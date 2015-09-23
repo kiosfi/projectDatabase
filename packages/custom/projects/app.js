@@ -18,12 +18,12 @@ Projects.register(function(app, auth, database) {
 
   //We are adding a link to the main menu for all authenticated users
   Projects.menus.add({
-    title: 'projects example page',
-    link: 'projects example page',
+    title: 'Hankeluettelo',
+    link: 'projects list',
     roles: ['authenticated'],
     menu: 'main'
   });
-  
+
   Projects.aggregateAsset('css', 'projects.css');
 
   /**
