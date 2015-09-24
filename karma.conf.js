@@ -17,10 +17,11 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress', 'coverage', 'junit'],
+    reporters: ['progress', 'coverage', 'junit', 'dots'],
 
     junitReporter: {
       outputDir: 'tests/results/public/junit/'
+      outputFile: 'test-results.xml'
     },
 
     // coverage
