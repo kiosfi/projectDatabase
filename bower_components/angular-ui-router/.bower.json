@@ -1,5 +1,6 @@
 {
   "name": "angular-ui-router",
+  "license": "MIT",
   "main": "./release/angular-ui-router.js",
   "dependencies": {
     "angular": ">= 1.0.8"
@@ -20,11 +21,11 @@
     "files.js"
   ],
   "homepage": "https://github.com/angular-ui/ui-router",
-  "_release": "e0497044de",
+  "_release": "07c046c095",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "e0497044dedc38a5cc65529d72068473cffe606d"
+    "commit": "07c046c0958b035b09b2928d150b9d25aa7369d8"
   },
   "_source": "git://github.com/angular-ui/ui-router.git",
   "_target": "master",

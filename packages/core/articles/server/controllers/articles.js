@@ -121,7 +121,7 @@ module.exports = function(Articles) {
          * List of Articles
          */
         all: function(req, res) {
-            var query = req.acl.query('Article');
+            var query = req.query('Article');
 
             query.find({}).sort('-created').populate('user', 'name username').exec(function(err, articles) {
                 if (err) {

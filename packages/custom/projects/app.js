@@ -11,42 +11,52 @@ var Projects = new Module('projects');
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
-Projects.register(function(app, auth, database) {
+Projects.register(function(app, auth, database, circles) {
 
   //We enable routing. By default the Package Object is passed to the routes
   Projects.routes(app, auth, database);
 
-  //We are adding a link to the main menu for all authenticated users
-  Projects.menus.add({
-    title: 'Hankeluettelo',
-    link: 'projects list',
-    roles: ['authenticated'],
-    menu: 'main'
-  });
-
   Projects.aggregateAsset('css', 'projects.css');
 
-  /**
+
+  //We are adding a link to the main menu for all authenticated users
+  Projects.menus.add({
+    'roles': ['authenticated'],
+    'title': 'Hankelistaus',
+    'link': 'all projects'
+  });
+  Projects.menus.add({
+    'roles': ['authenticated'],
+    'title': 'Hankkeiden lisäys',
+    'link': 'create project'
+  });
+
+  Projects.events.defaultData({
+    type: 'post',
+    subtype: 'project'
+  });
+
+
+  /*
     //Uncomment to use. Requires meanio@0.3.7 or above
     // Save settings with callback
     // Use this for saving data from administration pages
-    Projects.settings({
-        'someSetting': 'some value'
-    }, function(err, settings) {
-        //you now have the settings object
+    Articles.settings({'someSetting':'some value'},function (err, settings) {
+      //you now have the settings object
     });
 
     // Another save settings example this time with no callback
     // This writes over the last settings.
-    Projects.settings({
-        'anotherSettings': 'some value'
-    });
+    Articles.settings({'anotherSettings':'some value'});
 
-    // Get settings. Retrieves latest saved settigns
-    Projects.settings(function(err, settings) {
-        //you now have the settings object
+    // Get settings. Retrieves latest saved settings
+    Articles.settings(function (err, settings) {
+      //you now have the settings object
     });
     */
+
+  // Only use swagger.add if /docs and the corresponding files exists
+  //swagger.add(__dirname);
 
   return Projects;
 });

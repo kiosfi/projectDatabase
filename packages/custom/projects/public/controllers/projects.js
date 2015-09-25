@@ -1,11 +1,34 @@
 'use strict';
 
-/* jshint -W098 */
-angular.module('mean.projects').controller('ProjectsController', ['$scope', 'Global', 'Projects',
-  function($scope, Global, Projects) {
+angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Global', 'Projects', 'MeanUser',
+  function($scope, $stateParams, $location, Global, Projects, MeanUser) {
     $scope.global = Global;
-    $scope.package = {
-      name: 'projects'
+
+    $scope.hasAuthorization = function(project) {
+      if (!project || !project.user) return false;
+      return MeanUser.isAdmin || project.user._id === MeanUser.user._id;
     };
+
+    $scope.create = function(isValid) {
+      if (isValid) {
+        var project = new Projects($scope.project);
+
+        project.$save(function(response) {
+          $location.path('projects');
+        });
+
+        $scope.project = {};
+
+      } else {
+        $scope.submitted = true;
+      }
+    };
+
+    $scope.find = function() {
+      Projects.query(function(projects) {
+        $scope.projects = projects;
+      });
+    };
+
   }
 ]);

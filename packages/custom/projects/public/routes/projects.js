@@ -1,10 +1,28 @@
 'use strict';
 
+//Setting up route
 angular.module('mean.projects').config(['$stateProvider',
   function($stateProvider) {
-    $stateProvider.state('projects list', {
-      url: '/projects',
-      templateUrl: 'projects/views/index.html'
-    });
+
+    // states for my app
+    $stateProvider
+      .state('all projects', {
+        url: '/projects',
+        templateUrl: '/projects/views/list.html',
+        resolve: {
+          loggedin: function(MeanUser) {
+            return MeanUser.checkLoggedin();
+          }
+        }
+      })
+      .state('create project', {
+        url: '/projects/create',
+        templateUrl: '/projects/views/create.html',
+        resolve: {
+          loggedin: function(MeanUser) {
+            return MeanUser.checkLoggedin();
+          }
+        }
+      });
   }
 ]);

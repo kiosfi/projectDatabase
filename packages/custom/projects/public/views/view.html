@@ -1,0 +1,12 @@
+<section data-ng-controller="ProjectsController" data-ng-init="findOne()">
+  <h2>{{project.title}}</h2>
+  <div data-ng-if="hasAuthorization(project)">
+    <a class="btn" href="/projects/{{project._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn" data-ng-click="remove(project);">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div>{{project.status}}</div>
+</section>
