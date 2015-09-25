@@ -2,7 +2,7 @@
   <ul class="projects unstyled">
     <li data-ng-repeat="project in projects">
       <h2>{{project.title}}</h2>
-      <div>{{project.status}}</div>
+      <div>{{project.project_info.status}}</div>
     </li>
   </ul>
   <h1 data-ng-hide="!projects || projects.length">Hankkeita ole. <br><a href="/projects/create">Lisää hanke.</a></h1>
