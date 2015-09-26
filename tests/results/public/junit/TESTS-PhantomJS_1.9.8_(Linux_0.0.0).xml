@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<testsuite name="PhantomJS 1.9.8 (Linux 0.0.0)" package="" timestamp="2015-09-26T12:08:32" id="0" hostname="maria-X550LD" tests="1" errors="0" failures="0" time="0.001">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
+  </properties>
+  <testcase name="1 should be equals to 1" time="0.001" classname="PhantomJS_1_9_8_(Linux_0_0_0).Test test case"/>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>

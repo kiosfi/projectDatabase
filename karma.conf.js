@@ -20,7 +20,7 @@ module.exports = function(config) {
     reporters: ['progress', 'coverage', 'junit', 'dots'],
 
     junitReporter: {
-      outputDir: 'tests/results/public/junit/'
+      outputDir: 'tests/results/public/junit/',
       outputFile: 'test-results.xml'
     },
 
