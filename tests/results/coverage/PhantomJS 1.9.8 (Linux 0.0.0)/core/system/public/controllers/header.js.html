@@ -12,13 +12,13 @@
     </style>
 </head>
 <body>
-<div class="header low">
+<div class="header medium">
     <h1>Code coverage report for <span class="entity">core/system/public/controllers/header.js</span></h1>
     <h2>
-        Statements: <span class="metric">10% <small>(2 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">65% <small>(13 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Branches: <span class="metric">100% <small>(0 / 0)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">0% <small>(0 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">10% <small>(2 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">33.33% <small>(2 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">65% <small>(13 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">core/system/public/controllers/</a> &#187; header.js</div>
@@ -91,22 +91,22 @@
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,27 +115,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -150,24 +150,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
 angular.module('mean.system').controller('HeaderController', ['$scope', '$rootScope', 'Menus', 'MeanUser', '$state',
-<span class="fstat-no" title="function not covered" >  function($scope, $rootScope, Menus, MeanUser, $state) {</span>
+  function($scope, $rootScope, Menus, MeanUser, $state) {
     
-<span class="cstat-no" title="statement not covered" >    var vm = this;</span>
+    var vm = this;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    vm.menus = {};</span>
-<span class="cstat-no" title="statement not covered" >    vm.hdrvars = {</span>
+    vm.menus = {};
+    vm.hdrvars = {
       authenticated: MeanUser.loggedin,
       user: MeanUser.user, 
       isAdmin: MeanUser.isAdmin
     };
 &nbsp;
     // Default hard coded menu items for main menu
-<span class="cstat-no" title="statement not covered" >    var defaultMainMenu = [];</span>
+    var defaultMainMenu = [];
 &nbsp;
     // Query menus added by modules. Only returns menus that user is allowed to see.
-<span class="fstat-no" title="function not covered" >    function queryMenu(name, defaultMenu) {</span>
+    function queryMenu(name, defaultMenu) {
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      Menus.query({</span>
+      Menus.query({
         name: name,
         defaultMenu: defaultMenu
       }, <span class="fstat-no" title="function not covered" >function(menu) {</span>
@@ -176,13 +176,13 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
     }
 &nbsp;
     // Query server for menus and check permissions
-<span class="cstat-no" title="statement not covered" >    queryMenu('main', defaultMainMenu);</span>
-<span class="cstat-no" title="statement not covered" >    queryMenu('account', []);</span>
+    queryMenu('main', defaultMainMenu);
+    queryMenu('account', []);
 &nbsp;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    $scope.isCollapsed = false;</span>
+    $scope.isCollapsed = false;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    $rootScope.$on('loggedin', <span class="fstat-no" title="function not covered" >function() {</span></span>
+    $rootScope.$on('loggedin', <span class="fstat-no" title="function not covered" >function() {</span>
 <span class="cstat-no" title="statement not covered" >      queryMenu('main', defaultMainMenu);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      vm.hdrvars = {</span>
@@ -192,11 +192,11 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
       };
     });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    vm.logout = <span class="fstat-no" title="function not covered" >function(){</span></span>
+    vm.logout = <span class="fstat-no" title="function not covered" >function(){</span>
 <span class="cstat-no" title="statement not covered" >      MeanUser.logout();</span>
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    $rootScope.$on('logout', <span class="fstat-no" title="function not covered" >function() {</span></span>
+    $rootScope.$on('logout', <span class="fstat-no" title="function not covered" >function() {</span>
 <span class="cstat-no" title="statement not covered" >      vm.hdrvars = {</span>
         authenticated: false,
         user: {},
@@ -213,7 +213,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Sep 26 2015 15:08:32 GMT+0300 (EEST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Sep 27 2015 14:35:34 GMT+0300 (EEST)</div>
 </div>
 <script src="../../../../prettify.js"></script>
 <script>

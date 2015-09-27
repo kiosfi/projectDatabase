@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-  /*describe('MEAN controllers', function() {
+  describe('MEAN controllers', function() {
     describe('HeaderController', function() {
       beforeEach(function() {
         module('mean');
@@ -22,5 +22,5 @@
         expect(true).toBeTruthy();
       });
     });
-  });*/
+  });
 })();

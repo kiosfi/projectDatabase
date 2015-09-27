@@ -12,13 +12,13 @@
     </style>
 </head>
 <body>
-<div class="header low">
+<div class="header high">
     <h1>Code coverage report for <span class="entity">core/system/public/services/config.js</span></h1>
     <h2>
-        Statements: <span class="metric">15.38% <small>(2 / 13)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Branches: <span class="metric">0% <small>(0 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">0% <small>(0 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">15.38% <small>(2 / 13)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">92.31% <small>(12 / 13)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(4 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">75% <small>(3 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">92.31% <small>(12 / 13)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">core/system/public/services/</a> &#187; config.js</div>
@@ -50,56 +50,56 @@
 23
 24</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">angular.module('mean.system').provider('$meanConfig', [<span class="fstat-no" title="function not covered" >function() {</span>
-<span class="fstat-no" title="function not covered" >  function MeanConfigProvider() {</span>
-<span class="cstat-no" title="statement not covered" >    this.config = {};</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">angular.module('mean.system').provider('$meanConfig', [function() {
+  function MeanConfigProvider() {
+    this.config = {};
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+    var self = this;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    var xmlhttp = new XMLHttpRequest();</span>
-<span class="cstat-no" title="statement not covered" >    xmlhttp.onreadystatechange = <span class="fstat-no" title="function not covered" >function() {</span></span>
-<span class="cstat-no" title="statement not covered" >      if (xmlhttp.readyState === 4 &amp;&amp; xmlhttp.status === 200) {</span>
-<span class="cstat-no" title="statement not covered" >        self.config = JSON.parse(xmlhttp.responseText);</span>
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState === 4 &amp;&amp; xmlhttp.status === 200) {
+        self.config = JSON.parse(xmlhttp.responseText);
       }
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    xmlhttp.open("GET", "/api/get-public-config", false);</span>
-<span class="cstat-no" title="statement not covered" >    xmlhttp.send();</span>
+    xmlhttp.open("GET", "/api/get-public-config", false);
+    xmlhttp.send();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.$get = <span class="fstat-no" title="function not covered" >function() {</span></span>
+    this.$get = <span class="fstat-no" title="function not covered" >function() {</span>
 <span class="cstat-no" title="statement not covered" >      return this.config;</span>
     };
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return new MeanConfigProvider();</span>
+  return new MeanConfigProvider();
 }]);
 &nbsp;</pre></td></tr>
 </table></pre>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Sep 26 2015 15:08:32 GMT+0300 (EEST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Sep 27 2015 14:35:34 GMT+0300 (EEST)</div>
 </div>
 <script src="../../../../prettify.js"></script>
 <script>
