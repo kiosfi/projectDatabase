@@ -13,11 +13,11 @@ db.projects.insert({ "_id" : ObjectId("56091cbc00fccd6d66bc5cc3"),
   "duration_months" : 30,
   "description" : "A short description of project" } })
 
-  db.organisations.insert(
-    { "_id" : ObjectId("56091a0525f75ebc0c486338"),
-    "name" : "Humanrights org",
-    "representative" : "Representative",
-    "address" : "Adress 123",
-    "tel" : "123445",
-    "email" : "email@org.com",
-    "website" : "www.org.com" })
+db.organisations.insert(
+  { "_id" : ObjectId("56091a0525f75ebc0c486338"),
+  "name" : "Humanrights org",
+  "representative" : "Representative",
+  "address" : "Adress 123",
+  "tel" : "123445",
+  "email" : "email@org.com",
+  "website" : "www.org.com" })
