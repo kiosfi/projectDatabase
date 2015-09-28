@@ -3,7 +3,7 @@
     <li data-ng-repeat="project in projects">
         <h2><a href="">{{project.title}}</a></h2>
         <span style="color:blue">{{project.status}}</span>
-        <p>organisaatio{{project.organisation.name}}</p>      
+        <p>{{project.organisation.name}}</p>      
     </li>
   </ul>
   <h1 data-ng-hide="!projects || projects.length">Hankkeita ei ole. <br><a href="/projects/create">Lisää hanke.</a></h1>
