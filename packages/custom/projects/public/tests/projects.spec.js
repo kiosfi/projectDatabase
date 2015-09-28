@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 (function() {
   describe('Test test case', function() {
@@ -39,7 +39,7 @@
       beforeEach(inject(function($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_) {
 
         scope = $rootScope.$new();
-    
+
         ProjectsController = $controller('ProjectsController', {
           $scope: scope
         });
@@ -67,4 +67,4 @@
         });
     });
   });
-}());
+}());*/

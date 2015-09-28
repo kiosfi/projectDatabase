@@ -1,22 +1,10 @@
 <?xml version="1.0"?>
-<testsuite name="PhantomJS 1.9.8 (Linux 0.0.0)" package="" timestamp="2015-09-27T11:35:34" id="0" hostname="maria-X550LD" tests="4" errors="0" failures="1" time="0.052">
+<testsuite name="PhantomJS 1.9.8 (Linux 0.0.0)" package="" timestamp="2015-09-28T06:46:51" id="0" hostname="maria-X550LD" tests="2" errors="0" failures="0" time="0.043">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
   </properties>
-  <testcase name="should expose some global scope" time="0.027" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
-  <testcase name="should expose some global scope" time="0.014" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
-  <testcase name="1 should be equals to 1" time="0" classname="PhantomJS_1_9_8_(Linux_0_0_0).Test test case"/>
-  <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.011" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers">
-    <failure type="">TypeError: 'undefined' is not an object (evaluating '$httpBackend.expectGET')
-undefined
-    at /home/maria/projectDatabase/packages/custom/projects/public/tests/projects.spec.js:43
-    at e (/home/maria/projectDatabase/bower_components/angular/angular.min.js:39)
-    at workFn (/home/maria/projectDatabase/bower_components/angular-mocks/angular-mocks.js:2438)
-</failure>
-    <failure type="">TypeError: 'undefined' is not a function (evaluating 'scope.find()')
-    at /home/maria/projectDatabase/packages/custom/projects/public/tests/projects.spec.js:62
-</failure>
-  </testcase>
+  <testcase name="should expose some global scope" time="0.028" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
+  <testcase name="should expose some global scope" time="0.015" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
   <system-out>
     <![CDATA[
 ]]>
