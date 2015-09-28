@@ -11,5 +11,6 @@ nb-configuration.xml
 .nb-gradle/
 
 # Bower
-.bower-*/
+.bower-cache
+.bower-registry/bower.herokuapp.com/lookup
 bower_components
