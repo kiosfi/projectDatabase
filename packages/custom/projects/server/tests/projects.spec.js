@@ -5,30 +5,28 @@
 /**
  * Module dependencies.
  */
-/var expect = require('expect.js'),
+var expect = require('expect.js'),
   mongoose = require('mongoose'),
-  Project = mongoose.model('Project');
+  Project = mongoose.model('Project'),
+  Organisation = mongoose.model('Organisation');
 
-/**
- * Globals
- */
-// project;
-/**
- * Test Suites
- */
-/describe('<Unit Test>', function() {
+var project;
+var organisation;
+
+describe('<Unit Test>', function() {
   describe('Model Project:', function() {
     beforeEach(function(done) {
       this.timeout(10000);
+      organisation = new Organisation({
+        "name" : "Humanrights org",
+        "representative" : "Representative",
+        "address" : "Adress 123",
+        "tel" : "123445",
+        "email" : "email@org.com",
+        "website" : "www.org.com" });
       project = new Project({"title": "Human rights",
         "coordinator": "Keijo Koordinaattori",
-        "organisation": {
-          "name": "Humanrights org",
-          "representative": "Representative",
-          "address": "Adress 123",
-          "tel": "123445",
-          "email": "email@org.com",
-          "website": "www.org.com" },
+        "organisation": organisation,
         "project_info": {
           "status": "approved",
           "reg_date": "12.10.2014",
@@ -41,13 +39,7 @@
           "description": "A short description of project"}},
           {"title": "Humans",
             "coordinator": "Keijo Koordi",
-            "organisation": {
-              "name": "Humans org",
-              "representative": "Repr",
-              "address": "Adress 12334",
-              "tel": "1234456",
-              "email": "emails@org.com",
-              "website": "www.orgs.com" },
+            "organisation": organisation,
             "project_info": {
               "status": "approved",
               "reg_date": "12.9.2014",
@@ -67,10 +59,8 @@
       it('should list all projects', function(done) {
         this.timeout(10000);
         var query = Project
-        return query.find(function(err, data) {
+        return query.find(function(err) {
           expect(err).to.be(null);
-          expect(data[0].title).to.be("Human rights");
-          expect(data[1].project_info.status).to.be("approved");
           done();
         });
 

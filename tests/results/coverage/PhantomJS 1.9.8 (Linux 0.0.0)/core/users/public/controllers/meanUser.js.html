@@ -15,10 +15,10 @@
 <div class="header low">
     <h1>Code coverage report for <span class="entity">core/users/public/controllers/meanUser.js</span></h1>
     <h2>
-        Statements: <span class="metric">1.96% <small>(1 / 51)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">1.92% <small>(1 / 52)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Branches: <span class="metric">0% <small>(0 / 26)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Functions: <span class="metric">0% <small>(0 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">2% <small>(1 / 50)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">1.96% <small>(1 / 51)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">core/users/public/controllers/</a> &#187; meanUser.js</div>
@@ -137,7 +137,9 @@
 110
 111
 112
-113</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+113
+114
+115</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -220,20 +222,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -247,6 +237,20 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
@@ -299,8 +303,8 @@ angular.module('mean.users')
       };
     }
   ])
-  .controller('RegisterCtrl', ['$rootScope', 'MeanUser',
-<span class="fstat-no" title="function not covered" >    function($rootScope, MeanUser) {</span>
+  .controller('RegisterCtrl', ['$rootScope', 'MeanUser', '$location',
+<span class="fstat-no" title="function not covered" >    function($rootScope, MeanUser, $location) {</span>
 <span class="cstat-no" title="statement not covered" >      var vm = this;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      vm.user = {};</span>
@@ -332,6 +336,7 @@ angular.module('mean.users')
       // Register the register() function
 <span class="cstat-no" title="statement not covered" >      vm.register = <span class="fstat-no" title="function not covered" >function() {</span></span>
 <span class="cstat-no" title="statement not covered" >        MeanUser.register(this.user);</span>
+<span class="cstat-no" title="statement not covered" >        $location.path('/projects');</span>
       };
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      $rootScope.$on('registerfailed', <span class="fstat-no" title="function not covered" >function(){</span></span>
@@ -361,12 +366,13 @@ angular.module('mean.users')
 <span class="cstat-no" title="statement not covered" >        MeanUser.resetpassword(this.user);</span>
       };
     }
-  ]);</pre></td></tr>
+  ]);
+&nbsp;</pre></td></tr>
 </table></pre>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Sep 28 2015 09:54:01 GMT+0300 (EEST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Sep 28 2015 15:18:08 GMT+0300 (EEST)</div>
 </div>
 <script src="../../../../prettify.js"></script>
 <script>
