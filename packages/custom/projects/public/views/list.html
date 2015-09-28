@@ -1,9 +1,15 @@
 <section data-ng-controller="ProjectsController" data-ng-init="find()">
   <ul class="projects unstyled">
     <li data-ng-repeat="project in projects">
+<<<<<<< HEAD
       <h2>{{project.title}}</h2>
       <p>{{project.organisation.name}}</p>
+=======
+        <h2><a href="">{{project.title}}</a></h2>
+        <span style="color:blue">{{project.status}}</span>
+        <p>{{project.organisation.name}}</p>      
+>>>>>>> listView
     </li>
   </ul>
-  <h1 data-ng-hide="!projects || projects.length">Hankkeita ole. <br><a href="/projects/create">Lisää hanke.</a></h1>
+  <h1 data-ng-hide="!projects || projects.length">Hankkeita ei ole. <br><a href="/projects/create">Lisää hanke.</a></h1>
 </section>
