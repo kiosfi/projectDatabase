@@ -5,18 +5,18 @@
 /**
  * Module dependencies.
  */
-var expect = require('expect.js'),
+/var expect = require('expect.js'),
   mongoose = require('mongoose'),
   Project = mongoose.model('Project');
 
 /**
  * Globals
  */
-var project;
+// project;
 /**
  * Test Suites
  */
-describe('<Unit Test>', function() {
+/describe('<Unit Test>', function() {
   describe('Model Project:', function() {
     beforeEach(function(done) {
       this.timeout(10000);

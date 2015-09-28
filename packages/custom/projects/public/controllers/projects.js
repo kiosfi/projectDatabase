@@ -31,5 +31,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
       });
     };
 
+    $scope.findOne = function() {
+      Projects.get({
+        projectId: $stateParams.projectId
+      }, function(project) {
+        $scope.project = project;
+      });
+    };
   }
 ]);

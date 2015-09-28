@@ -29,4 +29,4 @@ module.exports = function(Projects, app, auth) {
   app.route('/api/projects')
     .get(projects.all)
     .post(auth.requiresLogin, hasPermissions, projects.create);
-};
+  };
