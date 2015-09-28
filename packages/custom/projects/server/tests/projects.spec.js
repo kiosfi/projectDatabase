@@ -20,7 +20,7 @@
   describe('Model Project:', function() {
     beforeEach(function(done) {
       this.timeout(10000);
-      project = new Project([{"title": "Human rights",
+      project = new Project({"title": "Human rights",
         "coordinator": "Keijo Koordinaattori",
         "organisation": {
           "name": "Humanrights org",
@@ -57,7 +57,7 @@
                 "granted_curr_local": "50 000",
                 "granted_curr_eur": "11 000"},
               "duration_months": 12,
-              "description": "A short description of project"}}]);
+              "description": "A short description of project"}});
       project.save();
       done();
     });
