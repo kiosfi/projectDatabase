@@ -2,7 +2,7 @@
     <ul class="projects unstyled">
         <li data-ng-repeat="project in projects">
             <h2><a href="">{{project.title}}</a></h2>
-            <span style="color:blue">{{project.status}}</span>
+            <span style="color:blue">{{project.project_info.status}}</span>
             <p>{{project.organisation.name}}</p>      
         </li>
     </ul>
