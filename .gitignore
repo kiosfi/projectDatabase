@@ -9,3 +9,7 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 .nb-gradle/
+
+# Bower
+.bower-*/
+bower_components

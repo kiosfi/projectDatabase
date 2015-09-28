@@ -48,8 +48,8 @@ angular.module('mean.users')
       };
     }
   ])
-  .controller('RegisterCtrl', ['$rootScope', 'MeanUser',
-    function($rootScope, MeanUser) {
+  .controller('RegisterCtrl', ['$rootScope', 'MeanUser', '$location',
+    function($rootScope, MeanUser, $location) {
       var vm = this;
 
       vm.user = {};
@@ -81,6 +81,7 @@ angular.module('mean.users')
       // Register the register() function
       vm.register = function() {
         MeanUser.register(this.user);
+        $location.path('/projects');
       };
 
       $rootScope.$on('registerfailed', function(){
