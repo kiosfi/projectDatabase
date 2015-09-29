@@ -28,8 +28,7 @@ var ProjectSchema = new Schema({
   },
   reg_date: {
     type: String,
-    required: true,
-    trim: true
+    required: true
   },
   funding: {
     applied_curr_local: {

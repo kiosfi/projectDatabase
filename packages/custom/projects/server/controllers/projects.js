@@ -15,7 +15,7 @@ module.exports = function(Projects) {
         project: function(req, res, next, id) {
             Project.load(id, function(err, project) {
                 if (err) return next(err);
-                if (!project) return next(new Error('Failed to load project ' + id));
+                if (!project) return next(new Error('Hankkeen ' + id + ' lataus epäonnistui.'));
                 req.project = project;
                 next();
               });
@@ -39,6 +39,17 @@ module.exports = function(Projects) {
 
                 res.json(project);
             });
+        },
+
+        show: function(req, res) {
+
+            Projects.events.publish({
+                action: 'viewed',
+                name: req.project.title,
+                url: config.hostname + '/projects/' + req.project._id
+            });
+
+            res.json(req.project);
         },
 
          all: function(req, res) {
