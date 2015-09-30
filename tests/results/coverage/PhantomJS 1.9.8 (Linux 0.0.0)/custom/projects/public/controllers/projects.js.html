@@ -15,10 +15,10 @@
 <div class="header low">
     <h1>Code coverage report for <span class="entity">custom/projects/public/controllers/projects.js</span></h1>
     <h2>
-        Statements: <span class="metric">5.26% <small>(1 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">42.11% <small>(8 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Branches: <span class="metric">0% <small>(0 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">0% <small>(0 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">5.56% <small>(1 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">37.5% <small>(3 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">44.44% <small>(8 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">custom/projects/public/controllers/</a> &#187; projects.js</div>
@@ -70,35 +70,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -110,15 +110,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
 angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Global', 'Projects', 'MeanUser',
-<span class="fstat-no" title="function not covered" >  function($scope, $stateParams, $location, Global, Projects, MeanUser) {</span>
-<span class="cstat-no" title="statement not covered" >    $scope.global = Global;</span>
+  function($scope, $stateParams, $location, Global, Projects, MeanUser) {
+    $scope.global = Global;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    $scope.hasAuthorization = <span class="fstat-no" title="function not covered" >function(project) {</span></span>
+    $scope.hasAuthorization = <span class="fstat-no" title="function not covered" >function(project) {</span>
 <span class="cstat-no" title="statement not covered" >      if (!project || !project.user) <span class="cstat-no" title="statement not covered" >return false;</span></span>
 <span class="cstat-no" title="statement not covered" >      return MeanUser.isAdmin || project.user._id === MeanUser.user._id;</span>
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    $scope.create = <span class="fstat-no" title="function not covered" >function(isValid) {</span></span>
+    $scope.create = <span class="fstat-no" title="function not covered" >function(isValid) {</span>
 <span class="cstat-no" title="statement not covered" >      if (isValid) {</span>
 <span class="cstat-no" title="statement not covered" >        var project = new Projects($scope.project);</span>
 &nbsp;
@@ -133,13 +133,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
       }
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    $scope.find = <span class="fstat-no" title="function not covered" >function() {</span></span>
-<span class="cstat-no" title="statement not covered" >      Projects.query(<span class="fstat-no" title="function not covered" >function(projects) {</span></span>
-<span class="cstat-no" title="statement not covered" >        $scope.projects = projects;</span>
+    $scope.find = function() {
+      Projects.query(function(projects) {
+        $scope.projects = projects;
       });
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    $scope.findOne = <span class="fstat-no" title="function not covered" >function() {</span></span>
+    $scope.findOne = <span class="fstat-no" title="function not covered" >function() {</span>
 <span class="cstat-no" title="statement not covered" >      Projects.get({</span>
         projectId: $stateParams.projectId
       }, <span class="fstat-no" title="function not covered" >function(project) {</span>
@@ -153,7 +153,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Sep 29 2015 22:45:29 GMT+0300 (EEST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Sep 30 2015 13:03:46 GMT+0300 (EEST)</div>
 </div>
 <script src="../../../../prettify.js"></script>
 <script>
