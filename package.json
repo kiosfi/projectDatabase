@@ -21,8 +21,8 @@
   "dependencies": {
     "assetmanager": "latest",
     "async": "latest",
-    "bower": "latest",
     "body-parser": "latest",
+    "bower": "latest",
     "compression": "latest",
     "connect-flash": "latest",
     "consolidate": "latest",
@@ -44,6 +44,7 @@
     "passport-google-oauth": "latest",
     "passport-linkedin": "latest",
     "passport-local": "latest",
+    "passport-strategy": "^1.0.0",
     "passport-twitter": "latest",
     "q": "latest",
     "request": "latest",
