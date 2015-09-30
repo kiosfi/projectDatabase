@@ -13,7 +13,12 @@ ul li
 
 .proj {
   padding: 1em;
-  background-color: rgb(230, 230, 230);
+}
+
+.proj-div {
+  padding: 1em;
+  float: left;
+  width: 33%;
 }
 
 .proj-header {
@@ -21,6 +26,5 @@ ul li
 }
 
 .proj-body {
-  display: inline;
   line-height: 1.2;
 }

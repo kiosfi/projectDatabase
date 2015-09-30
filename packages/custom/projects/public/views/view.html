@@ -1,7 +1,13 @@
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
   <h2><span>{{project.title}}</span><span><span class="tila">TILA: {{project.status}}</span></h2>
   <h3>Hankkeen koordinaattori: <a href="">{{project.coordinator}}</a></h3>
-  <div class="proj">
+
+  <article class="proj">
+    <h4 class=proj-header>Hankkeen kuvaus</h4>
+    <span class="proj-body">
+      <p>Kuvaus: {{project.description}}</p>
+    </span>
+    <br>
     <h4 class="proj-header">Järjestö</h4>
     <span class="proj-body">
       <p>Nimi: <a href="">{{project.organisation.name}}</a></p>
@@ -11,8 +17,9 @@
       <p>Sähköposti: {{project.organisation.email}}</p>
       <p>Websivut: <a href="www.org.com">{{project.organisation.website}}</a></p>
     </span>
-  </div>
-  <div class="proj">
+  </article>
+  <hr>
+  <article class="proj-div">
     <h4 class="proj-header">Hanketiedot</h4>
     <span class="proj-body">
       <p>Hankkeen tila: {{project.status}}</p>
@@ -20,11 +27,9 @@
       <p>Haettu summa: {{project.funding.applied_curr_eur}} EUR ({{project.funding.applied_curr_local}} local)</p>
       <p>Myönnetty: {{project.funding.granted_curr_eur}} EUR ({{project.funding.granted_curr_local}} local)</p>
       <p>Kesto: {{project.duration_months}} kk</p>
-      <p>Kuvaus: {{project.description}} </p>
     </span>
-  </div>
-  <p>VIELÄ STAATTINEN SIVUSISÄLTÖ >></p>
-  <div class="proj">
+  </article>
+  <article class="proj-div">
     <h4 class="proj-header">Maksatus</h4>
     <span class="proj-body">
       <p>Myönnetty</p>
@@ -38,8 +43,8 @@
       <p>Maksettu yhteensä: 8000 euroa (10 000 paikallista) </p>
       <p>Jäljellä: 3000 euroa (10 000 paikallista) </p>
     </span>
-  </div>
-  <div class="proj">
+  </article>
+  <article class="proj-div">
     <h4 class="proj-header">Aikataulu</h4>
     <span cass="proj-body">
       <p>1.12.2015 Loppuraportti ODOTTAA</p>
@@ -48,8 +53,8 @@
       <p>1.1.2015 1. Väliraportti</p>
       <p>1.6.2015 2. Väliraportti</p>
     </span>
-  </div>
-  <div class="proj">
+  </article>
+  <article class="proj-div">
     <h4 class="proj-header">Liitteet</h4>
     <span class="proj-body">
       <p><a href="">Hakemus</a> - Hyväksytty 1.1.2014</p>
@@ -63,5 +68,5 @@
       <p><a href="">Esitys 2</a> - ODOTTAA</p>
       <p><a href="">Sopimus</a> - Hyväksytty 1.1.2014</p>
     </span>
-  </div>
+  </article>
 </section>
