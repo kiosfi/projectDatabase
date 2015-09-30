@@ -27,7 +27,7 @@
             beforeEach(function () {
                 module('mean');
                 module('mean.system');
-                module('mean.projects');              
+                module('mean.projects');
                 module('authMock');
             });
 
@@ -57,11 +57,11 @@
 
             it('$scope.find() should create an array with at least one project object ' +
                     'fetched from XHR', function () {
-                        
+
                        MeanUser.login();
                         $httpBackend.expectGET('api\/projects').respond([{
                                 title: 'Human rights'
-                            }]);                        
+                            }]);
 
                         // run controller
                         scope.find();
@@ -71,6 +71,30 @@
                                 "title": "Human rights"
                             }]);
                     });
+
+            it('$scope.findOne() should create an array with one project object fetched ' +
+                      'from XHR using a projectId URL parameter', function() {
+                        // fixture URL parament
+                        $stateParams.projectId = '525a8422f6d0f87f0e407a33';
+
+                        // fixture response object
+                        var testProjectData = function() {
+                          return {
+                            title: 'Human rights'
+                          };
+                        };
+
+                        // test expected GET request with response object
+                        $httpBackend.expectGET(/api\/projects\/([0-9a-fA-F]{24})$/).respond(testProjectData());
+
+                        // run controller
+                        scope.findOne();
+                        $httpBackend.flush();
+
+                        // test scope value
+                        expect(scope.project).toEqualData(testProjectData());
+
+                      });
         });
     });
 }());
