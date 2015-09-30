@@ -20,7 +20,7 @@ describe('<Unit Test>', function () {
     describe('Model Project:', function () {
         beforeEach(function (done) {
             this.timeout(10000);
-            
+
             organisation = new Organisation({
                 "name": "Humanrights org",
                 "representative": "Representative",
@@ -82,9 +82,9 @@ describe('<Unit Test>', function () {
             it('should find given project', function (done) {
                 this.timeout(10000);
                 var query = Project;
-                return query.findOne(function (err, data) {
+                return query.findOne({title : 'Humans'}).exec(function (err, data) {
                     expect(err).to.be(null);
-                    expect(data.title).to.be('Human rights');
+                    expect(data.title).to.be("Humans");
                     done();
                 });
             });
