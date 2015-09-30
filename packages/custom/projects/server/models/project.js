@@ -17,9 +17,9 @@ var ProjectSchema = new Schema({
     required: true,
     trim: true
   },
-  project: {
+  organisation: {
     type: Schema.ObjectId,
-    ref: 'Project'
+    ref: 'Organisation'
   },
   status: {
     type: String,
