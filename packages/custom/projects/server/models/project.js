@@ -19,7 +19,7 @@ var ProjectSchema = new Schema({
   },
   project: {
     type: Schema.ObjectId,
-    ref: 'Project'
+    ref: 'Organisation'
   },
   status: {
     type: String,
@@ -108,7 +108,7 @@ ProjectSchema.path('coordinator').validate(function(coordinator) {
 ProjectSchema.statics.load = function(id, cb) {
   this.findOne({
     _id: id
-  }).populate('organisation').exec(cb);
+  }).populate({path: 'organisation', model: 'Organisation'}).exec(cb);
 };
 
 mongoose.model('Project', ProjectSchema);
