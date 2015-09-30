@@ -2,7 +2,7 @@
     <ul class="projects unstyled">
         <li data-ng-repeat="project in projects">
             <h2><a data-ng-href="/projects/{{project._id}}">{{project.title}}</a></h2>
-            <span style="color:blue">{{project.status}}</span>
+            <span style="color:blue">Hankkeen tila: {{project.status}}</span>
             <p>{{project.organisation.name}}</p>
         </li>
     </ul>

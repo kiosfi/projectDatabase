@@ -6,3 +6,21 @@ ul li
 {
     list-style-type: none;
 }
+
+.tila {
+  float: right;
+}
+
+.proj {
+  padding: 1em;
+  background-color: rgb(230, 230, 230);
+}
+
+.proj-header {
+  font-weight: bold;
+}
+
+.proj-body {
+  display: inline;
+  line-height: 1.2;
+}
