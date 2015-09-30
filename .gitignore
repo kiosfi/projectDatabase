@@ -14,3 +14,6 @@ nb-configuration.xml
 .bower-cache
 .bower-registry/bower.herokuapp.com/lookup
 bower_components
+
+# Test files
+tests/results/
