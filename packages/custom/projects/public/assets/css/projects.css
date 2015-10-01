@@ -1,5 +1,5 @@
 .projects-example h1 {
-  background-color: purple
+    background-color: purple
 }
 
 ul li
@@ -8,23 +8,37 @@ ul li
 }
 
 .tila {
-  float: right;
+    /*    float: right;*/
+}
+
+proj-box {
+    width: 100%;
 }
 
 .proj {
-  padding: 1em;
+    padding: 1em;
 }
 
 .proj-div {
-  padding: 1em;
-  float: left;
-  width: 33%;
+    padding: 1em;
+    float: left;
+    width: 50%;
 }
 
 .proj-header {
-  font-weight: bold;
+    font-weight: bold;
+}
+.proj-sub-title {
+    font-weight: bold;
 }
 
 .proj-body {
-  line-height: 1.2;
+    line-height: 1.2;
+}
+
+hr {
+    border: 0;
+    border-bottom: 1px dashed #ccc;
+    background: #999;
+    width: 100%;
 }
