@@ -1,15 +1,3 @@
-
-/*describe('Project view page', function() {
-    it('should show name and details of project', function() {
-        browser.get('/projects');
-
-        var elem = element.all(by.repeater('project in projects')).
-          get(0).
-          element(by.linkText('{{project.title}}')).
-          click();
-          console.log(elem);
-    })
-})*/
 describe('Project view page', function () {
 
 //    beforeEach(function() {
@@ -20,23 +8,21 @@ describe('Project view page', function () {
         browser.get('/auth/login');
         var email = element(by.model('login.user.email'));
         var password = element(by.model('login.user.password'));
-        email.sendKeys('test@test.com');
-        password.sendKeys('loltest15');
+        email.sendKeys('mr.wisty@gmail.com');
+        password.sendKeys('pe1971tE');
         var submit = element(by.buttonText("Login"));
         submit.click().then(function () {
 
-            browser.get('/projects');
+            browser.get('/');
 
-            var elements = element.all(by.repeater('project in projects')).
-                    get(0).
-                    $('a').
-                    click();
-            console.log(elements);
-            var status = element(by.css('proj-div').$('proj-body').element(by.binding('project.status')));
-//            browser.pause();
+            var elems = element.all(by.repeater('project in projects')).first();
+            var url = elems.all(by.css('a'));
+            url.click();
+            browser.pause();
+            expect(url).toContain('560d27b97b46bfe2c9bb36c8');
+
 //            element.getAttribute('value')
 //            browser.debugger();
-            console.log(status);
         })
 
 
