@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+ <testsuite name="Project view page" timestamp="2015-10-01T16:30:52" hostname="localhost" time="0.848" errors="0" tests="1" skipped="0" disabled="0" failures="1">
+  <testcase classname="Project view page" name="should show name and details of project" time="0.848">
+   <failure type="exception" message="Failed: Index out of bound. Trying to access element at index: 0, but there are only 0 elements that match locator by.repeater(&quot;project in projects&quot;)"><![CDATA[Error: Index out of bound. Trying to access element at index: 0, but there are only 0 elements that match locator by.repeater("project in projects")
+    at /usr/lib/node_modules/protractor/lib/element.js:257:15
+    at [object Object].promise.ControlFlow.runInFrame_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:1857:20)
+    at [object Object].goog.defineClass.notify (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:2448:25)
+    at [object Object].promise.Promise.notify_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:564:12)
+    at Array.forEach (native)
+    at [object Object].promise.Promise.notifyAll_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:553:15)
+    at [object Object].goog.async.run.processWorkQueue [as _onTimeout] (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/async/run.js:130:15)
+    at Timer.listOnTimeout [as ontimeout] (timers.js:121:15)
+Error
+    at [object Object].ElementArrayFinder.applyAction_ (/usr/lib/node_modules/protractor/lib/element.js:392:21)
+    at [object Object].self.(anonymous function) [as click] (/usr/lib/node_modules/protractor/lib/element.js:76:19)
+    at [object Object].self.(anonymous function) [as click] (/usr/lib/node_modules/protractor/lib/element.js:721:11)
+    at Object.<anonymous> (/home/maria/projectDatabase/tests/e2e/smoke/projectView.spec.js:8:11)
+    at /usr/lib/node_modules/protractor/node_modules/jasminewd2/index.js:96:23
+    at new promise.Promise (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:368:5)
+    at controlFlowExecute (/usr/lib/node_modules/protractor/node_modules/jasminewd2/index.js:82:18)
+    at [object Object].promise.ControlFlow.runInFrame_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:1857:20)
+    at [object Object].promise.ControlFlow.runEventLoop_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:1729:8)
+    at [object Object].eval (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:2043:12)
+From: Task: Run it("should show name and details of project") in control flow
+    at Object.<anonymous> (/usr/lib/node_modules/protractor/node_modules/jasminewd2/index.js:81:14)
+    at attemptAsync (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1819:24)
+    at QueueRunner.run (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1774:9)
+    at QueueRunner.execute (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1762:10)
+    at Spec.Env.queueRunnerFactory (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:627:35)
+    at Spec.execute (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:353:10)
+    at Object.fn (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:2360:37)
+    at attemptAsync (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1819:24)
+    at QueueRunner.run (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1774:9)
+    at QueueRunner.execute (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1762:10)
+From asynchronous test: 
+Error
+    at Suite.<anonymous> (/home/maria/projectDatabase/tests/e2e/smoke/projectView.spec.js:2:5)
+    at addSpecsToSuite (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:743:25)
+    at Env.describe (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:713:7)
+    at jasmineInterface.describe (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:3219:18)
+    at Object.<anonymous> (/home/maria/projectDatabase/tests/e2e/smoke/projectView.spec.js:1:63)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)]]>
+   </failure>
+  </testcase>
+ </testsuite>
+</testsuites>
