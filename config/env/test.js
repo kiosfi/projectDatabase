@@ -13,7 +13,7 @@ module.exports = {
     format: 'common'
   },
   app: {
-    name: 'MEAN - A Modern Stack - Test'
+    name: 'KIOS Ry - Hanketietojärjestelmä'
   },
   strategies: {
     local: {
