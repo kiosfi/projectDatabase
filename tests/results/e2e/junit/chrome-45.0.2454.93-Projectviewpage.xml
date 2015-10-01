@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+ <testsuite name="Project view page" timestamp="2015-10-01T23:29:33" hostname="localhost" time="1.553" errors="0" tests="1" skipped="0" disabled="0" failures="1">
+  <testcase classname="Project view page" name="should show name and details of project" time="1.553">
+   <failure type="toContain" message="Expected &apos;http://localhost:3001/&apos; to contain &apos;560d27ab7b46bfe2c9bb36c7&apos;."><![CDATA[Error: Failed expectation
+    at Object.<anonymous> (/home/maria/projectDatabase/tests/e2e/smoke/projectView.spec.js:19:41)
+    at /usr/lib/node_modules/protractor/node_modules/jasminewd2/index.js:96:23
+    at new promise.Promise (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:368:5)
+    at controlFlowExecute (/usr/lib/node_modules/protractor/node_modules/jasminewd2/index.js:82:18)
+    at [object Object].promise.ControlFlow.runInFrame_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:1857:20)
+    at [object Object].promise.ControlFlow.runEventLoop_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:1729:8)
+    at [object Object].eval (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:2043:12)
+    at [object Object].goog.async.run.processWorkQueue [as _onTimeout] (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/async/run.js:130:15)
+    at Timer.listOnTimeout [as ontimeout] (timers.js:121:15)]]>
+   </failure>
+  </testcase>
+ </testsuite>
+</testsuites>
