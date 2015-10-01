@@ -11,7 +11,7 @@ module.exports = {
   mongoose: {
     debug: false
   },
-  hostname: 'http://localhost:3000',
+  hostname: 'http://localhost:3001',
   app: {
     name: 'KIOS Ry - Hanketietojärjestelmä'
   },
