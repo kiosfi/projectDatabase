@@ -1,12 +1,32 @@
-//describe('Project view page', function() {
-//    it('should show name and details of project', function() {
-//        browser.get('/');
-//        
-//        element.all(by.repeater('project in projects')).
-//                get(1).
-//                $('a').
-//                click();
-//        
+describe('Project view page', function () {
+
+//    beforeEach(function() {
 //        
 //    })
-//})
+
+    it('should show name and details of project', function () {
+        browser.get('/auth/login');
+        var email = element(by.model('login.user.email'));
+        var password = element(by.model('login.user.password'));
+        email.sendKeys('test@test.com');
+        password.sendKeys('loltest15');
+        var submit = element(by.buttonText("Login"));
+        submit.click().then(function () {
+            
+            browser.get('/');
+            
+            element.all(by.repeater('project in projects')).
+                    get(0).
+                    $('a').
+                    click();
+
+            var status = element(by.css('proj-div').$('proj-body').element(by.binding('project.status')));
+//            browser.pause();
+//            element.getAttribute('value')
+//            browser.debugger();
+            expect(status.getText()).toEqual('approved');
+        })
+
+
+    })
+})
