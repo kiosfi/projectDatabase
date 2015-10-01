@@ -1,6 +1,6 @@
-describe('Smoke test home page', function(){
-  it('title should contain MEAN', function(){
-    browser.get('/');
-    expect(browser.getTitle()).toMatch(/.*MEAN.*/);
+describe('Project test home page', function(){
+  it('title should contain KIOS', function(){
+    browser.get('/');    
+    expect(browser.getTitle()).toMatch('KIOS');
   });
 });

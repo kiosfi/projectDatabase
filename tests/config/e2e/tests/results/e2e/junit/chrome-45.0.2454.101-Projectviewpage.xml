@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+ <testsuite name="Project view page" timestamp="2015-10-01T12:34:33" hostname="localhost" time="12.135" errors="0" tests="1" skipped="0" disabled="0" failures="1">
+  <testcase classname="Project view page" name="should show name and details of project" time="12.135">
+   <failure type="exception" message="Failed: Timed out waiting for Protractor to synchronize with the page after 11 seconds. Please see https://github.com/angular/protractor/blob/master/docs/faq.md. The following tasks were pending:
+- $http: api/projects"><![CDATA[Error: Failed: Timed out waiting for Protractor to synchronize with the page after 11 seconds. Please see https://github.com/angular/protractor/blob/master/docs/faq.md. The following tasks were pending:
+- $http: api/projects
+    at stack (C:\Users\Sonja\AppData\Roaming\npm\node_modules\protractor\node_modules\jasmine\node_modules\jasmine-core\lib\jasmine-core\jasmine.js:1482:17)
+    at buildExpectationResult (C:\Users\Sonja\AppData\Roaming\npm\node_modules\protractor\node_modules\jasmine\node_modules\jasmine-core\lib\jasmine-core\jasmine.js:1452:14)
+    at Spec.Env.expectationResultFactory (C:\Users\Sonja\AppData\Roaming\npm\node_modules\protractor\node_modules\jasmine\node_modules\jasmine-core\lib\jasmine-core\jasmine.js:583:18)
+    at Spec.addExpectationResult (C:\Users\Sonja\AppData\Roaming\npm\node_modules\protractor\node_modules\jasmine\node_modules\jasmine-core\lib\jasmine-core\jasmine.js:324:34)
+    at Env.fail (C:\Users\Sonja\AppData\Roaming\npm\node_modules\protractor\node_modules\jasmine\node_modules\jasmine-core\lib\jasmine-core\jasmine.js:894:25)
+    at Function.next.fail (C:\Users\Sonja\AppData\Roaming\npm\node_modules\protractor\node_modules\jasmine\node_modules\jasmine-core\lib\jasmine-core\jasmine.js:1806:19)
+    at C:\Users\Sonja\AppData\Roaming\npm\node_modules\protractor\node_modules\jasminewd2\index.js:101:16
+    at [object Object].promise.ControlFlow.runInFrame_ (C:/Users/Sonja/AppData/Roaming/npm/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/../webdriver/promise.js:1857:20)
+    at [object Object].goog.defineClass.notify (C:/Users/Sonja/AppData/Roaming/npm/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/../webdriver/promise.js:2448:25)
+    at [object Object].promise.Promise.notify_ (C:/Users/Sonja/AppData/Roaming/npm/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/../webdriver/promise.js:564:12)]]>
+   </failure>
+  </testcase>
+ </testsuite>
+</testsuites>
