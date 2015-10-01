@@ -10,8 +10,8 @@ nbactions.xml
 nb-configuration.xml
 .nb-gradle/
 
-# Bower
+# Bower/
 .bower-cache
-.bower-registry/bower.herokuapp.com/lookup
-bower_components
+.bower-registry/bower.herokuapp.com/lookup/
+bower_components/
 
