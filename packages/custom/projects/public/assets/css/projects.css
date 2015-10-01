@@ -8,10 +8,12 @@ ul li
 }
 
 .tila {
-    /*    float: right;*/
+    font-style: italic;
+    float: right;
 }
 
-proj-box {
+.proj-box {
+    display: inline-block;
     width: 100%;
 }
 
@@ -20,9 +22,10 @@ proj-box {
 }
 
 .proj-div {
+
     padding: 1em;
     float: left;
-    width: 50%;
+    width: 33%;
 }
 
 .proj-header {
@@ -36,9 +39,44 @@ proj-box {
     line-height: 1.2;
 }
 
+.attachments {
+
+}
+
 hr {
     border: 0;
     border-bottom: 1px dashed #ccc;
     background: #999;
     width: 100%;
+}
+
+
+.btn {
+
+    height: 30px;
+    width: 100px;
+    background: #b8b8b8;
+    background-image: -webkit-linear-gradient(top, #b8b8b8, #9c9a9c);
+    background-image: -moz-linear-gradient(top, #b8b8b8, #9c9a9c);
+    background-image: -ms-linear-gradient(top, #b8b8b8, #9c9a9c);
+    background-image: -o-linear-gradient(top, #b8b8b8, #9c9a9c);
+    background-image: linear-gradient(to bottom, #b8b8b8, #9c9a9c);
+    -webkit-border-radius: 4;
+    -moz-border-radius: 4;
+    border-radius: 4px;
+    font-family: Courier New;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 5px 15px 5px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #919191;
+    background-image: -webkit-linear-gradient(top, #919191, #474647);
+    background-image: -moz-linear-gradient(top, #919191, #474647);
+    background-image: -ms-linear-gradient(top, #919191, #474647);
+    background-image: -o-linear-gradient(top, #919191, #474647);
+    background-image: linear-gradient(to bottom, #919191, #474647);
+    text-decoration: none;
 }

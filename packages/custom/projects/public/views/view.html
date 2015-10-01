@@ -1,12 +1,13 @@
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
-    <h2><span>{{project.title}}</span>
-        <span class="tila"> - {{project.status}}</span></h2>
-    <h3>Koordinaattori: <a href="">{{project.coordinator}}</a></h3>
+    <a data-ng-href="/projects"> <p class="btn"><< Takaisin</p> </a>
+    <h2><span>{{project.title}}</span> </h2>
+    <h3>Koordinaattori: <a href="">{{project.coordinator}}</a> <span class="tila">{{project.status}}</span> </h3>        
+
     <hr>
     <article class="proj">
         <h4 class=proj-header>Kuvaus</h4>
         <span class="proj-body">
-            <p>{{project.description}}</p>
+            {{project.description}}
         </span>
     </article>
 
@@ -19,7 +20,7 @@
                 <p>Osoite: {{project.organisation.address}}</p>
                 <p>Puhelinnumero: {{project.organisation.tel}}</p>
                 <p>Sähköposti: {{project.organisation.email}}</p>
-                <p>Websivut: <a href="www.org.com">{{project.organisation.website}}</a></p>
+                <p>Websivut: {{project.organisation.website}}</p>
             </section>
         </article>
 
@@ -63,20 +64,24 @@
                 <p>1.6.2015 2. Väliraportti</p>
             </section>
         </article>
+
+        <article class="proj-div">
+            <h4 class="proj-header">Liitteet</h4>
+            <section class="proj-body">
+                <p><a href="">Hakemus</a> - Hyväksytty 1.1.2014</p>
+                <p><a href="">Budjetti</a> - Hyväksytty 1.1.2014</p>
+                <p><a href="">1. väliraportti</a> - Hyväksytty 1.1.2014</p>
+                <p><a href="">2. väliraportti</a> - ODOTTAA</p>
+                <p><a href="">Suosituskirje A</a> - Hyväksytty 1.1.2014</p>
+                <p><a href="">Suosituskirje B</a> - Hyväksytty 1.1.2014</p>
+                <p><a href="">Evaluointi</a> - Hyväksytty 1.1.2014</p>
+                <p><a href="">Esitys 1</a> - Hyväksytty 1.1.2014</p>
+                <p><a href="">Esitys 2</a> - ODOTTAA</p>
+                <p><a href="">Sopimus</a> - Hyväksytty 1.1.2014</p>
+            </section>
+        </article>
     </article>
-    <article class="proj-box">
-        <h4 class="proj-header">Liitteet</h4>
-        <section class="proj-body">
-            <p><a href="">Hakemus</a> - Hyväksytty 1.1.2014</p>
-            <p><a href="">Budjetti</a> - Hyväksytty 1.1.2014</p>
-            <p><a href="">1. väliraportti</a> - Hyväksytty 1.1.2014</p>
-            <p><a href="">2. väliraportti</a> - ODOTTAA</p>
-            <p><a href="">Suosituskirje A</a> - Hyväksytty 1.1.2014</p>
-            <p><a href="">Suosituskirje B</a> - Hyväksytty 1.1.2014</p>
-            <p><a href="">Evaluointi</a> - Hyväksytty 1.1.2014</p>
-            <p><a href="">Esitys 1</a> - Hyväksytty 1.1.2014</p>
-            <p><a href="">Esitys 2</a> - ODOTTAA</p>
-            <p><a href="">Sopimus</a> - Hyväksytty 1.1.2014</p>
-        </section>
-    </article>
+
+
+
 </section>
