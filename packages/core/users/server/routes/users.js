@@ -41,10 +41,10 @@ module.exports = function(MeanUser, app, auth, database, passport) {
       app.route('/api/login')
         .post(passport.authenticate('local', {
           failureFlash: false
-        }), function(req, res) {      
+        }), function(req, res) {
           var payload = req.user;
           payload.redirect = req.body.redirect;
-          var escaped = JSON.stringify(payload);      
+          var escaped = JSON.stringify(payload);
           escaped = encodeURI(escaped);
           // We are sending the payload inside the token
           var token = jwt.sign(escaped, config.secret, { expiresInMinutes: 60*5 });
@@ -79,81 +79,4 @@ module.exports = function(MeanUser, app, auth, database, passport) {
       }
       res.send(configuredApps);
     });
-
-  if(config.strategies.facebook.enabled)
-  {
-      // Setting the facebook oauth routes
-      app.route('/api/auth/facebook')
-        .get(passport.authenticate('facebook', {
-          scope: ['email', 'user_about_me'],
-          failureRedirect: '/auth/login',
-        }), users.signin);
-
-      app.route('/api/auth/facebook/callback')
-        .get(passport.authenticate('facebook', {
-          failureRedirect: '/auth/login',
-        }), users.authCallback);
-  }
-
-  if(config.strategies.github.enabled)
-  {
-      // Setting the github oauth routes
-      app.route('/api/auth/github')
-        .get(passport.authenticate('github', {
-          failureRedirect: '/auth/login'
-        }), users.signin);
-
-      app.route('/api/auth/github/callback')
-        .get(passport.authenticate('github', {
-          failureRedirect: '/auth/login'
-        }), users.authCallback);
-  }
-
-  if(config.strategies.twitter.enabled)
-  {    
-      // Setting the twitter oauth routes
-      app.route('/api/auth/twitter')
-        .get(passport.authenticate('twitter', {
-          failureRedirect: '/auth/login'
-        }), users.signin);
-
-      app.route('/api/auth/twitter/callback')
-        .get(passport.authenticate('twitter', {
-          failureRedirect: '/auth/login'
-        }), users.authCallback);
-  }
-
-  if(config.strategies.google.enabled)
-  {
-      // Setting the google oauth routes
-      app.route('/api/auth/google')
-        .get(passport.authenticate('google', {
-          failureRedirect: '/auth/login',
-          scope: [
-            'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email'
-          ]
-        }), users.signin);
-
-      app.route('/api/auth/google/callback')
-        .get(passport.authenticate('google', {
-          failureRedirect: '/auth/login'
-        }), users.authCallback);
-  }
-
-  if(config.strategies.linkedin.enabled)
-  {
-      // Setting the linkedin oauth routes
-      app.route('/api/auth/linkedin')
-        .get(passport.authenticate('linkedin', {
-          failureRedirect: '/auth/login',
-          scope: ['r_emailaddress']
-        }), users.signin);
-
-      app.route('/api/auth/linkedin/callback')
-        .get(passport.authenticate('linkedin', {
-          failureRedirect: '/auth/login'
-        }), users.authCallback);
-  }
-
 };
