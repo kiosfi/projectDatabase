@@ -22,8 +22,28 @@ module.exports = function(Projects) {
         },
 
         create: function(req, res) {
-            var project = new Project(req.body);
 
+            var organisation = new Organisation({
+              name: req.body.organisation.name,
+              representative: req.body.organisation.representative,
+              address: req.body.organisation.address,
+              tel:req.body.organisation.tel,
+              email: req.body.organisation.email,
+              website: req.body.organisation.website
+            });
+            organisation.save();
+
+            var project = new Project({
+              title: req.body.title,
+              coordinator: req.body.coordinator,
+              organisation: organisation._id,
+              status: req.body.status,
+              funding: {applied_curr_local: req.body.funding.applied_curr_local,
+                        applied_curr_eur: req.body.funding.applied_curr_eur},
+              duration_months: req.body.duration_months,
+              description: req.body.description
+              });
+              
             project.save(function(err) {
                 if (err) {
                     return res.status(500).json({
@@ -36,6 +56,7 @@ module.exports = function(Projects) {
                     url: config.hostname + '/projects/' + project._id,
                     name: project.title
                 });
+
 
                 res.json(project);
             });

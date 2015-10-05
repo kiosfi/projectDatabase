@@ -12,9 +12,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     $scope.create = function(isValid) {
       if (isValid) {
         var project = new Projects($scope.project);
-
         project.$save(function(response) {
-          $location.path('projects');
+          $location.path('projects/' + response._id);
         });
 
         $scope.project = {};
