@@ -100,24 +100,6 @@
       </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.grantedlocal.$invalid }">
-      <label mean-token="'create-grantedlocal'" class="col-md-3 control-label">Myönnetty avustus (paikallinen)</label>
-      <div class="col-md-9">
-        <input name="grantedlocal" type="text" class="form-control" data-ng-model="project.funding.granted_curr_local" id="grantedlocal" placeholder="Myönnetty avustus (paikallinen)" required>
-        <div ng-show="submitted && projectForm.grantedlocal.$invalid" class="help-block">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.grantedeur.$invalid }">
-      <label mean-token="'create-grantedeur'" class="col-md-3 control-label">Myönnetty avustus (EUR)</label>
-      <div class="col-md-9">
-        <input name="grantedeur" type="text" class="form-control" data-ng-model="project.funding.granted_curr_eur" id="grantedeur" placeholder="Myönnetty avustus (EUR)" required>
-        <div ng-show="submitted && projectForm.grantedeur.$invalid" class="help-block">
-        </div>
-      </div>
-    </div>
-
     <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.duration.$invalid }">
       <label mean-token="'create-duration'" class="col-md-3 control-label">Hankkeen kesto (kk)</label>
       <div class="col-md-9">
