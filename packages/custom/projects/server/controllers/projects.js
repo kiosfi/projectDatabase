@@ -33,17 +33,9 @@ module.exports = function(Projects) {
             });
             organisation.save();
 
-            var project = new Project({
-              title: req.body.title,
-              coordinator: req.body.coordinator,
-              organisation: organisation._id,
-              status: req.body.status,
-              funding: {applied_curr_local: req.body.funding.applied_curr_local,
-                        applied_curr_eur: req.body.funding.applied_curr_eur},
-              duration_months: req.body.duration_months,
-              description: req.body.description
-              });
-              
+            var project = new Project(req.body);
+            project.organisation = organisation._id;
+
             project.save(function(err) {
                 if (err) {
                     return res.status(500).json({
