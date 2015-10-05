@@ -26,6 +26,12 @@ Projects.register(function(app, auth, database, circles) {
     'link': 'all projects'
   });
 
+  Projects.menus.add({
+    'roles': ['authenticated'],
+    'title': 'Hankkeiden lisäys',
+    'link': 'create project'
+  });
+
   Projects.events.defaultData({
     type: 'post',
     subtype: 'project'

@@ -10,15 +10,131 @@
       </div>
 
     </div>
-    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.title.$invalid }">
-      <label mean-token="'create-title'" class="col-md-3 control-label">Hankkeen tila</label>
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.coordinator.$invalid }">
+      <label mean-token="'create-coordinator'" class="col-md-3 control-label">Hankkeen koordinaattori</label>
       <div class="col-md-9">
-        <input name="status" type="text" class="form-control" data-ng-model="project.status" id="status" placeholder="Tila" required>
-        <div ng-show="submitted && projectForm.status.$invalid" class="help-block">
-          <p ng-show="projectForm.status.$error.required">Tila on pakollinen</p>
+        <input name="coordinator" type="text" class="form-control" data-ng-model="project.coordinator" id="coordinator" placeholder="Koordinaattori" required>
+        <div ng-show="submitted && projectForm.coordinator.$invalid" class="help-block">
+          <p ng-show="projectForm.coordinator.$error.required">Koordinaattorin nimi on pakollinen</p>
         </div>
       </div>
+    </div>
 
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.orgname.$invalid }">
+      <label mean-token="'create-orgname'" class="col-md-3 control-label">Järjestön nimi</label>
+      <div class="col-md-9">
+        <input name="orgname" type="text" class="form-control" data-ng-model="project.organisation.name" id="orgname" placeholder="Järjestön nimi" required>
+        <div ng-show="submitted && projectForm.orgname.$invalid" class="help-block">
+          <p ng-show="projectForm.orgname.$error.required">Järjestön nimi on pakollinen</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.orgrep.$invalid }">
+      <label mean-token="'create-orgrep'" class="col-md-3 control-label">Järjestön edustaja</label>
+      <div class="col-md-9">
+        <input name="orgrep" type="text" class="form-control" data-ng-model="project.organisation.representative" id="orgrep" placeholder="Edustaja" required>
+        <div ng-show="submitted && projectForm.orgrep.$invalid" class="help-block">
+          <p ng-show="projectForm.orgrep.$error.required">Edustajan nimi on pakollinen</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.orgaddr.$invalid }">
+      <label mean-token="'create-orgaddr'" class="col-md-3 control-label">Järjestön osoite</label>
+      <div class="col-md-9">
+        <input name="orgaddr" type="text" class="form-control" data-ng-model="project.organisation.address" id="orgaddr" placeholder="Osoite" required>
+        <div ng-show="submitted && projectForm.orgaddr.$invalid" class="help-block">
+          <p ng-show="projectForm.orgaddr.$error.required">Osoite on pakollinen</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.orgtel.$invalid }">
+      <label mean-token="'create-orgtel'" class="col-md-3 control-label">Järjestön puhelinnumero</label>
+      <div class="col-md-9">
+        <input name="orgtel" type="text" class="form-control" data-ng-model="project.organisation.tel" id="orgtel" placeholder="Puhelinnumero" required>
+        <div ng-show="submitted && projectForm.orgtel.$invalid" class="help-block">
+          <p ng-show="projectForm.orgtel.$error.required">Puhelinnumero on pakollinen</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.orgemail.$invalid }">
+      <label mean-token="'create-orgemail'" class="col-md-3 control-label">Järjestön sähköpostiosoite</label>
+      <div class="col-md-9">
+        <input name="orgemail" type="text" class="form-control" data-ng-model="project.organisation.email" id="orgemail" placeholder="Sähköposti" required>
+        <div ng-show="submitted && projectForm.orgemail.$invalid" class="help-block">
+          <p ng-show="projectForm.orgemail.$error.required">Sähköpostiosoite on pakollinen</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.orgwww.$invalid }">
+      <label mean-token="'create-orgwww'" class="col-md-3 control-label">Järjestön websivut</label>
+      <div class="col-md-9">
+        <input name="orgwww" type="text" class="form-control" data-ng-model="project.organisation.website" id="orgwww" placeholder="Websivut" required>
+        <div ng-show="submitted && projectForm.orgwww.$invalid" class="help-block">
+          <p ng-show="projectForm.orgwww.$error.required">Websivut ovat pakolliset</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.appliedlocal.$invalid }">
+      <label mean-token="'create-appliedlocal'" class="col-md-3 control-label">Haettu avustus (paikallinen valuutta)</label>
+      <div class="col-md-9">
+        <input name="appliedlocal" type="text" class="form-control" data-ng-model="project.funding.applied_curr_local" id="appliedlocal" placeholder="Haettu avustus (paikallinen)" required>
+        <div ng-show="submitted && projectForm.appliedlocal.$invalid" class="help-block">
+          <p ng-show="projectForm.appliedlocal.$error.required">Avustuksen määrä on pakollinen</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.appliedeur.$invalid }">
+      <label mean-token="'create-appliedeur'" class="col-md-3 control-label">Haettu avustus (EUR)</label>
+      <div class="col-md-9">
+        <input name="appliedeur" type="text" class="form-control" data-ng-model="project.funding.applied_curr_eur" id="appliedeur" placeholder="Haettu avustus (EUR)" required>
+        <div ng-show="submitted && projectForm.appliedeur.$invalid" class="help-block">
+          <p ng-show="projectForm.appliedeur.$error.required">Avustuksen määrä on pakollinen</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.grantedlocal.$invalid }">
+      <label mean-token="'create-grantedlocal'" class="col-md-3 control-label">Myönnetty avustus (paikallinen)</label>
+      <div class="col-md-9">
+        <input name="grantedlocal" type="text" class="form-control" data-ng-model="project.funding.granted_curr_local" id="grantedlocal" placeholder="Myönnetty avustus (paikallinen)" required>
+        <div ng-show="submitted && projectForm.grantedlocal.$invalid" class="help-block">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.grantedeur.$invalid }">
+      <label mean-token="'create-grantedeur'" class="col-md-3 control-label">Myönnetty avustus (EUR)</label>
+      <div class="col-md-9">
+        <input name="grantedeur" type="text" class="form-control" data-ng-model="project.funding.granted_curr_eur" id="grantedeur" placeholder="Myönnetty avustus (EUR)" required>
+        <div ng-show="submitted && projectForm.grantedeur.$invalid" class="help-block">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.duration.$invalid }">
+      <label mean-token="'create-duration'" class="col-md-3 control-label">Hankkeen kesto (kk)</label>
+      <div class="col-md-9">
+        <input name="duration" type="text" class="form-control" data-ng-model="project.duration_months" id="duration" placeholder="Kesto (kk)" required>
+        <div ng-show="submitted && projectForm.duration.$invalid" class="help-block">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.description.$invalid }">
+      <label mean-token="'create-description'" for="description" class="col-md-3 control-label">Hankkeen kuvaus</label>
+      <div class="col-md-9">
+        <textarea name="description" data-ng-model="project.description" id="description" cols="30" rows="10" placeholder="Kuvaus" class="form-control" required></textarea>
+        <div ng-show="submitted && projectForm.description.$invalid" class="help-block">
+          <p ng-show="projectForm.description.$error.required">Kuvaus on pakollinen</p>
+        </div>
+      </div>
     </div>
 
     <div class="form-group">

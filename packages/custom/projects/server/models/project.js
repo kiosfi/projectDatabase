@@ -27,8 +27,8 @@ var ProjectSchema = new Schema({
     trim: true
   },
   reg_date: {
-    type: String,
-    required: true
+    type: Date,
+    default: Date.now
   },
   funding: {
     applied_curr_local: {
