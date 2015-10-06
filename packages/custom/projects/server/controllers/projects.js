@@ -23,6 +23,8 @@ module.exports = function(Projects) {
 
         create: function(req, res) {
 
+            var project = new Project(req.body);
+
             var organisation = new Organisation({
               name: req.body.organisation.name,
               representative: req.body.organisation.representative,
@@ -31,27 +33,30 @@ module.exports = function(Projects) {
               email: req.body.organisation.email,
               website: req.body.organisation.website
             });
-            organisation.save();
 
-            var project = new Project(req.body);
-            project.organisation = organisation._id;
-
-            project.save(function(err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Hanketta ei voi tallentaa'
-                    });
+            Organisation.findOne({name: organisation.name}, function(err, obj) {
+                if (!obj) {
+                  project.organisation = organisation._id;
+                  organisation.save();
+                } else {
+                  project.organisation = obj._id;
                 }
-
-                Projects.events.publish({
-                    action: 'created',
-                    url: config.hostname + '/projects/' + project._id,
-                    name: project.title
+                project.save(function(err) {
+                  if (err) {
+                      return res.status(500).json({
+                          error: 'Hanketta ei voi tallentaa'
+                      });
+                  }
                 });
-
-
-                res.json(project);
             });
+
+              Projects.events.publish({
+                  action: 'created',
+                  url: config.hostname + '/projects/' + project._id,
+                  name: project.title
+              });
+
+              res.json(project);
         },
 
         show: function(req, res) {
