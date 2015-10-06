@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
- <testsuite name="Project view page" timestamp="2015-10-06T18:01:16" hostname="localhost" time="1.132" errors="0" tests="1" skipped="0" disabled="0" failures="1">
-  <testcase classname="Project view page" name="should show name and details of project" time="1.132">
-   <failure type="toContain" message="Expected &apos;http://localhost:3001/&apos; to contain &apos;560d27ab7b46bfe2c9bb36c7&apos;."><![CDATA[Error: Failed expectation
-    at Object.<anonymous> (C:\Users\Sonja\projectDatabase\tests\e2e\smoke\projectView.spec.js:23:41)
-    at C:\Users\Sonja\AppData\Roaming\npm\node_modules\protractor\node_modules\jasminewd2\index.js:96:23
-    at new promise.Promise (C:/Users/Sonja/AppData/Roaming/npm/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/../webdriver/promise.js:368:5)
-    at controlFlowExecute (C:\Users\Sonja\AppData\Roaming\npm\node_modules\protractor\node_modules\jasminewd2\index.js:82:18)
-    at [object Object].promise.ControlFlow.runInFrame_ (C:/Users/Sonja/AppData/Roaming/npm/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/../webdriver/promise.js:1857:20)
-    at [object Object].promise.ControlFlow.runEventLoop_ (C:/Users/Sonja/AppData/Roaming/npm/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/../webdriver/promise.js:1729:8)
-    at [object Object].eval (C:/Users/Sonja/AppData/Roaming/npm/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/../webdriver/promise.js:2043:12)
-    at goog.async.run.processWorkQueue (C:\Users\Sonja\AppData\Roaming\npm\node_modules\protractor\node_modules\selenium-webdriver\lib\goog\async\run.js:130:15)
-    at process._tickCallback (node.js:356:9)]]>
-   </failure>
-  </testcase>
+ <testsuite name="Project view page" timestamp="2015-10-06T19:25:01" hostname="localhost" time="2.787" errors="0" tests="2" skipped="0" disabled="0" failures="0">
+  <testcase classname="Project view page" name="should show name and details of project when logged in " time="2.18" />
+  <testcase classname="Project view page" name="should redirect to login page when not logged in " time="0.606" />
  </testsuite>
 </testsuites>
