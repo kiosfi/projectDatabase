@@ -40,7 +40,16 @@ describe('<Unit Test>', function () {
                             "granted_curr_local": "50 000",
                             "granted_curr_eur": "10 000"},
                         "duration_months": 30,
-                        "description": "A short description of project"});
+                        "description": "A short description of project",
+                        "description_en": "Description in english",
+                        "background": "Project background",
+                        "beneficiaries": "The project benefits...",
+                        "gender_aspect": "Gender aspects include...",
+                        "project_goal": "Project goal is...",
+                        "sustainability_risks": "Some data here",
+                        "reporting_evaluation": "Data",
+                        "other_donors_proposed": "Donated amount",
+                        "dac": "abcd123"});
             project1.save();
             project2 = new Project(
                     {"title": "Humans",
@@ -54,7 +63,17 @@ describe('<Unit Test>', function () {
                             "granted_curr_local": "50 000",
                             "granted_curr_eur": "11 000"},
                         "duration_months": 12,
-                        "description": "A short description of project"});
+                        "description": "A short description of project",
+                        "description_en": "Description in english",
+                        "background": "Project background 2",
+                        "beneficiaries": "The project benefits such and such",
+                        "gender_aspect": "Gender aspects include this and that",
+                        "project_goal": "Project goal is...",
+                        "sustainability_risks": "Some data here",
+                        "reporting_evaluation": "More data",
+                        "other_donors_proposed": "Donated amount",
+                        "dac": "abcd123"
+                      });
             project2.save();
             done();
         });
