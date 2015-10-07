@@ -1,5 +1,5 @@
 var helpers = function helpers() {
-    
+
     this.login = function () {
         browser.get('/');
         element(by.linkText("Log In")).click();
@@ -11,12 +11,12 @@ var helpers = function helpers() {
         var submit = element(by.buttonText("Login"));
         submit.click();
     };
-    
+
     this.logout = function () {
         browser.get(browser.baseUrl + '/');
-        browser.executeScript('window.localStorage.clear();');        
+        browser.executeScript('window.localStorage.clear();');
     };
-    
+
 }
 
 module.exports = new helpers();
