@@ -112,9 +112,8 @@ describe('<Unit Test>', function () {
                 this.timeout(10000);
                 var query = Project;
                 return query.findOne({title : 'Humans'}).exec(function (err, data) {
-                    console.log(data);
                     expect(err).to.be(null);
-                    //expect(data.title).to.be("Humans");
+                    expect(data.title).to.be("Humans");
                     done();
                 });
             });
