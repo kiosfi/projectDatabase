@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+  Schema = mongoose.Schema,
+  Organisation = require('./organisation.js');
 
 var ProjectSchema = new Schema({
   title: {
@@ -64,39 +65,6 @@ var ProjectSchema = new Schema({
   }
 });
 
-var OrganisationSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  representative: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  address: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  tel: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  email: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  website: {
-    type: String,
-    required: true,
-    trim: true
-  }
-});
-
 ProjectSchema.path('title').validate(function(title) {
   return !!title;
 }, 'Nimi ei voi olla tyhjä');
@@ -112,4 +80,3 @@ ProjectSchema.statics.load = function(id, cb) {
 };
 
 mongoose.model('Project', ProjectSchema);
-mongoose.model('Organisation', OrganisationSchema);
