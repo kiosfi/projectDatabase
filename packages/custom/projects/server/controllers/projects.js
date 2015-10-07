@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
     Project = mongoose.model('Project'),
     Organisation = mongoose.model('Organisation'),
+    BankAccount = mongoose.model('BankAccount'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
@@ -24,17 +25,10 @@ module.exports = function(Projects) {
         create: function(req, res) {
 
             var project = new Project(req.body);
-
             var organisation = new Organisation(req.body.organisation);
-            /*var organisation = new Organisation({
-              name: req.body.organisation.name,
-              representative: req.body.organisation.representative,
-              address: req.body.organisation.address,
-              tel:req.body.organisation.tel,
-              email: req.body.organisation.email,
-              website: req.body.organisation.website
-            });*/
-
+            var bank_account = new BankAccount(req.body.organisation.bank_account);
+            bank_account.save();
+            organisation.bank_account = bank_account._id;
 
             Organisation.findOne({name: organisation.name}, function(err, obj) {
                 if (!obj) {

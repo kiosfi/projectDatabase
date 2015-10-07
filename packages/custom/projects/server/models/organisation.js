@@ -59,10 +59,11 @@ var mongoose = require('mongoose'),
 //    }
     bank_account: {
         type: Schema.ObjectId,
-        ref: 'BankAccount'
+        ref: 'BankAccount',
+        required: true
     }
   });
-  
+
   var BankAccountSchema = new Schema({
       bank_contact_details: {
           type: String,
