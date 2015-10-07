@@ -2,7 +2,7 @@ var jasmineReporters = require('jasmine-reporters');
 
 
 exports.config = {
-    baseUrl: 'http://localhost:3001',
+    baseUrl: 'http://localhost:3002',
     framework: 'jasmine2',
     seleniumAddress: 'http://localhost:4444/wd/hub',
     specs: [
