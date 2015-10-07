@@ -37,7 +37,52 @@ var mongoose = require('mongoose'),
       type: String,
       required: true,
       trim: true
+    },
+    legal_status: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    history_status: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    int_links: {
+        type: String,
+        required: true,
+        trim: ture
+    },
+//    prev_projects: {
+//        type: Array,
+//        required: true
+//    }
+    bank_account: {
+        type: Schema.ObjectId,
+        ref: 'BankAccount'
     }
+  });
+  
+  var BankAccountSchema = new Schema({
+      bank_contact_details: {
+          type: String,
+          required: true,
+          trim: true
+      },
+      iban: {
+          type: String,
+          required: true,
+          trim: true
+      },
+      swift: {
+          type: String,
+          required: true,
+          trim: true
+      },
+      holder_name: {
+          type: String
+      }
   });
 
   mongoose.model('Organisation', OrganisationSchema);
+  mongoose.model('BankAccount', BankAccountSchema);
