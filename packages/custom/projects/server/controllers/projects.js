@@ -25,14 +25,16 @@ module.exports = function(Projects) {
 
             var project = new Project(req.body);
 
-            var organisation = new Organisation({
+            var organisation = new Organisation(req.body.organisation);
+            /*var organisation = new Organisation({
               name: req.body.organisation.name,
               representative: req.body.organisation.representative,
               address: req.body.organisation.address,
               tel:req.body.organisation.tel,
               email: req.body.organisation.email,
               website: req.body.organisation.website
-            });
+            });*/
+
 
             Organisation.findOne({name: organisation.name}, function(err, obj) {
                 if (!obj) {

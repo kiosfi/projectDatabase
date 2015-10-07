@@ -20,7 +20,8 @@ var ProjectSchema = new Schema({
   },
   organisation: {
     type: Schema.ObjectId,
-    ref: 'Organisation'
+    ref: 'Organisation',
+    required: true
   },
   status: {
     type: String,
@@ -59,6 +60,51 @@ var ProjectSchema = new Schema({
     trim: true
   },
   description: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  description_en: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  background: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  beneficiaries: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  gender_aspect: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  project_goal: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  sustainability_risks: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  reporting_evaluation: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  other_donors_proposed: {
+    type: String,
+    required: false,
+    trim: true
+  },
+  dac: {
     type: String,
     required: true,
     trim: true
