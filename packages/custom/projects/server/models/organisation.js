@@ -51,7 +51,7 @@ var mongoose = require('mongoose'),
     int_links: {
         type: String,
         required: true,
-        trim: ture
+        trim: true
     },
 //    prev_projects: {
 //        type: Array,
