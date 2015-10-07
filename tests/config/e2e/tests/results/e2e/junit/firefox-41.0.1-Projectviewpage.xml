@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+ <testsuite name="Project view page" timestamp="2015-10-07T11:13:45" hostname="localhost" time="5.777" errors="0" tests="3" skipped="0" disabled="0" failures="0">
+  <testcase classname="Project view page" name="should stay project view page if logged in " time="3.159" />
+  <testcase classname="Project view page" name="should show details of project if logged in" time="1.893" />
+  <testcase classname="Project view page" name="should redirect to login page if not logged in " time="0.725" />
+ </testsuite>
+</testsuites>
