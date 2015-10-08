@@ -1,20 +1,34 @@
 <?xml version="1.0"?>
-<testsuite name="PhantomJS 1.9.8 (Windows 8 0.0.0)" package="" timestamp="2015-10-08T11:22:50" id="0" hostname="Fupu" tests="6" errors="0" failures="1" time="0.118">
+<testsuite name="PhantomJS 1.9.8 (Windows 8 0.0.0)" package="" timestamp="2015-10-08T12:30:24" id="0" hostname="Fupu" tests="6" errors="0" failures="1" time="0.148">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
   </properties>
-  <testcase name="should expose some global scope" time="0.04" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="should expose some global scope" time="0.016" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="should expose some global scope" time="0.05" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="should expose some global scope" time="0.018" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
   <testcase name="1 should be equals to 1" time="0" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).Test test case"/>
-  <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.021" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.findOne() should create an array with one project object fetched from XHR using a projectId URL parameter" time="0.019" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.create() with valid form data should send POST request " time="0.022" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers">
-    <failure type="">TypeError: 'undefined' is not a function (evaluating 'postProjectData().respond(responseProjectData())')
-    at C:/Users/Sonja/projectDatabase/packages/custom/projects/public/tests/projects.spec.js:177
+  <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.027" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.findOne() should create an array with one project object fetched from XHR using a projectId URL parameter" time="0.022" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.create() with valid form data should send POST request " time="0.031" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers">
+    <failure type="">Error: Expected POST api/projects with different data
+EXPECTED: {"title":"Human rights"}
+GOT:      {}
+    at $httpBackend (C:/Users/Sonja/projectDatabase/bower_components/angular-mocks/angular-mocks.js:1212)
+    at p (C:/Users/Sonja/projectDatabase/bower_components/angular/angular.min.js:89)
+    at C:/Users/Sonja/projectDatabase/bower_components/angular/angular.min.js:86
+    at C:/Users/Sonja/projectDatabase/bower_components/angular/angular.min.js:119
+    at C:/Users/Sonja/projectDatabase/bower_components/angular/angular.min.js:133
+    at C:/Users/Sonja/projectDatabase/bower_components/angular/angular.min.js:130
+    at C:/Users/Sonja/projectDatabase/bower_components/angular-mocks/angular-mocks.js:1543
+    at C:/Users/Sonja/projectDatabase/packages/custom/projects/public/tests/projects.spec.js:189
 </failure>
   </testcase>
   <system-out>
-    <![CDATA[PhantomJS 1.9.8 (Windows 8 0.0.0) LOG: undefined
+    <![CDATA[PhantomJS 1.9.8 (Windows 8 0.0.0) LOG: 'postProjectDatan sisällä'
+,PhantomJS 1.9.8 (Windows 8 0.0.0) LOG: 'responsedata: '
+,PhantomJS 1.9.8 (Windows 8 0.0.0) LOG: Object{_id: '525cf20451979dea2c000001', title: 'Human rights'}
+,PhantomJS 1.9.8 (Windows 8 0.0.0) LOG: 'postdata:'
+,PhantomJS 1.9.8 (Windows 8 0.0.0) LOG: 'postProjectDatan sisällä'
+,PhantomJS 1.9.8 (Windows 8 0.0.0) LOG: Object{title: 'Human rights'}
 
 ]]>
   </system-out>
