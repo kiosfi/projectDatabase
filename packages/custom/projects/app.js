@@ -1,13 +1,13 @@
 'use strict';
 
-/*
+/**
  * Defining the Package
  */
 var Module = require('meanio').Module;
 
 var Projects = new Module('projects');
 
-/*
+/**
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */

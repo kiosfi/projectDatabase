@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * This is a test.
+ *
+ * @param {type} param1
+ * @param {type} param2
+ */
 angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Global', 'Projects', 'MeanUser',
   function($scope, $stateParams, $location, Global, Projects, MeanUser) {
     $scope.global = Global;

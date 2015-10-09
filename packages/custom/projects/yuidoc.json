@@ -1,0 +1,7 @@
+{
+    "name": "KIOS Ry Project Database",
+    "options": {
+        "outdir": "docs/apidoc",
+        "paths": "."
+    }
+}
