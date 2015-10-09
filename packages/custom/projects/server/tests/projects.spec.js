@@ -14,7 +14,7 @@ var expect = require('expect.js'),
 
 var project1;
 var project2;
-var project;
+var project3;
 var organisation;
 var bank_account;
 
@@ -84,7 +84,7 @@ describe('<Unit Test>', function () {
                         "reporting_evaluation": "More data",
                         "other_donors_proposed": "Donated amount",
                         "dac": "abcd123"
-                      });
+                    });
             project2.save();
             done();
         });
@@ -111,9 +111,63 @@ describe('<Unit Test>', function () {
             it('should find given project', function (done) {
                 this.timeout(10000);
                 var query = Project;
-                return query.findOne({title : 'Humans'}).exec(function (err, data) {
+                return query.findOne({title: 'Humans'}).exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.title).to.be("Humans");
+                    done();
+                });
+            });
+        });
+
+        describe('Method Save', function () {
+
+            beforeEach(function (done) {
+                project3 = new Project(
+                        {"title": "Children rights",
+                            "coordinator": "Kaija Koordi",
+                            "organisation": organisation,
+                            "status": "registered",
+                            "funding": {
+                                "applied_curr_local": "50 000",
+                                "applied_curr_eur": "11 000",
+                                "granted_curr_local": "50 000",
+                                "granted_curr_eur": "11 000"},
+                            "duration_months": 19,
+                            "description": "A short description of project",
+                            "description_en": "Description in english",
+                            "background": "Project background 3",
+                            "beneficiaries": "The project benefits such and such",
+                            "gender_aspect": "Gender aspects include this and that",
+                            "project_goal": "Project goal is...",
+                            "sustainability_risks": "Some data here",
+                            "reporting_evaluation": "More data",
+                            "other_donors_proposed": "Donated amount",
+                            "dac": "19191123"
+                        });
+                done();
+            });
+
+            it('should be able to save project without problems', function (done) {
+                this.timeout(10000);
+
+                return project3.save(function (err, data) {
+                    expect(err).to.be(null);
+                    expect(data.title).to.equal('Children rights');
+                    expect(data.coordinator).to.equal('Kaija Koordi');
+                    expect(data.organisation.length).to.not.equal(0);
+                    expect(data.reg_date.length).to.not.equal(0);
+                    project3.remove();
+                    done();
+                });
+            });
+
+            it('should show an error when try to save without a title', function (done) {
+                this.timeout(10000);
+                
+                project3.title = '';
+                return project3.save(function (err) {
+                    expect(err).to.not.be(null);
+                    project3.remove();
                     done();
                 });
             });
@@ -123,6 +177,7 @@ describe('<Unit Test>', function () {
             this.timeout(10000);
             project1.remove();
             project2.remove();
+
             done();
         });
     });
