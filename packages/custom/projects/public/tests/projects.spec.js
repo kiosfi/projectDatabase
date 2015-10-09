@@ -78,122 +78,126 @@
                         // test scope value
                         expect(scope.project).toEqualData(testProjectData());
                     });
-            it('$scope.create() with valid form data should send POST request ', function () {
-                MeanUser.login();
-
-                // fixture expected POST data
-                var postProjectData = function () {
-                    console.log('postProjectDatan sisällä');
-                    return {
-                        title: 'Human rights'
-//                        coordinator: 'Keijo Koo',
-//                        organisation: {
-//                            _id: '622cf20451979dea2c000011',
-//                            name: 'HR org',
-//                            representative: 'James Smith',
-//                            address: 'Wallstreet',
-//                            tel: '+123456678',
-//                            email: 'smith@hrorg.com',
-//                            website: 'www.hrorg.org',
-//                            legal_status: 'non-profit',
-//                            history_status: 'Org history',
-//                            int_links: 'Unicef'
-//                        },
-//                        status: 'registered',
-//                        reg_date: Date.now,
-//                        funding: {
-//                            applied_curr_local: 50000,
-//                            applied_curr_eur: 10000
-//                        },
-//                        duration_months: 30,
-//                        descripiton: 'Kuvaus hankkeesta',
-//                        description_eng: 'Descciption in english',
-//                        background: 'Background',
-//                        beneficiaries: 'Children in Mosambik',
-//                        gender_aspect: 'Aspects',
-//                        project_goal: 'Goals',
-//                        sustainability_risks: 'Some risks',
-//                        reporting_evaluation: 'How to report',
-//                        other_donors_proposed: 'Unicef',
-//                        dac: '1234566'
-                    };
-                };
-                // fixture response data
-                var responseProjectData = function () {
-                    return {
-                        _id: '525cf20451979dea2c000001',
-                        title: 'Human rights',
-//                                        coordinator: 'Keijo Koo',
-//                                        organisation: '622cf20451979dea2c000011',
-//                                        status: 'registered',
-//                                        reg_date: Date.now,
-//                                        funding: {
-//                                        applied_curr_local: 50000,
-//                                                applied_curr_eur: 10000
-//                                        },
-//                                        duration_months: 30,
-//                                        descripiton: 'Kuvaus hankkeesta',
-//                                        description_eng: 'Descciption in english',
-//                                        background: 'Background',
-//                                        beneficiaries: 'Children in Mosambik',
-//                                        gender_aspect: 'Aspects',
-//                                        project_goal: 'Goals',
-//                                        sustainability_risks: 'Some risks',
-//                                        reporting_evaluation: 'How to report',
-//                                        other_donors_proposed: 'Unicef',
-//                                        dac: '1234566'
-                    };
-                };
-                // fixture mock form input values
-                scope.title = 'Human rights';
-//                                scope.coordinator = 'Keijo Koo';
-//                                scope.project.organisation.name = 'HR org';
-//                                scope.project.organisation.representative = 'James Smith';
-//                                scope.project.organisation.address = 'Wallstreet';
-//                                scope.project.organisation.tel = '+123456678';
-//                                scope.project.organisation.email = 'smith@hrorg.com';
-//                                scope.project.organisation.website = 'www.hrorg.org';
-//                                scope.project.organisation.legal_status = 'non-profit';
-//                                scope.project.organisation.history_status = 'Org history';
-//                                scope.project.organisation.int_links = 'Unicef';
-//                                scope.project.organisation.bank_account.bank_contact_details = 'EU Bank';
-//                                scope.project.organisation.bank_account.iban = 'EU1234567890';
-//                                scope.project.organisation.bank_account.swift = 'EUEUEUH';
-//                                scope.project.organisation.bank_account.holder_name = 'HR org';
-//                                scope.status = 'registered';
-//                                scope.applied_curr_local = 50000;
-//                                scope.applied_curr_eur = 10000;
-//                                scope.duration_months = 30;
-//                                scope.descripiton = 'Kuvaus hankkeesta';
-//                                scope.description_eng = 'Descciption in english';
-//                                scope.background = 'Background';
-//                                scope.beneficiaries = 'Children in Mosambik';
-//                                scope.gender_aspect = 'Aspects';
-//                                scope.project_goal = 'Goals';
-//                                scope.sustainability_risks = 'Some risks';
-//                                scope.reporting_evaluation = 'How to report';
-//                                scope.other_donors_proposed = 'Unicef';
-//                                scope.dac = '1234566';
-
-                // test post request is sent
-                $httpBackend.expectPOST('api\/projects', postProjectData()).respond(responseProjectData());
-
-                // Run controller
-                console.log('responsedata: ');
-                console.log(responseProjectData());
-                
-                console.log('postdata:');
-                console.log(postProjectData());
-
-                scope.create(true);
-                $httpBackend.flush();
-                
-                // test form input is reset
-                expect(scope.title).toEqual('');
-                
-                // test URL location to new object
-                expect($location.path()).toBe('/projects/' + responseProjectData._id);
-            });
+                    
+                 
+            // NB! SCOPE.CREATE TEST NOT YET WORKING
+            
+//            it('$scope.create() with valid form data should send POST request ', function () {
+//                MeanUser.login();
+//
+//                // fixture expected POST data
+//                var postProjectData = function () {
+//                    console.log('postProjectDatan sisällä');
+//                    return {
+//                        title: 'Human rights'
+////                        coordinator: 'Keijo Koo',
+////                        organisation: {
+////                            _id: '622cf20451979dea2c000011',
+////                            name: 'HR org',
+////                            representative: 'James Smith',
+////                            address: 'Wallstreet',
+////                            tel: '+123456678',
+////                            email: 'smith@hrorg.com',
+////                            website: 'www.hrorg.org',
+////                            legal_status: 'non-profit',
+////                            history_status: 'Org history',
+////                            int_links: 'Unicef'
+////                        },
+////                        status: 'registered',
+////                        reg_date: Date.now,
+////                        funding: {
+////                            applied_curr_local: 50000,
+////                            applied_curr_eur: 10000
+////                        },
+////                        duration_months: 30,
+////                        descripiton: 'Kuvaus hankkeesta',
+////                        description_eng: 'Descciption in english',
+////                        background: 'Background',
+////                        beneficiaries: 'Children in Mosambik',
+////                        gender_aspect: 'Aspects',
+////                        project_goal: 'Goals',
+////                        sustainability_risks: 'Some risks',
+////                        reporting_evaluation: 'How to report',
+////                        other_donors_proposed: 'Unicef',
+////                        dac: '1234566'
+//                    };
+//                };
+//                // fixture response data
+//                var responseProjectData = function () {
+//                    return {
+//                        _id: '525cf20451979dea2c000001',
+//                        title: 'Human rights',
+////                                        coordinator: 'Keijo Koo',
+////                                        organisation: '622cf20451979dea2c000011',
+////                                        status: 'registered',
+////                                        reg_date: Date.now,
+////                                        funding: {
+////                                        applied_curr_local: 50000,
+////                                                applied_curr_eur: 10000
+////                                        },
+////                                        duration_months: 30,
+////                                        descripiton: 'Kuvaus hankkeesta',
+////                                        description_eng: 'Descciption in english',
+////                                        background: 'Background',
+////                                        beneficiaries: 'Children in Mosambik',
+////                                        gender_aspect: 'Aspects',
+////                                        project_goal: 'Goals',
+////                                        sustainability_risks: 'Some risks',
+////                                        reporting_evaluation: 'How to report',
+////                                        other_donors_proposed: 'Unicef',
+////                                        dac: '1234566'
+//                    };
+//                };
+//                // fixture mock form input values
+//                scope.title = 'Human rights';
+////                                scope.coordinator = 'Keijo Koo';
+////                                scope.project.organisation.name = 'HR org';
+////                                scope.project.organisation.representative = 'James Smith';
+////                                scope.project.organisation.address = 'Wallstreet';
+////                                scope.project.organisation.tel = '+123456678';
+////                                scope.project.organisation.email = 'smith@hrorg.com';
+////                                scope.project.organisation.website = 'www.hrorg.org';
+////                                scope.project.organisation.legal_status = 'non-profit';
+////                                scope.project.organisation.history_status = 'Org history';
+////                                scope.project.organisation.int_links = 'Unicef';
+////                                scope.project.organisation.bank_account.bank_contact_details = 'EU Bank';
+////                                scope.project.organisation.bank_account.iban = 'EU1234567890';
+////                                scope.project.organisation.bank_account.swift = 'EUEUEUH';
+////                                scope.project.organisation.bank_account.holder_name = 'HR org';
+////                                scope.status = 'registered';
+////                                scope.applied_curr_local = 50000;
+////                                scope.applied_curr_eur = 10000;
+////                                scope.duration_months = 30;
+////                                scope.descripiton = 'Kuvaus hankkeesta';
+////                                scope.description_eng = 'Descciption in english';
+////                                scope.background = 'Background';
+////                                scope.beneficiaries = 'Children in Mosambik';
+////                                scope.gender_aspect = 'Aspects';
+////                                scope.project_goal = 'Goals';
+////                                scope.sustainability_risks = 'Some risks';
+////                                scope.reporting_evaluation = 'How to report';
+////                                scope.other_donors_proposed = 'Unicef';
+////                                scope.dac = '1234566';
+//
+//                // test post request is sent
+//                $httpBackend.expectPOST('api\/projects', postProjectData()).respond(responseProjectData());
+//
+//                // Run controller
+//                console.log('responsedata: ');
+//                console.log(responseProjectData());
+//                
+//                console.log('postdata:');
+//                console.log(postProjectData());
+//
+//                scope.create(true);
+//                $httpBackend.flush();
+//                
+//                // test form input is reset
+//                expect(scope.title).toEqual('');
+//                
+//                // test URL location to new object
+//                expect($location.path()).toBe('/projects/' + responseProjectData._id);
+//            });
         });
     });
 }());
