@@ -5,9 +5,15 @@
  */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  Organisation = require('./organisation.js');
+  Organisation = require('./organisation.js'),
+  autoIncrement = require('mongoose-auto-increment');
+
+autoIncrement.initialize(mongoose);
 
 var ProjectSchema = new Schema({
+  project_ref: {
+    type: Number
+  },
   title: {
     type: String,
     required: true,
@@ -109,6 +115,12 @@ var ProjectSchema = new Schema({
     required: true,
     trim: true
   }
+});
+
+ProjectSchema.plugin(autoIncrement.plugin, {
+    model: 'Project',
+    field: 'project_ref',
+    startAt: 15000
 });
 
 ProjectSchema.path('title').validate(function(title) {

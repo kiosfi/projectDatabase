@@ -1,8 +1,8 @@
 
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
 
-    <h2><span class="name">{{project.title}}</span> </h2>
-    <h3>Koordinaattori: <a href="">{{project.coordinator}}</a> <span class="tila">{{project.status}}</span> </h3>        
+    <h2><span class="name">{{project.title}}, {{project.project_ref}}</span> </h2>
+    <h3>Koordinaattori: <a href="">{{project.coordinator}}</a> <span class="tila">{{project.status}}</span> </h3>
 
     <hr>
     <article class="proj">
@@ -71,7 +71,7 @@
             <article class="projy">
                 <h4 class=proj-header>Sukupuolitasa-arvo</h4>
                 <span class="proj-body">
-                    {{project.gnder_aspect}}
+                    {{project.gender_aspect}}
                 </span>
             </article>
 
@@ -152,26 +152,26 @@
 </section>
 
 <!--    // Pohja rivin joka on jattu kolmee kolumniin
-    
+
     <article class="proj-box">
             <article class="proj-div">
                 <h4 class="proj-header">1. kolumni</h4>
                 <section class="proj-body">
-    
+
                 </section>
             </article>
-    
+
             <article class="proj-div">
                 <h4 class="proj-header">2. kolumni</h4>
                 <section class="proj-body">
-    
+
                 </section>
             </article>
-    
+
             <article class="proj-div">
                 <h4 class="proj-header">3. kolumni</h4>
                 <section class="proj-body">
-    
+
                 </section>
             </article>
         </article>
