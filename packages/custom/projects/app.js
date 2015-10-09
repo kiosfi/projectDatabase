@@ -17,6 +17,7 @@ Projects.register(function(app, auth, database, circles) {
   Projects.routes(app, auth, database);
 
   Projects.aggregateAsset('css', 'projects.css');
+  Projects.aggregateAsset('js', 'view.js', {global:true,  absolute: false});
 
 
   //We are adding a link to the main menu for all authenticated users

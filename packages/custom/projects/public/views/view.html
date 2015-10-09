@@ -1,5 +1,6 @@
+
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
-    <a data-ng-href="/projects"> <p class="btn"><< Takaisin</p> </a>
+
     <h2><span class="name">{{project.title}}</span> </h2>
     <h3>Koordinaattori: <a href="">{{project.coordinator}}</a> <span class="tila">{{project.status}}</span> </h3>        
 
@@ -11,6 +12,7 @@
         </span>
     </article>
 
+
     <article class="proj-box">
         <article class="proj-div">
             <h4 class="proj-header">Järjestö</h4>
@@ -21,20 +23,83 @@
                 <p>Puhelinnumero: {{project.organisation.tel}}</p>
                 <p>Sähköposti: {{project.organisation.email}}</p>
                 <p>Websivut: {{project.organisation.website}}</p>
+
+
             </section>
         </article>
 
         <article class="proj-div">
             <h4 class="proj-header">Hanketiedot</h4>
             <section class="proj-body">
+                <p> DAC: {{project.dac}}
                 <p>Tila: {{project.status}}</p>
-                <p>Kirjattu: {{project.reg_date}}</p>
+                <p>Kirjattu: {{project.reg_date| date:'dd.MM.yyyy'}}</p>
                 <p>Haettu summa: {{project.funding.applied_curr_eur}} EUR ({{project.funding.applied_curr_local}} local)</p>
                 <p>Myönnetty: {{project.funding.granted_curr_eur}} EUR ({{project.funding.granted_curr_local}} local)</p>
                 <p>Kesto: {{project.duration_months}} kk</p>
             </section>
         </article>
     </article>
+
+    <article class="proj-box">
+
+        <button class="btn" onclick="toggleCollapse('visibilityAppinfo')">Hakemustiedot</button>
+
+        <article id="visibilityAppinfo">
+            <article class="proj inheritVisibility">
+                <h4 class=proj-header>Projekin taustat</h4>
+                <span class="proj-body">
+                    {{project.background}}
+                </span>
+            </article>
+
+            <article class="proj inheritVisibility">
+                <h4 class=proj-header>Projektin tavoite</h4>
+                <span class="proj-body">
+                    {{project.project_goal}}
+                </span>
+            </article>
+
+
+            <article class="proj">
+                <h4 class=proj-header>Hyödynsaajat</h4>
+                <span class="proj-body">
+                    {{project.beneficiaries}}
+                </span>
+            </article>
+
+            <article class="projy">
+                <h4 class=proj-header>Sukupuolitasa-arvo</h4>
+                <span class="proj-body">
+                    {{project.gnder_aspect}}
+                </span>
+            </article>
+
+            <article class="proj">
+                <h4 class=proj-header>Riskit</h4>
+                <span class="proj-body">
+                    {{project.sustainability_risks}}
+                </span>
+            </article>
+
+            <article class="proj">
+                <h4 class=proj-header>Evaluointi</h4>
+                <span class="proj-body">
+                    {{project.reporting_evaluation}}
+                </span>
+            </article>
+
+            <article class="proj">
+                <h4 class=proj-header>Muut haut</h4>
+                <span class="proj-body">
+                    {{project.other_donors_proposed}}
+                </span>
+            </article>
+        </article>
+    </article>
+
+
+
     <hr>
 
     <article class="proj-box">
@@ -85,3 +150,29 @@
 
 
 </section>
+
+<!--    // Pohja rivin joka on jattu kolmee kolumniin
+    
+    <article class="proj-box">
+            <article class="proj-div">
+                <h4 class="proj-header">1. kolumni</h4>
+                <section class="proj-body">
+    
+                </section>
+            </article>
+    
+            <article class="proj-div">
+                <h4 class="proj-header">2. kolumni</h4>
+                <section class="proj-body">
+    
+                </section>
+            </article>
+    
+            <article class="proj-div">
+                <h4 class="proj-header">3. kolumni</h4>
+                <section class="proj-body">
+    
+                </section>
+            </article>
+        </article>
+    -->
