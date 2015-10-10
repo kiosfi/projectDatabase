@@ -31,8 +31,7 @@ var ProjectSchema = new Schema({
   },
   status: {
     type: String,
-    required: true,
-    trim: true
+    required: true
   },
   reg_date: {
     type: Date,

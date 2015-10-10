@@ -4,6 +4,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
   function($scope, $stateParams, $location, Global, Projects, MeanUser) {
     $scope.global = Global;
 
+    $scope.statuses = ['rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty',
+                      '1. väliraportti', '2. väliraportti', 'päättynyt'];
+
     $scope.hasAuthorization = function(project) {
       if (!project || !project.user) return false;
       return MeanUser.isAdmin || project.user._id === MeanUser.user._id;
@@ -34,6 +37,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         projectId: $stateParams.projectId
       }, function(project) {
         $scope.project = project;
+        console.log($scope.project.status);
       });
     };
   }
