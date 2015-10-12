@@ -37,6 +37,7 @@ module.exports = function(Projects) {
                 } else {
                   project.organisation = obj._id;
                 }
+
                 project.save(function(err) {
                   if (err) {
                       return res.status(500).json({
