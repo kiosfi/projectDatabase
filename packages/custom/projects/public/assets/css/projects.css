@@ -3,6 +3,35 @@
     display: none;
 }
 
+
+.proj-left {
+    padding: 1em;
+}
+
+.proj-right {
+    padding: 1em;
+}
+
+.proj-box-left {
+    float: left;
+    width: 50%;
+}
+
+.proj-box-right {
+/*    padding-top: 5%;*/
+    float: left;
+    width: 50%;
+}
+
+.proj-div {
+
+    padding-right: 10%;
+    padding: 1em;
+    float: left;
+    width: 50%;
+}
+
+
 .projects-example h1 {
     background-color: purple
 }
@@ -17,21 +46,6 @@ ul li
     float: right;
 }
 
-.proj-box {
-    display: inline-block;
-    width: 50%;
-}
-
-.proj {
-    padding: 1em;
-}
-
-.proj-div {
-
-    padding: 1em;
-    float: left;
-    width: 33%;
-}
 
 .proj-header {
     font-weight: bold;
