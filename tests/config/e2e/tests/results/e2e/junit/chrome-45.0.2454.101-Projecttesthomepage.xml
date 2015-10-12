@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
- <testsuite name="Project test home page" timestamp="2015-10-07T11:13:37" hostname="localhost" time="2.599" errors="0" tests="1" skipped="0" disabled="0" failures="0">
-  <testcase classname="Project test home page" name="title should contain KIOS" time="2.598" />
+ <testsuite name="Project test home page" timestamp="2015-10-12T10:36:41" hostname="localhost" time="1.054" errors="0" tests="1" skipped="0" disabled="0" failures="0">
+  <testcase classname="Project test home page" name="title should contain KIOS" time="1.053" />
  </testsuite>
 </testsuites>
