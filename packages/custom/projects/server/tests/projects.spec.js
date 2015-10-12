@@ -40,8 +40,7 @@ describe('<Unit Test>', function () {
                 "swift": "OKOYFI",
                 "holder_name": "John Smith"});
             project1 = new Project(
-                    {"project_ref": 15001,
-                      "title": "Human rights",
+                    {"title": "Human rights",
                         "coordinator": "Keijo Koordinaattori",
                         "organisation": organisation,
                         "status": "approved",
@@ -64,8 +63,7 @@ describe('<Unit Test>', function () {
                         "dac": "abcd123"});
             project1.save();
             project2 = new Project(
-                    {"project_ref": 15002,
-                      "title": "Humans",
+                    {"title": "Humans",
                         "coordinator": "Keijo Koordi",
                         "organisation": organisation,
                         "status": "approved",
@@ -125,8 +123,7 @@ describe('<Unit Test>', function () {
 
             beforeEach(function (done) {
                 project3 = new Project(
-                        {"project_ref": 15003,
-                          "title": "Children rights",
+                        {"title": "Children rights",
                             "coordinator": "Kaija Koordi",
                             "organisation": organisation,
                             "status": "registered",
