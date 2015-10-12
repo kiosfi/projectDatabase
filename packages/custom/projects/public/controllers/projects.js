@@ -5,7 +5,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     $scope.global = Global;
 
     $scope.statuses = ['rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty',
-                      '1. väliraportti', '2. väliraportti', 'päättynyt'];
+                      'sopimus allekirjoitettu', '1. väliraportti', '2. väliraportti',
+                      'loppuraportti', 'päättynyt'];
 
     $scope.hasAuthorization = function(project) {
       if (!project || !project.user) return false;
