@@ -87,7 +87,6 @@
 
             it('$scope.create() with valid form data should send POST request ', function () {
 
-                MeanUser.login();
                 scope.project = {title: 'Human rights'};
 
                 var postProjectData = function() {
