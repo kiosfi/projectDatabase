@@ -25,15 +25,17 @@ module.exports = function(Projects) {
         create: function(req, res) {
 
             var project = new Project(req.body);
-            var organisation = new Organisation(req.body.organisation);
-            var bank_account = new BankAccount(req.body.organisation.bank_account);
-            bank_account.save();
-            organisation.bank_account = bank_account._id;
+            var organisation;
+            var bank_account;
 
-            Organisation.findOne({name: organisation.name}, function(err, obj) {
+            Organisation.findOne({name: req.body.organisation.name}, function(err, obj) {
                 if (!obj) {
+                  organisation = new Organisation(req.body.organisation);
+                  bank_account = new BankAccount(req.body.organisation.bank_account);
                   project.organisation = organisation._id;
+                  organisation.bank_account = bank_account._id;
                   organisation.save();
+                  bank_account.save();
                 } else {
                   project.organisation = obj._id;
                 }
@@ -44,7 +46,6 @@ module.exports = function(Projects) {
                           error: 'Hanketta ei voi tallentaa'
                       });
                   }
-                  res.json(project);
                 });
             });
 
@@ -53,6 +54,8 @@ module.exports = function(Projects) {
                 url: config.hostname + '/projects/' + project._id,
                 name: project.title
             });
+
+            res.json(project);
         },
 
         show: function(req, res) {

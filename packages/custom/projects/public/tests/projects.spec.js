@@ -82,15 +82,15 @@
 
             // NB! SCOPE.CREATE TEST NOT YET WORKING
 
-//            it('$scope.create() with valid form data should send POST request ', function () {
-//                MeanUser.login();
-//
-//                // fixture expected POST data
-//                var postProjectData = function () {
-//                    console.log('postProjectDatan sisällä');
-//                    return {
-//                        title: 'Human rights'
-////                        coordinator: 'Keijo Koo',
+            it('$scope.create() with valid form data should send POST request ', function () {
+                MeanUser.login();
+
+                // fixture expected POST data
+                var postProjectData = function () {
+                    console.log('postProjectDatan sisällä');
+                    return {
+                       title: 'Human rights'
+///                        coordinator: 'Keijo Koo',
 ////                        organisation: {
 ////                            _id: '622cf20451979dea2c000011',
 ////                            name: 'HR org',
@@ -120,13 +120,13 @@
 ////                        reporting_evaluation: 'How to report',
 ////                        other_donors_proposed: 'Unicef',
 ////                        dac: '1234566'
-//                    };
-//                };
+                 };
+               };
 //                // fixture response data
-//                var responseProjectData = function () {
-//                    return {
-//                        _id: '525cf20451979dea2c000001',
-//                        title: 'Human rights',
+                var responseProjectData = function () {
+                    return {
+                       _id: '525cf20451979dea2c000001',
+                        title: 'Human rights'
 ////                                        coordinator: 'Keijo Koo',
 ////                                        organisation: '622cf20451979dea2c000011',
 ////                                        status: 'registered',
@@ -146,10 +146,10 @@
 ////                                        reporting_evaluation: 'How to report',
 ////                                        other_donors_proposed: 'Unicef',
 ////                                        dac: '1234566'
-//                    };
-//                };
+                   };
+               };
 //                // fixture mock form input values
-//                scope.title = 'Human rights';
+                scope.title = 'Human rights';
 ////                                scope.coordinator = 'Keijo Koo';
 ////                                scope.project.organisation.name = 'HR org';
 ////                                scope.project.organisation.representative = 'James Smith';
@@ -179,25 +179,25 @@
 ////                                scope.other_donors_proposed = 'Unicef';
 ////                                scope.dac = '1234566';
 //
-//                // test post request is sent
-//                $httpBackend.expectPOST('api\/projects', postProjectData()).respond(responseProjectData());
+                // test post request is sent
+                $httpBackend.expectPOST('api\/projects', postProjectData()).respond(responseProjectData());
 //
-//                // Run controller
-//                console.log('responsedata: ');
-//                console.log(responseProjectData());
+                // Run controller
+                console.log('responsedata: ');
+                console.log(responseProjectData());
+
+                console.log('postdata:');
+                console.log(postProjectData());
+
+                scope.create(true);
+                $httpBackend.flush();
 //
-//                console.log('postdata:');
-//                console.log(postProjectData());
+                // test form input is reset
+                expect(scope.title).toEqual('');
 //
-//                scope.create(true);
-//                $httpBackend.flush();
-//
-//                // test form input is reset
-//                expect(scope.title).toEqual('');
-//
-//                // test URL location to new object
-//                expect($location.path()).toBe('/projects/' + responseProjectData._id);
-//            });
+                // test URL location to new object
+                expect($location.path()).toBe('/projects/' + responseProjectData._id);
+            });
         });
     });
 }());
