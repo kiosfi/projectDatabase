@@ -1,13 +1,13 @@
 'use strict';
 
-/*
+/**
  * Defining the Package
  */
 var Module = require('meanio').Module;
 
 var Projects = new Module('projects');
 
-/*
+/**
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
@@ -17,6 +17,7 @@ Projects.register(function(app, auth, database, circles) {
   Projects.routes(app, auth, database);
 
   Projects.aggregateAsset('css', 'projects.css');
+  Projects.aggregateAsset('js', 'view.js', {global:true,  absolute: false});
 
 
   //We are adding a link to the main menu for all authenticated users

@@ -1,8 +1,18 @@
 'use strict';
 
+/**
+ * This is a test.
+ *
+ * @param {type} param1
+ * @param {type} param2
+ */
 angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Global', 'Projects', 'MeanUser',
   function($scope, $stateParams, $location, Global, Projects, MeanUser) {
     $scope.global = Global;
+
+    $scope.statuses = ['rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty',
+                      'sopimus allekirjoitettu', '1. väliraportti', '2. väliraportti',
+                      'loppuraportti', 'päättynyt'];
 
     $scope.hasAuthorization = function(project) {
       if (!project || !project.user) return false;

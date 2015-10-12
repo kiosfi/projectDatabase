@@ -37,22 +37,22 @@ module.exports = function(Projects) {
                 } else {
                   project.organisation = obj._id;
                 }
+
                 project.save(function(err) {
                   if (err) {
                       return res.status(500).json({
                           error: 'Hanketta ei voi tallentaa'
                       });
                   }
+                  res.json(project);
                 });
             });
 
-              Projects.events.publish({
-                  action: 'created',
-                  url: config.hostname + '/projects/' + project._id,
-                  name: project.title
-              });
-
-              res.json(project);
+            Projects.events.publish({
+                action: 'created',
+                url: config.hostname + '/projects/' + project._id,
+                name: project.title
+            });
         },
 
         show: function(req, res) {

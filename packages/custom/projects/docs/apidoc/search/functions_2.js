@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['model',['model',['../organisation_8js.html#a8afd94a5976642fba14dc005bbfa3f3a',1,'model(&apos;Organisation&apos;, OrganisationSchema):&#160;organisation.js'],['../project_8js.html#a6dc0a428a28cbc0ae977a86b7848c2bb',1,'model(&apos;Project&apos;, ProjectSchema):&#160;project.js']]],
+  ['module',['module',['../public_2controllers_2projects_8js.html#a12127dae4145dc1eaed1bfd06cd2f756',1,'module(&apos;mean.projects&apos;).controller(&apos;ProjectsController&apos;:&#160;projects.js'],['../public_2routes_2projects_8js.html#a32c67ed5f9c608802cdd7841e3eeb0ff',1,'module(&apos;mean.projects&apos;).config([&apos;$stateProvider&apos;:&#160;projects.js'],['../public_2services_2projects_8js.html#a51752ab3f20c1817c35c324665297be6',1,'module(&apos;mean.projects&apos;).factory(&apos;Projects&apos;:&#160;projects.js'],['../public_2tests_2projects_8spec_8js.html#ae1afb8ee540bd88899bde9e255556af7',1,'module(&apos;authMock&apos;, []).provider(&apos;MeanUser&apos;:&#160;projects.spec.js']]]
+];

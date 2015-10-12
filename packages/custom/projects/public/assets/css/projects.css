@@ -1,3 +1,8 @@
+
+#visibilityAppinfo {
+    display: none;
+}
+
 .projects-example h1 {
     background-color: purple
 }
@@ -7,7 +12,7 @@ ul li
     list-style-type: none;
 }
 
-.tila {
+.state {
     font-style: italic;
     float: right;
 }
@@ -31,6 +36,7 @@ ul li
 .proj-header {
     font-weight: bold;
 }
+
 .proj-sub-title {
     font-weight: bold;
 }
@@ -39,9 +45,6 @@ ul li
     line-height: 1.2;
 }
 
-.attachments {
-
-}
 
 hr {
     border: 0;
@@ -49,7 +52,6 @@ hr {
     background: #999;
     width: 100%;
 }
-
 
 .btn {
 
