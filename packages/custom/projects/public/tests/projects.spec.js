@@ -54,7 +54,7 @@
                             }]);
                         // run controller
                         scope.find();
-                        
+
                         $httpBackend.flush();
                         expect(scope.projects).toEqualData([{
                                 "title": "Human rights"
@@ -78,10 +78,10 @@
                         // test scope value
                         expect(scope.project).toEqualData(testProjectData());
                     });
-                    
-                 
+
+
             // NB! SCOPE.CREATE TEST NOT YET WORKING
-            
+
 //            it('$scope.create() with valid form data should send POST request ', function () {
 //                MeanUser.login();
 //
@@ -185,16 +185,16 @@
 //                // Run controller
 //                console.log('responsedata: ');
 //                console.log(responseProjectData());
-//                
+//
 //                console.log('postdata:');
 //                console.log(postProjectData());
 //
 //                scope.create(true);
 //                $httpBackend.flush();
-//                
+//
 //                // test form input is reset
 //                expect(scope.title).toEqual('');
-//                
+//
 //                // test URL location to new object
 //                expect($location.path()).toBe('/projects/' + responseProjectData._id);
 //            });
