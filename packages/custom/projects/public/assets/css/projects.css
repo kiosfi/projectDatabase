@@ -1,5 +1,5 @@
 
-#visibilityAppinfo {
+#visibilityAppinfo, #visibilityPayments, #visibilityAttachments {
     display: none;
 }
 
@@ -19,7 +19,7 @@ ul li
 
 .proj-box {
     display: inline-block;
-    width: 100%;
+    width: 50%;
 }
 
 .proj {
