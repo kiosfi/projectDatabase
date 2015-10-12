@@ -1,18 +1,18 @@
 var helpers = require('../helpers.e2e');
 
-describe('Project create page', function() {
-    
-    it('should not show create page if not logged in', function() {
+describe('Project create page', function () {
+
+    it('should not show create page if not logged in', function () {
         browser.get('/projects/create');
-        
+
         expect(browser.getCurrentUrl()).toContain('/auth/login');
     });
-    
+
     it('should create project with valid data filled in form', function () {
         helpers.login();
 
         element(by.linkText("Hankkeiden lisäys")).click();
-        
+
         element(by.model('project.title')).sendKeys('Test title');
         element(by.model('project.coordinator')).sendKeys('Tets coordinator');
         element(by.model('project.organisation.name')).sendKeys('Test organisation');
@@ -27,7 +27,7 @@ describe('Project create page', function() {
         element(by.model('project.duration_months')).sendKeys('20');
         element(by.model('project.description')).sendKeys('Short description of project');
         element(by.model('project.description_en')).sendKeys('Short summary in english');
-        
+
         element(by.model('project.background')).sendKeys('Test projects background');
         element(by.model('project.beneficiaries')).sendKeys('Test beneficiaries');
         element(by.model('project.gender_aspect')).sendKeys('Test projects gender aspects are...');
@@ -43,23 +43,24 @@ describe('Project create page', function() {
         element(by.model('project.organisation.bank_account.iban')).sendKeys('FI12345678');
         element(by.model('project.organisation.bank_account.swift')).sendKeys('iffifihh');
         element(by.model('project.organisation.bank_account.holder_name')).sendKeys('Test holder');
-        
+
         element(by.buttonText("Lähetä")).click();
-//        browser.pause();
+
         var header = element(by.css('section')).element(by.tagName('h2'));
         expect(header.getText()).toContain('Test title');
+
         helpers.logout();
-    }); 
-    
-    it('should not create project with empty form', function() {
-       helpers.login();
-       
-       element(by.linkText("Hankkeiden lisäys")).click();
-       element(by.buttonText("Lähetä")).click();
-       
-       expect(browser.getCurrentUrl()).toContain('/projects/create');
-       
-       helpers.logout(); 
     });
-            
+
+    it('should not create project with empty form', function () {
+        helpers.login();
+
+        element(by.linkText("Hankkeiden lisäys")).click();
+        element(by.buttonText("Lähetä")).click();
+
+        expect(browser.getCurrentUrl()).toContain('/projects/create');
+
+
+        helpers.logout();
+    });
 });
