@@ -70,6 +70,7 @@
     "gulp-load-plugins": "latest",
     "gulp-mocha": "latest",
     "gulp-nodemon": "latest",
+    "gulp-shell": "^0.5.0",
     "gulp-uglify": "latest",
     "gulp-util": "latest",
     "jasmine": "latest",

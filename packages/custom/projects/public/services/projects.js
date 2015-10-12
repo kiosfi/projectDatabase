@@ -1,6 +1,10 @@
 'use strict';
 
-//Articles service used for articles REST endpoint
+/**
+ *
+ * @param {type} param1
+ * @param {type} param2
+ */
 angular.module('mean.projects').factory('Projects', ['$resource',
   function($resource) {
     return $resource('api/projects/:projectId', {

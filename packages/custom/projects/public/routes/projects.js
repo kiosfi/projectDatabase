@@ -1,6 +1,10 @@
 'use strict';
 
-//Setting up route
+/**
+ * Diipadaa...
+ *
+ * @param {type} param
+ */
 angular.module('mean.projects').config(['$stateProvider',
   function($stateProvider) {
 
