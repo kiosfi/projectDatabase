@@ -25,7 +25,7 @@ angular.module('mean.users').config(['$meanStateProvider', '$httpProvider', 'jwt
           }
         }
       })
-      .state('auth.register', {
+      /*.state('auth.register', {
         url: '/register',
         templateUrl: 'users/views/register.html',
         resolve: {
@@ -33,7 +33,7 @@ angular.module('mean.users').config(['$meanStateProvider', '$httpProvider', 'jwt
             return MeanUser.checkLoggedOut();
           }
         }
-      })
+      })*/
       .state('forgot-password', {
         url: '/forgot-password',
         templateUrl: 'users/views/forgot-password.html',
