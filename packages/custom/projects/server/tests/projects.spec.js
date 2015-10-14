@@ -45,8 +45,7 @@ describe('<Unit Test>', function () {
                 "swift": "OKOYFI",
                 "holder_name": "John Smith"});
             project1 = new Project(
-                    {"project_ref": 15000,
-                    "title": "Human rights",
+                    {"title": "Human rights",
                         "coordinator": "Keijo Koordinaattori",
                         "organisation": organisation,
                         "status": "approved",
@@ -69,8 +68,7 @@ describe('<Unit Test>', function () {
                         "dac": "abcd123"});
             project1.save();
             project2 = new Project(
-                    {"project_ref": 15001,
-                    "title": "Humans",
+                    {"title": "Humans",
                         "coordinator": "Keijo Koordi",
                         "organisation": organisation,
                         "status": "approved",
@@ -147,8 +145,7 @@ describe('<Unit Test>', function () {
                     "swift": "NDEAFIHH",
                     "holder_name": "Jack Jackson"});
                 project3 = new Project(
-                        {"project_ref": 15002,
-                        "title": "Children rights",
+                        {"title": "Children rights",
                             "coordinator": "Kaija Koordi",
                             "organisation": organisation3,
                             "status": "registered",
@@ -243,8 +240,7 @@ describe('<Unit Test>', function () {
                 organisation4.save();
 
                 project4 = new Project(
-                        {"project_ref": 15003,
-                          "title": "Women rights",
+                        {"title": "Women rights",
                             "coordinator": "Carlos Coordinator",
                             "organisation": organisation4,
                             "status": "registered",
