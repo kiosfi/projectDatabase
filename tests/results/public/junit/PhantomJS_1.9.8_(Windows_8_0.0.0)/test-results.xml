@@ -1,44 +1,14 @@
 <?xml version="1.0"?>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<testsuite name="PhantomJS 1.9.8 (Windows 8 0.0.0)" package="" timestamp="2015-10-12T07:08:45" id="0" hostname="Fupu" tests="5" errors="0" failures="0" time="0.099">
-=======
-<testsuite name="PhantomJS 1.9.8 (Windows 8 0.0.0)" package="" timestamp="2015-10-09T10:51:00" id="0" hostname="Fupu" tests="5" errors="0" failures="0" time="0.115">
->>>>>>> master
-=======
-<testsuite name="PhantomJS 1.9.8 (Windows 8 0.0.0)" package="" timestamp="2015-10-12T12:31:13" id="0" hostname="Fupu" tests="5" errors="0" failures="0" time="0.109">
->>>>>>> bb2c5ca226eab0a9ccb0da5e1cca1044a3653bff
+<testsuite name="PhantomJS 1.9.8 (Windows 8 0.0.0)" package="" timestamp="2015-10-14T11:08:01" id="0" hostname="Fupu" tests="6" errors="0" failures="0" time="0.128">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
   </properties>
-  <testcase name="should expose some global scope" time="0.049" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="should expose some global scope" time="0.047" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
   <testcase name="should expose some global scope" time="0.017" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
   <testcase name="1 should be equals to 1" time="0" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).Test test case"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.02" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.findOne() should create an array with one project object fetched from XHR using a projectId URL parameter" time="0.018" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-=======
-  <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.026" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.findOne() should create an array with one project object fetched from XHR using a projectId URL parameter" time="0.021" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
->>>>>>> master
-=======
-  <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.023" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.findOne() should create an array with one project object fetched from XHR using a projectId URL parameter" time="0.02" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
->>>>>>> bb2c5ca226eab0a9ccb0da5e1cca1044a3653bff
-=======
-<testsuite name="PhantomJS 1.9.8 (Windows 8 0.0.0)" package="" timestamp="2015-10-14T08:50:45" id="0" hostname="Fupu" tests="6" errors="0" failures="0" time="0.129">
-  <properties>
-    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
-  </properties>
-  <testcase name="should expose some global scope" time="0.045" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="should expose some global scope" time="0.016" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="1 should be equals to 1" time="0" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).Test test case"/>
   <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.021" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.findOne() should create an array with one project object fetched from XHR using a projectId URL parameter" time="0.022" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.findOne() should create an array with one project object fetched from XHR using a projectId URL parameter" time="0.018" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
   <testcase name="$scope.create() with valid form data should send POST request " time="0.025" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
->>>>>>> origin/backendTest
   <system-out>
     <![CDATA[
 ]]>

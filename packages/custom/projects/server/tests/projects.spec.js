@@ -45,8 +45,8 @@ describe('<Unit Test>', function () {
                 "swift": "OKOYFI",
                 "holder_name": "John Smith"});
             project1 = new Project(
-                    {"project_ref": 15000,
-                    "title": "Human rights",
+                    {
+                        "title": "Human rights",
                         "coordinator": "Keijo Koordinaattori",
                         "organisation": organisation,
                         "status": "approved",
@@ -69,8 +69,8 @@ describe('<Unit Test>', function () {
                         "dac": "abcd123"});
             project1.save();
             project2 = new Project(
-                    {"project_ref": 15001,
-                    "title": "Humans",
+                    {
+                        "title": "Humans",
                         "coordinator": "Keijo Koordi",
                         "organisation": organisation,
                         "status": "approved",
@@ -103,10 +103,16 @@ describe('<Unit Test>', function () {
                 this.timeout(10000);
                 var query = Project
                 return query.find(function (err, data) {
+                    console.log('---');
+                    console.log(data);
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
 //                    expect(data[0].title).to.equal("Human rights");
 //                    expect(data[1].status).to.be("approved");
+                    project1.remove();
+                    project2.remove();
+                    organisation.remove();
+                    bank_account.remove();
                     done();
                 });
 
@@ -121,6 +127,11 @@ describe('<Unit Test>', function () {
                 return query.findOne({title: 'Humans'}).exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.title).to.be("Humans");
+
+                    project1.remove();
+                    project2.remove();
+                    organisation.remove();
+                    bank_account.remove();
                     done();
                 });
             });
@@ -147,8 +158,8 @@ describe('<Unit Test>', function () {
                     "swift": "NDEAFIHH",
                     "holder_name": "Jack Jackson"});
                 project3 = new Project(
-                        {"project_ref": 15002,
-                        "title": "Children rights",
+                        {
+                            "title": "Children rights",
                             "coordinator": "Kaija Koordi",
                             "organisation": organisation3,
                             "status": "registered",
@@ -184,6 +195,10 @@ describe('<Unit Test>', function () {
                     expect(data.organisation.bank_account).to.not.equal(0);
                     expect(data.reg_date.length).to.not.equal(0);
 
+                    project1.remove();
+                    project2.remove();
+                    organisation.remove();
+                    bank_account.remove();
                     project3.remove();
                     organisation3.remove();
                     bank_account3.remove();
@@ -198,6 +213,10 @@ describe('<Unit Test>', function () {
                 return project3.save(function (err) {
                     expect(err).to.not.be(null);
 
+                    project1.remove();
+                    project2.remove();
+                    organisation.remove();
+                    bank_account.remove();
                     project3.remove();
                     organisation3.remove();
                     bank_account3.remove();
@@ -213,6 +232,10 @@ describe('<Unit Test>', function () {
                     expect(err).to.be(null);
                     expect(data.other_donors_proposed).to.equal('');
 
+                    project1.remove();
+                    project2.remove();
+                    organisation.remove();
+                    bank_account.remove();
                     project3.remove();
                     organisation3.remove();
                     bank_account3.remove();
@@ -243,8 +266,8 @@ describe('<Unit Test>', function () {
                 organisation4.save();
 
                 project4 = new Project(
-                        {"project_ref": 15003,
-                          "title": "Women rights",
+                        {
+                            "title": "Women rights",
                             "coordinator": "Carlos Coordinator",
                             "organisation": organisation4,
                             "status": "registered",
@@ -267,6 +290,10 @@ describe('<Unit Test>', function () {
                     expect(err).to.be(null);
                     expect(data.organisation.name).to.equal('Humanrights org');
 
+                    project1.remove();
+                    project2.remove();
+                    organisation.remove();
+                    bank_account.remove();
                     project4.remove();
                     organisation4.remove();
                     bank_account4.remove();
