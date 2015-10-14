@@ -11,7 +11,6 @@ var expect = require('expect.js'),
         Organisation = mongoose.model('Organisation'),
         BankAccount = mongoose.model('BankAccount');
 
-
 var project1;
 var project2;
 var project3;
@@ -66,7 +65,6 @@ describe('<Unit Test>', function () {
                         "reporting_evaluation": "Data",
                         "other_donors_proposed": "Donated amount",
                         "dac": "abcd123"});
-            project1.save();
             project2 = new Project(
                     {"title": "Humans",
                         "coordinator": "Keijo Koordi",
@@ -90,7 +88,10 @@ describe('<Unit Test>', function () {
                         "other_donors_proposed": "Donated amount",
                         "dac": "abcd123"
                     });
+            project1.save();
             project2.save();
+            organisation.save();
+            bank_account.save();
             done();
         });
 
@@ -98,22 +99,15 @@ describe('<Unit Test>', function () {
 
             it('should list all projects', function (done) {
 
-                this.timeout(10000);
-                var query = Project
-                return query.find(function (err, data) {
-                    console.log('---');
-                    console.log(data);
+                //this.timeout(10000);
+                var query = Project.find();
+                return query.exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
 //                    expect(data[0].title).to.equal("Human rights");
 //                    expect(data[1].status).to.be("approved");
-                    project1.remove();
-                    project2.remove();
-                    organisation.remove();
-                    bank_account.remove();
-                    done();
+                                done();
                 });
-
             });
         });
 
@@ -125,11 +119,6 @@ describe('<Unit Test>', function () {
                 return query.findOne({title: 'Humans'}).exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.title).to.be("Humans");
-
-                    project1.remove();
-                    project2.remove();
-                    organisation.remove();
-                    bank_account.remove();
                     done();
                 });
             });
@@ -192,10 +181,6 @@ describe('<Unit Test>', function () {
                     expect(data.organisation.bank_account).to.not.equal(0);
                     expect(data.reg_date.length).to.not.equal(0);
 
-                    project1.remove();
-                    project2.remove();
-                    organisation.remove();
-                    bank_account.remove();
                     project3.remove();
                     organisation3.remove();
                     bank_account3.remove();
@@ -210,10 +195,6 @@ describe('<Unit Test>', function () {
                 return project3.save(function (err) {
                     expect(err).to.not.be(null);
 
-                    project1.remove();
-                    project2.remove();
-                    organisation.remove();
-                    bank_account.remove();
                     project3.remove();
                     organisation3.remove();
                     bank_account3.remove();
@@ -229,10 +210,6 @@ describe('<Unit Test>', function () {
                     expect(err).to.be(null);
                     expect(data.other_donors_proposed).to.equal('');
 
-                    project1.remove();
-                    project2.remove();
-                    organisation.remove();
-                    bank_account.remove();
                     project3.remove();
                     organisation3.remove();
                     bank_account3.remove();
@@ -286,10 +263,6 @@ describe('<Unit Test>', function () {
                     expect(err).to.be(null);
                     expect(data.organisation.name).to.equal('Humanrights org');
 
-                    project1.remove();
-                    project2.remove();
-                    organisation.remove();
-                    bank_account.remove();
                     project4.remove();
                     organisation4.remove();
                     bank_account4.remove();
@@ -303,8 +276,8 @@ describe('<Unit Test>', function () {
             this.timeout(10000);
             project1.remove();
             project2.remove();
-            organisation.remove();
-            bank_account.remove();
+            /*organisation.remove();
+            bank_account.remove();*/
             done();
         });
     });
