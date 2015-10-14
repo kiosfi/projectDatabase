@@ -2,7 +2,7 @@
     <h1>Lisätyt hankkeet</h1>
     <ul class="projects unstyled">
         <li data-ng-repeat="project in projects">
-            <h2><a data-ng-href="/projects/{{project._id}}">{{project.title}}</a></h2>
+            <h2><a data-ng-href="/projects/{{project._id}}">{{project.project_ref}}: {{project.title}}</a></h2>
             <span style="color:blue" class="state">TILA: {{project.status}}</span>
             <p>JÄRJESTÖ: {{project.organisation.name}}</p>
             <hr>

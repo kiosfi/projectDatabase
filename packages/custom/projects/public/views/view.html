@@ -1,7 +1,7 @@
 
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
     <a data-ng-href="/projects"> <p class="btn"><< Takaisin</p> </a>
-    <h2><span class="name">{{project.title}}</span> </h2>
+    <h2><span class="name">{{project.project_ref}}: {{project.title}}</span> </h2>
     <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
       <span class="state">
         <select data-ng-model="project.status">{{project.status}}
