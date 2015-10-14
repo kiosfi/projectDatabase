@@ -35,12 +35,8 @@
     "jsonwebtoken": "latest",
     "lodash": "latest",
     "meanio": "latest",
-<<<<<<< HEAD
-    "mongoose": "^4.1.10",
-=======
     "mongoose": "~4.0.0",
     "mongoose-auto-increment": "^4.0.0",
->>>>>>> bb2c5ca226eab0a9ccb0da5e1cca1044a3653bff
     "morgan": "latest",
     "ms": "latest",
     "nodemailer": "latest",

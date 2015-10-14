@@ -46,6 +46,7 @@ module.exports = function(Projects) {
                           error: 'Hanketta ei voi tallentaa'
                       });
                   }
+                  res.json(project);
                 });
             });
 
@@ -54,8 +55,6 @@ module.exports = function(Projects) {
                 url: config.hostname + '/projects/' + project._id,
                 name: project.title
             });
-
-            res.json(project);
         },
 
         show: function(req, res) {
