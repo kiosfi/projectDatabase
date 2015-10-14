@@ -4,18 +4,18 @@
     <div class="kios_logo">
         <img src="/theme/assets/img/kios_logo_public.gif" alt="#">
     </div>
-    <h2>Login</h2>
+    <h2>Kirjautuminen</h2>
 
 
     <form id="login_form" ng-submit="login.login()">
         <div class="input-wrapper">
-            <input required id="email_block" type="email" name="email" placeholder="Email Address" ng-model="login.user.email">
-            <div class="error_message">Please enter a correct info #</div>
+            <input required id="email_block" type="email" name="email" placeholder="Sähköpostiosoite" ng-model="login.user.email">
+            <div class="error_message">Sähköposti tai salasana väärin #</div>
             <span class="pic email"></span>
         </div>
         <div class="input-wrapper">
             <input required id="password_block" name="password" type="{{login.input.type}}" placeholder="{{login.input.placeholder}}" ng-model="login.user.password">
-            <div class="error_message">Please enter a correct info #</div>
+            <div class="error_message">Sähköposti tai salasana väärin #</div>
                 <span class="pic password {{login.input.iconClass}}" ng-click = "login.togglePasswordVisible()">
                       <div class="hide_text_password">
                           {{login.input.tooltipText}}
@@ -23,10 +23,10 @@
                 </span>
         </div>
         <div class="forgot_password">
-            <a ui-sref='forgot-password'>Forgot your password?</a>
+            <a ui-sref='forgot-password'>Unohditko salasanan?</a>
         </div>
         <div class="button_login">
-            <button type="submit" class="submit_button">Login</button>
+            <button type="submit" class="submit_button">Kirjaudu</button>
             <!-- <p>Don't have an account?</p>
             <a ui-sref='auth.register' >Sign up</a> -->
         </div>
