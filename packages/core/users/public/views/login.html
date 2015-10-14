@@ -1,8 +1,11 @@
 <div data-ng-controller="LoginCtrl as login">
 
     <div class="alert alert-danger animated fadeIn" ng-show="login.loginError">{{login.loginError}}</div>
-
+    <div class="kios_logo">
+        <img src="/theme/assets/img/kios_logo_public.gif" alt="#">
+    </div>
     <h2>Login</h2>
+
 
     <form id="login_form" ng-submit="login.login()">
         <div class="input-wrapper">
@@ -24,11 +27,9 @@
         </div>
         <div class="button_login">
             <button type="submit" class="submit_button">Login</button>
-            <p>Don't have an account?</p>
-            <a ui-sref='auth.register' >Sign up</a>
+            <!-- <p>Don't have an account?</p>
+            <a ui-sref='auth.register' >Sign up</a> -->
         </div>
-        <div class="woman_ninja_bottom">
-            <img src="/theme/assets/img/woman_ninja.png" alt="#">
-        </div>
+
     </form>
 </div>

@@ -1,0 +1,147 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install', 'passport' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.40
+4 verbose node symlink /usr/bin/node
+5 info shrinkwrap file "/home/laleppan/projectDatabase/npm-shrinkwrap.json"
+6 verbose readDependencies returned deps { assetmanager: 'https://registry.npmjs.org/assetmanager/-/assetmanager-1.2.2.tgz',
+6 verbose readDependencies returned deps   async: 'https://registry.npmjs.org/async/-/async-1.4.2.tgz',
+6 verbose readDependencies returned deps   'body-parser': 'https://registry.npmjs.org/body-parser/-/body-parser-1.13.3.tgz',
+6 verbose readDependencies returned deps   bower: 'https://registry.npmjs.org/bower/-/bower-1.4.1.tgz',
+6 verbose readDependencies returned deps   compression: 'https://registry.npmjs.org/compression/-/compression-1.5.2.tgz',
+6 verbose readDependencies returned deps   'connect-flash': 'https://registry.npmjs.org/connect-flash/-/connect-flash-0.1.1.tgz',
+6 verbose readDependencies returned deps   consolidate: 'https://registry.npmjs.org/consolidate/-/consolidate-0.13.1.tgz',
+6 verbose readDependencies returned deps   'cookie-parser': 'https://registry.npmjs.org/cookie-parser/-/cookie-parser-1.3.5.tgz',
+6 verbose readDependencies returned deps   errorhandler: 'https://registry.npmjs.org/errorhandler/-/errorhandler-1.4.2.tgz',
+6 verbose readDependencies returned deps   express: 'https://registry.npmjs.org/express/-/express-4.13.3.tgz',
+6 verbose readDependencies returned deps   forever: 'https://registry.npmjs.org/forever/-/forever-0.15.1.tgz',
+6 verbose readDependencies returned deps   'gridfs-stream': 'https://registry.npmjs.org/gridfs-stream/-/gridfs-stream-1.1.1.tgz',
+6 verbose readDependencies returned deps   'jasmine-core': 'https://registry.npmjs.org/jasmine-core/-/jasmine-core-2.3.4.tgz',
+6 verbose readDependencies returned deps   jsonwebtoken: 'https://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-5.0.4.tgz',
+6 verbose readDependencies returned deps   lodash: 'https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz',
+6 verbose readDependencies returned deps   meanio: '0.8.82',
+6 verbose readDependencies returned deps   mongoose: 'https://registry.npmjs.org/mongoose/-/mongoose-4.1.3.tgz',
+6 verbose readDependencies returned deps   morgan: 'https://registry.npmjs.org/morgan/-/morgan-1.6.1.tgz',
+6 verbose readDependencies returned deps   ms: 'https://registry.npmjs.org/ms/-/ms-0.7.1.tgz',
+6 verbose readDependencies returned deps   nodemailer: 'https://registry.npmjs.org/nodemailer/-/nodemailer-1.4.0.tgz',
+6 verbose readDependencies returned deps   npm: 'https://registry.npmjs.org/npm/-/npm-2.13.5.tgz',
+6 verbose readDependencies returned deps   'passport-facebook': 'https://registry.npmjs.org/passport-facebook/-/passport-facebook-2.0.0.tgz',
+6 verbose readDependencies returned deps   'passport-github': 'https://registry.npmjs.org/passport-github/-/passport-github-0.1.5.tgz',
+6 verbose readDependencies returned deps   'passport-google-oauth': 'https://registry.npmjs.org/passport-google-oauth/-/passport-google-oauth-0.2.0.tgz',
+6 verbose readDependencies returned deps   'passport-linkedin': 'https://registry.npmjs.org/passport-linkedin/-/passport-linkedin-0.1.3.tgz',
+6 verbose readDependencies returned deps   'passport-local': 'https://registry.npmjs.org/passport-local/-/passport-local-1.0.0.tgz',
+6 verbose readDependencies returned deps   'passport-twitter': 'https://registry.npmjs.org/passport-twitter/-/passport-twitter-1.0.3.tgz',
+6 verbose readDependencies returned deps   phantomjs: 'https://registry.npmjs.org/phantomjs/-/phantomjs-1.9.18.tgz',
+6 verbose readDependencies returned deps   q: 'https://registry.npmjs.org/q/-/q-1.4.1.tgz',
+6 verbose readDependencies returned deps   request: 'https://registry.npmjs.org/request/-/request-2.60.0.tgz',
+6 verbose readDependencies returned deps   'serve-favicon': 'https://registry.npmjs.org/serve-favicon/-/serve-favicon-2.3.0.tgz',
+6 verbose readDependencies returned deps   shelljs: 'https://registry.npmjs.org/shelljs/-/shelljs-0.5.3.tgz',
+6 verbose readDependencies returned deps   swig: 'https://registry.npmjs.org/swig/-/swig-1.4.2.tgz',
+6 verbose readDependencies returned deps   'view-helpers': 'https://registry.npmjs.org/view-helpers/-/view-helpers-0.1.5.tgz' }
+7 verbose cache add [ 'passport', null ]
+8 verbose cache add name=undefined spec="passport" args=["passport",null]
+9 verbose parsed url { protocol: null,
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: null,
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: null,
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: 'passport',
+9 verbose parsed url   path: 'passport',
+9 verbose parsed url   href: 'passport' }
+10 silly lockFile a3404013-passport passport
+11 verbose lock passport /home/laleppan/.npm/a3404013-passport.lock
+12 silly lockFile a3404013-passport passport
+13 silly lockFile a3404013-passport passport
+14 verbose addNamed [ 'passport', '' ]
+15 verbose addNamed [ null, '*' ]
+16 silly lockFile d5a254c4-passport passport@
+17 verbose lock passport@ /home/laleppan/.npm/d5a254c4-passport.lock
+18 silly addNameRange { name: 'passport', range: '*', hasData: false }
+19 verbose request where is /passport
+20 verbose request registry https://registry.npmjs.org/
+21 verbose request id 5ed992223a0dd282
+22 verbose url raw /passport
+23 verbose url resolving [ 'https://registry.npmjs.org/', './passport' ]
+24 verbose url resolved https://registry.npmjs.org/passport
+25 verbose request where is https://registry.npmjs.org/passport
+26 info trying registry request attempt 1 at 12:26:30
+27 verbose etag "7UF2VDTN7Q9QZP3AFQFWD08LL"
+28 http GET https://registry.npmjs.org/passport
+29 http 304 https://registry.npmjs.org/passport
+30 silly registry.get cb [ 304,
+30 silly registry.get   { date: 'Tue, 13 Oct 2015 09:26:30 GMT',
+30 silly registry.get     via: '1.1 varnish',
+30 silly registry.get     'cache-control': 'max-age=60',
+30 silly registry.get     etag: '"7UF2VDTN7Q9QZP3AFQFWD08LL"',
+30 silly registry.get     age: '31',
+30 silly registry.get     connection: 'keep-alive',
+30 silly registry.get     'x-served-by': 'cache-fra1242-FRA',
+30 silly registry.get     'x-cache': 'HIT',
+30 silly registry.get     'x-cache-hits': '1',
+30 silly registry.get     'x-timer': 'S1444728390.797826,VS0,VE0',
+30 silly registry.get     vary: 'Accept' } ]
+31 verbose etag https://registry.npmjs.org/passport from cache
+32 silly addNameRange number 2 { name: 'passport', range: '*', hasData: true }
+33 silly addNameRange versions [ 'passport',
+33 silly addNameRange   [ '0.1.0',
+33 silly addNameRange     '0.1.1',
+33 silly addNameRange     '0.1.2',
+33 silly addNameRange     '0.1.3',
+33 silly addNameRange     '0.1.4',
+33 silly addNameRange     '0.1.5',
+33 silly addNameRange     '0.1.6',
+33 silly addNameRange     '0.1.7',
+33 silly addNameRange     '0.1.8',
+33 silly addNameRange     '0.1.9',
+33 silly addNameRange     '0.1.10',
+33 silly addNameRange     '0.1.11',
+33 silly addNameRange     '0.1.12',
+33 silly addNameRange     '0.1.13',
+33 silly addNameRange     '0.1.14',
+33 silly addNameRange     '0.1.15',
+33 silly addNameRange     '0.1.16',
+33 silly addNameRange     '0.1.17',
+33 silly addNameRange     '0.1.18',
+33 silly addNameRange     '0.2.0',
+33 silly addNameRange     '0.2.1',
+33 silly addNameRange     '0.2.2',
+33 silly addNameRange     '0.3.0' ] ]
+34 verbose addNamed [ 'passport', '0.3.0' ]
+35 verbose addNamed [ '0.3.0', '0.3.0' ]
+36 silly lockFile 82ba4305-passport-0-3-0 passport@0.3.0
+37 verbose lock passport@0.3.0 /home/laleppan/.npm/82ba4305-passport-0-3-0.lock
+38 silly lockFile 59c56072--org-passport-passport-0-3-0-tgz https://registry.npmjs.org/passport/-/passport-0.3.0.tgz
+39 verbose lock https://registry.npmjs.org/passport/-/passport-0.3.0.tgz /home/laleppan/.npm/59c56072--org-passport-passport-0-3-0-tgz.lock
+40 verbose addRemoteTarball [ 'https://registry.npmjs.org/passport/-/passport-0.3.0.tgz',
+40 verbose addRemoteTarball   '14c151b0eb6795aa9335239827f548d5f94c7046' ]
+41 info retry fetch attempt 1 at 12:26:30
+42 verbose fetch to= /tmp/npm-11500-W3G9RHzb/registry.npmjs.org/passport/-/passport-0.3.0.tgz
+43 http GET https://registry.npmjs.org/passport/-/passport-0.3.0.tgz
+44 http 200 https://registry.npmjs.org/passport/-/passport-0.3.0.tgz
+45 silly lockFile 59c56072--org-passport-passport-0-3-0-tgz https://registry.npmjs.org/passport/-/passport-0.3.0.tgz
+46 silly lockFile 59c56072--org-passport-passport-0-3-0-tgz https://registry.npmjs.org/passport/-/passport-0.3.0.tgz
+47 silly lockFile 82ba4305-passport-0-3-0 passport@0.3.0
+48 silly lockFile 82ba4305-passport-0-3-0 passport@0.3.0
+49 silly lockFile d5a254c4-passport passport@
+50 silly lockFile d5a254c4-passport passport@
+51 error Error: EACCES, mkdir '/home/laleppan/.npm/passport/0.3.0'
+51 error  { [Error: EACCES, mkdir '/home/laleppan/.npm/passport/0.3.0']
+51 error   errno: 3,
+51 error   code: 'EACCES',
+51 error   path: '/home/laleppan/.npm/passport/0.3.0',
+51 error   parent: 'mean' }
+52 error Please try running this command again as root/Administrator.
+53 error System Linux 3.19.0-30-generic
+54 error command "/usr/bin/node" "/usr/bin/npm" "install" "passport"
+55 error cwd /home/laleppan/projectDatabase
+56 error node -v v0.10.40
+57 error npm -v 1.4.28
+58 error path /home/laleppan/.npm/passport/0.3.0
+59 error code EACCES
+60 error errno 3
+61 error stack Error: EACCES, mkdir '/home/laleppan/.npm/passport/0.3.0'
+62 verbose exit [ 3, true ]
