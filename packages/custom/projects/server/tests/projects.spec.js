@@ -106,7 +106,7 @@ describe('<Unit Test>', function () {
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
 //                    expect(data[0].title).to.equal("Human rights");
-//                    expect(data[1].status).to.be("approved");                    
+//                    expect(data[1].status).to.be("approved");
                     done();
                 });
 
@@ -243,7 +243,8 @@ describe('<Unit Test>', function () {
                 organisation4.save();
 
                 project4 = new Project(
-                        {"title": "Women rights",
+                        {"project_ref": 15003,
+                          "title": "Women rights",
                             "coordinator": "Carlos Coordinator",
                             "organisation": organisation4,
                             "status": "registered",

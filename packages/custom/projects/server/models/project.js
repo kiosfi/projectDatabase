@@ -14,7 +14,7 @@ var ProjectSchema = new Schema({
   project_ref: {
     type: Number,
     required: true
-  }
+  },
   title: {
     type: String,
     required: true,
