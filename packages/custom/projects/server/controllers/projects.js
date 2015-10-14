@@ -46,16 +46,15 @@ module.exports = function(Projects) {
                           error: 'Hanketta ei voi tallentaa'
                       });
                   }
+                  res.json(project);
+                });
+
+                Projects.events.publish({
+                      action: 'created',
+                      url: config.hostname + '/projects/' + project._id,
+                      name: project.title
                 });
             });
-
-            Projects.events.publish({
-                action: 'created',
-                url: config.hostname + '/projects/' + project._id,
-                name: project.title
-            });
-
-            res.json(project);
         },
 
         show: function(req, res) {
@@ -78,7 +77,6 @@ module.exports = function(Projects) {
                          error: 'Hankkeita ei voi näyttää'
                      });
                  }
-
                  res.json(projects)
              });
 
