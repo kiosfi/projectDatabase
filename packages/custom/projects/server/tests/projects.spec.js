@@ -117,8 +117,6 @@ describe('<Unit Test>', function () {
                 var query = Project.find();
 
                 return query.exec(function (err, data) {
-                    console.log('dataa:');
-                    console.log(data);
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
 //                    expect(data[0].title).to.equal("Human rights");
@@ -164,7 +162,7 @@ describe('<Unit Test>', function () {
                     "holder_name": "Jack Jackson"});
                 project3 = new Project(
                         {"title": "Children rights",
-                            "coordinator": "Kaija Koordi",
+                            "coordinator": "Maija Maa",
                             "organisation": organisation3,
 //                            "status": "registered",
                             "funding": {
@@ -201,7 +199,7 @@ describe('<Unit Test>', function () {
                 return project3.save(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.title).to.equal('Children rights');
-                    expect(data.coordinator).to.equal('Kaija Koordi');
+                    expect(data.coordinator).to.equal('Maija Maa');
                     expect(data.organisation.name).to.equal('Children rights org');
                     expect(data.organisation.bank_account).to.not.equal(0);
                     expect(data.reg_date.length).to.not.equal(0);
@@ -266,7 +264,7 @@ describe('<Unit Test>', function () {
 
                 project4 = new Project(
                         {"title": "Women rights",
-                            "coordinator": "Carlos Coordinator",
+                            "coordinator": "Maija Maa",
                             "organisation": organisation4,
 //                            "status": "registered",
                             "funding": {
