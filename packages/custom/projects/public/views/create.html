@@ -2,8 +2,8 @@
     <form name="projectForm" class="form-horizontal" role="form" data-ng-submit="create(projectForm.$valid)" novalidate>
         <fieldset>
             <legend><a onclick="toggleCollapse2('fs1', 'img1')">Perustiedot
-                    <img id="img1" src="../assets/img/indicator-open.gif"/></a></legend>
-            <div id ="fs1">
+                    <img id="img1" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
+            <div id ="fs1" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{ 'has-error' : submitted && projectForm.title.$invalid }">
                     <label mean-token="'create-title'" class="col-md-3 control-label">Nimi</label>
                     <div class="col-md-9">
@@ -27,8 +27,8 @@
         </fieldset>
         <fieldset>
             <legend><a onclick="toggleCollapse2('fs2', 'img2')">Järjestö
-                <img id="img2" src="../assets/img/indicator-open.gif"/></a></legend>
-            <div id="fs2">
+                <img id="img2" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
+            <div id="fs2" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{ 'has-error' : submitted && projectForm.orgname.$invalid }">
                     <label mean-token="'create-orgname'" class="col-md-3 control-label">Nimi</label>
                     <div class="col-md-9">
@@ -92,8 +92,8 @@
         </fieldset>
         <fieldset>
             <legend><a onclick="toggleCollapse2('fs3', 'img3')">Hankkeen tiedot
-                <img id="img3" src="../assets/img/indicator-open.gif"/></a></legend>
-            <div id="fs3">
+                <img id="img3" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
+            <div id="fs3" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{ 'has-error' : submitted && projectForm.status.$invalid }">
                     <label mean-token="'create-status'" class="col-md-3 control-label">Tila</label>
                     <div class="col-md-9">
@@ -156,8 +156,8 @@
         </fieldset>
         <fieldset>
             <legend><a onclick="toggleCollapse2('fs4', 'img4')">Hankkeen yksityiskohdat
-                <img id="img4" src="../assets/img/indicator-open.gif"/></a></legend>
-            <div id="fs4">
+                <img id="img4" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
+            <div id="fs4" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{ 'has-error' : submitted && projectForm.background.$invalid }">
                     <label mean-token="'create-background'" for="background" class="col-md-3 control-label">Tausta</label>
                     <div class="col-md-9">
@@ -242,8 +242,8 @@
         <fieldset>
             <legend><a onclick="toggleCollapse2('fs5', 'img5')">Hakijajärjestön
                     yksityiskohtaiset tiedot
-                <img id="img5" src="../assets/img/indicator-open.gif"/></a></legend>
-            <div id="fs5">
+                <img id="img5" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
+            <div id="fs5" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{ 'has-error' : submitted && projectForm.orgLegal.$invalid }">
                     <label mean-token="'create-orgLegal'" for="orgLegal" class="col-md-3 control-label">Oikeudellinen status</label>
                     <div class="col-md-9">
@@ -276,9 +276,9 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend><a onclick="toggleCollapse2('fs4', 'img4')">Pankkitili
-                <img id="img6" src="../assets/img/indicator-open.gif"/></a></legend>
-            <div id="fs6">
+            <legend><a onclick="toggleCollapse2('fs6', 'img6')">Pankkitili
+                <img id="img6" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
+            <div id="fs6" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{ 'has-error' : submitted && projectForm.bankCont.$invalid }">
                     <label mean-token="'create-bankCont'" class="col-md-3 control-label">Pankin yhteystiedot</label>
                     <div class="col-md-9">
