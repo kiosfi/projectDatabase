@@ -1,8 +1,8 @@
 
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
 
-    <h2><span class="name">{{project.title}}</span> </h2>
-    <h3>Koordinaattori: <a href="">{{project.coordinator}}</a> <span class="tila">{{project.status}}</span> </h3>        
+    <h2><span class="name">{{project.project_ref}}: {{project.title}}</span> </h2>
+    <h3>Koordinaattori: <a href="">{{project.coordinator}}</a> <span class="tila">{{project.status}}</span> </h3>
 
     <hr>
 
@@ -166,9 +166,9 @@
 
 
     <!--    <article class="proj-box">
-    
+
             <button class="btn" onclick="toggleCollapse('visibilityAppinfo')">Hakemustiedot</button>
-    
+
             <article id="visibilityAppinfo">
                 <article class="proj inheritVisibility">
                     <h4 class=proj-header>Projekin taustat</h4>
@@ -176,43 +176,43 @@
                         {{project.background}}
                     </span>
                 </article>
-    
+
                 <article class="proj inheritVisibility">
                     <h4 class=proj-header>Projektin tavoite</h4>
                     <span class="proj-body">
                         {{project.project_goal}}
                     </span>
                 </article>
-    
-    
+
+
                 <article class="proj">
                     <h4 class=proj-header>Hyödynsaajat</h4>
                     <span class="proj-body">
                         {{project.beneficiaries}}
                     </span>
                 </article>
-    
+
                 <article class="proj">
                     <h4 class=proj-header>Sukupuolitasa-arvo</h4>
                     <span class="proj-body">
                         {{project.gnder_aspect}}
                     </span>
                 </article>
-    
+
                 <article class="proj">
                     <h4 class=proj-header>Riskit</h4>
                     <span class="proj-body">
                         {{project.sustainability_risks}}
                     </span>
                 </article>
-    
+
                 <article class="proj">
                     <h4 class=proj-header>Evaluointi</h4>
                     <span class="proj-body">
                         {{project.reporting_evaluation}}
                     </span>
                 </article>
-    
+
                 <article class="proj">
                     <h4 class=proj-header>Muut haut</h4>
                     <span class="proj-body">
@@ -221,16 +221,16 @@
                 </article>
             </article>
         </article>
-    
-    
-    
+
+
+
         <hr>
-    
-    
+
+
         <article class="proj-box">
-    
+
             <button class="btn" onclick="toggleCollapse('visibilityPayments')">Maksatus</button>
-    
+
             <article id="visibilityPayments">
                 <h4 class="proj-header">Maksatus</h4>
                 <section class="proj-body">
@@ -246,13 +246,13 @@
                     <p>Jäljellä: 3000 euroa (10 000 paikallista) </p>
                 </section>
             </article>
-    
+
         </article>
-    
+
         <article class="proj-box">
-    
+
             <button class="btn" onclick="toggleCollapse('visibilityAttachments')">Liitteet</button>
-    
+
             <article id="visibilityAttachments">
                 <h4 class="proj-header">Liitteet</h4>
                 <section class="proj-body">
@@ -267,9 +267,9 @@
                     <p><a href="">Esitys 2</a> - ODOTTAA</p>
                     <p><a href="">Sopimus</a> - Hyväksytty 1.1.2014</p>
                 </section>
-    
+
             </article>
-    
+
         </article>
     -->
 
@@ -290,8 +290,8 @@
 
 
     <!--    WANHA
-    
-    
+
+
         <article class="proj-box">
             <article class="proj-div">
                 <h4 class="proj-header">Maksatus</h4>
@@ -308,7 +308,7 @@
                     <p>Jäljellä: 3000 euroa (10 000 paikallista) </p>
                 </section>
             </article>
-    
+
             <article class="proj-div">
                 <h4 class="proj-header">Aikataulu</h4>
                 <section class="proj-body">
@@ -319,7 +319,7 @@
                     <p>1.6.2015 2. Väliraportti</p>
                 </section>
             </article>
-    
+
             <article class="proj-div">
                 <h4 class="proj-header">Liitteet</h4>
                 <section class="proj-body">
@@ -342,26 +342,26 @@
 </section>
 
 <!--    // Pohja rivin joka on jattu kolmee kolumniin
-    
+
     <article class="proj-box">
             <article class="proj-div">
                 <h4 class="proj-header">1. kolumni</h4>
                 <section class="proj-body">
-    
+
                 </section>
             </article>
-    
+
             <article class="proj-div">
                 <h4 class="proj-header">2. kolumni</h4>
                 <section class="proj-body">
-    
+
                 </section>
             </article>
-    
+
             <article class="proj-div">
                 <h4 class="proj-header">3. kolumni</h4>
                 <section class="proj-body">
-    
+
                 </section>
             </article>
         </article>

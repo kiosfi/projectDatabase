@@ -21,9 +21,8 @@ var ProjectSchema = new Schema({
         trim: true
     },
     coordinator: {
-        type: String,
-        required: true,
-        trim: true
+      type: String,
+      required: true
     },
     organisation: {
         type: Schema.ObjectId,
@@ -150,14 +149,15 @@ ProjectSchema.path('title').validate(function (title) {
     return !!title;
 }, 'Nimi ei voi olla tyhjä');
 
-ProjectSchema.path('coordinator').validate(function (coordinator) {
+/*ProjectSchema.path('coordinator').validate(function (coordinator) {
     return !!coordinator;
-}, 'Koordinaattorin nimi ei voi olla tyhjä');
+}, 'Koordinaattorin nimi ei voi olla tyhjä');*/
 
 ProjectSchema.statics.load = function (id, cb) {
     this.findOne({
         _id: id
-    }).populate({path: 'organisation', model: 'Organisation'}).exec(cb);
+    }).populate({path: 'organisation', model: 'Organisation'})
+    .exec(cb);
 };
 
 mongoose.model('Project', ProjectSchema);
