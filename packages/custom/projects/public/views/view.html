@@ -2,7 +2,14 @@
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
 
     <h2><span class="name">{{project.project_ref}}: {{project.title}}</span> </h2>
-    <h3>Koordinaattori: <a href="">{{project.coordinator}}</a> <span class="tila">{{project.status}}</span> </h3>
+    <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
+    <span class="tila">
+        <select ng-model="project.status">
+            <option ng-repeat="stat in statuses" ng-selected="stat === project.status">
+              {{stat}}
+            </option>
+        </select>
+    </span> </h3>
 
     <hr>
 
