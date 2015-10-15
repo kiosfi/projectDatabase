@@ -71,7 +71,10 @@ module.exports = function(Projects) {
          all: function(req, res) {
              var query = Project.find()
 
-             query.sort({project_ref: 'asc'}).populate({path: 'organisation', model: 'Organisation'}).exec(function(err, projects) {
+             query.sort({project_ref: 'asc'})
+             .populate('user', 'name username')
+             .populate({path: 'organisation', model: 'Organisation'})
+             .exec(function(err, projects) {
                  if (err) {
                      return res.status(500).json({
                          error: 'Hankkeita ei voi näyttää'
