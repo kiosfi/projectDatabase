@@ -1,7 +1,36 @@
 
-#visibilityAppinfo {
+#visibilityAppinfo, #visibilityPayments, #visibilityAttachments {
     display: none;
 }
+
+
+.proj-left {
+    padding: 1em;
+}
+
+.proj-right {
+    padding: 1em;
+}
+
+.proj-box-left {
+    float: left;
+    width: 50%;
+}
+
+.proj-box-right {
+/*    padding-top: 5%;*/
+    float: left;
+    width: 50%;
+}
+
+.proj-div {
+
+    padding-right: 10%;
+    padding: 1em;
+    float: left;
+    width: 50%;
+}
+
 
 .projects-example h1 {
     background-color: purple
@@ -12,31 +41,15 @@ ul li
     list-style-type: none;
 }
 
-.state {
+.tila {
     font-style: italic;
     float: right;
 }
 
-.proj-box {
-    display: inline-block;
-    width: 100%;
-}
-
-.proj {
-    padding: 1em;
-}
-
-.proj-div {
-
-    padding: 1em;
-    float: left;
-    width: 33%;
-}
 
 .proj-header {
     font-weight: bold;
 }
-
 .proj-sub-title {
     font-weight: bold;
 }
@@ -52,6 +65,7 @@ hr {
     background: #999;
     width: 100%;
 }
+
 
 .btn {
 

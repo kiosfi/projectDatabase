@@ -14,6 +14,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                       'sopimus allekirjoitettu', '1. väliraportti', '2. väliraportti',
                       'loppuraportti', 'päättynyt'];
 
+    $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
+
     $scope.hasAuthorization = function(project) {
       if (!project || !project.user) return false;
       return MeanUser.isAdmin || project.user._id === MeanUser.user._id;

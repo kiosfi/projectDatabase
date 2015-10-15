@@ -45,9 +45,9 @@ describe('<Unit Test>', function () {
                 "holder_name": "John Smith"});
             project1 = new Project(
                   {"title": "Human rights",
-                        "coordinator": "Keijo Koordinaattori",
+                        "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
-                        "status": "approved",
+//                        "status": "approved",
                         "reg_date": "12.10.2014",
                         "funding": {
                             "applied_curr_local": "50 000",
@@ -57,6 +57,13 @@ describe('<Unit Test>', function () {
                         "duration_months": 30,
                         "description": "A short description of project",
                         "description_en": "Description in english",
+                        "categories": {
+                          "women": true,
+                          "children": false,
+                          "disabled": true,
+                          "general": false,
+                          "other": false
+                        },
                         "background": "Project background",
                         "beneficiaries": "The project benefits...",
                         "gender_aspect": "Gender aspects include...",
@@ -67,9 +74,9 @@ describe('<Unit Test>', function () {
                         "dac": "abcd123"});
             project2 = new Project(
                     {"title": "Humans",
-                        "coordinator": "Keijo Koordi",
+                        "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
-                        "status": "approved",
+//                       "status": "approved",
                         "reg_date": "12.9.2014",
                         "funding": {
                             "applied_curr_local": "50 000",
@@ -79,6 +86,13 @@ describe('<Unit Test>', function () {
                         "duration_months": 12,
                         "description": "A short description of project",
                         "description_en": "Description in english",
+                        "categories:": {
+                            "women": false,
+                            "children": true,
+                            "disabled": false,
+                            "general": false,
+                            "other": false
+                          },
                         "background": "Project background 2",
                         "beneficiaries": "The project benefits such and such",
                         "gender_aspect": "Gender aspects include this and that",
@@ -99,14 +113,15 @@ describe('<Unit Test>', function () {
 
             it('should list all projects', function (done) {
 
-                //this.timeout(10000);
+                this.timeout(10000);
                 var query = Project.find();
+
                 return query.exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
 //                    expect(data[0].title).to.equal("Human rights");
 //                    expect(data[1].status).to.be("approved");
-                                done();
+                    done();
                 });
             });
         });
@@ -127,6 +142,7 @@ describe('<Unit Test>', function () {
         describe('Method Save', function () {
 
             beforeEach(function (done) {
+                this.timeout(10000);
 
                 organisation3 = new Organisation({
                     "name": "Children rights org",
@@ -146,9 +162,9 @@ describe('<Unit Test>', function () {
                     "holder_name": "Jack Jackson"});
                 project3 = new Project(
                         {"title": "Children rights",
-                            "coordinator": "Kaija Koordi",
+                            "coordinator": "Maija Maa",
                             "organisation": organisation3,
-                            "status": "registered",
+//                            "status": "registered",
                             "funding": {
                                 "applied_curr_local": "50 000",
                                 "applied_curr_eur": "11 000",
@@ -157,6 +173,13 @@ describe('<Unit Test>', function () {
                             "duration_months": 19,
                             "description": "A short description of project",
                             "description_en": "Description in english",
+                            "categories": {
+                              "women": true,
+                              "children": false,
+                              "disabled": true,
+                              "general": false,
+                              "other": false
+                            },
                             "background": "Project background 3",
                             "beneficiaries": "The project benefits such and such",
                             "gender_aspect": "Gender aspects include this and that",
@@ -176,8 +199,8 @@ describe('<Unit Test>', function () {
                 return project3.save(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.title).to.equal('Children rights');
-                    expect(data.coordinator).to.equal('Kaija Koordi');
-                    expect(data.organisation.name).to.equal('Children rights org')
+                    expect(data.coordinator).to.equal('Maija Maa');
+                    expect(data.organisation.name).to.equal('Children rights org');
                     expect(data.organisation.bank_account).to.not.equal(0);
                     expect(data.reg_date.length).to.not.equal(0);
 
@@ -203,7 +226,7 @@ describe('<Unit Test>', function () {
             });
 
             it('should be able to save project with with empty not-required field', function (done) {
-                this.timeout(1000);
+                this.timeout(10000);
 
                 project3.other_donors_proposed = '';
                 return project3.save(function (err, data) {
@@ -241,15 +264,22 @@ describe('<Unit Test>', function () {
 
                 project4 = new Project(
                         {"title": "Women rights",
-                            "coordinator": "Carlos Coordinator",
+                            "coordinator": "Maija Maa",
                             "organisation": organisation4,
-                            "status": "registered",
+//                            "status": "registered",
                             "funding": {
                                 "applied_curr_local": "150 000",
                                 "applied_curr_eur": "111 000"},
                             "duration_months": 29,
                             "description": "A short description of project",
                             "description_en": "Description in english",
+                            "categories": {
+                              "women": true,
+                              "children": false,
+                              "disabled": true,
+                              "general": false,
+                              "other": false
+                            },
                             "background": "Project background 3",
                             "beneficiaries": "The project benefits such and such",
                             "gender_aspect": "Gender aspects include this and that",
@@ -276,8 +306,8 @@ describe('<Unit Test>', function () {
             this.timeout(10000);
             project1.remove();
             project2.remove();
-            /*organisation.remove();
-            bank_account.remove();*/
+            organisation.remove();
+            bank_account.remove();
             done();
         });
     });

@@ -1,14 +1,10 @@
 var helpers = require('../helpers.e2e');
 
-<<<<<<< HEAD
-describe('Project create page', function() {
 
-    it('should not show create page if not logged in', function() {
-=======
 describe('Project create page', function () {
 
     it('should not show create page if not logged in', function () {
->>>>>>> 20aac7c6c6cf48734c5b052fe5696ff5b4782de8
+
         browser.get('/projects/create');
 
         expect(browser.getCurrentUrl()).toContain('/auth/login');
@@ -68,22 +64,6 @@ describe('Project create page', function () {
 
 
         helpers.logout();
-<<<<<<< HEAD
-    });
 
-    it('should not create project with empty form', function() {
-       helpers.login();
-
-       element(by.linkText("Hankkeiden lisäys")).click();
-       element(by.buttonText("Lähetä")).click();
-
-       expect(browser.getCurrentUrl()).toContain('/projects/create');
-
-       helpers.logout();
-    });
-
-});
-=======
     });
 });
->>>>>>> 20aac7c6c6cf48734c5b052fe5696ff5b4782de8
