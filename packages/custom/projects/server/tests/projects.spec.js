@@ -44,8 +44,8 @@ describe('<Unit Test>', function () {
                 "swift": "OKOYFI",
                 "holder_name": "John Smith"});
             project1 = new Project(
-                    {"title": "Human rights",
-                        "coordinator": "Keijo Koordinaattori",
+                  {"title": "Human rights",
+                        "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
 //                        "status": "approved",
                         "reg_date": "12.10.2014",
@@ -57,12 +57,12 @@ describe('<Unit Test>', function () {
                         "duration_months": 30,
                         "description": "A short description of project",
                         "description_en": "Description in english",
-                        "categories:": {
-                            "women": false,
-                            "children": false,
-                            "disabled": true,
-                            "general": false,
-                            "other": true
+                        "categories": {
+                          "women": true,
+                          "children": false,
+                          "disabled": true,
+                          "general": false,
+                          "other": false
                         },
                         "background": "Project background",
                         "beneficiaries": "The project benefits...",
@@ -74,9 +74,9 @@ describe('<Unit Test>', function () {
                         "dac": "abcd123"});
             project2 = new Project(
                     {"title": "Humans",
-                        "coordinator": "Keijo Koordi",
+                        "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
-//                        "status": "approved",
+//                       "status": "approved",
                         "reg_date": "12.9.2014",
                         "funding": {
                             "applied_curr_local": "50 000",
@@ -92,7 +92,7 @@ describe('<Unit Test>', function () {
                             "disabled": false,
                             "general": false,
                             "other": false
-                        },
+                          },
                         "background": "Project background 2",
                         "beneficiaries": "The project benefits such and such",
                         "gender_aspect": "Gender aspects include this and that",
@@ -175,12 +175,12 @@ describe('<Unit Test>', function () {
                             "duration_months": 19,
                             "description": "A short description of project",
                             "description_en": "Description in english",
-                            "categories:": {
-                                "women": false,
-                                "children": false,
-                                "disabled": false,
-                                "general": false,
-                                "other": false
+                            "categories": {
+                              "women": true,
+                              "children": false,
+                              "disabled": true,
+                              "general": false,
+                              "other": false
                             },
                             "background": "Project background 3",
                             "beneficiaries": "The project benefits such and such",
@@ -228,7 +228,7 @@ describe('<Unit Test>', function () {
             });
 
             it('should be able to save project with with empty not-required field', function (done) {
-                this.timeout(1000);
+                this.timeout(10000);
 
                 project3.other_donors_proposed = '';
                 return project3.save(function (err, data) {
@@ -275,12 +275,12 @@ describe('<Unit Test>', function () {
                             "duration_months": 29,
                             "description": "A short description of project",
                             "description_en": "Description in english",
-                            "categories:": {
-                                "women": true,
-                                "children": true,
-                                "disabled": false,
-                                "general": false,
-                                "other": false
+                            "categories": {
+                              "women": true,
+                              "children": false,
+                              "disabled": true,
+                              "general": false,
+                              "other": false
                             },
                             "background": "Project background 3",
                             "beneficiaries": "The project benefits such and such",
@@ -308,8 +308,8 @@ describe('<Unit Test>', function () {
             this.timeout(10000);
             project1.remove();
             project2.remove();
-            /*organisation.remove();
-             bank_account.remove();*/
+            organisation.remove();
+            bank_account.remove();
             done();
         });
     });
