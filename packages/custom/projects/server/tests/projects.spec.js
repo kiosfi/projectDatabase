@@ -45,7 +45,7 @@ describe('<Unit Test>', function () {
                 "holder_name": "John Smith"});
             project1 = new Project(
                   {"title": "Human rights",
-                        "coordinator": "Keijo Koordinaattori",
+                        "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
                         "status": "approved",
                         "reg_date": "12.10.2014",
@@ -57,6 +57,13 @@ describe('<Unit Test>', function () {
                         "duration_months": 30,
                         "description": "A short description of project",
                         "description_en": "Description in english",
+                        "categories": {
+                          "women": true,
+                          "children": false,
+                          "disabled": true,
+                          "general": false,
+                          "other": false
+                        },
                         "background": "Project background",
                         "beneficiaries": "The project benefits...",
                         "gender_aspect": "Gender aspects include...",
@@ -67,7 +74,7 @@ describe('<Unit Test>', function () {
                         "dac": "abcd123"});
             project2 = new Project(
                     {"title": "Humans",
-                        "coordinator": "Keijo Koordi",
+                        "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
                         "status": "approved",
                         "reg_date": "12.9.2014",
@@ -79,6 +86,13 @@ describe('<Unit Test>', function () {
                         "duration_months": 12,
                         "description": "A short description of project",
                         "description_en": "Description in english",
+                        "categories": {
+                          "women": true,
+                          "children": false,
+                          "disabled": true,
+                          "general": false,
+                          "other": false
+                        },
                         "background": "Project background 2",
                         "beneficiaries": "The project benefits such and such",
                         "gender_aspect": "Gender aspects include this and that",
@@ -99,7 +113,7 @@ describe('<Unit Test>', function () {
 
             it('should list all projects', function (done) {
 
-                //this.timeout(10000);
+                this.timeout(10000);
                 var query = Project.find();
                 return query.exec(function (err, data) {
                     expect(err).to.be(null);
@@ -157,6 +171,13 @@ describe('<Unit Test>', function () {
                             "duration_months": 19,
                             "description": "A short description of project",
                             "description_en": "Description in english",
+                            "categories": {
+                              "women": true,
+                              "children": false,
+                              "disabled": true,
+                              "general": false,
+                              "other": false
+                            },
                             "background": "Project background 3",
                             "beneficiaries": "The project benefits such and such",
                             "gender_aspect": "Gender aspects include this and that",
@@ -203,7 +224,7 @@ describe('<Unit Test>', function () {
             });
 
             it('should be able to save project with with empty not-required field', function (done) {
-                this.timeout(1000);
+                this.timeout(10000);
 
                 project3.other_donors_proposed = '';
                 return project3.save(function (err, data) {
@@ -250,6 +271,13 @@ describe('<Unit Test>', function () {
                             "duration_months": 29,
                             "description": "A short description of project",
                             "description_en": "Description in english",
+                            "categories": {
+                              "women": true,
+                              "children": false,
+                              "disabled": true,
+                              "general": false,
+                              "other": false
+                            },
                             "background": "Project background 3",
                             "beneficiaries": "The project benefits such and such",
                             "gender_aspect": "Gender aspects include this and that",
@@ -276,8 +304,8 @@ describe('<Unit Test>', function () {
             this.timeout(10000);
             project1.remove();
             project2.remove();
-            /*organisation.remove();
-            bank_account.remove();*/
+            organisation.remove();
+            bank_account.remove();
             done();
         });
     });
