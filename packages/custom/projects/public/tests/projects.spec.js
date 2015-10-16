@@ -87,22 +87,25 @@
 
             it('$scope.create() with valid form data should send POST request ', function () {
 
-                scope.project = {title: 'Human rights'};
+                scope.project = {
+                  title: 'Human rights',
+                  categories: ['yleiset ihmisoikeudet']
+                };
 
                 var postProjectData = function() {
                     return scope.project;
                  };
 //                // fixture response data
-
                 var responseProjectData = function() {
                   return {
                     _id: '525cf20451979dea2c000001',
-                    title: 'Human rights'
+                    title: 'Human rights',
+                    categories: ['yleiset ihmisoikeudet']
                   };
                };
 
                 scope.title = 'Human rights';
-
+                scope.categorySelection = ['yleiset ihmisoikeudet'];
                 // test post request is sent
                 $httpBackend.expectPOST('api\/projects', postProjectData()).respond(responseProjectData());
                 // Run controller
