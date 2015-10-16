@@ -3,16 +3,22 @@
 
     <h2><span class="name">{{project.project_ref}}: {{project.title}}</span> </h2>
     <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
-    <span class="tila">
-        <select ng-model="project.status">
-            <option ng-repeat="stat in statuses" ng-selected="stat === project.status">
-              {{stat}}
-            </option>
-        </select>
-    </span> </h3>
+        <span class="tila">
+            <select ng-model="project.status">
+                <option ng-repeat="stat in statuses" ng-selected="stat === project.status">
+                    {{stat}}
+                </option>
+            </select>
+        </span> </h3>
 
     <hr>
 
+    <article class="kategoria">
+        <button type="button"  data-ng-model="project.categories" data-ng-repeat="cat in project.categories" disabled>
+            <span class="glyphicon glyphicon-tag" >                
+            </span> {{cat}} 
+        </button>
+    </article>
 
     <article class="proj-box-left">
 
