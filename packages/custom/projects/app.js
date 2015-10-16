@@ -29,7 +29,7 @@ Projects.register(function(app, auth, database, circles) {
 
   Projects.menus.add({
     'roles': ['authenticated'],
-    'title': 'Hankkeiden lisäys',
+    'title': 'Hankkeen lisäys',
     'link': 'create project'
   });
 
