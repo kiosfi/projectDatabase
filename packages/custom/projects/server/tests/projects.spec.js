@@ -44,7 +44,7 @@ describe('<Unit Test>', function () {
                 "swift": "OKOYFI",
                 "holder_name": "John Smith"});
             project1 = new Project(
-                  {"title": "Human rights",
+                    {"title": "Human rights",
                         "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
 //                        "status": "approved",
@@ -57,13 +57,10 @@ describe('<Unit Test>', function () {
                         "duration_months": 30,
                         "description": "A short description of project",
                         "description_en": "Description in english",
-                        "categories": {
-                          "women": true,
-                          "children": false,
-                          "disabled": true,
-                          "general": false,
-                          "other": false
-                        },
+                        "categories": [
+                            "naiset",
+                            "yleiset ihmisoikeudet"
+                        ],
                         "background": "Project background",
                         "beneficiaries": "The project benefits...",
                         "gender_aspect": "Gender aspects include...",
@@ -86,13 +83,9 @@ describe('<Unit Test>', function () {
                         "duration_months": 12,
                         "description": "A short description of project",
                         "description_en": "Description in english",
-                        "categories:": {
-                            "women": false,
-                            "children": true,
-                            "disabled": false,
-                            "general": false,
-                            "other": false
-                          },
+                        "categories": [
+                            "lapset"
+                        ],
                         "background": "Project background 2",
                         "beneficiaries": "The project benefits such and such",
                         "gender_aspect": "Gender aspects include this and that",
@@ -173,13 +166,9 @@ describe('<Unit Test>', function () {
                             "duration_months": 19,
                             "description": "A short description of project",
                             "description_en": "Description in english",
-                            "categories": {
-                              "women": true,
-                              "children": false,
-                              "disabled": true,
-                              "general": false,
-                              "other": false
-                            },
+                            "categories": [
+                                "yleiset ihmisoikeudet"
+                            ],
                             "background": "Project background 3",
                             "beneficiaries": "The project benefits such and such",
                             "gender_aspect": "Gender aspects include this and that",
@@ -273,13 +262,7 @@ describe('<Unit Test>', function () {
                             "duration_months": 29,
                             "description": "A short description of project",
                             "description_en": "Description in english",
-                            "categories": {
-                              "women": true,
-                              "children": false,
-                              "disabled": true,
-                              "general": false,
-                              "other": false
-                            },
+                            "categories": [],
                             "background": "Project background 3",
                             "beneficiaries": "The project benefits such and such",
                             "gender_aspect": "Gender aspects include this and that",
