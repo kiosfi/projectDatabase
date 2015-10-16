@@ -1,7 +1,7 @@
 <section data-ng-controller="ProjectsController">
     <form name="projectForm" class="form-horizontal" role="form" data-ng-submit="create(projectForm.$valid)" novalidate>
         <fieldset>
-            <legend><a onclick="toggleCollapse2('fs1', 'img1')">Perustiedot
+            <legend><a onclick="toggleCollapse2('fs1', 'img1')">Hankkeen nimi ja koordinaattori
                     <img id="img1" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
             <div id ="fs1" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
@@ -203,7 +203,7 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend><a onclick="toggleCollapse2('fs4', 'img4')">Hankkeen yksityiskohdat
+            <legend><a onclick="toggleCollapse2('fs4', 'img4')">Hankkeen lisätiedot
                     <img id="img4" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
             <div id="fs4" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
@@ -304,7 +304,7 @@
         </fieldset>
         <fieldset>
             <legend><a onclick="toggleCollapse2('fs5', 'img5')">Hakijajärjestön
-                    yksityiskohtaiset tiedot
+                    lisätiedot
                     <img id="img5" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
             <div id="fs5" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{

@@ -18,7 +18,8 @@ module.exports = {
   strategies: {
     local: {
       enabled: true
-    }
+    },
+    landingPage: '/',
   },
   emailFrom: 'SENDER EMAIL ADDRESS', // sender address like ABC <abc@example.com>
   mailer: {
