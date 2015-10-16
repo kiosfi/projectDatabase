@@ -15,6 +15,24 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                       'loppuraportti', 'päättynyt'];
 
     $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
+    
+    $scope.categories = ['naiset', 'lapset', 'vammaiset', 'yleiset ihmisoikeudet', 'muu'];
+    
+    $scope.categorySelection = [];
+    
+    $scope.toggleSelection = function toggleSelection(categ) {
+    var idx = $scope.categorySelection.indexOf(categ);
+
+    // is currently selected
+    if (idx > -1) {
+      $scope.categorySelection.splice(idx, 1);
+    }
+
+    // is newly selected
+    else {
+      $scope.categorySelection.push(categ);
+    }
+  };
 
     $scope.hasAuthorization = function(project) {
       if (!project || !project.user) return false;
@@ -24,7 +42,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     $scope.create = function(isValid) {
       if (isValid) {
         var project = new Projects($scope.project);
+        project.categories = $scope.categorySelection;
         project.$save(function(response) {
+            console.log(project.categories);
           $location.path('projects/' + response._id);
         });
 

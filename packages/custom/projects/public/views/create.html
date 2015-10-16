@@ -174,21 +174,30 @@
                                     : submitted && projectForm.appliedeur.$invalid }">
                     <label mean-token="'create-categories'" class="col-md-3 control-label">Hankkeen kategoriat</label>
                     <div class="col-md-6">
-                        <label>Naiset:
-                            <input type="checkbox" data-ng-model="project.categories.women">
+                        <label ng-repeat="categ in categories">
+                            <input
+                                type="checkbox"
+                                name="selectedCategs[]"
+                                value="{{categ}}"
+                                ng-checked="categorySelection.indexOf(categ) > - 1"
+                                ng-click="toggleSelection(categ)"
+                                > {{categ}}
                         </label>
-                        <label>Lapset:
-                            <input type="checkbox" data-ng-model="project.categories.children">
-                        </label>
-                        <label>Vammaiset:
-                            <input type="checkbox" data-ng-model="project.categories.disabled">
-                        </label>
-                        <label>Yleiset ihmisoikeudet:
-                            <input type="checkbox" data-ng-model="project.categories.general">
-                        </label>
-                        <label>Muu:
-                            <input type="checkbox" data-ng-model="project.categories.other">
-                        </label>
+                        <!--                        <label>Naiset:
+                                                    <input type="checkbox" data-ng-model="project.categories.women">
+                                                </label>
+                                                <label>Lapset:
+                                                    <input type="checkbox" data-ng-model="project.categories.children">
+                                                </label>
+                                                <label>Vammaiset:
+                                                    <input type="checkbox" data-ng-model="project.categories.disabled">
+                                                </label>
+                                                <label>Yleiset ihmisoikeudet:
+                                                    <input type="checkbox" data-ng-model="project.categories.general">
+                                                </label>
+                                                <label>Muu:
+                                                    <input type="checkbox" data-ng-model="project.categories.other">
+                                                </label>-->
                     </div>
                 </div>
             </div>

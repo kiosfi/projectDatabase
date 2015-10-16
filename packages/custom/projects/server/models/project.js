@@ -76,26 +76,27 @@ var ProjectSchema = new Schema({
         trim: true
     },
     categories: {
-        women: {
-            type: Boolean,
-            default: false
-        },
-        children: {
-            type: Boolean,
-            default: false
-        },
-        disabled: {
-            type: Boolean,
-            default: false
-        },
-        general: {
-            type: Boolean,
-            default: false
-        },
-        other: {
-            type: Boolean,
-            default: false
-        }
+        type: Array
+//        women: {
+//            type: Boolean,
+//            default: false
+//        },
+//        children: {
+//            type: Boolean,
+//            default: false
+//        },
+//        disabled: {
+//            type: Boolean,
+//            default: false
+//        },
+//        general: {
+//            type: Boolean,
+//            default: false
+//        },
+//        other: {
+//            type: Boolean,
+//            default: false
+//        }
     },
     background: {
         type: String,
