@@ -149,9 +149,9 @@ ProjectSchema.path('title').validate(function (title) {
     return !!title;
 }, 'Nimi ei voi olla tyhjä');
 
-/*ProjectSchema.path('coordinator').validate(function (coordinator) {
+ProjectSchema.path('coordinator').validate(function (coordinator) {
     return !!coordinator;
-}, 'Koordinaattorin nimi ei voi olla tyhjä');*/
+}, 'Koordinaattorin nimi ei voi olla tyhjä');
 
 ProjectSchema.statics.load = function (id, cb) {
     this.findOne({

@@ -44,7 +44,7 @@
                 <p>Tila: {{project.status}}</p>
                 <p>Kirjattu: {{project.reg_date| date:'dd.MM.yyyy'}}</p>
                 <p>Haettu summa: {{project.funding.applied_curr_eur}} EUR ({{project.funding.applied_curr_local}} local)</p>
-                <p>Myönnetty: {{project.funding.granted_curr_eur}} EUR ({{project.funding.granted_curr_local}} local)</p>
+                <p ng-show="project.status === 'hyväksytty'" class="ng-hide">Myönnetty: {{project.funding.granted_curr_eur}} EUR ({{project.funding.granted_curr_local}} local)</p>
                 <p>Kesto: {{project.duration_months}} kk</p>
             </section>
         </article>
