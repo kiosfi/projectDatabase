@@ -6,8 +6,8 @@
  * @param {type} param1
  * @param {type} param2
  */
-angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Global', 'Projects', 'MeanUser',
-  function($scope, $stateParams, $location, Global, Projects, MeanUser) {
+angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Global', 'Projects', 'MeanUser', 'Circles',
+  function($scope, $stateParams, $location, Global, Projects, MeanUser, Circles) {
     $scope.global = Global;
 
     $scope.statuses = ['rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty',
@@ -15,11 +15,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                       'loppuraportti', 'päättynyt'];
 
     $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
-    
+
     $scope.categories = ['naiset', 'lapset', 'vammaiset', 'yleiset ihmisoikeudet', 'muu'];
-    
+
     $scope.categorySelection = [];
-    
+
     $scope.toggleSelection = function toggleSelection(categ) {
     var idx = $scope.categorySelection.indexOf(categ);
 
@@ -35,8 +35,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
   };
 
     $scope.hasAuthorization = function(project) {
-      if (!project || !project.user) return false;
-      return MeanUser.isAdmin || project.user._id === MeanUser.user._id;
+      if (!project) return false;
+      return MeanUser.isAdmin;
     };
 
     $scope.create = function(isValid) {
@@ -67,6 +67,23 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
       }, function(project) {
         $scope.project = project;
       });
+    };
+
+    $scope.remove = function(project) {
+      if (project) {
+        project.$remove(function(response) {
+          for (var i in $scope.projects) {
+            if ($scope.projects[i] === project) {
+              $scope.projects.splice(i, 1);
+            }
+          }
+          $location.path('projects');
+        });
+      } else {
+        $scope.project.$remove(function(response) {
+          $location.path('projects');
+        });
+      }
     };
   }
 ]);

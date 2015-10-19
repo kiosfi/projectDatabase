@@ -83,6 +83,28 @@ module.exports = function(Projects) {
                  res.json(projects)
              });
 
+         },
+         destroy: function(req, res) {
+             var project = req.project;
+
+
+             project.remove(function(err) {
+                 if (err) {
+                     return res.status(500).json({
+                         error: 'Hankkeen poistaminen ei onnistu.'
+                     });
+                 }
+
+                 Projects.events.publish({
+                     action: 'deleted',
+                     user: {
+                         name: req.user.name
+                     },                                       
+                     name: project.title
+                 });
+
+                 res.json(project);
+             });
          }
     };
 }

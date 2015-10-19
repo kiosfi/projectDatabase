@@ -1,7 +1,13 @@
 
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
 
-    <h2><span class="name">{{project.project_ref}}: {{project.title}}</span> </h2>
+    <h2><span class="name">{{project.project_ref}}: {{project.title}}</span>
+      <span data-ng-if="hasAuthorization(project)">
+        <a class="btn-lg" data-ng-click="remove(project);">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
+      </span></h2>
+
     <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
         <span class="tila">
             <select ng-model="project.status">
@@ -15,8 +21,8 @@
 
     <article class="kategoria">
         <button type="button"  data-ng-model="project.categories" data-ng-repeat="cat in project.categories" disabled>
-            <span class="glyphicon glyphicon-tag" >                
-            </span> {{cat}} 
+            <span class="glyphicon glyphicon-tag" >
+            </span> {{cat}}
         </button>
     </article>
 

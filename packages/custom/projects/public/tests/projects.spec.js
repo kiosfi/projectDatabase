@@ -118,6 +118,32 @@
 
                 expect($location.path()).toEqual('/projects/' + responseProjectData()._id);
             });
+
+            it('$scope.remove() should send a DELETE request with a valid projectId ' +
+              'and remove the project from the scope', inject(function(Projects) {
+
+                // fixture rideshare
+                var project = new Projects({
+                    _id: '525a8422f6d0f87f0e407a33'
+                });
+
+                // mock rideshares in scope
+                scope.projects = [];
+                scope.projects.push(project);
+
+                // test expected rideshare DELETE request
+                $httpBackend.expectDELETE(/api\/projects\/([0-9a-fA-F]{24})$/).respond(204);
+
+                // run controller
+                scope.remove(project);
+                $httpBackend.flush();
+
+                // test after successful delete URL location projects list
+                expect($location.path()).toBe('/projects');
+                expect(scope.projects.length).toBe(0);
+
+            }));
+
         });
     });
 }());

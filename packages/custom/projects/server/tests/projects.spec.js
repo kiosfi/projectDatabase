@@ -132,6 +132,18 @@ describe('<Unit Test>', function () {
             });
         });
 
+        describe('Method Destroy', function () {
+          it('should delete given project', function (done) {
+            this.timeout(10000);
+            var query = Project;
+            return query.remove({title: "Humans"}).exec(function (err) {
+              expect(err).to.be(null);
+              done();
+            });
+          });
+
+        });
+
         describe('Method Save', function () {
 
             beforeEach(function (done) {

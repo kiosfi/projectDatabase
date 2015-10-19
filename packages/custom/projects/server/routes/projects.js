@@ -2,7 +2,7 @@
 
 // Article authorization helpers
 var hasAuthorization = function(req, res, next) {
-  if (!req.user.isAdmin && !req.project.user._id.equals(req.user._id)) {
+  if (!req.user.isAdmin) {
     return res.status(401).send('User is not authorized');
   }
   next();
@@ -30,7 +30,8 @@ module.exports = function(Projects, app, auth) {
     .get(projects.all)
     .post(auth.requiresLogin, hasPermissions, projects.create);
   app.route('/api/projects/:projectId')
-    .get(auth.isMongoId, projects.show);
+    .get(auth.isMongoId, projects.show)
+    .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, projects.destroy);
 
   app.param('projectId', projects.project);
 };
