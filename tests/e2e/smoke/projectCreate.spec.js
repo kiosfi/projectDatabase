@@ -13,23 +13,29 @@ describe('Project create page', function () {
     it('should create project with valid data filled in form', function () {
         helpers.login();
 
-        element(by.linkText("Hankkeiden lisäys")).click();
+        element(by.linkText("Hankkeen lisäys")).click();
+        element(by.linkText("Hankkeen nimi ja koordinaattori")).click();
+        element(by.linkText("Järjestö")).click();
+        element(by.linkText("Hankkeen perustiedot")).click();
+        element(by.linkText("Hankkeen lisätiedot")).click();
+        element(by.linkText("Hakijajärjestön lisätiedot")).click();
+        element(by.linkText("Pankkitili")).click();
 
         element(by.model('project.title')).sendKeys('Test title');
-        element(by.model('project.coordinator')).sendKeys('Tets coordinator');
+        element(by.model('project.coordinator')).element(by.cssContainingText('option', 'Maija Maa')).click();
+        //element(by.model('project.coordinator')).sendKeys('Tets coordinator');
         element(by.model('project.organisation.name')).sendKeys('Test organisation');
         element(by.model('project.organisation.representative')).sendKeys('Test prep');
         element(by.model('project.organisation.address')).sendKeys('Test org address 123');
         element(by.model('project.organisation.tel')).sendKeys('+123456789');
         element(by.model('project.organisation.email')).sendKeys('org@test.com');
         element(by.model('project.organisation.website')).sendKeys('www.testorg.com');
-        element(by.model('project.status')).element(by.cssContainingText('option', 'rekisteröity')).click();
+        //element(by.model('project.status')).element(by.cssContainingText('option', 'rekisteröity')).click();
         element(by.model('project.funding.applied_curr_local')).sendKeys('100000');
         element(by.model('project.funding.applied_curr_eur')).sendKeys('19000');
         element(by.model('project.duration_months')).sendKeys('20');
         element(by.model('project.description')).sendKeys('Short description of project');
         element(by.model('project.description_en')).sendKeys('Short summary in english');
-
         element(by.model('project.background')).sendKeys('Test projects background');
         element(by.model('project.beneficiaries')).sendKeys('Test beneficiaries');
         element(by.model('project.gender_aspect')).sendKeys('Test projects gender aspects are...');
@@ -51,19 +57,42 @@ describe('Project create page', function () {
         var header = element(by.css('section')).element(by.tagName('h2'));
         expect(header.getText()).toContain('Test title');
 
+        element(by.linkText("Hankelistaus")).click();
+        var buttons = $$('i.glyphicon-trash');
+        buttons.last().click();
+
         helpers.logout();
+
     });
 
     it('should not create project with empty form', function () {
         helpers.login();
 
-        element(by.linkText("Hankkeiden lisäys")).click();
+        element(by.linkText("Hankkeen lisäys")).click();
+        element(by.linkText("Hankkeen nimi ja koordinaattori")).click();
+        element(by.linkText("Järjestö")).click();
+        element(by.linkText("Hankkeen perustiedot")).click();
+        element(by.linkText("Hankkeen lisätiedot")).click();
+        element(by.linkText("Hakijajärjestön lisätiedot")).click();
+        element(by.linkText("Pankkitili")).click();
         element(by.buttonText("Lähetä")).click();
 
         expect(browser.getCurrentUrl()).toContain('/projects/create');
-
-
         helpers.logout();
-
     });
+
 });
+
+/*afterEach(function(done) {
+  helpers.login();
+  browser.get('/projects');
+  var buttons = $$('i.glyphicon-trash');
+  buttons.count().then(function(count) {
+    while (count > 3) {
+      buttons.last().click();
+      count--;
+    }
+    done();
+  });
+  helpers.logout();
+});*/

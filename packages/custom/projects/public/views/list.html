@@ -4,8 +4,8 @@
         <li data-ng-repeat="project in projects">
             <h2>
               <a data-ng-href="/projects/{{project._id}}">{{project.project_ref}}: {{project.title}}</a>
-              <span data-ng-if="hasAuthorization(project)">
-                <a class="btn-lg" data-ng-click="remove(project);">
+              <span>
+                <a class="btn-lg" id="delete" data-ng-click="remove(project);">
                   <i class="glyphicon glyphicon-trash"></i>
                 </a>
               </span>

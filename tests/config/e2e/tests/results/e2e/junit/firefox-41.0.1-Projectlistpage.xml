@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
- <testsuite name="Project list page" timestamp="2015-10-12T12:21:07" hostname="localhost" time="0.687" errors="0" tests="1" skipped="0" disabled="0" failures="0">
-  <testcase classname="Project list page" name="should list registered projects" time="0.686" />
+ <testsuite name="Project list page" timestamp="2015-10-21T17:38:46" hostname="localhost" time="0.497" errors="0" tests="1" skipped="0" disabled="0" failures="2">
+  <testcase classname="Project list page" name="should list registered projects" time="0.496">
+   <failure type="toEqual" message="Expected 5 to equal 3."><![CDATA[Error: Failed expectation
+    at Object.<anonymous> (/home/maria/projectDatabase/tests/e2e/smoke/projectList.spec.js:7:73)
+    at /usr/lib/node_modules/protractor/node_modules/jasminewd2/index.js:96:23
+    at new promise.Promise (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:368:5)
+    at controlFlowExecute (/usr/lib/node_modules/protractor/node_modules/jasminewd2/index.js:82:18)
+    at [object Object].promise.ControlFlow.runInFrame_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:1857:20)
+    at [object Object].promise.ControlFlow.runEventLoop_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:1729:8)
+    at [object Object].eval (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:2043:12)
+    at [object Object].goog.async.run.processWorkQueue [as _onTimeout] (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/async/run.js:130:15)
+    at Timer.listOnTimeout [as ontimeout] (timers.js:121:15)]]>
+   </failure>
+   <failure type="exception" message="Failed: Object [object Object] has no method &apos;element&apos;"><![CDATA[TypeError: Object [object Object] has no method 'element'
+    at Object.<anonymous> (/home/maria/projectDatabase/tests/e2e/smoke/projectCreate.spec.js:85:6)
+    at /usr/lib/node_modules/protractor/node_modules/jasminewd2/index.js:92:15
+    at new promise.Promise (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:368:5)
+    at controlFlowExecute (/usr/lib/node_modules/protractor/node_modules/jasminewd2/index.js:82:18)
+    at [object Object].promise.ControlFlow.runInFrame_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:1857:20)
+    at [object Object].promise.ControlFlow.runEventLoop_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:1729:8)
+    at [object Object].eval (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:2043:12)
+    at [object Object].goog.async.run.processWorkQueue [as _onTimeout] (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/async/run.js:130:15)
+    at Timer.listOnTimeout [as ontimeout] (timers.js:121:15)
+From: Task: Run afterEach in control flow
+    at Object.<anonymous> (/usr/lib/node_modules/protractor/node_modules/jasminewd2/index.js:81:14)
+    at attemptAsync (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1819:24)
+    at QueueRunner.run (/usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1774:9)
+    at /usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1801:16
+    at /usr/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1745:9
+    at /usr/lib/node_modules/protractor/node_modules/jasminewd2/index.js:18:5
+    at [object Object].promise.ControlFlow.runInFrame_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:1857:20)
+    at [object Object].goog.defineClass.notify (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:2448:25)
+    at [object Object].promise.Promise.notify_ (eval at <anonymous> (/usr/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/base.js:1124:19), <anonymous>:564:12)
+    at Array.forEach (native)
+From asynchronous test: 
+Error
+    at Object.<anonymous> (/home/maria/projectDatabase/tests/e2e/smoke/projectCreate.spec.js:83:1)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Module.require (module.js:364:17)
+    at require (module.js:380:17)
+    at /usr/lib/node_modules/protractor/node_modules/jasmine/lib/jasmine.js:63:5
+    at Array.forEach (native)]]>
+   </failure>
+  </testcase>
  </testsuite>
 </testsuites>

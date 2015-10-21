@@ -14,10 +14,10 @@ describe('Project view page', function () {
         helpers.login();
         element.all(by.repeater('project in projects')).
                 get(0).$('a').click();
-        
+
         var header = element(by.css('section')).element(by.tagName('h2'));
         expect(header.getText()).toContain('Human rights');
-        
+
         helpers.logout();
     });
 
