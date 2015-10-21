@@ -2,7 +2,7 @@
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
 
     <h2><span class="name">{{project.project_ref}}: {{project.title}}</span>
-      <span data-ng-if="hasAuthorization(project)">
+      <span>
         <a class="btn-lg" data-ng-click="remove(project);">
           <i class="glyphicon glyphicon-trash"></i>
         </a>
