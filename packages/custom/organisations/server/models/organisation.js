@@ -4,8 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema,
-  Project = require('./project.js');
+  Schema = mongoose.Schema;
 
   var OrganisationSchema = new Schema({
     name: {
@@ -84,6 +83,12 @@ var mongoose = require('mongoose'),
           type: String
       }
   });
+
+  OrganisationSchema.statics.load = function (id, cb) {
+      this.findOne({
+          _id: id
+      }).populate({path: 'bank_account', model: 'BankAccount'}).exec(cb);
+  };
 
   mongoose.model('Organisation', OrganisationSchema);
   mongoose.model('BankAccount', BankAccountSchema);

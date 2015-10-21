@@ -5,7 +5,6 @@
  */
 var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        Organisation = require('./organisation.js'),
         autoIncrement = require('mongoose-auto-increment');
 
 autoIncrement.initialize(mongoose);
