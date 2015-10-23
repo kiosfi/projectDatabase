@@ -12,13 +12,13 @@
     </style>
 </head>
 <body>
-<div class="header low">
+<div class="header medium">
     <h1>Code coverage report for <span class="entity">custom/organisations/public/controllers/organisations.js</span></h1>
     <h2>
-        Statements: <span class="metric">7.69% <small>(1 / 13)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">75% <small>(9 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Branches: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">0% <small>(0 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">8.33% <small>(1 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">83.33% <small>(5 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">81.82% <small>(9 / 11)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">custom/organisations/public/controllers/</a> &#187; organisations.js</div>
@@ -57,8 +57,7 @@
 30
 31
 32
-33
-34</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+33</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -68,25 +67,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -100,26 +98,25 @@
  * @param {type} param2
  */
 angular.module('mean.organisations').controller('OrganisationsController', ['$scope', '$stateParams', '$location', 'Global', 'Organisations', 'MeanUser', 'Circles',
-<span class="fstat-no" title="function not covered" >  function($scope, $stateParams, $location, Global, Organisations, MeanUser, Circles) {</span>
-<span class="cstat-no" title="statement not covered" >    $scope.global = Global;</span>
+  function($scope, $stateParams, $location, Global, Organisations, MeanUser, Circles) {
+    $scope.global = Global;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    $scope.hasAuthorization = <span class="fstat-no" title="function not covered" >function(organisation) {</span></span>
+    $scope.hasAuthorization = <span class="fstat-no" title="function not covered" >function(organisation) {</span>
 <span class="cstat-no" title="statement not covered" >      if (!project) <span class="cstat-no" title="statement not covered" >return false;</span></span>
 <span class="cstat-no" title="statement not covered" >      return MeanUser.isAdmin;</span>
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    $scope.find = <span class="fstat-no" title="function not covered" >function() {</span></span>
-<span class="cstat-no" title="statement not covered" >      Organisations.query(<span class="fstat-no" title="function not covered" >function(organisations) {</span></span>
-<span class="cstat-no" title="statement not covered" >        $scope.organisations = organisations;</span>
-<span class="cstat-no" title="statement not covered" >        console.log($scope.organisations);</span>
+    $scope.find = function() {
+      Organisations.query(function(organisations) {
+        $scope.organisations = organisations;
       });
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    $scope.findOne = <span class="fstat-no" title="function not covered" >function() {</span></span>
-<span class="cstat-no" title="statement not covered" >      Organisations.get({</span>
+    $scope.findOne = function() {
+      Organisations.get({
         organisationId: $stateParams.organisationId
-      }, <span class="fstat-no" title="function not covered" >function(organisation) {</span>
-<span class="cstat-no" title="statement not covered" >        $scope.organisation = organisation;</span>
+      }, function(organisation) {
+        $scope.organisation = organisation;
       });
     };
   }
@@ -129,7 +126,7 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 21 2015 22:38:56 GMT+0300 (EEST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Oct 23 2015 13:53:18 GMT+0300 (EEST)</div>
 </div>
 <script src="../../../../prettify.js"></script>
 <script>

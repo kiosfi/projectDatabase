@@ -5,7 +5,7 @@
 /**
  * Module dependencies.
  */
-/*var expect = require('expect.js'),
+var expect = require('expect.js'),
         mongoose = require('mongoose'),
         Organisation = mongoose.model('Organisation'),
         BankAccount = mongoose.model('BankAccount');
@@ -19,6 +19,12 @@ describe('<Unit Test>', function () {
         beforeEach(function (done) {
             this.timeout(10000);
 
+            bank_account = new BankAccount({
+                "bank_contact_details": "Branch, address",
+                "iban": "abcdefg1234",
+                "swift": "OKOYFI",
+                "holder_name": "John Smith"});
+            bank_account.save();
             organisation = new Organisation({
                 "name": "Humanrights org",
                 "representative": "Representative",
@@ -30,26 +36,19 @@ describe('<Unit Test>', function () {
                 "history_status": "history status",
                 "int_links": "international links",
                 "bank_account": bank_account});
+            organisation.save();
             organisation2 = new Organisation({
                 "name": "Children's Rights Org",
-                "representative": "Representative",
-                "address": "Adress 123",
-                "tel": "123445",
-                "email": "email@cro.com",
-                "website": "www.cro.com",
-                "legal_status": "legal status",
-                "history_status": "history status",
-                "int_links": "international links",
+                "representative": "Representative2",
+                "address": "Adress 1234",
+                "tel": "1234456",
+                "email": "email@cro2.com",
+                "website": "www.cro2.com",
+                "legal_status": "legal statuses",
+                "history_status": "history statuses",
+                "int_links": "international link",
                 "bank_account": bank_account});
-            bank_account = new BankAccount({
-                "bank_contact_details": "Branch, address",
-                "iban": "abcdefg1234",
-                "swift": "OKOYFI",
-                "holder_name": "John Smith"});
-            organisation.save();
             organisation2.save();
-            bank_account.save();
-            //console.log(organisation);
             done();
         });
 
@@ -60,11 +59,9 @@ describe('<Unit Test>', function () {
                 this.timeout(10000);
                 var query = Organisation.find()
 
-                return query.exec(function (err, orgs) {
+                return query.sort({'name':'asc'}).exec(function (err, orgs) {
                     expect(err).to.be(null);
-                    expect(orgs.length).to.be(2);
-//                    expect(data[0].title).to.equal("Human rights");
-//                    expect(data[1].status).to.be("approved");
+                    expect(orgs.length).to.equal(2);
                     done();
                 });
             });
@@ -91,4 +88,4 @@ describe('<Unit Test>', function () {
             done();
         });
     });
-});*/
+});

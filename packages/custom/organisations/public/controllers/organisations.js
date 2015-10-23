@@ -18,7 +18,6 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
     $scope.find = function() {
       Organisations.query(function(organisations) {
         $scope.organisations = organisations;
-        console.log($scope.organisations);
       });
     };
 

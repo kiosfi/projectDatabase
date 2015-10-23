@@ -44,7 +44,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         var project = new Projects($scope.project);
         project.categories = $scope.categorySelection;
         project.$save(function(response) {
-            console.log(project.categories);
           $location.path('projects/' + response._id);
         });
 
