@@ -23,29 +23,32 @@
         <article class="proj-div">
             <h4 class="proj-header">Oikeudellinen status</h4>
             <section class="proj-body">
-                <p>Tila: {{organisation.legal_status}}</p>
+                <p>{{organisation.legal_status}}</p>
             </section>
         </article>
+
+        <article class="proj-div">
+            <h4 class="proj-header">Kansalliset ja kansainväliset yhteydet</h4>
+            <section class="proj-body">
+                <p>{{organisation.int_links}}</p>
+            </section>
+        </article>
+
         <article class="proj-left">
             <h4 class="proj-header">Historia</h4>
             <section class="proj-body">
                 <p>{{organisation.history_status}}</p>
             </section>
         </article>
-        <article class="proj-left">
-            <h4 class="proj-header">Kansalliset ja kansainväliset yhteydet</h4>
-            <section class="proj-body">
-                <p>{{organisation.int_links}}</p>
-            </section>
-        </article>
+
     </article>
 
     <article class="proj-box-right">
+
         <article class="proj-right">
+            <button class="btn" onclick="toggleCollapse('visibilityBankinfo')">Tilitiedot</button>
 
-            <button class="btn" onclick="toggleCollapse('visibilityAppinfo')">Tilitiedot</button>
-
-            <article id="visibilityAppinfo">
+            <article id="visibilityBankinfo">
 
                 <article class="proj">
                     <h4 class=proj-header>Tilin haltija</h4>
@@ -76,6 +79,7 @@
                         {{organisation.bank_account.bank_contact_details}}
                     </span>
                 </article>
+
             </article>
         </article>
     </article>
