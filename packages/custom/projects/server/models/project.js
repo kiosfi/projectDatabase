@@ -4,8 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-        Schema = mongoose.Schema,
-        Organisation = require('./organisation.js'),
+        Schema = mongoose.Schema,        
         autoIncrement = require('mongoose-auto-increment');
 
 autoIncrement.initialize(mongoose);

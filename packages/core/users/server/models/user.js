@@ -168,7 +168,7 @@ UserSchema.methods = {
 
   /**
    * Hide security sensitive fields
-   * 
+   *
    * @returns {*|Array|Binary|Object}
    */
   toJSON: function() {

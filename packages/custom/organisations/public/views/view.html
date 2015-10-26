@@ -1,0 +1,88 @@
+
+<section data-ng-controller="OrganisationsController" data-ng-init="findOne()">
+
+    <h2><span class="name">{{organisation.name}}</span>
+
+    <h3>Edustaja: <a href="">{{organisation.representative}}</a></h3>
+
+    <hr>
+    <article class="proj-box-left">
+        <article class="proj-div">
+            <h4 class="proj-header">Perustiedot</h4>
+            <section class="proj-body">
+                <p>Edustaja: <a href="">{{organisation.representative}}</a>
+                <p>Osoite: {{organisation.address}}</p>
+                <p>Puhelinnumero: {{organisation.tel}}</p>
+                <p>Sähköposti: {{organisation.email}}</p>
+                <p>Websivut: {{organisation.website}}</p>
+
+
+            </section>
+        </article>
+
+        <article class="proj-div">
+            <h4 class="proj-header">Oikeudellinen status</h4>
+            <section class="proj-body">
+                <p>{{organisation.legal_status}}</p>
+            </section>
+        </article>
+
+        <article class="proj-div">
+            <h4 class="proj-header">Kansalliset ja kansainväliset yhteydet</h4>
+            <section class="proj-body">
+                <p>{{organisation.int_links}}</p>
+            </section>
+        </article>
+
+        <article class="proj-left">
+            <h4 class="proj-header">Historia</h4>
+            <section class="proj-body">
+                <p>{{organisation.history_status}}</p>
+            </section>
+        </article>
+
+    </article>
+
+    <article class="proj-box-right">
+
+        <article class="proj-right">
+            <button class="btn" onclick="toggleCollapse('visibilityBankinfo')">Tilitiedot</button>
+
+            <article id="visibilityBankinfo">
+
+                <article class="proj">
+                    <h4 class=proj-header>Tilin haltija</h4>
+                    <span class="proj-body">
+                        {{organisation.bank_account.holder_name}}
+                    </span>
+                </article>
+
+
+                <article class="proj">
+                    <h4 class=proj-header>Tilinumero (IBAN)</h4>
+                    <span class="proj-body">
+                        {{organisation.bank_account.iban}}
+                    </span>
+                </article>
+
+
+                <article class="proj">
+                    <h4 class=proj-header>SWIFT</h4>
+                    <span class="proj-body">
+                        {{organisation.bank_account.swift}}
+                    </span>
+                </article>
+
+                <article class="proj">
+                    <h4 class=proj-header>Pankin yhteystiedot</h4>
+                    <span class="proj-body">
+                        {{organisation.bank_account.bank_contact_details}}
+                    </span>
+                </article>
+
+            </article>
+        </article>
+    </article>
+
+
+</section>

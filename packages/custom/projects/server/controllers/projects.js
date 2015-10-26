@@ -5,8 +5,8 @@
  */
 var mongoose = require('mongoose'),
     Project = mongoose.model('Project'),
-    Organisation = mongoose.model('Organisation'),
-    BankAccount = mongoose.model('BankAccount'),
+    //Organisation = mongoose.model('Organisation'),
+    //BankAccount = mongoose.model('BankAccount'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
@@ -72,7 +72,6 @@ module.exports = function(Projects) {
              var query = Project.find();
 
              query.sort({project_ref: 'asc'})
-             .populate('user', 'name username')
              .populate({path: 'organisation', model: 'Organisation'})
              .exec(function(err, projects) {
                  if (err) {
@@ -99,7 +98,7 @@ module.exports = function(Projects) {
                      action: 'deleted',
                      user: {
                          name: req.user.name
-                     },                                       
+                     },
                      name: project.title
                  });
 

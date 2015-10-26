@@ -27,6 +27,12 @@ describe('<Unit Test>', function () {
         beforeEach(function (done) {
             this.timeout(10000);
 
+            bank_account = new BankAccount({
+                "bank_contact_details": "Branch, address",
+                "iban": "abcdefg1234",
+                "swift": "OKOYFI",
+                "holder_name": "John Smith"});
+            bank_account.save();
             organisation = new Organisation({
                 "name": "Humanrights org",
                 "representative": "Representative",
@@ -38,11 +44,7 @@ describe('<Unit Test>', function () {
                 "history_status": "history status",
                 "int_links": "international links",
                 "bank_account": bank_account});
-            bank_account = new BankAccount({
-                "bank_contact_details": "Branch, address",
-                "iban": "abcdefg1234",
-                "swift": "OKOYFI",
-                "holder_name": "John Smith"});
+            organisation.save();
             project1 = new Project(
                     {"title": "Human rights",
                         "coordinator": "Teppo Tenhunen",
@@ -69,6 +71,7 @@ describe('<Unit Test>', function () {
                         "reporting_evaluation": "Data",
                         "other_donors_proposed": "Donated amount",
                         "dac": "abcd123"});
+            project1.save();
             project2 = new Project(
                     {"title": "Humans",
                         "coordinator": "Teppo Tenhunen",
@@ -95,10 +98,7 @@ describe('<Unit Test>', function () {
                         "other_donors_proposed": "Donated amount",
                         "dac": "abcd123"
                     });
-            project1.save();
             project2.save();
-            organisation.save();
-            bank_account.save();
             done();
         });
 
@@ -109,7 +109,7 @@ describe('<Unit Test>', function () {
                 this.timeout(10000);
                 var query = Project.find();
 
-                return query.exec(function (err, data) {
+                return query.sort({"name": "asc"}).exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
 //                    expect(data[0].title).to.equal("Human rights");

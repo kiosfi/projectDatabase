@@ -1,0 +1,12 @@
+<section data-ng-controller="OrganisationsController" data-ng-init="find()">
+    <h1>Järjestöt</h1>
+    <ul class="projects unstyled">
+        <li data-ng-repeat="organisation in organisations">
+            <h2>
+              <a data-ng-href="/organisations/{{organisation._id}}">{{organisation.name}}</a>
+            </h2>
+            <p>EDUSTAJA: {{organisation.representative}}</p>
+            <hr>
+        </li>
+    </ul>
+</section>
