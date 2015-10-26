@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
-module.exports = function(Projects, Organisations) {
+module.exports = function(Projects) {
 
     return {
         project: function(req, res, next, id) {
