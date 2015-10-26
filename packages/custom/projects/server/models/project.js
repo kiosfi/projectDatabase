@@ -117,7 +117,33 @@ var ProjectSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    in_review: {
+      type: Schema.ObjectId,
+      ref: 'InReview'
+    },
+    approved: {
+      type: Schema.ObjectId,
+      ref: 'Approved'
+    },
+    rejected: {
+      type: Schema.ObjectId,
+      ref: 'Rejected'
+    },
+    signed: {
+      type: Schema.ObjectId,
+      ref: 'Signed'
+    },
+    intermediary_report: {
+      type: Schema.ObjectId,
+      ref: 'IntReport'
+    },
+    end_report: {
+      type: Schema.ObjectId,
+      ref: 'EndReport'
     }
+
+
 });
 
 ProjectSchema.plugin(autoIncrement.plugin, {

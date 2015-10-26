@@ -1,0 +1,178 @@
+var mongoose = require('mongoose'),
+  Schema = mongoose.Schema;
+
+var InReviewSchema = new Schema({
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  comments: {
+    type: String
+  }
+});
+
+var ApprovedSchema = new Schema({
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  approved_date: {
+    type: String
+  },
+  approved_by: {
+    type: Array,
+    default: ['ceo', 'board', 'foreign_ministry']
+  },
+  board_notified: {
+    type: String
+  },
+  granted_sum: {
+    granted_curr_local: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    granted_curr_eur: {
+        type: String,
+        required: true,
+        trim: true
+    }
+  },
+  themes: {
+    type: String,
+    required: true
+  },
+  methods: {
+    type: String,
+    required: true
+  }
+});
+
+RejectedSchema = new Schema({
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  rejection_categories: {
+    type: Array,
+    default: [1, 2, 3, 4, 5],
+    required: true
+  },
+  rejection_comments: {
+    type: String,
+    required: true
+  }
+});
+
+SignedSchema = new Schema({
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  signed_by: {
+    type: String,
+    required: true
+  },
+  signed_date: {
+    type: String,
+    required: true
+  }
+});
+
+IntReportSchema = new Schema({
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  objectives: {
+    type: Array
+  },
+  activities: {
+    type: Array
+  },
+  processed: {
+    type: Boolean,
+    default: false
+  }
+});
+
+EndReportSchema = new Schema({
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  audit: {
+    date: {
+      type: String,
+      required: true
+    },
+    audit_review: {
+      type: String,
+      required: true
+    }
+  },
+  objectives: {
+    type: Array
+  },
+  activities: {
+    type: Array
+  },
+  processed: {
+    type: Boolean,
+    default: false
+  }
+});
+
+EndedSchema = new Schema({
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  end_date: {
+    type: String,
+    required: true
+  },
+  board_notified: {
+    type: String
+  },
+  approved_by: {
+    type: Array,
+    default: ['ceo', 'board']
+  }
+});
+
+mongoose.model('InReview', InReviewSchema);
+mongoose.model('Approved', ApprovedSchema);
+mongoose.model('Rejected', RejectedSchema);
+mongoose.model('Signed', SignedSchema);
+mongoose.model('IntReport', IntReportSchema);
+mongoose.model('EndReport', EndReportSchema);
+mongoose.model('Ended', EndedSchema);
