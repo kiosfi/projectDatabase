@@ -2,11 +2,11 @@
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
 
     <h2><span class="name">{{project.project_ref}}: {{project.title}}</span>
-      <span>
-        <a class="btn-lg" data-ng-click="remove(project);">
-          <i class="glyphicon glyphicon-trash"></i>
-        </a>
-      </span></h2>
+        <span>
+            <a class="btn-lg" data-ng-click="remove(project);">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </span></h2>
 
     <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
         <span class="tila">
@@ -42,8 +42,8 @@
                 <p>Edustaja: <a href="">{{project.organisation.representative}}</a>
                 <h5>Osoite:</h5> 
                 <p>{{project.organisation.address.street}}<br>
-                {{project.organisation.address.postal_code}} {{project.organisation.address.city}}<br>
-                {{project.organisation.address.country}}</p> 
+                    {{project.organisation.address.postal_code}} {{project.organisation.address.city}}<br>
+                    {{project.organisation.address.country}}</p> 
                 <p>Puhelinnumero: {{project.organisation.tel}}</p>
                 <p>Sähköposti: {{project.organisation.email}}</p>
                 <p>Websivut: {{project.organisation.website}}</p>
@@ -99,14 +99,14 @@
 
 
                 <article class="proj">
-                    <h4 class=proj-header>Hyödynsaajat</h4>
+                    <h4 class=proj-header>Hyödynsaajat ja vastuunkantajat</h4>
                     <span class="proj-body">
                         {{project.beneficiaries}}
                     </span>
                 </article>
 
                 <article class="proj">
-                    <h4 class=proj-header>Sukupuolten tasa-arvo</h4>
+                    <h4 class=proj-header>Gender analyysi</h4>
                     <span class="proj-body">
                         {{project.gender_aspect}}
                     </span>
