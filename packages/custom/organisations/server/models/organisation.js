@@ -110,3 +110,4 @@ OrganisationSchema.statics.load = function (id, cb) {
 
 module.exports = mongoose.model('Organisation', OrganisationSchema);
 module.exports = mongoose.model('BankAccount', BankAccountSchema);
+
