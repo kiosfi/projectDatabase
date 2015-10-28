@@ -68,12 +68,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.project = project;
             });
         };
-        
-        $scope.confirm = function(project) {
-    if (confirm("Haluatko varmasti poistaa hankkeen '" + project.title + "'?")) {
-        $scope.remove(project);
-    }
-};
+
+        $scope.confirm = function (project) {
+            if (confirm("Haluatko varmasti poistaa hankkeen '" + project.title + "'?")) {
+                $scope.remove(project);
+            }
+        };
 
         $scope.remove = function (project) {
             if (project) {
@@ -87,7 +87,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
                 });
             } else {
-                $scope.project.$remove(function (response) {;
+                $scope.project.$remove(function (response) {
                     $location.path('projects');
 
                 });
