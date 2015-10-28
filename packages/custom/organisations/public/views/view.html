@@ -11,7 +11,10 @@
             <h4 class="proj-header">Perustiedot</h4>
             <section class="proj-body">
                 <p>Edustaja: <a href="">{{organisation.representative}}</a>
-                <p>Osoite: {{organisation.address}}</p>
+                <h5>Osoite:</h5> 
+                <p>{{organisation.address.street}}<br>
+                {{organisation.address.postal_code}} {{organisation.address.city}}<br>
+                {{organisation.address.country}}</p>
                 <p>Puhelinnumero: {{organisation.tel}}</p>
                 <p>Sähköposti: {{organisation.email}}</p>
                 <p>Websivut: {{organisation.website}}</p>
