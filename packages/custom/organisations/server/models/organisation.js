@@ -108,5 +108,5 @@ OrganisationSchema.statics.load = function (id, cb) {
     }).populate({path: 'bank_account', model: 'BankAccount'}).exec(cb);
 };
 
-mongoose.model('Organisation', OrganisationSchema);
-mongoose.model('BankAccount', BankAccountSchema);
+module.exports = mongoose.model('Organisation', OrganisationSchema);
+module.exports = mongoose.model('BankAccount', BankAccountSchema);
