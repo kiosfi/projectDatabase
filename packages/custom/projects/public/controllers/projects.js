@@ -6,13 +6,17 @@
  * @param {type} param1
  * @param {type} param2
  */
-angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Global', 'Projects', 'MeanUser', 'Circles',
-  function($scope, $stateParams, $location, Global, Projects, MeanUser, Circles) {
+angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', '$window', 'Global', 'Projects', 'MeanUser', 'Circles',
+  function($scope, $stateParams, $location, $window, Global, Projects, MeanUser, Circles) {
     $scope.global = Global;
 
-    $scope.statuses = ['rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty',
-                      'sopimus allekirjoitettu', '1. väliraportti', '2. väliraportti',
-                      'loppuraportti', 'päättynyt'];
+    $scope.states = [{"current": "rekisteröity", "next": ["käsittelyssä", "päättynyt"]},
+      {"current": "käsittelyssä", "next": ["hyväksytty", "hylätty", "päättynyt"]},
+      {"current": "hyväksytty", "next": ["allekirjoitettu", "hylätty", "päättynyt"]},
+      {"current": "hylätty", "next": []}, {"current": "allekirjoitettu",
+      "next": ["väliraportti", "loppuraportti", "päättynyt"]},
+      {"current": "väliraportti", "next": ["väliraportti", "loppuraportti", "päättynyt"]},
+      {"current": "loppuraportti", "next": ["päättynyt"]}, {"current": "päättynyt", "next": []}];
 
     $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
 
@@ -68,6 +72,19 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
       });
     };
 
+    $scope.findState = function() {
+      Projects.get({
+        projectId: $stateParams.projectId
+      }, function(project) {
+        $scope.project = project;
+        for (var i = 0; i < $scope.states.length; i++) {
+          if ($scope.states[i].current === $scope.project.status) {
+            $scope.state = $scope.states[i];
+          }
+        }
+      });
+    };
+
     $scope.remove = function(project) {
       if (project) {
         project.$remove(function(response) {
@@ -83,6 +100,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
           $location.path('projects');
         });
       }
+    };
+
+    $scope.updateState = function() {
+      var project = $scope.project;
+      project.$update(function(response) {
+          $window.location.reload();
+      });
     };
   }
 ]);

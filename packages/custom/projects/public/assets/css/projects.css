@@ -3,7 +3,6 @@
     display: none;
 }
 
-
 .proj-left {
     padding: 1em;
 }
@@ -24,13 +23,11 @@
 }
 
 .proj-div {
-
     padding-right: 10%;
     padding: 1em;
     float: left;
     width: 50%;
 }
-
 
 .projects-example h1 {
     background-color: purple
@@ -42,10 +39,13 @@ ul li
 }
 
 .tila {
-    font-style: italic;
     float: right;
 }
 
+.states {
+    font-size: 17px;
+    font-weight: normal;
+}
 
 .proj-header {
     font-weight: bold;
@@ -58,14 +58,12 @@ ul li
     line-height: 1.2;
 }
 
-
 hr {
     border: 0;
     border-bottom: 1px dashed #ccc;
     background: #999;
     width: 100%;
 }
-
 
 .btn {
 

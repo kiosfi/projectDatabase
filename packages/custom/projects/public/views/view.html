@@ -9,13 +9,7 @@
       </span></h2>
 
     <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
-        <span class="tila">
-            <select ng-model="project.status">
-                <option ng-repeat="stat in statuses" ng-selected="stat === project.status">
-                    {{stat}}
-                </option>
-            </select>
-        </span> </h3>
+      <span class="tila"><p>{{project.status}}</p></span><h3>
 
     <hr>
 
@@ -24,6 +18,18 @@
             <span class="glyphicon glyphicon-tag" >
             </span> {{cat}}
         </button>
+    </article>
+
+    <article class="tila" data-ng-init="findState()">
+      <form name="stateForm" class="states" data-ng-submit="updateState(stateForm)">
+        <label for="stateSelect">Päivitä tila: </label>
+        <select id="stateSelect" data-ng-model="project.status">
+          <option data-ng-repeat="next_state in state.next" value="{{next_state}}">{{next_state}}</option>
+        </select>
+        <button type="submit" mean-token="'edit-submit'" class="btn-xs">
+            <span class="glyphicon glyphicon-arrow-right"></span>
+        </button>
+      </form>
     </article>
 
     <article class="proj-box-left">
@@ -47,8 +53,6 @@
                 <p>Puhelinnumero: {{project.organisation.tel}}</p>
                 <p>Sähköposti: {{project.organisation.email}}</p>
                 <p>Websivut: {{project.organisation.website}}</p>
-
-
             </section>
         </article>
 
@@ -63,6 +67,7 @@
                 <p>Kesto: {{project.duration_months}} kk</p>
             </section>
         </article>
+
         <article class="proj-left">
             <h4 class="proj-header">Aikataulu</h4>
             <section class="proj-body">
@@ -73,6 +78,7 @@
                 <p>1.6.2015 2. Väliraportti</p>
             </section>
         </article>
+
     </article>
 
     <article class="proj-box-right">
