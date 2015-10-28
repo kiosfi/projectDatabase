@@ -4,38 +4,56 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+        Schema = mongoose.Schema;
 
-  var OrganisationSchema = new Schema({
+var OrganisationSchema = new Schema({
     name: {
-      type: String,
-      required: true,
-      trim: true
+        type: String,
+        required: true,
+        trim: true
     },
     representative: {
-      type: String,
-      required: true,
-      trim: true
+        type: String,
+        required: true,
+        trim: true
     },
     address: {
-      type: String,
-      required: true,
-      trim: true
+        street: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        postal_code: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        city: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        country: {
+            type: String,
+            required: true,
+            trim: true
+        }
+
     },
     tel: {
-      type: String,
-      required: true,
-      trim: true
+        type: String,
+        required: true,
+        trim: true
     },
     email: {
-      type: String,
-      required: true,
-      trim: true
+        type: String,
+        required: true,
+        trim: true
     },
     website: {
-      type: String,
-      required: true,
-      trim: true
+        type: String,
+        required: true,
+        trim: true
     },
     legal_status: {
         type: String,
@@ -61,34 +79,34 @@ var mongoose = require('mongoose'),
         ref: 'BankAccount',
         required: true
     }
-  });
+});
 
-  var BankAccountSchema = new Schema({
-      bank_contact_details: {
-          type: String,
-          required: true,
-          trim: true
-      },
-      iban: {
-          type: String,
-          required: true,
-          trim: true
-      },
-      swift: {
-          type: String,
-          required: true,
-          trim: true
-      },
-      holder_name: {
-          type: String
-      }
-  });
+var BankAccountSchema = new Schema({
+    bank_contact_details: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    iban: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    swift: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    holder_name: {
+        type: String
+    }
+});
 
-  OrganisationSchema.statics.load = function (id, cb) {
-      this.findOne({
-          _id: id
-      }).populate({path: 'bank_account', model: 'BankAccount'}).exec(cb);
-  };
+OrganisationSchema.statics.load = function (id, cb) {
+    this.findOne({
+        _id: id
+    }).populate({path: 'bank_account', model: 'BankAccount'}).exec(cb);
+};
 
-  mongoose.model('Organisation', OrganisationSchema);
-  mongoose.model('BankAccount', BankAccountSchema);
+mongoose.model('Organisation', OrganisationSchema);
+mongoose.model('BankAccount', BankAccountSchema);

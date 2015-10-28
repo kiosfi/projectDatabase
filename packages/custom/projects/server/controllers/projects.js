@@ -5,8 +5,8 @@
  */
 var mongoose = require('mongoose'),
     Project = mongoose.model('Project'),
-    //Organisation = mongoose.model('Organisation'),
-    //BankAccount = mongoose.model('BankAccount'),
+    Organisation = mongoose.model('Organisation'),
+    BankAccount = mongoose.model('BankAccount'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 

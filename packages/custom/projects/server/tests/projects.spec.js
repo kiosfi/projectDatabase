@@ -36,7 +36,12 @@ describe('<Unit Test>', function () {
             organisation = new Organisation({
                 "name": "Humanrights org",
                 "representative": "Representative",
-                "address": "Adress 123",
+                "address": {
+                    "street": "Street 123911",
+                    "postal_code": "22039",
+                    "city": "Oslo",
+                    "country": "Norway"
+                },
                 "tel": "123445",
                 "email": "email@org.com",
                 "website": "www.org.com",
@@ -133,14 +138,14 @@ describe('<Unit Test>', function () {
         });
 
         describe('Method Destroy', function () {
-          it('should delete given project', function (done) {
-            this.timeout(10000);
-            var query = Project;
-            return query.remove({title: "Humans"}).exec(function (err) {
-              expect(err).to.be(null);
-              done();
+            it('should delete given project', function (done) {
+                this.timeout(10000);
+                var query = Project;
+                return query.remove({title: "Humans"}).exec(function (err) {
+                    expect(err).to.be(null);
+                    done();
+                });
             });
-          });
 
         });
 
@@ -152,7 +157,12 @@ describe('<Unit Test>', function () {
                 organisation3 = new Organisation({
                     "name": "Children rights org",
                     "representative": "Mr Jackson",
-                    "address": "Address road 123",
+                    "address": {
+                        "street": "Address Road 123",
+                        "postal_code": "011325",
+                        "city": "Cityham",
+                        "country": "Countryland"
+                    },
                     "tel": "+111123445",
                     "email": "email@childrenorg.com",
                     "website": "www.childrenorg.com",
@@ -246,7 +256,12 @@ describe('<Unit Test>', function () {
                 organisation4 = new Organisation({
                     "name": "Humanrights org",
                     "representative": "Representative",
-                    "address": "Address road 123",
+                    "address": {
+                        "street": "Street road 123",
+                        "postal_code": "211325",
+                        "city": "Madrid",
+                        "country": "Spain"
+                    },
                     "tel": "123445",
                     "email": "email@hrorg.com",
                     "website": "www.hrorg.com",

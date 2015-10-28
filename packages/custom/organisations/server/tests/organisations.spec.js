@@ -28,7 +28,12 @@ describe('<Unit Test>', function () {
             organisation = new Organisation({
                 "name": "Humanrights org",
                 "representative": "Representative",
-                "address": "Adress 123",
+                "address": {
+                    "street": "Street 123",
+                    "postal_code": "011325",
+                    "city": "London",
+                    "country": "England"
+                },
                 "tel": "123445",
                 "email": "email@org.com",
                 "website": "www.org.com",
@@ -40,7 +45,12 @@ describe('<Unit Test>', function () {
             organisation2 = new Organisation({
                 "name": "Children's Rights Org",
                 "representative": "Representative2",
-                "address": "Adress 1234",
+                "address": {
+                    "street": "Street 123567",
+                    "postal_code": "020333",
+                    "city": "Tampere",
+                    "country": "Finland"
+                },
                 "tel": "1234456",
                 "email": "email@cro2.com",
                 "website": "www.cro2.com",
