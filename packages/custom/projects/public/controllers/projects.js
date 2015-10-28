@@ -84,10 +84,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         }
                     }
                     $location.path('projects');
+
                 });
             } else {
-                $scope.project.$remove(function (response) {
+                $scope.project.$remove(function (response) {;
                     $location.path('projects');
+
                 });
             }
         };

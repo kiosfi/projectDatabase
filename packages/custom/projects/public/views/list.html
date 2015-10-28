@@ -1,5 +1,6 @@
 <section data-ng-controller="ProjectsController" data-ng-init="find()">
     <h1>Lisätyt hankkeet</h1>
+     <div class="alert alert-danger animated fadeIn" ng-show="deleteMessage">asdasdasd</div>
     <ul class="projects unstyled">
         <li data-ng-repeat="project in projects">
             <h2>
@@ -7,7 +8,7 @@
               <span>
 <!--                Confirm action here-->
                
-                <a class="btn-lg" id="delete" data-ng-click="remove(project);">
+                <a class="btn-lg" id="delete" data-ng-click="confirm(project);">
                   <i class="glyphicon glyphicon-trash"></i>
                 </a>
               </span>
