@@ -1,6 +1,22 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
+var StatesSchema = new Schema({
+  current_state: {
+    type: String,
+    required: true
+  },
+  next_states: {
+    type: Array
+  }
+});
+
+StatesSchema.statics.load = function (current_state, cb) {
+    this.findOne({
+        current_state: current_state
+    }).exec(cb);
+};
+
 var InReviewSchema = new Schema({
   date: {
     type: Date,
@@ -169,6 +185,7 @@ EndedSchema = new Schema({
   }
 });
 
+mongoose.model('States', StatesSchema);
 mongoose.model('InReview', InReviewSchema);
 mongoose.model('Approved', ApprovedSchema);
 mongoose.model('Rejected', RejectedSchema);

@@ -83,6 +83,30 @@ module.exports = function(Projects) {
              });
 
          },
+
+         update: function(req, res) {
+             var project = req.project;
+
+             project = _.extend(project, req.body);
+
+             project.save(function(err) {
+                 if (err) {
+                     return res.status(500).json({
+                         error: 'Hankkeen päivitys epäonnistui'
+                     });
+                 }
+
+                Projects.events.publish({
+                   action: 'updated',
+                   name: project.title,
+                   url: config.hostname + '/projects/' + project._id
+                });
+
+                res.json(project);
+            });
+
+         },
+
          destroy: function(req, res) {
              var project = req.project;
 
