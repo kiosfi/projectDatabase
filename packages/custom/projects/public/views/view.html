@@ -62,9 +62,10 @@
         <article class="proj-div">
             <h4 class="proj-header">Hanketiedot</h4>
             <section class="proj-body">
-                <p> DAC: {{project.dac}}</p>
-                <p>Tila: {{project.state}}</p>
-                <p>Kirjattu: {{project.reg_date | date:'dd.MM.yyyy'}}</p>
+                <p>Vaikutusalue: {{project.region}}</p>
+                <p> DAC: {{project.dac}}
+                <p>Tila: {{project.status}}</p>
+                <p>Kirjattu: {{project.reg_date| date:'dd.MM.yyyy'}}</p>
                 <p>Haettu summa: {{project.funding.applied_curr_eur}} EUR ({{project.funding.applied_curr_local}} local)</p>
                 <p ng-show="project.status === 'hyväksytty'" class="ng-hide">Myönnetty: {{project.funding.granted_curr_eur}} EUR ({{project.funding.granted_curr_local}} local)</p>
                 <p>Kesto: {{project.duration_months}} kk</p>

@@ -117,6 +117,11 @@ var ProjectSchema = new Schema({
         required: true,
         trim: true
     },
+    region: {
+        type: String,
+        required: true,
+        trim: true
+    },
     in_review: {
       type: Schema.ObjectId,
       ref: 'InReview'
