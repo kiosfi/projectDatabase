@@ -17,6 +17,11 @@ var OrganisationSchema = new Schema({
         required: true,
         trim: true
     },
+    exec_manager: {
+        type: String,
+        required: true,
+        trim: true
+    },
     address: {
         street: {
             type: String,
