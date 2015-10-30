@@ -11,5 +11,6 @@
     "npm": "1.4.x"
   },
   "dependencies": {},
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {}
 }

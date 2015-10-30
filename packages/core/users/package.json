@@ -11,8 +11,9 @@
     "npm": "1.4.x"
   },
   "scripts": {
-    "postinstall" : "bower install"
+    "postinstall": "bower install"
   },
   "dependencies": {},
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {}
 }
