@@ -30,7 +30,7 @@
 }
 
 .projects-example h1 {
-    background-color: purple
+    background-color: purple;
 }
 
 ul li
@@ -56,6 +56,8 @@ ul li
 
 .proj-body {
     line-height: 1.2;
+    font-size: 14px;
+    font-style: normal;
 }
 
 hr {
