@@ -77,7 +77,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
       }, function(project) {
         $scope.project = project;
         for (var i = 0; i < $scope.states.length; i++) {
-          if ($scope.states[i].current === $scope.project.status) {
+          if ($scope.states[i].current === $scope.project.state) {
             $scope.state = $scope.states[i];
           }
         }

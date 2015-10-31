@@ -28,7 +28,7 @@ var ProjectSchema = new Schema({
         ref: 'Organisation',
         required: true
     },
-    status: {
+    state: {
         type: String,
         default: 'rekisteröity',
         required: true
