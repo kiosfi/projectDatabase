@@ -10,6 +10,12 @@
     width: 50%;
 }
 
+.org-box {
+    float: left;
+    width: 100%;
+    padding: 1em;
+}
+
 /*ul li
 {
     list-style-type: none;

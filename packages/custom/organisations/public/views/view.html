@@ -34,36 +34,38 @@
 
         </article>
 
-  </article>
+      </article>
 
-  <hr>
 
-  <article>
-      <h4 class="org-header">Oikeudellinen status</h4>
-      <br>
+  <article class="org-box">
+
+    <hr>
+    <article>
+        <h4 class="org-header">Oikeudellinen status</h4>
+        <br>
+          <section class="org-body">
+              <p>{{organisation.legal_status}}</p>
+            </section>
+    </article>
+
+    <br>
+
+    <article>
+        <h4 class="org-header">Historia</h4>
+        <br>
         <section class="org-body">
-            <p>{{organisation.legal_status}}</p>
+            <p>{{organisation.history_status}}</p>
         </section>
+    </article>
+
+    <br>
+
+    <article>
+        <h4 class="org-header">Kansalliset ja kansainväliset yhteydet</h4>
+        <br>
+        <section class="org-body">
+            <p>{{organisation.int_links}}</p>
+        </section>
+    </article>
   </article>
-
-  <br>
-
-  <article>
-      <h4 class="org-header">Historia</h4>
-      <br>
-      <section class="org-body">
-          <p>{{organisation.history_status}}</p>
-      </section>
-  </article>
-
-  <br>
-
-  <article>
-      <h4 class="org-header">Kansalliset ja kansainväliset yhteydet</h4>
-      <br>
-      <section class="org-body">
-          <p>{{organisation.int_links}}</p>
-      </section>
-  </article>
-
 </section>
