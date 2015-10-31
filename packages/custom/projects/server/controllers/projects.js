@@ -110,6 +110,12 @@ module.exports = function(Projects) {
          destroy: function(req, res) {
              var project = req.project;
 
+             var query = Project.update( { project_ref: { $gt: project.project_ref} },
+                {$inc: {project_ref: -1}}, {multi: true});
+
+             query.exec(function(err) {
+               console.log("viitenumerot päivitetty");
+             });
 
              project.remove(function(err) {
                  if (err) {

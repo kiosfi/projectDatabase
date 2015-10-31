@@ -103,6 +103,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
       } else {
         $scope.project.$remove(function(response) {
           $location.path('projects');
+          $window.location.reload();          
         });
       }
     };

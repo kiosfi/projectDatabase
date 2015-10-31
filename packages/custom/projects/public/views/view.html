@@ -2,11 +2,13 @@
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
 
     <h2><span class="name">{{project.project_ref}}: {{project.title}}</span>
-        <span>
-            <a class="btn-lg" data-ng-click="remove(project);">
-                <i class="glyphicon glyphicon-trash"></i>
-            </a>
-        </span>
+      <span>
+<!--                Confirm action here-->
+
+        <a class="btn-lg" id="delete" data-ng-click="confirm(project);">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
+      </span>
     </h2>
 
     <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>

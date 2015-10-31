@@ -5,13 +5,6 @@
         <li data-ng-repeat="project in projects">
             <h2>
               <a data-ng-href="/projects/{{project._id}}">{{project.project_ref}}: {{project.title}}</a>
-              <span>
-<!--                Confirm action here-->
-
-                <a class="btn-lg" id="delete" data-ng-click="confirm(project);">
-                  <i class="glyphicon glyphicon-trash"></i>
-                </a>
-              </span>
             </h2>
             <span style="color:blue" class="state">TILA: {{project.state}}</span>
             <p>JÄRJESTÖ: {{project.organisation.name}}</p>
