@@ -8,17 +8,9 @@
  */
 
 angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams',
-'$location', '$window', 'Global', 'Projects', 'States', 'MeanUser', 'Circles',
-  function($scope, $stateParams, $location, $window, Global, Projects, States, MeanUser, Circles) {
+'$location', '$window', '$http', 'Global', 'Projects', 'MeanUser', 'Circles',
+  function($scope, $stateParams, $location, $window, $http, Global, Projects, MeanUser, Circles) {
     $scope.global = Global;
-
-    $scope.states = [{"current": "rekisteröity", "next": ["käsittelyssä", "päättynyt"]},
-      {"current": "käsittelyssä", "next": ["hyväksytty", "hylätty", "päättynyt"]},
-      {"current": "hyväksytty", "next": ["allekirjoitettu", "hylätty", "päättynyt"]},
-      {"current": "hylätty", "next": []}, {"current": "allekirjoitettu",
-      "next": ["väliraportti", "loppuraportti", "päättynyt"]},
-      {"current": "väliraportti", "next": ["väliraportti", "loppuraportti", "päättynyt"]},
-      {"current": "loppuraportti", "next": ["päättynyt"]}, {"current": "päättynyt", "next": []}];
 
     $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
 
@@ -77,18 +69,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
       Projects.get({
         projectId: $stateParams.projectId
       }, function(project) {
-        States.query(function(states) {
-          $scope.states = states;
-          console.log($scope.states);
           $scope.project = project;
-          for (var i = 0; i < $scope.states.length; i++) {
-            if ($scope.states[i].current === $scope.project.state) {
-              $scope.state = $scope.states[i];
+          $http.get('projects/assets/js/states.json').then(function(res) {
+            $scope.states = res.data;
+            for (var i = 0; i < $scope.states.length; i++) {
+              if ($scope.states[i].current === $scope.project.state) {
+                $scope.state = $scope.states[i];
+              }
             }
-          }
+          });
         });
-      });
-    };
+      };
 
     $scope.confirm = function (project) {
         if (confirm("Haluatko varmasti poistaa hankkeen '" + project.title + "'?")) {

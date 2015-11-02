@@ -85,6 +85,16 @@ module.exports = function(Projects) {
 
          },
 
+         allStates: function(req, res) {
+            var query = States.find();
+            query.exec(function(err, states) {
+              return res.status(500).json({
+                  error: 'Tiloja ei voi näyttää'
+              });
+              res.json(states)
+            });
+         },
+
          update: function(req, res) {
              var project = req.project;
 
