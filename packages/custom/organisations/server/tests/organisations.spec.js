@@ -9,6 +9,7 @@ var expect = require('expect.js'),
         mongoose = require('mongoose'),
         Organisation = mongoose.model('Organisation'),
         BankAccount = mongoose.model('BankAccount');
+var async = require('async');
 
 var organisation;
 var organisation2;
@@ -41,6 +42,7 @@ describe('<Unit Test>', function () {
                 "legal_status": "legal status",
                 "history_status": "history status",
                 "int_links": "international links",
+                "nat_links": "local human rights org",
                 "bank_account": bank_account});
             organisation.save();
             organisation2 = new Organisation({
@@ -59,6 +61,7 @@ describe('<Unit Test>', function () {
                 "legal_status": "legal statuses",
                 "history_status": "history statuses",
                 "int_links": "international link",
+                "nat_links": "local human rights org 2",
                 "bank_account": bank_account});
             organisation2.save();
             done();
@@ -69,10 +72,11 @@ describe('<Unit Test>', function () {
             it('should list all organisations', function (done) {
 
                 this.timeout(10000);
-                var query = Organisation.find();
-                
-                return query.sort({'name': 'asc'}).exec(function (err, orgs) {
 
+
+                var query = Organisation.find();
+
+                return query.sort({'name': 'asc'}).exec(function (err, orgs) {
                     expect(err).to.be(null);
                     expect(orgs.length).to.equal(2);
                     done();
