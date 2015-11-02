@@ -49,6 +49,7 @@ describe('<Unit Test>', function () {
                 "legal_status": "legal status",
                 "history_status": "history status",
                 "int_links": "international links",
+                "nat_links": "local human rights org",
                 "bank_account": bank_account});
             organisation.save();
             project1 = new Project(
@@ -75,7 +76,8 @@ describe('<Unit Test>', function () {
                         "sustainability_risks": "Some data here",
                         "reporting_evaluation": "Data",
                         "other_donors_proposed": "Donated amount",
-                        "dac": "abcd123"});
+                        "dac": "abcd123",
+                        "region": "Itä-Aasia"});
             project1.save();
             project2 = new Project(
                     {"title": "Humans",
@@ -100,7 +102,8 @@ describe('<Unit Test>', function () {
                         "sustainability_risks": "Some data here",
                         "reporting_evaluation": "More data",
                         "other_donors_proposed": "Donated amount",
-                        "dac": "abcd123"
+                        "dac": "abcd123",
+                        "region": "Itä-Aasia"
                     });
             project2.save();
             done();
@@ -169,6 +172,7 @@ describe('<Unit Test>', function () {
                     "legal_status": "non-profit",
                     "history_status": "history status",
                     "int_links": "international links",
+                    "nat_links": "local human rights org 2",
                     "bank_account": bank_account});
                 bank_account3 = new BankAccount({
                     "bank_contact_details": "Bank Branch, address",
@@ -197,7 +201,8 @@ describe('<Unit Test>', function () {
                             "sustainability_risks": "Some data here",
                             "reporting_evaluation": "More data",
                             "other_donors_proposed": "Donated amount",
-                            "dac": "19191123"
+                            "dac": "19191123",
+                            "region": "Itä-Aasia"
                         });
                 done();
             });
@@ -268,6 +273,7 @@ describe('<Unit Test>', function () {
                     "legal_status": "legal status",
                     "history_status": "history status",
                     "int_links": "international links",
+                    "nat_links": "local human rights org 4",
                     "bank_account": bank_account4});
 
                 bank_account4 = new BankAccount({
@@ -296,7 +302,8 @@ describe('<Unit Test>', function () {
                             "sustainability_risks": "Some data here",
                             "reporting_evaluation": "More data",
                             "other_donors_proposed": "Donated amount",
-                            "dac": "1234"
+                            "dac": "1234",
+                            "region": "Itä-Aasia"
                         });
                 return project4.save(function (err, data) {
                     expect(err).to.be(null);
