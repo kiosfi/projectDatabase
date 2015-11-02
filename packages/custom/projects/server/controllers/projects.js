@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
     Project = mongoose.model('Project'),
     Organisation = mongoose.model('Organisation'),
     BankAccount = mongoose.model('BankAccount'),
+    States = mongoose.model('States'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
@@ -109,13 +110,6 @@ module.exports = function(Projects) {
 
          destroy: function(req, res) {
              var project = req.project;
-
-             var query = Project.update( { project_ref: { $gt: project.project_ref} },
-                {$inc: {project_ref: -1}}, {multi: true});
-
-             query.exec(function(err) {
-               console.log("viitenumerot päivitetty");
-             });
 
              project.remove(function(err) {
                  if (err) {

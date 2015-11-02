@@ -6,13 +6,26 @@
 var Module = require('meanio').Module;
 
 var Projects = new Module('projects');
+var States = new Module('states');
+
+
 
 /**
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
 
-Projects.register(function(app, auth, database, circles) {
+States.register(function(app, auth, database, circles) {
+    States.routes(app, auth, database);
+    States.events.defaultData({
+      type: 'post',
+      subtype: 'state'
+    });
+
+  return States;
+});
+
+Projects.register(function(app, auth, database, circles, states) {
 
   //We enable routing. By default the Package Object is passed to the routes
   Projects.routes(app, auth, database);

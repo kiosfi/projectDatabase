@@ -6,8 +6,10 @@
  * @param {type} param1
  * @param {type} param2
  */
-angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', '$window', 'Global', 'Projects', 'MeanUser', 'Circles',
-  function($scope, $stateParams, $location, $window, Global, Projects, MeanUser, Circles) {
+
+angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams',
+'$location', '$window', 'Global', 'Projects', 'States', 'MeanUser', 'Circles',
+  function($scope, $stateParams, $location, $window, Global, Projects, States, MeanUser, Circles) {
     $scope.global = Global;
 
     $scope.states = [{"current": "rekisteröity", "next": ["käsittelyssä", "päättynyt"]},
@@ -75,12 +77,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
       Projects.get({
         projectId: $stateParams.projectId
       }, function(project) {
-        $scope.project = project;
-        for (var i = 0; i < $scope.states.length; i++) {
-          if ($scope.states[i].current === $scope.project.state) {
-            $scope.state = $scope.states[i];
+        States.all(function(states) {
+          $scope.states = states;
+          console.log($scope.states);
+          $scope.project = project;
+          for (var i = 0; i < $scope.states.length; i++) {
+            if ($scope.states[i].current === $scope.project.state) {
+              $scope.state = $scope.states[i];
+            }
           }
-        }
+        });
       });
     };
 
@@ -103,7 +109,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
       } else {
         $scope.project.$remove(function(response) {
           $location.path('projects');
-          $window.location.reload();          
+          $window.location.reload();
         });
       }
     };
@@ -114,5 +120,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
           $window.location.reload();
       });
     };
+
   }
 ]);
