@@ -75,6 +75,11 @@ var OrganisationSchema = new Schema({
         required: true,
         trim: true
     },
+    nat_links: {
+        type: String,
+        required: true,
+        trim: true
+    },
 //    prev_projects: {
 //        type: Array,
 //        required: true
@@ -115,4 +120,3 @@ OrganisationSchema.statics.load = function (id, cb) {
 
 module.exports = mongoose.model('Organisation', OrganisationSchema);
 module.exports = mongoose.model('BankAccount', BankAccountSchema);
-
