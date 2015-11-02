@@ -28,6 +28,7 @@ describe('<Unit Test>', function () {
             organisation = new Organisation({
                 "name": "Humanrights org",
                 "representative": "Representative",
+                "exec_manager": "Manager",
                 "address": {
                     "street": "Street 123",
                     "postal_code": "011325",
@@ -45,6 +46,7 @@ describe('<Unit Test>', function () {
             organisation2 = new Organisation({
                 "name": "Children's Rights Org",
                 "representative": "Representative2",
+                "exec_manager": "Manager2",
                 "address": {
                     "street": "Street 123567",
                     "postal_code": "020333",
@@ -67,9 +69,10 @@ describe('<Unit Test>', function () {
             it('should list all organisations', function (done) {
 
                 this.timeout(10000);
-                var query = Organisation.find()
+                var query = Organisation.find();
+                
+                return query.sort({'name': 'asc'}).exec(function (err, orgs) {
 
-                return query.sort({'name':'asc'}).exec(function (err, orgs) {
                     expect(err).to.be(null);
                     expect(orgs.length).to.equal(2);
                     done();

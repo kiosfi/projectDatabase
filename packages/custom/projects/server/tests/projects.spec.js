@@ -36,6 +36,7 @@ describe('<Unit Test>', function () {
             organisation = new Organisation({
                 "name": "Humanrights org",
                 "representative": "Representative",
+                "exec_manager": "Manager",
                 "address": {
                     "street": "Street 123911",
                     "postal_code": "22039",
@@ -54,7 +55,6 @@ describe('<Unit Test>', function () {
                     {"title": "Human rights",
                         "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
-//                        "status": "approved",
                         "reg_date": "12.10.2014",
                         "funding": {
                             "applied_curr_local": "50 000",
@@ -81,7 +81,6 @@ describe('<Unit Test>', function () {
                     {"title": "Humans",
                         "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
-//                       "status": "approved",
                         "reg_date": "12.9.2014",
                         "funding": {
                             "applied_curr_local": "50 000",
@@ -157,6 +156,7 @@ describe('<Unit Test>', function () {
                 organisation3 = new Organisation({
                     "name": "Children rights org",
                     "representative": "Mr Jackson",
+                    "exec_manager": "Manager3",
                     "address": {
                         "street": "Address Road 123",
                         "postal_code": "011325",
@@ -179,7 +179,6 @@ describe('<Unit Test>', function () {
                         {"title": "Children rights",
                             "coordinator": "Maija Maa",
                             "organisation": organisation3,
-//                            "status": "registered",
                             "funding": {
                                 "applied_curr_local": "50 000",
                                 "applied_curr_eur": "11 000",
@@ -256,6 +255,7 @@ describe('<Unit Test>', function () {
                 organisation4 = new Organisation({
                     "name": "Humanrights org",
                     "representative": "Representative",
+                    "exec_manager": "Manager4",
                     "address": {
                         "street": "Street road 123",
                         "postal_code": "211325",
@@ -282,7 +282,6 @@ describe('<Unit Test>', function () {
                         {"title": "Women rights",
                             "coordinator": "Maija Maa",
                             "organisation": organisation4,
-//                            "status": "registered",
                             "funding": {
                                 "applied_curr_local": "150 000",
                                 "applied_curr_eur": "111 000"},
