@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
@@ -72,7 +74,7 @@ var ApprovedSchema = new Schema({
   }
 });
 
-RejectedSchema = new Schema({
+var RejectedSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
@@ -92,7 +94,7 @@ RejectedSchema = new Schema({
   }
 });
 
-SignedSchema = new Schema({
+var SignedSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
@@ -111,7 +113,7 @@ SignedSchema = new Schema({
   }
 });
 
-IntReportSchema = new Schema({
+var IntReportSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
@@ -132,7 +134,7 @@ IntReportSchema = new Schema({
   }
 });
 
-EndReportSchema = new Schema({
+var EndReportSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
@@ -163,7 +165,7 @@ EndReportSchema = new Schema({
   }
 });
 
-EndedSchema = new Schema({
+var EndedSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
@@ -185,7 +187,7 @@ EndedSchema = new Schema({
   }
 });
 
-mongoose.model('States', StatesSchema);
+module.exports = mongoose.model('States', StatesSchema);
 mongoose.model('InReview', InReviewSchema);
 mongoose.model('Approved', ApprovedSchema);
 mongoose.model('Rejected', RejectedSchema);
