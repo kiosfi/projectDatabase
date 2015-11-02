@@ -36,6 +36,16 @@ angular.module('mean.projects').config(['$stateProvider',
             return MeanUser.checkLoggedin();
           }
         }
+      })
+      
+            .state('change project state', {
+        url: '/projects/:projectId/change',
+        templateUrl: '/projects/views/change.html',
+        resolve: {
+          loggedin: function(MeanUser) {
+            return MeanUser.checkLoggedin();
+          }
+        }
       });
   }
 ]);
