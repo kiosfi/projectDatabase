@@ -4,24 +4,8 @@
 // The Package is past automatically as first parameter
 module.exports = function(States, app, auth, database) {
 
-  app.get('/api/states/example/anyone', function(req, res, next) {
-    res.send('Anyone can access this');
-  });
+  var states = require('../controllers/states')(States);
 
-  app.get('/api/states/example/auth', auth.requiresLogin, function(req, res, next) {
-    res.send('Only authenticated users can access this');
-  });
-
-  app.get('/api/states/example/admin', auth.requiresAdmin, function(req, res, next) {
-    res.send('Only users with Admin role can access this');
-  });
-
-  app.get('/api/states/example/render', function(req, res, next) {
-    States.render('index', {
-      package: 'states'
-    }, function(err, html) {
-      //Rendering a view from the Package server/views
-      res.send(html);
-    });
-  });
+  app.route('/api/states')
+    .get(states.all);
 };
