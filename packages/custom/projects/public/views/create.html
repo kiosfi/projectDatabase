@@ -180,18 +180,6 @@
 
                 <div class="form-group col-md-6" ng-class="{
                                 'has-error'
-                                : submitted && projectForm.duration.$invalid }">
-                    <label mean-token="'create-duration'" class="col-md-3 control-label">Kesto (kk)</label>
-                    <div class="col-md-9">
-                        <input name="duration" type="text" class="form-control" data-ng-model="project.duration_months" id="duration" placeholder="Kesto (kk)" required>
-                        <div ng-show="submitted && projectForm.duration.$invalid" class="help-block">
-                            <p ng-show="projectForm.appliedeur.$error.required">Kenttä on pakollinen</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6" ng-class="{
-                                'has-error'
                                 : submitted && projectForm.appliedlocal.$invalid }">
                     <label mean-token="'create-appliedlocal'" class="col-md-3 control-label">Haettu avustus (paikallinen valuutta)</label>
                     <div class="col-md-9">
@@ -215,21 +203,34 @@
                 </div>
 
                 <div class="form-group col-md-6" ng-class="{
-                                    'has-error'
-                                    : submitted && projectForm.appliedeur.$invalid }">
-                    <label mean-token="'create-categories'" class="col-md-3 control-label">Hankkeen kategoriat</label>
-                    <div class="col-md-6">
-                        <label ng-repeat="categ in categories">
-                            <input
-                                type="checkbox"
-                                name="selectedCategs[]"
-                                value="{{categ}}"
-                                ng-checked="categorySelection.indexOf(categ) > - 1"
-                                ng-click="toggleSelection(categ)"
-                                > {{categ}}
-                        </label>
+                                'has-error'
+                                : submitted && projectForm.duration.$invalid }">
+                    <label mean-token="'create-duration'" class="col-md-3 control-label">Kesto (kk)</label>
+                    <div class="col-md-9">
+                        <input name="duration" type="text" class="form-control" data-ng-model="project.duration_months" id="duration" placeholder="Kesto (kk)" required>
+                        <div ng-show="submitted && projectForm.duration.$invalid" class="help-block">
+                            <p ng-show="projectForm.appliedeur.$error.required">Kenttä on pakollinen</p>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Below will be added to "inReview" -state! -->
+                <!--                <div class="form-group col-md-6" ng-class="{
+                                                    'has-error'
+                                                    : submitted && projectForm.appliedeur.$invalid }">
+                                    <label mean-token="'create-categories'" class="col-md-3 control-label">Hankkeen kategoriat</label>
+                                    <div class="col-md-6">
+                                        <label ng-repeat="categ in categories">
+                                            <input
+                                                type="checkbox"
+                                                name="selectedCategs[]"
+                                                value="{{categ}}"
+                                                ng-checked="categorySelection.indexOf(categ) > - 1"
+                                                ng-click="toggleSelection(categ)"
+                                                > {{categ}}
+                                        </label>
+                                    </div>
+                                </div>-->
             </div>
         </fieldset>
         <fieldset>
@@ -320,7 +321,7 @@
                 </div>
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
-                        : submitted &&  projectForm.region.$invalid }">
+                        : submitted && projectForm.region.$invalid }">
                     <label mean-token="'create-region'" class="col-md-3 control-label">Vaikutusalue tai -maa</label>
                     <div class="col-md-9">
                         <input name="region" type="text" class="form-control" data-ng-model="project.region" id="region" placeholder="Vaikutusalue" required>
