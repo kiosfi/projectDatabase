@@ -11,54 +11,54 @@ var mongoose = require('mongoose'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
-module.exports = function(Projects) {
+module.exports = function (Projects) {
 
     return {
-        project: function(req, res, next, id) {
-            Project.load(id, function(err, project) {
-                if (err) return next(err);
-                if (!project) return next(new Error('Hankkeen ' + id + ' lataus epäonnistui.'));
+        project: function (req, res, next, id) {
+            Project.load(id, function (err, project) {
+                if (err)
+                    return next(err);
+                if (!project)
+                    return next(new Error('Hankkeen ' + id + ' lataus epäonnistui.'));
                 req.project = project;
                 next();
-              });
+            });
         },
-
-        create: function(req, res) {
+        create: function (req, res) {
 
             var project = new Project(req.body);
             var organisation;
             var bank_account;
 
-            Organisation.findOne({name: req.body.organisation.name}, function(err, obj) {
+            Organisation.findOne({name: req.body.organisation.name}, function (err, obj) {
                 if (!obj) {
-                  organisation = new Organisation(req.body.organisation);
-                  bank_account = new BankAccount(req.body.organisation.bank_account);
-                  project.organisation = organisation._id;
-                  organisation.bank_account = bank_account._id;
-                  organisation.save();
-                  bank_account.save();
+                    organisation = new Organisation(req.body.organisation);
+                    bank_account = new BankAccount(req.body.organisation.bank_account);
+                    project.organisation = organisation._id;
+                    organisation.bank_account = bank_account._id;
+                    organisation.save();
+                    bank_account.save();
                 } else {
-                  project.organisation = obj._id;
+                    project.organisation = obj._id;
                 }
 
-                project.save(function(err) {
-                  if (err) {
-                      return res.status(500).json({
-                          error: 'Hanketta ei voi tallentaa'
-                      });
-                  }
-                  res.json(project);
+                project.save(function (err) {
+                    if (err) {
+                        return res.status(500).json({
+                            error: 'Hanketta ei voi tallentaa'
+                        });
+                    }
+                    res.json(project);
                 });
 
                 Projects.events.publish({
-                      action: 'created',
-                      url: config.hostname + '/projects/' + project._id,
-                      name: project.title
+                    action: 'created',
+                    url: config.hostname + '/projects/' + project._id,
+                    name: project.title
                 });
             });
         },
-
-        show: function(req, res) {
+        show: function (req, res) {
 
             Projects.events.publish({
                 action: 'viewed',
@@ -68,7 +68,7 @@ module.exports = function(Projects) {
 
             res.json(req.project);
         },
-
+        
          all: function(req, res) {
              var query = Project.find();
 
@@ -98,28 +98,28 @@ module.exports = function(Projects) {
          update: function(req, res) {
              var project = req.project;
 
-             project = _.extend(project, req.body);
+            project = _.extend(project, req.body);
 
-             project.save(function(err) {
-                 if (err) {
-                     return res.status(500).json({
-                         error: 'Hankkeen päivitys epäonnistui'
-                     });
-                 }
+            project.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Hankkeen päivitys epäonnistui'
+                    });
+                }
 
                 Projects.events.publish({
-                   action: 'updated',
-                   name: project.title,
-                   url: config.hostname + '/projects/' + project._id
+                    action: 'updated',
+                    name: project.title,
+                    url: config.hostname + '/projects/' + project._id
                 });
 
                 res.json(project);
             });
 
-         },
+        },
+        destroy: function (req, res) {
+            var project = req.project;
 
-         destroy: function(req, res) {
-             var project = req.project;
 
              project.remove(function(err) {
                  if (err) {
@@ -127,17 +127,33 @@ module.exports = function(Projects) {
                          error: 'Hankkeen poistaminen ei onnistu.'
                      });
                  }
+                 
+                Projects.events.publish({
+                    action: 'deleted',
+                    user: {
+                        name: req.user.name
+                    },
+                    name: project.title
+                });
 
-                 Projects.events.publish({
-                     action: 'deleted',
-                     user: {
-                         name: req.user.name
-                     },
-                     name: project.title
-                 });
-
-                 res.json(project);
-             });
-         }
+                res.json(project);
+            });
+        },
+        
+        /*
+         * Finds projects by organisationId and returns list of projects in json
+         */
+        byOrg: function(req, res) {            
+            Project.find({organisation: req.organisation})
+                    .exec(function(err, projects) {
+                        console.log('projects:' + projects);
+                        if(err) {
+                            return res.status(500).json({
+                                error: 'Järjestön hankkeiden lataaminen ei onnistu.'
+                            });
+                        }                        
+                res.json(projects);
+            });
+        }        
     };
 }
