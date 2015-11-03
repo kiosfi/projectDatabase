@@ -21,7 +21,7 @@ gulp.task('default', ['clean'], function (defaultTasks) {
  * Gulp task for building apidoc.
  */
 gulp.task('apidoc', shell.task(
-        ['cd packages/custom/projects && doxygen']
+        ['mkdir -p docs/api && doxygen']
         )
 )
 
