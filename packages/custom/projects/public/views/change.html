@@ -54,7 +54,7 @@ A form for project state change.
         <div class="form-group col-md-12">
             <label for="comments" class="col-md-2 control-label">Kommentit</label>
             <div class="col-md-10">
-                <input name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Siirretty käsittelyyn" required>
+                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Siirretty käsittelyyn" required></textarea>
             </div>
         </div>
 
@@ -82,7 +82,7 @@ A form for project state change.
                 <select id="approved_by" data-ng-model="" class='form-control'>
                     <option value="option-1">Toiminnanjohtaja</option>
                     <option value="option-2">Halko</option>
-                    <option value="option-2">UM</option>
+                    <option value="option-3">UM</option>
                 </select>
             </div>
         </div>
@@ -109,30 +109,60 @@ A form for project state change.
         <div class="form-group col-md-12">
             <label for="themes" class="col-md-2">Teemat</label>
             <div class="col-md-10">
-                <input name="themes" type="text" class="form-control" data-ng-model="" id="themes" placeholder="Hankkeen teemat" required>
+                <textarea name="themes" type="text" class="form-control" data-ng-model="" id="themes" placeholder="Hankkeen teemat" required></textarea>
             </div>
         </div>
 
         <div class="form-group col-md-12">
             <label for="methods" class="col-md-2">Toimintatavat</label>
             <div class="col-md-10">
-                <input name="methods" type="text" class="form-control" data-ng-model="" id="methods" placeholder="Hankkeen toimintatavat" required>
+                <textarea name="methods" type="text" class="form-control" data-ng-model="" id="methods" placeholder="Hankkeen toimintatavat" required></textarea>
             </div>
         </div>
 
         <div class="form-group col-md-12">
             <label for="comments" class="col-md-2">Kommentit</label>
             <div class="col-md-10">
-                <input name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Kommentteja" required>
+                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Kommentteja" required></textarea>
             </div>
         </div>
 
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button mean-token="'edit-submit'" type="submit" class="btn btn-default">Tallenna</button>
+                <button type="submit" class="btn btn-default">Tallenna</button>
             </div>
         </div>
     </form>
 
+<!--    Hylätty-->
+    
+    <form name="rejectedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hylätty'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+
+        <div class="form-group col-md-12">
+                <label for="categories" class="col-md-2">Syyt</label>
+                <div class="col-md-10">
+                    <select id="approved_by" data-ng-model="" class='form-control'>
+                        <option value="option-1">Täältä</option>
+                        <option value="option-2">Lisätäään</option>
+                        <option value="option-3">Modeliin</option>
+                        <option value="option-4">Syitä</option>
+                    </select>
+                </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="comments" class="col-md-2">Kommentit</label>
+            <div class="col-md-10">
+                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Kommentit hylkäysperusteille" required></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Tallenna</button>
+            </div>
+        </div>
+    </form>
 </section>
