@@ -25,7 +25,6 @@ A form for project state change.
         <section class="proj-body">
             <p>DAC: {{project.dac}}</p>
             <p>Kirjattu: {{project.reg_date| date:'dd.MM.yyyy'}}</p>
-            <p>Haettu summa: {{project.funding.applied_curr_eur}} EUR ({{project.funding.applied_curr_local}} local)</p>
             <p ng-show="project.funding.granted_curr_eur" class="ng-hide">Myönnetty: {{project.funding.granted_curr_eur}} EUR ({{project.funding.granted_curr_local}} local)</p>
             <p ng-show="!project.funding.granted_curr_eur" class="ng-hide">Haettu: {{project.funding.applied_curr_eur}} EUR ({{project.funding.applied_curr_local}} local)</p>
             <p>Kesto: {{project.duration_months}} kk</p>
@@ -35,7 +34,7 @@ A form for project state change.
     <article class="proj-div">
         <h4 class="proj-header">Järjestö</h4>
         <section class="proj-body">
-            <p>Nimi: {{project.organisation._id}}</p>
+            <p>Nimi: {{project.organisation.name}}</p>
             <p>Edustaja: {{project.organisation.representative}}</p>
         </section>
     </article>
@@ -44,38 +43,327 @@ A form for project state change.
 
         <h3>Olet siirtämässä hanketta tilaan: <span class="change-state-title">{{global.newState}}</span> </h3>
 
-        <p>Täytä seuraavat kentät muokataksesi hankkeen tilaa. Hankkeen muiden tietojen muuttaminen on tehtävä "muokkaus" lomakkeen kautta. </p>
+        <p>Siirtääksesi hankkeen tilasta "{{project.state}}" tilaan "{{global.newState}}", täytä alle puuttuvat tiedot. Hankkeen muiden tietojen muuttaminen on tehtävä "muokkaus" lomakkeen kautta. </p>
 
     </article>
 
-    <article class="change-box">
 
-        <form name="projectForm" class="form-horizontal col-md-6" role="form" data-ng-submit="update(projectForm.$valid)" novalidate>
-            <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.title.$invalid }">
-                <label mean-token="'edit-title'" for="title" class="col-md-2 control-label">asdasdasd</label>
-                <div class="col-md-10">
-                    <input name="title" type="text" class="form-control" data-ng-model="project.title" id="title" placeholder="Title" required>
-                    <div ng-show="submitted && projectForm.title.$invalid" class="help-block">
-                        <p ng-show="projectForm.title.$error.required">Title is required</p>
-                    </div>
-                </div>
+    <!--    Käsittelyssä -->
 
-            </div>
-            <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.status.$invalid }">
-                <label mean-token="'edit-status'" for="status" class="col-md-2 control-label">Status</label>
-                <div class="col-md-10">
-                    <input name="status" type="text" class="form-control" data-ng-model="project.status" id="status" placeholder="Status" required>
-                    <div ng-show="submitted && projectForm.status.$invalid" class="help-block">
-                        <p ng-show="projectForm.status.$error.required">Status is required</p>
-                    </div>
-                </div>
 
+    <form name="inReviewForm" class="form-horizontal col-md-8" ng-show="global.newState === 'käsittelyssä'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+
+        <div class="form-group col-md-12">
+            <label for="comments" class="col-md-2 control-label">Kommentit</label>
+            <div class="col-md-10">
+                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Siirretty käsittelyyn" required></textarea>
             </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button mean-token="'edit-submit'" type="submit" class="btn btn-default">Submit</button>
-                </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Tallenna</button>
             </div>
-        </form>
-    </article>
+        </div>
+    </form>
+
+    <!--        Hyväksytty-->
+
+
+    <form name="approvedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hyväksytty'"  role="form" data-ng-submit="" novalidate>
+
+        <div class="form-group col-md-12">
+            <label for="approved_date" class="col-md-2">Päivämäärä</label>
+            <div class="col-md-10">
+                <input name="approved_date" type="text" class="form-control" data-ng-model="" id="approved_date" placeholder="Hankkeen hyväksynnän pvm" required>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="approved_by" class="col-md-2"> Hyväksyjä</label>
+            <div class="col-md-10">
+                <select id="approved_by" data-ng-model="" class='form-control'>
+                    <option value="option-1">Toiminnanjohtaja</option>
+                    <option value="option-2">Halko</option>
+                    <option value="option-3">UM</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="board_notified" class="col-md-2">Tiedoksiannnon päivämäärä</label>
+            <div class="col-md-10">
+                <input name="board_notified" type="text" class="form-control" data-ng-model="" id="board_notified" placeholder="Hallitukselle tiedoksi pvm" required>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="granted_sum_eur" class="col-md-2 control-label">Myönnetty summa</label>
+            <div class="col-md-4">
+                <input name="granted_sum_eur" type="text" class="form-control" data-ng-model="" id="granted_sum_eur" placeholder="0" required>EUR
+            </div>
+
+            <label for="granted_sum_local" class="col-md-2 control-label">Myönnetty summa</label>
+            <div class="col-md-4">
+                <input name="granted_sum_local" type="text" class="form-control" data-ng-model="" id="granted_sum_local" placeholder="0" required>local
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="themes" class="col-md-2">Teemat</label>
+            <div class="col-md-10">
+                <textarea name="themes" type="text" class="form-control" data-ng-model="" id="themes" placeholder="Hankkeen teemat" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="methods" class="col-md-2">Toimintatavat</label>
+            <div class="col-md-10">
+                <textarea name="methods" type="text" class="form-control" data-ng-model="" id="methods" placeholder="Hankkeen toimintatavat" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="comments" class="col-md-2">Kommentit</label>
+            <div class="col-md-10">
+                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Kommentteja" required></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Tallenna</button>
+            </div>
+        </div>
+    </form>
+
+
+    <!--    Hylätty-->
+
+
+    <form name="rejectedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hylätty'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+
+        <div class="form-group col-md-12">
+            <label for="categories" class="col-md-2">Syyt</label>
+            <div class="col-md-10">
+                <select id="approved_by" data-ng-model="" class='form-control'>
+                    <option value="option-1">Täältä</option>
+                    <option value="option-2">Lisätäään</option>
+                    <option value="option-3">Modeliin</option>
+                    <option value="option-4">Syitä</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="comments" class="col-md-2">Kommentit</label>
+            <div class="col-md-10">
+                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Kommentit hylkäysperusteille" required></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Tallenna</button>
+            </div>
+        </div>
+    </form>
+
+
+    <!--Allekirjoitettu-->
+
+
+    <form name="signedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'allekirjoitettu'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+
+        <div class="form-group col-md-12">
+            <label for="signed_by" class="col-md-2">Allekirjoittaja</label>
+            <div class="col-md-10">
+                <input name="signed_by" type="text" class="form-control" data-ng-model="" id="signed_by" placeholder="Sopimuksen allekirjoittajan nimi" required>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="signed_date" class="col-md-2">Päivämäärä</label>
+            <div class="col-md-10">
+                <input name="signed_date" type="text" class="form-control" data-ng-model="" id="signed_date" placeholder="Allekirjoituksen pvm" required>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Tallenna</button>
+            </div>
+        </div>
+    </form>
+
+
+    <!--    Väliraportti-->
+
+
+    <form name="intReportForm" class="form-horizontal col-md-8" ng-show="global.newState === 'väliraportti'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+
+        <div class="form-group col-md-12">
+            <label for="payments" class="col-md-2">Maksatuserittely</label>
+            <div class="col-md-10">
+                <textarea name="payments" type="text" class="form-control" data-ng-model="" id="payments" placeholder="Parsetaan kauniisti kannasta maksatuserittely ja päivämäärät. Tässä niihin voi lisätä kommentteja?" required></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-12">
+            <label for="themes" class="col-md-2">Teemat</label>
+            <div class="col-md-4">
+                <textarea name="themes" type="text" class="form-control" data-ng-model="" id="themes" placeholder="Tähän tulee jo kannassa olevat teemat" required></textarea>
+            </div>
+
+            <label for="themesComments" class="col-md-2">Toteutuneet teemat</label>
+            <div class="col-md-4">
+                <textarea name="themesComments" type="text" class="form-control" data-ng-model="" id="themesComments" placeholder="Tälle puolelle kommentteja niistä" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="methods" class="col-md-2">Toimintatavat</label>
+            <div class="col-md-4">
+                <textarea name="methods" type="text" class="form-control" data-ng-model="" id="methods" placeholder="Kannassa olevat toimintatavat" required></textarea>
+            </div>
+
+            <label for="methodsComments" class="col-md-2">Toteutuneet toimintatavat</label>
+            <div class="col-md-4">
+                <textarea name="methodsComments" type="text" class="form-control" data-ng-model="" id="methodsComments" placeholder="Kommentteja toimintatavoista" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="comments" class="col-md-2">Muut kommentit</label>
+            <div class="col-md-10">
+                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Muut raportin kommentit" required></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Tallenna</button>
+            </div>
+        </div>
+    </form>
+
+
+
+    <!--   Loppuraportti-->
+
+
+    <form name="endReportForm" class="form-horizontal col-md-8" ng-show="global.newState === 'loppuraportti'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+
+        <div class="form-group col-md-12">
+            <label for="audit_date" class="col-md-2">Tilintarkastus pvm</label>
+            <div class="col-md-4">
+                <input name="audit_date" type="text" class="form-control" data-ng-model="" id="audit_date" placeholder="Tilintarkastuksen päivämäärä" required>
+            </div>
+
+
+            <label for="audit_reviw" class="col-md-2">Arvio</label>
+            <div class="col-md-4">
+                <textarea name="audit_reviw" type="text" class="form-control" data-ng-model="" id="audit_review" placeholder="Arvio tilintarkastuksesta" required></textarea>
+            </div>
+
+        </div>
+
+
+        <div class="form-group col-md-12">
+            <label for="themes" class="col-md-2">Teemat</label>
+            <div class="col-md-4">
+                <textarea name="themes" type="text" class="form-control" data-ng-model="" id="themes" placeholder="Tähän tulee jo kannassa olevat teemat" required></textarea>
+            </div>
+
+            <label for="themesComments" class="col-md-2">Toteutuneet teemat</label>
+            <div class="col-md-4">
+                <textarea name="themesComments" type="text" class="form-control" data-ng-model="" id="themesComments" placeholder="Tälle puolelle kommentteja niistä" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="methods" class="col-md-2">Toimintatavat</label>
+            <div class="col-md-4">
+                <textarea name="methods" type="text" class="form-control" data-ng-model="" id="methods" placeholder="Kannassa olevat toimintatavat" required></textarea>
+            </div>
+
+            <label for="methodsComments" class="col-md-2">Toteutuneet toimintatavat</label>
+            <div class="col-md-4">
+                <textarea name="methodsComments" type="text" class="form-control" data-ng-model="" id="methodsComments" placeholder="Kommentteja toimintatavoista" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="payments" class="col-md-2">Maksatuserittely</label>
+            <div class="col-md-10">
+                <textarea name="payments" type="text" class="form-control" data-ng-model="" id="payments" placeholder="Parsetaan kauniisti kannasta maksatuserittely ja päivämäärät. Tässä niihin voi lisätä kommentteja?" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="comments" class="col-md-2">Muut kommentit</label>
+            <div class="col-md-10">
+                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Muut raportin kommentit" required></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Tallenna</button>
+            </div>
+        </div>
+    </form>
+
+    <!--Päättynyt-->
+
+    <form name="endedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'päättynyt'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+
+                <div class="form-group col-md-12">
+            <label for="end_date" class="col-md-2">Päivämäärä</label>
+            <div class="col-md-10">
+                <input name="end_date" type="text" class="form-control" data-ng-model="" id="end_date" placeholder="Päättymispäivämäärä" required>
+            </div>
+        </div>
+        
+                <div class="form-group col-md-12">
+            <label for="approved_by" class="col-md-2"> Hyväksyjä</label>
+            <div class="col-md-10">
+                <select id="approved_by" data-ng-model="" class='form-control'>
+                    <option value="option-1">Toiminnanjohtaja</option>
+                    <option value="option-2">Hallitus</option>
+                </select>
+            </div>
+        </div>
+        
+                <div class="form-group col-md-12">
+            <label for="board_notified" class="col-md-2">Tiedoksiannnon päivämäärä</label>
+            <div class="col-md-10">
+                <input name="board_notified" type="text" class="form-control" data-ng-model="" id="board_notified" placeholder="Hallitukselle tiedoksi pvm" required>
+            </div>
+        </div>
+        
+        <div class="form-group col-md-12">
+            <label for="comments" class="col-md-2">Muut kommentit</label>
+            <div class="col-md-10">
+                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Muut päättämiseen liittyvät kommentit" required></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Tallenna</button>
+            </div>
+        </div>
+    </form>
+
+</form>
+
+
 </section>

@@ -24,7 +24,7 @@
     </article>
 
 
-    <article ng-show="state.next.length !== 0" class="tila ng-hide" data-ng-init="findState()">
+    <article ng-show="state.next.length !== 0 && project.state !== 'hylätty' && project.state !== 'päättynyt'" class="tila ng-hide" data-ng-init="findState()">
         <form name="stateForm" class="states" data-ng-submit="changeState(project.changeTo);">
             <label for="stateSelect">Siirry tilaan: </label>
             <select id="stateSelect" data-ng-model="project.changeTo">
