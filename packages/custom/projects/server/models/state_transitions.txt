@@ -1,34 +1,36 @@
-states.insert(
+* needs to be inserted in mongodb collection "states"*
+
+db.states.insert([
   {
-    name: "registered",
-    next_states: ["in_review", "ended"]
+    current_state: "rekisteröity",
+    next_states: ["käsittelyssä", "päättynyt"]
   },
   {
-    name: "in_review",
-    next_states: ["approved", "rejected", "ended"]
+    current_state: "käsittelyssä",
+    next_states: ["hyväksytty", "hylätty", "päättynyt"]
   },
   {
-    name: "approved",
-    next_states: ["signed", "rejected", "ended"]
+    current state: "hyväksytty",
+    next_states: ["allekirjoitettu", "hylätty", "päättynyt"]
   },
   {
-    name: "rejected",
+    current_state: "hylätty",
     next_states: []
   },
   {
-    name: "signed",
-    next_states: ["intermediary_report", "end_report", "ended"]
+    current_state: "allekirjoitettu",
+    next_states: ["väliraportti", "loppuraportti", "päättynyt"]
   },
   {
-    name: "intermediary_report",
-    next_states: ["intermediary_report", "end_report", "ended"]
+    current_state: "väliraportti",
+    next_states: ["väliraportti", "loppuraportti", "päättynyt"]
   },
   {
-    name: "end_report",
-    next_states: ["ended"]
+    current_state: "loppuraportti",
+    next_states: ["päättynyt"]
   },
   {
-    name: "ended",
+    current_state: "päättynyt",
     next_states: []
   }
-)
+])
