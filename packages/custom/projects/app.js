@@ -6,7 +6,7 @@
 var Module = require('meanio').Module;
 
 var Projects = new Module('projects');
-
+var Statechanges = new Module('statechanges');
 
 
 /**
@@ -14,10 +14,11 @@ var Projects = new Module('projects');
  * Dependency injection is used to define required modules
  */
 
-Projects.register(function (app, auth, database, circles) {
 
-    //We enable routing. By default the Package Object is passed to the routes
-    Projects.routes(app, auth, database);
+Projects.register(function(app, auth, database, circles, organisations, statechanges) {
+
+  //We enable routing. By default the Package Object is passed to the routes
+  Projects.routes(app, auth, database, organisations, statechanges);
 
     Projects.aggregateAsset('css', 'projects.css');
     Projects.aggregateAsset('js', 'view.js', {global: true, absolute: false});
