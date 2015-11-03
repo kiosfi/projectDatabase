@@ -23,6 +23,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.categories = ['naiset', 'lapset', 'vammaiset', 'yleiset ihmisoikeudet', 'muu'];
 
         $scope.categorySelection = [];
+        
 
         $scope.toggleSelection = function toggleSelection(categ) {
             var idx = $scope.categorySelection.indexOf(categ);
@@ -63,6 +64,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
+                $scope.global.asd = "asd";
                 $location.path('projects/' + project._id + "/change")
             });
         }
