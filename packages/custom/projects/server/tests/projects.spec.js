@@ -334,7 +334,6 @@ describe('<Unit Test>', function () {
             it('should update a given project', function (done) {
                 this.timeout(10000);
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
-
                     proj.state = "käsittelyssä";
                     proj.save();
                     console.log(proj.state);
