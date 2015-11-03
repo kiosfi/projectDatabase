@@ -68,7 +68,7 @@ module.exports = function (Projects) {
 
             res.json(req.project);
         },
-        
+
          all: function(req, res) {
              var query = Project.find();
 
@@ -88,9 +88,11 @@ module.exports = function (Projects) {
          allStates: function(req, res) {
             var query = States.find();
             query.exec(function(err, states) {
-              return res.status(500).json({
-                  error: 'Tiloja ei voi näyttää'
-              });
+              if (err) {
+                return res.status(500).json({
+                    error: 'Tiloja ei voi näyttää'
+                });
+              }
               res.json(states)
             });
          },
@@ -127,7 +129,7 @@ module.exports = function (Projects) {
                          error: 'Hankkeen poistaminen ei onnistu.'
                      });
                  }
-                 
+
                 Projects.events.publish({
                     action: 'deleted',
                     user: {
@@ -139,11 +141,11 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-        
+
         /*
          * Finds projects by organisationId and returns list of projects in json
          */
-        byOrg: function(req, res) {            
+        byOrg: function(req, res) {
             Project.find({organisation: req.organisation})
                     .exec(function(err, projects) {
                         console.log('projects:' + projects);
@@ -151,9 +153,9 @@ module.exports = function (Projects) {
                             return res.status(500).json({
                                 error: 'Järjestön hankkeiden lataaminen ei onnistu.'
                             });
-                        }                        
+                        }
                 res.json(projects);
             });
-        }        
+        }
     };
 }
