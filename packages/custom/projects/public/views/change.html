@@ -47,7 +47,9 @@ A form for project state change.
 
     </article>
 
+
     <!--    Käsittelyssä -->
+
 
     <form name="inReviewForm" class="form-horizontal col-md-8" ng-show="global.newState === 'käsittelyssä'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
 
@@ -66,6 +68,7 @@ A form for project state change.
     </form>
 
     <!--        Hyväksytty-->
+
 
     <form name="approvedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hyväksytty'"  role="form" data-ng-submit="" novalidate>
 
@@ -135,26 +138,56 @@ A form for project state change.
         </div>
     </form>
 
-<!--    Hylätty-->
-    
+
+    <!--    Hylätty-->
+
+
     <form name="rejectedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hylätty'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
 
         <div class="form-group col-md-12">
-                <label for="categories" class="col-md-2">Syyt</label>
-                <div class="col-md-10">
-                    <select id="approved_by" data-ng-model="" class='form-control'>
-                        <option value="option-1">Täältä</option>
-                        <option value="option-2">Lisätäään</option>
-                        <option value="option-3">Modeliin</option>
-                        <option value="option-4">Syitä</option>
-                    </select>
-                </div>
+            <label for="categories" class="col-md-2">Syyt</label>
+            <div class="col-md-10">
+                <select id="approved_by" data-ng-model="" class='form-control'>
+                    <option value="option-1">Täältä</option>
+                    <option value="option-2">Lisätäään</option>
+                    <option value="option-3">Modeliin</option>
+                    <option value="option-4">Syitä</option>
+                </select>
+            </div>
         </div>
 
         <div class="form-group col-md-12">
             <label for="comments" class="col-md-2">Kommentit</label>
             <div class="col-md-10">
                 <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Kommentit hylkäysperusteille" required></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Tallenna</button>
+            </div>
+        </div>
+    </form>
+
+
+    <!--Allekirjoitettu-->
+
+
+    <form name="signedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'allekirjoitettu'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+
+        <div class="form-group col-md-12">
+            <label for="signed_by" class="col-md-2">Allekirjoittaja</label>
+            <div class="col-md-10">
+                <input name="signed_by" type="text" class="form-control" data-ng-model="" id="signed_by" placeholder="Sopimuksen allekirjoittajan nimi" required>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="signed_date" class="col-md-2">Päivämäärä</label>
+            <div class="col-md-10">
+               <input name="signed_date" type="text" class="form-control" data-ng-model="" id="signed_date" placeholder="Allekirjoituksen pvm" required>
             </div>
         </div>
 
