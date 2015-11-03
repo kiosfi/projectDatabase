@@ -1,7 +1,0 @@
-[{"current": "rekisteröity", "next": ["käsittelyssä", "päättynyt"]},
-  {"current": "käsittelyssä", "next": ["hyväksytty", "hylätty", "päättynyt"]},
-  {"current": "hyväksytty", "next": ["allekirjoitettu", "hylätty", "päättynyt"]},
-  {"current": "hylätty", "next": []}, {"current": "allekirjoitettu",
-  "next": ["väliraportti", "loppuraportti", "päättynyt"]},
-  {"current": "väliraportti", "next": ["väliraportti", "loppuraportti", "päättynyt"]},
-  {"current": "loppuraportti", "next": ["päättynyt"]}, {"current": "päättynyt", "next": []}]
