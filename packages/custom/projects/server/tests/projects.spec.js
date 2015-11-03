@@ -318,6 +318,21 @@ describe('<Unit Test>', function () {
 
         });
 
+        describe('Method Update', function () {
+
+            it('should update a given project', function (done) {
+                this.timeout(10000);
+                Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                    proj.state = "käsittelyssä";
+                    return proj.save(function(err, data) {
+                      expect(err).to.be(null);
+                      expect(data.state).to.be("käsittelyssä");
+                      done();
+                    });
+                });
+            });
+        });
+
         afterEach(function (done) {
             this.timeout(10000);
             project1.remove();
