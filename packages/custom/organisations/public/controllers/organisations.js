@@ -6,8 +6,8 @@
  * @param {type} param1
  * @param {type} param2
  */
-angular.module('mean.organisations').controller('OrganisationsController', ['$scope', '$stateParams', '$location', 'Global', 'Organisations', 'MeanUser', 'Circles', 'Projects',
-    function ($scope, $stateParams, $location, Global, Organisations, MeanUser, Circles, Projects) {
+angular.module('mean.organisations').controller('OrganisationsController', ['$scope', '$stateParams', '$location', 'Global', 'Organisations', 'MeanUser', 'Circles', 'Projects', 'OrgProjects',
+    function ($scope, $stateParams, $location, Global, Organisations, MeanUser, Circles, Projects, OrgProjects) {
         $scope.global = Global;
 
 
@@ -32,22 +32,11 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
             });
         };
 
-        $scope.findOrgProjects = function () {
-//            OrgProjects.get({
-//                organisation: $stateParams.organisationId
-//            }, function (projects) {
-//                console.log(projects);
-//                $scope.orgProjects = projects;
-//            });
-            Projects.query({organisation: $stateParams.organisationId}, function (projects) {
-                $scope.orgProjects = [];
-                projects.forEach(function (project) {
-                    if (project.organisation._id == $stateParams.organisationId) {
-                        $scope.orgProjects.push(project);
-                    }
-                })
-            });
-        };
 
+        $scope.findOrgProjects = function () {
+            OrgProjects.findProjects($stateParams.organisationId).success(function (projects) {
+                $scope.orgProjects = projects;
+            })
+        };
     }
 ]);

@@ -131,20 +131,22 @@ module.exports = function (Projects) {
 
                 res.json(project);
             });
-        }
+        },
         
-//        byOrganisation: function (req, res) {
-//            Project.find({organisation: req.body.organisation._id})
-//                    .sort({project_ref: 'asc'})
-//                    .populate({path: 'organisation', model: 'Organisation'})
-//                    .exec(function (err, projects) {
-//                        if (err) {
-//                            return res.status(500).json({
-//                                error: 'Hankkeen listaaminen ei onnistu.'
-//                            });
-//                        }
-//                        res.json(projects);
-//                    });
-//        }
+        /*
+         * Finds projects by organisationId
+         */
+        byOrg: function(req, res) {            
+            Project.find({organisation: req.organisation})
+                    .exec(function(err, projects) {
+                        console.log('projects:' + projects);
+                        if(err) {
+                            return res.status(500).json({
+                                error: 'Järjestön hankkeiden lataaminen ei onnistu.'
+                            });
+                        }                        
+                res.json(projects);
+            });
+        }        
     };
 }
