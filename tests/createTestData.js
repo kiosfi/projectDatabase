@@ -37,6 +37,7 @@ db.organisations.insert(
 );
 
 db.projects.insert({"_id": ObjectId("56091cbc00fccd6d66bc5cc3"),
+    "project_ref": "70001",
     "title": "Human rights",
     "coordinator": "Keijo Koordinaattori",
     "organisation": ObjectId("56091a0525f75ebc0c486338"),
@@ -52,6 +53,7 @@ db.projects.insert({"_id": ObjectId("56091cbc00fccd6d66bc5cc3"),
 );
 
 db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a41b"),
+    "project_ref": "70002",
     "title": "Minority rights",
     "coordinator": "Maija Meikäläinen",
     "organisation": ObjectId("56091a0525f75ebc0c486338"),
@@ -67,7 +69,8 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a41b"),
 );
 
 db.projects.insert({"_id": ObjectId("f2e7c9aeb017189911996768"),
-    "title": "Project nr 3",
+    "project_ref": "70003",
+    "title": "projects nr 3",
     "coordinator": "John Doe",
     "organisation": ObjectId("8344235a153b2cf192bf74b2"),
     "status": "intermediary_report",
