@@ -317,6 +317,17 @@ describe('<Unit Test>', function () {
             });
 
         });
+        
+        describe('Method byOrg', function() {
+            it('should get projects where given organisation is the organisation', function(done) {
+                this.timeout(10000);
+                return Project.find({organisation: organisation}).exec(function(err, data) {
+                    expect(err).to.be(null);
+                    expect(data.length).to.be(2);
+                    done();
+                });
+            });
+        });
 
         afterEach(function (done) {
             this.timeout(10000);
