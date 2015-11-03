@@ -36,13 +36,14 @@
         </article>
         
         <article data-ng-init="findOrgProjects()">
-            <h4 class="org-header">Aikaisemmin KIOS:lta haetut rahoitukset</h4>
+            <h4 class="org-header">KIOS:lta rahoitusta hakeneet hankkeet</h4>
+            
             <section>
                 <ul>
                     <li data-ng-repeat="project in orgProjects">
-                        <!--{{project.title}}-->
                         <a data-ng-href="/projects/{{project._id}}">{{project.title}}</a>
                     </li>
+                    <li data-ng-if="!orgProjects.length">Ei rahoitusta hakeneita hankkeita</li>
                 </ul>
             </section>
         </article>
