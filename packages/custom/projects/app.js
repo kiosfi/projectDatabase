@@ -14,32 +14,32 @@ var Projects = new Module('projects');
  * Dependency injection is used to define required modules
  */
 
-Projects.register(function(app, auth, database, circles) {
+Projects.register(function (app, auth, database, circles) {
 
-  //We enable routing. By default the Package Object is passed to the routes
-  Projects.routes(app, auth, database);
+    //We enable routing. By default the Package Object is passed to the routes
+    Projects.routes(app, auth, database);
 
-  Projects.aggregateAsset('css', 'projects.css');
-  Projects.aggregateAsset('js', 'view.js', {global:true,  absolute: false});
+    Projects.aggregateAsset('css', 'projects.css');
+    Projects.aggregateAsset('js', 'view.js', {global: true, absolute: false});
 
 
-  //We are adding a link to the main menu for all authenticated users
-  Projects.menus.add({
-    'roles': ['authenticated'],
-    'title': 'Hankelistaus',
-    'link': 'all projects'
-  });
+    //We are adding a link to the main menu for all authenticated users
+    Projects.menus.add({
+        'roles': ['authenticated'],
+        'title': 'Hankelistaus',
+        'link': 'all projects'
+    });
 
-  Projects.menus.add({
-    'roles': ['authenticated'],
-    'title': 'Hankkeen lisäys',
-    'link': 'create project'
-  });
+    Projects.menus.add({
+        'roles': ['authenticated'],
+        'title': 'Hankkeen lisäys',
+        'link': 'create project'
+    });
 
-  Projects.events.defaultData({
-    type: 'post',
-    subtype: 'project'
-  });
+    Projects.events.defaultData({
+        type: 'post',
+        subtype: 'project'
+    });
 
-  return Projects;
+    return Projects;
 });
