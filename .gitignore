@@ -18,3 +18,4 @@ bower_components/
 
 docs/api/
 **/doxygen_sqlite3.db
+tests/config/e2e/tests/results/*
