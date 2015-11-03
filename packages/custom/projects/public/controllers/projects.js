@@ -8,8 +8,8 @@
  */
 
 angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams',
-'$location', '$window', '$http', 'Global', 'Projects', 'MeanUser', 'Circles',
-  function($scope, $stateParams, $location, $window, $http, Global, Projects, MeanUser, Circles) {
+'$location', '$window', '$http', 'Global', 'Projects', 'Statechanges', 'MeanUser', 'Circles',
+  function($scope, $stateParams, $location, $window, $http, Global, Projects, Statechanges, MeanUser, Circles) {
     $scope.global = Global;
 
     $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
@@ -66,20 +66,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     };
 
     $scope.findState = function() {
-      Projects.get({
-        projectId: $stateParams.projectId
-      }, function(project) {
-          $scope.project = project;
-          $http.get('projects/assets/js/states.json').then(function(res) {
-            $scope.states = res.data;
-            for (var i = 0; i < $scope.states.length; i++) {
-              if ($scope.states[i].current === $scope.project.state) {
-                $scope.state = $scope.states[i];
+      Projects.get({projectId: $stateParams.projectId}, function(project) {
+         $http.get('/api/states').success(function(data) {
+            data.forEach(function(state) {
+              if (state.current_state == project.state) {
+                $scope.state = state;
               }
-            }
-          });
+            });
         });
-      };
+      });
+    };
 
     $scope.confirm = function (project) {
         if (confirm("Haluatko varmasti poistaa hankkeen '" + project.title + "'?")) {
