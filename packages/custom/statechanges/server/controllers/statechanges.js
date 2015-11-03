@@ -32,6 +32,17 @@ module.exports = function(Statechanges) {
                  res.json(states)
              });
 
+         },
+
+         show: function(req, res) {
+
+             Statechanges.events.publish({
+                 action: 'viewed',
+                 name: req.state.current_state,
+                 url: config.hostname + '/states/' + req.state.current_state
+             });
+
+             res.json(req.state);
          }
     };
 }

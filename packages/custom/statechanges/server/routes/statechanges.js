@@ -8,6 +8,8 @@ module.exports = function(Statechanges, app, auth, database) {
 
     app.route('/api/states')
       .get(statechanges.all);
+    app.route('/api/states/:current_state')
+      .get(auth.isMongoId, statechanges.show);
 
-    app.param('current_state', statechanges.state);      
+    app.param('current_state', statechanges.state);
 };
