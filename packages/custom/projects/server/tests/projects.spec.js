@@ -317,7 +317,7 @@ describe('<Unit Test>', function () {
             });
 
         });
-        
+
         describe('Method byOrg', function() {
             it('should get projects where given organisation is the organisation', function(done) {
                 this.timeout(10000);
@@ -333,13 +333,14 @@ describe('<Unit Test>', function () {
 
             it('should update a given project', function (done) {
                 this.timeout(10000);
-                Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+
                     proj.state = "käsittelyssä";
-                    return proj.save(function(err, data) {
-                      expect(err).to.be(null);
-                      expect(data.state).to.be("käsittelyssä");
-                      done();
-                    });
+                    proj.save();
+                    console.log(proj.state);
+                    expect(err).to.be(null);
+                    expect(proj.state).to.be("käsittelyssä");
+                    done();
                 });
             });
         });
