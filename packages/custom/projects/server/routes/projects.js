@@ -29,9 +29,11 @@ module.exports = function(Projects, app, auth) {
   app.route('/api/projects')
     .get(projects.all)
     .post(auth.requiresLogin, hasPermissions, projects.create);
+  app.route('/api/states')
+    .get(projects.allStates);
   app.route('/api/projects/:projectId')
     .get(auth.isMongoId, projects.show)
-    .put(auth.isMongoId, auth.requiresLogin, hasAuthorization, projects.update)    
+    .put(auth.isMongoId, auth.requiresLogin, hasAuthorization, projects.update)
     .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, projects.destroy);
 
   app.param('projectId', projects.project);

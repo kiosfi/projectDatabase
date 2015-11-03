@@ -23,11 +23,11 @@
         </button>
     </article>
 
-    <article ng-show="state.next.length !== 0" class="tila ng-hide" data-ng-init="findState()">
+    <article ng-show="state.next_states.length !== 0" class="tila ng-hide" data-ng-init="findState()">
       <form name="stateForm" class="states" data-ng-submit="updateState(stateForm)">
         <label for="stateSelect">Päivitä tila: </label>
         <select id="stateSelect" data-ng-model="project.state">
-          <option data-ng-repeat="next_state in state.next" value="{{next_state}}">{{next_state}}</option>
+          <option data-ng-repeat="next_state in state.next_states" value="{{next_state}}">{{next_state}}</option>
         </select>
         <button type="submit" class="btn-xs">
             <span class="glyphicon glyphicon-arrow-right"></span>
