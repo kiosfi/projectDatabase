@@ -67,6 +67,16 @@ hr {
     width: 100%;
 }
 
+.change-box {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 3%;
+}
+
+.change-state-title {
+    font-weight: bold;
+}
+
 .btn {
 
     height: 30px;

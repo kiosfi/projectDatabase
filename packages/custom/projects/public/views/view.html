@@ -24,7 +24,7 @@
     </article>
 
     <article ng-show="state.next.length !== 0" class="tila ng-hide" data-ng-init="findState()">
-        <form name="stateForm" class="states" data-ng-submit="change();">
+        <form name="stateForm" class="states" data-ng-submit="changeState(project.changeTo);">
             <label for="stateSelect">Siirry tilaan: </label>
             <select id="stateSelect" data-ng-model="project.changeTo">
                 <option data-ng-repeat="next_state in state.next" value="{{next_state}}">{{next_state}}</option>
@@ -71,7 +71,7 @@
             </section>
         </article>
 
-        <article class="proj-left">
+        <article class="proj-div">
             <h4 class="proj-header">Aikataulu</h4>
             <section class="proj-body">
                 <p>1.12.2015 Loppuraportti ODOTTAA</p>

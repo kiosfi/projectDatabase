@@ -59,12 +59,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
-        $scope.change = function () {
+        $scope.changeState = function (changeTo) {
             Projects.get({
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
-                $scope.global.asd = "asd";
+                $scope.global.newState = changeTo;
                 $location.path('projects/' + project._id + "/change")
             });
         }
