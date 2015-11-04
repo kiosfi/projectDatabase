@@ -351,7 +351,6 @@ describe('<Unit Test>', function () {
                     in_review.save();
                     proj.state = "käsittelyssä";
                     proj.in_review = in_review;
-                    console.log(proj);
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("käsittelyssä");
