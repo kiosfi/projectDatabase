@@ -76,17 +76,6 @@
             </section>
         </article>
 
-        <article class="proj-div">
-            <h4 class="proj-header">Aikataulu</h4>
-            <section class="proj-body">
-                <p>1.12.2015 Loppuraportti ODOTTAA</p>
-                <br>
-                <p class="proj-sub-title">Menneet</p>
-                <p>1.1.2015 1. Väliraportti</p>
-                <p>1.6.2015 2. Väliraportti</p>
-            </section>
-        </article>
-
     </article>
 
     <article class="proj-box-right">
@@ -197,6 +186,24 @@
 
     </article>
 
+    <hr>
+    <article>
+        <h4 class="proj-header">Aikataulu</h4>
+            <section class="proj-body">
+                <b>Siirtynyt käsittelyyn</b>: {{project.in_review.date | date:'dd.MM.yyyy'}}
+                <button class="btn" onclick="toggleCollapse('visibilityReviewinfo')">Tiedot</button>
+                <span id="visibilityReviewinfo">
+                    <p><i>Muokkaaja</i>: muokkaajan nimi, {{project.in_review.date | date:'dd.MM.yyyy'}}</p>
+                    <br>
+                    <i>Kommentit: </i><br><br>
+                    <p>{{project.in_review.comments}}</p>
+                </span>
+                <br>
+                <p class="proj-sub-title">Menneet</p>
+                <p>1.1.2015 1. Väliraportti</p>
+                <p>1.6.2015 2. Väliraportti</p>
+              </section>
+      </article>
 
 
 

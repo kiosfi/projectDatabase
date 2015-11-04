@@ -167,7 +167,7 @@ ProjectSchema.path('coordinator').validate(function (coordinator) {
 ProjectSchema.statics.load = function (id, cb) {
     this.findOne({
         _id: id
-    }).populate({path: 'organisation', model: 'Organisation'})
+    }).populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'}])
     .exec(cb);
 };
 
