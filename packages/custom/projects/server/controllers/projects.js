@@ -8,12 +8,14 @@ var mongoose = require('mongoose'),
     Organisation = mongoose.model('Organisation'),
     BankAccount = mongoose.model('BankAccount'),
     States = mongoose.model('States'),
+    InReview = mongoose.model('InReview'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
 module.exports = function (Projects) {
 
     return {
+
         project: function (req, res, next, id) {
             Project.load(id, function (err, project) {
                 if (err)
@@ -24,6 +26,7 @@ module.exports = function (Projects) {
                 next();
             });
         },
+
         create: function (req, res) {
 
             var project = new Project(req.body);
@@ -58,6 +61,7 @@ module.exports = function (Projects) {
                 });
             });
         },
+
         show: function (req, res) {
 
             Projects.events.publish({
@@ -99,8 +103,19 @@ module.exports = function (Projects) {
 
          update: function(req, res) {
              var project = req.project;
+             var in_review = new InReview(req.body.in_review);
+             in_review.user = req.user._id;
+             project.in_review = in_review._id;
+             project.state = req.body.state;
 
-            project = _.extend(project, req.body);
+             in_review.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                      error: 'Tilatietojen tallennus epäonnistui'
+                    });
+                }
+             });
+
 
             project.save(function (err) {
                 if (err) {
@@ -119,6 +134,7 @@ module.exports = function (Projects) {
             });
 
         },
+        
         destroy: function (req, res) {
             var project = req.project;
 
@@ -148,7 +164,6 @@ module.exports = function (Projects) {
         byOrg: function(req, res) {
             Project.find({organisation: req.organisation})
                     .exec(function(err, projects) {
-                        console.log('projects:' + projects);
                         if(err) {
                             return res.status(500).json({
                                 error: 'Järjestön hankkeiden lataaminen ei onnistu.'
@@ -157,5 +172,7 @@ module.exports = function (Projects) {
                 res.json(projects);
             });
         }
+
+
     };
 }

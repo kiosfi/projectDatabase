@@ -103,10 +103,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
-        $scope.updateState = function () {
+        $scope.addReviewState = function () {
             var project = $scope.project;
+            project.state = $scope.global.newState;
             project.$update(function (response) {
-                $window.location.reload();
+                $location.path('projects/' + project._id)
             });
         };
 
