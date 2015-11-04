@@ -9,7 +9,9 @@ var expect = require('expect.js'),
         mongoose = require('mongoose'),
         Project = mongoose.model('Project'),
         Organisation = mongoose.model('Organisation'),
-        BankAccount = mongoose.model('BankAccount');
+        BankAccount = mongoose.model('BankAccount'),
+        User = mongoose.model('User'),
+        InReview = mongoose.model('InReview');
 
 var project1;
 var project2;
@@ -21,12 +23,20 @@ var organisation4;
 var bank_account;
 var bank_account3;
 var bank_account4;
+var user;
+var in_review;
 
 describe('<Unit Test>', function () {
     describe('Model Project:', function () {
         beforeEach(function (done) {
             this.timeout(10000);
 
+            user = new User({
+                name: 'Full name',
+                email: 'test@test.com',
+                username: 'user',
+                password: 'password'});
+            user.save();
             bank_account = new BankAccount({
                 "bank_contact_details": "Branch, address",
                 "iban": "abcdefg1234",
@@ -331,14 +341,21 @@ describe('<Unit Test>', function () {
 
         describe('Method Update', function () {
 
-            it('should update a given project', function (done) {
+            it('should create a new "in review" state update given project with its id', function (done) {
                 this.timeout(10000);
+                in_review = new InReview({
+                    "user": user,
+                    "comments": "this is a comment"});
+
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                    in_review.save();
                     proj.state = "käsittelyssä";
+                    proj.in_review = in_review;
+                    console.log(proj);
                     proj.save();
-                    console.log(proj.state);
                     expect(err).to.be(null);
                     expect(proj.state).to.be("käsittelyssä");
+                    expect(proj.in_review.comments).to.be("this is a comment");
                     done();
                 });
             });
