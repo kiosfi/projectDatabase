@@ -188,7 +188,7 @@ var EndedSchema = new Schema({
 });
 
 module.exports = mongoose.model('States', StatesSchema);
-mongoose.model('InReview', InReviewSchema);
+module.exports = mongoose.model('InReview', InReviewSchema);
 mongoose.model('Approved', ApprovedSchema);
 mongoose.model('Rejected', RejectedSchema);
 mongoose.model('Signed', SignedSchema);

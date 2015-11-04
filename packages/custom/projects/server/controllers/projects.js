@@ -22,6 +22,7 @@ module.exports = function (Projects) {
                     return next(err);
                 if (!project)
                     return next(new Error('Hankkeen ' + id + ' lataus epäonnistui.'));
+
                 req.project = project;
                 next();
             });
@@ -73,11 +74,16 @@ module.exports = function (Projects) {
             res.json(req.project);
         },
 
+        showReview: function (req, res) {
+
+            res.json(req.in_review);
+        },
+
          all: function(req, res) {
              var query = Project.find();
 
-             query.sort({project_ref: 'asc'})
-             .populate({path: 'organisation', model: 'Organisation'})
+             query
+             .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'}])
              .exec(function(err, projects) {
                  if (err) {
                      return res.status(500).json({
@@ -134,7 +140,7 @@ module.exports = function (Projects) {
             });
 
         },
-        
+
         destroy: function (req, res) {
             var project = req.project;
 
