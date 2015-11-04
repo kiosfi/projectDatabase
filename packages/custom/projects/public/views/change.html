@@ -1,6 +1,6 @@
 
 <!--
-A form for project state change. 
+A form for project state change.
 -->
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
 
@@ -51,12 +51,12 @@ A form for project state change.
     <!--    Käsittelyssä -->
 
 
-    <form name="inReviewForm" class="form-horizontal col-md-8" ng-show="global.newState === 'käsittelyssä'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+    <form name="inReviewForm" class="form-horizontal col-md-8" ng-show="global.newState === 'käsittelyssä'"  role="form" data-ng-submit="addReviewState(inReviewForm.$valid)" novalidate>
 
         <div class="form-group col-md-12">
             <label for="comments" class="col-md-2 control-label">Kommentit</label>
             <div class="col-md-10">
-                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Siirretty käsittelyyn" required></textarea>
+                <textarea name="comments" type="text" class="form-control" data-ng-model="project.in_review.comments" id="comments" placeholder="Siirretty käsittelyyn" required></textarea>
             </div>
         </div>
 
@@ -330,7 +330,7 @@ A form for project state change.
                 <input name="end_date" type="text" class="form-control" data-ng-model="" id="end_date" placeholder="Päättymispäivämäärä" required>
             </div>
         </div>
-        
+
                 <div class="form-group col-md-12">
             <label for="approved_by" class="col-md-2"> Hyväksyjä</label>
             <div class="col-md-10">
@@ -340,14 +340,14 @@ A form for project state change.
                 </select>
             </div>
         </div>
-        
+
                 <div class="form-group col-md-12">
             <label for="board_notified" class="col-md-2">Tiedoksiannnon päivämäärä</label>
             <div class="col-md-10">
                 <input name="board_notified" type="text" class="form-control" data-ng-model="" id="board_notified" placeholder="Hallitukselle tiedoksi pvm" required>
             </div>
         </div>
-        
+
         <div class="form-group col-md-12">
             <label for="comments" class="col-md-2">Muut kommentit</label>
             <div class="col-md-10">
