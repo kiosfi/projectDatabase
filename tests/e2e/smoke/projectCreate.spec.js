@@ -26,7 +26,10 @@ describe('Project create page', function () {
         //element(by.model('project.coordinator')).sendKeys('Tets coordinator');
         element(by.model('project.organisation.name')).sendKeys('Test organisation');
         element(by.model('project.organisation.representative')).sendKeys('Test prep');
-        element(by.model('project.organisation.address')).sendKeys('Test org address 123');
+        element(by.model('project.organisation.address.street')).sendKeys('Test org address 123');
+        element(by.model('project.organisation.address.postal_code')).sendKeys('90100');
+        element(by.model('project.organisation.address.city')).sendKeys('Ankkalinna');
+        element(by.model('project.organisation.address.country')).sendKeys('Suomi');
         element(by.model('project.organisation.tel')).sendKeys('+123456789');
         element(by.model('project.organisation.email')).sendKeys('org@test.com');
         element(by.model('project.organisation.website')).sendKeys('www.testorg.com');
@@ -43,10 +46,13 @@ describe('Project create page', function () {
         element(by.model('project.sustainability_risks')).sendKeys('Test projects risks are...');
         element(by.model('project.reporting_evaluation')).sendKeys('Test project reports....');
         element(by.model('project.other_donors_proposed')).sendKeys('Other donors');
+        element(by.model('project.region')).sendKeys('Asia');
         element(by.model('project.dac')).sendKeys('12345677');
+        element(by.model('project.organisation.exec_manager')).sendKeys('Matti Manageri');
         element(by.model('project.organisation.legal_status')).sendKeys('Orgs legal status is...');
         element(by.model('project.organisation.history_status')).sendKeys('Orgs history...');
         element(by.model('project.organisation.int_links')).sendKeys('Test international links');
+        element(by.model('project.organisation.nat_links')).sendKeys('Test national links');
         element(by.model('project.organisation.bank_account.bank_contact_details')).sendKeys('Test bank details');
         element(by.model('project.organisation.bank_account.iban')).sendKeys('FI12345678');
         element(by.model('project.organisation.bank_account.swift')).sendKeys('iffifihh');
@@ -54,12 +60,14 @@ describe('Project create page', function () {
 
         element(by.buttonText("Lähetä")).click();
 
-        var header = element(by.css('section')).element(by.tagName('h2'));
+        var header = element(by.css('section')).element(by.id('projtitle'));
         expect(header.getText()).toContain('Test title');
 
-        element(by.linkText("Hankelistaus")).click();
         var buttons = $$('i.glyphicon-trash');
         buttons.last().click();
+
+        var alertDialog = browser.switchTo().alert();
+        alertDialog.accept();
 
         helpers.logout();
 
