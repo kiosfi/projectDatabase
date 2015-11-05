@@ -5,7 +5,7 @@ describe('Project view page', function () {
     it('should stay project view page if logged in ', function () {
         helpers.login();
         element.all(by.repeater('project in projects')).
-                get(0).$('a').click();
+                get(0).element(by.id('projname')).click(); 
         expect(browser.getCurrentUrl()).toContain('56091cbc00fccd6d66bc5cc3');
         helpers.logout();
     });
