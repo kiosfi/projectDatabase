@@ -6,12 +6,13 @@ describe('Project list page', function() {
         browser.get('/');
         expect(element.all(by.repeater('project in projects')).count()).toEqual(3);
 
-        // TODO: Fix existence testing.
-//        expect(element(by.id('proj-70001'))).toEqual(jasmine.anything());
-//        expect(element(by.id('proj-70002'))).toEqual(jasmine.anything());
-//        expect(element(by.id('proj-70003'))).toEqual(jasmine.anything());
-//        expect(element(by.id('proj-70004'))).not.toEqual(jasmine.anything());
-    })
+        expect(element(by.id('proj-70001')).isPresent()).toBe(true);
+        expect(element(by.id('proj-70002')).isPresent()).toBe(true);
+        expect(element(by.id('proj-70003')).isPresent()).toBe(true);
+        expect(element(by.id('proj-70004')).isPresent()).toBe(false);
+    }),
 
-    // TODO: Implement tests for sorting functionality.
+    xit('should list registered projects in correct order', function() {
+
+    })
 })
