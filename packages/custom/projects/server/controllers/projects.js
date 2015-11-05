@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
     BankAccount = mongoose.model('BankAccount'),
     States = mongoose.model('States'),
     InReview = mongoose.model('InReview'),
+    User = mongoose.model('InReview'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
@@ -24,8 +25,26 @@ module.exports = function (Projects) {
                     return next(new Error('Hankkeen ' + id + ' lataus epäonnistui.'));
 
                 req.project = project;
+
                 next();
             });
+        },
+
+        in_review: function (req, res, next, id) {
+            InReview.load(id, function (err, inrev) {
+                if (err)
+                    return next(err);
+                if (!inrev)
+                    return next(new Error('Tilan ' + id + ' lataus epäonnistui.'));
+
+                req.in_review = inrev;
+
+                next();
+            });
+        },
+
+        showReview: function (req, res) {
+          res.json(req.in_review);
         },
 
         create: function (req, res) {
