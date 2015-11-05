@@ -25,11 +25,10 @@ db.organisations.insert(
                 "postal_code": "00780",
                 "city": "Samppalinna",
                 "country": "Suomi"
-              }
-            },
+              },
             "tel": "123445",
             "email": "email@org.com",
-            "website": "www.org.com"
+            "website": "www.org.com",
             "legal_status": "hyväntekeväisyysjärjestö",
             "history_status": "järjestön historiaa...",
             "int_links": "link 1, link 2",
@@ -47,8 +46,7 @@ db.organisations.insert(
                 "postal_code": "01780",
                 "city": "Vantaa",
                 "country": "Suomi"
-              }
-            },
+              },
             "tel": "555 1234 567",
             "email": "email@wr.org",
             "website": "www.wr.org",
@@ -69,8 +67,7 @@ db.organisations.insert(
                 "postal_code": "01280",
                 "city": "Ankkalinna",
                 "country": "Suomi"
-              }
-            },
+              },
             "tel": "555 9876 543",
             "email": "test@test.com",
             "website": "www.test.com",
