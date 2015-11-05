@@ -47,9 +47,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="project in projects| orderBy:predicate:reverse">
+                <tr ng-repeat="project in projects| orderBy:predicate:reverse"
+                    id="proj-{{project.project_ref}}">
                     <td>{{project.project_ref}}</td>
-                    <td id="projname"><a ng-href="/projects/{{project._id}}">{{project.title}}</a></td>
+                    <td><a ng-href="/projects/{{project._id}}">{{project.title}}</a></td>
                     <td>{{project.state}}</td>
                     <td>{{project.organisation.name}}</td>
                 </tr>

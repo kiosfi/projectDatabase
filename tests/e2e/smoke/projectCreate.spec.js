@@ -60,7 +60,7 @@ describe('Project create page', function () {
 
         element(by.buttonText("Lähetä")).click();
 
-        var header = element(by.css('section')).element(by.id('projtitle'));
+        var header = element(by.id('projtitle'));
         expect(header.getText()).toContain('Test title');
 
         var buttons = $$('i.glyphicon-trash');
