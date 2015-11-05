@@ -106,7 +106,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addReviewState = function () {
             var project = $scope.project;
             project.state = $scope.global.newState;
-            project.$update(function (response) {
+            project.$addReview(function (response) {
                 $location.path('projects/' + project._id)
             });
         };
@@ -121,6 +121,32 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.global.newState = changeTo;
                 $location.path('projects/' + project._id + "/change")
             });
+        };
+
+        /**
+         * The sorting predicate used in project listing. Initial value is
+         * "project_ref".
+         */
+        $scope.predicate = "project_ref";
+
+        /**
+         * <tt>true</tt> iff the projects will be listed in reverse order.
+         */
+        $scope.reverse = false;
+
+        /**
+         * Changes the ordering to match the given predicate. If the new
+         * predicate is the same as the previous value, the order will be
+         * reversed.
+         *
+         * @param {string} predicate Ordering predicate, i.e. name of the
+         * attribute used for ordering the list (e.g. "project_ref").
+         * @returns {undefined}
+         */
+        $scope.order = function (predicate) {
+            $scope.reverse = ($scope.predicate === predicate)
+            ? !$scope.reverse : false;
+            $scope.predicate = predicate;
         };
 
     }
