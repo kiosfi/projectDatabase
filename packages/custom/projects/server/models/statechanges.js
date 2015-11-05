@@ -39,6 +39,13 @@ InReviewSchema.statics.load = function (id, cb) {
     }).populate('user', 'name').exec(cb);
 };
 
+InReviewSchema.statics.load = function (id, cb) {
+    this.findOne({
+        _id: id
+    }).populate('user', 'name')
+    .exec(cb);
+};
+
 var ApprovedSchema = new Schema({
   date: {
     type: Date,
