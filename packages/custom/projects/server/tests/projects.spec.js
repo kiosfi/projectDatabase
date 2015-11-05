@@ -325,6 +325,23 @@ describe('<Unit Test>', function () {
                     done();
                 });
             });
+            
+            it('should be able to save project where data has scandic letters', function(done) {
+                this.timeout(10000);
+
+                project3.title = 'Ääkkönen';
+                project3.organisation.name = 'Åke Björn';
+                return project3.save(function (err, data) {
+                    expect(err).to.be(null);
+                    expect(data.title).to.equal('Ääkkönen');
+                    expect(data.organisation.name).to.equal('Åke Björn');
+
+                    project3.remove();
+                    organisation3.remove();
+                    bank_account3.remove();
+                    done();
+                });
+            });
 
         });
 
