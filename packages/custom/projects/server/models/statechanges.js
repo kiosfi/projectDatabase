@@ -71,12 +71,10 @@ var ApprovedSchema = new Schema({
     }
   },
   themes: {
-    type: String,
-    required: true
+    type: Array
   },
   methods: {
-    type: String,
-    required: true
+    type: Array
   }
 });
 

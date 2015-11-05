@@ -15,19 +15,38 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
 
         $scope.categories = ['naiset', 'lapset', 'vammaiset', 'yleiset ihmisoikeudet', 'muu'];
+        
+        $scope.themes = ['naiset', 'lapset', 'vammaiset', 'yleiset ihmisoikeudet', 'muu'];
+        
+        $scope.methods = ['toiminta1', 'toiminta2', 'toiminta3', 'toiminta4', 'toiminta4', 'toiminta5'];
 
-        $scope.categorySelection = [];
+        $scope.themeSelection = [];
+        
+        $scope.methodSelection = [];
 
-        $scope.toggleSelection = function toggleSelection(categ) {
-            var idx = $scope.categorySelection.indexOf(categ);
+        $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
+            var idx = $scope.themeSelection.indexOf(theme);
 
             // is currently selected
             if (idx > -1) {
-                $scope.categorySelection.splice(idx, 1);
+                $scope.themeSelection.splice(idx, 1);
             }
             // is newly selected
             else {
-                $scope.categorySelection.push(categ);
+                $scope.themeSelection.push(theme);
+            }
+        };
+        
+        $scope.toggleMethodSelection = function toggleMethodSelection(method) {
+            var idx = $scope.methodSelection.indexOf(method);
+
+            // is currently selected
+            if (idx > -1) {
+                $scope.methodSelection.splice(idx, 1);
+            }
+            // is newly selected
+            else {
+                $scope.methodSelection.push(method);
             }
         };
 
@@ -120,6 +139,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.project = project;
                 $scope.global.newState = changeTo;
                 $location.path('projects/' + project._id + "/change")
+            });
+        };
+        
+        $scope.addApprovedState = function () {
+            var project = $scope.project;
+            console.log(project);
+            project.state = $scope.global.newState;
+            project.$addApproved(function (response) {
+                $location.path('projects/' + project._id)
             });
         };
 
