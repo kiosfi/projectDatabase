@@ -12,6 +12,9 @@ angular.module('mean.projects').factory('Projects', ['$resource',
     }, {
       addReview: {
         method: 'PUT'
+      },
+      addApproved: {
+        method: 'PUT'
       }
     });
   }

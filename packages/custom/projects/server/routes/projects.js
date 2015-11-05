@@ -33,8 +33,7 @@ module.exports = function (Projects, app, auth) {
             .get(projects.allStates);
     app.route('/api/projects/:projectId')
             .get(auth.isMongoId, auth.requiresLogin, projects.show)
-            .get(auth.isMongoId, auth.requiresLogin, projects.showReview)
-            .put(auth.isMongoId, auth.requiresLogin, projects.addReview)
+            .put(auth.isMongoId, auth.requiresLogin, projects.addReview, projects.addApproved)
             .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, projects.destroy);
     app.route('/api/projects/byOrg/:organisationId')
             .get(projects.byOrg);

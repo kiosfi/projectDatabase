@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
     BankAccount = mongoose.model('BankAccount'),
     States = mongoose.model('States'),
     InReview = mongoose.model('InReview'),
-    User = mongoose.model('InReview'),
+    Approved = mongoose.model('Approved'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
@@ -28,23 +28,6 @@ module.exports = function (Projects) {
 
                 next();
             });
-        },
-
-        in_review: function (req, res, next, id) {
-            InReview.load(id, function (err, inrev) {
-                if (err)
-                    return next(err);
-                if (!inrev)
-                    return next(new Error('Tilan ' + id + ' lataus epäonnistui.'));
-
-                req.in_review = inrev;
-
-                next();
-            });
-        },
-
-        showReview: function (req, res) {
-          res.json(req.in_review);
         },
 
         create: function (req, res) {
@@ -152,6 +135,38 @@ module.exports = function (Projects) {
                 res.json(project);
             });
 
+        },
+
+        addApproved: function (req, res) {
+              var project = req.project;
+              console.log(req.body);
+              var approved = new Approved(req.body.approved);
+              approved.user = req.user;
+              project.approved = approved._id;
+              project.state = req.body.state;
+
+              approved.save(function (err) {
+                  if (err) {
+                      return res.status(500).json({
+                          error: 'Tilatietojen tallennus epäonnistui.'
+                      });
+                    }
+              });
+
+              project.save(function (err) {
+                  if (err) {
+                     return res.status(500).json({
+                          error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'
+                        });
+                      }
+
+                  Projects.events.publish({
+                      action: 'updated',
+                      name: project.title,
+                      url: config.hostname + '/projects/' + project._id
+                  });
+                  res.json(project);
+            });
         },
 
         destroy: function (req, res) {

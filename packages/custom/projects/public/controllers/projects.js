@@ -18,6 +18,36 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.categorySelection = [];
 
+        $scope.themeSelection = [];
+
+        $scope.methodSelection = [];
+
+        $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
+            var idx = $scope.themeSelection.indexOf(theme);
+
+            // is currently selected
+            if (idx > -1) {
+                $scope.themeSelection.splice(idx, 1);
+            }
+            // is newly selected
+            else {
+                $scope.themeSelection.push(theme);
+            }
+        };
+
+        $scope.toggleMethodSelection = function toggleMethodSelection(method) {
+            var idx = $scope.methodSelection.indexOf(method);
+
+            // is currently selected
+            if (idx > -1) {
+                $scope.methodSelection.splice(idx, 1);
+            }
+            // is newly selected
+            else {
+                $scope.methodSelection.push(method);
+            }
+        };
+
         $scope.toggleSelection = function toggleSelection(categ) {
             var idx = $scope.categorySelection.indexOf(categ);
 
@@ -63,8 +93,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
-                console.log($scope.project.in_review.user);
-                console.log($scope.project.in_review);
             });
         };
 
@@ -113,6 +141,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
+        $scope.addApprovedState = function () {
+                var project = $scope.project;
+                project.approved.themes = $scope.themeSelection;
+                project.approved.methods = $scope.methodSelection;
+                project.state = $scope.global.newState;
+                console.log(project);
+                project.$addApproved(function (response) {
+                    $location.path('projects/' + project._id)
+                });
+            };
 
 
         $scope.changeState = function (changeTo) {
