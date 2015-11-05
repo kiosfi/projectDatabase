@@ -63,6 +63,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
+                Projects.inReviewUser({_id: project.in_review.user
+                }, function(user) {
+                  $scope.user = user;
+                });
             });
         };
 
@@ -106,7 +110,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addReviewState = function () {
             var project = $scope.project;
             project.state = $scope.global.newState;
-            project.$update(function (response) {
+            project.$addReview(function (response) {
                 $location.path('projects/' + project._id)
             });
         };

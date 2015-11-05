@@ -28,6 +28,22 @@ module.exports = function (Projects) {
             });
         },
 
+        in_review: function (req, res, next, id) {
+            InReview.load(id, function (err, inrev) {
+                if (err)
+                    return next(err);
+                if (!inrev)
+                    return next(new Error('Tilan ' + id + ' lataus epäonnistui. '));
+
+                req.in_review = inrev;
+                next();
+            }
+        },
+
+        showReview: function (req, res) {
+            res.json(req.in_review)
+        },
+        
         create: function (req, res) {
 
             var project = new Project(req.body);
@@ -74,11 +90,6 @@ module.exports = function (Projects) {
             res.json(req.project);
         },
 
-        showReview: function (req, res) {
-
-            res.json(req.in_review);
-        },
-
          all: function(req, res) {
              var query = Project.find();
 
@@ -107,10 +118,10 @@ module.exports = function (Projects) {
             });
          },
 
-         update: function(req, res) {
+         addReview: function(req, res) {
              var project = req.project;
              var in_review = new InReview(req.body.in_review);
-             in_review.user = req.user._id;
+             in_review.user = req.user;
              project.in_review = in_review._id;
              project.state = req.body.state;
 
@@ -121,7 +132,6 @@ module.exports = function (Projects) {
                     });
                 }
              });
-
 
             project.save(function (err) {
                 if (err) {
