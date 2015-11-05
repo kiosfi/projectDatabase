@@ -63,6 +63,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
+                console.log($scope.project.in_review.user);
+                console.log($scope.project.in_review);
             });
         };
 
