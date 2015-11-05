@@ -6,6 +6,18 @@ db.projects.drop();
 db.createCollection("organisations");
 db.createCollection("projects");
 db.createCollection("bankaccounts");
+db.createCollection("users");
+
+db.users.insert(
+  { "_id" : ObjectId("5614d428013b9a2f1ca236ce"),
+  "email" : "test@test.com",
+  "hashed_password" : "O2cdPpHlLOkwnQBnExKqwmRF3lpQRW8NDit/UCk+WQz06+CyUJjQOrrBf5mWrhGgE5YKn5y+DY4DZ6Q4zwT/3A==",
+  "salt" : "e5y3JfOstfMYQSZzpQ+acw==",
+  "username" : "testia",
+  "name" : "teppo testi",
+  "provider" : "local",
+  "roles" : [ "authenticated" ], "__v" : 0 }
+);
 
 db.bankaccounts.insert(
       {"_id": ObjectId("56150897b560c1fc0b9b3015"),
