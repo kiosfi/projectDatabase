@@ -189,7 +189,7 @@
     <hr>
     <article>
         <h4 class="proj-header">Aikataulu</h4>
-            <section ng-show="project.state === 'käsittelyssä'" class="proj-body">
+            <section ng-show="project.state !== 'rekisteröity'" class="proj-body">
                 <b>Siirtynyt käsittelyyn</b>: {{project.in_review.date | date:'dd.MM.yyyy'}}
                 <button class="btn" onclick="toggleCollapse('visibilityReviewinfo')">Tiedot</button>
                 <span id="visibilityReviewinfo">

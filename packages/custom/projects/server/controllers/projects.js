@@ -28,22 +28,6 @@ module.exports = function (Projects) {
             });
         },
 
-        in_review: function (req, res, next, id) {
-            InReview.load(id, function (err, inrev) {
-                if (err)
-                    return next(err);
-                if (!inrev)
-                    return next(new Error('Tilan ' + id + ' lataus epäonnistui. '));
-
-                req.in_review = inrev;
-                next();
-            }
-        },
-
-        showReview: function (req, res) {
-            res.json(req.in_review)
-        },
-        
         create: function (req, res) {
 
             var project = new Project(req.body);
