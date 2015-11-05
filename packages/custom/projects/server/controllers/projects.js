@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
     BankAccount = mongoose.model('BankAccount'),
     States = mongoose.model('States'),
     InReview = mongoose.model('InReview'),
+    Approved = mongoose.model('Approved'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
@@ -133,6 +134,44 @@ module.exports = function (Projects) {
                 res.json(project);
             });
 
+        },
+        
+         /*
+         * Updates project to contain data required in approved state        
+         * @param {type} req project object to be updated, sent from frontend
+         * @param {type} res project object after update 
+         * @returns updated project object in json to frontend, or error if 
+         *  updating not possible
+         */
+        addApproved: function (req, res) {
+            var project = req.project;
+            var approved = new Approved(req.body.approved);
+            approved.user = req.user;
+            project.approved = approved._id;
+            project.state = req.body.state;
+            
+            approved.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Tilatietojen tallennus epäonnistui.'
+                    });
+                }
+            });
+                
+                project.save(function (err) {
+                    if (err) {
+                        return res.status(500).json({
+                            error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'
+                        });
+                }
+                
+                Projects.events.publish({
+                    action: 'updated',
+                    name: project.title,
+                    url: config.hostname + '/projects/' + project._id
+                });
+                res.json(project);
+            });
         },
 
         destroy: function (req, res) {

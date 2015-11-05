@@ -16,10 +16,11 @@
 
     <hr>
 
-    <article class="proj-body">
-        <button type="button" data-ng-model="project.categories" data-ng-repeat="cat in project.categories" disabled>
+    <article class="proj-body" ng-show="project.approved.length">
+        <b>Teemat </b>
+        <button type="button" data-ng-model="project.approved.themes" data-ng-repeat="theme in project.approved.themes" disabled>
             <span class="glyphicon glyphicon-tag">
-            </span> {{cat}}
+            </span> {{theme}} 
         </button>
     </article>
 

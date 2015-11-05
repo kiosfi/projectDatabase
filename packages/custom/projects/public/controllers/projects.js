@@ -144,7 +144,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         
         $scope.addApprovedState = function () {
             var project = $scope.project;
-            console.log(project);
+            project.themes = $scope.themeSelection;
+            project.methods = $scope.methodSelection;
             project.state = $scope.global.newState;
             project.$addApproved(function (response) {
                 $location.path('projects/' + project._id)
