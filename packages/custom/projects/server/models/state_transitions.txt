@@ -10,7 +10,7 @@ db.states.insert([
     next_states: ["hyväksytty", "hylätty", "päättynyt"]
   },
   {
-    current state: "hyväksytty",
+    current_state: "hyväksytty",
     next_states: ["allekirjoitettu", "hylätty", "päättynyt"]
   },
   {
