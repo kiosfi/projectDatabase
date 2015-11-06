@@ -71,14 +71,18 @@ var ApprovedSchema = new Schema({
     }
   },
   themes: {
-    type: Array,
-    required: true
+    type: Array
   },
   methods: {
-    type: Array,
-    required: true
+    type: Array
   }
 });
+
+ApprovedSchema.statics.load = function (id, cb) {
+    this.findOne({
+        _id: id
+    }).populate('user', 'name').exec(cb);
+};
 
 var RejectedSchema = new Schema({
   date: {

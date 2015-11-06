@@ -22,9 +22,18 @@ var hasPermissions = function (req, res, next) {
     next();
 };
 
+/*module.exports = function (InReviews, app, auth) {
+    var reviews = require('.../controllers/projects')(Projects);
+    app.route('/api/projects/:projectId')
+            .put(auth.isMongoId, auth.requiresLogin, reviews.addReview);
+
+    app.param('projectId', reviews.project);
+};*/
+
 module.exports = function (Projects, app, auth) {
 
-    var projects = require('../controllers/projects')(Projects);
+    var projects = require('../controllers/projects')(Projects)
+
 
     app.route('/api/projects')
             .get(projects.all)
@@ -33,8 +42,11 @@ module.exports = function (Projects, app, auth) {
             .get(projects.allStates);
     app.route('/api/projects/:projectId')
             .get(auth.isMongoId, auth.requiresLogin, projects.show)
-            .put(auth.isMongoId, auth.requiresLogin, projects.addReview, projects.addApproved)
             .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, projects.destroy);
+    app.route('/api/projects/rev/:projectId')
+            .put(auth.isMongoId, auth.requiresLogin, projects.addReview);
+    app.route('/api/projects/appr/:projectId')
+            .put(auth.isMongoId, auth.requiresLogin, projects.addApproved);
     app.route('/api/projects/byOrg/:organisationId')
             .get(projects.byOrg);
 

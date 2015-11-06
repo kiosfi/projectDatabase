@@ -104,13 +104,9 @@ module.exports = function (Projects) {
             });
          },
 
-         addReview: function(req, res) {
-             var project = req.project;
+         addReview: function(req, res)   {
              var in_review = new InReview(req.body.in_review);
              in_review.user = req.user;
-             project.in_review = in_review._id;
-             project.state = req.body.state;
-
              in_review.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -119,7 +115,11 @@ module.exports = function (Projects) {
                 }
              });
 
-            project.save(function (err) {
+             var project = req.project;
+             project.in_review = in_review._id;
+             project.state = req.body.state;
+
+             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Hankkeen päivitys epäonnistui'
@@ -138,13 +138,8 @@ module.exports = function (Projects) {
         },
 
         addApproved: function (req, res) {
-              var project = req.project;
-              console.log(req.body);
               var approved = new Approved(req.body.approved);
               approved.user = req.user;
-              project.approved = approved._id;
-              project.state = req.body.state;
-
               approved.save(function (err) {
                   if (err) {
                       return res.status(500).json({
@@ -152,6 +147,10 @@ module.exports = function (Projects) {
                       });
                     }
               });
+
+              var project = req.project;
+              project.approved = approved._id;
+              project.state = req.body.state;
 
               project.save(function (err) {
                   if (err) {

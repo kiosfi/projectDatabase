@@ -11,10 +11,10 @@ angular.module('mean.projects').factory('Projects', ['$resource',
       projectId: '@_id'
     }, {
       addReview: {
-        method: 'PUT'
+        method: 'PUT', url: 'api/projects/rev/:projectId'
       },
       addApproved: {
-        method: 'PUT'
+        method: 'PUT', url: 'api/projects/appr/:projectId'
       }
     });
   }

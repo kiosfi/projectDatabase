@@ -12,7 +12,6 @@ var Projects = new Module('projects');
  * Dependency injection is used to define required modules
  */
 
-
 Projects.register(function(app, auth, database, circles, organisations) {
 
   //We enable routing. By default the Package Object is passed to the routes

@@ -134,6 +134,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.addReviewState = function () {
+            console.log($scope.project);
             var project = $scope.project;
             project.state = $scope.global.newState;
             project.$addReview(function (response) {
@@ -146,9 +147,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.approved.themes = $scope.themeSelection;
                 project.approved.methods = $scope.methodSelection;
                 project.state = $scope.global.newState;
-                console.log(project);
                 project.$addApproved(function (response) {
-                    $location.path('projects/' + project._id)
+                    console.log(response);
+                    $location.path('projects/' + response._id)
                 });
             };
 
