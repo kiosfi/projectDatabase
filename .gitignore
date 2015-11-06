@@ -20,3 +20,4 @@ docs/api/
 **/doxygen_sqlite3.db
 tests/config/e2e/tests/results/*
 *.log
+tests/results
