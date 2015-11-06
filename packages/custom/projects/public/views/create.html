@@ -1,8 +1,13 @@
 <section data-ng-controller="ProjectsController">
     <form name="projectForm" class="form-horizontal" role="form" data-ng-submit="create(projectForm.$valid)" novalidate>
         <fieldset>
-            <legend><a onclick="toggleCollapse2('fs1', 'img1')">Hankkeen nimi ja koordinaattori
-                    <img id="img1" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
+            <legend>
+                <a onclick="toggleCollapse2('fs1', 'btn1')">
+                    Hankkeen nimi ja koordinaattori
+                </a>
+                <button id="btn1" class="btn-default btn-xs"
+                        onclick="toggleCollapse2('fs1', 'btn1')">+</button>
+            </legend>
             <div id ="fs1" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
@@ -29,8 +34,11 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend><a onclick="toggleCollapse2('fs2', 'img2')">Järjestö
-                    <img id="img2" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
+            <legend>
+                <a onclick="toggleCollapse2('fs2', 'btn2')">Järjestö</a>
+                <button id="btn2" class="btn-default btn-xs"
+                        onclick="toggleCollapse2('fs2', 'btn2')">+</button>
+            </legend>
             <div id="fs2" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
@@ -151,8 +159,12 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend><a onclick="toggleCollapse2('fs3', 'img3')">Hankkeen perustiedot
-                    <img id="img3" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
+            <legend>
+                <a onclick="toggleCollapse2('fs3', 'btn3')">
+                    Hankkeen perustiedot</a>
+                <button id="btn3" class="btn-default btn-xs"
+                        onclick="toggleCollapse2('fs3', 'btn3')">+</button>
+            </legend>
             <div id="fs3" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
@@ -234,8 +246,11 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend><a onclick="toggleCollapse2('fs4', 'img4')">Hankkeen lisätiedot
-                    <img id="img4" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
+            <legend><a onclick="toggleCollapse2('fs4', 'btn4')">
+                    Hankkeen lisätiedot</a>
+                <button id="btn4" class="btn-default btn-xs"
+                        onclick="toggleCollapse2('fs4', 'btn4')">+</button>
+            </legend>
             <div id="fs4" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
@@ -344,9 +359,11 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend><a onclick="toggleCollapse2('fs5', 'img5')">Hakijajärjestön
-                    lisätiedot
-                    <img id="img5" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
+            <legend><a onclick="toggleCollapse2('fs5', 'btn5')">Hakijajärjestön
+                    lisätiedot</a>
+                <button id="btn5" class="btn-default btn-xs"
+                        onclick="toggleCollapse2('fs5', 'btn5')">+</button>
+            </legend>
             <div id="fs5" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
@@ -397,8 +414,11 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend><a onclick="toggleCollapse2('fs6', 'img6')">Pankkitili
-                    <img id="img6" src="/projects/assets/img/indicator-closed.gif"/></a></legend>
+            <legend>
+                <a onclick="toggleCollapse2('fs6', 'btn6')">Pankkitili</a>
+                <button id="btn6" class="btn-default btn-xs"
+                        onclick="toggleCollapse2('fs6', 'btn6')">+</button>
+            </legend>
             <div id="fs6" style="display: none;">
                 <div class="form-group">
                     <div class="form-group col-md-6" ng-class="{
