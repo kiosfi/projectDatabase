@@ -155,7 +155,6 @@ module.exports = function (Projects) {
         * its collection.
         */
         addRejected: function (req, res) {
-              console.log(req.body);
               var rejected = new Rejected(req.body.rejected);
               rejected.user = req.user;
               rejected.save(function (err) {
