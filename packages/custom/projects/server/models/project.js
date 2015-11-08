@@ -168,7 +168,7 @@ ProjectSchema.statics.load = function (id, cb) {
     this.findOne({
         _id: id
     }).populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
-                  {path: 'approved', model: 'Approved'}])
+                  {path: 'rejected', model: 'Rejected'}])
     .exec(cb);
 };
 

@@ -16,11 +16,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.categories = ['naiset', 'lapset', 'vammaiset', 'yleiset ihmisoikeudet', 'muu'];
 
+        $scope.rejcategories = ["1", "2", "3", "4", "5"];
+
         $scope.categorySelection = [];
 
         $scope.themeSelection = [];
 
         $scope.methodSelection = [];
+
+        $scope.rejectedCategorySelection = [];
+
 
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
             var idx = $scope.themeSelection.indexOf(theme);
@@ -45,6 +50,19 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             // is newly selected
             else {
                 $scope.methodSelection.push(method);
+            }
+        };
+
+        $scope.toggleRejectedCategorySelection = function toggleRejectedCategorySelection(rejectedCategory) {
+            var idx = $scope.rejectedCategorySelection.indexOf(rejectedCategory);
+
+            // is currently selected
+            if (idx > -1) {
+                $scope.rejectedCategorySelection.splice(idx, 1);
+            }
+            // is newly selected
+            else {
+                $scope.rejectedCategorySelection.push(rejectedCategory);
             }
         };
 
@@ -134,7 +152,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.addReviewState = function () {
-            console.log($scope.project);
             var project = $scope.project;
             project.state = $scope.global.newState;
             project.$addReview(function (response) {
@@ -142,13 +159,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
-        $scope.addApprovedState = function () {
+        $scope.addRejectedState = function () {
                 var project = $scope.project;
-                project.approved.themes = $scope.themeSelection;
-                project.approved.methods = $scope.methodSelection;
+                project.rejected.rejection_categories = $scope.rejectedCategorySelection;
                 project.state = $scope.global.newState;
-                project.$addApproved(function (response) {
-                    console.log(response);
+                console.log(project);
+                project.$addRejected(function (response) {
                     $location.path('projects/' + response._id)
                 });
             };

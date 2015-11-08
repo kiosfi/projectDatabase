@@ -22,14 +22,6 @@ var hasPermissions = function (req, res, next) {
     next();
 };
 
-/*module.exports = function (InReviews, app, auth) {
-    var reviews = require('.../controllers/projects')(Projects);
-    app.route('/api/projects/:projectId')
-            .put(auth.isMongoId, auth.requiresLogin, reviews.addReview);
-
-    app.param('projectId', reviews.project);
-};*/
-
 module.exports = function (Projects, app, auth) {
 
     var projects = require('../controllers/projects')(Projects)
@@ -45,8 +37,8 @@ module.exports = function (Projects, app, auth) {
             .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, projects.destroy);
     app.route('/api/projects/rev/:projectId')
             .put(auth.isMongoId, auth.requiresLogin, projects.addReview);
-    app.route('/api/projects/appr/:projectId')
-            .put(auth.isMongoId, auth.requiresLogin, projects.addApproved);
+    app.route('/api/projects/rej/:projectId')
+            .put(auth.isMongoId, auth.requiresLogin, projects.addRejected);
     app.route('/api/projects/byOrg/:organisationId')
             .get(projects.byOrg);
 

@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
     BankAccount = mongoose.model('BankAccount'),
     States = mongoose.model('States'),
     InReview = mongoose.model('InReview'),
-    Approved = mongoose.model('Approved'),
+    Rejected = mongoose.model('Rejected'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
@@ -24,9 +24,8 @@ module.exports = function (Projects) {
                 if (!project)
                     return next(new Error('Hankkeen ' + id + ' lataus epäonnistui.'));
 
-                req.project = project;
-
-                next();
+                    req.project = project;
+                    next();
             });
         },
 
@@ -67,20 +66,30 @@ module.exports = function (Projects) {
 
         show: function (req, res) {
 
-            Projects.events.publish({
-                action: 'viewed',
-                name: req.project.title,
-                url: config.hostname + '/projects/' + req.project._id
+          InReview.load(req.project.in_review, function (err, rev) {
+              req.project.in_review = rev;
+
+              Rejected.load(req.project.rejected, function(err, rej) {
+                req.project.rejected = rej;
+
+                Projects.events.publish({
+                    action: 'viewed',
+                    name: req.project.title,
+                    url: config.hostname + '/projects/' + req.project._id
+                });
+
+                res.json(req.project);
+              });
             });
 
-            res.json(req.project);
         },
 
          all: function(req, res) {
              var query = Project.find();
 
              query
-             .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'}])
+             .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
+                        {path: 'rejected', model: 'Rejected'}])
              .exec(function(err, projects) {
                  if (err) {
                      return res.status(500).json({
@@ -104,6 +113,10 @@ module.exports = function (Projects) {
             });
          },
 
+         /*
+         * Moves a project to review state and saves the state object to
+         * its collection.
+         */
          addReview: function(req, res)   {
              var in_review = new InReview(req.body.in_review);
              in_review.user = req.user;
@@ -137,10 +150,15 @@ module.exports = function (Projects) {
 
         },
 
-        addApproved: function (req, res) {
-              var approved = new Approved(req.body.approved);
-              approved.user = req.user;
-              approved.save(function (err) {
+        /*
+        * Moves a project to rejected state and saves the state object to
+        * its collection.
+        */
+        addRejected: function (req, res) {
+              console.log(req.body);
+              var rejected = new Rejected(req.body.rejected);
+              rejected.user = req.user;
+              rejected.save(function (err) {
                   if (err) {
                       return res.status(500).json({
                           error: 'Tilatietojen tallennus epäonnistui.'
@@ -149,7 +167,7 @@ module.exports = function (Projects) {
               });
 
               var project = req.project;
-              project.approved = approved._id;
+              project.rejected = rejected._id;
               project.state = req.body.state;
 
               project.save(function (err) {
@@ -164,6 +182,7 @@ module.exports = function (Projects) {
                       name: project.title,
                       url: config.hostname + '/projects/' + project._id
                   });
+
                   res.json(project);
             });
         },
