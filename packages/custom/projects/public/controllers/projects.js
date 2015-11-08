@@ -163,7 +163,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 var project = $scope.project;
                 project.rejected.rejection_categories = $scope.rejectedCategorySelection;
                 project.state = $scope.global.newState;
-                console.log(project);
                 project.$addRejected(function (response) {
                     $location.path('projects/' + response._id)
                 });
