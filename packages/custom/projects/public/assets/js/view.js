@@ -17,40 +17,21 @@ function toggleCollapse(id) {
 }
 
 /**
- * Previous indicator image.
+ * Hides or shows the given HTML element and changes the show/hide button
+ * accordingly.
  *
- * @type undefined|@exp;previousIndicator
- */
-var previousIndicator;
-
-/**
- * Hides or shows the given HTML element and changes the animation of the
- * associated indicator image.
- *
- * @param {String} elementID   id of the element.
- * @param {String} indicatorID id of the indicator.
+ * @param {String} elementID    id of the element.
+ * @param {String} buttonID     id of the button.
  * @return {undefined}
  */
-function toggleCollapse2(elementID, indicatorID) {
+function toggleCollapse2(elementID, buttonID) {
     var element = document.getElementById(elementID);
-    var indicator = document.getElementById(indicatorID);
+    var indicator = document.getElementById(buttonID);
     if (element.style.display !== 'block') {
         element.style.display = 'block';
-        indicator.src = '/projects/assets/img/indicator-opening.gif';
+        indicator.innerHTML = '-';
     } else {
         element.style.display = 'none';
-        indicator.src = '/projects/assets/img/indicator-closing.gif';
+        indicator.innerHTML = '+';
     }
-    if (typeof previousIndicator !== 'undefined') {
-        if (indicator !== previousIndicator) {
-            if (previousIndicator.src === '/projects/assets/img/indicator-opening.gif') {
-                previousIndicator.src = '/projects/assets/img/indicator-open.gif';
-            } else {
-                previousIndicator.src = '/projects/assets/img/indicator-closed.gif';
-            }
-        } else {
-            return;
-        }
-    }
-    previousIndicator = indicator;
 }

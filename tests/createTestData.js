@@ -2,6 +2,8 @@ db = connect("localhost:27017/testDB");
 
 db.organisations.drop();
 db.projects.drop();
+db.bankaccounts.drop();
+db.users.drop();
 
 db.createCollection("organisations");
 db.createCollection("projects");
