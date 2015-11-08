@@ -161,9 +161,9 @@
 
               // mock project in scope
               scope.project = project;
-              
+
               // test PUT happens correctly
-              $httpBackend.expectPUT(/api\/projects\/([0-9a-fA-F]{24})$/).respond();
+              $httpBackend.expectPUT(/api\/projects\/rev\/([0-9a-fA-F]{24})$/).respond();
 
               // run controller
               scope.addReviewState(true);
