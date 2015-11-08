@@ -190,197 +190,33 @@
     <article>
         <h4 class="proj-header">Aikataulu</h4>
             <section ng-show="project.state !== 'rekisteröity'" class="proj-body">
-                <b>Siirtynyt käsittelyyn</b>: {{project.in_review.date | date:'dd.MM.yyyy'}}
+                <b>**Siirtynyt käsittelyyn</b>:&nbsp&nbsp{{project.in_review.date | date:'dd.MM.yyyy'}}&nbsp&nbsp
                 <button class="btn" onclick="toggleCollapse('visibilityReviewinfo')">Tiedot</button>
                 <span id="visibilityReviewinfo">
-                    <p><i>Muokkaaja</i>: {{project.in_review.user.name}}, {{project.in_review.date | date:'dd.MM.yyyy'}}</p>
+                    <h5>Muokkaaja:</h5>
+                    <p>{{project.in_review.user.name}}, {{project.in_review.date | date:'dd.MM.yyyy'}}</p>
                     <br>
-                    <i>Kommentit: </i><br><br>
+                    <h5>Kommentit: </h5>
                     <p>{{project.in_review.comments}}</p>
                 </span>
-                <br>
-                <p class="proj-sub-title">Menneet</p>
-                <p>1.1.2015 1. Väliraportti</p>
-                <p>1.6.2015 2. Väliraportti</p>
             </section>
+            <br>
+            <section ng-show="project.state === 'hylätty'" class="proj-body">
+                <b>**Hanke hylätty</b>:&nbsp&nbsp{{project.rejected.date | date:'dd.MM.yyyy'}}&nbsp&nbsp
+                <button class="btn" onclick="toggleCollapse('visibilityRejectedinfo')">Tiedot</button>
+                <span id="visibilityRejectedinfo">
+                    <h5>Hylkäyksen teki:</h5>
+                    <p>{{project.rejected.user.name}}, {{project.rejected.date | date:'dd.MM.yyyy'}}</p>
+                    <br>
+                    <h5>Hylkäyssyyt:</h5>
+                    <p ng-repeat="rej in project.rejected.rejection_categories">{{rej}} </p>
+                    <br>
+                    <h5>Kommentit: </h5>
+                    <p>{{project.rejected.rejection_comments}}</p>
+                </span>
+            </section>
+            <br>
       </article>
-
-
-
-
-    <!--    <article class="proj-box">
-
-            <button class="btn" onclick="toggleCollapse('visibilityAppinfo')">Hakemustiedot</button>
-
-            <article id="visibilityAppinfo">
-                <article class="proj inheritVisibility">
-                    <h4 class=proj-header>Projekin taustat</h4>
-                    <span class="proj-body">
-                        {{project.background}}
-                    </span>
-                </article>
-
-                <article class="proj inheritVisibility">
-                    <h4 class=proj-header>Projektin tavoite</h4>
-                    <span class="proj-body">
-                        {{project.project_goal}}
-                    </span>
-                </article>
-
-
-                <article class="proj">
-                    <h4 class=proj-header>Hyödynsaajat</h4>
-                    <span class="proj-body">
-                        {{project.beneficiaries}}
-                    </span>
-                </article>
-
-                <article class="proj">
-                    <h4 class=proj-header>Sukupuolitasa-arvo</h4>
-                    <span class="proj-body">
-                        {{project.gnder_aspect}}
-                    </span>
-                </article>
-
-                <article class="proj">
-                    <h4 class=proj-header>Riskit</h4>
-                    <span class="proj-body">
-                        {{project.sustainability_risks}}
-                    </span>
-                </article>
-
-                <article class="proj">
-                    <h4 class=proj-header>Evaluointi</h4>
-                    <span class="proj-body">
-                        {{project.reporting_evaluation}}
-                    </span>
-                </article>
-
-                <article class="proj">
-                    <h4 class=proj-header>Muut haut</h4>
-                    <span class="proj-body">
-                        {{project.other_donors_proposed}}
-                    </span>
-                </article>
-            </article>
-        </article>
-
-
-
-        <hr>
-
-
-        <article class="proj-box">
-
-            <button class="btn" onclick="toggleCollapse('visibilityPayments')">Maksatus</button>
-
-            <article id="visibilityPayments">
-                <h4 class="proj-header">Maksatus</h4>
-                <section class="proj-body">
-                    <p class="proj-sub-title">Myönnetty</p>
-                    <p>Summa: {{project.funding.granted_curr_eur}} EUR ({{project.funding.granted_curr_local}} local) 12.10.2014</p>
-                    <p>Lisärahoitus: 1000 euroa (10 000 paikallista) 5.7.2014</p>
-                    <br>
-                    <p class="proj-sub-title">Maksettu</p>
-                    <p>1. Erä: 4000 euroa (10 000 paikallista) 7.1.2015</p>
-                    <p>2. Erä: 4000 euroa (10 000 paikallista) 7.6.2015</p>
-                    <br>
-                    <p>Maksettu yhteensä: 8000 euroa (10 000 paikallista) </p>
-                    <p>Jäljellä: 3000 euroa (10 000 paikallista) </p>
-                </section>
-            </article>
-
-        </article>
-
-        <article class="proj-box">
-
-            <button class="btn" onclick="toggleCollapse('visibilityAttachments')">Liitteet</button>
-
-            <article id="visibilityAttachments">
-                <h4 class="proj-header">Liitteet</h4>
-                <section class="proj-body">
-                    <p><a href="">Hakemus</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">Budjetti</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">1. väliraportti</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">2. väliraportti</a> - ODOTTAA</p>
-                    <p><a href="">Suosituskirje A</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">Suosituskirje B</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">Evaluointi</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">Esitys 1</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">Esitys 2</a> - ODOTTAA</p>
-                    <p><a href="">Sopimus</a> - Hyväksytty 1.1.2014</p>
-                </section>
-
-            </article>
-
-        </article>
-    -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--    WANHA
-
-
-        <article class="proj-box">
-            <article class="proj-div">
-                <h4 class="proj-header">Maksatus</h4>
-                <section class="proj-body">
-                    <p class="proj-sub-title">Myönnetty</p>
-                    <p>Summa: {{project.funding.granted_curr_eur}} EUR ({{project.funding.granted_curr_local}} local) 12.10.2014</p>
-                    <p>Lisärahoitus: 1000 euroa (10 000 paikallista) 5.7.2014</p>
-                    <br>
-                    <p class="proj-sub-title">Maksettu</p>
-                    <p>1. Erä: 4000 euroa (10 000 paikallista) 7.1.2015</p>
-                    <p>2. Erä: 4000 euroa (10 000 paikallista) 7.6.2015</p>
-                    <br>
-                    <p>Maksettu yhteensä: 8000 euroa (10 000 paikallista) </p>
-                    <p>Jäljellä: 3000 euroa (10 000 paikallista) </p>
-                </section>
-            </article>
-
-            <article class="proj-div">
-                <h4 class="proj-header">Aikataulu</h4>
-                <section class="proj-body">
-                    <p>1.12.2015 Loppuraportti ODOTTAA</p>
-                    <br>
-                    <p class="proj-sub-title">Menneet</p>
-                    <p>1.1.2015 1. Väliraportti</p>
-                    <p>1.6.2015 2. Väliraportti</p>
-                </section>
-            </article>
-
-            <article class="proj-div">
-                <h4 class="proj-header">Liitteet</h4>
-                <section class="proj-body">
-                    <p><a href="">Hakemus</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">Budjetti</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">1. väliraportti</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">2. väliraportti</a> - ODOTTAA</p>
-                    <p><a href="">Suosituskirje A</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">Suosituskirje B</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">Evaluointi</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">Esitys 1</a> - Hyväksytty 1.1.2014</p>
-                    <p><a href="">Esitys 2</a> - ODOTTAA</p>
-                    <p><a href="">Sopimus</a> - Hyväksytty 1.1.2014</p>
-                </section>
-            </article>
-        </article>-->
-
-
 
 </section>
 

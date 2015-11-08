@@ -36,13 +36,7 @@ var InReviewSchema = new Schema({
 InReviewSchema.statics.load = function (id, cb) {
     this.findOne({
         _id: id
-    }).populate('user', 'name').exec(cb);
-};
-
-InReviewSchema.statics.load = function (id, cb) {
-    this.findOne({
-        _id: id
-    }).populate('user', 'name')
+    }).populate('user', 'name email username')
     .exec(cb);
 };
 
@@ -78,12 +72,10 @@ var ApprovedSchema = new Schema({
     }
   },
   themes: {
-    type: String,
-    required: true
+    type: Array
   },
   methods: {
-    type: String,
-    required: true
+    type: Array
   }
 });
 
@@ -98,7 +90,6 @@ var RejectedSchema = new Schema({
   },
   rejection_categories: {
     type: Array,
-    default: [1, 2, 3, 4, 5],
     required: true
   },
   rejection_comments: {
@@ -106,6 +97,12 @@ var RejectedSchema = new Schema({
     required: true
   }
 });
+
+RejectedSchema.statics.load = function (id, cb) {
+    this.findOne({
+        _id: id
+    }).populate('user', 'name email username').exec(cb);
+};
 
 var SignedSchema = new Schema({
   date: {

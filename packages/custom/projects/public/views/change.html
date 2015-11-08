@@ -70,96 +70,115 @@ A form for project state change.
     <!--        Hyväksytty-->
 
 
-    <form name="approvedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hyväksytty'"  role="form" data-ng-submit="" novalidate>
+        <form name="approvedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hyväksytty'"  role="form" data-ng-submit="addApprovedState(approvedForm.$valid)" novalidate>
 
-        <div class="form-group col-md-12">
-            <label for="approved_date" class="col-md-2">Päivämäärä</label>
-            <div class="col-md-10">
-                <input name="approved_date" type="text" class="form-control" data-ng-model="" id="approved_date" placeholder="Hankkeen hyväksynnän pvm" required>
-            </div>
-        </div>
-
-        <div class="form-group col-md-12">
-            <label for="approved_by" class="col-md-2"> Hyväksyjä</label>
-            <div class="col-md-10">
-                <select id="approved_by" data-ng-model="" class='form-control'>
-                    <option value="option-1">Toiminnanjohtaja</option>
-                    <option value="option-2">Halko</option>
-                    <option value="option-3">UM</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group col-md-12">
-            <label for="board_notified" class="col-md-2">Tiedoksiannnon päivämäärä</label>
-            <div class="col-md-10">
-                <input name="board_notified" type="text" class="form-control" data-ng-model="" id="board_notified" placeholder="Hallitukselle tiedoksi pvm" required>
-            </div>
-        </div>
-
-        <div class="form-group col-md-12">
-            <label for="granted_sum_eur" class="col-md-2 control-label">Myönnetty summa</label>
-            <div class="col-md-4">
-                <input name="granted_sum_eur" type="text" class="form-control" data-ng-model="" id="granted_sum_eur" placeholder="0" required>EUR
+            <div class="form-group col-md-12">
+                <label for="approved_date" class="col-md-2">Päivämäärä</label>
+                <div class="col-md-10">
+                    <input name="approved_date" type="text" class="form-control" data-ng-model="project.approved.approved_date" id="approved_date" placeholder="Hankkeen hyväksynnän pvm" required>
+                </div>
             </div>
 
-            <label for="granted_sum_local" class="col-md-2 control-label">Myönnetty summa</label>
-            <div class="col-md-4">
-                <input name="granted_sum_local" type="text" class="form-control" data-ng-model="" id="granted_sum_local" placeholder="0" required>local
+            <div class="form-group col-md-12">
+                <label for="approved_by" class="col-md-2"> Hyväksyjä</label>
+                <div class="col-md-10">
+                    <select id="approved_by" data-ng-model="project.approved.approved_by" class='form-control'>
+                        <option value="option-1">Toiminnanjohtaja</option>
+                        <option value="option-2">Halko</option>
+                        <option value="option-3">UM</option>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group col-md-12">
-            <label for="themes" class="col-md-2">Teemat</label>
-            <div class="col-md-10">
-                <textarea name="themes" type="text" class="form-control" data-ng-model="" id="themes" placeholder="Hankkeen teemat" required></textarea>
+            <div class="form-group col-md-12">
+                <label for="board_notified" class="col-md-2">Tiedoksiannnon päivämäärä</label>
+                <div class="col-md-10">
+                    <input name="board_notified" type="text" class="form-control" data-ng-model="project.approved.board_notified" id="board_notified" placeholder="Hallitukselle tiedoksi pvm" required>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group col-md-12">
-            <label for="methods" class="col-md-2">Toimintatavat</label>
-            <div class="col-md-10">
-                <textarea name="methods" type="text" class="form-control" data-ng-model="" id="methods" placeholder="Hankkeen toimintatavat" required></textarea>
+            <div class="form-group col-md-12">
+                <label for="granted_sum_eur" class="col-md-2 control-label">Myönnetty summa (euro)</label>
+                <div class="col-md-4">
+                    <input name="granted_sum_eur" type="text" class="form-control" data-ng-model="project.approved.granted_sum.granted_curr_eur" id="granted_sum_eur" placeholder="0" required>EUR
+                </div>
+
+                <label for="granted_sum_local" class="col-md-2 control-label">Myönnetty summa (paikallinen)</label>
+                <div class="col-md-4">
+                    <input name="granted_sum_local" type="text" class="form-control" data-ng-model="project.approved.granted_sum.granted_curr_local" id="granted_sum_local" placeholder="0" required>local
+                </div>
             </div>
-        </div>
 
-        <div class="form-group col-md-12">
-            <label for="comments" class="col-md-2">Kommentit</label>
-            <div class="col-md-10">
-                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Kommentteja" required></textarea>
+            <div class="form-group col-md-6">
+                <label mean-token="'create-themes'" class="col-md-3 control-label">Teemat</label>
+                <div class="col-md-12">
+                    <label ng-repeat="theme in themes">
+                        <input
+                            type="checkbox"
+                            name="selectedThemes[]"
+                            value="{{theme}}"
+                            ng-checked="themeSelection.indexOf(theme) > - 1"
+                            ng-click="toggleThemeSelection(theme)"
+                            > {{theme}}
+                    </label>
+                </div>
             </div>
-        </div>
 
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-default">Tallenna</button>
+            <div class="form-group col-md-12">
+                <label mean-token="'create-methods'" class="col-md-3 control-label">Toimintatavat</label>
+                <div class="col-md-12">
+                    <label ng-repeat="method in methods">
+                        <input
+                            type="checkbox"
+                            name="selectedMethods[]"
+                            value="{{method}}"
+                            ng-checked="methodSelection.indexOf(method) > - 1"
+                            ng-click="toggleMethodSelection(method)"
+                            > {{method}}
+                    </label>
+                </div>
             </div>
-        </div>
+
+    <!--        <div class="form-group col-md-12">
+                <label for="comments" class="col-md-2">Kommentit</label>
+                <div class="col-md-10">
+                    <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Kommentteja" required></textarea>
+                </div>
+            </div>-->
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-default">Tallenna</button>
+                </div>
+            </div>
     </form>
 
 
     <!--    Hylätty-->
 
 
-    <form name="rejectedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hylätty'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+    <form name="rejectedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hylätty'"  role="form" data-ng-submit="addRejectedState(rejectedForm.$valid)" novalidate>
 
-        <div class="form-group col-md-12">
-            <label for="categories" class="col-md-2">Syyt</label>
-            <div class="col-md-10">
-                <select id="approved_by" data-ng-model="" class='form-control'>
-                    <option value="option-1">Täältä</option>
-                    <option value="option-2">Lisätäään</option>
-                    <option value="option-3">Modeliin</option>
-                    <option value="option-4">Syitä</option>
-                </select>
-            </div>
-        </div>
+      <div class="form-group col-md-12">
+          <label mean-token="'create-rejcategories'" class="col-md-3 control-label">Syyt</label>
+          <div class="col-md-12">
+              <label ng-repeat="rej in rejcategories">
+                  <input
+                      type="checkbox"
+                      name="selectedRejCategories[]"
+                      value="{{rej}}"
+                      ng-checked="rejectedCategorySelection.indexOf(rej) > - 1"
+                      ng-click="toggleRejectedCategorySelection(rej)"
+                     >{{rej}}
+              </label>
+          </div>
+      </div>
 
         <div class="form-group col-md-12">
             <label for="comments" class="col-md-2">Kommentit</label>
             <div class="col-md-10">
-                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Kommentit hylkäysperusteille" required></textarea>
+                <textarea name="comments" type="text" class="form-control" data-ng-model="project.rejected.rejection_comments" id="comments" placeholder="Kommentit hylkäysperusteille" required></textarea>
             </div>
         </div>
 

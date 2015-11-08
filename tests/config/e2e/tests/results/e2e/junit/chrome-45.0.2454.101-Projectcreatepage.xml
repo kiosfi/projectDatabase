@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
- <testsuite name="Project create page" timestamp="2015-10-23T14:11:02" hostname="localhost" time="12.946" errors="0" tests="3" skipped="0" disabled="0" failures="0">
-  <testcase classname="Project create page" name="should not show create page if not logged in" time="0.756" />
-  <testcase classname="Project create page" name="should create project with valid data filled in form" time="8.749" />
-  <testcase classname="Project create page" name="should not create project with empty form" time="3.44" />
+ <testsuite name="Project create page" timestamp="2015-11-05T15:38:51" hostname="localhost" time="15.419" errors="0" tests="3" skipped="0" disabled="0" failures="0">
+  <testcase classname="Project create page" name="should not show create page if not logged in" time="1.386" />
+  <testcase classname="Project create page" name="should create project with valid data filled in form" time="10.391" />
+  <testcase classname="Project create page" name="should not create project with empty form" time="3.642" />
  </testsuite>
 </testsuites>

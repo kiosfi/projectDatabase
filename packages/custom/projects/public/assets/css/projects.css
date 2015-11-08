@@ -1,6 +1,11 @@
 
-#visibilityAppinfo, #visibilityPayments, #visibilityAttachments, #visibilityReviewinfo {
+#visibilityAppinfo, #visibilityPayments, #visibilityAttachments, #visibilityReviewinfo,
+#visibilityRejectedinfo {
     display: none;
+}
+
+h5 {
+  font-weight: bold;
 }
 
 .proj-left {

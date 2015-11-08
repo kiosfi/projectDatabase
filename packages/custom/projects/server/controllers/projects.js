@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
     BankAccount = mongoose.model('BankAccount'),
     States = mongoose.model('States'),
     InReview = mongoose.model('InReview'),
-    User = mongoose.model('InReview'),
+    Rejected = mongoose.model('Rejected'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
@@ -24,27 +24,9 @@ module.exports = function (Projects) {
                 if (!project)
                     return next(new Error('Hankkeen ' + id + ' lataus epäonnistui.'));
 
-                req.project = project;
-
-                next();
+                    req.project = project;
+                    next();
             });
-        },
-
-        in_review: function (req, res, next, id) {
-            InReview.load(id, function (err, inrev) {
-                if (err)
-                    return next(err);
-                if (!inrev)
-                    return next(new Error('Tilan ' + id + ' lataus epäonnistui.'));
-
-                req.in_review = inrev;
-
-                next();
-            });
-        },
-
-        showReview: function (req, res) {
-          res.json(req.in_review);
         },
 
         create: function (req, res) {
@@ -84,20 +66,30 @@ module.exports = function (Projects) {
 
         show: function (req, res) {
 
-            Projects.events.publish({
-                action: 'viewed',
-                name: req.project.title,
-                url: config.hostname + '/projects/' + req.project._id
+          InReview.load(req.project.in_review, function (err, rev) {
+              req.project.in_review = rev;
+
+              Rejected.load(req.project.rejected, function(err, rej) {
+                req.project.rejected = rej;
+
+                Projects.events.publish({
+                    action: 'viewed',
+                    name: req.project.title,
+                    url: config.hostname + '/projects/' + req.project._id
+                });
+
+                res.json(req.project);
+              });
             });
 
-            res.json(req.project);
         },
 
          all: function(req, res) {
              var query = Project.find();
 
              query
-             .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'}])
+             .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
+                        {path: 'rejected', model: 'Rejected'}])
              .exec(function(err, projects) {
                  if (err) {
                      return res.status(500).json({
@@ -121,13 +113,13 @@ module.exports = function (Projects) {
             });
          },
 
-         addReview: function(req, res) {
-             var project = req.project;
+         /*
+         * Moves a project to review state and saves the state object to
+         * its collection.
+         */
+         addReview: function(req, res)   {
              var in_review = new InReview(req.body.in_review);
              in_review.user = req.user;
-             project.in_review = in_review._id;
-             project.state = req.body.state;
-
              in_review.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -136,7 +128,11 @@ module.exports = function (Projects) {
                 }
              });
 
-            project.save(function (err) {
+             var project = req.project;
+             project.in_review = in_review._id;
+             project.state = req.body.state;
+
+             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Hankkeen päivitys epäonnistui'
@@ -152,6 +148,43 @@ module.exports = function (Projects) {
                 res.json(project);
             });
 
+        },
+
+        /*
+        * Moves a project to rejected state and saves the state object to
+        * its collection.
+        */
+        addRejected: function (req, res) {
+              console.log(req.body);
+              var rejected = new Rejected(req.body.rejected);
+              rejected.user = req.user;
+              rejected.save(function (err) {
+                  if (err) {
+                      return res.status(500).json({
+                          error: 'Tilatietojen tallennus epäonnistui.'
+                      });
+                    }
+              });
+
+              var project = req.project;
+              project.rejected = rejected._id;
+              project.state = req.body.state;
+
+              project.save(function (err) {
+                  if (err) {
+                     return res.status(500).json({
+                          error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'
+                        });
+                      }
+
+                  Projects.events.publish({
+                      action: 'updated',
+                      name: project.title,
+                      url: config.hostname + '/projects/' + project._id
+                  });
+
+                  res.json(project);
+            });
         },
 
         destroy: function (req, res) {

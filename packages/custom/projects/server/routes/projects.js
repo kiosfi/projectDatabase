@@ -24,7 +24,8 @@ var hasPermissions = function (req, res, next) {
 
 module.exports = function (Projects, app, auth) {
 
-    var projects = require('../controllers/projects')(Projects);
+    var projects = require('../controllers/projects')(Projects)
+
 
     app.route('/api/projects')
             .get(projects.all)
@@ -33,9 +34,11 @@ module.exports = function (Projects, app, auth) {
             .get(projects.allStates);
     app.route('/api/projects/:projectId')
             .get(auth.isMongoId, auth.requiresLogin, projects.show)
-            .get(auth.isMongoId, auth.requiresLogin, projects.showReview)
-            .put(auth.isMongoId, auth.requiresLogin, projects.addReview)
             .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, projects.destroy);
+    app.route('/api/projects/rev/:projectId')
+            .put(auth.isMongoId, auth.requiresLogin, projects.addReview);
+    app.route('/api/projects/rej/:projectId')
+            .put(auth.isMongoId, auth.requiresLogin, projects.addRejected);
     app.route('/api/projects/byOrg/:organisationId')
             .get(projects.byOrg);
 

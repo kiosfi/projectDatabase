@@ -16,7 +16,55 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.categories = ['naiset', 'lapset', 'vammaiset', 'yleiset ihmisoikeudet', 'muu'];
 
+        $scope.rejcategories = ["1", "2", "3", "4", "5"];
+
         $scope.categorySelection = [];
+
+        $scope.themeSelection = [];
+
+        $scope.methodSelection = [];
+
+        $scope.rejectedCategorySelection = [];
+
+
+        $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
+            var idx = $scope.themeSelection.indexOf(theme);
+
+            // is currently selected
+            if (idx > -1) {
+                $scope.themeSelection.splice(idx, 1);
+            }
+            // is newly selected
+            else {
+                $scope.themeSelection.push(theme);
+            }
+        };
+
+        $scope.toggleMethodSelection = function toggleMethodSelection(method) {
+            var idx = $scope.methodSelection.indexOf(method);
+
+            // is currently selected
+            if (idx > -1) {
+                $scope.methodSelection.splice(idx, 1);
+            }
+            // is newly selected
+            else {
+                $scope.methodSelection.push(method);
+            }
+        };
+
+        $scope.toggleRejectedCategorySelection = function toggleRejectedCategorySelection(rejectedCategory) {
+            var idx = $scope.rejectedCategorySelection.indexOf(rejectedCategory);
+
+            // is currently selected
+            if (idx > -1) {
+                $scope.rejectedCategorySelection.splice(idx, 1);
+            }
+            // is newly selected
+            else {
+                $scope.rejectedCategorySelection.push(rejectedCategory);
+            }
+        };
 
         $scope.toggleSelection = function toggleSelection(categ) {
             var idx = $scope.categorySelection.indexOf(categ);
@@ -63,8 +111,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
-                console.log($scope.project.in_review.user);
-                console.log($scope.project.in_review);
             });
         };
 
@@ -113,6 +159,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
+        $scope.addRejectedState = function () {
+                var project = $scope.project;
+                project.rejected.rejection_categories = $scope.rejectedCategorySelection;
+                project.state = $scope.global.newState;
+                console.log(project);
+                project.$addRejected(function (response) {
+                    $location.path('projects/' + response._id)
+                });
+            };
 
 
         $scope.changeState = function (changeTo) {
