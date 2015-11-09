@@ -27,7 +27,7 @@ describe('<Unit Test>', function () {
                 "holder_name": "John Smith"});
             bank_account.save();
             organisation = new Organisation({
-                "name": "Humanrights org",
+                "name": "Human rights org",
                 "representative": "Representative",
                 "exec_manager": "Manager",
                 "address": {
@@ -76,7 +76,7 @@ describe('<Unit Test>', function () {
 
                 var query = Organisation.find();
 
-                return query.sort({'name': 'asc'}).exec(function (err, orgs) {
+                return query.exec(function (err, orgs) {
                     expect(err).to.be(null);
                     expect(orgs.length).to.equal(2);
                     done();

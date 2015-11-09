@@ -80,10 +80,6 @@ var OrganisationSchema = new Schema({
         required: true,
         trim: true
     },
-//    prev_projects: {
-//        type: Array,
-//        required: true
-//    }
     bank_account: {
         type: Schema.ObjectId,
         ref: 'BankAccount',
