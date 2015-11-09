@@ -145,7 +145,7 @@ var ProjectSchema = new Schema({
     end_report: {
       type: Schema.ObjectId,
       ref: 'EndReport'
-    },
+    }
 
 
 });
@@ -168,7 +168,7 @@ ProjectSchema.statics.load = function (id, cb) {
     this.findOne({
         _id: id
     }).populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
-                  {path: 'rejected', model: 'Rejected'}])
+                  {path: 'rejected', model: 'Rejected'}, {path: 'end_report', model: 'EndReport'}])
     .exec(cb);
 };
 
