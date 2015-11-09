@@ -143,7 +143,7 @@ module.exports = function (Projects) {
              project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
-                        error: 'Hankkeen päivitys epäonnistui'
+                        error: 'Hankkeen päivitys käsiteltäväksi epäonnistui'
                     });
                 }
 
@@ -180,7 +180,7 @@ module.exports = function (Projects) {
               project.save(function (err) {
                   if (err) {
                      return res.status(500).json({
-                          error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'
+                          error: 'Hankkeen päivitys hylätyksi epäonnistui.'
                         });
                       }
 
@@ -216,7 +216,7 @@ module.exports = function (Projects) {
               project.save(function (err) {
                   if (err) {
                      return res.status(500).json({
-                          error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'
+                          error: 'Hankkeen päivitys allekirjoitetuksi epäonnistui.'
                         });
                       }
 
