@@ -155,26 +155,34 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             var project = $scope.project;
             project.state = $scope.global.newState;
             project.$addReview(function (response) {
-                $location.path('projects/' + project._id)
+                $location.path('projects/' + project._id);
             });
         };
 
         $scope.addRejectedState = function () {
-                var project = $scope.project;
-                project.rejected.rejection_categories = $scope.rejectedCategorySelection;
-                project.state = $scope.global.newState;
-                project.$addRejected(function (response) {
-                    $location.path('projects/' + response._id)
-                });
-            };
+            var project = $scope.project;
+            project.rejected.rejection_categories = $scope.rejectedCategorySelection;
+            project.state = $scope.global.newState;
+            project.$addRejected(function (response) {
+                $location.path('projects/' + response._id);
+            });
+        };
 
 
         $scope.addSignedState = function () {
-                var project = $scope.project;
-                project.state = $scope.global.newState;
-                project.$addSigned(function (response) {
-                    $location.path('projects/' + response._id)
-                });
+            var project = $scope.project;
+            project.state = $scope.global.newState;
+            project.$addSigned(function (response) {
+                $location.path('projects/' + response._id);
+            });
+        };
+
+        $scope.addEndReportState = function () {
+            var project = $scope.project;
+            project.state = $scope.global.newState;
+            project.$addEndReport(function (response) {
+                $location.path('projects/' + response._id);
+            });
         };
 
         $scope.changeState = function (changeTo) {
@@ -183,7 +191,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }, function (project) {
                 $scope.project = project;
                 $scope.global.newState = changeTo;
-                $location.path('projects/' + project._id + "/change")
+                $location.path('projects/' + project._id + "/change");
             });
         };
 
@@ -209,7 +217,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.order = function (predicate) {
             $scope.reverse = ($scope.predicate === predicate)
-            ? !$scope.reverse : false;
+                    ? !$scope.reverse : false;
             $scope.predicate = predicate;
         };
 
