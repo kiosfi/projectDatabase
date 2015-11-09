@@ -3,42 +3,12 @@
 A form for project state change.
 -->
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
-
-    <h2><span class="name">{{project.project_ref}}: {{project.title}}</span>
+    <h2><span>{{project.project_ref}}: {{project.title}}</span>
     </h2>
 
 
     <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
         <span class="tila"><p>{{project.state}}</p></span></h3>
-
-    <hr>
-
-    <article class="proj-left">
-        <h4 class="proj-header">Kuvaus</h4>
-        <span class="proj-body">
-            {{project.description}}
-        </span>
-    </article>
-
-    <article class="proj-div">
-        <h4 class="proj-header">Hanketiedot</h4>
-        <section class="proj-body">
-            <p>DAC: {{project.dac}}</p>
-            <p>Kirjattu: {{project.reg_date| date:'dd.MM.yyyy'}}</p>
-            <p ng-show="project.funding.granted_curr_eur" class="ng-hide">Myönnetty: {{project.funding.granted_curr_eur}} EUR ({{project.funding.granted_curr_local}} local)</p>
-            <p ng-show="!project.funding.granted_curr_eur" class="ng-hide">Haettu: {{project.funding.applied_curr_eur}} EUR ({{project.funding.applied_curr_local}} local)</p>
-            <p>Kesto: {{project.duration_months}} kk</p>
-        </section>
-    </article>
-
-    <article class="proj-div">
-        <h4 class="proj-header">Järjestö</h4>
-        <section class="proj-body">
-            <p>Nimi: {{project.organisation.name}}</p>
-            <p>Edustaja: {{project.organisation.representative}}</p>
-        </section>
-    </article>
-
     <article class="change-box">
 
         <h3>Olet siirtämässä hanketta tilaan: <span class="change-state-title">{{global.newState}}</span> </h3>
@@ -46,7 +16,7 @@ A form for project state change.
         <p>Siirtääksesi hankkeen tilasta "{{project.state}}" tilaan "{{global.newState}}", täytä alle puuttuvat tiedot. Hankkeen muiden tietojen muuttaminen on tehtävä "muokkaus" lomakkeen kautta. </p>
 
     </article>
-
+    <a ng-href="/projects/{{project._id}}" class="btn btn-danger">Peruuta</a>
 
     <!--    Käsittelyssä -->
 
@@ -139,13 +109,13 @@ A form for project state change.
         <div class="form-group col-md-12">
             <label mean-token="'create-methods'" class="col-md-3 control-label">Toimintatavat</label>
             <div class="col-md-12" id="methodsSelection">
-                                <select id="methodSelect" data-ng-model="method_name">
-                                    <option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>
-                                </select>
-                
-                                <select id="levelSelect" data-ng-model="method_level">
-                                    <option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>
-                                </select>
+                <select id="methodSelect" data-ng-model="method_name">
+                    <option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>
+                </select>
+
+                <select id="levelSelect" data-ng-model="method_level">
+                    <option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>
+                </select>
                 <!--                <label ng-repeat="method in methods">
                                     <input
                                         type="checkbox"
@@ -401,7 +371,36 @@ A form for project state change.
         </div>
     </form>
 
-</form>
+
+    <hr>
+
+    <article class="proj-left">
+        <h4 class="proj-header">Kuvaus</h4>
+        <span class="proj-body">
+            {{project.description}}
+        </span>
+    </article>
+
+    <article class="proj-div">
+        <h4 class="proj-header">Hanketiedot</h4>
+        <section class="proj-body">
+            <p>DAC: {{project.dac}}</p>
+            <p>Kirjattu: {{project.reg_date| date:'dd.MM.yyyy'}}</p>
+            <p ng-show="project.funding.granted_curr_eur" class="ng-hide">Myönnetty: {{project.funding.granted_curr_eur}} EUR ({{project.funding.granted_curr_local}} local)</p>
+            <p ng-show="!project.funding.granted_curr_eur" class="ng-hide">Haettu: {{project.funding.applied_curr_eur}} EUR ({{project.funding.applied_curr_local}} local)</p>
+            <p>Kesto: {{project.duration_months}} kk</p>
+        </section>
+    </article>
+
+    <article class="proj-div">
+        <h4 class="proj-header">Järjestö</h4>
+        <section class="proj-body">
+            <p>Nimi: {{project.organisation.name}}</p>
+            <p>Edustaja: {{project.organisation.representative}}</p>
+        </section>
+    </article>
+
+
 
 
 </section>
