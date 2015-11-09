@@ -177,6 +177,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 });
         };
 
+        $scope.addEndedState = function () {
+                var project = $scope.project;
+                project.state = $scope.global.newState;
+                console.log($scope.project);                
+                project.$addEnded(function (response) {
+                    $location.path('projects/' + response._id)
+                });
+        };
+
         $scope.changeState = function (changeTo) {
             Projects.get({
                 projectId: $stateParams.projectId

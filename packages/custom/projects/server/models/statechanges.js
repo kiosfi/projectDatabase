@@ -25,20 +25,13 @@ var InReviewSchema = new Schema({
     default: Date.now
   },
   user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+    type: String,
+    required: true
   },
   comments: {
     type: String
   }
 });
-
-InReviewSchema.statics.load = function (id, cb) {
-    this.findOne({
-        _id: id
-    }).populate('user', 'name email username')
-    .exec(cb);
-};
 
 var ApprovedSchema = new Schema({
   date: {
@@ -46,8 +39,8 @@ var ApprovedSchema = new Schema({
     default: Date.now
   },
   user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+    type: String,
+    required: true
   },
   approved_date: {
     type: String
@@ -85,8 +78,8 @@ var RejectedSchema = new Schema({
     default: Date.now
   },
   user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+    type: String,
+    required: true
   },
   rejection_categories: {
     type: Array,
@@ -98,20 +91,14 @@ var RejectedSchema = new Schema({
   }
 });
 
-RejectedSchema.statics.load = function (id, cb) {
-    this.findOne({
-        _id: id
-    }).populate('user', 'name email username').exec(cb);
-};
-
 var SignedSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
   },
   user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+    type: String,
+    required: true
   },
   signed_by: {
     type: String,
@@ -123,20 +110,14 @@ var SignedSchema = new Schema({
   }
 });
 
-SignedSchema.statics.load = function (id, cb) {
-    this.findOne({
-        _id: id
-    }).populate('user', 'name email username').exec(cb);
-};
-
 var IntReportSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
   },
   user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+    type: String,
+    required: true
   },
   objectives: {
     type: Array
@@ -156,8 +137,8 @@ var EndReportSchema = new Schema({
     default: Date.now
   },
   user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+    type: String,
+    required: true
   },
   audit: {
     date: {
@@ -187,8 +168,8 @@ var EndedSchema = new Schema({
     default: Date.now
   },
   user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+    type: String,
+    required: true
   },
   end_date: {
     type: String,
@@ -198,8 +179,11 @@ var EndedSchema = new Schema({
     type: String
   },
   approved_by: {
-    type: Array,
-    default: ['ceo', 'board']
+    type: String,
+    required: true
+  },
+  other_comments: {
+    type: String
   }
 });
 
