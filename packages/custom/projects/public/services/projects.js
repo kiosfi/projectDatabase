@@ -15,6 +15,9 @@ angular.module('mean.projects').factory('Projects', ['$resource',
       },
       addRejected: {
         method: 'PUT', url: 'api/projects/rej/:projectId'
+      },
+      addSigned: {
+        method: 'PUT', url: 'api/projects/sign/:projectId'
       }
     });
   }

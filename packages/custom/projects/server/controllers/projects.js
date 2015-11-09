@@ -10,6 +10,7 @@ var mongoose = require('mongoose'),
     States = mongoose.model('States'),
     InReview = mongoose.model('InReview'),
     Rejected = mongoose.model('Rejected'),
+    Signed = mongoose.model('Signed'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
@@ -64,6 +65,9 @@ module.exports = function (Projects) {
             });
         },
 
+        /*
+        * Loads a project for display and populates its state fields.
+        */
         show: function (req, res) {
 
           InReview.load(req.project.in_review, function (err, rev) {
@@ -72,13 +76,17 @@ module.exports = function (Projects) {
               Rejected.load(req.project.rejected, function(err, rej) {
                 req.project.rejected = rej;
 
-                Projects.events.publish({
-                    action: 'viewed',
-                    name: req.project.title,
-                    url: config.hostname + '/projects/' + req.project._id
-                });
+                Signed.load(req.project.signed, function(err, sign) {
+                  req.project.signed = sign;
 
-                res.json(req.project);
+                  Projects.events.publish({
+                      action: 'viewed',
+                      name: req.project.title,
+                      url: config.hostname + '/projects/' + req.project._id
+                    });
+
+                  res.json(req.project);
+                });
               });
             });
 
@@ -167,6 +175,42 @@ module.exports = function (Projects) {
 
               var project = req.project;
               project.rejected = rejected._id;
+              project.state = req.body.state;
+
+              project.save(function (err) {
+                  if (err) {
+                     return res.status(500).json({
+                          error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'
+                        });
+                      }
+
+                  Projects.events.publish({
+                      action: 'updated',
+                      name: project.title,
+                      url: config.hostname + '/projects/' + project._id
+                  });
+
+                  res.json(project);
+            });
+        },
+
+        /*
+        * Moves a project to signed state and saves the state object to
+        * its collection.
+        */
+        addSigned: function (req, res) {
+              var signed = new Signed(req.body.signed);
+              signed.user = req.user;
+              signed.save(function (err) {
+                  if (err) {
+                      return res.status(500).json({
+                          error: 'Tilatietojen tallennus epäonnistui.'
+                      });
+                    }
+              });
+
+              var project = req.project;
+              project.signed = signed._id;
               project.state = req.body.state;
 
               project.save(function (err) {
