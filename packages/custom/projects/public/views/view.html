@@ -194,7 +194,7 @@
             <b>Siirtynyt käsittelyyn</b>: {{project.in_review.date| date:'dd.MM.yyyy'}}
             <button class="btn" onclick="toggleCollapse('visibilityReviewinfo')">Tiedot</button>
             <span id="visibilityReviewinfo">
-                <p><i>Muokkaaja</i>: {{project.in_review.user.name}}, {{project.in_review.date| date:'dd.MM.yyyy'}}</p>
+                <p><i>Muokkaaja</i>: {{project.in_review.user.name}}, {{project.in_review.date| date:'dd.MM.yyyy, HH:mm'}}</p>
                 <br>
                 <i>Kommentit: </i><br><br>
                 <p>{{project.in_review.comments}}</p>
@@ -206,7 +206,7 @@
             <b>Siirtynyt hyväksytyksi</b>: {{project.approved.date| date:'dd.MM.yyyy'}}
             <button class="btn" onclick="toggleCollapse('visibilityApprovedinfo')">Tiedot</button>
             <span id="visibilityApprovedinfo">
-                <p><i>Muokkaaja</i>: {{project.approved.user}}, {{project.approved.date| date:'dd.MM.yyyy'}}</p>
+                <p><i>Muokkaaja</i>: {{project.approved.user}}, {{project.approved.date| date:'dd.MM.yyyy, HH:mm'}}</p>
                 <p><i>Hyväksyjä:</i> {{project.approved.approved_by}}</p>
                 <p><i>Hyväksymis pvm:</i> {{project.approved.approved_date}}</p>
                 <p><i>Hallitukselle tiedoksi:</i> {{project.approved.board_notified}}</p>
