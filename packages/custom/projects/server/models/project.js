@@ -139,12 +139,16 @@ var ProjectSchema = new Schema({
       ref: 'Signed'
     },
     intermediary_report: {
-      type: Schema.ObjectId,
-      ref: 'IntReport'
+      type: Array,
+      default: [{type: Schema.ObjectId, ref: 'IntReport'}]
     },
     end_report: {
       type: Schema.ObjectId,
       ref: 'EndReport'
+    },
+    ended: {
+      type: Schema.ObjectId,
+      ref: 'Ended'
     },
 
 
@@ -168,7 +172,8 @@ ProjectSchema.statics.load = function (id, cb) {
     this.findOne({
         _id: id
     }).populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
-                  {path: 'rejected', model: 'Rejected'}])
+                  {path: 'signed', model: 'Signed'}, {path: 'rejected', model: 'Rejected'},
+                  {path: 'ended', model: 'Ended'}])
     .exec(cb);
 };
 

@@ -341,21 +341,21 @@ A form for project state change.
 
     <!--Päättynyt-->
 
-    <form name="endedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'päättynyt'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+    <form name="endedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'päättynyt'"  role="form" data-ng-submit="addEndedState(endedForm.$valid)" novalidate>
 
                 <div class="form-group col-md-12">
             <label for="end_date" class="col-md-2">Päivämäärä</label>
             <div class="col-md-10">
-                <input name="end_date" type="text" class="form-control" data-ng-model="" id="end_date" placeholder="Päättymispäivämäärä" required>
+                <input name="end_date" type="text" class="form-control" data-ng-model="project.ended.end_date" id="end_date" placeholder="Päättymispäivämäärä" required>
             </div>
         </div>
 
                 <div class="form-group col-md-12">
             <label for="approved_by" class="col-md-2"> Hyväksyjä</label>
             <div class="col-md-10">
-                <select id="approved_by" data-ng-model="" class='form-control'>
-                    <option value="option-1">Toiminnanjohtaja</option>
-                    <option value="option-2">Hallitus</option>
+                <select id="approved_by" data-ng-model="project.ended.approved_by" class='form-control'>
+                    <option value="toiminnanjohtaja">Toiminnanjohtaja</option>
+                    <option value="hallitus">Hallitus</option>
                 </select>
             </div>
         </div>
@@ -363,14 +363,14 @@ A form for project state change.
                 <div class="form-group col-md-12">
             <label for="board_notified" class="col-md-2">Tiedoksiannnon päivämäärä</label>
             <div class="col-md-10">
-                <input name="board_notified" type="text" class="form-control" data-ng-model="" id="board_notified" placeholder="Hallitukselle tiedoksi pvm" required>
+                <input name="board_notified" type="text" class="form-control" data-ng-model="project.ended.board_notified" id="board_notified" placeholder="Hallitukselle tiedoksi pvm" required>
             </div>
         </div>
 
         <div class="form-group col-md-12">
             <label for="comments" class="col-md-2">Muut kommentit</label>
             <div class="col-md-10">
-                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Muut päättämiseen liittyvät kommentit" required></textarea>
+                <textarea name="comments" type="text" class="form-control" data-ng-model="project.ended.other_comments" id="comments" placeholder="Muut päättämiseen liittyvät kommentit" required></textarea>
             </div>
         </div>
 
