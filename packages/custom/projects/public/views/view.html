@@ -10,18 +10,18 @@
             </a>
         </span>
     </h2>
-{{project.approved}}
+
     <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
         <span class="tila">{{project.state}}</span></h3>
 
     <hr>
 
-    <article class="proj-body" ng-show="project.approved.length">
+    <article class="proj-body" ng-show="project.approved">
         <b>Teemat </b>
         <button type="button" data-ng-model="project.approved.themes" data-ng-repeat="theme in project.approved.themes" disabled>
             <span class="glyphicon glyphicon-tag">
-            </span> {{theme}} 
-        </button>
+             </span> {{theme}}  
+        </button><br>
     </article>
 
 
@@ -201,13 +201,26 @@
             </span>
             <br>
         </section>
-        <section ng-show="project.state !== 'rekisteröity'" class="proj-body">
+        <section ng-show="project.state == 'hyväksytty' || project.state == 'hylätty' || project.state == 'allekirjoitettu' ||
+                 project.state == 'väliraportti' || project.state == 'loppuraportti' || project.state == 'päättynyt'" class="proj-body">
             <b>Siirtynyt hyväksytyksi</b>: {{project.approved.date| date:'dd.MM.yyyy'}}
             <button class="btn" onclick="toggleCollapse('visibilityApprovedinfo')">Tiedot</button>
             <span id="visibilityApprovedinfo">
-                <p><i>Muokkaaja</i>: {{project.approved.user.name}}, {{project.approved.date| date:'dd.MM.yyyy'}}</p>
-                <br>
+                <p><i>Muokkaaja</i>: {{project.approved.user}}, {{project.approved.date| date:'dd.MM.yyyy'}}</p>
                 <p><i>Hyväksyjä:</i> {{project.approved.approved_by}}</p>
+                <p><i>Hyväksymis pvm:</i> {{project.approved.approved_date}}</p>
+                <p><i>Hallitukselle tiedoksi:</i> {{project.approved.board_notified}}</p>
+                <p><i>Hyväksytty summa:</i> {{project.approved.granted_sum.granted_curr_eur}} € ({{project.approved.granted_sum.granted_curr_local}} paikallista valuuttaa)</p>
+                <p><i>Teemat:</i></p>
+                <ul>
+                    <li data-ng-repeat="theme in project.approved.themes">{{theme}}</li>
+                </ul>
+                <p><i>Toimintatavat:</i></p>
+                <ul>
+                    <li data-ng-repeat="method in project.approved.methods">{{method.name}}, 
+                    <i>taso:</i> {{method.level}}
+                    </li>
+                </ul>
             </span>
         </section>
         <section>

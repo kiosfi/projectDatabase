@@ -89,7 +89,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             Projects.get({
                 projectId: $stateParams.projectId
             }, function (project) {
-                console.log(project);
                 $scope.project = project;
             });
         };
