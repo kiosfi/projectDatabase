@@ -10,7 +10,7 @@
             </a>
         </span>
     </h2>
-
+{{project.approved}}
     <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
         <span class="tila">{{project.state}}</span></h3>
 
@@ -190,21 +190,32 @@
     <hr>
     <article>
         <h4 class="proj-header">Aikataulu</h4>
-            <section ng-show="project.state !== 'rekisteröity'" class="proj-body">
-                <b>Siirtynyt käsittelyyn</b>: {{project.in_review.date | date:'dd.MM.yyyy'}}
-                <button class="btn" onclick="toggleCollapse('visibilityReviewinfo')">Tiedot</button>
-                <span id="visibilityReviewinfo">
-                    <p><i>Muokkaaja</i>: {{project.in_review.user.name}}, {{project.in_review.date | date:'dd.MM.yyyy'}}</p>
-                    <br>
-                    <i>Kommentit: </i><br><br>
-                    <p>{{project.in_review.comments}}</p>
-                </span>
+        <section ng-show="project.state !== 'rekisteröity'" class="proj-body">
+            <b>Siirtynyt käsittelyyn</b>: {{project.in_review.date| date:'dd.MM.yyyy'}}
+            <button class="btn" onclick="toggleCollapse('visibilityReviewinfo')">Tiedot</button>
+            <span id="visibilityReviewinfo">
+                <p><i>Muokkaaja</i>: {{project.in_review.user.name}}, {{project.in_review.date| date:'dd.MM.yyyy'}}</p>
                 <br>
-                <p class="proj-sub-title">Menneet</p>
-                <p>1.1.2015 1. Väliraportti</p>
-                <p>1.6.2015 2. Väliraportti</p>
-            </section>
-      </article>
+                <i>Kommentit: </i><br><br>
+                <p>{{project.in_review.comments}}</p>
+            </span>
+            <br>
+        </section>
+        <section ng-show="project.state !== 'rekisteröity'" class="proj-body">
+            <b>Siirtynyt hyväksytyksi</b>: {{project.approved.date| date:'dd.MM.yyyy'}}
+            <button class="btn" onclick="toggleCollapse('visibilityApprovedinfo')">Tiedot</button>
+            <span id="visibilityApprovedinfo">
+                <p><i>Muokkaaja</i>: {{project.approved.user.name}}, {{project.approved.date| date:'dd.MM.yyyy'}}</p>
+                <br>
+                <p><i>Hyväksyjä:</i> {{project.approved.approved_by}}</p>
+            </span>
+        </section>
+        <section>
+            <p class="proj-sub-title">Menneet</p>
+            <p>1.1.2015 1. Väliraportti</p>
+            <p>1.6.2015 2. Väliraportti</p>
+        </section>
+    </article>
 
 
 

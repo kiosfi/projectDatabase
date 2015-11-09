@@ -4,19 +4,18 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    Project = mongoose.model('Project'),
-    Organisation = mongoose.model('Organisation'),
-    BankAccount = mongoose.model('BankAccount'),
-    States = mongoose.model('States'),
-    InReview = mongoose.model('InReview'),
-    Approved = mongoose.model('Approved'),
-    config = require('meanio').loadConfig(),
-    _ = require('lodash');
+        Project = mongoose.model('Project'),
+        Organisation = mongoose.model('Organisation'),
+        BankAccount = mongoose.model('BankAccount'),
+        States = mongoose.model('States'),
+        InReview = mongoose.model('InReview'),
+        Approved = mongoose.model('Approved'),
+        config = require('meanio').loadConfig(),
+        _ = require('lodash');
 
 module.exports = function (Projects) {
 
     return {
-
         project: function (req, res, next, id) {
             Project.load(id, function (err, project) {
                 if (err)
@@ -28,7 +27,6 @@ module.exports = function (Projects) {
                 next();
             });
         },
-
         create: function (req, res) {
 
             var project = new Project(req.body);
@@ -63,7 +61,6 @@ module.exports = function (Projects) {
                 });
             });
         },
-
         show: function (req, res) {
 
             Projects.events.publish({
@@ -74,49 +71,46 @@ module.exports = function (Projects) {
 
             res.json(req.project);
         },
+        all: function (req, res) {
+            var query = Project.find();
 
-         all: function(req, res) {
-             var query = Project.find();
+            query
+                    .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'}])
+                    .exec(function (err, projects) {
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Hankkeita ei voi näyttää'
+                            });
+                        }
+                        res.json(projects)
+                    });
 
-             query
-             .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'}])
-             .exec(function(err, projects) {
-                 if (err) {
-                     return res.status(500).json({
-                         error: 'Hankkeita ei voi näyttää'
-                     });
-                 }
-                 res.json(projects)
-             });
-
-         },
-
-         allStates: function(req, res) {
+        },
+        allStates: function (req, res) {
             var query = States.find();
-            query.exec(function(err, states) {
-              if (err) {
-                return res.status(500).json({
-                    error: 'Tiloja ei voi näyttää'
-                });
-              }
-              res.json(states)
-            });
-         },
-
-         addReview: function(req, res) {
-             var project = req.project;
-             var in_review = new InReview(req.body.in_review);
-             in_review.user = req.user;
-             project.in_review = in_review._id;
-             project.state = req.body.state;
-
-             in_review.save(function (err) {
+            query.exec(function (err, states) {
                 if (err) {
                     return res.status(500).json({
-                      error: 'Tilatietojen tallennus epäonnistui'
+                        error: 'Tiloja ei voi näyttää'
                     });
                 }
-             });
+                res.json(states)
+            });
+        },
+        addReview: function (req, res) {
+            var project = req.project;
+            var in_review = new InReview(req.body.in_review);
+            in_review.user = req.user;
+            project.in_review = in_review._id;
+            project.state = req.body.state;
+
+            in_review.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Tilatietojen tallennus epäonnistui'
+                    });
+                }
+            });
 
             project.save(function (err) {
                 if (err) {
@@ -135,8 +129,7 @@ module.exports = function (Projects) {
             });
 
         },
-        
-         /*
+        /*
          * Updates project to contain data required in approved state        
          * @param {type} req project object to be updated, sent from frontend
          * @param {type} res project object after update 
@@ -144,27 +137,30 @@ module.exports = function (Projects) {
          *  updating not possible
          */
         addApproved: function (req, res) {
-            var project = req.project;
+            console.log('alku:  ' + req.body);
             var approved = new Approved(req.body.approved);
-            approved.user = req.user;
-            project.approved = approved._id;
-            project.state = req.body.state;
-            
+            approved.user = req.user.name;
+
             approved.save(function (err) {
                 if (err) {
+                    console.log(err);
                     return res.status(500).json({
                         error: 'Tilatietojen tallennus epäonnistui.'
                     });
                 }
             });
-                
-                project.save(function (err) {
-                    if (err) {
-                        return res.status(500).json({
-                            error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'
-                        });
+
+            var project = req.project;
+            project.approved = approved._id;
+            project.state = req.body.state;
+            project.save(function (err) {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'
+                    });
                 }
-                
+
                 Projects.events.publish({
                     action: 'updated',
                     name: project.title,
@@ -173,17 +169,16 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         destroy: function (req, res) {
             var project = req.project;
 
 
-             project.remove(function(err) {
-                 if (err) {
-                     return res.status(500).json({
-                         error: 'Hankkeen poistaminen ei onnistu.'
-                     });
-                 }
+            project.remove(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Hankkeen poistaminen ei onnistu.'
+                    });
+                }
 
                 Projects.events.publish({
                     action: 'deleted',
@@ -196,20 +191,19 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /*
          * Finds projects by organisationId and returns list of projects in json
          */
-        byOrg: function(req, res) {
+        byOrg: function (req, res) {
             Project.find({organisation: req.organisation})
-                    .exec(function(err, projects) {
-                        if(err) {
+                    .exec(function (err, projects) {
+                        if (err) {
                             return res.status(500).json({
                                 error: 'Järjestön hankkeiden lataaminen ei onnistu.'
                             });
                         }
-                res.json(projects);
-            });
+                        res.json(projects);
+                    });
         }
 
 

@@ -14,14 +14,22 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
 
-        $scope.categories = ['naiset', 'lapset', 'vammaiset', 'yleiset ihmisoikeudet', 'muu'];
-        
-        $scope.themes = ['naiset', 'lapset', 'vammaiset', 'yleiset ihmisoikeudet', 'muu'];
-        
-        $scope.methods = ['toiminta1', 'toiminta2', 'toiminta3', 'toiminta4', 'toiminta4', 'toiminta5'];
+        $scope.categories = ['Oikeusvaltio ja demokratia', 'lapset', 'vammaiset', 'yleiset ihmisoikeudet', 'muu'];
+
+        $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
+            'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
+            'Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet', 'Etniset vähemmistöt ja alkuperäiskansat',
+            'LHBTIQ', 'Ihmisoikeuspuolustajat'];
+
+        $scope.methodNames = ['Tietoisuuden lisääminen', 'Ihmisoikeuskasvatus ja -koulutus', 'Kapasiteetin vahvistaminen',
+            'Kampanjointi ja/tai lobbaus', 'Vaikuttamistyö', 'Dokumentaatio ja monitorointi', 'Oikeusapu ja -neuvonta',
+            'Strategiset ja/tai perusoikeuskanteet ja/tai ryhmäkanteet', 'Oikeusturvan saatavuuden parantaminen', 'Palveluiden saatavuuden parantaminen',
+            'Ihmisoikeuspuolustajien suojelu', 'Verkostoituminen', 'Alueellinen yhteistyö', 'Toimintatuki', 'Muu'];
+
+        $scope.methodLevels = ['Kansainvälinen', 'Kansallinen', 'Paikallinen', 'Yhteisö'];
 
         $scope.themeSelection = [];
-        
+
         $scope.methodSelection = [];
 
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
@@ -36,7 +44,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.themeSelection.push(theme);
             }
         };
-        
+
         $scope.toggleMethodSelection = function toggleMethodSelection(method) {
             var idx = $scope.methodSelection.indexOf(method);
 
@@ -81,6 +89,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             Projects.get({
                 projectId: $stateParams.projectId
             }, function (project) {
+                console.log(project);
                 $scope.project = project;
             });
         };
@@ -141,16 +150,40 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $location.path('projects/' + project._id + "/change")
             });
         };
-        
+
         $scope.addApprovedState = function () {
+            $scope.approvedMethod = {
+                name: $scope.method_name,
+                level: $scope.method_level
+            };
+            
             var project = $scope.project;
-            project.themes = $scope.themeSelection;
-            project.methods = $scope.methodSelection;
+            project.approved.themes = $scope.themeSelection;
+            project.approved.methods = $scope.approvedMethod;
             project.state = $scope.global.newState;
             project.$addApproved(function (response) {
                 $location.path('projects/' + project._id)
             });
         };
+        
+        $scope.addMethod = function () {
+//            var opts = document.getElementById('methodsSelection');
+//            var str = "<select id="
+//            
+//            for (var i=0; i>opts.length; i++) {
+//                
+//            }
+            var div = document.getElementById('methodsSelection');
+            div.innerHTML += '<select data-ng-model="method_name">' +
+                    '<option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>' +
+                '</select>' +
+
+                '<select data-ng-model="method_level">' +
+                    '<option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>' +
+                '</select>';
+        
+        };
+        
 
         /**
          * The sorting predicate used in project listing. Initial value is
@@ -174,7 +207,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.order = function (predicate) {
             $scope.reverse = ($scope.predicate === predicate)
-            ? !$scope.reverse : false;
+                    ? !$scope.reverse : false;
             $scope.predicate = predicate;
         };
 

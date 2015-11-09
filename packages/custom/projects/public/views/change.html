@@ -77,6 +77,9 @@ A form for project state change.
             <div class="col-md-10">
                 <input name="approved_date" type="text" class="form-control" data-ng-model="project.approved.approved_date" id="approved_date" placeholder="Hankkeen hyväksynnän pvm" required>
             </div>
+            <div ng-show="submitted && approvedForm.approved_date.$invalid" class="help-block">
+                <p ng-show="approvedForm.approved_date.$error.required">Kenttä on pakollinen</p>
+            </div>
         </div>
 
         <div class="form-group col-md-12">
@@ -95,6 +98,9 @@ A form for project state change.
             <div class="col-md-10">
                 <input name="board_notified" type="text" class="form-control" data-ng-model="project.approved.board_notified" id="board_notified" placeholder="Hallitukselle tiedoksi pvm" required>
             </div>
+            <div ng-show="submitted && approvedForm.board_notified.$invalid" class="help-block">
+                <p ng-show="approvedForm.board_notified.$error.required">Kenttä on pakollinen</p>
+            </div>
         </div>
 
         <div class="form-group col-md-12">
@@ -102,51 +108,67 @@ A form for project state change.
             <div class="col-md-4">
                 <input name="granted_sum_eur" type="text" class="form-control" data-ng-model="project.approved.granted_sum.granted_curr_eur" id="granted_sum_eur" placeholder="0" required>EUR
             </div>
+            <div ng-show="submitted && approvedForm.granted_sum_eur.$invalid" class="help-block">
+                <p ng-show="approvedForm.granted_sum_eur.$error.required">Kenttä on pakollinen</p>
+            </div>
 
             <label for="granted_sum_local" class="col-md-2 control-label">Myönnetty summa (paikallinen)</label>
             <div class="col-md-4">
                 <input name="granted_sum_local" type="text" class="form-control" data-ng-model="project.approved.granted_sum.granted_curr_local" id="granted_sum_local" placeholder="0" required>local
             </div>
+            <div ng-show="submitted && approvedForm.granted_sum_local.$invalid" class="help-block">
+                <p ng-show="approvedForm.granted_sum_local.$error.required">Kenttä on pakollinen</p>
+            </div>
         </div>
 
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
             <label mean-token="'create-themes'" class="col-md-3 control-label">Teemat</label>
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <label ng-repeat="theme in themes">
                     <input
                         type="checkbox"
                         name="selectedThemes[]"
                         value="{{theme}}"
-                        ng-checked="themeSelection.indexOf(theme) > - 1"
+                        ng-checked="themeSelection.indexOf(theme) > -1"
                         ng-click="toggleThemeSelection(theme)"
-                        > {{theme}}
+                        > {{theme}}<br>
                 </label>
             </div>
         </div>
 
         <div class="form-group col-md-12">
             <label mean-token="'create-methods'" class="col-md-3 control-label">Toimintatavat</label>
+            <div class="col-md-12" id="methodsSelection">
+                                <select id="methodSelect" data-ng-model="method_name">
+                                    <option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>
+                                </select>
+                
+                                <select id="levelSelect" data-ng-model="method_level">
+                                    <option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>
+                                </select>
+                <!--                <label ng-repeat="method in methods">
+                                    <input
+                                        type="checkbox"
+                                        name="selectedMethods[]"
+                                        value="{{method}}"
+                                        ng-checked="methodSelection.indexOf(method) > -1"
+                                        ng-click="toggleMethodSelection(method)"
+                                        > {{method}}
+                                </label>-->
+                <input type="button" value="Lisää toimintatapa" ng-click="addMethod();"/>
+            </div>
             <div class="col-md-12">
-                <label ng-repeat="method in methods">
-                    <input
-                        type="checkbox"
-                        name="selectedMethods[]"
-                        value="{{method}}"
-                        ng-checked="methodSelection.indexOf(method) > - 1"
-                        ng-click="toggleMethodSelection(method)"
-                        > {{method}}
-                </label>
+
             </div>
+
+            <!--        <div class="form-group col-md-12">
+                        <label for="comments" class="col-md-2">Kommentit</label>
+                        <div class="col-md-10">
+                            <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Kommentteja" required></textarea>
+                        </div>
+                    </div>-->
+
         </div>
-
-<!--        <div class="form-group col-md-12">
-            <label for="comments" class="col-md-2">Kommentit</label>
-            <div class="col-md-10">
-                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Kommentteja" required></textarea>
-            </div>
-        </div>-->
-
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button type="submit" class="btn btn-default">Tallenna</button>
@@ -340,14 +362,14 @@ A form for project state change.
 
     <form name="endedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'päättynyt'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
 
-                <div class="form-group col-md-12">
+        <div class="form-group col-md-12">
             <label for="end_date" class="col-md-2">Päivämäärä</label>
             <div class="col-md-10">
                 <input name="end_date" type="text" class="form-control" data-ng-model="" id="end_date" placeholder="Päättymispäivämäärä" required>
             </div>
         </div>
 
-                <div class="form-group col-md-12">
+        <div class="form-group col-md-12">
             <label for="approved_by" class="col-md-2"> Hyväksyjä</label>
             <div class="col-md-10">
                 <select id="approved_by" data-ng-model="" class='form-control'>
@@ -357,7 +379,7 @@ A form for project state change.
             </div>
         </div>
 
-                <div class="form-group col-md-12">
+        <div class="form-group col-md-12">
             <label for="board_notified" class="col-md-2">Tiedoksiannnon päivämäärä</label>
             <div class="col-md-10">
                 <input name="board_notified" type="text" class="form-control" data-ng-model="" id="board_notified" placeholder="Hallitukselle tiedoksi pvm" required>
