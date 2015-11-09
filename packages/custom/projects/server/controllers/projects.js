@@ -86,7 +86,8 @@ module.exports = function (Projects) {
 
              query
              .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
-                        {path: 'rejected', model: 'Rejected'}])
+                        {path: 'rejected', model: 'Rejected'}, {path: 'signed', model: 'Signed'},
+                      {path: 'ended', model: 'Ended'}])
              .exec(function(err, projects) {
                  if (err) {
                      return res.status(500).json({

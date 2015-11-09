@@ -11,7 +11,10 @@ var expect = require('expect.js'),
         Organisation = mongoose.model('Organisation'),
         BankAccount = mongoose.model('BankAccount'),
         User = mongoose.model('User'),
-        InReview = mongoose.model('InReview');
+        InReview = mongoose.model('InReview'),
+        Rejected = mongoose.model('Rejected'),
+        Signed = mongoose.model('Signed'),
+        Ended = mongoose.model('Ended');
 
 var project1;
 var project2;
@@ -25,6 +28,9 @@ var bank_account3;
 var bank_account4;
 var user;
 var in_review;
+var rejected;
+var signed;
+var ended;
 
 describe('<Unit Test>', function () {
     describe('Model Project:', function () {
@@ -126,7 +132,7 @@ describe('<Unit Test>', function () {
                 this.timeout(10000);
                 var query = Project.find();
 
-                return query.sort({"name": "asc"}).exec(function (err, data) {
+                return query.exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
 //                    expect(data[0].title).to.equal("Human rights");
@@ -344,10 +350,10 @@ describe('<Unit Test>', function () {
             it('should create a new "in review" state update given project with its id', function (done) {
                 this.timeout(10000);
                 in_review = new InReview({
-                    "user": user,
                     "comments": "this is a comment"});
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                    in_review.user = user.name;
                     in_review.save();
                     proj.state = "käsittelyssä";
                     proj.in_review = in_review;
@@ -355,9 +361,77 @@ describe('<Unit Test>', function () {
                     expect(err).to.be(null);
                     expect(proj.state).to.be("käsittelyssä");
                     expect(proj.in_review.comments).to.be("this is a comment");
+                    in_review.remove();
+                    user.remove();
                     done();
                 });
             });
+
+            it('should create a new "rejected" state update given project with its id', function (done) {
+                this.timeout(10000);
+                rejected = new Rejected({
+                    "rejection_categories": ["1", "3"],
+                    "rejection_comments": "this is a comment"});
+
+                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                    rejected.user = user.name;
+                    rejected.save();
+                    proj.state = "hylätty";
+                    proj.rejected = rejected;
+                    proj.save();
+                    expect(err).to.be(null);
+                    expect(proj.state).to.be("hylätty");
+                    expect(proj.rejected.rejection_comments).to.be("this is a comment");
+                    rejected.remove();
+                    user.remove();
+                    done();
+                });
+            });
+
+            it('should create a new "signed" state update given project with its id', function (done) {
+                this.timeout(10000);
+                signed = new Signed({
+                    "signed_by": "Jaana Jantunen",
+                    "signed_date": "12.12.2015"});
+
+                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                    signed.user = user.name;
+                    signed.save();
+                    proj.state = "allekirjoitettu";
+                    proj.signed = signed;
+                    proj.save();
+                    expect(err).to.be(null);
+                    expect(proj.state).to.be("allekirjoitettu");
+                    expect(proj.signed.signed_by).to.be("Jaana Jantunen");
+                    signed.remove();
+                    user.remove();
+                    done();
+                });
+            });
+
+            it('should create a new "ended" state update given project with its id', function (done) {
+                this.timeout(10000);
+                ended = new Ended({
+                    "end_date": "12.12.2015",
+                    "board_notified": "12.12.2015",
+                    "approved_by": "toimitusjohtaja",
+                    "other_comments": "kommentti"});
+
+                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                    ended.user = user.name;
+                    ended.save();
+                    proj.state = "päättynyt";
+                    proj.ended = ended;
+                    proj.save();
+                    expect(err).to.be(null);
+                    expect(proj.state).to.be("päättynyt");
+                    expect(proj.ended.board_notified).to.be("12.12.2015");
+                    ended.remove();
+                    user.remove();
+                    done();
+                });
+            });
+
         });
 
         afterEach(function (done) {
@@ -366,6 +440,7 @@ describe('<Unit Test>', function () {
             project2.remove();
             organisation.remove();
             bank_account.remove();
+
             done();
         });
     });
