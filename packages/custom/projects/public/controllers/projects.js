@@ -28,6 +28,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.methodLevels = ['Kansainvälinen', 'Kansallinen', 'Paikallinen', 'Yhteisö'];
 
+        $scope.selectedMethods = [];
+
         $scope.themeSelection = [];
 
         $scope.methodSelection = [];
@@ -149,40 +151,62 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $location.path('projects/' + project._id + "/change")
             });
         };
+        
+        $scope.testList = [];
 
         $scope.addApprovedState = function () {
-            $scope.approvedMethod = {
-                name: $scope.method_name,
-                level: $scope.method_level
-            };
-            
+            console.log($scope.testList);
             var project = $scope.project;
             project.approved.themes = $scope.themeSelection;
-            project.approved.methods = $scope.approvedMethod;
+            project.approved.methods = $scope.testList;
             project.state = $scope.global.newState;
             project.$addApproved(function (response) {
                 $location.path('projects/' + project._id)
             });
         };
-        
-        $scope.addMethod = function () {
+
+        $scope.addMethod = function (divId) {
+            $scope.testList.push({name: '', level: ''});
+            
+            
+//            var name = document.createElement("select");
+//            for (var i = 0; i < $scope.methodNames.length; i++) {
+//                var opt = document.createElement("option");
+//                opt.value = $scope.methodNames[i];
+//                opt.text = $scope.methodNames[i];
+//                name.appendChild(opt);
+//            }
+//            document.getElementById(divId).appendChild(name);
+//            var level = document.createElement("select");
+//            for (var i = 0; i < $scope.methodLevels.length; i++) {
+//                var opt = document.createElement("option");
+//                opt.value = $scope.methodLevels[i];
+//                opt.text = $scope.methodLevels[i];
+//                level.appendChild(opt);
+//            }
+//            document.getElementById(divId).appendChild(level);
+
 //            var opts = document.getElementById('methodsSelection');
 //            var str = "<select id="
 //            
 //            for (var i=0; i>opts.length; i++) {
 //                
 //            }
-            var div = document.getElementById('methodsSelection');
-            div.innerHTML += '<select data-ng-model="method_name">' +
-                    '<option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>' +
-                '</select>' +
+//            var div = document.getElementById('methodsSelection');
+//            div.innerHTML += '<select data-ng-model="method_name">' +
+//                    '<option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>' +
+//                '</select>' +
+//
+//                '<select data-ng-model="method_level">' +
+//                    '<option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>' +
+//                '</select>';
 
-                '<select data-ng-model="method_level">' +
-                    '<option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>' +
-                '</select>';
-        
         };
         
+        $scope.removeMethod = function (divId) {
+            
+        }
+
 
         /**
          * The sorting predicate used in project listing. Initial value is

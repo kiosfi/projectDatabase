@@ -137,12 +137,13 @@ module.exports = function (Projects) {
          *  updating not possible
          */
         addApproved: function (req, res) {
-            console.log('alku:  ' + req.body);
+            console.log('alku:  ' + req.body.approved);
             var approved = new Approved(req.body.approved);
             approved.user = req.user.name;
 
             approved.save(function (err) {
                 if (err) {
+                    console.log(" EKA SAVE HAJOS");
                     console.log(err);
                     return res.status(500).json({
                         error: 'Tilatietojen tallennus epäonnistui.'
@@ -155,6 +156,8 @@ module.exports = function (Projects) {
             project.state = req.body.state;
             project.save(function (err) {
                 if (err) {
+                    console.log(project);
+                     console.log(" TOKA SAVE HAJOS");
                     console.log(err);
                     return res.status(500).json({
                         error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'

@@ -108,14 +108,21 @@ A form for project state change.
 
         <div class="form-group col-md-12">
             <label mean-token="'create-methods'" class="col-md-3 control-label">Toimintatavat</label>
-            <div class="col-md-12" id="methodsSelection">
-                <select id="methodSelect" data-ng-model="method_name">
+            <div class="col-md-12" id="methodsSelection" data-ng-repeat="test in testList">
+                <select id="methodSelect" data-ng-model="test.name">
                     <option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>
                 </select>
 
-                <select id="levelSelect" data-ng-model="method_level">
+                <select id="levelSelect" data-ng-model="test.level">
                     <option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>
                 </select>
+                <!--                <select id="methodSelect" data-ng-model="method_name">
+                                    <option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>
+                                </select>
+                
+                                <select id="levelSelect" data-ng-model="method_level">
+                                    <option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>
+                                </select>-->
                 <!--                <label ng-repeat="method in methods">
                                     <input
                                         type="checkbox"
@@ -125,10 +132,12 @@ A form for project state change.
                                         ng-click="toggleMethodSelection(method)"
                                         > {{method}}
                                 </label>-->
-                <input type="button" value="Lisää toimintatapa" ng-click="addMethod();"/>
-            </div>
-            <div class="col-md-12">
 
+            </div>
+
+            <div class="col-md-12">
+                <input type="button" value="Lisää uusi" ng-click="addMethod('methodsSelection');"/>
+                <input type="button" value="Poista edellinen" ng-click="removeMethod('methodsSelection');"/>
             </div>
 
             <!--        <div class="form-group col-md-12">
