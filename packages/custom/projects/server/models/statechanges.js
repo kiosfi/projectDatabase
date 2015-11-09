@@ -123,6 +123,12 @@ var SignedSchema = new Schema({
   }
 });
 
+SignedSchema.statics.load = function (id, cb) {
+    this.findOne({
+        _id: id
+    }).populate('user', 'name email username').exec(cb);
+};
+
 var IntReportSchema = new Schema({
   date: {
     type: Date,
@@ -199,9 +205,9 @@ var EndedSchema = new Schema({
 
 module.exports = mongoose.model('States', StatesSchema);
 module.exports = mongoose.model('InReview', InReviewSchema);
-mongoose.model('Approved', ApprovedSchema);
-mongoose.model('Rejected', RejectedSchema);
-mongoose.model('Signed', SignedSchema);
-mongoose.model('IntReport', IntReportSchema);
-mongoose.model('EndReport', EndReportSchema);
-mongoose.model('Ended', EndedSchema);
+module.exports = mongoose.model('Approved', ApprovedSchema);
+module.exports = mongoose.model('Rejected', RejectedSchema);
+module.exports = mongoose.model('Signed', SignedSchema);
+module.exports = mongoose.model('IntReport', IntReportSchema);
+module.exports = mongoose.model('EndReport', EndReportSchema);
+module.exports = mongoose.model('Ended', EndedSchema);

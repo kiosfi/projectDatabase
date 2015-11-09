@@ -194,19 +194,19 @@ A form for project state change.
     <!--Allekirjoitettu-->
 
 
-    <form name="signedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'allekirjoitettu'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+    <form name="signedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'allekirjoitettu'"  role="form" data-ng-submit="addSignedState(signedForm.$valid)" novalidate>
 
         <div class="form-group col-md-12">
             <label for="signed_by" class="col-md-2">Allekirjoittaja</label>
             <div class="col-md-10">
-                <input name="signed_by" type="text" class="form-control" data-ng-model="" id="signed_by" placeholder="Sopimuksen allekirjoittajan nimi" required>
+                <input name="signed_by" type="text" class="form-control" data-ng-model="project.signed.signed_by" id="signed_by" placeholder="Sopimuksen allekirjoittajan nimi" required>
             </div>
         </div>
 
         <div class="form-group col-md-12">
             <label for="signed_date" class="col-md-2">Päivämäärä</label>
             <div class="col-md-10">
-                <input name="signed_date" type="text" class="form-control" data-ng-model="" id="signed_date" placeholder="Allekirjoituksen pvm" required>
+                <input name="signed_date" type="text" class="form-control" data-ng-model="project.signed.signed_date" id="signed_date" placeholder="Allekirjoituksen pvm" required>
             </div>
         </div>
 
