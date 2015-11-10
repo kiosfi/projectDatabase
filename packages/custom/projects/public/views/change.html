@@ -108,12 +108,12 @@ A form for project state change.
 
         <div class="form-group col-md-12">
             <label mean-token="'create-methods'" class="col-md-3 control-label">Toimintatavat</label>
-            <div class="col-md-12" id="methodsSelection" data-ng-repeat="test in testList">
-                <select id="methodSelect" data-ng-model="test.name">
+            <div class="col-md-12" id="methodsSelection" data-ng-repeat="method in addedMethods">
+                <select id="methodSelect" data-ng-model="method.name">
                     <option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>
                 </select>
 
-                <select id="levelSelect" data-ng-model="test.level">
+                <select id="levelSelect" data-ng-model="method.level">
                     <option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>
                 </select>
                 <!--                <select id="methodSelect" data-ng-model="method_name">
@@ -136,8 +136,8 @@ A form for project state change.
             </div>
 
             <div class="col-md-12">
-                <input type="button" value="Lisää uusi" ng-click="addMethod('methodsSelection');"/>
-                <input type="button" value="Poista edellinen" ng-click="removeMethod('methodsSelection');"/>
+                <input type="button" value="Lisää uusi" ng-click="addMethod();"/>
+                <input type="button" value="Poista viimeinen" ng-click="removeMethod();"/>
             </div>
 
             <!--        <div class="form-group col-md-12">

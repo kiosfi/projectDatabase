@@ -28,24 +28,24 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.methodLevels = ['Kansainvälinen', 'Kansallinen', 'Paikallinen', 'Yhteisö'];
 
-        $scope.selectedMethods = [];
+        $scope.addedMethods = [];
 
         $scope.themeSelection = [];
 
-        $scope.methodSelection = [];
-
-        $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
-            var idx = $scope.themeSelection.indexOf(theme);
-
-            // is currently selected
-            if (idx > -1) {
-                $scope.themeSelection.splice(idx, 1);
-            }
-            // is newly selected
-            else {
-                $scope.themeSelection.push(theme);
-            }
-        };
+//        $scope.methodSelection = [];
+//
+//        $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
+//            var idx = $scope.themeSelection.indexOf(theme);
+//
+//            // is currently selected
+//            if (idx > -1) {
+//                $scope.themeSelection.splice(idx, 1);
+//            }
+//            // is newly selected
+//            else {
+//                $scope.themeSelection.push(theme);
+//            }
+//        };
 
         $scope.toggleMethodSelection = function toggleMethodSelection(method) {
             var idx = $scope.methodSelection.indexOf(method);
@@ -151,8 +151,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $location.path('projects/' + project._id + "/change")
             });
         };
-        
-        $scope.testList = [];
+
 
         $scope.addApprovedState = function () {
             console.log($scope.testList);
@@ -165,47 +164,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
-        $scope.addMethod = function (divId) {
-            $scope.testList.push({name: '', level: ''});
-            
-            
-//            var name = document.createElement("select");
-//            for (var i = 0; i < $scope.methodNames.length; i++) {
-//                var opt = document.createElement("option");
-//                opt.value = $scope.methodNames[i];
-//                opt.text = $scope.methodNames[i];
-//                name.appendChild(opt);
-//            }
-//            document.getElementById(divId).appendChild(name);
-//            var level = document.createElement("select");
-//            for (var i = 0; i < $scope.methodLevels.length; i++) {
-//                var opt = document.createElement("option");
-//                opt.value = $scope.methodLevels[i];
-//                opt.text = $scope.methodLevels[i];
-//                level.appendChild(opt);
-//            }
-//            document.getElementById(divId).appendChild(level);
-
-//            var opts = document.getElementById('methodsSelection');
-//            var str = "<select id="
-//            
-//            for (var i=0; i>opts.length; i++) {
-//                
-//            }
-//            var div = document.getElementById('methodsSelection');
-//            div.innerHTML += '<select data-ng-model="method_name">' +
-//                    '<option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>' +
-//                '</select>' +
-//
-//                '<select data-ng-model="method_level">' +
-//                    '<option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>' +
-//                '</select>';
-
+        $scope.addMethod = function () {
+            $scope.addedMethods.push({name: '', level: ''});
         };
-        
-        $scope.removeMethod = function (divId) {
-            
-        }
+
+        $scope.removeMethod = function () {
+            $scope.addedMethods.splice(-1, 1);
+        };
 
 
         /**
