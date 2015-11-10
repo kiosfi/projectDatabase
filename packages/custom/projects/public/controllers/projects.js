@@ -139,18 +139,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
 
         $scope.addApprovedState = function () {
-//            var methods = [];
-//            angular.forEach($scope.addedMethods, function(value, key) {
-//                this.push(key + ': ' + value);
-//            }, methods);
-            
-            console.log('lisätyt methodit' + $scope.addedMethods);
             var project = $scope.project;
             project.approved.themes = $scope.themeSelection;
             project.approved.methods = $scope.addedMethods;
             project.state = $scope.global.newState;
             project.$addApproved(function (response) {
-                $location.path('projects/' + project._id)
+                $location.path('projects/' + response._id)
             });
         };
 

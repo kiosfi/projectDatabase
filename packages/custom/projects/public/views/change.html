@@ -56,9 +56,9 @@ A form for project state change.
             <label for="approved_by" class="col-md-2"> Hyväksyjä</label>
             <div class="col-md-10">
                 <select id="approved_by" data-ng-model="project.approved.approved_by" class='form-control'>
-                    <option value="option-1">Toiminnanjohtaja</option>
-                    <option value="option-2">Halko</option>
-                    <option value="option-3">UM</option>
+                    <option value="Toiminnanjohtaja">Toiminnanjohtaja</option>
+                    <option value="Halko">Halko</option>
+                    <option value="UM">UM</option>
                 </select>
             </div>
         </div>
@@ -116,37 +116,12 @@ A form for project state change.
                 <select id="levelSelect" data-ng-model="method.level">
                     <option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>
                 </select>
-                <!--                <select id="methodSelect" data-ng-model="method_name">
-                                    <option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>
-                                </select>
-                
-                                <select id="levelSelect" data-ng-model="method_level">
-                                    <option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>
-                                </select>-->
-                <!--                <label ng-repeat="method in methods">
-                                    <input
-                                        type="checkbox"
-                                        name="selectedMethods[]"
-                                        value="{{method}}"
-                                        ng-checked="methodSelection.indexOf(method) > -1"
-                                        ng-click="toggleMethodSelection(method)"
-                                        > {{method}}
-                                </label>-->
-
             </div>
 
             <div class="col-md-12">
                 <input type="button" value="Lisää uusi" ng-click="addMethod();"/>
                 <input type="button" value="Poista viimeinen" ng-click="removeMethod();"/>
             </div>
-
-            <!--        <div class="form-group col-md-12">
-                        <label for="comments" class="col-md-2">Kommentit</label>
-                        <div class="col-md-10">
-                            <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Kommentteja" required></textarea>
-                        </div>
-                    </div>-->
-
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

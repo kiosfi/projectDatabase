@@ -145,7 +145,7 @@ var ProjectSchema = new Schema({
     end_report: {
       type: Schema.ObjectId,
       ref: 'EndReport'
-    },
+    }
 
 
 });

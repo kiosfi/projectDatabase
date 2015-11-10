@@ -25,8 +25,8 @@ var InReviewSchema = new Schema({
         default: Date.now
     },
     user: {
-        type: Schema.ObjectId,
-        ref: 'User'
+        type: String,
+        required: true
     },
     comments: {
         type: String
@@ -84,8 +84,8 @@ var RejectedSchema = new Schema({
         default: Date.now
     },
     user: {
-        type: Schema.ObjectId,
-        ref: 'User'
+        type: String,
+        required: true
     },
     rejection_categories: {
         type: Array,
@@ -104,8 +104,8 @@ var SignedSchema = new Schema({
         default: Date.now
     },
     user: {
-        type: Schema.ObjectId,
-        ref: 'User'
+        type: String,
+        required: true
     },
     signed_by: {
         type: String,
@@ -123,8 +123,8 @@ var IntReportSchema = new Schema({
         default: Date.now
     },
     user: {
-        type: Schema.ObjectId,
-        ref: 'User'
+        type: String,
+        required: true
     },
     objectives: {
         type: Array
@@ -144,8 +144,8 @@ var EndReportSchema = new Schema({
         default: Date.now
     },
     user: {
-        type: Schema.ObjectId,
-        ref: 'User'
+        type: String,
+        required: true
     },
     audit: {
         date: {
@@ -175,8 +175,8 @@ var EndedSchema = new Schema({
         default: Date.now
     },
     user: {
-        type: Schema.ObjectId,
-        ref: 'User'
+        type: String,
+        required: true
     },
     end_date: {
         type: String,
@@ -193,7 +193,7 @@ var EndedSchema = new Schema({
 
 module.exports = mongoose.model('States', StatesSchema);
 module.exports = mongoose.model('InReview', InReviewSchema);
-mongoose.model('Approved', ApprovedSchema);
+module.exports = mongoose.model('Approved', ApprovedSchema);
 mongoose.model('Rejected', RejectedSchema);
 mongoose.model('Signed', SignedSchema);
 mongoose.model('IntReport', IntReportSchema);
