@@ -1,5 +1,5 @@
 
-#visibilityAppinfo, #visibilityPayments, #visibilityAttachments, #visibilityReviewinfo {
+#visibilityAppinfo, #visibilityPayments, #visibilityAttachments, #visibilityReviewinfo, #visibilityApprovedinfo {
     display: none;
 }
 
