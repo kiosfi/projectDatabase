@@ -193,12 +193,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             var project = $scope.project;
             var index = project.intermediary_report.length;
             project.state = $scope.global.newState;
-            project.intermediary_report[index].themes = $scope.themeSelection;
-            project.intermediary_report[index].methods = $scope.addedMethods;
-            project.intermediary_report[index].objectives = $scope.objectiveComments;
-            project.intermediary_report[index].reportNumber = project.intermediary_report[index-1].reportNumber + 1;
+            project.intermediary_report.themes = $scope.themeSelection;
+            project.intermediary_report.methods = $scope.addedMethods;
+            project.intermediary_report.objectives = $scope.objectiveComments;
+            project.intermediary_report.reportNumber = project.intermediary_report[index-1].reportNumber + 1;
             
-            project.$addEndReport(function (response) {
+            project.$addIntReport(function (response) {
                 $location.path('projects/' + response._id);
             });
         };

@@ -270,7 +270,7 @@ module.exports = function (Projects) {
          * its collection.
          */
         
-               addIntReport: function (req, res) {
+           addIntReport: function (req, res) {
             var intReport = new IntReport(req.body.intermediary_report);
             intReport.user = req.user.name;
             intReport.save(function (err) {
