@@ -20,8 +20,8 @@ var ProjectSchema = new Schema({
         trim: true
     },
     coordinator: {
-      type: String,
-      required: true
+        type: String,
+        required: true
     },
     organisation: {
         type: Schema.ObjectId,
@@ -123,33 +123,33 @@ var ProjectSchema = new Schema({
         trim: true
     },
     in_review: {
-      type: Schema.ObjectId,
-      ref: 'InReview'
+        type: Schema.ObjectId,
+        ref: 'InReview'
     },
     approved: {
-      type: Schema.ObjectId,
-      ref: 'Approved'
+        type: Schema.ObjectId,
+        ref: 'Approved'
     },
     rejected: {
-      type: Schema.ObjectId,
-      ref: 'Rejected'
+        type: Schema.ObjectId,
+        ref: 'Rejected'
     },
     signed: {
-      type: Schema.ObjectId,
-      ref: 'Signed'
+        type: Schema.ObjectId,
+        ref: 'Signed'
     },
     intermediary_report: {
-      type: Array,
-      default: [{type: Schema.ObjectId, ref: 'IntReport'}]
+        type: Array,
+        default: [{type: Schema.ObjectId, ref: 'IntReport'}]
     },
     end_report: {
-      type: Schema.ObjectId,
-      ref: 'EndReport'
+        type: Schema.ObjectId,
+        ref: 'EndReport'
     },
     ended: {
-      type: Schema.ObjectId,
-      ref: 'Ended'
-    },
+        type: Schema.ObjectId,
+        ref: 'Ended'
+    }
 
 
 });
@@ -172,9 +172,9 @@ ProjectSchema.statics.load = function (id, cb) {
     this.findOne({
         _id: id
     }).populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
-                  {path: 'signed', model: 'Signed'}, {path: 'rejected', model: 'Rejected'},
-                  {path: 'ended', model: 'Ended'}])
-    .exec(cb);
+        {path: 'signed', model: 'Signed'}, {path: 'rejected', model: 'Rejected'},
+        {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'}])
+            .exec(cb);
 };
 
 mongoose.model('Project', ProjectSchema);

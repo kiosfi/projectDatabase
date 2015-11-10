@@ -43,6 +43,8 @@ module.exports = function (Projects, app, auth) {
             .put(auth.isMongoId, auth.requiresLogin, projects.addSigned);
     app.route('/api/projects/end/:projectId')
             .put(auth.isMongoId, auth.requiresLogin, projects.addEnded);
+    app.route('/api/projects/appr/:projectId')
+            .put(auth.isMongoId, auth.requiresLogin, projects.addApproved);
     app.route('/api/projects/byOrg/:organisationId')
             .get(projects.byOrg);
 

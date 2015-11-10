@@ -13,16 +13,28 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.global = Global;
 
         $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
+        
+        $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
+            'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
+            'Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet', 'Etniset vähemmistöt ja alkuperäiskansat',
+            'LHBTIQ', 'Ihmisoikeuspuolustajat'];
 
-        $scope.categories = ['naiset', 'lapset', 'vammaiset', 'yleiset ihmisoikeudet', 'muu'];
+        $scope.methodNames = ['Tietoisuuden lisääminen', 'Ihmisoikeuskasvatus ja -koulutus', 'Kapasiteetin vahvistaminen',
+            'Kampanjointi ja/tai lobbaus', 'Vaikuttamistyö', 'Dokumentaatio ja monitorointi', 'Oikeusapu ja -neuvonta',
+            'Strategiset ja/tai perusoikeuskanteet ja/tai ryhmäkanteet', 'Oikeusturvan saatavuuden parantaminen', 'Palveluiden saatavuuden parantaminen',
+            'Ihmisoikeuspuolustajien suojelu', 'Verkostoituminen', 'Alueellinen yhteistyö', 'Toimintatuki', 'Muu'];
 
-        $scope.rejcategories = ["1", "2", "3", "4", "5"];
+        $scope.methodLevels = ['Kansainvälinen', 'Kansallinen', 'Paikallinen', 'Yhteisö'];
 
-        $scope.categorySelection = [];
+        $scope.addedMethods = [];
 
         $scope.themeSelection = [];
 
-        $scope.methodSelection = [];
+        $scope.rejcategories = ["1", "2", "3", "4", "5"];
+
+
+        $scope.themeSelection = [];
+
 
         $scope.rejectedCategorySelection = [];
 
@@ -40,19 +52,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
-        $scope.toggleMethodSelection = function toggleMethodSelection(method) {
-            var idx = $scope.methodSelection.indexOf(method);
-
-            // is currently selected
-            if (idx > -1) {
-                $scope.methodSelection.splice(idx, 1);
-            }
-            // is newly selected
-            else {
-                $scope.methodSelection.push(method);
-            }
-        };
-
         $scope.toggleRejectedCategorySelection = function toggleRejectedCategorySelection(rejectedCategory) {
             var idx = $scope.rejectedCategorySelection.indexOf(rejectedCategory);
 
@@ -66,16 +65,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
-        $scope.toggleSelection = function toggleSelection(categ) {
-            var idx = $scope.categorySelection.indexOf(categ);
+       
+        $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
+            var idx = $scope.themeSelection.indexOf(theme);
 
             // is currently selected
             if (idx > -1) {
-                $scope.categorySelection.splice(idx, 1);
+                $scope.themeSelection.splice(idx, 1);
             }
             // is newly selected
             else {
-                $scope.categorySelection.push(categ);
+                $scope.themeSelection.push(theme);
             }
         };
 
@@ -196,6 +196,26 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
+
+        $scope.addApprovedState = function () {
+            var project = $scope.project;
+            project.approved.themes = $scope.themeSelection;
+            project.approved.methods = $scope.addedMethods;
+            project.state = $scope.global.newState;
+            project.$addApproved(function (response) {
+                $location.path('projects/' + response._id)
+            });
+        };
+
+        $scope.addMethod = function () {
+            $scope.addedMethods.push({name: '', level: ''});
+        };
+
+        $scope.removeMethod = function () {
+            $scope.addedMethods.splice(-1, 1);
+        };
+
+
         /**
          * The sorting predicate used in project listing. Initial value is
          * "project_ref".
@@ -218,7 +238,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.order = function (predicate) {
             $scope.reverse = ($scope.predicate === predicate)
-            ? !$scope.reverse : false;
+                    ? !$scope.reverse : false;
             $scope.predicate = predicate;
         };
 
