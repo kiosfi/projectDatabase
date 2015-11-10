@@ -176,8 +176,6 @@ ProjectSchema.statics.load = function (id, cb) {
         {path: 'signed', model: 'Signed'}, {path: 'rejected', model: 'Rejected'},
         {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'}, {path: 'end_report', model: 'EndReport'}])
             .exec(cb);
-
-    .exec(cb);
 };
 
 mongoose.model('Project', ProjectSchema);
