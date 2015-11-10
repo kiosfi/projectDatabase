@@ -123,19 +123,18 @@ var IntReportSchema = new Schema({
         type: Number,
         required: true
     },
-    
-    
+    themes: {
+        type: Array
+    },
+    methods: {
+        type: Array
+    },
     objectives: {
         type: Array
     },
-    activities: {
-        type: Array
-    },
-
     comments: {
         type: String
     },
-
     processed: {
         type: Boolean,
         default: false
