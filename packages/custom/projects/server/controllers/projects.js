@@ -12,6 +12,7 @@ var mongoose = require('mongoose'),
         Signed = mongoose.model('Signed'),
         Ended = mongoose.model('Ended'),
         Approved = mongoose.model('Approved'),
+        IntReport = mongoose.model('IntReport'),
         EndReport = mongoose.model('EndReport'),
         config = require('meanio').loadConfig(),
         _ = require('lodash');
@@ -263,13 +264,49 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
+        
+                /*
+         * Moves a project to endReport state (or adds another) and saves the state object to
+         * its collection.
+         */
+        
+               addIntReport: function (req, res) {
+            var intReport = new IntReport(req.body.intermediary_report);
+            intReport.user = req.user.name;
+            intReport.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Tilatietojen tallennus epäonnistui.'
+                    });
+                }
+            });
+
+            var project = req.project;
+            project.intermediary_report.push(intReport._id);
+            project.state = req.body.state;
+
+            project.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Väliraportin lisääminen epäonnistui.'
+                    });
+                }
+
+                Projects.events.publish({
+                    action: 'updated',
+                    name: project.title,
+                    url: config.hostname + '/projects/' + project._id
+                });
+
+                res.json(project);
+            });
+        },
         /*
          * Moves a project to endReport state and saves the state object to
          * its collection.
          */
 
         addEndReport: function (req, res) {
-            console.log(req.body);
             var endReport = new EndReport(req.body.end_report);
             endReport.user = req.user.name;
             endReport.save(function (err) {
@@ -287,7 +324,7 @@ module.exports = function (Projects) {
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
-                        error: 'Hankkeen päivitys allekirjoitetuksi epäonnistui.'
+                        error: 'Loppuraportin lisääminen epäonnistui.'
                     });
                 }
 
