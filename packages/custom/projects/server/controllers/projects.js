@@ -11,7 +11,7 @@ var mongoose = require('mongoose'),
         InReview = mongoose.model('InReview'),
         Rejected = mongoose.model('Rejected'),
         Signed = mongoose.model('Signed'),
-        EndReport = mongoode.model('EndReport'),
+        EndReport = mongoose.model('EndReport'),
         config = require('meanio').loadConfig(),
         _ = require('lodash');
 
@@ -228,8 +228,9 @@ module.exports = function (Projects) {
          */
 
         addEndReport: function (req, res) {
-            var endReport = new EndReport(req.body.signed);
-            endReport.user = req.user;
+            console.log(req.body);
+            var endReport = new EndReport(req.body.end_report);
+            endReport.user = req.user.name;
             endReport.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -239,7 +240,7 @@ module.exports = function (Projects) {
             });
 
             var project = req.project;
-            project.endReport = endReport._id;
+            project.end_report = endReport._id;
             project.state = req.body.state;
 
             project.save(function (err) {

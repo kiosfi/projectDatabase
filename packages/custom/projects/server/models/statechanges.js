@@ -163,8 +163,8 @@ var EndReportSchema = new Schema({
         default: Date.now
     },
     user: {
-        type: Schema.ObjectId,
-        ref: 'User'
+        type: String,
+        required: true
     },
     audit: {
         date: {
