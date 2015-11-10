@@ -26,7 +26,6 @@ var InReviewSchema = new Schema({
     user: {
         type: String,
         required: true
-
     },
     comments: {
         type: String
@@ -46,8 +45,8 @@ var ApprovedSchema = new Schema({
         type: String
     },
     approved_by: {
-        type: Array,
-        default: ['ceo', 'board', 'foreign_ministry']
+        type: String,
+        required: true
     },
     board_notified: {
         type: String
@@ -213,4 +212,3 @@ module.exports = mongoose.model('Signed', SignedSchema);
 module.exports = mongoose.model('IntReport', IntReportSchema);
 module.exports = mongoose.model('EndReport', EndReportSchema);
 module.exports = mongoose.model('Ended', EndedSchema);
-
