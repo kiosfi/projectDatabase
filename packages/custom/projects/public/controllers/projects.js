@@ -31,32 +31,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addedMethods = [];
 
         $scope.themeSelection = [];
-
-//        $scope.methodSelection = [];
 //
-//        $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
-//            var idx = $scope.themeSelection.indexOf(theme);
-//
-//            // is currently selected
-//            if (idx > -1) {
-//                $scope.themeSelection.splice(idx, 1);
-//            }
-//            // is newly selected
-//            else {
-//                $scope.themeSelection.push(theme);
-//            }
-//        };
-
-        $scope.toggleMethodSelection = function toggleMethodSelection(method) {
-            var idx = $scope.methodSelection.indexOf(method);
+        $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
+            var idx = $scope.themeSelection.indexOf(theme);
 
             // is currently selected
             if (idx > -1) {
-                $scope.methodSelection.splice(idx, 1);
+                $scope.themeSelection.splice(idx, 1);
             }
             // is newly selected
             else {
-                $scope.methodSelection.push(method);
+                $scope.themeSelection.push(theme);
             }
         };
 
@@ -154,10 +139,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
 
         $scope.addApprovedState = function () {
-            console.log($scope.testList);
+//            var methods = [];
+//            angular.forEach($scope.addedMethods, function(value, key) {
+//                this.push(key + ': ' + value);
+//            }, methods);
+            
+            console.log('lisätyt methodit' + $scope.addedMethods);
             var project = $scope.project;
             project.approved.themes = $scope.themeSelection;
-            project.approved.methods = $scope.testList;
+            project.approved.methods = $scope.addedMethods;
             project.state = $scope.global.newState;
             project.$addApproved(function (response) {
                 $location.path('projects/' + project._id)

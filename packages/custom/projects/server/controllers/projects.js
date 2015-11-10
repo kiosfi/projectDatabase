@@ -157,7 +157,7 @@ module.exports = function (Projects) {
             project.save(function (err) {
                 if (err) {
                     console.log(project);
-                     console.log(" TOKA SAVE HAJOS");
+                    console.log(" TOKA SAVE HAJOS");
                     console.log(err);
                     return res.status(500).json({
                         error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'
