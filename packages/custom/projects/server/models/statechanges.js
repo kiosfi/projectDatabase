@@ -123,6 +123,8 @@ var IntReportSchema = new Schema({
         type: Number,
         required: true
     },
+    
+    
     objectives: {
         type: Array
     },
@@ -161,13 +163,16 @@ var EndReportSchema = new Schema({
             required: true
         }
     },
+  
+    themes: {
+        type: Array
+    },
+    methods: {
+        type: Array
+    },
     objectives: {
         type: Array
     },
-    activities: {
-        type: Array
-    },
-
     comments: {
         type: String
     },

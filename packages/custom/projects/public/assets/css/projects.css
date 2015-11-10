@@ -83,8 +83,12 @@ hr {
     margin-bottom: 3%;
 }
 
-.change-state-title {
+.strong-title {
     font-weight: bold;
+}
+
+.comment-form-div {
+    margin-top: 2%;
 }
 
 .btn {
