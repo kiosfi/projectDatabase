@@ -149,6 +149,7 @@ var ProjectSchema = new Schema({
     ended: {
         type: Schema.ObjectId,
         ref: 'Ended'
+
     }
 
 
@@ -173,8 +174,10 @@ ProjectSchema.statics.load = function (id, cb) {
         _id: id
     }).populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
         {path: 'signed', model: 'Signed'}, {path: 'rejected', model: 'Rejected'},
-        {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'}])
+        {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'}, {path: 'end_report', model: 'EndReport'}])
             .exec(cb);
+
+    .exec(cb);
 };
 
 mongoose.model('Project', ProjectSchema);

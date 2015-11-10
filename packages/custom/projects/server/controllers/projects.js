@@ -12,8 +12,10 @@ var mongoose = require('mongoose'),
         Signed = mongoose.model('Signed'),
         Ended = mongoose.model('Ended'),
         Approved = mongoose.model('Approved'),
+        EndReport = mongoose.model('EndReport'),
         config = require('meanio').loadConfig(),
         _ = require('lodash');
+
 module.exports = function (Projects) {
 
     return {
@@ -261,6 +263,43 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
+        /*
+         * Moves a project to endReport state and saves the state object to
+         * its collection.
+         */
+
+        addEndReport: function (req, res) {
+            console.log(req.body);
+            var endReport = new EndReport(req.body.end_report);
+            endReport.user = req.user.name;
+            endReport.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Tilatietojen tallennus epäonnistui.'
+                    });
+                }
+            });
+
+            var project = req.project;
+            project.end_report = endReport._id;
+            project.state = req.body.state;
+
+            project.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Hankkeen päivitys allekirjoitetuksi epäonnistui.'
+                    });
+                }
+
+                Projects.events.publish({
+                    action: 'updated',
+                    name: project.title,
+                    url: config.hostname + '/projects/' + project._id
+                });
+
+                res.json(project);
+            });
+        },
         destroy: function (req, res) {
             var project = req.project;
             project.remove(function (err) {
@@ -298,3 +337,5 @@ module.exports = function (Projects) {
 
     };
 }
+
+

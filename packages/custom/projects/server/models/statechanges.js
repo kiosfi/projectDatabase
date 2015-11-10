@@ -1,6 +1,7 @@
 'use strict';
 var mongoose = require('mongoose'),
         Schema = mongoose.Schema;
+
 var StatesSchema = new Schema({
     current_state: {
         type: String,
@@ -25,6 +26,7 @@ var InReviewSchema = new Schema({
     user: {
         type: String,
         required: true
+
     },
     comments: {
         type: String
@@ -78,6 +80,7 @@ var RejectedSchema = new Schema({
     user: {
         type: String,
         required: true
+
     },
     rejection_categories: {
         type: Array,
@@ -117,12 +120,21 @@ var IntReportSchema = new Schema({
         type: String,
         required: true
     },
+    reportNumber: {
+        type: Number,
+        required: true
+    },
     objectives: {
         type: Array
     },
     activities: {
         type: Array
     },
+
+    comments: {
+        type: String
+    },
+
     processed: {
         type: Boolean,
         default: false
@@ -143,7 +155,9 @@ var EndReportSchema = new Schema({
             type: String,
             required: true
         },
-        audit_review: {
+
+        review: {
+
             type: String,
             required: true
         }
@@ -153,6 +167,10 @@ var EndReportSchema = new Schema({
     },
     activities: {
         type: Array
+    },
+
+    comments: {
+        type: String
     },
     processed: {
         type: Boolean,
@@ -168,6 +186,7 @@ var EndedSchema = new Schema({
     user: {
         type: String,
         required: true
+
     },
     end_date: {
         type: String,
@@ -182,6 +201,7 @@ var EndedSchema = new Schema({
     },
     other_comments: {
         type: String
+
     }
 });
 

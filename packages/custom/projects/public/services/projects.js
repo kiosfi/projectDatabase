@@ -18,11 +18,16 @@ angular.module('mean.projects').factory('Projects', ['$resource',
             addSigned: {
                 method: 'PUT', url: 'api/projects/sign/:projectId'
             },
+            
             addEnded: {
                 method: 'PUT', url: 'api/projects/end/:projectId'
             },
             addApproved: {
                 method: 'PUT', url: 'api/projects/appr/:projectId'
+            },
+            
+            addEndReport: {
+                method: 'PUT', url: 'api/projects/endReport/:projectId'
             }
         });
     }
