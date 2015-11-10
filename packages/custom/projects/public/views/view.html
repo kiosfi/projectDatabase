@@ -233,7 +233,7 @@
         </section>
         <section ng-show="project.state === 'hylätty'" class="proj-body">
             <b>**Hanke hylätty</b>:&nbsp&nbsp{{project.rejected.date| date:'dd.MM.yyyy'}}&nbsp&nbsp
-            <button class="btn" onclick="toggleCollapse('visibilityRejectedinfo')">Tiedot</button>
+            <button class="btn small-btn" onclick="toggleCollapse('visibilityRejectedinfo')">Tiedot</button>
             <br>
             <span id="visibilityRejectedinfo">
                 <h5>Hylkäyksen teki:</h5>
@@ -250,7 +250,7 @@
 
         <section ng-show="project.state === 'allekirjoitettu'" class="proj-body">
             <b>**Sopimus allekirjoitettu</b>:&nbsp&nbsp{{project.signed.signed_date}}&nbsp&nbsp
-            <button class="btn" onclick="toggleCollapse('visibilitySignedinfo')">Tiedot</button>
+            <button class="btn small-btn" onclick="toggleCollapse('visibilitySignedinfo')">Tiedot</button>
             <br>
             <span id="visibilitySignedinfo">
                 <h5>Tiedot lisäsi:</h5>
@@ -264,7 +264,7 @@
 
         <section ng-show="project.state === 'päättynyt'" class="proj-body">
             <b>**Hanke päätetty</b>:&nbsp&nbsp{{project.ended.end_date}}&nbsp&nbsp
-            <button class="btn" onclick="toggleCollapse('visibilityEndedinfo')">Tiedot</button>
+            <button class="btn small-btn" onclick="toggleCollapse('visibilityEndedinfo')">Tiedot</button>
             <br>
             <span id="visibilityEndedinfo">
                 <h5>Tiedot lisäsi:</h5>
