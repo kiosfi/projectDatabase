@@ -16,8 +16,10 @@ var hasPermissions = function (req, res, next) {
         var permission = req.body.permissions[i];
         if (req.acl.user.allowed.indexOf(permission) === -1) {
             return res.status(401).send('User not allowed to assign ' + permission + ' permission.');
-        };
-    };
+        }
+        ;
+    }
+    ;
 
     next();
 };
@@ -40,9 +42,9 @@ module.exports = function (Projects, app, auth) {
     app.route('/api/projects/rej/:projectId')
             .put(auth.isMongoId, auth.requiresLogin, projects.addRejected);
     app.route('/api/projects/sign/:projectId')
-            .put(auth.isMongoId, auth.requiresLogin, projects.addSigned); 
-        app.route('/api/projects/endReport/:projectId')
-            .put(auth.isMongoId, auth.requiresLogin, projects.addEndReport); 
+            .put(auth.isMongoId, auth.requiresLogin, projects.addSigned);
+    app.route('/api/projects/endReport/:projectId')
+            .put(auth.isMongoId, auth.requiresLogin, projects.addEndReport);
     app.route('/api/projects/byOrg/:organisationId')
             .get(projects.byOrg);
 

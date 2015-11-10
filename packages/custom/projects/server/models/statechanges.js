@@ -138,6 +138,10 @@ var IntReportSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
+  reportNumber: {
+      type: Number,
+      required: true
+  },
   objectives: {
     type: Array
   },
@@ -164,7 +168,7 @@ var EndReportSchema = new Schema({
       type: String,
       required: true
     },
-    audit_review: {
+    review: {
       type: String,
       required: true
     }

@@ -233,12 +233,12 @@ A form for project state change.
 
 
         <div class="form-group col-md-12">
-            <label for="themes" class="col-md-2">Teemat</label>
+            <label for="themes" class="col-md-2">Tavoitteet</label>
             <div class="col-md-4">
-                <textarea name="themes" type="text" class="form-control" data-ng-model="" id="themes" placeholder="Tähän tulee jo kannassa olevat teemat" required></textarea>
+                <textarea name="themes" type="text" class="form-control" data-ng-model="" id="themes" placeholder="Tähän tulee jo kannassa olevat teemat ja tasot. Ei muokattavissa." required></textarea>
             </div>
 
-            <label for="themesComments" class="col-md-2">Toteutuneet teemat</label>
+            <label for="themesComments" class="col-md-2">Toteutuneet tavoitteet</label>
             <div class="col-md-4">
                 <textarea name="themesComments" type="text" class="form-control" data-ng-model="" id="themesComments" placeholder="Tälle puolelle kommentteja niistä" required></textarea>
             </div>
@@ -276,30 +276,30 @@ A form for project state change.
     <!--   Loppuraportti-->
 
 
-    <form name="endReportForm" class="form-horizontal col-md-8" ng-show="global.newState === 'loppuraportti'"  role="form" data-ng-submit="create(inReviewForm.$valid)" novalidate>
+    <form name="endReportForm" class="form-horizontal col-md-8" ng-show="global.newState === 'loppuraportti'"  role="form" data-ng-submit="addEndReportStatee(endReportForm.$valid)" novalidate>
 
         <div class="form-group col-md-12">
             <label for="audit_date" class="col-md-2">Tilintarkastus pvm</label>
             <div class="col-md-4">
-                <input name="audit_date" type="text" class="form-control" data-ng-model="" id="audit_date" placeholder="Tilintarkastuksen päivämäärä" required>
+                <input name="audit_date" type="text" class="form-control" data-ng-model="project.end_report.audit.date" id="audit_date" placeholder="Tilintarkastuksen päivämäärä" required>
             </div>
 
 
             <label for="audit_reviw" class="col-md-2">Arvio</label>
             <div class="col-md-4">
-                <textarea name="audit_reviw" type="text" class="form-control" data-ng-model="" id="audit_review" placeholder="Arvio tilintarkastuksesta" required></textarea>
+                <textarea name="audit_reviw" type="text" class="form-control" data-ng-model="project.end_report.audit.review" id="audit_review" placeholder="Arvio tilintarkastuksesta" required></textarea>
             </div>
 
         </div>
 
 
         <div class="form-group col-md-12">
-            <label for="themes" class="col-md-2">Teemat</label>
+            <label for="themes" class="col-md-2">Tavoitteet</label>
             <div class="col-md-4">
-                <textarea name="themes" type="text" class="form-control" data-ng-model="" id="themes" placeholder="Tähän tulee jo kannassa olevat teemat" required></textarea>
+                <textarea name="themes" type="text" class="form-control" data-ng-model="" id="themes" placeholder="{{project.}}" required></textarea>
             </div>
 
-            <label for="themesComments" class="col-md-2">Toteutuneet teemat</label>
+            <label for="themesComments" class="col-md-2">Toteutuneet tavoitteet</label>
             <div class="col-md-4">
                 <textarea name="themesComments" type="text" class="form-control" data-ng-model="" id="themesComments" placeholder="Tälle puolelle kommentteja niistä" required></textarea>
             </div>
