@@ -285,7 +285,7 @@ A form for project state change.
             </div>
 
 
-            <label for="audit_reviw" class="col-md-2">Arvio</label>
+            <label for="audit_review" class="col-md-2">Arvio</label>
             <div class="col-md-4">
                 <textarea name="audit_reviw" type="text" class="form-control" data-ng-model="project.end_report.audit.review" id="audit_review" placeholder="Arvio tilintarkastuksesta" required></textarea>
             </div>
@@ -294,40 +294,40 @@ A form for project state change.
 
 
         <div class="form-group col-md-12">
-            <label for="themes" class="col-md-2">Tavoitteet</label>
+            <label for="objectives" class="col-md-2">Tavoitteet</label>
             <div class="col-md-4">
-                <textarea name="themes" type="text" class="form-control" data-ng-model="" id="themes" placeholder="{{project.}}" required></textarea>
+                <textarea name="objectives" type="text" class="form-control" data-ng-model="" id="objectives" placeholder="Haetaan projektin tavoitteet" required></textarea>
             </div>
 
-            <label for="themesComments" class="col-md-2">Toteutuneet tavoitteet</label>
+            <label for="objectivesComments" class="col-md-2">Toteutuneet tavoitteet</label>
             <div class="col-md-4">
-                <textarea name="themesComments" type="text" class="form-control" data-ng-model="" id="themesComments" placeholder="Tälle puolelle kommentteja niistä" required></textarea>
+                <textarea name="objectivesComments" type="text" class="form-control" data-ng-model="project.end_report.objectives" id="objectivesComments" placeholder="Tälle puolelle kommentteja niistä" required></textarea>
             </div>
         </div>
 
         <div class="form-group col-md-12">
-            <label for="methods" class="col-md-2">Toimintatavat</label>
+            <label for="activities" class="col-md-2">Toimintatavat</label>
             <div class="col-md-4">
-                <textarea name="methods" type="text" class="form-control" data-ng-model="" id="methods" placeholder="Kannassa olevat toimintatavat" required></textarea>
+                <textarea name="activities" type="text" class="form-control" data-ng-model="" id="activities" placeholder="Kannassa olevat toimintatavat" required></textarea>
             </div>
 
-            <label for="methodsComments" class="col-md-2">Toteutuneet toimintatavat</label>
+            <label for="activitiesComments" class="col-md-2">Toteutuneet toimintatavat</label>
             <div class="col-md-4">
-                <textarea name="methodsComments" type="text" class="form-control" data-ng-model="" id="methodsComments" placeholder="Kommentteja toimintatavoista" required></textarea>
+                <textarea name="activitiesComments" type="text" class="form-control" data-ng-model="project.end_report.activities" id="activitiesComments" placeholder="Kommentteja toimintatavoista" required></textarea>
             </div>
         </div>
 
         <div class="form-group col-md-12">
             <label for="payments" class="col-md-2">Maksatuserittely</label>
             <div class="col-md-10">
-                <textarea name="payments" type="text" class="form-control" data-ng-model="" id="payments" placeholder="Parsetaan kauniisti kannasta maksatuserittely ja päivämäärät. Tässä niihin voi lisätä kommentteja?" required></textarea>
+                <textarea name="payments" type="text" class="form-control" data-ng-model="" id="payments" placeholder="Tähän parsetaan kannasta maksatuksien tiedot." required></textarea>
             </div>
         </div>
 
         <div class="form-group col-md-12">
             <label for="comments" class="col-md-2">Muut kommentit</label>
             <div class="col-md-10">
-                <textarea name="comments" type="text" class="form-control" data-ng-model="" id="comments" placeholder="Muut raportin kommentit" required></textarea>
+                <textarea name="comments" type="text" class="form-control" data-ng-model="project.end_report.comments" id="comments" placeholder="Muut raportin kommentit" required></textarea>
             </div>
         </div>
 
