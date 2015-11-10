@@ -5,6 +5,10 @@
     display: none;
 }
 
+body {
+    padding-bottom: 50px;
+}
+
 h5 {
   font-weight: bold;
 }
@@ -110,4 +114,10 @@ hr {
     background-image: -o-linear-gradient(top, #919191, #474647);
     background-image: linear-gradient(to bottom, #919191, #474647);
     text-decoration: none;
+}
+
+.small-btn {
+    width: 50px;
+    height: 20px;
+    padding: 1px;
 }
