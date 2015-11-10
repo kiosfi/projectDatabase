@@ -164,18 +164,16 @@ var EndReportSchema = new Schema({
             required: true
         }
     },
-    
-        themes: {
+  
+    themes: {
         type: Array
     },
     methods: {
         type: Array
-    }
+    },
     objectives: {
         String: Array
     },
-
-
     comments: {
         type: String
     },
