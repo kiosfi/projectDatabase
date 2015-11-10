@@ -29,6 +29,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addedMethods = [];
 
         $scope.themeSelection = [];
+        
+        $scope.objectiveComments = [];
 
         $scope.rejcategories = ["1", "2", "3", "4", "5"];
 
@@ -178,13 +180,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.addEndReportState = function () {
-            console.log("1")
             var project = $scope.project;
-            console.log("2");
             project.state = $scope.global.newState;
-            console.log(project);
+            project.end_report.themes = $scope.themeSelection;
+            project.end_report.methods = $scope.addedMethods;
+            project.end_report.objectives = $scope.objectiveComments;
             project.$addEndReport(function (response) {
-                console.log(response);
                 $location.path('projects/' + response._id);
             });
         };

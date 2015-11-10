@@ -274,7 +274,7 @@ A form for project state change.
                 <p>Hankkeen hakemusvaiheessa määritellyt tavoitteet</p>
             </div>
             <div class="col-md-8">
-                <textarea name="objectivesComments" type="text" class="form-control" data-ng-model="project.end_report.objectives" id="objectivesComments" placeholder="Kommentteja tavoitteiden toteutumisesta" required></textarea>
+                <textarea name="objectivesComments" type="text" class="form-control" data-ng-model="objectiveComments[0]" id="objectivesComments" placeholder="Kommentteja tavoitteiden toteutumisesta" required></textarea>
             </div>
         </div>
 
@@ -283,35 +283,37 @@ A form for project state change.
             <div class="col-md-4">
                 {{method.name}} <br>- {{method.level}}
             </div>
-
-                <input class="col-md-8" id="{{method.name}}" value="Kommentteja toimintatavan toteutumisesta">
-        </div>
-
-        <p class="col-md-12 strong-title comment-form-div">Teemat ja niiden toteutuminen</p>
-
-        <div class="form-group col-md-12" ng-repeat="theme in project.approved.themes">
-            <div class="col-md-4">
-                {{theme}}
-            </div>
-
             <div class="col-md-8">
-                <textarea name="activitiesComments" type="text" class="form-control" data-ng-model="project.end_report.activities" id="activitiesComments" placeholder="Kommentteja teemojen toteutumisesta" required></textarea>
+                <textarea name="methods" type="text" class="form-control" data-ng-model="addedMethods[(project.approved.methods).indexOf(method)]" id="methods" placeholder="Kommentteja" required></textarea>
             </div>
         </div>
 
+            <p class="col-md-12 strong-title comment-form-div">Teemat ja niiden toteutuminen</p>
 
-        <p class="col-md-12 strong-title comment-form-div">Muut kommentit</p>
-        <div class="col-md-12">
-            <textarea name="comments" type="text" class="form-control" data-ng-model="project.end_report.comments" id="comments" placeholder="Muut raportin kommentit" required></textarea>
-        </div>
+            <div class="form-group col-md-12" ng-repeat="theme in project.approved.themes">
+                <div class="col-md-4">
 
+                    {{theme}}
+                </div>
 
-
-        <div class="form-group">
-            <div class="col-md-offset-10 col-md-12 comment-form-div">
-                <button type="submit" class="btn btn-default">Tallenna</button>
+                <div class="col-md-8">
+                    <textarea name="themes" type="text" class="form-control" data-ng-model="themeSelection[(project.approved.themes).indexOf(theme)]" id="themes" placeholder="Kommentteja teemojen toteutumisesta" required></textarea>
+                </div>
             </div>
-        </div>
+
+
+            <p class="col-md-12 strong-title comment-form-div">Muut kommentit</p>
+            <div class="col-md-12">
+                <textarea name="comments" type="text" class="form-control" data-ng-model="project.end_report.comments" id="comments" placeholder="Muut raportin kommentit" required></textarea>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-10 col-md-12 comment-form-div">
+                    <button type="submit" class="btn btn-default">Tallenna</button>
+                </div>
+            </div>
     </form>
 
     <!--Päättynyt-->

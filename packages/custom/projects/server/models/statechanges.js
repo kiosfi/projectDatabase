@@ -172,7 +172,7 @@ var EndReportSchema = new Schema({
         type: Array
     },
     objectives: {
-        String: Array
+        type: Array
     },
     comments: {
         type: String
