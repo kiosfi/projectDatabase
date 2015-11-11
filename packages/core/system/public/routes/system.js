@@ -56,7 +56,7 @@ angular.module('mean.system').config(['$meanStateProvider', '$urlRouterProvider'
     $meanStateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'projects/views/list.html'
+        templateUrl: 'auth/login.html'
       });
 
     $meanStateProvider
