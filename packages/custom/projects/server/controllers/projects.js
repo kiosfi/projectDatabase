@@ -239,7 +239,6 @@ module.exports = function (Projects) {
          */
 
         addIntReport: function (req, res) {
-            console.log(req.body);
             var intReport = new IntReport(req.body.intermediary_report);
             intReport.user = req.user.name;
             intReport.reportNumber = req.body.intermediary_report.reportNumber;
@@ -341,7 +340,7 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-                
+
         destroy: function (req, res) {
             var project = req.project;
             project.remove(function (err) {
