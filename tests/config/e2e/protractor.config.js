@@ -19,7 +19,7 @@ exports.config = {
     onPrepare: function () {
         //Creates independent results files for each browser
         //Otherwise they run at the same time and overwrite each other
-        browser.manage().window().setSize(1600, 1000);
+        browser.manage().window().maximize();
 
         var capsPromise = browser.getCapabilities();
 

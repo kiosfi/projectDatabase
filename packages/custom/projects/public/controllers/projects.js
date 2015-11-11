@@ -34,10 +34,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.rejcategories = ["1", "2", "3", "4", "5"];
 
-
-        $scope.themeSelection = [];
-
-
         $scope.rejectedCategorySelection = [];
 
 
