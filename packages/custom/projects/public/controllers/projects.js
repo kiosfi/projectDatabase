@@ -13,7 +13,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.global = Global;
 
         $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
-        
+
         $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
             'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
             'Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet', 'Etniset vähemmistöt ja alkuperäiskansat',
@@ -29,7 +29,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addedMethods = [];
 
         $scope.themeSelection = [];
-        
+
         $scope.objectiveComments = [];
 
         $scope.rejcategories = ["1", "2", "3", "4", "5"];
@@ -67,7 +67,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
-       
+
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
             var idx = $scope.themeSelection.indexOf(theme);
 
@@ -197,7 +197,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             project.intermediary_report.methods = $scope.addedMethods;
             project.intermediary_report.objectives = $scope.objectiveComments;
             project.intermediary_report.reportNumber = project.intermediary_report[index-1].reportNumber + 1;
-            
+
+            console.log(project);
             project.$addIntReport(function (response) {
                 $location.path('projects/' + response._id);
             });
@@ -206,7 +207,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addEndedState = function () {
                 var project = $scope.project;
                 project.state = $scope.global.newState;
-                console.log($scope.project);                
+                console.log($scope.project);
                 project.$addEnded(function (response) {
                     $location.path('projects/' + response._id)
                 });

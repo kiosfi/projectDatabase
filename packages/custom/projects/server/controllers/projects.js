@@ -79,7 +79,8 @@ module.exports = function (Projects) {
             query
                     .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
                         {path: 'rejected', model: 'Rejected'}, {path: 'signed', model: 'Signed'},
-                        {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'}])
+                        {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'},
+                        {path: 'intermediary_reports.intermediary_report', model: 'IntReport'}])
                     .exec(function (err, projects) {
                         if (err) {
                             return res.status(500).json({
@@ -107,6 +108,7 @@ module.exports = function (Projects) {
         addReview: function (req, res) {
             var in_review = new InReview(req.body.in_review);
             in_review.user = req.user.name;
+            in_review.reportNumber = req.body.in_review.reportNumber;
             in_review.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -270,7 +272,8 @@ module.exports = function (Projects) {
          * its collection.
          */
 
-           addIntReport: function (req, res) {
+        addIntReport: function (req, res) {
+            console.log(req.body);
             var intReport = new IntReport(req.body.intermediary_report);
             intReport.user = req.user.name;
             intReport.save(function (err) {
@@ -282,7 +285,7 @@ module.exports = function (Projects) {
             });
 
             var project = req.project;
-            project.intermediary_report.push(intReport._id);
+            project.intermediary_reports.push(intReport._id);
             project.state = req.body.state;
 
             project.save(function (err) {
