@@ -271,14 +271,14 @@
                 <h5>Teemat</h5>
                 <ul>
                   <li ng-repeat="theme in project.approved.themes">
-                    {{project.approved.themes.indexOf(theme) + 1}}. <i>{{theme}}</i><br>
+                     <i>{{theme}}</i><br>
                     {{project.end_report.themes[project.approved.themes.indexOf(theme)]}}
                   </li>
                 </ul>
                 <h5>Metodit</h5>
                 <ul>
                   <li ng-repeat="method in project.approved.methods">
-                    {{project.approved.methods.indexOf(method) + 1}}. <i>{{method.name}}</i>, taso: <i>{{method.level}}</i><br>
+                     <i>{{method.name}}</i>, taso: <i>{{method.level}}</i><br>
                     {{project.end_report.methods[project.approved.methods.indexOf(method)]}}
                   </li>
                 </ul>

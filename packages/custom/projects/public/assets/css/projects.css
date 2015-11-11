@@ -44,9 +44,12 @@ h5 {
     background-color: purple;
 }
 
-ul li
-{
+ul li {
     list-style-type: none;
+}
+
+span ul li {
+    list-style-type: disc;
 }
 
 .tila {
