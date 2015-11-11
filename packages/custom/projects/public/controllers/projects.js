@@ -13,7 +13,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.global = Global;
 
         $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
-        
+
         $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
             'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
             'Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet', 'Etniset vähemmistöt ja alkuperäiskansat',
@@ -29,7 +29,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addedMethods = [];
 
         $scope.themeSelection = [];
-        
+
         $scope.objectiveComments = [];
 
         $scope.rejcategories = ["1", "2", "3", "4", "5"];
@@ -67,7 +67,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
-       
+
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
             var idx = $scope.themeSelection.indexOf(theme);
 
@@ -113,6 +113,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
+                var reports = $scope.project.intermediary_reports;
+                for (var i = 0; i < reports.length; i++) {
+                  $scope.info = true;
+                  $scope.toggleInfo = function() {
+                    $scope.info = ! $scope.info;
+                  };
+                }
             });
         };
 
@@ -161,6 +168,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
+        $scope.addApprovedState = function () {
+            var project = $scope.project;
+            project.approved.themes = $scope.themeSelection;
+            project.approved.methods = $scope.addedMethods;
+            project.state = $scope.global.newState;
+            project.$addApproved(function (response) {
+                $location.path('projects/' + response._id)
+            });
+        };
+
         $scope.addRejectedState = function () {
             var project = $scope.project;
             project.rejected.rejection_categories = $scope.rejectedCategorySelection;
@@ -179,6 +196,24 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
+        $scope.addIntReportState = function () {
+            var project = $scope.project;
+            project.state = $scope.global.newState;
+            project.intermediary_report.themes = $scope.themeSelection;
+            project.intermediary_report.methods = $scope.addedMethods;
+            project.intermediary_report.objectives = $scope.objectiveComments;
+            var index = project.intermediary_reports.length;
+            if (index === undefined) {
+              project.intermediary_report.reportNumber = 1;
+            } else {
+              project.intermediary_report.reportNumber = project.intermediary_reports.length + 1;
+            }
+
+            project.$addIntReport(function (response) {
+                $location.path('projects/' + response._id);
+            });
+        };
+
         $scope.addEndReportState = function () {
             var project = $scope.project;
             project.state = $scope.global.newState;
@@ -189,24 +224,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $location.path('projects/' + response._id);
             });
         };
-        $scope.addIntReportState = function () {
-            var project = $scope.project;
-            var index = project.intermediary_report.length;
-            project.state = $scope.global.newState;
-            project.intermediary_report.themes = $scope.themeSelection;
-            project.intermediary_report.methods = $scope.addedMethods;
-            project.intermediary_report.objectives = $scope.objectiveComments;
-            project.intermediary_report.reportNumber = project.intermediary_report[index-1].reportNumber + 1;
-            
-            project.$addIntReport(function (response) {
-                $location.path('projects/' + response._id);
-            });
-        };
 
         $scope.addEndedState = function () {
                 var project = $scope.project;
                 project.state = $scope.global.newState;
-                console.log($scope.project);                
                 project.$addEnded(function (response) {
                     $location.path('projects/' + response._id)
                 });
@@ -219,17 +240,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.project = project;
                 $scope.global.newState = changeTo;
                 $location.path('projects/' + project._id + "/change");
-            });
-        };
-
-
-        $scope.addApprovedState = function () {
-            var project = $scope.project;
-            project.approved.themes = $scope.themeSelection;
-            project.approved.methods = $scope.addedMethods;
-            project.state = $scope.global.newState;
-            project.$addApproved(function (response) {
-                $location.path('projects/' + response._id)
             });
         };
 
@@ -267,6 +277,5 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     ? !$scope.reverse : false;
             $scope.predicate = predicate;
         };
-
     }
 ]);

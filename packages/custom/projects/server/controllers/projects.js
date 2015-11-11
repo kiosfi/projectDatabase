@@ -79,7 +79,8 @@ module.exports = function (Projects) {
             query
                     .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
                         {path: 'rejected', model: 'Rejected'}, {path: 'signed', model: 'Signed'},
-                        {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'}])
+                        {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'},
+                        {path: 'intermediary_reports.intermediary_report', model: 'IntReport'}])
                     .exec(function (err, projects) {
                         if (err) {
                             return res.status(500).json({
@@ -231,48 +232,17 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-        /*
-         * Moves a project to ended state and saves the state object to
-         * its collection.
-         */
-        addEnded: function (req, res) {
-            console.log(req.body);
-            var ended = new Ended(req.body.ended);
-            ended.user = req.user.name;
-            ended.save(function (err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Tilatietojen tallennus epäonnistui.'
-                    });
-                }
-            });
-            var project = req.project;
-            project.ended = ended._id;
-            project.state = req.body.state;
-            project.save(function (err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'
-                    });
-                }
 
-                Projects.events.publish({
-                    action: 'updated',
-                    name: project.title,
-                    url: config.hostname + '/projects/' + project._id
-                });
-                res.json(project);
-            });
-        },
-
-                /*
+          /*
          * Moves a project to IntReport state (or adds another) and saves the state object to
          * its collection.
          */
 
-           addIntReport: function (req, res) {
+        addIntReport: function (req, res) {
+            console.log(req.body);
             var intReport = new IntReport(req.body.intermediary_report);
             intReport.user = req.user.name;
+            intReport.reportNumber = req.body.intermediary_report.reportNumber;
             intReport.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -282,7 +252,7 @@ module.exports = function (Projects) {
             });
 
             var project = req.project;
-            project.intermediary_report.push(intReport._id);
+            project.intermediary_reports.push(intReport);
             project.state = req.body.state;
 
             project.save(function (err) {
@@ -337,6 +307,41 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
+
+        /*
+         * Moves a project to ended state and saves the state object to
+         * its collection.
+         */
+        addEnded: function (req, res) {
+            console.log(req.body);
+            var ended = new Ended(req.body.ended);
+            ended.user = req.user.name;
+            ended.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Tilatietojen tallennus epäonnistui.'
+                    });
+                }
+            });
+            var project = req.project;
+            project.ended = ended._id;
+            project.state = req.body.state;
+            project.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'
+                    });
+                }
+
+                Projects.events.publish({
+                    action: 'updated',
+                    name: project.title,
+                    url: config.hostname + '/projects/' + project._id
+                });
+                res.json(project);
+            });
+        },
+                
         destroy: function (req, res) {
             var project = req.project;
             project.remove(function (err) {
