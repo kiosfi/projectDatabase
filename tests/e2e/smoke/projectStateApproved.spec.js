@@ -62,4 +62,10 @@ describe('Changing project state to "approved"', function () {
         
         helpers.logout();
     });
+    
+    it('should show login page if trying to load "/projectId/change -view', function() {
+        browser.get('/projects/5c9ed9f94250406da7a7a111/change');
+        
+        expect(browser.getCurrentUrl()).toContain('/auth/login');
+    });
 });
