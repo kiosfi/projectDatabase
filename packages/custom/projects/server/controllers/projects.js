@@ -108,7 +108,6 @@ module.exports = function (Projects) {
         addReview: function (req, res) {
             var in_review = new InReview(req.body.in_review);
             in_review.user = req.user.name;
-            in_review.reportNumber = req.body.in_review.reportNumber;
             in_review.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -276,6 +275,7 @@ module.exports = function (Projects) {
             console.log(req.body);
             var intReport = new IntReport(req.body.intermediary_report);
             intReport.user = req.user.name;
+            intReport.reportNumber = req.body.intermediary_report.reportNumber;
             intReport.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -285,7 +285,7 @@ module.exports = function (Projects) {
             });
 
             var project = req.project;
-            project.intermediary_reports.push(intReport._id);
+            project.intermediary_reports.push(intReport);
             project.state = req.body.state;
 
             project.save(function (err) {

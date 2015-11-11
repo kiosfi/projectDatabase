@@ -191,14 +191,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
         $scope.addIntReportState = function () {
             var project = $scope.project;
-            var index = project.intermediary_report.length;
             project.state = $scope.global.newState;
             project.intermediary_report.themes = $scope.themeSelection;
             project.intermediary_report.methods = $scope.addedMethods;
             project.intermediary_report.objectives = $scope.objectiveComments;
-            project.intermediary_report.reportNumber = project.intermediary_report[index-1].reportNumber + 1;
+            var index = project.intermediary_reports.length;
+            if (index === undefined) {
+              project.intermediary_report.reportNumber = 1;
+            } else {
+              project.intermediary_report.reportNumber = project.intermediary_reports.length + 1;
+            }
 
-            console.log(project);
             project.$addIntReport(function (response) {
                 $location.path('projects/' + response._id);
             });
@@ -207,7 +210,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addEndedState = function () {
                 var project = $scope.project;
                 project.state = $scope.global.newState;
-                console.log($scope.project);
                 project.$addEnded(function (response) {
                     $location.path('projects/' + response._id)
                 });
