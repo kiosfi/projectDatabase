@@ -20,7 +20,7 @@
         <h5>Teemat </h5>
         <button type="button" data-ng-model="project.approved.themes" data-ng-repeat="theme in project.approved.themes" disabled>
             <span class="glyphicon glyphicon-tag">
-            </span> {{theme}}  
+            </span> {{theme}}
         </button><br>
     </article>
 
@@ -195,11 +195,11 @@
             <button class="btn small-btn" onclick="toggleCollapse('visibilityReviewinfo')">Tiedot</button></p>
             <span class="proj-left" id="visibilityReviewinfo">
                 <h5>Muokkaaja:</h5>
-                <p>{{project.in_review.user}}, {{project.in_review.date| date:'dd.MM.yyyy, HH:mm'}}</p>                
+                <p>{{project.in_review.user}}, {{project.in_review.date| date:'dd.MM.yyyy, HH:mm'}}</p>
                 <h5>Kommentit: </h5>
                 <p>{{project.in_review.comments}}</p>
             </span>
-            
+
         </section>
 
         <section ng-show="project.approved._id" class="proj-body">
@@ -210,11 +210,11 @@
                 <p>{{project.approved.user}}, {{project.approved.date| date:'dd.MM.yyyy, HH:mm'}}</p>
                 <h5>Hyväksyjä:</h5>
                 <p>{{project.approved.approved_by}}</p>
-                <h5>Hyväksymis pvm:</h5> 
+                <h5>Hyväksymis pvm:</h5>
                 <p>{{project.approved.approved_date}}</p>
-                <h5>Hallitukselle tiedoksi:</h5> 
+                <h5>Hallitukselle tiedoksi:</h5>
                 <p>{{project.approved.board_notified}}</p>
-                <h5>Hyväksytty summa:</h5> 
+                <h5>Hyväksytty summa:</h5>
                 <p>{{project.approved.granted_sum.granted_curr_eur}} € ({{project.approved.granted_sum.granted_curr_local}} paikallista valuuttaa)</p>
                 <h5>Teemat:</h5>
                 <ul>
@@ -222,12 +222,12 @@
                 </ul>
                 <h5>Toimintatavat:</h5>
                 <ul>
-                    <li data-ng-repeat="method in project.approved.methods">{{method.name}}, 
+                    <li data-ng-repeat="method in project.approved.methods">{{method.name}},
                         <i>taso:</i> {{method.level}}
                     </li>
                 </ul>
             </span>
-            
+
         </section>
 
         <section ng-show="project.rejected._id" class="proj-body">
@@ -244,7 +244,7 @@
                 <h5>Kommentit: </h5>
                 <p>{{project.rejected.rejection_comments}}</p>
             </span>
-            
+
         </section>
 
 
@@ -258,7 +258,7 @@
                 <h5>Allekirjoitettu:</h5>
                 <p>{{project.signed.signed_by}}, <i>päivämäärä</i>: {{project.signed.signed_date}}</p>
             </span>
-            
+
         </section>
 
         <section ng-show="project.intermediary_reports.length > 0" class="proj-body">
@@ -274,14 +274,14 @@
                 <h5>Teemat</h5>
                 <ul>
                   <li ng-repeat="theme in project.approved.themes">
-                    {{project.approved.themes.indexOf(theme) + 1}}. <i>{{theme}}</i><br>
+                    <i>{{theme}}</i><br>
                     {{intreport.themes[project.approved.themes.indexOf(theme)]}}
                   </li>
                 </ul>
                 <h5>Metodit</h5>
                 <ul>
                   <li ng-repeat="method in project.approved.methods">
-                    {{project.approved.methods.indexOf(method) + 1}}. <i>{{method.name}}</i>, taso: <i>{{method.level}}</i><br>
+                    <i>{{method.name}}</i>, taso: <i>{{method.level}}</i><br>
                     {{intreport.methods[project.approved.methods.indexOf(method)]}}
                   </li>
                 </ul>
@@ -341,6 +341,6 @@
                 <h5>Muut päättämiseen liittyvät kommentit:</h5>
                 <p>{{project.ended.other_comments}}</p>
             </span>
-            
+
         </section>
     </article>
