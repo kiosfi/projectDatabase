@@ -144,7 +144,7 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a41b"),
     "region": "Afrikka"}
 );
 
-db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a41b"),
+db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a111"),
     "project_ref": "70009",
     "title": "Elder rights",
     "coordinator": "Matti Meikäläinen",
