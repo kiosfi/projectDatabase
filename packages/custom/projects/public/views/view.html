@@ -262,10 +262,12 @@
             <span class="proj-left" id="visibilityEndreportinfo">
                 <h5>Muokkaaja:</h5>
                 <p>{{project.end_report.user}}, {{project.end_report.date| date:'dd.MM.yyyy, HH:mm'}}</p>
-
+                <p ng-show="project.end_report.processed === true">Loppuraportti käsitelty</p>
                 <h5>Tilintarkastus</h5>
                 <p>Tilintarkastus suoritettu {{project.end_report.audit.date}}</p>
                 <p>{{project.end_report.audit.review}}</p>
+                <h5>Kommentit</h5>
+                <p>{{project.end_report.comments}}</p>
                 <h5>Teemat</h5>
                 <ul>
                   <li ng-repeat="theme in project.approved.themes">
