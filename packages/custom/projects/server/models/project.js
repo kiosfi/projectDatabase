@@ -168,10 +168,9 @@ ProjectSchema.path('coordinator').validate(function (coordinator) {
 ProjectSchema.statics.load = function (id, cb) {
     this.findOne({
         _id: id
-    }).populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
+    }).populate('intermediary_reports').populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
         {path: 'signed', model: 'Signed'}, {path: 'rejected', model: 'Rejected'},
-        {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'}, {path: 'end_report', model: 'EndReport'},
-        {path: 'intermediary_reports.intermediary_report', model: 'IntReport'}])
+        {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'}, {path: 'end_report', model: 'EndReport'}])
             .exec(cb);
 };
 

@@ -1,7 +1,7 @@
 
 #visibilityAppinfo, #visibilityPayments, #visibilityAttachments, #visibilityReviewinfo,
-#visibilityRejectedinfo, #visibilitySignedinfo, #visibilityEndedinfo, #visibilityApprovedinfo,
-#visibilityEndreportinfo {
+#visibilityRejectedinfo, #visibilitySignedinfo, #visibilityApprovedinfo,
+#visibilityEndreportinfo, #visibilityEndedinfo, #visibilityIntreportinfo {
 
     display: none;
 }
@@ -49,6 +49,10 @@ ul li
     list-style-type: none;
 }
 
+span ul li
+{
+    list-style-type: circle;
+}
 .tila {
     float: right;
 }
