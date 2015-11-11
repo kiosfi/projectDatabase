@@ -191,7 +191,7 @@
     <article>
         <h4 class="proj-header">Aikataulu</h4>
         <section ng-show="project.in_review._id" class="proj-body">
-            <p><b>**Siirtynyt käsittelyyn</b>:&nbsp&nbsp{{project.in_review.date| date:'dd.MM.yyyy'}}:&nbsp&nbsp
+            <p><b>**Rekisteröity käsittelyyn</b>:&nbsp&nbsp{{project.in_review.date| date:'dd.MM.yyyy'}}&nbsp&nbsp
             <button class="btn small-btn" onclick="toggleCollapse('visibilityReviewinfo')">Tiedot</button></p>
             <span class="proj-left" id="visibilityReviewinfo">
                 <h5>Muokkaaja:</h5>
@@ -202,7 +202,7 @@
 
         </section>
         <section ng-show="project.approved._id" class="proj-body">
-            <p><b>**Hanke hyväksytty</b>: {{project.approved.date| date:'dd.MM.yyyy'}}
+            <p><b>**Rekisteröity hyväksytyksi</b>: {{project.approved.date| date:'dd.MM.yyyy'}}
             <button class="btn small-btn" onclick="toggleCollapse('visibilityApprovedinfo')">Tiedot</button></p>
             <span class="proj-left" id="visibilityApprovedinfo">
                 <h5>Muokkaaja:</h5>
@@ -229,13 +229,15 @@
 
         </section>
         <section ng-show="project.rejected._id" class="proj-body">
-            <p><b>**Hanke hylätty</b>:&nbsp&nbsp{{project.rejected.date| date:'dd.MM.yyyy'}}&nbsp&nbsp
+            <p><b>**Rekisteröity hylätyksi</b>:&nbsp&nbsp{{project.rejected.date| date:'dd.MM.yyyy'}}&nbsp&nbsp
             <button class="btn small-btn" onclick="toggleCollapse('visibilityRejectedinfo')">Tiedot</button></p>
             <span class="proj-left" id="visibilityRejectedinfo">
-                <h5>Hylkäyksen teki:</h5>
+                <h5>Muokkaaja:</h5>
                 <p>{{project.rejected.user}}, {{project.rejected.date| date:'dd.MM.yyyy, HH:mm'}}</p>
                 <h5>Hylkäyssyyt:</h5>
-                <p ng-repeat="rej in project.rejected.rejection_categories">{{rej}} </p>
+                <ul>
+                  <li ng-repeat="rej in project.rejected.rejection_categories">{{rej}} </li>
+                </ul>
                 <h5>Kommentit: </h5>
                 <p>{{project.rejected.rejection_comments}}</p>
             </span>
@@ -243,10 +245,10 @@
         </section>
 
         <section ng-show="project.signed._id" class="proj-body">
-            <p><b>**Sopimus allekirjoitettu</b>:&nbsp&nbsp{{project.signed.signed_date}}&nbsp&nbsp
+            <p><b>**Rekisteröity allekirjoitetuksi</b>:&nbsp&nbsp{{project.signed.date| date:'dd.MM.yyyy'}}&nbsp&nbsp
             <button class="btn small-btn" onclick="toggleCollapse('visibilitySignedinfo')">Tiedot</button></p>
             <span class="proj-left" id="visibilitySignedinfo">
-                <h5>Tiedot lisäsi:</h5>
+                <h5>Muokkaaja:</h5>
                 <p>{{project.signed.user}}, {{project.signed.date| date:'dd.MM.yyyy, HH:mm'}}</p>
                 <h5>Allekirjoitettu:</h5>
                 <p><{{project.signed.signed_by}}, <i>päivämäärä</i>: {{project.signed.signed_date}}</p>
@@ -254,8 +256,39 @@
 
         </section>
 
+        <section ng-show="project.end_report._id" class="proj-body">
+            <p><b>**Loppuraportti rekisteröity</b>:&nbsp&nbsp{{project.end_report.date| date:'dd.MM.yyyy'}}&nbsp&nbsp
+            <button class="btn small-btn" onclick="toggleCollapse('visibilityEndreportinfo')">Tiedot</button></p>
+            <span class="proj-left" id="visibilityEndreportinfo">
+                <h5>Muokkaaja:</h5>
+                <p>{{project.end_report.user}}, {{project.end_report.date| date:'dd.MM.yyyy, HH:mm'}}</p>
+
+                <h5>Tilintarkastus</h5>
+                <p>Tilintarkastus suoritettu {{project.end_report.audit.date}}</p>
+                <p>{{project.end_report.audit.review}}</p>
+                <h5>Teemat</h5>
+                <ul>
+                  <li ng-repeat="theme in project.approved.themes">
+                    {{project.approved.themes.indexOf(theme) + 1}}. <i>{{theme}}</i><br>
+                    {{project.end_report.themes[project.approved.themes.indexOf(theme)]}}
+                  </li>
+                </ul>
+                <h5>Metodit</h5>
+                <ul>
+                  <li ng-repeat="method in project.approved.methods">
+                    {{project.approved.methods.indexOf(method) + 1}}. <i>{{method.name}}</i>, taso: <i>{{method.level}}</i><br>
+                    {{project.end_report.methods[project.approved.methods.indexOf(method)]}}
+                  </li>
+                </ul>
+                <h5>Tavoitteet</h5>
+                <ul>
+                  <li ng-repeat="objective in project.intermediary_report.objectives">{{objective}}</li>
+                </ul>
+            </span>
+
+        </section>
         <section ng-show="project.ended._id" class="proj-body">
-            <p><b>**Hanke päätetty</b>:&nbsp&nbsp{{project.ended.end_date}}&nbsp&nbsp
+            <p><b>**Rekisteröity päätetyksi</b>:&nbsp&nbsp{{project.ended.end_date}}&nbsp&nbsp
             <button class="btn small-btn" onclick="toggleCollapse('visibilityEndedinfo')">Tiedot</button></p>
             <span class="proj-left" id="visibilityEndedinfo">
                 <h5>Tiedot lisäsi:</h5>

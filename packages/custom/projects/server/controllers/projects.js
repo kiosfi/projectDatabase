@@ -133,10 +133,10 @@ module.exports = function (Projects) {
             });
         },
         /*
-         * Updates project to contain data required in approved state        
+         * Updates project to contain data required in approved state
          * @param {type} req project object to be updated, sent from frontend
-         * @param {type} res project object after update 
-         * @returns updated project object in json to frontend, or error if 
+         * @param {type} res project object after update
+         * @returns updated project object in json to frontend, or error if
          *  updating not possible
          */
         addApproved: function (req, res) {
@@ -264,12 +264,12 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-        
+
                 /*
-         * Moves a project to endReport state (or adds another) and saves the state object to
+         * Moves a project to IntReport state (or adds another) and saves the state object to
          * its collection.
          */
-        
+
            addIntReport: function (req, res) {
             var intReport = new IntReport(req.body.intermediary_report);
             intReport.user = req.user.name;
@@ -374,5 +374,3 @@ module.exports = function (Projects) {
 
     };
 }
-
-

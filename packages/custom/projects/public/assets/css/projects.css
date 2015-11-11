@@ -1,6 +1,7 @@
 
 #visibilityAppinfo, #visibilityPayments, #visibilityAttachments, #visibilityReviewinfo,
-#visibilityRejectedinfo, #visibilitySignedinfo, #visibilityEndedinfo, #visibilityApprovedinfo {
+#visibilityRejectedinfo, #visibilitySignedinfo, #visibilityEndedinfo, #visibilityApprovedinfo,
+#visibilityEndreportinfo {
 
     display: none;
 }
