@@ -387,7 +387,7 @@ describe('<Unit Test>', function () {
             it('should create a new "rejected" state update given project with its id', function (done) {
                 this.timeout(10000);
                 rejected = new Rejected({
-                    "rejection_categories": ["1", "3"],
+                    "rejection_categories": [{rejection: "7 Strategia"}, {rejection: "8 Muu, mikä?"}],
                     "rejection_comments": "this is a comment"});
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
