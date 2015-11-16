@@ -137,7 +137,16 @@ A form for project state change.
 
         <div class="form-group col-md-12">
             <label mean-token="'create-rejcategories'" class="col-md-3 control-label">Syyt</label>
+            <div class="col-md-12" id="rejSelection" data-ng-repeat="rej in addedRejections">
+                <select id="rejSelect" data-ng-model="rej.rejection">
+                    <option data-ng-repeat="rejCat in rejcategories" value="{{rejCat}}">{{rejCat}}</option>
+                </select>
+            </div>
             <div class="col-md-12">
+                <input type="button" value="Lisää uusi" ng-click="addRejection();"/>
+                <input type="button" value="Poista viimeinen" ng-click="removeRejection();"/>
+            </div>
+<!--            <div class="col-md-12">
                 <label ng-repeat="rej in rejcategories">
                     <input
                         type="checkbox"
@@ -147,7 +156,7 @@ A form for project state change.
                         ng-click="toggleRejectedCategorySelection(rej)"
                         >{{rej}}
                 </label>
-            </div>
+            </div>-->
         </div>
 
         <div class="form-group col-md-12">

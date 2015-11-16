@@ -32,7 +32,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.objectiveComments = [];
 
-        $scope.rejcategories = ["1", "2", "3", "4", "5"];
+        $scope.rejcategories = ["1 Hanke ei ole ihmisoikeushanke", "2 Järjestöllä ei ole ihmisoikeushankkeen toteutuskapasiteettia", 
+            "3 Järjestöllä ei ole hallintokapasiteettia", "4 Hanke on epärealistinen tai muuten heikosti suunniteltu", 
+            "5 Hankkeen budjetti on epärealistinen", "6 Huonot tai puuttuvat referenssit", "7 Strategia", "8 Muu, mikä?"];
+        
+        $scope.addedRejections = [];
 
         $scope.rejectedCategorySelection = [];
 
@@ -176,7 +180,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.addRejectedState = function () {
             var project = $scope.project;
-            project.rejected.rejection_categories = $scope.rejectedCategorySelection;
+            project.rejected.rejection_categories = $scope.addedRejections;
             project.state = $scope.global.newState;
             project.$addRejected(function (response) {
                 $location.path('projects/' + response._id);
@@ -245,6 +249,14 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.removeMethod = function () {
             $scope.addedMethods.splice(-1, 1);
+        };
+        
+        $scope.addRejection = function () {
+            $scope.addedRejections.push({rejection: ''});
+        };
+
+        $scope.removeRejection = function () {
+            $scope.addedRejections.splice(-1, 1);
         };
 
 
