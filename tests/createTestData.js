@@ -170,6 +170,32 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a111"),
     "region": "Aasia"}
 );
 
+db.projects.insert({"_id": ObjectId("779ed9f94250406da7a7a111"),
+    "project_ref": "70009",
+    "title": "Some rights",
+    "coordinator": "Matti Meikäläinen",
+    "organisation": ObjectId("56091a0525f75ebc0c486338"),
+    "state": "käsittelyssä",
+    "reg_date": "12.1.2012",
+    "funding":
+            {"applied_curr_local": "218 000",
+                "applied_curr_eur": "128 000",
+                "granted_curr_local": "0",
+                "granted_curr_eur": "0"},
+    "duration_months": 26,
+    "description": "Lyhyt kuvaus ....",
+    "description_en": "A short description ....",
+    "background": "Hankkeen tausta",
+    "beneficiaries": "1, 2, 3",
+    "gender_aspect": "näkökulma",
+    "project_goal": "Hankkeen päätavoite on ...",
+    "sustainability_risks": "riskit...",
+    "reporting_evaluation": "raportointityökalut ym.",
+    "other_donors_proposed": "donor1",
+    "dac": "ABC1C345",
+    "region": "Aasia"}
+);
+
 db.projects.insert({"_id": ObjectId("f2e7c9aeb017189911996768"),
     "project_ref": "70003",
     "title": "Project nr 3",
