@@ -2,7 +2,7 @@
 
 angular.module('mean.projects').controller('ProjectsController',
 ['$scope', '$stateParams', '$location', '$window', '$http', 'Global',
-    'Projects', 'MeanUser', 'Circles',
+    'Projects', 'MeanUser', 'Circles', 'countProjects',
     function ($scope, $stateParams, $location, $window, $http, Global, Projects, MeanUser, Circles) {
         $scope.global = Global;
 
@@ -54,8 +54,8 @@ angular.module('mean.projects').controller('ProjectsController',
                     offset:     $scope.offset,
                     count:      $scope.pageSize
                 },
-                function(result) {
-                    $scope.projects = result;
+                function(results) {
+                    $scope.projects = results;
                 }
             );
         };
@@ -164,15 +164,23 @@ angular.module('mean.projects').controller('ProjectsController',
          */
         $scope.pageSize = 10;
 
+//        $scope.pageNr = 1;
+
         /**
          * Fills the pagination.
          *
          * @returns {undefined}
          */
         $scope.paginate = function() {
-            var pages = Math.ceil($scope.projects.length / $scope.pageSize);
+            var pages = $scope.numberOfProjects();
 
         };
 
+        $scope.numberOfProjects = function() {
+            countProjects(function(result) {
+                console.log(result);
+            });
+            return 42;
+        }
     }
 ]);

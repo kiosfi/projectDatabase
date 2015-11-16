@@ -149,6 +149,19 @@ module.exports = function (Projects) {
                 res.json(result);
             });
         },
+        /**
+         * Writes the number of projects present at the database as a json
+         * object {projectCount : &lt;n&gt;}, where &lt;n&gt; is the number of
+         * projects.
+         *
+         * @param {type} req Request object.
+         * @param {type} res Response object.
+         */
+        countProjects: function (req, res) {
+            Project.count({}, function(error, result) {
+                res.json({projectCount: result});
+            });
+        },
         allStates: function (req, res) {
             var query = States.find();
             query.exec(function (err, states) {
