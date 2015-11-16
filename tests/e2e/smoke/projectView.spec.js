@@ -4,6 +4,8 @@ describe('Project view page', function () {
 
     it('should stay project view page if logged in ', function () {
         helpers.login();
+        
+        element(by.linkText('Hankelistaus')).click();
         element(by.linkText('Human rights')).click();
         expect(browser.getCurrentUrl()).toContain('56091cbc00fccd6d66bc5cc3');
         helpers.logout();
@@ -11,6 +13,8 @@ describe('Project view page', function () {
 
     it('should show details of project if logged in', function () {
         helpers.login();
+        
+        element(by.linkText('Hankelistaus')).click();
         element(by.linkText('Human rights')).click();
         // TODO: "by.css('section')" should probably be replaced with something
         // more unambiguous.
@@ -20,9 +24,10 @@ describe('Project view page', function () {
         helpers.logout();
     });
 
-    it('should redirect to login page if not logged in ', function () {
-        browser.get('/');
-        element(by.linkText('Human rights')).click();
-        expect(browser.getCurrentUrl()).toContain('/auth/login');
+    it('should redirect to empty home page if not logged in ', function () {
+        browser.get('/56091cbc00fccd6d66bc5cc3');
+        
+        var text = element(by.id('sys-idx'));
+        expect(text.getText()).toContain('KIOS Ry:n hanketietokanta');
     })
 });

@@ -143,8 +143,8 @@ A form for project state change.
                 </select>
             </div>
             <div class="col-md-12">
-                <input type="button" value="Lisää uusi" ng-click="addRejection();"/>
-                <input type="button" value="Poista viimeinen" ng-click="removeRejection();"/>
+                <input id="addRej" type="button" value="Lisää uusi" ng-click="addRejection();"/>
+                <input id="remRej" type="button" value="Poista viimeinen" ng-click="removeRejection();"/>
             </div>
 <!--            <div class="col-md-12">
                 <label ng-repeat="rej in rejcategories">
@@ -169,7 +169,7 @@ A form for project state change.
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-default">Tallenna</button>
+                <button id="rej-btn" type="submit" class="btn btn-default">Tallenna</button>
             </div>
         </div>
     </form>
