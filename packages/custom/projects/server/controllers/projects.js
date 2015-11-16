@@ -111,31 +111,36 @@ module.exports = function (Projects) {
          * parameter).
          * @param {type} res The response object where the results will be
          * written into as JSON data.
-         * @param {type} criterion  A MongoDB query document. Only documents
+         * @param {json} criterion  A MongoDB query document. Only documents
          * matching this criterion will be processed. Examples:
          * All projects having reference number greater than 15000:
          * "{project_ref : {$gt : 15000}}". All projects whose name ends with
          * "rights": "{title : {$regex: /\w*rights$/i}}" (case insensitive).
-         * @param {type} ordering   A MongoDB sort document. It is a JSON object
+         * Empty document selects all projects.
+         * @param {json} ordering   A MongoDB sort document. It is a JSON object
          * of the form {X_1 : Y_1, X_2 : Y_2, X_3 : Y_3, ... , X_n : Y_n} where
          * X_1 .. X_n are the names of the attributes used for sorting and
          * Y_1 .. Y_n are either 1 for ascending or -1 for descending ordering
          * by the corresponding attribute. Example:
          * "{project_ref : 1, project_title : 1}".
-         * @param {type} offset     Offset index i.e. the index of the first
+         * @param {Number} offset     Offset index i.e. the index of the first
          * matching document to be included. Used for paging the results.
-         * @param {type} count      Maximum count of results.
+         * @param {Number} count      Maximum count of results.
          *
          * @returns {undefined} This function has no return value.
          *
          * @see https://docs.mongodb.org/manual/core/crud-introduction/
          */
-        getProjects: function (req, res, criterion, ordering, offset, count) {
+        getProjects: function (req, res) {
+            var criterion = req.query.criterion;
+            var ordering = req.query.ordering;
+            var offset = req.query.offset;
+            var count = req.query.count;
             res.json(Project.find(criterion, {_id: 1, project_ref: 1,
                 title: 1, state: 1, organisation: 1}).sort(ordering).
                     skip(offset).limit(count));
         },
-        
+
         allStates: function (req, res) {
             var query = States.find();
             query.exec(function (err, states) {

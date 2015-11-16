@@ -1,4 +1,4 @@
-<section data-ng-controller="ProjectsController" data-ng-init="find()">
+<section data-ng-controller="ProjectsController" data-ng-init="getProjects(0)">
     <article ng-if="projects && projects.length > 0">
         <style type="text/css">
             .sortorder:after {
@@ -12,22 +12,15 @@
         <hr>
         <table class="col-md-12 table table-striped">
             <thead>
-<!--                <tr>
-                    <th>Haku</th>
-                    <th colspan="3">
-                        <input st-search="" class="form-control"
-                               placeholder="Hankehaku" type="text"/>
-                    </th>
-                </tr>-->
                 <tr>
-                    <th class="col-md-2">
+                    <th class="col-md-1">
                         <a href="" ng-click="order('project_ref')">Tunnus</a>
                         <span class="sortorder"
                               ng-show="predicate === 'project_ref'"
                               ng-class="{reverse:reverse}"></span>
                     </th>
-                    <th class="col-md-4">
-                        <a ng-href="/projects/project._id" ng-click="order('title')">Nimi</a>
+                    <th class="col-md-5">
+                        <a ng-href="" ng-click="order('title')">Nimi</a>
                         <span class="sortorder"
                               ng-show="predicate === 'title'"
                               ng-class="{reverse:reverse}"></span>
@@ -46,16 +39,18 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr ng-repeat="project in projects| orderBy:predicate:reverse"
-                    id="proj-{{project.project_ref}}">
+            <tbody id="projtable">
+                <tr ng-repeat="project in projects2">
                     <td>{{project.project_ref}}</td>
-                    <td><a ng-href="/projects/{{project._id}}">{{project.title}}</a></td>
+                    <td>{{project.title}}</td>
                     <td>{{project.state}}</td>
-                    <td>{{project.organisation.name}}</td>
+                    <td>{{project.organisation}}</td>
                 </tr>
             </tbody>
         </table>
+        <ul class="pagination pagination-sm" data-ng-init="paginate()">
+            <li><a href="#">1</a></li>
+        </ul>
     </article>
     <article data-ng-hide="!projects || projects.length">
         <h1>Hankkeita ei ole.</h1>
