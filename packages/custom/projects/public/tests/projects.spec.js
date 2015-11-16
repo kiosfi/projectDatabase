@@ -73,7 +73,8 @@
                         // fixture response object
                         var testProjectData = function () {
                             return {
-                                title: 'Human rights'
+                                title: 'Human rights',
+                                reports: []
                             };
                         };
                         // test expected GET request with response object
