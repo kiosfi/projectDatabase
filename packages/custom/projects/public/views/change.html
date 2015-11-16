@@ -91,22 +91,24 @@ A form for project state change.
         </div>
 
         <div class="form-group col-md-12">
-            <label mean-token="'create-themes'" class="col-md-3 control-label">Teemat</label>
-            <div class="col-md-10">
-                <label ng-repeat="theme in themes">
-                    <input
+            <label mean-token="'create-themes'" class="col-md-2">Teemat</label>
+            <div class="col-md-12">
+                <table>
+                    <tr ng-repeat="theme in themes">
+                    <td><input
                         type="checkbox"
                         name="selectedThemes[]"
                         value="{{theme}}"
                         ng-checked="themeSelection.indexOf(theme) > -1"
                         ng-click="toggleThemeSelection(theme)"
-                        > {{theme}}<br>
-                </label>
+                        > {{theme}}</td>
+                </tr>
+                </table>
             </div>
         </div>
 
         <div class="form-group col-md-12">
-            <label mean-token="'create-methods'" class="col-md-3 control-label">Toimintatavat</label>
+            <label mean-token="'create-methods'" class="col-md-2">Toimintatavat</label>
             <div class="col-md-12" id="methodsSelection" data-ng-repeat="method in addedMethods">
                 <select id="methodSelect" data-ng-model="method.name">
                     <option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>
@@ -136,7 +138,7 @@ A form for project state change.
     <form name="rejectedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hylätty'"  role="form" data-ng-submit="addRejectedState(rejectedForm.$valid)" novalidate>
 
         <div class="form-group col-md-12">
-            <label mean-token="'create-rejcategories'" class="col-md-3 control-label">Syyt</label>
+            <label mean-token="'create-rejcategories'" class="col-md-3">Syyt</label>
             <div class="col-md-12" id="rejSelection" data-ng-repeat="rej in addedRejections">
                 <select id="rejSelect" data-ng-model="rej.rejection">
                     <option data-ng-repeat="rejCat in rejcategories" value="{{rejCat}}">{{rejCat}}</option>
