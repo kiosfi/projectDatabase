@@ -38,9 +38,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         
         $scope.addedRejections = [];
 
-        $scope.rejectedCategorySelection = [];
-
-
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
             var idx = $scope.themeSelection.indexOf(theme);
 
@@ -53,20 +50,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.themeSelection.push(theme);
             }
         };
-
-        $scope.toggleRejectedCategorySelection = function toggleRejectedCategorySelection(rejectedCategory) {
-            var idx = $scope.rejectedCategorySelection.indexOf(rejectedCategory);
-
-            // is currently selected
-            if (idx > -1) {
-                $scope.rejectedCategorySelection.splice(idx, 1);
-            }
-            // is newly selected
-            else {
-                $scope.rejectedCategorySelection.push(rejectedCategory);
-            }
-        };
-
 
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
             var idx = $scope.themeSelection.indexOf(theme);
