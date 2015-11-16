@@ -148,13 +148,12 @@
                     <p class="proj-header">Myönnetty</p>
                     <section class="proj-body">
                         <p>Summa: {{project.funding.granted_curr_eur}} EUR ({{project.funding.granted_curr_local}} local) 12.10.2014</p>
-                        <p>Lisärahoitus: 1000 euroa (10 000 paikallista) 5.7.2014</p>
+                        <!--<p>Lisärahoitus: 1000 euroa (10 000 paikallista) 5.7.2014</p>-->
                     </section>
                     <br>
-                    <section class="proj-body">
-                        <p class="proj-header">Maksettu</p>
-                        <p>1. Erä: 4000 euroa (10 000 paikallista) 7.1.2015</p>
-                        <p>2. Erä: 4000 euroa (10 000 paikallista) 7.6.2015</p>
+                    <section class="proj-body" ng-repeat="planned_payment in project.planned_payments">
+                        <p class="proj-header">Suunnitellut maksatukset</p>
+                        <p>{{project.planned_payments.indexOf(planned_payment)}} Erä: {{planned_payment.sum}} {{planned_payment.date}}</p>
                         <br>
                         <p>Maksettu yhteensä: 8000 euroa (10 000 paikallista) </p>
                         <p>Jäljellä: 3000 euroa (10 000 paikallista) </p>

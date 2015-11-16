@@ -15,6 +15,7 @@ var mongoose = require('mongoose'),
         Approved = mongoose.model('Approved'),
         IntReport = mongoose.model('IntReport'),
         EndReport = mongoose.model('EndReport'),
+        PlannedPayment = mongoose.model('PlannedPayment'),
         config = require('meanio').loadConfig(),
         _ = require('lodash');
 

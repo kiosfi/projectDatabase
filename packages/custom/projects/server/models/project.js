@@ -138,6 +138,9 @@ var ProjectSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'Signed'
     },
+    planned_payments: {
+      type: Array
+    },
     intermediary_reports: [{ type : Schema.ObjectId, ref: 'IntReport' }],
     end_report: {
         type: Schema.ObjectId,

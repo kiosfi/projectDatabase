@@ -107,6 +107,32 @@ var SignedSchema = new Schema({
     signed_date: {
         type: String,
         required: true
+    },
+    planned_payments: {
+
+    },
+
+});
+
+var PlannedPaymentSchema = new Schema({
+    planned_date: {
+        type: String,
+        required: true
+    },
+    sum: {
+        type: String,
+        required: true
+    }
+});
+
+var PaymentSchema = new Schema({
+    payment_date: {
+        type: String,
+        required: true
+    },
+    sum: {
+        type: String,
+        required: true
     }
 });
 
@@ -162,7 +188,7 @@ var EndReportSchema = new Schema({
             required: true
         }
     },
-  
+
     themes: {
         type: Array
     },
@@ -213,6 +239,8 @@ module.exports = mongoose.model('InReview', InReviewSchema);
 module.exports = mongoose.model('Approved', ApprovedSchema);
 module.exports = mongoose.model('Rejected', RejectedSchema);
 module.exports = mongoose.model('Signed', SignedSchema);
+module.exports = mongoose.model('PlannedPayment', PlannedPaymentSchema);
+module.exports = mongoose.model('Payment', PaymentSchema);
 module.exports = mongoose.model('IntReport', IntReportSchema);
 module.exports = mongoose.model('EndReport', EndReportSchema);
 module.exports = mongoose.model('Ended', EndedSchema);

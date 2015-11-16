@@ -28,6 +28,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.addedMethods = [];
 
+        $scope.plannedPayments = [];
+
         $scope.themeSelection = [];
 
         $scope.objectiveComments = [];
@@ -101,6 +103,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.find = function () {
             Projects.query(function (projects) {
                 $scope.projects = projects;
+                $scope.displayedCollection = [].concat($scope.projects);
             });
         };
 
@@ -109,13 +112,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
-                var reports = $scope.project.intermediary_reports;
-                for (var i = 0; i < reports.length; i++) {
-                  $scope.info = true;
-                  $scope.toggleInfo = function() {
-                    $scope.info = ! $scope.info;
-                  };
-                }
             });
         };
 
@@ -186,6 +182,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.addSignedState = function () {
             var project = $scope.project;
+            project.planned_payments = $scope.plannedPayments;
             project.state = $scope.global.newState;
             project.$addSigned(function (response) {
                 $location.path('projects/' + response._id);
@@ -245,6 +242,14 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.removeMethod = function () {
             $scope.addedMethods.splice(-1, 1);
+        };
+
+        $scope.addPlannedPayment = function () {
+            $scope.plannedPayments.push({date: '', sum: ''});
+        };
+
+        $scope.removePlannedPayment = function () {
+            $scope.plannedPayments.splice(-1, 1);
         };
 
 
