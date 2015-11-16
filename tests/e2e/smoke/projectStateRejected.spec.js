@@ -34,25 +34,25 @@ describe('Changing project state to "rejected"', function () {
         helpers.logout();
     });
     
-//    it('should not change state if user clicks "cancel"-button in change-view', function() {
-//        helpers.login();
-//        
-//        element(by.linkText("Hankelistaus")).click();
-//        element(by.linkText("Elder rights")).click();
-//        
-//        element(by.model('project.changeTo')).element(by.cssContainingText('option', 'hyväksytty')).click();
-//        element(by.id('st')).click();
-//        
-//        expect(browser.getCurrentUrl()).toContain('/change');
-//        
-//        element(by.linkText('Peruuta')).click();
-//        
-//        expect(browser.getCurrentUrl()).toContain('/5c9ed9f94250406da7a7a111');
-//        var state = element(by.css('h3')).element(by.id('state')).getText();
-//        expect(state).toContain('käsittelyssä');
-//        
-//        helpers.logout();
-//    });
+    it('should not change state if user clicks "cancel"-button in change-view', function() {
+        helpers.login();
+        
+        element(by.linkText("Hankelistaus")).click();
+        element(by.linkText("Human rights 123")).click();
+        
+        element(by.model('project.changeTo')).element(by.cssContainingText('option', 'hylätty')).click();
+        element(by.id('st')).click();
+        
+        expect(browser.getCurrentUrl()).toContain('/change');
+        
+        element(by.linkText('Peruuta')).click();
+        
+        expect(browser.getCurrentUrl()).toContain('/5c9ed9f94250406da7a7aabc');
+        var state = element(by.css('h3')).element(by.id('state')).getText();
+        expect(state).toContain('käsittelyssä');
+        
+        helpers.logout();
+    });
 //    
 //    it('should show login page if trying to load "/projectId/change -view', function() {
 //        browser.get('/projects/5c9ed9f94250406da7a7a111/change');
