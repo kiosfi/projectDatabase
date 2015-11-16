@@ -13,10 +13,6 @@ angular.module('mean.projects').factory('Projects', ['$resource',
             addReview: {
                 method: 'PUT'
             }
-//            getProjects: {
-//                method: 'GET',
-//                url:    'api/projects/list?criterion={}&ordering={project_ref:1}&offset=0&count=10'
-//            }
         });
     }
 ]);

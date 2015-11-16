@@ -1,4 +1,4 @@
-<section data-ng-controller="ProjectsController" data-ng-init="getProjects(0)">
+<section data-ng-controller="ProjectsController" data-ng-init="find()">
     <article ng-if="projects && projects.length > 0">
         <style type="text/css">
             .sortorder:after {
@@ -40,11 +40,13 @@
                 </tr>
             </thead>
             <tbody id="projtable">
-                <tr ng-repeat="project in projects2">
+                <tr ng-repeat="project in projects">
                     <td>{{project.project_ref}}</td>
-                    <td>{{project.title}}</td>
+                    <td><a ng-href="/projects/{{project._id}}">
+                            {{project.title}}</a></td>
                     <td>{{project.state}}</td>
-                    <td>{{project.organisation}}</td>
+                    <td><a ng-href="/organisations/{{project.organisation._id}}">
+                            {{project.organisation.name}}</a></td>
                 </tr>
             </tbody>
         </table>

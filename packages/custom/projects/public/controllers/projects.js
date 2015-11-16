@@ -47,9 +47,17 @@ angular.module('mean.projects').controller('ProjectsController',
         };
 
         $scope.find = function () {
-            Projects.query(function (projects) {
-                $scope.projects = projects;
-            });
+            var pred = $scope.predicate;
+            Projects.query({
+                    criterion:  $scope.criterion,
+                    ordering:   $scope.ordering,
+                    offset:     $scope.offset,
+                    count:      $scope.pageSize
+                },
+                function(result) {
+                    $scope.projects = result;
+                }
+            );
         };
 
         $scope.findOne = function () {
@@ -141,6 +149,8 @@ angular.module('mean.projects').controller('ProjectsController',
             $scope.reverse = ($scope.predicate === predicate)
                     ? !$scope.reverse : false;
             $scope.predicate = predicate;
+            $scope.ordering = {predicate : $scope.reverse ? -1 : 1};
+            $scope.find();
         };
 
         $scope.criterion = {};
@@ -152,37 +162,7 @@ angular.module('mean.projects').controller('ProjectsController',
         /**
          * The number of projects to be listed on a single page.
          */
-        $scope.pageSize = 3;
-
-        $scope.projects2 = [];
-
-        $scope.getProjects = function(offset) {
-            Projects.query({criterion : {}, ordering : {project_ref:1},
-                offset : 0, count : 10}, function(result) {
-                        $scope.projects2 = result;
-            });
-        }
-
-        /**
-         * Fills the table with project entries. The page number will be read
-         * from HTTP GET.
-         *
-         * @returns {undefined}
-         */
-        $scope.fillTable = function() {
-            console.log("dgtwrg");
-            var table = document.getElementById('projtable');
-            for (var i = 0; i < $scope.pageSize; ++i) {
-                var row = table.insertRow(-1);
-                var project = $scope.projects2[i];
-                console.log(project);
-                row.insertCell(0).innerHTML = project.project_ref;
-                row.insertCell(1).innerHTML = '<a href="projects/' + project._id +
-                        '">' + project.title + '</a>';
-                row.insertCell(2).innerHTML = project.state;
-                row.insertCell(3).innerHTML = project.organisation.name;
-            }
-        };
+        $scope.pageSize = 10;
 
         /**
          * Fills the pagination.

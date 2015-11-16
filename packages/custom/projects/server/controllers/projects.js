@@ -136,11 +136,19 @@ module.exports = function (Projects) {
             var ordering = req.query.ordering;
             var offset = req.query.offset;
             var count = req.query.count;
-            res.json(Project.find(criterion, {_id: 1, project_ref: 1,
-                title: 1, state: 1, organisation: 1}).sort(ordering).
-                    skip(offset).limit(count));
+            Project.find(criterion, {_id: 1, project_ref: 1, title: 1, state: 1,
+                organisation: 1}
+            ).sort(ordering).skip(offset).limit(count)
+            .populate('organisation', {_id: 1, name : 1})
+            .exec(function (err, result) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Hankkeita ei voi näyttää'
+                    });
+                }
+                res.json(result);
+            });
         },
-
         allStates: function (req, res) {
             var query = States.find();
             query.exec(function (err, states) {

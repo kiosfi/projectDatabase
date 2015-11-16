@@ -27,10 +27,8 @@ module.exports = function (Projects, app, auth) {
     var projects = require('../controllers/projects')(Projects);
 
     app.route('/api/projects')
-            .get(projects.getProject)
+            .get(projects.getProjects)
             .post(auth.requiresLogin, hasPermissions, projects.create);
-//    app.route('/api/projects/list')
-//            .get(projects.getProjects);
     app.route('/api/states')
             .get(projects.allStates);
     app.route('/api/projects/:projectId')
