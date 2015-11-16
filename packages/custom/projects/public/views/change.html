@@ -95,14 +95,14 @@ A form for project state change.
             <div class="col-md-12">
                 <table>
                     <tr ng-repeat="theme in themes">
-                    <td><input
-                        type="checkbox"
-                        name="selectedThemes[]"
-                        value="{{theme}}"
-                        ng-checked="themeSelection.indexOf(theme) > -1"
-                        ng-click="toggleThemeSelection(theme)"
-                        > {{theme}}</td>
-                </tr>
+                        <td><input
+                                type="checkbox"
+                                name="selectedThemes[]"
+                                value="{{theme}}"
+                                ng-checked="themeSelection.indexOf(theme) > -1"
+                                ng-click="toggleThemeSelection(theme)"
+                                > {{theme}}</td>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -136,7 +136,6 @@ A form for project state change.
 
 
     <form name="rejectedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hylätty'"  role="form" data-ng-submit="addRejectedState(rejectedForm.$valid)" novalidate>
-
         <div class="form-group col-md-12">
             <label mean-token="'create-rejcategories'" class="col-md-3">Syyt</label>
             <div class="col-md-12" id="rejSelection" data-ng-repeat="rej in addedRejections">
@@ -148,17 +147,17 @@ A form for project state change.
                 <input id="addRej" type="button" value="Lisää uusi" ng-click="addRejection();"/>
                 <input id="remRej" type="button" value="Poista viimeinen" ng-click="removeRejection();"/>
             </div>
-<!--            <div class="col-md-12">
-                <label ng-repeat="rej in rejcategories">
-                    <input
-                        type="checkbox"
-                        name="selectedRejCategories[]"
-                        value="{{rej}}"
-                        ng-checked="rejectedCategorySelection.indexOf(rej) > -1"
-                        ng-click="toggleRejectedCategorySelection(rej)"
-                        >{{rej}}
-                </label>
-            </div>-->
+            <!--            <div class="col-md-12">
+                            <label ng-repeat="rej in rejcategories">
+                                <input
+                                    type="checkbox"
+                                    name="selectedRejCategories[]"
+                                    value="{{rej}}"
+                                    ng-checked="rejectedCategorySelection.indexOf(rej) > -1"
+                                    ng-click="toggleRejectedCategorySelection(rej)"
+                                    >{{rej}}
+                            </label>
+                        </div>-->
         </div>
 
         <div class="form-group col-md-12">
