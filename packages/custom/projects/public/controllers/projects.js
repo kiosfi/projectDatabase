@@ -32,10 +32,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.objectiveComments = [];
 
-        $scope.rejcategories = ["1 Hanke ei ole ihmisoikeushanke", "2 Järjestöllä ei ole ihmisoikeushankkeen toteutuskapasiteettia", 
-            "3 Järjestöllä ei ole hallintokapasiteettia", "4 Hanke on epärealistinen tai muuten heikosti suunniteltu", 
+        $scope.rejcategories = ["1 Hanke ei ole ihmisoikeushanke", "2 Järjestöllä ei ole ihmisoikeushankkeen toteutuskapasiteettia",
+            "3 Järjestöllä ei ole hallintokapasiteettia", "4 Hanke on epärealistinen tai muuten heikosti suunniteltu",
             "5 Hankkeen budjetti on epärealistinen", "6 Huonot tai puuttuvat referenssit", "7 Strategia", "8 Muu, mikä?"];
-        
+
         $scope.addedRejections = [];
 
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
@@ -98,10 +98,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.project = project;
                 var reports = $scope.project.intermediary_reports;
                 for (var i = 0; i < reports.length; i++) {
-                  $scope.info = true;
-                  $scope.toggleInfo = function() {
-                    $scope.info = ! $scope.info;
-                  };
+                    $scope.info = true;
+                    $scope.toggleInfo = function () {
+                        $scope.info = !$scope.info;
+                    };
                 }
             });
         };
@@ -161,13 +161,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
-        $scope.addRejectedState = function () {
-            var project = $scope.project;
-            project.rejected.rejection_categories = $scope.addedRejections;
-            project.state = $scope.global.newState;
-            project.$addRejected(function (response) {
-                $location.path('projects/' + response._id);
-            });
+        $scope.addRejectedState = function (isValid) {
+            if (isValid) {
+                var project = $scope.project;
+                project.rejected.rejection_categories = $scope.addedRejections;
+                project.state = $scope.global.newState;
+                project.$addRejected(function (response) {
+                    $location.path('projects/' + response._id);
+                });
+            } 
+
         };
 
 
@@ -187,9 +190,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             project.intermediary_report.objectives = $scope.objectiveComments;
             var index = project.intermediary_reports.length;
             if (index === undefined) {
-              project.intermediary_report.reportNumber = 1;
+                project.intermediary_report.reportNumber = 1;
             } else {
-              project.intermediary_report.reportNumber = project.intermediary_reports.length + 1;
+                project.intermediary_report.reportNumber = project.intermediary_reports.length + 1;
             }
 
             project.$addIntReport(function (response) {
@@ -209,11 +212,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.addEndedState = function () {
-                var project = $scope.project;
-                project.state = $scope.global.newState;
-                project.$addEnded(function (response) {
-                    $location.path('projects/' + response._id)
-                });
+            var project = $scope.project;
+            project.state = $scope.global.newState;
+            project.$addEnded(function (response) {
+                $location.path('projects/' + response._id)
+            });
         };
 
         $scope.changeState = function (changeTo) {
@@ -233,7 +236,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.removeMethod = function () {
             $scope.addedMethods.splice(-1, 1);
         };
-        
+
         $scope.addRejection = function () {
             $scope.addedRejections.push({rejection: ''});
         };

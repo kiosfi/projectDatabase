@@ -38,6 +38,20 @@ describe('Changing project state to "rejected"', function () {
         helpers.logout();
     });
 
+    it('should stay on change-page when trying to submit invalid form', function () {
+        helpers.login();
+
+        element(by.linkText("Hankelistaus")).click();
+        element(by.linkText("Human rights 123")).click();
+        element(by.model('project.changeTo')).element(by.cssContainingText('option', 'hylätty')).click();
+        element(by.id('st')).click();
+
+        expect(browser.getCurrentUrl()).toContain('/change');
+
+        helpers.logout();
+
+    });
+
     it('should not change state if user clicks "cancel"-button in change-view', function () {
         helpers.login();
 
