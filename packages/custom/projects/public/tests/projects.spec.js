@@ -70,12 +70,10 @@
                     'from XHR using a projectId URL parameter', function () {
                         // fixture URL parament
                         $stateParams.projectId = '525a8422f6d0f87f0e407a33';
-                        scope.project.intermediary_reports = [];
                         // fixture response object
                         var testProjectData = function () {
                             return {
-                                title: 'Human rights',
-                                reports: []
+                                title: 'Human rights'
                             };
                         };
                         // test expected GET request with response object

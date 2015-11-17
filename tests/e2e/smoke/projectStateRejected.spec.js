@@ -71,7 +71,6 @@ describe('Changing project state to "rejected"', function () {
         expect(browser.getCurrentUrl()).toContain('/change');
 
         helpers.logout();
-
     });
 
     it('should not change state if user clicks "cancel"-button in change-view', function () {
