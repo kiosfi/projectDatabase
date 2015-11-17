@@ -259,6 +259,9 @@
                                placeholder="Haettu avustus (paikallinen)" required>
 
                         <div ng-show=" projectForm.appliedlocal.$invalid" class="help-block">
+                            <p ng-show="projectForm.appliedlocal.$error.number">Summan täytyy olla numero</p>
+                        </div>
+                        <div ng-show=" projectForm.appliedlocal.$invalid" class="help-block">
                             <p ng-show="projectForm.appliedlocal.$error.required">Kenttä on pakollinen</p>
                         </div>
                     </div>
@@ -274,7 +277,10 @@
                                data-ng-model="project.funding.applied_curr_eur" id="appliedeur"
                                placeholder="Haettu avustus (EUR)" required>
 
-                        <div ng-show=" projectForm.appliedeur.$invalid" class="help-block">
+                        <div ng-show="projectForm.appliedeur.$invalid" class="help-block">
+                            <p ng-show="projectForm.appliedeur.$error.number">Summan täytyy olla numero</p>
+                        </div>
+                        <div ng-show="projectForm.appliedeur.$invalid" class="help-block">
                             <p ng-show="projectForm.appliedeur.$error.required">Kenttä on pakollinen</p>
                         </div>
                     </div>
