@@ -12,8 +12,10 @@ var expect = require('expect.js'),
         BankAccount = mongoose.model('BankAccount'),
         User = mongoose.model('User'),
         InReview = mongoose.model('InReview'),
+        Approved = mongoose.model('Approved'),
         Rejected = mongoose.model('Rejected'),
         Signed = mongoose.model('Signed'),
+        Payment = mongoose.model('Payment'),
         Ended = mongoose.model('Ended');
 
 var project1;
@@ -28,8 +30,12 @@ var bank_account3;
 var bank_account4;
 var user;
 var in_review;
+var approved;
 var rejected;
 var signed;
+var payment;
+var int_report;
+var end_report;
 var ended;
 
 describe('<Unit Test>', function () {
@@ -74,10 +80,8 @@ describe('<Unit Test>', function () {
                         "organisation": organisation,
                         "reg_date": "12.10.2014",
                         "funding": {
-                            "applied_curr_local": "50 000",
-                            "applied_curr_eur": "10 000",
-                            "granted_curr_local": "50 000",
-                            "granted_curr_eur": "10 000"},
+                            "applied_curr_local": 50000,
+                            "applied_curr_eur": 10000},
                         "duration_months": 30,
                         "description": "A short description of project",
                         "description_en": "Description in english",
@@ -101,10 +105,8 @@ describe('<Unit Test>', function () {
                         "organisation": organisation,
                         "reg_date": "12.9.2014",
                         "funding": {
-                            "applied_curr_local": "50 000",
-                            "applied_curr_eur": "11 000",
-                            "granted_curr_local": "50 000",
-                            "granted_curr_eur": "11 000"},
+                            "applied_curr_local": 50000,
+                            "applied_curr_eur": 11000},
                         "duration_months": 12,
                         "description": "A short description of project",
                         "description_en": "Description in english",
@@ -200,10 +202,8 @@ describe('<Unit Test>', function () {
                             "coordinator": "Maija Maa",
                             "organisation": organisation3,
                             "funding": {
-                                "applied_curr_local": "50 000",
-                                "applied_curr_eur": "11 000",
-                                "granted_curr_local": "50 000",
-                                "granted_curr_eur": "11 000"},
+                                "applied_curr_local": 50000,
+                                "applied_curr_eur": 11000},
                             "duration_months": 19,
                             "description": "A short description of project",
                             "description_en": "Description in english",
@@ -305,8 +305,8 @@ describe('<Unit Test>', function () {
                             "coordinator": "Maija Maa",
                             "organisation": organisation4,
                             "funding": {
-                                "applied_curr_local": "150 000",
-                                "applied_curr_eur": "111 000"},
+                                "applied_curr_local": 150000,
+                                "applied_curr_eur": 111000},
                             "duration_months": 29,
                             "description": "A short description of project",
                             "description_en": "Description in english",
@@ -331,7 +331,7 @@ describe('<Unit Test>', function () {
                     done();
                 });
             });
-            
+
             it('should be able to save project where data has scandic letters', function(done) {
                 this.timeout(10000);
 
@@ -364,7 +364,7 @@ describe('<Unit Test>', function () {
 
         describe('Method Update', function () {
 
-            it('should create a new "in review" state update given project with its id', function (done) {
+            it('should create a new "in review" state and update given project with its id', function (done) {
                 this.timeout(10000);
                 in_review = new InReview({
                     "comments": "this is a comment"});
@@ -384,7 +384,32 @@ describe('<Unit Test>', function () {
                 });
             });
 
-            it('should create a new "rejected" state update given project with its id', function (done) {
+            it('should create a new "approved" state and update given project with its id', function (done) {
+                this.timeout(10000);
+                approved = new Approved({
+                    "approved_date": "12.5.2015",
+                    "approved_by": "Toiminnanjohtaja",
+                    "board_notified": "15.5.2015",
+                    "methods": [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen"}],
+                    "themes": ["Oikeusvaltio ja demokratia"],
+                    "granted_sum": {"granted_curr_eur": 60000, "granted_curr_local": 80000}});
+
+                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                    approved.user = user.name;
+                    approved.save();
+                    proj.state = "hyväksytty";
+                    proj.approved = approved;
+                    proj.save();
+                    expect(err).to.be(null);
+                    expect(proj.state).to.be("hyväksytty");
+                    expect(proj.approved.granted_sum.granted_curr_local).to.be(80000);
+                    approved.remove();
+                    user.remove();
+                    done();
+                });
+            });
+
+            it('should create a new "rejected" state and update given project with its id', function (done) {
                 this.timeout(10000);
                 rejected = new Rejected({
                     "rejection_categories": [{rejection: "7 Strategia"}, {rejection: "8 Muu, mikä?"}],
@@ -416,12 +441,30 @@ describe('<Unit Test>', function () {
                     signed.save();
                     proj.state = "allekirjoitettu";
                     proj.signed = signed;
+                    proj.planned_payments = [{"date": "12.12.2015", "sum_eur": 50000, "sum_local": 80000}];
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("allekirjoitettu");
                     expect(proj.signed.signed_by).to.be("Jaana Jantunen");
                     signed.remove();
                     user.remove();
+                    done();
+                });
+            });
+
+            it('should create a new payment and add its id to the payments array of project', function (done) {
+                this.timeout(10000);
+                payment = new Payment({
+                    "payment_date": "12.12.2015",
+                    "sum_eur": 20000, "sum_local": 20000});
+
+                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                    payment.save();
+                    proj.payments.push(payment._id);
+                    proj.save();
+                    expect(err).to.be(null);
+                    expect(proj.payments.length).to.be(1);
+                    payment.remove();
                     done();
                 });
             });

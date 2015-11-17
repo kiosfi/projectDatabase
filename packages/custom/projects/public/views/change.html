@@ -75,7 +75,7 @@ A form for project state change.
         <div class="form-group col-md-12">
             <label for="granted_sum_eur" class="col-md-2 control-label">Myönnetty summa (euro)</label>
             <div class="col-md-4">
-                <input name="granted_sum_eur" type="text" class="form-control" data-ng-model="project.approved.granted_sum.granted_curr_eur" id="granted_sum_eur" placeholder="0" required>EUR
+                <input name="granted_sum_eur" type="number" class="form-control" data-ng-model="project.approved.granted_sum.granted_curr_eur" id="granted_sum_eur" placeholder="0" required>EUR
             </div>
             <div ng-show="submitted && approvedForm.granted_sum_eur.$invalid" class="help-block">
                 <p ng-show="approvedForm.granted_sum_eur.$error.required">Kenttä on pakollinen</p>
@@ -83,7 +83,7 @@ A form for project state change.
 
             <label for="granted_sum_local" class="col-md-2 control-label">Myönnetty summa (paikallinen)</label>
             <div class="col-md-4">
-                <input name="granted_sum_local" type="text" class="form-control" data-ng-model="project.approved.granted_sum.granted_curr_local" id="granted_sum_local" placeholder="0" required>local
+                <input name="granted_sum_local" type="number" class="form-control" data-ng-model="project.approved.granted_sum.granted_curr_local" id="granted_sum_local" placeholder="0" required>local
             </div>
             <div ng-show="submitted && approvedForm.granted_sum_local.$invalid" class="help-block">
                 <p ng-show="approvedForm.granted_sum_local.$error.required">Kenttä on pakollinen</p>
@@ -141,7 +141,7 @@ A form for project state change.
             <div class="col-md-12" id="rejSelection" data-ng-repeat="rej in addedRejections" required>
                 <select name="rejSelect" id="rejSelect" data-ng-model="rej.rejection" required>
                     <option data-ng-repeat="rejCat in rejcategories" value="{{rejCat}}">{{rejCat}}</option>
-                </select>             
+                </select>
             </div>
 
             <div ng-show="rejectedForm.rejSelect.$invalid" class="help-block">
@@ -208,13 +208,13 @@ A form for project state change.
 
                 <label for="plannedSumEUR" class="col-md-2 control-label">Summa (EUR)</label>
                 <div class="col-md-5">
-                    <input name="plannedSumEUR" type="text" class="form-control" data-ng-model="plannedPayment.sum_eur" id="plannedSumEUR" placeholder="Summa (EUR)" required>
+                    <input name="plannedSumEUR" type="number" class="form-control" data-ng-model="plannedPayment.sum_eur" id="plannedSumEUR" placeholder="Summa (EUR)" required>
                 </div>
                 <div style="clear:both;">&nbsp;</div>
 
                 <label for="plannedSumLocal" class="col-md-2 control-label">Summa (pv)</label>
                 <div class="col-md-5">
-                    <input name="plannedSumLocal" type="text" class="form-control" data-ng-model="plannedPayment.sum_local" id="plannedSumLocal" placeholder="Summa (paikallinen val)" required>
+                    <input name="plannedSumLocal" type="number" class="form-control" data-ng-model="plannedPayment.sum_local" id="plannedSumLocal" placeholder="Summa (paikallinen val)" required>
                 </div>
                 <div style="clear:both;">&nbsp;</div>
 

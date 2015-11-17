@@ -163,7 +163,7 @@
                         <p>{{project.payments.indexOf(payment) + 1}}. Erä: {{payment.sum_eur}} EUR ({{payment.sum_local}} paikallista valuuttaa), {{payment.payment_date}}</p>
                     </section>
                     <br>
-                    <h5 class="proj-header">Maksettu</h5>                    
+                    <h5 class="proj-header">Maksettu</h5>
                     <section class="proj-body" ng-show="project.payments.length">
                         <p>Maksettu yhteensä: {{project.funding.paid_eur}} euroa ({{project.funding.paid_local}} paikallista) </p>
                         <p>Jäljellä: {{project.funding.left_eur}} euroa ({{project.funding.left_local}} paikallista) </p>
@@ -208,14 +208,14 @@
               <div class="form-group col-xs-12">
                   <label for="paymentSumEUR" class="col-xs-2 control-label">Summa (EUR)</label>
                   <div class="col-xs-4">
-                      <input name="paymentSumEUR" type="text" class="form-control" data-ng-model="project.payment.sum_eur" id="paymentSumEUR" placeholder="Summa (EUR)" required></input>
+                      <input name="paymentSumEUR" type="number" class="form-control" data-ng-model="project.payment.sum_eur" id="paymentSumEUR" placeholder="Summa (EUR)" required></input>
                   </div>
               </div>
 
               <div class="form-group col-xs-12">
                   <label for="paymentSumLocal" class="col-xs-2 control-label">Summa (pv)</label>
                   <div class="col-xs-4">
-                      <input name="paymentSumLocal" type="text" class="form-control" data-ng-model="project.payment.sum_local" id="paymentSumLocal" placeholder="Summa (pv)" required></input>
+                      <input name="paymentSumLocal" type="number" class="form-control" data-ng-model="project.payment.sum_local" id="paymentSumLocal" placeholder="Summa (pv)" required></input>
                   </div>
               </div>
 
