@@ -73,7 +73,8 @@
                         // fixture response object
                         var testProjectData = function () {
                             return {
-                                title: 'Human rights'
+                                title: 'Human rights',
+                                intermediary_reports: []
                             };
                         };
                         // test expected GET request with response object
@@ -88,24 +89,21 @@
             it('$scope.create() with valid form data should send POST request ', function () {
 
                 scope.project = {
-                  title: 'Human rights',
-                  categories: ['yleiset ihmisoikeudet']
+                    title: 'Human rights'
                 };
 
-                var postProjectData = function() {
+                var postProjectData = function () {
                     return scope.project;
-                 };
+                };
 //                // fixture response data
-                var responseProjectData = function() {
-                  return {
-                    _id: '525cf20451979dea2c000001',
-                    title: 'Human rights',
-                    categories: ['yleiset ihmisoikeudet']
-                  };
-               };
+                var responseProjectData = function () {
+                    return {
+                        _id: '525cf20451979dea2c000001',
+                        title: 'Human rights'
+                    };
+                };
 
                 scope.title = 'Human rights';
-                scope.categorySelection = ['yleiset ihmisoikeudet'];
                 // test post request is sent
                 $httpBackend.expectPOST('api\/projects', postProjectData()).respond(responseProjectData());
                 // Run controller
@@ -120,57 +118,91 @@
             });
 
             it('$scope.remove() should send a DELETE request with a valid projectId ' +
-              'and remove the project from the scope', inject(function(Projects) {
+                    'and remove the project from the scope', inject(function (Projects) {
+
+                        // fixture rideshare
+                        var project = new Projects({
+                            _id: '525a8422f6d0f87f0e407a33'
+                        });
+
+                        // mock rideshares in scope
+                        scope.projects = [];
+                        scope.projects.push(project);
+
+                        // test expected rideshare DELETE request
+                        $httpBackend.expectDELETE(/api\/projects\/([0-9a-fA-F]{24})$/).respond(204);
+
+                        // run controller
+                        scope.remove(project);
+                        $httpBackend.flush();
+
+                        // test after successful delete URL location projects list
+                        expect($location.path()).toBe('/projects');
+                        expect(scope.projects.length).toBe(0);
+
+                    }));
+
+            it('$scope.addReviewState(true) should update a valid project', inject(function (Projects) {
+
 
                 // fixture rideshare
-                var project = new Projects({
-                    _id: '525a8422f6d0f87f0e407a33'
-                });
+                var putProjectData = function () {
+                    return {
+                        _id: '525a8422f6d0f87f0e407a33',
+                        state: 'rekisteröity',
+                        to: 'käsittelyssä'
+                    };
+                };
 
-                // mock rideshares in scope
-                scope.projects = [];
-                scope.projects.push(project);
+                // mock project object from form
+                var project = new Projects(putProjectData());
 
-                // test expected rideshare DELETE request
-                $httpBackend.expectDELETE(/api\/projects\/([0-9a-fA-F]{24})$/).respond(204);
+                // mock project in scope
+                scope.project = project;
+
+                // test PUT happens correctly
+                $httpBackend.expectPUT(/api\/projects\/rev\/([0-9a-fA-F]{24})$/).respond();
 
                 // run controller
-                scope.remove(project);
+                scope.addReviewState(true);
                 $httpBackend.flush();
 
-                // test after successful delete URL location projects list
-                expect($location.path()).toBe('/projects');
-                expect(scope.projects.length).toBe(0);
+                // test URL location to new object
+                expect($location.path()).toBe('/projects/' + putProjectData()._id);
 
             }));
 
-            it('$scope.addReviewState(true) should update a valid project', inject(function(Projects) {
+            it('$scope.addRejectedState(true) should update a valid project', inject(function (Projects) {
 
 
-              // fixture rideshare
-              var putProjectData = function() {
-                return {
-                      _id: '525a8422f6d0f87f0e407a33',
-                      state: 'rekisteröity',
-                      to: 'käsittelyssä'
-                  };
-              };
+                // fixture rideshare
+                var putProjectData = function () {
+                    return {
+                        _id: '525a8422f6d0f87f0e407a33',
+                        rejected: {
+                            rejection_categories: ["1 Hanke ei ole ihmisoikeushanke"]
+                        },
+                        state: 'käsittelyssä',
+                        to: 'hylätty'
+                    };
+                };
 
-              // mock project object from form
-              var project = new Projects(putProjectData());
+                // mock project object from form
+                var project = new Projects(putProjectData());
 
-              // mock project in scope
-              scope.project = project;
+                // mock project in scope
+                scope.project = project;
+                scope.addedRejections = ["1 Hanke ei ole ihmisoikeushanke"];
 
-              // test PUT happens correctly
-              $httpBackend.expectPUT(/api\/projects\/rev\/([0-9a-fA-F]{24})$/).respond();
+                // test PUT happens correctly
+                $httpBackend.expectPUT(/api\/projects\/rej\/([0-9a-fA-F]{24})$/).respond();
 
-              // run controller
-              scope.addReviewState(true);
-              $httpBackend.flush();
+                // run controller
+                scope.addRejectedState(true);
+                $httpBackend.flush();
 
-              // test URL location to new object
-              expect($location.path()).toBe('/projects/' + putProjectData()._id);
+                // test URL location to new object
+                expect($location.path()).toBe('/projects/' + putProjectData()._id);
 
             }));
 
