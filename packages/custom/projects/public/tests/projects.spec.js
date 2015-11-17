@@ -149,8 +149,49 @@
                 var putProjectData = function () {
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
+                        in_review: {
+                          comments: "This is a comment"
+                        },
                         state: 'rekisteröity',
                         to: 'käsittelyssä'
+                    };
+                };
+
+                // mock project object from form
+                var project = new Projects(putProjectData());
+
+                // mock project in scope
+                scope.project = project;
+
+                // test PUT happens correctly
+                $httpBackend.expectPUT(/api\/projects\/rev\/([0-9a-fA-F]{24})$/).respond();
+
+                // run controller
+                scope.addReviewState(true);
+                $httpBackend.flush();
+
+                // test URL location to new object
+                expect($location.path()).toBe('/projects/' + putProjectData()._id);
+
+            }));
+
+            it('$scope.addApprovedState(true) should update a valid project', inject(function (Projects) {
+
+
+                // fixture rideshare
+                var putProjectData = function () {
+                    return {
+                        _id: '525a8422f6d0f87f0e407a33',
+                        approved: {
+                          approved_date: "12.12.2015",
+                          approved_by: "Toiminnanjohtaja",
+                          board_notified: "22.12.2015",
+                          methods: [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen"}],
+                          themes: ["Oikeusvaltio ja demokratia"],
+                          granted_sum: {"granted_curr_eur": 60000, "granted_curr_local": 80000}
+                        },
+                        state: 'käsittelyssä',
+                        to: 'hyväksytty'
                     };
                 };
 
@@ -199,6 +240,77 @@
 
                 // run controller
                 scope.addRejectedState(true);
+                $httpBackend.flush();
+
+                // test URL location to new object
+                expect($location.path()).toBe('/projects/' + putProjectData()._id);
+
+            }));
+
+            it('$scope.addSignedState(true) should update a valid project', inject(function (Projects) {
+
+
+                // fixture rideshare
+                var putProjectData = function () {
+                    return {
+                        _id: '525a8422f6d0f87f0e407a33',
+                        signed: {
+                          signed_by: 'Jaana Jantunen',
+                          signed_date: '22.12.2015',
+                          planned_payments: [{"date": "12.12.2015", "sum_eur": 50000, "sum_local": 80000}]
+                        },
+                        state: 'hyväksytty',
+                        to: 'allekirjoitettu'
+                    };
+                };
+
+                // mock project object from form
+                var project = new Projects(putProjectData());
+
+                // mock project in scope
+                scope.project = project;
+
+                // test PUT happens correctly
+                $httpBackend.expectPUT(/api\/projects\/rev\/([0-9a-fA-F]{24})$/).respond();
+
+                // run controller
+                scope.addReviewState(true);
+                $httpBackend.flush();
+
+                // test URL location to new object
+                expect($location.path()).toBe('/projects/' + putProjectData()._id);
+
+            }));
+
+            it('$scope.addEndedState(true) should update a valid project', inject(function (Projects) {
+
+
+                // fixture rideshare
+                var putProjectData = function () {
+                    return {
+                        _id: '525a8422f6d0f87f0e407a33',
+                        ended: {
+                          end_date: "12.12.2015",
+                          board_notified: "12.12.2015",
+                          approved_by: "toimitusjohtaja",
+                          other_comments: "kommentti"
+                        },
+                        state: 'loppuraportti',
+                        to: 'päättynyt'
+                    };
+                };
+
+                // mock project object from form
+                var project = new Projects(putProjectData());
+
+                // mock project in scope
+                scope.project = project;
+
+                // test PUT happens correctly
+                $httpBackend.expectPUT(/api\/projects\/rev\/([0-9a-fA-F]{24})$/).respond();
+
+                // run controller
+                scope.addReviewState(true);
                 $httpBackend.flush();
 
                 // test URL location to new object

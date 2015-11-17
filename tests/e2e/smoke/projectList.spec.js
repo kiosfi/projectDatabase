@@ -8,7 +8,7 @@ describe('Project list page', function () {
 
         element(by.linkText('Hankelistaus')).click();
 
-        expect(element.all(by.repeater('project in projects')).count()).toEqual(12);
+        expect(element.all(by.repeater('project in projects')).count()).toEqual(13);
 
         expect(element(by.id('proj-70001')).isPresent()).toBe(true);
         expect(element(by.id('proj-70002')).isPresent()).toBe(true);

@@ -430,18 +430,19 @@ describe('<Unit Test>', function () {
                 });
             });
 
-            it('should create a new "signed" state update given project with its id', function (done) {
+            it('should create a new "signed" state and update given project with its id', function (done) {
                 this.timeout(10000);
                 signed = new Signed({
                     "signed_by": "Jaana Jantunen",
-                    "signed_date": "12.12.2015"});
+                    "signed_date": "12.12.2015",
+                    "planned_payments": [{"date": "12.12.2015", "sum_eur": 50000, "sum_local": 80000}]});
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
                     signed.user = user.name;
                     signed.save();
                     proj.state = "allekirjoitettu";
                     proj.signed = signed;
-                    proj.planned_payments = [{"date": "12.12.2015", "sum_eur": 50000, "sum_local": 80000}];
+                    //proj.planned_payments = [{"date": "12.12.2015", "sum_eur": 50000, "sum_local": 80000}];
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("allekirjoitettu");

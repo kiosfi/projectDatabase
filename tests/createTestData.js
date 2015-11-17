@@ -9,6 +9,10 @@ db.createCollection("organisations");
 db.createCollection("projects");
 db.createCollection("bankaccounts");
 db.createCollection("users");
+db.createCollection("inreviews");
+db.createCollection("approveds");
+db.createCollection("signeds");
+db.createCollection("rejecteds");
 
 db.users.insert(
   { "_id" : ObjectId("5614d428013b9a2f1ca236ce"),
@@ -19,6 +23,45 @@ db.users.insert(
   "name" : "teppo testi",
   "provider" : "local",
   "roles" : [ "authenticated" ], "__v" : 0 }
+);
+
+db.inreviews.insert(
+  {"_id" : ObjectId("564b78b0609e79f4514f961e"),
+   "user" : "Pekka Puupää",
+   "comments" : "Jep jep"
+  }
+);
+
+db.approveds.insert(
+  {
+    "_id": ObjectId("564b0cdc9d87261b1bbf0009"),
+    "user": "Maria",
+    "approved_date": "12.15.2015",
+    "approved_by": "Toiminnanjohtaja",
+    "board_notified": "13.15.2015",
+    "methods": [
+      {
+        "level": "Kansainvälinen",
+        "name": "Kapasiteetin vahvistaminen"
+      }
+    ],
+    "themes": [
+      "Oikeusvaltio ja demokratia"
+    ],
+    "granted_sum": {
+      "granted_curr_eur": 60000,
+      "granted_curr_local": 80000
+    }
+  }
+);
+
+db.signeds.insert(
+  {
+    "_id": ObjectId("564b0d089d87261b1bbf000a"),
+    "user": "Maria",
+    "signed_by": "Maija Meri",
+    "signed_date": "3.1.2016"
+  }
 );
 
 db.bankaccounts.insert(
@@ -100,10 +143,8 @@ db.projects.insert({"_id": ObjectId("56091cbc00fccd6d66bc5cc3"),
     "state": "rekisteröity",
     "reg_date": "12.10.2014",
     "funding":
-            {"applied_curr_local": "50 000",
-                "applied_curr_eur": "10 000",
-                "granted_curr_local": "50 000",
-                "granted_curr_eur": "10 000"},
+            {"applied_curr_local": 50000,
+                "applied_curr_eur": 10000},
     "duration_months": 30,
     "description": "Lyhyt kuvaus",
     "description_en": "A short description",
@@ -126,10 +167,8 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a41b"),
     "state": "käsittelyssä",
     "reg_date": "2.11.2015",
     "funding":
-            {"applied_curr_local": "18 000",
-                "applied_curr_eur": "8 000",
-                "granted_curr_local": "0",
-                "granted_curr_eur": "0"},
+            {"applied_curr_local": 18000,
+                "applied_curr_eur": 8000},
     "duration_months": 36,
     "description": "Lyhyt kuvaus",
     "description_en": "A short description",
@@ -141,7 +180,8 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a41b"),
     "reporting_evaluation": "raportointityökalut ym.",
     "other_donors_proposed": "donor1, donorB",
     "dac": "ABC1C345",
-    "region": "Afrikka"}
+    "region": "Afrikka",
+    "in_review": ObjectId("564b78b0609e79f4514f961e")}
 );
 
 db.projects.insert({"_id": ObjectId("f2e7c9aeb017189911996768"),
@@ -152,10 +192,8 @@ db.projects.insert({"_id": ObjectId("f2e7c9aeb017189911996768"),
     "state": "hyväksytty",
     "reg_date": "7.10.2015",
     "funding":
-            {"applied_curr_local": "100 000",
-                "applied_curr_eur": "12 000",
-                "granted_curr_local": "0",
-                "granted_curr_eur": "0"},
+            {"applied_curr_local": 100000,
+                "applied_curr_eur": 12000},
     "duration_months": 18,
     "description": "Lyhyt kuvaus",
     "description_en": "A short description",
@@ -167,7 +205,9 @@ db.projects.insert({"_id": ObjectId("f2e7c9aeb017189911996768"),
     "reporting_evaluation": "raportointityökalut ym.",
     "other_donors_proposed": "donor1, donor2",
     "dac": "ABC12355",
-    "region": "Aasia"}
+    "region": "Aasia",
+    "in_review": ObjectId("564b78b0609e79f4514f961e"),
+    "approved": ObjectId("564b0cdc9d87261b1bbf0009")}
 );
 
 db.projects.insert({"_id": ObjectId("f2e7c9adb017176611996768"),
@@ -178,10 +218,8 @@ db.projects.insert({"_id": ObjectId("f2e7c9adb017176611996768"),
     "state": "hylätty",
     "reg_date": "7.12.2015",
     "funding":
-            {"applied_curr_local": "100 000",
-                "applied_curr_eur": "12 000",
-                "granted_curr_local": "0",
-                "granted_curr_eur": "0"},
+            {"applied_curr_local": 100000,
+                "applied_curr_eur": 12000},
     "duration_months": 18,
     "description": "Lyhyt kuvaus",
     "description_en": "A short description",
@@ -193,7 +231,8 @@ db.projects.insert({"_id": ObjectId("f2e7c9adb017176611996768"),
     "reporting_evaluation": "raportointityökalut ym.",
     "other_donors_proposed": "donor1, donorB",
     "dac": "ABC12355",
-    "region": "Afrikka"}
+    "region": "Afrikka",
+    "in_review": ObjectId("564b78b0609e79f4514f961e")}
 );
 
 db.projects.insert({"_id": ObjectId("5c9ed9f94260406da7a7a41b"),
@@ -204,10 +243,8 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94260406da7a7a41b"),
     "state": "allekirjoitettu",
     "reg_date": "7.12.2015",
     "funding":
-            {"applied_curr_local": "100 000",
-                "applied_curr_eur": "12 000",
-                "granted_curr_local": "0",
-                "granted_curr_eur": "0"},
+            {"applied_curr_local": 100000,
+                "applied_curr_eur": 12000},
     "duration_months": 20,
     "description": "Lyhyt kuvaus",
     "description_en": "A short description",
@@ -219,7 +256,11 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94260406da7a7a41b"),
     "reporting_evaluation": "raportointityökalut ym.",
     "other_donors_proposed": "donor1, donorB",
     "dac": "ABC12355",
-    "region": "Afrikka"}
+    "region": "Afrikka",
+    "planned_payments": [{"date": "27.12.2015", "sum_eur": 5000, "sum_local": 10000}],
+    "in_review": ObjectId("564b78b0609e79f4514f961e"),
+    "approved": ObjectId("564b0cdc9d87261b1bbf0009"),
+    "signed": ObjectId("564b0d089d87261b1bbf000a")}
 );
 
 db.projects.insert({"_id": ObjectId("a2c8c9adb020176611996768"),
@@ -230,10 +271,8 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176611996768"),
     "state": "väliraportti",
     "reg_date": "7.12.2015",
     "funding":
-            {"applied_curr_local": "100 000",
-                "applied_curr_eur": "12 000",
-                "granted_curr_local": "0",
-                "granted_curr_eur": "0"},
+            {"applied_curr_local": 100000,
+                "applied_curr_eur": 12000},
     "duration_months": 20,
     "description": "Lyhyt kuvaus",
     "description_en": "A short description",
@@ -256,10 +295,8 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176622996766"),
     "state": "loppuraportti",
     "reg_date": "7.12.2015",
     "funding":
-            {"applied_curr_local": "100 000",
-                "applied_curr_eur": "12 000",
-                "granted_curr_local": "0",
-                "granted_curr_eur": "0"},
+            {"applied_curr_local": 100000,
+                "applied_curr_eur": 12000},
     "duration_months": 11,
     "description": "Lyhyt kuvaus hankkeesta",
     "description_en": "A short description",
@@ -282,10 +319,8 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a111"),
     "state": "käsittelyssä",
     "reg_date": "12.11.2015",
     "funding":
-            {"applied_curr_local": "118 000",
-                "applied_curr_eur": "18 000",
-                "granted_curr_local": "0",
-                "granted_curr_eur": "0"},
+            {"applied_curr_local": 118000,
+                "applied_curr_eur": 18000},
     "duration_months": 16,
     "description": "Lyhyt kuvaus ....",
     "description_en": "A short description ....",
@@ -297,7 +332,8 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a111"),
     "reporting_evaluation": "raportointityökalut ym.",
     "other_donors_proposed": "donor1",
     "dac": "ABC1C345",
-    "region": "Aasia"}
+    "region": "Aasia",
+    "in_review": ObjectId("564b78b0609e79f4514f961e")}
 );
 
 db.projects.insert({"_id": ObjectId("779ed9f94250406da7a7a111"),
@@ -308,10 +344,8 @@ db.projects.insert({"_id": ObjectId("779ed9f94250406da7a7a111"),
     "state": "käsittelyssä",
     "reg_date": "12.1.2012",
     "funding":
-            {"applied_curr_local": "218 000",
-                "applied_curr_eur": "128 000",
-                "granted_curr_local": "0",
-                "granted_curr_eur": "0"},
+            {"applied_curr_local": 218000,
+                "applied_curr_eur": 128000},
     "duration_months": 26,
     "description": "Lyhyt kuvaus ....",
     "description_en": "A short description ....",
@@ -323,7 +357,8 @@ db.projects.insert({"_id": ObjectId("779ed9f94250406da7a7a111"),
     "reporting_evaluation": "raportointityökalut ym.",
     "other_donors_proposed": "donor1",
     "dac": "ABC1C345",
-    "region": "Aasia"}
+    "region": "Aasia",
+    "in_review": ObjectId("564b78b0609e79f4514f961e")}
 );
 
 db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7aabc"),
@@ -334,10 +369,8 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7aabc"),
     "state": "käsittelyssä",
     "reg_date": "16.08.2015",
     "funding":
-            {"applied_curr_local": "8 000",
-                "applied_curr_eur": "108 000",
-                "granted_curr_local": "0",
-                "granted_curr_eur": "0"},
+            {"applied_curr_local": 8000,
+                "applied_curr_eur": 108000},
     "duration_months": 40,
     "description": "Lyhyt kuvaus ....",
     "description_en": "A short description ....",
@@ -349,7 +382,8 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7aabc"),
     "reporting_evaluation": "raportointityökalut ym.",
     "other_donors_proposed": "donor567",
     "dac": "ABC1C345",
-    "region": "Aasia"}
+    "region": "Aasia",
+    "in_review": ObjectId("564b78b0609e79f4514f961e")}
 );
 
 db.projects.insert({"_id": ObjectId("56091ded00fccd6d66bc5cc3"),
@@ -360,10 +394,8 @@ db.projects.insert({"_id": ObjectId("56091ded00fccd6d66bc5cc3"),
     "state": "rekisteröity",
     "reg_date": "12.10.2014",
     "funding":
-            {"applied_curr_local": "50 000",
-                "applied_curr_eur": "10 000",
-                "granted_curr_local": "50 000",
-                "granted_curr_eur": "10 000"},
+            {"applied_curr_local": 50000,
+                "applied_curr_eur": 10000},
     "duration_months": 30,
     "description": "Lyhyt kuvaus",
     "description_en": "A short description",
@@ -386,10 +418,8 @@ db.projects.insert({"_id": ObjectId("56091ded00fdde6d66bc5cc3"),
     "state": "rekisteröity",
     "reg_date": "12.10.2014",
     "funding":
-            {"applied_curr_local": "50 000",
-                "applied_curr_eur": "10 000",
-                "granted_curr_local": "50 000",
-                "granted_curr_eur": "10 000"},
+            {"applied_curr_local": 50000,
+                "applied_curr_eur": 10000},
     "duration_months": 30,
     "description": "Lyhyt kuvaus",
     "description_en": "A short description",
@@ -402,4 +432,30 @@ db.projects.insert({"_id": ObjectId("56091ded00fdde6d66bc5cc3"),
     "other_donors_proposed": "donor1, donor2",
     "dac": "ABC12345",
     "region": "Aasia"}
+);
+
+db.projects.insert({"_id": ObjectId("f2c7d9aeb017189911996768"),
+    "project_ref": "70014",
+    "title": "Project for children",
+    "coordinator": "John Doe",
+    "organisation": ObjectId("8344235a153b2cf192bf74b2"),
+    "state": "hyväksytty",
+    "reg_date": "7.10.2015",
+    "funding":
+            {"applied_curr_local": 100000,
+                "applied_curr_eur": 12000},
+    "duration_months": 22,
+    "description": "Lyhyt kuvaus",
+    "description_en": "A short description",
+    "background": "Hankkeen tausta",
+    "beneficiaries": "1, 2, 3",
+    "gender_aspect": "ei ole",
+    "project_goal": "Hankkeen päätavoite",
+    "sustainability_risks": "riskit...",
+    "reporting_evaluation": "raportointityökalut ym.",
+    "other_donors_proposed": "donor1, donor2",
+    "dac": "ABC12355",
+    "region": "Aasia",
+    "in_review": ObjectId("564b78b0609e79f4514f961e"),
+    "approved": ObjectId("564b0cdc9d87261b1bbf0009")}
 );

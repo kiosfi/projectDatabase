@@ -107,8 +107,8 @@ var SignedSchema = new Schema({
         required: true
     },
     planned_payments: {
-
-    },
+        type: Array
+    }
 
 });
 
