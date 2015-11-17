@@ -138,12 +138,13 @@ A form for project state change.
     <form name="rejectedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hylätty'"  role="form" data-ng-submit="addRejectedState(rejectedForm.$valid)" novalidate>
         <div class="form-group col-md-12">
             <label mean-token="'create-rejcategories'" class="col-md-3">Syyt</label>
-                       
+
             <div class="col-md-12" id="rejSelection" data-ng-repeat="rej in addedRejections" required>
                 <select name="rejSelect" id="rejSelect" data-ng-model="rej.rejection" required>
                     <option data-ng-repeat="rejCat in rejcategories" value="{{rejCat}}">{{rejCat}}</option>
-                </select>                
+                </select>             
             </div>
+
             <div ng-show="rejectedForm.rejSelect.$invalid" class="help-block">
                 <p ng-show="rejectedForm.rejSelect.$error.required">Hylkäyssyy täytyy valita listalta</p>
             </div>
@@ -180,7 +181,11 @@ A form for project state change.
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button ng-disabled="rejectedForm.$invalid" id="rej-btn" type="submit" class="btn btn-default">Tallenna</button>
+                <div ng-show="rejectedForm.$invalid" class="help-block">
+                    <p ng-show="rejectedForm.$error.required">Varmista, että olet täyttänyt vaaditut tiedot.</p>
+                </div>
             </div>
+
         </div>
     </form>
 
