@@ -234,7 +234,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.removeRejection = function () {
             $scope.addedRejections.splice(-1, 1);
-
+        };
+        
         $scope.addPlannedPayment = function () {
             $scope.plannedPayments.push({date: '', sum_eur: '', sum_local: ''});
         };
