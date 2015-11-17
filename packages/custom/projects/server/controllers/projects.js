@@ -36,17 +36,17 @@ module.exports = function (Projects) {
             var project = new Project(req.body);
             var organisation;
             var bank_account;
-            Organisation.findOne({name: req.body.organisation.name}, function (err, obj) {
-                if (!obj) {
-                    organisation = new Organisation(req.body.organisation);
-                    bank_account = new BankAccount(req.body.organisation.bank_account);
-                    project.organisation = organisation._id;
-                    organisation.bank_account = bank_account._id;
-                    organisation.save();
-                    bank_account.save();
-                } else {
-                    project.organisation = obj._id;
-                }
+//            Organisation.findOne({name: req.body.organisation.name}, function (err, obj) {
+//                if (!obj) {
+//                    organisation = new Organisation(req.body.organisation);
+//                    bank_account = new BankAccount(req.body.organisation.bank_account);
+//                    project.organisation = organisation._id;
+//                    organisation.bank_account = bank_account._id;
+//                    organisation.save();
+//                    bank_account.save();
+//                } else {
+//                    project.organisation = obj._id;
+//                }
 
                 project.save(function (err) {
                     if (err) {
@@ -61,7 +61,7 @@ module.exports = function (Projects) {
                     url: config.hostname + '/projects/' + project._id,
                     name: project.title
                 });
-            });
+//            });
         },
         /*
          * Loads a project for display and populates its state fields.
