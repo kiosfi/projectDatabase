@@ -34,9 +34,9 @@ describe('Project create page', function () {
         element(by.model('project.organisation.email')).sendKeys('org@test.com');
         element(by.model('project.organisation.website')).sendKeys('www.testorg.com');
         //element(by.model('project.status')).element(by.cssContainingText('option', 'rekisteröity')).click();
-        element(by.model('project.funding.applied_curr_local')).sendKeys('100000');
-        element(by.model('project.funding.applied_curr_eur')).sendKeys('19000');
-        element(by.model('project.duration_months')).sendKeys('20');
+        element(by.model('project.funding.applied_curr_local')).sendKeys(100000);
+        element(by.model('project.funding.applied_curr_eur')).sendKeys(19000);
+        element(by.model('project.duration_months')).sendKeys(20);
         element(by.model('project.description')).sendKeys('Short description of project');
         element(by.model('project.description_en')).sendKeys('Short summary in english');
         element(by.model('project.background')).sendKeys('Test projects background');
@@ -90,17 +90,3 @@ describe('Project create page', function () {
     });
 
 });
-
-/*afterEach(function(done) {
-  helpers.login();
-  browser.get('/projects');
-  var buttons = $$('i.glyphicon-trash');
-  buttons.count().then(function(count) {
-    while (count > 3) {
-      buttons.last().click();
-      count--;
-    }
-    done();
-  });
-  helpers.logout();
-});*/

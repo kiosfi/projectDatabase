@@ -32,7 +32,7 @@ describe('Changing project state to "rejected"', function () {
 
 
         expect(browser.getCurrentUrl()).toContain('/779ed9f94250406da7a7a111');
-        var state = element(by.css('h3')).element(by.id('state')).getText();
+        var state = element(by.css('h3')).element(by.className('tila')).getText();
         expect(state).toContain('hylätty');
 
         helpers.logout();
@@ -47,27 +47,27 @@ describe('Changing project state to "rejected"', function () {
         element(by.id('st')).click();
 
         expect(browser.getCurrentUrl()).toContain('/change');
-        
+
         // test for saving empty form
-        element(by.id('rej-btn')).click();        
+        element(by.id('rej-btn')).click();
         expect(browser.getCurrentUrl()).toContain('/change');
-        
+
         // test for saving form when comments are added but rejection reasons not
         element(by.model('project.rejected.rejection_comments')).sendKeys('Hanke ei vastaa vaatimuksia');
-        element(by.id('rej-btn')).click();        
+        element(by.id('rej-btn')).click();
         expect(browser.getCurrentUrl()).toContain('/change');
-        
-        // test for saving form when comments are added and "Lisää uusi"-button clicked, 
+
+        // test for saving form when comments are added and "Lisää uusi"-button clicked,
         // but rejection reasons not selected
         element(by.id('addRej')).click();
         element(by.model('project.rejected.rejection_comments')).sendKeys('Hanke ei vastaa vaatimuksia');
-        element(by.id('rej-btn')).click();        
+        element(by.id('rej-btn')).click();
         expect(browser.getCurrentUrl()).toContain('/change');
-        
+
         // test for saving form when rejection reasons are added but comments are not
         element(by.id('addRej')).click();
         element.all(by.model('rej.rejection')).get(1).element(by.cssContainingText('option', '7 Strategia')).click();
-        element(by.id('rej-btn')).click();        
+        element(by.id('rej-btn')).click();
         expect(browser.getCurrentUrl()).toContain('/change');
 
         helpers.logout();
@@ -87,7 +87,7 @@ describe('Changing project state to "rejected"', function () {
         element(by.linkText('Peruuta')).click();
 
         expect(browser.getCurrentUrl()).toContain('/5c9ed9f94250406da7a7aabc');
-        var state = element(by.css('h3')).element(by.id('state')).getText();
+        var state = element(by.css('h3')).element(by.className('tila')).getText();
         expect(state).toContain('käsittelyssä');
 
         helpers.logout();
