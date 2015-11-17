@@ -47,6 +47,28 @@ describe('Changing project state to "rejected"', function () {
         element(by.id('st')).click();
 
         expect(browser.getCurrentUrl()).toContain('/change');
+        
+        // test for saving empty form
+        element(by.id('rej-btn')).click();        
+        expect(browser.getCurrentUrl()).toContain('/change');
+        
+        // test for saving form when comments are added but rejection reasons not
+        element(by.model('project.rejected.rejection_comments')).sendKeys('Hanke ei vastaa vaatimuksia');
+        element(by.id('rej-btn')).click();        
+        expect(browser.getCurrentUrl()).toContain('/change');
+        
+        // test for saving form when comments are added and "Lisää uusi"-button clicked, 
+        // but rejection reasons not selected
+        element(by.id('addRej')).click();
+        element(by.model('project.rejected.rejection_comments')).sendKeys('Hanke ei vastaa vaatimuksia');
+        element(by.id('rej-btn')).click();        
+        expect(browser.getCurrentUrl()).toContain('/change');
+        
+        // test for saving form when rejection reasons are added but comments are not
+        element(by.id('addRej')).click();
+        element.all(by.model('rej.rejection')).get(1).element(by.cssContainingText('option', '7 Strategia')).click();
+        element(by.id('rej-btn')).click();        
+        expect(browser.getCurrentUrl()).toContain('/change');
 
         helpers.logout();
 
