@@ -11,6 +11,7 @@ var mongoose = require('mongoose'),
         InReview = mongoose.model('InReview'),
         Rejected = mongoose.model('Rejected'),
         Signed = mongoose.model('Signed'),
+        Payment = mongoose.model('Payment'),
         Ended = mongoose.model('Ended'),
         Approved = mongoose.model('Approved'),
         IntReport = mongoose.model('IntReport'),
@@ -218,6 +219,7 @@ module.exports = function (Projects) {
             var project = req.project;
             project.signed = signed._id;
             project.state = req.body.state;
+            project.planned_payments = req.body.planned_payments;
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -234,6 +236,36 @@ module.exports = function (Projects) {
             });
         },
 
+        addPayment: function (req, res) {
+            var payment = new Payment(req.body.payment);
+            payment.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Maksun tallennus epäonnistui.'
+                    });
+                }
+            });
+            var project = req.project;
+            project.funding.paid_eur = project.funding.paid_eur + payment.sum_eur;
+            project.funding.paid_local = project.funding.paid_local + payment.sum_local;
+            project.funding.left_eur = project.approved.granted_sum.granted_curr_eur - payment.sum_eur;
+            project.funding.left_local = project.approved.granted_sum.granted_curr_local - payment.sum_local;
+            project.payments.push(payment._id);
+            project.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Hankkeen päivitys allekirjoitetuksi epäonnistui.'
+                    });
+                }
+
+                Projects.events.publish({
+                    action: 'updated',
+                    name: project.title,
+                    url: config.hostname + '/projects/' + project._id
+                });
+                res.json(project);
+            });
+        },
           /*
          * Moves a project to IntReport state (or adds another) and saves the state object to
          * its collection.

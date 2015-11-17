@@ -28,6 +28,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.addedMethods = [];
 
+        $scope.plannedPayments = [];
+
         $scope.themeSelection = [];
 
         $scope.objectiveComments = [];
@@ -37,19 +39,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             "5 Hankkeen budjetti on epärealistinen", "6 Huonot tai puuttuvat referenssit", "7 Strategia", "8 Muu, mikä?"];
 
         $scope.addedRejections = [];
-
-        $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
-            var idx = $scope.themeSelection.indexOf(theme);
-
-            // is currently selected
-            if (idx > -1) {
-                $scope.themeSelection.splice(idx, 1);
-            }
-            // is newly selected
-            else {
-                $scope.themeSelection.push(theme);
-            }
-        };
 
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
             var idx = $scope.themeSelection.indexOf(theme);
@@ -88,6 +77,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.find = function () {
             Projects.query(function (projects) {
                 $scope.projects = projects;
+                $scope.displayedCollection = [].concat($scope.projects);
             });
         };
 
@@ -96,13 +86,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
-                var reports = $scope.project.intermediary_reports;
-                for (var i = 0; i < reports.length; i++) {
-                    $scope.info = true;
-                    $scope.toggleInfo = function () {
-                        $scope.info = !$scope.info;
-                    };
-                }
             });
         };
 
@@ -169,16 +152,24 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.$addRejected(function (response) {
                     $location.path('projects/' + response._id);
                 });
-            } 
+            }
 
         };
 
 
         $scope.addSignedState = function () {
             var project = $scope.project;
+            project.planned_payments = $scope.plannedPayments;
             project.state = $scope.global.newState;
             project.$addSigned(function (response) {
                 $location.path('projects/' + response._id);
+            });
+        };
+
+        $scope.addPaymentInfo = function () {
+            var project = $scope.project;
+            project.$addPayment(function (response) {
+                $window.location.reload();
             });
         };
 
@@ -243,6 +234,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.removeRejection = function () {
             $scope.addedRejections.splice(-1, 1);
+
+        $scope.addPlannedPayment = function () {
+            $scope.plannedPayments.push({date: '', sum_eur: '', sum_local: ''});
+        };
+
+        $scope.removePlannedPayment = function () {
+            $scope.plannedPayments.splice(-1, 1);
         };
 
 
