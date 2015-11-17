@@ -38,7 +38,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.rejectedCategorySelection = [];
 
-
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
             var idx = $scope.themeSelection.indexOf(theme);
 
@@ -111,7 +110,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             Projects.get({
                 projectId: $stateParams.projectId
             }, function (project) {
-                $scope.project = project;
+              $scope.project = project;
             });
         };
 
@@ -189,6 +188,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
+        $scope.addPaymentInfo = function () {
+            var project = $scope.project;
+            project.$addPayment(function (response) {
+                $window.location.reload();
+            });
+        };
+
         $scope.addIntReportState = function () {
             var project = $scope.project;
             project.state = $scope.global.newState;
@@ -245,7 +251,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.addPlannedPayment = function () {
-            $scope.plannedPayments.push({date: '', sum: ''});
+            $scope.plannedPayments.push({date: '', sum_eur: '', sum_local: ''});
         };
 
         $scope.removePlannedPayment = function () {

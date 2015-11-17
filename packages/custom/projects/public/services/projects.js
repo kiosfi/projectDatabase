@@ -18,6 +18,9 @@ angular.module('mean.projects').factory('Projects', ['$resource',
             addSigned: {
                 method: 'PUT', url: 'api/projects/sign/:projectId'
             },
+            addPayment: {
+                method: 'PUT', url: '/api/projects/payment/:projectId'
+            },
             addEnded: {
                 method: 'PUT', url: 'api/projects/end/:projectId'
             },

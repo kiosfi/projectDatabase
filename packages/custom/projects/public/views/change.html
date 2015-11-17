@@ -185,25 +185,35 @@ A form for project state change.
             </div>
         </div>
 
+        <label for="plannedPaymentSelection" class="col-md-3">Maksusuunnitelma</label>
         <div class="form-group col-md-12">
-            <label mean-token="'create-plannedPayments'" class="col-md-3 control-label">Maksatussuunnitelma</label>
-            
-            <div class="col-md-12" id="plannedPaymentSelection" data-ng-repeat="plannedPayment in plannedPayments">
-                <label for="plannedDate" class="col-md-2">Päivämäärä</label>
-                <div class="col-md-10">
+
+            <div class="col-md-12" name="plannedPaymentSelection" id="plannedPaymentSelection" data-ng-repeat="plannedPayment in plannedPayments">
+                <label for="plannedDate" class="col-md-2 control-label">Päivämäärä</label>
+                <div class="col-md-5">
                     <input name="plannedDate" type="text" class="form-control" data-ng-model="plannedPayment.date" id="plannedDate" placeholder="Päivämäärä" required>
                 </div>
+                <div style="clear:both;">&nbsp;</div>
 
-                <label for="plannedSum" class="col-md-2">Maksuerä (EUR)</label>
-                <div class="col-md-10">
-                    <input name="plannedSum" type="text" class="form-control" data-ng-model="plannedPayment.sum" id="plannedSum" placeholder="Summa" required>
+                <label for="plannedSumEUR" class="col-md-2 control-label">Summa (EUR)</label>
+                <div class="col-md-5">
+                    <input name="plannedSumEUR" type="text" class="form-control" data-ng-model="plannedPayment.sum_eur" id="plannedSumEUR" placeholder="Summa (EUR)" required>
                 </div>
+                <div style="clear:both;">&nbsp;</div>
+
+                <label for="plannedSumLocal" class="col-md-2 control-label">Summa (pv)</label>
+                <div class="col-md-5">
+                    <input name="plannedSumLocal" type="text" class="form-control" data-ng-model="plannedPayment.sum_local" id="plannedSumLocal" placeholder="Summa (paikallinen val)" required>
+                </div>
+                <div style="clear:both;">&nbsp;</div>
+
             </div>
 
             <div class="col-md-12">
                 <input type="button" value="Lisää uusi" ng-click="addPlannedPayment();"/>
                 <input type="button" value="Poista viimeinen" ng-click="removePlannedPayment();"/>
             </div>
+
         </div>
 
         <div class="form-group">

@@ -53,14 +53,12 @@ var ApprovedSchema = new Schema({
     },
     granted_sum: {
         granted_curr_local: {
-            type: String,
-            required: true,
-            trim: true
+            type: Number,
+            required: true
         },
         granted_curr_eur: {
-            type: String,
-            required: true,
-            trim: true
+            type: Number,
+            required: true
         }
     },
     themes: {
@@ -114,24 +112,17 @@ var SignedSchema = new Schema({
 
 });
 
-var PlannedPaymentSchema = new Schema({
-    planned_date: {
-        type: String,
-        required: true
-    },
-    sum: {
-        type: String,
-        required: true
-    }
-});
-
 var PaymentSchema = new Schema({
     payment_date: {
         type: String,
         required: true
     },
-    sum: {
-        type: String,
+    sum_eur: {
+        type: Number,
+        required: true
+    },
+    sum_local: {
+        type: Number,
         required: true
     }
 });
@@ -239,7 +230,6 @@ module.exports = mongoose.model('InReview', InReviewSchema);
 module.exports = mongoose.model('Approved', ApprovedSchema);
 module.exports = mongoose.model('Rejected', RejectedSchema);
 module.exports = mongoose.model('Signed', SignedSchema);
-module.exports = mongoose.model('PlannedPayment', PlannedPaymentSchema);
 module.exports = mongoose.model('Payment', PaymentSchema);
 module.exports = mongoose.model('IntReport', IntReportSchema);
 module.exports = mongoose.model('EndReport', EndReportSchema);

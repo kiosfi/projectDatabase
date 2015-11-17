@@ -39,24 +39,28 @@ var ProjectSchema = new Schema({
     },
     funding: {
         applied_curr_local: {
-            type: String,
-            required: true,
-            trim: true
+            type: Number,
+            required: true
         },
         applied_curr_eur: {
-            type: String,
-            required: true,
-            trim: true
+            type: Number,
+            required: true
         },
-        granted_curr_local: {
-            type: String,
-            required: false,
-            trim: true
+        paid_eur: {
+            type: Number,
+            default: 0
         },
-        granted_curr_eur: {
-            type: String,
-            required: false,
-            trim: true
+        paid_local: {
+            type: Number,
+            default: 0
+        },
+        left_eur: {
+            type: Number,
+            default: 0
+        },
+        left_local: {
+            type: Number,
+            default: 0
         }
     },
     duration_months: {
@@ -141,6 +145,7 @@ var ProjectSchema = new Schema({
     planned_payments: {
       type: Array
     },
+    payments: [{ type : Schema.ObjectId, ref: 'Payment'}],
     intermediary_reports: [{ type : Schema.ObjectId, ref: 'IntReport' }],
     end_report: {
         type: Schema.ObjectId,
@@ -171,10 +176,16 @@ ProjectSchema.path('coordinator').validate(function (coordinator) {
 ProjectSchema.statics.load = function (id, cb) {
     this.findOne({
         _id: id
-    }).populate('intermediary_reports').populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
-        {path: 'signed', model: 'Signed'}, {path: 'rejected', model: 'Rejected'},
-        {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'}, {path: 'end_report', model: 'EndReport'}])
-            .exec(cb);
+    }).populate('intermediary_reports payments')
+      .populate([
+        {path: 'organisation', model: 'Organisation'},
+        {path: 'in_review', model: 'InReview'},
+        {path: 'signed', model: 'Signed'},
+        {path: 'rejected', model: 'Rejected'},
+        {path: 'ended', model: 'Ended'},
+        {path: 'approved', model: 'Approved'},
+        {path: 'end_report', model: 'EndReport'}
+      ]).exec(cb);
 };
 
 mongoose.model('Project', ProjectSchema);
