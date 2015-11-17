@@ -134,7 +134,6 @@ A form for project state change.
 
     <!--    Hylätty-->
 
-
     <form name="rejectedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hylätty'"  role="form" data-ng-submit="addRejectedState(rejectedForm.$valid)" novalidate>
         <div class="form-group col-md-12">
             <label mean-token="'create-rejcategories'" class="col-md-3">Syyt</label>
@@ -153,18 +152,6 @@ A form for project state change.
                 <input id="addRej" type="button" value="Lisää uusi" ng-click="addRejection();"/>
                 <input id="remRej" type="button" value="Poista viimeinen" ng-click="removeRejection();"/>
             </div>
-
-            <!--            <div class="col-md-12">
-                            <label ng-repeat="rej in rejcategories">
-                                <input
-                                    type="checkbox"
-                                    name="selectedRejCategories[]"
-                                    value="{{rej}}"
-                                    ng-checked="rejectedCategorySelection.indexOf(rej) > -1"
-                                    ng-click="toggleRejectedCategorySelection(rej)"
-                                    >{{rej}}
-                            </label>
-                        </div>-->
         </div>
 
         <div class="form-group col-md-12">
