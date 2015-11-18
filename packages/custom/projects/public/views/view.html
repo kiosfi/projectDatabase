@@ -154,8 +154,8 @@
                     </section>
                     <br>
                     <h5 class="proj-header">Suunniteltu maksuaikataulu</h5>
-                    <section class="proj-body" ng-repeat="planned_payment in project.planned_payments">
-                        <p>{{project.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur}} EUR ({{planned_payment.sum_local}} paikallista valuuttaa), {{planned_payment.date}}</p>
+                    <section class="proj-body" ng-repeat="planned_payment in project.signed.planned_payments">
+                        <p>{{project.signed.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur}} EUR ({{planned_payment.sum_local}} paikallista valuuttaa), {{planned_payment.date}}</p>
                     </section>
                     <br>
                     <h5 class="proj-header">Maksetut erät</h5>
@@ -198,7 +198,9 @@
           <h5>Lisää maksutieto</h5>
           <form name="paymentForm" class="form-horizonal" role="form" data-ng-submit="addPaymentInfo(paymentForm.$valid)" novalidate>
 
-              <div class="form-group col-xs-12">
+              <div class="form-group col-xs-12" ng-class="{
+                                  'has-error'
+                                  :  paymentForm.paymentDate.$invalid }">
                   <label for="paymentDate" class="col-xs-2 control-label">Päiväys</label>
                   <div class="col-xs-4">
                       <input name="paymentDate" type="text" class="form-control" data-ng-model="project.payment.payment_date" id="paymentDate" placeholder="Päiväys" required></input>
@@ -208,7 +210,9 @@
                   </div>
               </div>
 
-              <div class="form-group col-xs-12">
+              <div class="form-group col-xs-12" ng-class="{
+                                  'has-error'
+                                  :  paymentForm.paymentSumEUR.$invalid }">
                   <label for="paymentSumEUR" class="col-xs-2 control-label">Summa (EUR)</label>
                   <div class="col-xs-4">
                       <input name="paymentSumEUR" type="number" class="form-control" data-ng-model="project.payment.sum_eur" id="paymentSumEUR" placeholder="Summa (EUR)" required></input>
@@ -221,7 +225,9 @@
                   </div>
               </div>
 
-              <div class="form-group col-xs-12">
+              <div class="form-group col-xs-12" ng-class="{
+                                  'has-error'
+                                  :  paymentForm.paymentSumLocal.$invalid }">
                   <label for="paymentSumLocal" class="col-xs-2 control-label">Summa (pv)</label>
                   <div class="col-xs-4">
                       <input name="paymentSumLocal" type="number" class="form-control" data-ng-model="project.payment.sum_local" id="paymentSumLocal" placeholder="Summa (pv)" required></input>

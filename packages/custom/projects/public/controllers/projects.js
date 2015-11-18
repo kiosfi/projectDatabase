@@ -30,6 +30,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.plannedPayments = [];
 
+        $scope.deadlines = [];
+
         $scope.themeSelection = [];
 
         $scope.objectiveComments = [];
@@ -159,7 +161,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.addSignedState = function () {
             var project = $scope.project;
-            project.planned_payments = $scope.plannedPayments;
+            project.signed.planned_payments = $scope.plannedPayments;
+            project.signed.intreport_deadlines = $scope.deadlines;
             project.state = $scope.global.newState;
             project.$addSigned(function (response) {
                 $location.path('projects/' + response._id);
@@ -242,6 +245,14 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.removePlannedPayment = function () {
             $scope.plannedPayments.splice(-1, 1);
+        };
+
+        $scope.addDeadline = function () {
+            $scope.deadlines.push({report: '', date: ''});
+        };
+
+        $scope.removeDeadline = function () {
+            $scope.deadlines.splice(-1, 1);
         };
 
 

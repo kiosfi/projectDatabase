@@ -25,6 +25,11 @@ describe('Changing project state to "signed"', function () {
         element(by.model('plannedPayment.sum_eur')).sendKeys(30000);
         element(by.model('plannedPayment.sum_local')).sendKeys(50000);
 
+        element(by.id('add-btn2')).click();
+
+        element(by.model('deadline.report')).sendKeys('1. väliraportti');
+        element(by.model('deadline.date')).sendKeys('1.10.2016');
+
         element(by.id('sign-btn')).click();
 
         expect(browser.getCurrentUrl()).toContain('/f2e7c9aeb017189911996768');

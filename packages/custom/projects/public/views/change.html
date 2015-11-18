@@ -45,17 +45,21 @@ A form for project state change.
 
     <form name="approvedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'hyväksytty'"  role="form" data-ng-submit="addApprovedState(approvedForm.$valid)" novalidate>
 
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12" ng-class="{
+                            'has-error'
+                            :  approvedForm.approved_date.$invalid }">
             <label for="approved_date" class="col-md-2">Päivämäärä</label>
             <div class="col-md-10">
                 <input name="approved_date" type="text" class="form-control" data-ng-model="project.approved.approved_date" id="approved_date" placeholder="Hankkeen hyväksynnän pvm" required>
             </div>
-            <div ng-show="submitted && approvedForm.approved_date.$invalid" class="help-block">
+            <div ng-show="approvedForm.approved_date.$invalid" class="help-block">
                 <p ng-show="approvedForm.approved_date.$error.required">Kenttä on pakollinen</p>
             </div>
         </div>
 
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12" ng-class="{
+                            'has-error'
+                            :  approvedForm.approved_by.$invalid }">
             <label for="approved_by" class="col-md-2">Hyväksyjä</label>
             <div class="col-md-10">
                 <select id="approved_by" data-ng-model="project.approved.approved_by" class='form-control'>
@@ -66,36 +70,42 @@ A form for project state change.
             </div>
         </div>
 
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12" ng-class="{
+                            'has-error'
+                            :  approvedForm.board_notified.$invalid }">
             <label for="board_notified" class="col-md-2">Tiedoksiannnon päivämäärä</label>
             <div class="col-md-10">
                 <input name="board_notified" type="text" class="form-control" data-ng-model="project.approved.board_notified" id="board_notified" placeholder="Hallitukselle tiedoksi pvm" required>
             </div>
-            <div ng-show="submitted && approvedForm.board_notified.$invalid" class="help-block">
+            <div ng-show="approvedForm.board_notified.$invalid" class="help-block">
                 <p ng-show="approvedForm.board_notified.$error.required">Kenttä on pakollinen</p>
             </div>
         </div>
 
         <div class="form-group col-md-12">
             <label for="granted_sum_eur" class="col-md-2 control-label">Myönnetty summa (euro)</label>
-            <div class="col-md-4">
+            <div class="col-md-4" ng-class="{
+                                'has-error'
+                                :  approvedForm.granted_sum_eur.$invalid }">
                 <input name="granted_sum_eur" type="number" class="form-control" data-ng-model="project.approved.granted_sum.granted_curr_eur" id="granted_sum_eur" placeholder="0" required>EUR
             </div>
             <div ng-show="approvedForm.granted_sum_eur.$invalid" class="help-block">
                 <p ng-show="approvedForm.granted_sum_eur.$error.number">Summan täytyy olla numero</p>
             </div>
-            <div ng-show="submitted && approvedForm.granted_sum_eur.$invalid" class="help-block">
+            <div ng-show="approvedForm.granted_sum_eur.$invalid" class="help-block">
                 <p ng-show="approvedForm.granted_sum_eur.$error.required">Kenttä on pakollinen</p>
             </div>
 
             <label for="granted_sum_local" class="col-md-2 control-label">Myönnetty summa (paikallinen)</label>
-            <div class="col-md-4">
+            <div class="col-md-4" ng-class="{
+                                'has-error'
+                                :  approvedForm.granted_sum_local.$invalid }">
                 <input name="granted_sum_local" type="number" class="form-control" data-ng-model="project.approved.granted_sum.granted_curr_local" id="granted_sum_local" placeholder="0" required>local
             </div>
             <div ng-show="approvedForm.granted_sum_local.$invalid" class="help-block">
                 <p ng-show="approvedForm.granted_sum_local.$error.number">Summan täytyy olla numero</p>
             </div>
-            <div ng-show="submitted && approvedForm.granted_sum_local.$invalid" class="help-block">
+            <div ng-show="approvedForm.granted_sum_local.$invalid" class="help-block">
                 <p ng-show="approvedForm.granted_sum_local.$error.required">Kenttä on pakollinen</p>
             </div>
         </div>
@@ -136,7 +146,7 @@ A form for project state change.
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button id="appr-btn" type="submit" class="btn btn-default">Tallenna</button>
+                <button id="appr-btn" type="submit" class="btn btn-default" ng-disabled="approvedForm.$invalid">Tallenna</button>
             </div>
         </div>
     </form>
@@ -164,7 +174,9 @@ A form for project state change.
             </div>
         </div>
 
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12" ng-class="{
+                            'has-error'
+                            :  rejectedForm.comments.$invalid }">
             <label for="comments" class="col-md-2">Kommentit</label>
             <div class="col-md-10">
                 <textarea name="comments" type="text" class="form-control" data-ng-model="project.rejected.rejection_comments" id="comments" placeholder="Kommentit hylkäysperusteille" required></textarea>
@@ -221,7 +233,9 @@ A form for project state change.
 
             <div class="col-md-12" name="plannedPaymentSelection" id="plannedPaymentSelection" data-ng-repeat="plannedPayment in plannedPayments">
                 <label for="plannedDate" class="col-md-2 control-label">Päivämäärä</label>
-                <div class="col-md-5">
+                <div class="col-md-5" ng-class="{
+                                    'has-error'
+                                    :  signedForm.plannedDate.$invalid }">
                     <input name="plannedDate" type="text" class="form-control" data-ng-model="plannedPayment.date" id="plannedDate" placeholder="Päivämäärä" required>
                 </div>
                 <div ng-show="signedForm.plannedDate.$invalid" class="help-block">
@@ -230,7 +244,9 @@ A form for project state change.
                 <div style="clear:both;">&nbsp;</div>
 
                 <label for="plannedSumEUR" class="col-md-2 control-label">Summa (EUR)</label>
-                <div class="col-md-5">
+                <div class="col-md-5" ng-class="{
+                                    'has-error'
+                                    :  signedForm.plannedSumEUR.$invalid }">
                     <input name="plannedSumEUR" type="number" class="form-control" data-ng-model="plannedPayment.sum_eur" id="plannedSumEUR" placeholder="Summa (EUR)" required>
                 </div>
                 <div ng-show="signedForm.plannedSumEUR.$invalid" class="help-block">
@@ -242,7 +258,9 @@ A form for project state change.
                 <div style="clear:both;">&nbsp;</div>
 
                 <label for="plannedSumLocal" class="col-md-2 control-label">Summa (pv)</label>
-                <div class="col-md-5">
+                <div class="col-md-5" ng-class="{
+                                    'has-error'
+                                    :  signedForm.plannedSumLocal.$invalid }">
                     <input name="plannedSumLocal" type="number" class="form-control" data-ng-model="plannedPayment.sum_local" id="plannedSumLocal" placeholder="Summa (paikallinen val)" required>
                 </div>
                 <div ng-show="signedForm.plannedSumLocal.$invalid" class="help-block">
@@ -258,6 +276,41 @@ A form for project state change.
             <div class="col-md-12">
                 <input type="button" id="add-btn" value="Lisää uusi" ng-click="addPlannedPayment();"/>
                 <input type="button" value="Poista viimeinen" ng-click="removePlannedPayment();"/>
+            </div>
+
+        </div>
+
+        <label for="intReportDeadlines" class="col-md-3">Väliraporttien eräpäivät</label>
+        <div class="form-group col-md-12">
+
+            <div class="col-md-12" name="intReportDeadlines" id="intReportDeadlines" data-ng-repeat="deadline in deadlines">
+                <label for="dlRep" class="col-md-2 control-label">Raportti</label>
+                <div class="col-md-5" ng-class="{
+                                    'has-error'
+                                    :  signedForm.dlRep.$invalid }">
+                    <input name="dlRep" type="text" class="form-control" data-ng-model="deadline.report" id="dlRep" placeholder="Raportti" required>
+                </div>
+                <div ng-show="signedForm.dlRep.$invalid" class="help-block">
+                    <p ng-show="signedForm.dlRep.$error.required">Kenttä on pakollinen</p>
+                </div>
+                <div style="clear:both;">&nbsp;</div>
+
+                <label for="dlDate" class="col-md-2 control-label">Eräpäivä</label>
+                <div class="col-md-5" ng-class="{
+                                    'has-error'
+                                    :  signedForm.dlDate.$invalid }">
+                    <input name="dlDate" type="text" class="form-control" data-ng-model="deadline.date" id="dlDate" placeholder="Eräpäivä" required>
+                </div>
+                <div ng-show="signedForm.dlDate.$invalid" class="help-block">
+                    <p ng-show="signedForm.dlDate.$error.required">Kenttä on pakollinen</p>
+                </div>
+                <div style="clear:both;">&nbsp;</div>
+
+            </div>
+
+            <div class="col-md-12">
+                <input type="button" id="add-btn2" value="Lisää uusi" ng-click="addDeadline();"/>
+                <input type="button" value="Poista viimeinen" ng-click="removeDeadline();"/>
             </div>
 
         </div>
@@ -395,10 +448,15 @@ A form for project state change.
 
     <form name="endedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'päättynyt'"  role="form" data-ng-submit="addEndedState(endedForm.$valid)" novalidate>
 
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12" ng-class="{
+                            'has-error'
+                            :  endedForm.end_date.$invalid }">
             <label for="end_date" class="col-md-2">Päivämäärä</label>
             <div class="col-md-10">
                 <input name="end_date" type="text" class="form-control" data-ng-model="project.ended.end_date" id="end_date" placeholder="Päättymispäivämäärä" required>
+            </div>
+            <div ng-show="endedForm.end_date.$invalid" class="help-block">
+                <p ng-show="endedForm.end_date.$error.required">Kenttä on pakollinen</p>
             </div>
         </div>
 
@@ -412,24 +470,34 @@ A form for project state change.
             </div>
         </div>
 
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12" ng-class="{
+                            'has-error'
+                            :  endedForm.board_notified.$invalid }">
             <label for="board_notified" class="col-md-2">Tiedoksiannnon päivämäärä</label>
             <div class="col-md-10">
                 <input name="board_notified" type="text" class="form-control" data-ng-model="project.ended.board_notified" id="board_notified" placeholder="Hallitukselle tiedoksi pvm" required>
             </div>
+            <div ng-show="endedForm.board_notified.$invalid" class="help-block">
+                <p ng-show="endedForm.board_notified.$error.required">Kenttä on pakollinen</p>
+            </div>
         </div>
 
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12" ng-class="{
+                            'has-error'
+                            :  endedForm.comments.$invalid }">
             <label for="comments" class="col-md-2">Muut kommentit</label>
             <div class="col-md-10">
                 <textarea name="comments" type="text" class="form-control" data-ng-model="project.ended.other_comments" id="comments" placeholder="Muut päättämiseen liittyvät kommentit" required></textarea>
             </div>
+            <div ng-show="endedForm.comments.$invalid" class="help-block">
+                <p ng-show="endedForm.comments.$error.required">Kenttä on pakollinen</p>
+            </div>              
         </div>
 
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-default">Tallenna</button>
+                <button type="submit" class="btn btn-default" ng-disabled="endedForm.$invalid">Tallenna</button>
             </div>
         </div>
     </form>

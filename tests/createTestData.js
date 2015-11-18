@@ -60,7 +60,25 @@ db.signeds.insert(
     "_id": ObjectId("564b0d089d87261b1bbf000a"),
     "user": "Maria",
     "signed_by": "Maija Meri",
-    "signed_date": "3.1.2016"
+    "signed_date": "3.1.2016",
+    "planned_payments": [
+        {
+            "sum_local": 10000,
+            "sum_eur": 5000,
+            "date": "15.1.2016"
+        },
+        {
+            "sum_local": 10000,
+            "sum_eur": 5000,
+            "date": "15.3.2016"
+        }
+    ],
+    "intreport_deadlines": [
+        {
+            "date": "1.10.2016",
+            "report": "1. väliraportti"
+        }
+    ],        
   }
 );
 

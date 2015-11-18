@@ -219,7 +219,6 @@ module.exports = function (Projects) {
             var project = req.project;
             project.signed = signed._id;
             project.state = req.body.state;
-            project.planned_payments = req.body.planned_payments;
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({

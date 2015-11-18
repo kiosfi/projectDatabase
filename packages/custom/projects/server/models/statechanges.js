@@ -108,6 +108,9 @@ var SignedSchema = new Schema({
     },
     planned_payments: {
         type: Array
+    },
+    intreport_deadlines: {
+        type: Array
     }
 
 });
