@@ -39,22 +39,24 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-12" ng-class="{
-                        'has-error'
-                        : projectForm.organisation.$invalid }" data-ng-show="!newOrg">
+                <div class="form-group col-md-6" data-ng-show="!newOrg">
                     <label mean-token="'create-organisation'" class="col-md-3 control-label">Järjestö</label>
                     <div data-ng-if="!newOrg" class="col-md-9" id="orgSelection" data-ng-init="addOrgFromDb()">
                         <label>
                             <select data-ng-if="!newOrg" data-ng-model="project.listOrganisation">
                                 <option data-ng-if="!newOrg" data-ng-repeat="org in orgs" value="{{org._id}}">{{org.name}}</option>
                             </select>
-                        </label>
+                        </label>                        
                     </div>
-                    <div data-ng-show="!newOrg">
+                    
+                    <div data-ng-show="!newOrg" class="form-group">
+                        <i>Valitse järjestö listalta tai   </i>
                         <input  type="button" id="addOrg" data-ng-click="addNewOrg()" value="Lisää uusi järjestö"/>
                     </div>
+
                 </div>
-                <div data-ng-show="newOrg">
+                <div data-ng-show="newOrg" class="form-group col-md-6">
+                    <i>Täytä lomakkeeseen uuden järjestön tiedot tai </i>
                     <input type="button" id="addOrgFromList" data-ng-click="addOrgFromDb()" value="Lisää järjestö listalta"/>
                 </div>
 
