@@ -116,6 +116,10 @@ var SignedSchema = new Schema({
 });
 
 var PaymentSchema = new Schema({
+    payment_number: {
+        type: Number,
+        required: true
+    },
     payment_date: {
         type: String,
         required: true

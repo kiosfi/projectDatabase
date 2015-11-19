@@ -160,7 +160,7 @@
                     <br>
                     <h5 class="proj-header">Maksetut erät</h5>
                     <section class="proj-body" ng-repeat="payment in project.payments">
-                        <p id="paid">{{project.payments.indexOf(payment) + 1}}. Erä: {{payment.sum_eur}} EUR ({{payment.sum_local}} paikallista valuuttaa), {{payment.payment_date}}</p>
+                        <p id="paid">{{payment.payment_number}}. Erä: {{payment.sum_eur}} EUR ({{payment.sum_local}} paikallista valuuttaa), {{payment.payment_date}}</p>
                     </section>
                     <br>
                     <h5 class="proj-header">Maksettu</h5>

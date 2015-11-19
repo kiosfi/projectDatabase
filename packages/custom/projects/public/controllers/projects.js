@@ -128,15 +128,19 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
-        $scope.addReviewState = function () {
+        $scope.addReviewState = function (isValid) {
+          if (isValid) {
             var project = $scope.project;
             project.state = $scope.global.newState;
             project.$addReview(function (response) {
                 $location.path('projects/' + project._id);
             });
+          }
+
         };
 
-        $scope.addApprovedState = function () {
+        $scope.addApprovedState = function (isValid) {
+          if (isValid) {
             var project = $scope.project;
             project.approved.themes = $scope.themeSelection;
             project.approved.methods = $scope.addedMethods;
@@ -144,6 +148,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             project.$addApproved(function (response) {
                 $location.path('projects/' + response._id)
             });
+          }
+
         };
 
         $scope.addRejectedState = function (isValid) {
@@ -158,8 +164,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         };
 
-
-        $scope.addSignedState = function () {
+        $scope.addSignedState = function (isValid) {
+          if (isValid) {
             var project = $scope.project;
             project.signed.planned_payments = $scope.plannedPayments;
             project.signed.intreport_deadlines = $scope.deadlines;
@@ -167,16 +173,29 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             project.$addSigned(function (response) {
                 $location.path('projects/' + response._id);
             });
+          }
+
         };
 
-        $scope.addPaymentInfo = function () {
+        $scope.addPaymentInfo = function (isValid) {
+          if (isValid) {
             var project = $scope.project;
+            var index = project.payments.length;
+            if (index === undefined) {
+                project.payment.paymentNumber = 1;
+            } else {
+                project.payment.payment_number = project.payments.length + 1;
+            }
+
             project.$addPayment(function (response) {
                 $window.location.reload();
             });
+          }
+
         };
 
-        $scope.addIntReportState = function () {
+        $scope.addIntReportState = function (isValid) {
+          if (isValid) {
             var project = $scope.project;
             project.state = $scope.global.newState;
             project.intermediary_report.themes = $scope.themeSelection;
@@ -192,9 +211,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             project.$addIntReport(function (response) {
                 $location.path('projects/' + response._id);
             });
+          }
+
         };
 
-        $scope.addEndReportState = function () {
+        $scope.addEndReportState = function (isValid) {
+          if (isValid) {
             var project = $scope.project;
             project.state = $scope.global.newState;
             project.end_report.themes = $scope.themeSelection;
@@ -203,14 +225,19 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             project.$addEndReport(function (response) {
                 $location.path('projects/' + response._id);
             });
+          }
+
         };
 
-        $scope.addEndedState = function () {
+        $scope.addEndedState = function (isValid) {
+          if (isValid) {
             var project = $scope.project;
             project.state = $scope.global.newState;
             project.$addEnded(function (response) {
                 $location.path('projects/' + response._id)
             });
+          }
+
         };
 
         $scope.changeState = function (changeTo) {
