@@ -28,7 +28,7 @@
                               ng-class="{reverse:reverse}"></span>
                     </th>
                     <th class="col-md-4">
-                        <a ng-href="/projects/project._id" ng-click="order('title')">Nimi</a>
+                        <a ng-href="" ng-click="order('title')">Nimi</a>
                         <span class="sortorder"
                               ng-show="predicate === 'title'"
                               ng-class="{reverse:reverse}"></span>
@@ -40,9 +40,9 @@
                               ng-class="{reverse:reverse}"></span>
                     </th>
                     <th class="col-md-4">
-                        <a href="" ng-click="order('organisation')">Järjestö</a>
+                        <a href="" ng-click="order('organisation.name')">Järjestö</a>
                         <span class="sortorder"
-                              ng-show="predicate === 'organisation'"
+                              ng-show="predicate === 'organisation.name'"
                               ng-class="{reverse:reverse}"></span>
                     </th>
                 </tr>
