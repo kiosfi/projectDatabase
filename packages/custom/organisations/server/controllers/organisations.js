@@ -35,8 +35,9 @@ module.exports = function(Organisations) {
         create: function(req,res) {
             var bank_account;
             var organisation = new Organisation(req.body);
-            bank_account = new BankAccount(req.body.bank_account);
+            var bank_account = new BankAccount(req.body.bank_account);
             organisation.bank_account = bank_account._id;
+            bank_account.save();
             organisation.save(function (err) {
                 if (err) {
                     return res.status(500).json({
