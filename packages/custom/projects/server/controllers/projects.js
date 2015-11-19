@@ -102,43 +102,39 @@ module.exports = function (Projects) {
                     });
         },
         /**
-         * Writes a cursor to JSON objects containing _id, project_ref, title,
-         * state and organisation fields of the matching project documents into
-         * the given response object. This function is used by the project list
-         * view.
+         * Gets all projects.
          *
-         * @param {type} req The request object for the transaction (dummy
-         * parameter).
-         * @param {type} res The response object where the results will be
-         * written into as JSON data.
-         * @param {json} criterion  A MongoDB query document. Only documents
-         * matching this criterion will be processed. Examples:
-         * All projects having reference number greater than 15000:
-         * "{project_ref : {$gt : 15000}}". All projects whose name ends with
-         * "rights": "{title : {$regex: /\w*rights$/i}}" (case insensitive).
-         * Empty document selects all projects.
-         * @param {json} ordering   A MongoDB sort document. It is a JSON object
-         * of the form {X_1 : Y_1, X_2 : Y_2, X_3 : Y_3, ... , X_n : Y_n} where
-         * X_1 .. X_n are the names of the attributes used for sorting and
-         * Y_1 .. Y_n are either 1 for ascending or -1 for descending ordering
-         * by the corresponding attribute. Example:
-         * "{project_ref : 1, project_title : 1}".
-         * @param {Number} offset     Offset index i.e. the index of the first
-         * matching document to be included. Used for paging the results.
-         * @param {Number} count      Maximum count of results.
-         *
-         * @returns {undefined} This function has no return value.
-         *
-         * @see https://docs.mongodb.org/manual/core/crud-introduction/
+         * @param {type} req
+         * @param {type} res
+         * @returns {undefined}
          */
         getProjects: function (req, res) {
-            var criterion = req.query.criterion;
             var ordering = req.query.ordering;
-            var offset = req.query.offset;
-            var count = req.query.count;
-            Project.find(criterion, {_id: 1, project_ref: 1, title: 1, state: 1,
+            var ascending = req.query.ascending;
+            var page = req.query.page;
+            if (typeof ordering === 'undefined') {
+                ordering = 'project_ref';
+            }
+            if (typeof ascending === 'undefined') {
+                ascending = true;
+            }
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            var pageSize = 10;
+            var orderingJSON = {};
+            orderingJSON[ordering] = ascending ? 1 : -1;
+            if (ordering !== "title") {
+                orderingJSON["title"] = 1;
+            } else {
+                orderingJSON["project_ref"] = 1;
+            }
+
+            Project.find({}, {_id: 1, project_ref: 1, title: 1, state: 1,
                 organisation: 1}
-            ).sort(ordering).skip(offset).limit(count)
+            ).sort(orderingJSON)
+            .skip((page - 1) * pageSize)
+            .limit(pageSize)
             .populate('organisation', {_id: 1, name : 1})
             .exec(function (err, result) {
                 if (err) {

@@ -46,13 +46,16 @@ angular.module('mean.projects').controller('ProjectsController',
             }
         };
 
+        /**
+         *
+         *
+         * @returns {undefined}
+         */
         $scope.find = function () {
-            var pred = $scope.predicate;
             Projects.query({
-                    criterion:  $scope.criterion,
-                    ordering:   $scope.ordering,
-                    offset:     $scope.offset,
-                    count:      $scope.pageSize
+                    ordering:   $location.search().ordering,
+                    ascending:  $location.search().ascending,
+                    page:       $location.search().page,
                 },
                 function(results) {
                     $scope.projects = results;
@@ -132,9 +135,21 @@ angular.module('mean.projects').controller('ProjectsController',
         $scope.predicate = "project_ref";
 
         /**
-         * <tt>true</tt> iff the projects will be listed in reverse order.
+         * <tt>true</tt> iff the projects will be listed in ascending order.
          */
-        $scope.reverse = false;
+        $scope.ascending = true;
+
+        /**
+         * Current page number.
+         */
+        $scope.page = 1;
+
+        /**
+         * The number of projects to be listed on a single page.
+         */
+        $scope.pageSize = 10;
+
+        $scope.pages;
 
         /**
          * Changes the ordering to match the given predicate. If the new
@@ -146,28 +161,15 @@ angular.module('mean.projects').controller('ProjectsController',
          * @returns {undefined}
          */
         $scope.order = function (predicate) {
-            $scope.reverse = ($scope.predicate === predicate)
-                    ? !$scope.reverse : false;
+            $scope.ascending = ($scope.predicate === predicate)
+                    ? !$scope.ascending : true;
             $scope.predicate = predicate;
-            $scope.ordering = {predicate : $scope.reverse ? -1 : 1};
             $scope.find();
         };
 
-        $scope.criterion = {};
-
-        $scope.ordering = {project_ref : 1};
-
-        $scope.offset = 0;
-
         /**
-         * The number of projects to be listed on a single page.
-         */
-        $scope.pageSize = 10;
-
-        $scope.pages;
-
-        /**
-         * Fills the pagination.
+         * Calculates the number of and links to pages and writes the output to
+         * $scope.pages.
          *
          * @returns {undefined}
          */
@@ -178,12 +180,10 @@ angular.module('mean.projects').controller('ProjectsController',
                 numberOfPages = Math.ceil(pageCount / $scope.pageSize);
                 pagination = document.getElementById("pagination");
                 $scope.pages = [];
-                console.log(JSON.stringify($scope.ordering));
-                var orderingKey = (Object.keys($scope.ordering))[0];
                 for (var i = 1; i <= numberOfPages; ++i) {
                     $scope.pages.push({number: i, url: "/projects"
-                                + "?ordering=" + orderingKey
-                                + "&ascending=" + !$scope.reverse
+                                + "?ordering=" + $scope.predicate
+                                + "&ascending=" + $scope.ascending
                                 + "&page=" + i});
                 }
             });

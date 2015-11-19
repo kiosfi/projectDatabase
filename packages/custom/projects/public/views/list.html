@@ -14,28 +14,28 @@
             <thead>
                 <tr>
                     <th class="col-md-1">
-                        <a href="" ng-click="order('project_ref')">Tunnus</a>
+                        <a href="/projects?ordering=project_ref&ascending={{ascending}}&page={{page}}">Tunnus</a>
                         <span class="sortorder"
                               ng-show="predicate === 'project_ref'"
-                              ng-class="{reverse:reverse}"></span>
+                              ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-5">
-                        <a ng-href="" ng-click="order('title')">Nimi</a>
+                        <a href="/projects?ordering=title&ascending={{ascending}}&page={{page}}">Nimi</a>
                         <span class="sortorder"
                               ng-show="predicate === 'title'"
-                              ng-class="{reverse:reverse}"></span>
+                              ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-2">
-                        <a href="" ng-click="order('state')">Tila</a>
+                        <a href="/projects?ordering=state&ascending={{ascending}}&page={{page}}">Tila</a>
                         <span class="sortorder"
                               ng-show="predicate === 'state'"
-                              ng-class="{reverse:reverse}"></span>
+                              ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-4">
-                        <a href="" ng-click="order('organisation')">Järjestö</a>
+                        <a href="/projects?ordering=project_ref&ascending={{ascending}}&page={{page}}">Järjestö</a>
                         <span class="sortorder"
                               ng-show="predicate === 'organisation'"
-                              ng-class="{reverse:reverse}"></span>
+                              ng-class="{reverse:!ascending}"></span>
                     </th>
                 </tr>
             </thead>
