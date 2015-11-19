@@ -11,7 +11,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     '$location', '$window', '$http', 'Global', 'Projects', 'MeanUser', 'Circles', 'Organisations',
     function ($scope, $stateParams, $location, $window, $http, Global, Projects, MeanUser, Circles, Organisations) {
         $scope.global = Global;
-        
+
         $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
 
         $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
@@ -72,22 +72,50 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.create = function (isValid) {
             if (isValid) {
+                var project = new Projects($scope.project);
                 
                 if($scope.newOrg) {
-                    var orgId;
-                    var org = new Organisations($scope.project.organisation);
-                    org.$save(function (response) {
-                        orgId = response._id;
-                    });
+                    project.organisation = $scope.newOrganisation;
+                    
+                } else {
+                    console.log($scope.listOrganisation);
+                    project.organisation = $scope.listOrganisation;              
+                    
                 }
-                var project = new Projects($scope.project);
-                project.organisation = orgId;
                 project.$save(function (response) {
-                    $location.path('projects/' + response._id);
+                        $location.path('projects/' + response._id);
                 });
 
                 $scope.project = {};
-
+                
+//                var orgId;
+//                if ($scope.newOrg) {
+//                    var org = new Organisations($scope.project.organisation);
+//                    org.$save(function (response) {
+//                        orgId = response._id;
+//                        console.log('org.saven sisällä: ' + orgId);
+//
+//                        var project = new Projects($scope.project);
+//                        project.organisation = orgId;
+//                        console.log('project.org = ' + project.organisation);
+//                        project.$save(function (response) {
+//                            $location.path('projects/' + response._id);
+//                        });
+//
+//                        $scope.project = {};
+//                    });
+//
+//                } else {
+//                    orgId = $scope.project.listOrganisation;
+//
+//                    var project = new Projects($scope.project);
+//                    project.organisation = orgId;
+//                    project.$save(function (response) {
+//                        $location.path('projects/' + response._id);
+//                    });
+//
+//                    $scope.project = {};
+//                }
             } else {
                 $scope.submitted = true;
             }
@@ -177,7 +205,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.$addRejected(function (response) {
                     $location.path('projects/' + response._id);
                 });
-            } 
+            }
 
         };
 
@@ -252,17 +280,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.removeRejection = function () {
             $scope.addedRejections.splice(-1, 1);
         };
-        
+
         $scope.findOrganisations = function () {
             Organisations.query(function (organisations) {
                 $scope.orgs = organisations;
             });
         };
-        
+
         $scope.addNewOrg = function () {
             $scope.newOrg = true;
         };
-        
+
         $scope.addOrgFromDb = function () {
             $scope.newOrg = false;
         };

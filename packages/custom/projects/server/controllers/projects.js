@@ -48,19 +48,31 @@ module.exports = function (Projects) {
 //                    project.organisation = obj._id;
 //                }
 
-                project.save(function (err) {
-                    if (err) {
-                        return res.status(500).json({
-                            error: 'Hanketta ei voi tallentaa'
-                        });
-                    }
-                    res.json(project);
-                });
-                Projects.events.publish({
-                    action: 'created',
-                    url: config.hostname + '/projects/' + project._id,
-                    name: project.title
-                });
+            if (!req.body.organisation._id) {
+                organisation = new Organisation(req.body.organisation);
+                bank_account = new BankAccount(req.body.organisation.bank_account);
+                project.organisation = organisation._id;
+                organisation.bank_account = bank_account._id;
+                organisation.save();
+                bank_account.save();
+            } else {
+                project.organisation = req.body.organisation._id;
+            }
+
+            project.save(function (err) {
+                if (err) {
+                    console.log('project save error: ' + err);
+                    return res.status(500).json({
+                        error: 'Hanketta ei voi tallentaa'
+                    });
+                }
+                res.json(project);
+            });
+            Projects.events.publish({
+                action: 'created',
+                url: config.hostname + '/projects/' + project._id,
+                name: project.title
+            });
 //            });
         },
         /*
@@ -233,8 +245,7 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
-          /*
+        /*
          * Moves a project to IntReport state (or adds another) and saves the state object to
          * its collection.
          */
@@ -307,7 +318,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /*
          * Moves a project to ended state and saves the state object to
          * its collection.
@@ -341,7 +351,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         destroy: function (req, res) {
             var project = req.project;
             project.remove(function (err) {

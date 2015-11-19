@@ -45,7 +45,7 @@
                     <label mean-token="'create-organisation'" class="col-md-3 control-label">Järjestö</label>
                     <div class="col-md-9" id="orgSelection" data-ng-init="findOrganisations()">
                         <label>
-                            <select data-ng-if="!newOrg" data-ng-model="project.organisation">
+                            <select data-ng-if="!newOrg" data-ng-model="listOrganisation">
                                 <option data-ng-repeat="org in orgs" value="{{org._id}}">{{org.name}}</option>
                             </select>
                         </label>
@@ -75,7 +75,7 @@
                     <label mean-token="'create-orgname'" class="col-md-3 control-label">Nimi</label>
 
                     <div class="col-md-9">
-                        <input name="orgname" type="text" class="form-control" data-ng-model="project.organisation.name"
+                        <input data-ng-if="newOrg" name="orgname" type="text" class="form-control" data-ng-model="newOrganisation.name"
                                id="orgname" placeholder="Järjestön nimi" required>
 
                         <div ng-show="projectForm.orgname.$invalid" class="help-block">
@@ -90,8 +90,8 @@
                     <label mean-token="'create-orgrep'" class="col-md-3 control-label">Edustaja</label>
 
                     <div class="col-md-9">
-                        <input name="orgrep" type="text" class="form-control"
-                               data-ng-model="project.organisation.representative" id="orgrep" placeholder="Edustaja"
+                        <input data-ng-if="newOrg" name="orgrep" type="text" class="form-control"
+                               data-ng-model="newOrganisation.representative" id="orgrep" placeholder="Edustaja"
                                required>
 
                         <div ng-show="projectForm.orgrep.$invalid" class="help-block">
@@ -105,8 +105,8 @@
                     <label mean-token="'create-orgexecMan'" class="col-md-3 control-label">Vastuullinen johtaja</label>
 
                     <div class="col-md-9">
-                        <input name="orgexecMan" type="text" class="form-control"
-                               data-ng-model="project.organisation.exec_manager" id="orgexecMan"
+                        <input data-ng-if="newOrg" name="orgexecMan" type="text" class="form-control"
+                               data-ng-model="newOrganisation.exec_manager" id="orgexecMan"
                                placeholder="Vastuullinen johtaja" required>
 
                         <div ng-show="projectForm.orgexecMan.$invalid" class="help-block">
@@ -121,8 +121,8 @@
                         <label mean-token="'create-orgaddr'" class="col-md-3 control-label">Osoite</label>
 
                         <div class="col-md-9">
-                            <input name="orgaddr" type="text" class="form-control"
-                                   data-ng-model="project.organisation.address.street" id="orgaddr" placeholder="Osoite"
+                            <input data-ng-if="newOrg" name="orgaddr" type="text" class="form-control"
+                                   data-ng-model="newOrganisation.address.street" id="orgaddr" placeholder="Osoite"
                                    required>
 
                             <div ng-show=" projectForm.orgaddr.$invalid" class="help-block">
@@ -136,8 +136,8 @@
                         <label mean-token="'create-orgaddrcode'" class="col-md-3 control-label">Postinumero</label>
 
                         <div class="col-md-9">
-                            <input name="orgaddrcode" type="text" class="form-control"
-                                   data-ng-model="project.organisation.address.postal_code" id="orgaddrcode"
+                            <input data-ng-if="newOrg" name="orgaddrcode" type="text" class="form-control"
+                                   data-ng-model="newOrganisation.address.postal_code" id="orgaddrcode"
                                    placeholder="Postinumero" required>
 
                             <div ng-show=" projectForm.orgaddrcode.$invalid" class="help-block">
@@ -151,8 +151,8 @@
                         <label mean-token="'create-orgaddrcity'" class="col-md-3 control-label">Kaupunki</label>
 
                         <div class="col-md-9">
-                            <input name="orgaddrcity" type="text" class="form-control"
-                                   data-ng-model="project.organisation.address.city" id="orgaddrcity"
+                            <input data-ng-if="newOrg" name="orgaddrcity" type="text" class="form-control"
+                                   data-ng-model="newOrganisation.address.city" id="orgaddrcity"
                                    placeholder="Kaupunki" required>
 
                             <div ng-show=" projectForm.orgaddrcity.$invalid" class="help-block">
@@ -166,8 +166,8 @@
                         <label mean-token="'create-orgaddrcntry'" class="col-md-3 control-label">Maa</label>
 
                         <div class="col-md-9">
-                            <input name="orgaddrcntry" type="text" class="form-control"
-                                   data-ng-model="project.organisation.address.country" id="orgaddrcntry"
+                            <input data-ng-if="newOrg" name="orgaddrcntry" type="text" class="form-control"
+                                   data-ng-model="newOrganisation.address.country" id="orgaddrcntry"
                                    placeholder="Maa" required>
 
                             <div ng-show=" projectForm.orgaddrcntry.$invalid" class="help-block">
@@ -183,7 +183,7 @@
                     <label mean-token="'create-orgtel'" class="col-md-3 control-label">Puhelinnumero</label>
 
                     <div class="col-md-9">
-                        <input name="orgtel" type="text" class="form-control" data-ng-model="project.organisation.tel"
+                        <input data-ng-if="newOrg" name="orgtel" type="text" class="form-control" data-ng-model="newOrganisation.tel"
                                id="orgtel" placeholder="Puhelinnumero" required>
 
                         <div ng-show=" projectForm.orgtel.$invalid" class="help-block">
@@ -198,8 +198,8 @@
                     <label mean-token="'create-orgemail'" class="col-md-3 control-label">Sähköpostiosoite</label>
 
                     <div class="col-md-9">
-                        <input name="orgemail" type="email" class="form-control"
-                               data-ng-model="project.organisation.email" id="orgemail" placeholder="Sähköposti"
+                        <input data-ng-if="newOrg" name="orgemail" type="email" class="form-control"
+                               data-ng-model="newOrganisation.email" id="orgemail" placeholder="Sähköposti"
                                required>
 
                         <div ng-show=" projectForm.orgemail.$invalid" class="help-block">
@@ -217,8 +217,8 @@
                     <label mean-token="'create-orgwww'" class="col-md-3 control-label">Websivut</label>
 
                     <div class="col-md-9">
-                        <input name="orgwww" type="text" class="form-control"
-                               data-ng-model="project.organisation.website" id="orgwww" placeholder="Websivut" required>
+                        <input data-ng-if="newOrg" name="orgwww" type="text" class="form-control"
+                               data-ng-model="newOrganisation.website" id="orgwww" placeholder="Websivut" required>
 
                         <div ng-show=" projectForm.orgwww.$invalid" class="help-block">
                             <p ng-show="projectForm.orgwww.$error.required">Kenttä on pakollinen</p>
@@ -504,7 +504,7 @@
                         status</label>
 
                     <div class="col-md-9">
-                        <textarea name="orgLegal" data-ng-model="project.organisation.legal_status" id="orgLegal"
+                        <textarea data-ng-if="newOrg" name="orgLegal" data-ng-model="newOrganisation.legal_status" id="orgLegal"
                                   placeholder="Oikeudellinen status" class="form-control" required></textarea>
 
                         <div ng-show=" projectForm.orgLegal.$invalid" class="help-block">
@@ -520,7 +520,7 @@
                         historia</label>
 
                     <div class="col-md-9">
-                        <textarea name="orgHist" data-ng-model="project.organisation.history_status" id="orgHist"
+                        <textarea data-ng-if="newOrg" name="orgHist" data-ng-model="newOrganisation.history_status" id="orgHist"
                                   placeholder="Historia" class="form-control" required></textarea>
 
                         <div ng-show=" projectForm.orgHist.$invalid" class="help-block">
@@ -536,7 +536,7 @@
                         yhteydet</label>
 
                     <div class="col-md-9">
-                        <textarea name="orgLinks" data-ng-model="project.organisation.int_links" id="orgLinks"
+                        <textarea data-ng-if="newOrg" name="orgLinks" data-ng-model="newOrganisation.int_links" id="orgLinks"
                                   placeholder="Kansainväliset yhteydet" class="form-control" required></textarea>
 
                         <div ng-show=" projectForm.orgLinks.$invalid" class="help-block">
@@ -551,7 +551,7 @@
                         yhteydet</label>
 
                     <div class="col-md-9">
-                        <textarea name="orgNatLinks" data-ng-model="project.organisation.nat_links" id="orgNatLinks"
+                        <textarea data-ng-if="newOrg" name="orgNatLinks" data-ng-model="newOrganisation.nat_links" id="orgNatLinks"
                                   placeholder="Paikalliset yhteydet" class="form-control" required></textarea>
 
                         <div ng-show=" projectForm.orgNatLinks.$invalid" class="help-block">
@@ -576,8 +576,8 @@
                         <label mean-token="'create-bankIban'" class="col-md-3 control-label">Tilinumero (IBAN)</label>
 
                         <div class="col-md-9">
-                            <input name="bankIban" type="text" class="form-control"
-                                   data-ng-model="project.organisation.bank_account.iban" id="bankIban"
+                            <input data-ng-if="newOrg" name="bankIban" type="text" class="form-control"
+                                   data-ng-model="newOrganisation.bank_account.iban" id="bankIban"
                                    placeholder="Tilinumero (IBAN)" required>
 
                             <div ng-show=" projectForm.bankIban.$invalid" class="help-block">
@@ -591,8 +591,8 @@
                         <label mean-token="'create-bankSwift'" class="col-md-3 control-label">Pankin SWIFT</label>
 
                         <div class="col-md-9">
-                            <input name="bankSwift" type="text" class="form-control"
-                                   data-ng-model="project.organisation.bank_account.swift" id="bankSwift"
+                            <input data-ng-if="newOrg" name="bankSwift" type="text" class="form-control"
+                                   data-ng-model="newOrganisation.bank_account.swift" id="bankSwift"
                                    placeholder="Pankin SWIFT" required>
 
                             <div ng-show=" projectForm.bankSwift.$invalid" class="help-block">
@@ -609,8 +609,8 @@
                         <label mean-token="'create-bankHolder'" class="col-md-3 control-label">Tilin haltija</label>
 
                         <div class="col-md-9">
-                            <input name="bankHolder" type="text" class="form-control"
-                                   data-ng-model="project.organisation.bank_account.holder_name" id="bankHolder"
+                            <input data-ng-if="newOrg" name="bankHolder" type="text" class="form-control"
+                                   data-ng-model="newOrganisation.bank_account.holder_name" id="bankHolder"
                                    placeholder="Tilinhaltija" required>
 
                             <div ng-show=" projectForm.bankHolder.$invalid" class="help-block">
@@ -624,8 +624,8 @@
                         <label mean-token="'create-bankCont'" class="col-md-3 control-label">Pankin yhteystiedot</label>
 
                         <div class="col-md-9">
-                            <input name="bankCont" type="text" class="form-control"
-                                   data-ng-model="project.organisation.bank_account.bank_contact_details" id="bankCont"
+                            <input data-ng-if="newOrg" name="bankCont" type="text" class="form-control"
+                                   data-ng-model="newOrganisation.bank_account.bank_contact_details" id="bankCont"
                                    placeholder="Pankin yhteystiedot" required>
 
                             <div ng-show=" projectForm.bankCont.$invalid" class="help-block">
