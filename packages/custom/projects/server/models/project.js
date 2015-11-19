@@ -74,9 +74,6 @@ var ProjectSchema = new Schema({
         required: true,
         trim: true
     },
-    categories: {
-        type: Array
-    },
     background: {
         type: String,
         required: true,

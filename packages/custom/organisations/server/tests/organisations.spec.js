@@ -44,7 +44,9 @@ describe('<Unit Test>', function () {
                 "legal_status": "legal status",
                 "history_status": "history status",
                 "int_links": "international links",
-                "nat_links": "local human rights org",
+                "nat_local_links": "local human rights org",
+                "description": "description for organisation .....",
+                "other_funding": "other funders",
                 "bank_account": bank_account});
             organisation.save();
             organisation2 = new Organisation({
@@ -63,7 +65,9 @@ describe('<Unit Test>', function () {
                 "legal_status": "legal statuses",
                 "history_status": "history statuses",
                 "int_links": "international link",
-                "nat_links": "local human rights org 2",
+                "nat__local_links": "local human rights org 2",
+                "description": "description for organisation .....",
+                "other_funding": "other funders",
                 "bank_account": bank_account});
             organisation2.save();
             done();
@@ -85,9 +89,9 @@ describe('<Unit Test>', function () {
                 });
             });
         });
-        
+
         describe('Method Save', function () {
-            
+
             beforeEach(function (done) {
                 this.timeout(10000);
 
@@ -96,7 +100,7 @@ describe('<Unit Test>', function () {
                     "iban": "EU11111113333334",
                     "swift": "NDEAFIHH",
                     "holder_name": "Jack Jackson"});
-                
+
                 organisation3 = new Organisation({
                     "name": "Children rights org",
                     "representative": "Mr Jackson",
@@ -113,9 +117,11 @@ describe('<Unit Test>', function () {
                     "legal_status": "non-profit",
                     "history_status": "history status",
                     "int_links": "international links",
-                    "nat_links": "local human rights org 2",
-                    "bank_account": bank_account2});           
-                
+                    "nat__local_links": "local human rights org 2",
+                    "description": "description for organisation .....",
+                    "other_funding": "other funders",
+                    "bank_account": bank_account2});
+
                 done();
             });
 
@@ -132,10 +138,10 @@ describe('<Unit Test>', function () {
                     done();
                 });
             });
-            
+
             it('should show an error when try to save without a name', function (done) {
                 this.timeout(10000);
-                
+
                 organisation3.name = null;
 
                 return organisation3.save(function (err) {
