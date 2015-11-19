@@ -75,7 +75,7 @@ var OrganisationSchema = new Schema({
         required: true,
         trim: true
     },
-    nat_links: {
+    nat_local_links: {
         type: String,
         required: true,
         trim: true
