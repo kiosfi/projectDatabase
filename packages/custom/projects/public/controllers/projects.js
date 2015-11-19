@@ -32,8 +32,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.deadlines = [];
 
-        $scope.parsedDeadlines = [];
-
         $scope.themeSelection = [];
 
         $scope.objectiveComments = [];
@@ -62,6 +60,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
           var d = parsed.getDate();
           var m = parsed.getMonth() + 1;
           var y = parsed.getFullYear();
+          if (d < 10) {
+            d = '0' + d;
+          }
+          if (m < 10) {
+            m = '0' + m;
+          }
           return (d + "-" + m + "-" + y);
         };
 
@@ -176,16 +180,30 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.addSignedState = function (isValid) {
           if (isValid) {
-            var project = $scope.project;
 
-            project.signed.planned_payments = $scope.plannedPayments;
+            var signed_date = $scope.convertDate($scope.signed_date.day, $scope.signed_date.month, $scope.signed_date.year)
+            var project = $scope.project;
+            project.signed.signed_date = signed_date;
+
+            $scope.parsedDeadlines = [];
+            $scope.parsedPlannedPayments = [];
+
+            var plpms = $scope.plannedPayments;
+
+            for (var i = 0; i < plpms.length; i++) {
+              var pp = $scope.convertDate(plpms[i].day, plpms[i].month, plpms[i].year);
+              $scope.parsedPlannedPayments.push({date: pp, sum_eur: plpms[i].sum_eur, sum_local: plpms[i].sum_local})
+            }
+            project.signed.planned_payments = $scope.parsedPlannedPayments;
+
             var dls = $scope.deadlines;
+
             for (var i = 0; i < dls.length; i++) {
               var dl = $scope.convertDate(dls[i].day, dls[i].month, dls[i].year);
               $scope.parsedDeadlines.push({report: dls[i].report, date: dl});
             }
-            console.log($scope.parsedDeadlines);
             project.signed.intreport_deadlines = $scope.parsedDeadlines;
+
             project.state = $scope.global.newState;
             project.$addSigned(function (response) {
                 $location.path('projects/' + response._id);
@@ -284,7 +302,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.addPlannedPayment = function () {
-            $scope.plannedPayments.push({date: '', sum_eur: '', sum_local: ''});
+            $scope.plannedPayments.push({day: '', month: '', year: '', sum_eur: '', sum_local: ''});
         };
 
         $scope.removePlannedPayment = function () {

@@ -256,9 +256,9 @@
                         _id: '525a8422f6d0f87f0e407a33',
                         signed: {
                           signed_by: 'Jaana Jantunen',
-                          signed_date: '22.12.2015',
-                          planned_payments: [{"date": "12.12.2015", "sum_eur": 50000, "sum_local": 80000}],
-                          intreport_deadlines: [{"report": "1. väliraportti", "date": "1.4.2016"}]
+                          signed_date: '22-12-2015',
+                          planned_payments: [{"date": "12-12-2015", "sum_eur": 50000, "sum_local": 80000}],
+                          intreport_deadlines: [{"report": "1. väliraportti", "date": "01-04-2016"}]
                         },
                         state: 'hyväksytty',
                         to: 'allekirjoitettu'

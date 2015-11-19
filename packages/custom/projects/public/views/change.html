@@ -216,33 +216,50 @@ A form for project state change.
             </div>
         </div>
 
-        <div class="form-group col-md-12" ng-class="{
-                            'has-error'
-                            :  signedForm.signed_date.$invalid }">
-            <label for="signed_date" class="col-md-2">Päivämäärä</label>
-            <div class="col-md-10">
-                <input name="signed_date" type="text" class="form-control" data-ng-model="project.signed.signed_date" id="signed_date" placeholder="Allekirjoituksen pvm" required>
+        <div class="form-group col-md-12">
+            <label for="signed_date_day" class="col-md-2">Päivämäärä</label>
+            <div class="col-md-2" style="float:left;">
+                <input name="signed_date_day" type="number" class="form-control" data-ng-model="signed_date.day" id="signed_date_day" placeholder="p" required>
             </div>
-            <div ng-show="signedForm.signed_date.$invalid" class="help-block">
-                <p ng-show="signedForm.signed_date.$error.required">Kenttä on pakollinen</p>
+            <div class="col-md-2" style="float:left;">
+                <input name="signed_date_month" type="number" class="form-control" data-ng-model="signed_date.month" id="signed_date_month" placeholder="k" required>
             </div>
+            <div class="col-md-2" style="float:left;">
+                <input name="signed_date_year" type="number" class="form-control" data-ng-model="signed_date.year" id="signed_date_year" placeholder="vvvv" required>
+            </div>
+            <div ng-show="signedForm.signed_date_year.$invalid" class="help-block">
+                <p ng-show="signedForm.signed_date_year.$error.number">Kenttien täytyy olla numeroita</p>
+            </div>
+            <div ng-show="signedForm.signed_date_year.$invalid" class="help-block">
+                <p ng-show="signedForm.signed_date_year.$error.required">Kentät ovat pakolliset</p>
+            </div>
+
         </div>
 
         <label for="plannedPaymentSelection" class="col-md-3">Maksusuunnitelma</label>
         <div class="form-group col-md-12">
 
             <div class="col-md-12" name="plannedPaymentSelection" id="plannedPaymentSelection" data-ng-repeat="plannedPayment in plannedPayments">
-                <label for="plannedDate" class="col-md-2 control-label">Päivämäärä</label>
-                <div class="col-md-5" ng-class="{
-                                    'has-error'
-                                    :  signedForm.plannedDate.$invalid }">
-                    <input name="plannedDate" type="text" class="form-control" data-ng-model="plannedPayment.date" id="plannedDate" placeholder="Päivämäärä" required>
+              <div>
+                <label for="plannedDay" class="col-md-2 control-label">Päivämäärä</label>
+                <div class="col-md-2" style="float:left;">
+                    <input name="plannedDay" type="number" class="form-control" data-ng-model="plannedPayment.day" id="plannedDay" placeholder="p" required>
                 </div>
-                <div ng-show="signedForm.plannedDate.$invalid" class="help-block">
-                    <p ng-show="signedForm.plannedDate.$error.required">Kenttä on pakollinen</p>
+                <div class="col-md-2" style="float:left;">
+                    <input name="plannedMonth" type="number" class="form-control" data-ng-model="plannedPayment.month" id="plannedMonth" placeholder="k" required>
                 </div>
+                <div class="col-md-2" style="float:left;">
+                    <input name="plannedYear" type="number" class="form-control" data-ng-model="plannedPayment.year" id="plannedYear" placeholder="vvvv" required>
+                </div>
+                <div ng-show="signedForm.plannedYear.$invalid" class="help-block">
+                    <p ng-show="signedForm.plannedYear.$error.number">Kenttien täytyy olla numeroita</p>
+                </div>
+                <div ng-show="signedForm.plannedYear.$invalid" class="help-block">
+                    <p ng-show="signedForm.plannedYear.$error.required">Kentät ovat pakolliset</p>
+                </div>
+              </div>
                 <div style="clear:both;">&nbsp;</div>
-
+              <div>
                 <label for="plannedSumEUR" class="col-md-2 control-label">Summa (EUR)</label>
                 <div class="col-md-5" ng-class="{
                                     'has-error'
@@ -270,7 +287,7 @@ A form for project state change.
                     <p ng-show="signedForm.plannedSumLocal.$error.required">Kenttä on pakollinen</p>
                 </div>
                 <div style="clear:both;">&nbsp;</div>
-
+              </div>
             </div>
 
             <div class="col-md-12">
@@ -303,6 +320,9 @@ A form for project state change.
                  </div>
                  <div class="col-md-2" style="float:left;">
                     <input name="dlYear" type="number" class="form-control" data-ng-model="deadline.year" id="dlYear" placeholder="vvvv" required>
+                </div>
+                <div ng-show="signedForm.dlYear.$invalid" class="help-block">
+                    <p ng-show="signedForm.dlYear.$error.number">Summan täytyy olla numero</p>
                 </div>
                 <div ng-show="signedForm.dlYear.$invalid" class="help-block">
                     <p ng-show="signedForm.dlYear.$error.required">Kentät ovat pakolliset</p>

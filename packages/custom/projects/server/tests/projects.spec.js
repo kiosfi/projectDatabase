@@ -434,16 +434,15 @@ describe('<Unit Test>', function () {
                 this.timeout(10000);
                 signed = new Signed({
                     "signed_by": "Jaana Jantunen",
-                    "signed_date": "12.12.2015",
-                    "planned_payments": [{"date": "12.12.2015", "sum_eur": 50000, "sum_local": 80000}],
-                    "intreport_deadlines": [{"report": "1. väliraportti", "date": "1.4.2016"}]});
+                    "signed_date": "12-12-2015",
+                    "planned_payments": [{"date": "12-12-2015", "sum_eur": 50000, "sum_local": 80000}],
+                    "intreport_deadlines": [{"report": "1. väliraportti", "date": "01-04-2016"}]});
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
                     signed.user = user.name;
                     signed.save();
                     proj.state = "allekirjoitettu";
                     proj.signed = signed;
-                    //proj.planned_payments = [{"date": "12.12.2015", "sum_eur": 50000, "sum_local": 80000}];
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("allekirjoitettu");

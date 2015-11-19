@@ -17,20 +17,31 @@ describe('Changing project state to "signed"', function () {
         expect(browser.getCurrentUrl()).toContain('/change');
 
         element(by.model('project.signed.signed_by')).sendKeys('Teija Testi');
-        element(by.model('project.signed.signed_date')).sendKeys('12.12.2015');
+        element(by.model('signed_date.day')).sendKeys(12);
+        element(by.model('signed_date.month')).sendKeys(12);
+        element(by.model('signed_date.year')).sendKeys(2015);
 
         element(by.id('add-btn')).click();
 
-        element(by.model('plannedPayment.date')).sendKeys('12.1.2016');
+        element(by.model('plannedPayment.day')).sendKeys(12);
+        element(by.model('plannedPayment.month')).sendKeys(12);
+        element(by.model('plannedPayment.year')).sendKeys(2015);
+
         element(by.model('plannedPayment.sum_eur')).sendKeys(30000);
         element(by.model('plannedPayment.sum_local')).sendKeys(50000);
 
-        element(by.id('add-btn2')).click();
+        browser.executeScript('window.scrollTo(0,100000)').then(function () {
+            element(by.id('add-btn2')).click();
+        });
 
         element(by.model('deadline.report')).sendKeys('1. väliraportti');
-        element(by.model('deadline.date')).sendKeys('1.10.2016');
+        element(by.model('deadline.day')).sendKeys(1);
+        element(by.model('deadline.month')).sendKeys(6);
+        element(by.model('deadline.year')).sendKeys(2016);
 
-        element(by.id('sign-btn')).click();
+        browser.executeScript('window.scrollTo(0,100000)').then(function () {
+            element(by.id('sign-btn')).click();
+        });
 
         expect(browser.getCurrentUrl()).toContain('/f2e7c9aeb017189911996768');
         var state = element(by.className('tila')).getText();
