@@ -80,6 +80,16 @@ var OrganisationSchema = new Schema({
         required: true,
         trim: true
     },
+    description: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    other_funding: {
+        type: String,
+        required: true,
+        trim: true
+    },
     bank_account: {
         type: Schema.ObjectId,
         ref: 'BankAccount',

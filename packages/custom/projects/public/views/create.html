@@ -514,6 +514,21 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                :  projectForm.orgDescription.$invalid }">
+                    <label mean-token="'create-orgDescription'" for="orgDescription" class="col-md-3 control-label">Kuvaus</label>
+
+                    <div class="col-md-9">
+                        <textarea data-ng-if="newOrg" name="orgDescription" data-ng-model="project.organisation.description" id="orgDescription"
+                                  placeholder="Kuvaus järjestöstä" class="form-control" required></textarea>
+
+                        <div ng-show=" projectForm.orgDescription.$invalid" class="help-block">
+                            <p ng-show="projectForm.orgDescription.$error.required">Kenttä on pakollinen</p>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-group col-md-6" ng-class="{
                                 'has-error'
@@ -549,15 +564,29 @@
                 <div class="form-group col-md-6" ng-class="{
                                 'has-error'
                                 : projectForm.orgNatLinks.$invalid }">
-                    <label mean-token="'create-orgNatLinks'" for="orgNatLinks" class="col-md-3 control-label">Kansalliset ja paikalliset
+                    <label mean-token="'create-orgNatLocLinks'" for="orgNatLocLinks" class="col-md-3 control-label">Kansalliset ja paikalliset
                         yhteydet</label>
 
                     <div class="col-md-9">
-                        <textarea data-ng-if="newOrg" name="orgNatLocLinks" data-ng-model="project.organisation.nat_local_links" id="orgNatLinks"
+                        <textarea data-ng-if="newOrg" name="orgNatLocLinks" data-ng-model="project.organisation.nat_local_links" id="orgNatLocLinks"
                                   placeholder="Kansalliset ja paikalliset yhteydet" class="form-control" required></textarea>
 
                         <div ng-show=" projectForm.orgNatLocLinks.$invalid" class="help-block">
                             <p ng-show="projectForm.orgNatLocLinks.$error.required">Kenttä on pakollinen</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                : projectForm.orgOthFund.$invalid }">
+                    <label mean-token="'create-orgOthFund'" for="orgOthFund" class="col-md-3 control-label">Muut rahoittajat</label>
+
+                    <div class="col-md-9">
+                        <textarea data-ng-if="newOrg" name="orgOthFund" data-ng-model="project.organisation.other_funding" id="orgOthFund"
+                                  placeholder="Järjestön muut rahoittajat" class="form-control" required></textarea>
+
+                        <div ng-show=" projectForm.orgOthFund.$invalid" class="help-block">
+                            <p ng-show="projectForm.orgOthFund.$error.required">Kenttä on pakollinen</p>
                         </div>
                     </div>
                 </div>
