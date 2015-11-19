@@ -73,21 +73,35 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
-                
-                if($scope.newOrg) {
-                    project.organisation = $scope.newOrganisation;
-                    
-                } else {
-                    console.log($scope.listOrganisation);
-                    project.organisation = $scope.listOrganisation;              
-                    
-                }
-                project.$save(function (response) {
-                        $location.path('projects/' + response._id);
-                });
+                if ($scope.newOrg) {
+                    console.log('uuden orgin data : ' + $scope.project.organisation);
+                    var org = new Organisations($scope.project.organisation);
+                    org.$save(function (response) {
+                        var orgId = response._id;
+                        console.log('org.saven sisällä: ' + orgId);
 
-                $scope.project = {};
-                
+                        project.organisation = orgId;
+                        console.log('project.org (id?) = ' + project.organisation);
+                        project.$save(function (response) {
+                            $location.path('projects/' + response._id);
+                        });
+
+                        $scope.project = {};
+                    });
+
+                } else {
+                    console.log('lista orgin data : ' + $scope.project.organisation);
+                    project.organisation = $scope.project.organisation;
+
+                    project.$save(function (response) {
+                        $location.path('projects/' + response._id);
+                    });
+
+                    $scope.project = {};
+
+                }
+
+
 //                var orgId;
 //                if ($scope.newOrg) {
 //                    var org = new Organisations($scope.project.organisation);

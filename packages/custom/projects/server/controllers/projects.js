@@ -36,29 +36,10 @@ module.exports = function (Projects) {
             var project = new Project(req.body);
             var organisation;
             var bank_account;
-//            Organisation.findOne({name: req.body.organisation.name}, function (err, obj) {
-//                if (!obj) {
-//                    organisation = new Organisation(req.body.organisation);
-//                    bank_account = new BankAccount(req.body.organisation.bank_account);
-//                    project.organisation = organisation._id;
-//                    organisation.bank_account = bank_account._id;
-//                    organisation.save();
-//                    bank_account.save();
-//                } else {
-//                    project.organisation = obj._id;
-//                }
-
-            if (!req.body.organisation._id) {
-                organisation = new Organisation(req.body.organisation);
-                bank_account = new BankAccount(req.body.organisation.bank_account);
-                project.organisation = organisation._id;
-                organisation.bank_account = bank_account._id;
-                organisation.save();
-                bank_account.save();
-            } else {
-                project.organisation = req.body.organisation._id;
-            }
-
+ 
+            project.organisation = req.body.organisation;
+            console.log('org id serverillä : ' + req.body.organisation);
+            
             project.save(function (err) {
                 if (err) {
                     console.log('project save error: ' + err);
