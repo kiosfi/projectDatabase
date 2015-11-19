@@ -39,7 +39,6 @@ module.exports = function(Organisations) {
             organisation.bank_account = bank_account._id;
             organisation.save(function (err) {
                 if (err) {
-                    console.log('virhe: ' +err);
                     return res.status(500).json({
                         error: 'Järjestöä ei voi tallentaa'
                     });

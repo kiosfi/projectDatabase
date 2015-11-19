@@ -32,29 +32,24 @@ module.exports = function (Projects) {
             });
         },
         create: function (req, res) {
-
             var project = new Project(req.body);
-            var organisation;
-            var bank_account;
- 
+
             project.organisation = req.body.organisation;
-            console.log('org id serverillä : ' + req.body.organisation);
-            
+
             project.save(function (err) {
                 if (err) {
-                    console.log('project save error: ' + err);
                     return res.status(500).json({
                         error: 'Hanketta ei voi tallentaa'
                     });
                 }
                 res.json(project);
             });
+
             Projects.events.publish({
                 action: 'created',
                 url: config.hostname + '/projects/' + project._id,
                 name: project.title
             });
-//            });
         },
         /*
          * Loads a project for display and populates its state fields.
