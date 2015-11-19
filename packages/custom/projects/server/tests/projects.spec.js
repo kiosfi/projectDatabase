@@ -283,7 +283,7 @@ describe('<Unit Test>', function () {
                     "legal_status": "legal status",
                     "history_status": "history status",
                     "int_links": "international links",
-                    "nat__local_links": "local human rights org 4",
+                    "nat_local_links": "local human rights org 4",
                     "description": "description for organisation .....",
                     "other_funding": "other funders",
                     "bank_account": bank_account4});

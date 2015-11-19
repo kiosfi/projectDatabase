@@ -65,7 +65,7 @@ describe('<Unit Test>', function () {
                 "legal_status": "legal statuses",
                 "history_status": "history statuses",
                 "int_links": "international link",
-                "nat__local_links": "local human rights org 2",
+                "nat_local_links": "local human rights org 2",
                 "description": "description for organisation .....",
                 "other_funding": "other funders",
                 "bank_account": bank_account});
@@ -117,7 +117,7 @@ describe('<Unit Test>', function () {
                     "legal_status": "non-profit",
                     "history_status": "history status",
                     "int_links": "international links",
-                    "nat__local_links": "local human rights org 2",
+                    "nat_local_links": "local human rights org 2",
                     "description": "description for organisation .....",
                     "other_funding": "other funders",
                     "bank_account": bank_account2});
