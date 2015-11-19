@@ -13,7 +13,9 @@ var async = require('async');
 
 var organisation;
 var organisation2;
+var organisation3;
 var bank_account;
+var bank_account2;
 
 describe('<Unit Test>', function () {
     describe('Model Organisation:', function () {
@@ -79,6 +81,67 @@ describe('<Unit Test>', function () {
                 return query.exec(function (err, orgs) {
                     expect(err).to.be(null);
                     expect(orgs.length).to.equal(2);
+                    done();
+                });
+            });
+        });
+        
+        describe('Method Save', function () {
+            
+            beforeEach(function (done) {
+                this.timeout(10000);
+
+                bank_account2 = new BankAccount({
+                    "bank_contact_details": "Bank Branch, address",
+                    "iban": "EU11111113333334",
+                    "swift": "NDEAFIHH",
+                    "holder_name": "Jack Jackson"});
+                
+                organisation3 = new Organisation({
+                    "name": "Children rights org",
+                    "representative": "Mr Jackson",
+                    "exec_manager": "Manager3",
+                    "address": {
+                        "street": "Address Road 123",
+                        "postal_code": "011325",
+                        "city": "Cityham",
+                        "country": "Countryland"
+                    },
+                    "tel": "+111123445",
+                    "email": "email@childrenorg.com",
+                    "website": "www.childrenorg.com",
+                    "legal_status": "non-profit",
+                    "history_status": "history status",
+                    "int_links": "international links",
+                    "nat_links": "local human rights org 2",
+                    "bank_account": bank_account2});           
+                
+                done();
+            });
+
+            it('should be able to save organisation without problems', function (done) {
+
+                this.timeout(10000);
+
+                return organisation3.save(function (err, data) {
+                    expect(err).to.be(null);
+                    expect(data.name).to.equal('Children rights org');
+                    expect(data.bank_account.swift).to.equal('NDEAFIHH');
+                    organisation3.remove();
+                    bank_account2.remove();
+                    done();
+                });
+            });
+            
+            it('should show an error when try to save without a name', function (done) {
+                this.timeout(10000);
+                
+                organisation3.name = null;
+
+                return organisation3.save(function (err) {
+                    expect(err).to.not.be(null);
+                    organisation3.remove();
+                    bank_account2.remove();
                     done();
                 });
             });
