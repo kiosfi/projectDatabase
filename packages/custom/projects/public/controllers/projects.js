@@ -70,6 +70,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             return MeanUser.isAdmin;
         };
 
+/*
+ * Creates new project by checking if organisation already exists (i.e. organisation 
+ * has been selected from dropdown list) or if organisation is new. 
+ * If organisation is new, first creates new organisation by calling
+ * organisation server-side controller and after that creates project.
+ * If organisation is selected from list, uses existing organisation._id and 
+ * creates project. 
+ * 
+ * @param {type} isValid checks if project creation form is valid
+ * @returns {undefined}
+ */
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
