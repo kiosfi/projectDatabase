@@ -285,9 +285,7 @@ A form for project state change.
 
             <div class="col-md-12" name="intReportDeadlines" id="intReportDeadlines" data-ng-repeat="deadline in deadlines">
                 <label for="dlRep" class="col-md-2 control-label">Raportti</label>
-                <div class="col-md-5" ng-class="{
-                                    'has-error'
-                                    :  signedForm.dlRep.$invalid }">
+                <div class="col-md-5" style="float:left;">
                     <input name="dlRep" type="text" class="form-control" data-ng-model="deadline.report" id="dlRep" placeholder="Raportti" required>
                 </div>
                 <div ng-show="signedForm.dlRep.$invalid" class="help-block">
@@ -295,17 +293,22 @@ A form for project state change.
                 </div>
                 <div style="clear:both;">&nbsp;</div>
 
-                <label for="dlDate" class="col-md-2 control-label">Eräpäivä</label>
-                <div class="col-md-5" ng-class="{
-                                    'has-error'
-                                    :  signedForm.dlDate.$invalid }">
-                    <input name="dlDate" type="text" class="form-control" data-ng-model="deadline.date" id="dlDate" placeholder="Eräpäivä" required>
+              <div name="dlDate" id="dlDate">
+                 <label for="dlDay" class="col-md-2 control-label">Eräpäivä</label>
+                 <div class="col-md-2">
+                      <input name="dlDay" type="number" class="form-control" data-ng-model="deadline.day" id="dlDay" placeholder="p" required>
+                 </div>
+                 <div class="col-md-2" style="float:left;">
+                    <input name="dlMonth" type="number" class="form-control" data-ng-model="deadline.month" id="dlMonth" placeholder="k" required>
+                 </div>
+                 <div class="col-md-2" style="float:left;">
+                    <input name="dlYear" type="number" class="form-control" data-ng-model="deadline.year" id="dlYear" placeholder="vvvv" required>
                 </div>
-                <div ng-show="signedForm.dlDate.$invalid" class="help-block">
-                    <p ng-show="signedForm.dlDate.$error.required">Kenttä on pakollinen</p>
+                <div ng-show="signedForm.dlYear.$invalid" class="help-block">
+                    <p ng-show="signedForm.dlYear.$error.required">Kentät ovat pakolliset</p>
                 </div>
-                <div style="clear:both;">&nbsp;</div>
-
+                <br>
+              </div>
             </div>
 
             <div class="col-md-12">
@@ -491,7 +494,7 @@ A form for project state change.
             </div>
             <div ng-show="endedForm.comments.$invalid" class="help-block">
                 <p ng-show="endedForm.comments.$error.required">Kenttä on pakollinen</p>
-            </div>              
+            </div>
         </div>
 
 

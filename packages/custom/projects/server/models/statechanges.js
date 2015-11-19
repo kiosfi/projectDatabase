@@ -103,8 +103,8 @@ var SignedSchema = new Schema({
         required: true
     },
     signed_date: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     planned_payments: {
         type: Array

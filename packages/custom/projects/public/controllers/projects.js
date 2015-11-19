@@ -32,6 +32,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.deadlines = [];
 
+        $scope.parsedDeadlines = [];
+
         $scope.themeSelection = [];
 
         $scope.objectiveComments = [];
@@ -53,6 +55,14 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             else {
                 $scope.themeSelection.push(theme);
             }
+        };
+
+        $scope.convertDate = function(day, month, year) {
+          var parsed = new Date(year + "-" + month + "-" + day);
+          var d = parsed.getDate();
+          var m = parsed.getMonth() + 1;
+          var y = parsed.getFullYear();
+          return (d + "-" + m + "-" + y);
         };
 
         $scope.hasAuthorization = function (project) {
@@ -167,8 +177,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addSignedState = function (isValid) {
           if (isValid) {
             var project = $scope.project;
+
             project.signed.planned_payments = $scope.plannedPayments;
-            project.signed.intreport_deadlines = $scope.deadlines;
+            var dls = $scope.deadlines;
+            for (var i = 0; i < dls.length; i++) {
+              var dl = $scope.convertDate(dls[i].day, dls[i].month, dls[i].year);
+              $scope.parsedDeadlines.push({report: dls[i].report, date: dl});
+            }
+            console.log($scope.parsedDeadlines);
+            project.signed.intreport_deadlines = $scope.parsedDeadlines;
             project.state = $scope.global.newState;
             project.$addSigned(function (response) {
                 $location.path('projects/' + response._id);
@@ -275,7 +292,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.addDeadline = function () {
-            $scope.deadlines.push({report: '', date: ''});
+            $scope.deadlines.push({report: '', day: '', month: '', year: ''});
         };
 
         $scope.removeDeadline = function () {
