@@ -99,7 +99,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     });
 
                 } else {
-                    project.organisation = $scope.project.organisation;
+                    project.organisation = $scope.project.listOrganisation;
 
                     project.$save(function (response) {
                         $location.path('projects/' + response._id);
@@ -272,18 +272,22 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             $scope.addedRejections.splice(-1, 1);
         };
 
-        $scope.findOrganisations = function () {
-            Organisations.query(function (organisations) {
-                $scope.orgs = organisations;
-            });
-        };
+//        $scope.findOrganisations = function () {
+//            Organisations.query(function (organisations) {
+//                $scope.orgs = organisations;
+//            });
+//        };
 
         $scope.addNewOrg = function () {
             $scope.newOrg = true;
+            $scope.orgs = null;
         };
 
         $scope.addOrgFromDb = function () {
             $scope.newOrg = false;
+            Organisations.query(function (organisations) {
+                $scope.orgs = organisations;
+            });
         };
 
 
