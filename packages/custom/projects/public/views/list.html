@@ -50,8 +50,11 @@
                 </tr>
             </tbody>
         </table>
-        <ul class="pagination pagination-sm" data-ng-init="paginate()">
-            <li><a href="#">1</a></li>
+        <ul id="pagination" class="pagination pagination-sm"
+            data-ng-init="paginate()">
+            <li ng-repeat="page in pages">
+                <a href="{{page.url}}">{{page.number}}</a>
+            </li>
         </ul>
     </article>
     <article data-ng-hide="!projects || projects.length">

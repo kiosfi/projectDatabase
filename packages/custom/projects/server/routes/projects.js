@@ -28,6 +28,7 @@ module.exports = function (Projects, app, auth) {
 
     app.route('/api/projects')
             .get(projects.getProjects)
+            .put(projects.countProjects)
             .post(auth.requiresLogin, hasPermissions, projects.create);
     app.route('/api/states')
             .get(projects.allStates);

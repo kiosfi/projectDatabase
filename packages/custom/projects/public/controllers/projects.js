@@ -2,7 +2,7 @@
 
 angular.module('mean.projects').controller('ProjectsController',
 ['$scope', '$stateParams', '$location', '$window', '$http', 'Global',
-    'Projects', 'MeanUser', 'Circles', 'countProjects',
+    'Projects', 'MeanUser', 'Circles',
     function ($scope, $stateParams, $location, $window, $http, Global, Projects, MeanUser, Circles) {
         $scope.global = Global;
 
@@ -164,7 +164,7 @@ angular.module('mean.projects').controller('ProjectsController',
          */
         $scope.pageSize = 10;
 
-//        $scope.pageNr = 1;
+        $scope.pages;
 
         /**
          * Fills the pagination.
@@ -172,15 +172,21 @@ angular.module('mean.projects').controller('ProjectsController',
          * @returns {undefined}
          */
         $scope.paginate = function() {
-            var pages = $scope.numberOfProjects();
-
-        };
-
-        $scope.numberOfProjects = function() {
-            countProjects(function(result) {
-                console.log(result);
+            Projects.countProjects(function(result) {
+                var pageCount, numberOfPages, pagination;
+                pageCount = result.projectCount;
+                numberOfPages = Math.ceil(pageCount / $scope.pageSize);
+                pagination = document.getElementById("pagination");
+                $scope.pages = [];
+                console.log(JSON.stringify($scope.ordering));
+                var orderingKey = (Object.keys($scope.ordering))[0];
+                for (var i = 1; i <= numberOfPages; ++i) {
+                    $scope.pages.push({number: i, url: "/projects"
+                                + "?ordering=" + orderingKey
+                                + "&ascending=" + !$scope.reverse
+                                + "&page=" + i});
+                }
             });
-            return 42;
-        }
+        };
     }
 ]);
