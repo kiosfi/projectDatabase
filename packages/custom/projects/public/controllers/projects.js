@@ -52,10 +52,16 @@ angular.module('mean.projects').controller('ProjectsController',
          * @returns {undefined}
          */
         $scope.find = function () {
+            $scope.ordering  = $location.search().ordering;
+            $scope.ascending = $location.search().ascending;
+            $scope.page      = $location.search().page;
+//            console.log($scope.ordering);
+//            console.log($scope.ascending);
+//            console.log($scope.page);
             Projects.query({
-                    ordering:   $location.search().ordering,
-                    ascending:  $location.search().ascending,
-                    page:       $location.search().page,
+                    ordering:   $scope.ordering,
+                    ascending:  $scope.ascending,
+                    page:       $scope.page
                 },
                 function(results) {
                     $scope.projects = results;
@@ -132,7 +138,7 @@ angular.module('mean.projects').controller('ProjectsController',
          * The sorting predicate used in project listing. Initial value is
          * "project_ref".
          */
-        $scope.predicate = "project_ref";
+        $scope.ordering = "project_ref";
 
         /**
          * <tt>true</tt> iff the projects will be listed in ascending order.
@@ -149,23 +155,31 @@ angular.module('mean.projects').controller('ProjectsController',
          */
         $scope.pageSize = 10;
 
+        /**
+         * An array containing JSON objects for pagination.
+         */
         $scope.pages;
 
         /**
-         * Changes the ordering to match the given predicate. If the new
-         * predicate is the same as the previous value, the order will be
-         * reversed.
+         * Updates the ordering and page number and reloads the page.
          *
-         * @param {string} predicate Ordering predicate, i.e. name of the
-         * attribute used for ordering the list (e.g. "project_ref").
-         * @returns {undefined}
+         * @param {type} ordering   The ordering predicate (eg. "project_ref").
+         * @param {type} page       The page number.
          */
-        $scope.order = function (predicate) {
-            $scope.ascending = ($scope.predicate === predicate)
-                    ? !$scope.ascending : true;
-            $scope.predicate = predicate;
-            $scope.find();
-        };
+        $scope.update = function(ordering, page) {
+            var ord = ordering;
+            var pg = page;
+            if (typeof ord === 'undefined') {
+                ord = $scope.ordering;
+            }
+            if (typeof pg === 'undefined') {
+                pg = $scope.page;
+            }
+            $window.location = "/projects?ordering=" + ord
+                    + "&ascending=" + (ord === $scope.ordering
+                            ? !$scope.ascending : true)
+                    + "&page=" + pg;
+        }
 
         /**
          * Calculates the number of and links to pages and writes the output to
@@ -182,7 +196,7 @@ angular.module('mean.projects').controller('ProjectsController',
                 $scope.pages = [];
                 for (var i = 1; i <= numberOfPages; ++i) {
                     $scope.pages.push({number: i, url: "/projects"
-                                + "?ordering=" + $scope.predicate
+                                + "?ordering=" + $scope.ordering
                                 + "&ascending=" + $scope.ascending
                                 + "&page=" + i});
                 }

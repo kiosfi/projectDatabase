@@ -14,27 +14,35 @@
             <thead>
                 <tr>
                     <th class="col-md-1">
-                        <a href="/projects?ordering=project_ref&ascending={{ascending}}&page={{page}}">Tunnus</a>
+                        <a href="" ng-click="update('project_ref', page)">
+                            Tunnus
+                        </a>
                         <span class="sortorder"
-                              ng-show="predicate === 'project_ref'"
+                              ng-show="ordering === 'project_ref'"
                               ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-5">
-                        <a href="/projects?ordering=title&ascending={{ascending}}&page={{page}}">Nimi</a>
+                        <a href="" ng-click="update('title', page)">
+                            Nimi
+                        </a>
                         <span class="sortorder"
-                              ng-show="predicate === 'title'"
+                              ng-show="ordering === 'title'"
                               ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-2">
-                        <a href="/projects?ordering=state&ascending={{ascending}}&page={{page}}">Tila</a>
+                        <a href="" ng-click="update('state', page)">
+                            Tila
+                        </a>
                         <span class="sortorder"
-                              ng-show="predicate === 'state'"
+                              ng-show="ordering === 'state'"
                               ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-4">
-                        <a href="/projects?ordering=project_ref&ascending={{ascending}}&page={{page}}">Järjestö</a>
+                        <a href="" ng-click="update('organisation', page)">
+                            Järjestö
+                        </a>
                         <span class="sortorder"
-                              ng-show="predicate === 'organisation'"
+                              ng-show="ordering === 'organisation'"
                               ng-class="{reverse:!ascending}"></span>
                     </th>
                 </tr>
@@ -53,7 +61,7 @@
         <ul id="pagination" class="pagination pagination-sm"
             data-ng-init="paginate()">
             <li ng-repeat="page in pages">
-                <a href="{{page.url}}">{{page.number}}</a>
+                <a href="" ng-click="update(ordering, page.number)">{{page.number}}</a>
             </li>
         </ul>
     </article>
