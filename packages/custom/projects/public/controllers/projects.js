@@ -52,16 +52,25 @@ angular.module('mean.projects').controller('ProjectsController',
          * @returns {undefined}
          */
         $scope.find = function () {
-            $scope.ordering  = $location.search().ordering;
-            $scope.ascending = $location.search().ascending;
-            $scope.page      = $location.search().page;
-//            console.log($scope.ordering);
-//            console.log($scope.ascending);
-//            console.log($scope.page);
+            var ordering  = $location.search().ordering;
+            var ascending = $location.search().ascending;
+            var page      = $location.search().page;
+            if (typeof ordering === 'undefined') {
+                ordering = 'project_ref';
+            }
+            if (typeof ascending === 'undefined') {
+                ascending = true;
+            }
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            $scope.ordering  = ordering;
+            $scope.ascending = ascending === "true";
+            $scope.page      = page;
             Projects.query({
-                    ordering:   $scope.ordering,
-                    ascending:  $scope.ascending,
-                    page:       $scope.page
+                    ordering:   ordering,
+                    ascending:  ascending,
+                    page:       page
                 },
                 function(results) {
                     $scope.projects = results;
@@ -167,18 +176,10 @@ angular.module('mean.projects').controller('ProjectsController',
          * @param {type} page       The page number.
          */
         $scope.update = function(ordering, page) {
-            var ord = ordering;
-            var pg = page;
-            if (typeof ord === 'undefined') {
-                ord = $scope.ordering;
-            }
-            if (typeof pg === 'undefined') {
-                pg = $scope.page;
-            }
-            $window.location = "/projects?ordering=" + ord
-                    + "&ascending=" + (ord === $scope.ordering
+            $window.location = "/projects?ordering=" + ordering
+                    + "&ascending=" + (ordering === $scope.ordering
                             ? !$scope.ascending : true)
-                    + "&page=" + pg;
+                    + "&page=" + page;
         }
 
         /**

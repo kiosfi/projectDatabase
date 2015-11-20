@@ -104,8 +104,17 @@ module.exports = function (Projects) {
         /**
          * Gets all projects.
          *
-         * @param {type} req
-         * @param {type} res
+         * @param {type} req    The request object. It should contain the
+         * following GET-parameters: <tt>ordering</tt>, <tt>ascending</tt>, and
+         * <tt>page</tt>. The results will be sorted primarily by
+         * <tt>ordering</tt> and in ascending order if <tt>ascending</tt> was
+         * "true". Additionally, this function will take care of paging the
+         * results and only displaying the page requested with <tt>page</tt>.
+         * @param {type} res    The response object. The results of this query
+         * will be stored as JSON objects consisting of the form
+         * {_id: X_1, project_ref: X_2, organisation: {_id: Y_1, name: Y_2},
+         * title: X_3, state: X_4}, where X_1 .. X_4 are values from from
+         * Project schema and Y_1, Y_2 are from Organisation schema.
          * @returns {undefined}
          */
         getProjects: function (req, res) {
@@ -121,14 +130,24 @@ module.exports = function (Projects) {
             if (typeof page === 'undefined') {
                 page = 1;
             }
+
             var pageSize = 10;
+
+            // We want to sort organisations by title, not by _id:
+            if (ordering === 'organisation') {
+                ordering = 'organisation.title';
+            }
             var orderingJSON = {};
-            orderingJSON[ordering] = ascending ? 1 : -1;
-            if (ordering !== "title") {
+            orderingJSON[ordering] = ascending === "true" ? 1 : -1;
+
+            // Secondary sorting predicate will be title, except for when the
+            // primary was.
+            if (ordering !== 'title') {
                 orderingJSON["title"] = 1;
             } else {
                 orderingJSON["project_ref"] = 1;
             }
+            console.log(JSON.stringify(orderingJSON));
 
             Project.find({}, {_id: 1, project_ref: 1, title: 1, state: 1,
                 organisation: 1}
