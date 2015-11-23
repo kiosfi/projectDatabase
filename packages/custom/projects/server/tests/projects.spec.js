@@ -71,7 +71,9 @@ describe('<Unit Test>', function () {
                 "legal_status": "legal status",
                 "history_status": "history status",
                 "int_links": "international links",
-                "nat_links": "local human rights org",
+                "nat_local_links": "local human rights org",
+                "description": "description for organisation .....",
+                "other_funding": "other funders",
                 "bank_account": bank_account});
             organisation.save();
             project1 = new Project(
@@ -85,10 +87,6 @@ describe('<Unit Test>', function () {
                         "duration_months": 30,
                         "description": "A short description of project",
                         "description_en": "Description in english",
-                        "categories": [
-                            "naiset",
-                            "yleiset ihmisoikeudet"
-                        ],
                         "background": "Project background",
                         "beneficiaries": "The project benefits...",
                         "gender_aspect": "Gender aspects include...",
@@ -110,9 +108,6 @@ describe('<Unit Test>', function () {
                         "duration_months": 12,
                         "description": "A short description of project",
                         "description_en": "Description in english",
-                        "categories": [
-                            "lapset"
-                        ],
                         "background": "Project background 2",
                         "beneficiaries": "The project benefits such and such",
                         "gender_aspect": "Gender aspects include this and that",
@@ -190,7 +185,9 @@ describe('<Unit Test>', function () {
                     "legal_status": "non-profit",
                     "history_status": "history status",
                     "int_links": "international links",
-                    "nat_links": "local human rights org 2",
+                    "nat__local_links": "local human rights org 2",
+                    "description": "description for organisation .....",
+                    "other_funding": "other funders",
                     "bank_account": bank_account});
                 bank_account3 = new BankAccount({
                     "bank_contact_details": "Bank Branch, address",
@@ -207,9 +204,6 @@ describe('<Unit Test>', function () {
                             "duration_months": 19,
                             "description": "A short description of project",
                             "description_en": "Description in english",
-                            "categories": [
-                                "yleiset ihmisoikeudet"
-                            ],
                             "background": "Project background 3",
                             "beneficiaries": "The project benefits such and such",
                             "gender_aspect": "Gender aspects include this and that",
@@ -289,7 +283,9 @@ describe('<Unit Test>', function () {
                     "legal_status": "legal status",
                     "history_status": "history status",
                     "int_links": "international links",
-                    "nat_links": "local human rights org 4",
+                    "nat_local_links": "local human rights org 4",
+                    "description": "description for organisation .....",
+                    "other_funding": "other funders",
                     "bank_account": bank_account4});
 
                 bank_account4 = new BankAccount({
@@ -310,7 +306,6 @@ describe('<Unit Test>', function () {
                             "duration_months": 29,
                             "description": "A short description of project",
                             "description_en": "Description in english",
-                            "categories": [],
                             "background": "Project background 3",
                             "beneficiaries": "The project benefits such and such",
                             "gender_aspect": "Gender aspects include this and that",
@@ -332,7 +327,8 @@ describe('<Unit Test>', function () {
                 });
             });
 
-            it('should be able to save project where data has scandic letters', function(done) {
+            it('should be able to save project where data has scandic letters', function (done) {
+
                 this.timeout(10000);
 
                 project3.title = 'Ääkkönen';
@@ -351,10 +347,10 @@ describe('<Unit Test>', function () {
 
         });
 
-        describe('Method byOrg', function() {
-            it('should get projects where given organisation is the organisation', function(done) {
+        describe('Method byOrg', function () {
+            it('should get projects where given organisation is the organisation', function (done) {
                 this.timeout(10000);
-                return Project.find({organisation: organisation}).exec(function(err, data) {
+                return Project.find({organisation: organisation}).exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
                     done();

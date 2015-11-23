@@ -8,8 +8,8 @@
  */
 
 angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams',
-    '$location', '$window', '$http', 'Global', 'Projects', 'MeanUser', 'Circles',
-    function ($scope, $stateParams, $location, $window, $http, Global, Projects, MeanUser, Circles) {
+    '$location', '$window', '$http', 'Global', 'Projects', 'MeanUser', 'Circles', 'Organisations',
+    function ($scope, $stateParams, $location, $window, $http, Global, Projects, MeanUser, Circles, Organisations) {
         $scope.global = Global;
 
         $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
@@ -55,18 +55,18 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
-        $scope.convertDate = function(day, month, year) {
-          var parsed = new Date(year + "-" + month + "-" + day);
-          var d = parsed.getDate();
-          var m = parsed.getMonth() + 1;
-          var y = parsed.getFullYear();
-          if (d < 10) {
-            d = '0' + d;
-          }
-          if (m < 10) {
-            m = '0' + m;
-          }
-          return (d + "-" + m + "-" + y);
+        $scope.convertDate = function (day, month, year) {
+            var parsed = new Date(year + "-" + month + "-" + day);
+            var d = parsed.getDate();
+            var m = parsed.getMonth() + 1;
+            var y = parsed.getFullYear();
+            if (d < 10) {
+                d = '0' + d;
+            }
+            if (m < 10) {
+                m = '0' + m;
+            }
+            return (d + "-" + m + "-" + y);
         };
 
         $scope.hasAuthorization = function (project) {
@@ -75,16 +75,43 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             return MeanUser.isAdmin;
         };
 
+        /*
+         * Creates new project by checking if organisation already exists (i.e. organisation 
+         * has been selected from dropdown list) or if organisation is new. 
+         * If organisation is new, first creates new organisation by calling
+         * organisation server-side controller and after that creates project.
+         * If organisation is selected from list, uses existing organisation._id and 
+         * creates project. 
+         * 
+         * @param {type} isValid checks if project creation form is valid
+         * @returns {undefined}
+         */
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
-                project.categories = $scope.categorySelection;
-                project.$save(function (response) {
-                    $location.path('projects/' + response._id);
-                });
+                if ($scope.newOrg) {
+                    var org = new Organisations($scope.project.organisation);
 
-                $scope.project = {};
+                    org.$save(function (response) {
+                        var orgId = response._id;
+                        project.organisation = orgId;
 
+                        project.$save(function (response) {
+                            $location.path('projects/' + response._id);
+                        });
+
+                        $scope.project = {};
+                    });
+
+                } else {
+                    project.organisation = $scope.project.listOrganisation;
+
+                    project.$save(function (response) {
+                        $location.path('projects/' + response._id);
+                    });
+
+                    $scope.project = {};
+                }
             } else {
                 $scope.submitted = true;
             }
@@ -143,26 +170,26 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.addReviewState = function (isValid) {
-          if (isValid) {
-            var project = $scope.project;
-            project.state = $scope.global.newState;
-            project.$addReview(function (response) {
-                $location.path('projects/' + project._id);
-            });
-          }
+            if (isValid) {
+                var project = $scope.project;
+                project.state = $scope.global.newState;
+                project.$addReview(function (response) {
+                    $location.path('projects/' + project._id);
+                });
+            }
 
         };
 
         $scope.addApprovedState = function (isValid) {
-          if (isValid) {
-            var project = $scope.project;
-            project.approved.themes = $scope.themeSelection;
-            project.approved.methods = $scope.addedMethods;
-            project.state = $scope.global.newState;
-            project.$addApproved(function (response) {
-                $location.path('projects/' + response._id)
-            });
-          }
+            if (isValid) {
+                var project = $scope.project;
+                project.approved.themes = $scope.themeSelection;
+                project.approved.methods = $scope.addedMethods;
+                project.state = $scope.global.newState;
+                project.$addApproved(function (response) {
+                    $location.path('projects/' + response._id)
+                });
+            }
 
         };
 
@@ -179,99 +206,99 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.addSignedState = function (isValid) {
-          if (isValid) {
+            if (isValid) {
 
-            var signed_date = $scope.convertDate($scope.signed_date.day, $scope.signed_date.month, $scope.signed_date.year)
-            var project = $scope.project;
-            project.signed.signed_date = signed_date;
+                var signed_date = $scope.convertDate($scope.signed_date.day, $scope.signed_date.month, $scope.signed_date.year)
+                var project = $scope.project;
+                project.signed.signed_date = signed_date;
 
-            $scope.parsedDeadlines = [];
-            $scope.parsedPlannedPayments = [];
+                $scope.parsedDeadlines = [];
+                $scope.parsedPlannedPayments = [];
 
-            var plpms = $scope.plannedPayments;
+                var plpms = $scope.plannedPayments;
 
-            for (var i = 0; i < plpms.length; i++) {
-              var pp = $scope.convertDate(plpms[i].day, plpms[i].month, plpms[i].year);
-              $scope.parsedPlannedPayments.push({date: pp, sum_eur: plpms[i].sum_eur, sum_local: plpms[i].sum_local})
+                for (var i = 0; i < plpms.length; i++) {
+                    var pp = $scope.convertDate(plpms[i].day, plpms[i].month, plpms[i].year);
+                    $scope.parsedPlannedPayments.push({date: pp, sum_eur: plpms[i].sum_eur, sum_local: plpms[i].sum_local})
+                }
+                project.signed.planned_payments = $scope.parsedPlannedPayments;
+
+                var dls = $scope.deadlines;
+
+                for (var i = 0; i < dls.length; i++) {
+                    var dl = $scope.convertDate(dls[i].day, dls[i].month, dls[i].year);
+                    $scope.parsedDeadlines.push({report: dls[i].report, date: dl});
+                }
+                project.signed.intreport_deadlines = $scope.parsedDeadlines;
+
+                project.state = $scope.global.newState;
+                project.$addSigned(function (response) {
+                    $location.path('projects/' + response._id);
+                });
             }
-            project.signed.planned_payments = $scope.parsedPlannedPayments;
-
-            var dls = $scope.deadlines;
-
-            for (var i = 0; i < dls.length; i++) {
-              var dl = $scope.convertDate(dls[i].day, dls[i].month, dls[i].year);
-              $scope.parsedDeadlines.push({report: dls[i].report, date: dl});
-            }
-            project.signed.intreport_deadlines = $scope.parsedDeadlines;
-
-            project.state = $scope.global.newState;
-            project.$addSigned(function (response) {
-                $location.path('projects/' + response._id);
-            });
-          }
 
         };
 
         $scope.addPaymentInfo = function (isValid) {
-          if (isValid) {
-            var project = $scope.project;
-            var index = project.payments.length;
-            if (index === undefined) {
-                project.payment.paymentNumber = 1;
-            } else {
-                project.payment.payment_number = project.payments.length + 1;
-            }
+            if (isValid) {
+                var project = $scope.project;
+                var index = project.payments.length;
+                if (index === undefined) {
+                    project.payment.paymentNumber = 1;
+                } else {
+                    project.payment.payment_number = project.payments.length + 1;
+                }
 
-            project.$addPayment(function (response) {
-                $window.location.reload();
-            });
-          }
+                project.$addPayment(function (response) {
+                    $window.location.reload();
+                });
+            }
 
         };
 
         $scope.addIntReportState = function (isValid) {
-          if (isValid) {
-            var project = $scope.project;
-            project.state = $scope.global.newState;
-            project.intermediary_report.themes = $scope.themeSelection;
-            project.intermediary_report.methods = $scope.addedMethods;
-            project.intermediary_report.objectives = $scope.objectiveComments;
-            var index = project.intermediary_reports.length;
-            if (index === undefined) {
-                project.intermediary_report.reportNumber = 1;
-            } else {
-                project.intermediary_report.reportNumber = project.intermediary_reports.length + 1;
-            }
+            if (isValid) {
+                var project = $scope.project;
+                project.state = $scope.global.newState;
+                project.intermediary_report.themes = $scope.themeSelection;
+                project.intermediary_report.methods = $scope.addedMethods;
+                project.intermediary_report.objectives = $scope.objectiveComments;
+                var index = project.intermediary_reports.length;
+                if (index === undefined) {
+                    project.intermediary_report.reportNumber = 1;
+                } else {
+                    project.intermediary_report.reportNumber = project.intermediary_reports.length + 1;
+                }
 
-            project.$addIntReport(function (response) {
-                $location.path('projects/' + response._id);
-            });
-          }
+                project.$addIntReport(function (response) {
+                    $location.path('projects/' + response._id);
+                });
+            }
 
         };
 
         $scope.addEndReportState = function (isValid) {
-          if (isValid) {
-            var project = $scope.project;
-            project.state = $scope.global.newState;
-            project.end_report.themes = $scope.themeSelection;
-            project.end_report.methods = $scope.addedMethods;
-            project.end_report.objectives = $scope.objectiveComments;
-            project.$addEndReport(function (response) {
-                $location.path('projects/' + response._id);
-            });
-          }
+            if (isValid) {
+                var project = $scope.project;
+                project.state = $scope.global.newState;
+                project.end_report.themes = $scope.themeSelection;
+                project.end_report.methods = $scope.addedMethods;
+                project.end_report.objectives = $scope.objectiveComments;
+                project.$addEndReport(function (response) {
+                    $location.path('projects/' + response._id);
+                });
+            }
 
         };
 
         $scope.addEndedState = function (isValid) {
-          if (isValid) {
-            var project = $scope.project;
-            project.state = $scope.global.newState;
-            project.$addEnded(function (response) {
-                $location.path('projects/' + response._id)
-            });
-          }
+            if (isValid) {
+                var project = $scope.project;
+                project.state = $scope.global.newState;
+                project.$addEnded(function (response) {
+                    $location.path('projects/' + response._id)
+                });
+            }
 
         };
 
@@ -301,6 +328,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             $scope.addedRejections.splice(-1, 1);
         };
 
+
         $scope.addPlannedPayment = function () {
             $scope.plannedPayments.push({day: '', month: '', year: '', sum_eur: '', sum_local: ''});
         };
@@ -315,6 +343,20 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.removeDeadline = function () {
             $scope.deadlines.splice(-1, 1);
+        }
+
+
+        $scope.addNewOrg = function () {
+            $scope.newOrg = true;
+            $scope.orgs = null;
+        };
+
+        $scope.addOrgFromDb = function () {
+            $scope.newOrg = false;
+            Organisations.query(function (organisations) {
+                $scope.orgs = organisations;
+            });
+
         };
 
 
