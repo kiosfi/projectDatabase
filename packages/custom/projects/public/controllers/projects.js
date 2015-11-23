@@ -412,17 +412,27 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.pages;
 
         /**
-         * Updates the ordering and page number and reloads the page.
+         * Updates the page number and reloads the view.
          *
-         * @param {type} ordering   The ordering predicate (eg. "project_ref").
-         * @param {type} page       The page number.
+         * @param {String} page Number of the page to be displayed.
          */
-        $scope.update = function(ordering, page) {
+        $scope.updatePage = function(page) {
+            $window.location = '/projects?ordering=' + $scope.ordering
+                    + '&ascending=' + $scope.ascending
+                    + '&page=' + page;
+        };
+
+        /**
+         * Updates the ordering and reloads the view.
+         *
+         * @param {String} ordering The ordering predicate (eg. "project_ref").
+         */
+        $scope.updateOrdering = function(ordering) {
             $window.location = '/projects?ordering=' + ordering
                     + '&ascending=' + (ordering === $scope.ordering
                             ? !$scope.ascending : true)
-                    + '&page=' + page;
-        }
+                    + '&page=' + $scope.page;
+        };
 
         /**
          * Calculates the number of and links to pages and writes the output to

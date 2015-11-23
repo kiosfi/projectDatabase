@@ -16,7 +16,7 @@
             <thead>
                 <tr>
                     <th class="col-md-1">
-                        <a href="" ng-click="update('project_ref', page)">
+                        <a href="" ng-click="updateOrdering('project_ref')">
                             Tunnus
                         </a>
                         <span class="sortorder"
@@ -24,7 +24,7 @@
                               ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-5">
-                        <a href="" ng-click="update('title', page)">
+                        <a href="" ng-click="updateOrdering('title')">
                             Nimi
                         </a>
                         <span class="sortorder"
@@ -32,7 +32,7 @@
                               ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-2">
-                        <a href="" ng-click="update('state', page)">
+                        <a href="" ng-click="updateOrdering('state')">
                             Tila
                         </a>
                         <span class="sortorder"
@@ -40,7 +40,7 @@
                               ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-4">
-                        <a href="" ng-click="update('organisation', page)">
+                        <a href="" ng-click="updateOrdering('organisation')">
                             Järjestö
                         </a>
                         <span class="sortorder"
@@ -62,8 +62,8 @@
         </table>
         <ul id="pagination" class="pagination pagination-sm"
             data-ng-init="paginate()">
-            <li ng-repeat="page in pages">
-                <a href="" ng-click="update(ordering, page.number)">{{page.number}}</a>
+            <li ng-repeat="pg in pages" ng-class="pg.number == page ? 'active' : ''">
+                <a href="" ng-click="updatePage(pg.number)">{{pg.number}}</a>
             </li>
         </ul>
     </article>
