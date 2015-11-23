@@ -35,9 +35,9 @@ describe('Project create page', function () {
         element(by.model('project.organisation.email')).sendKeys('org@test.com');
         element(by.model('project.organisation.website')).sendKeys('www.testorg.com');
         //element(by.model('project.status')).element(by.cssContainingText('option', 'rekisteröity')).click();
-        element(by.model('project.funding.applied_curr_local')).sendKeys(100000);
-        element(by.model('project.funding.applied_curr_eur')).sendKeys(19000);
-        element(by.model('project.duration_months')).sendKeys(20);
+        element(by.model('project.funding.applied_curr_local')).sendKeys('100000');
+        element(by.model('project.funding.applied_curr_eur')).sendKeys('19000');
+        element(by.model('project.duration_months')).sendKeys('20');
         element(by.model('project.description')).sendKeys('Short description of project');
         element(by.model('project.description_en')).sendKeys('Short summary in english');
         element(by.model('project.background')).sendKeys('Test projects background');
@@ -77,19 +77,19 @@ describe('Project create page', function () {
         helpers.logout();
 
     });
-    
+
     it('should create project with valid data filled in form and organisation selected from list', function () {
         helpers.login();
-        
+
         element(by.linkText("Hankkeen lisäys")).click();
         element(by.linkText("Hankkeen nimi, koordinaattori ja järjestö")).click();
         element(by.linkText("Hankkeen perustiedot")).click();
         element(by.linkText("Hankkeen lisätiedot")).click();
-        
+
         element(by.model('project.title')).sendKeys('Test title 2');
         element(by.model('project.coordinator')).element(by.cssContainingText('option', 'Teppo Tenhunen')).click();
         element(by.model('project.listOrganisation')).element(by.cssContainingText('option', 'Human rights org')).click();
-        
+
         element(by.model('project.funding.applied_curr_local')).sendKeys('300000');
         element(by.model('project.funding.applied_curr_eur')).sendKeys('10000');
         element(by.model('project.duration_months')).sendKeys('22');
@@ -104,7 +104,7 @@ describe('Project create page', function () {
         element(by.model('project.other_donors_proposed')).sendKeys('Other donors');
         element(by.model('project.region')).sendKeys('Asia');
         element(by.model('project.dac')).sendKeys('12345677');
-        
+
         element(by.buttonText("Lähetä")).click();
         var header = element(by.id('projtitle'));
         expect(header.getText()).toContain('Test title');
@@ -116,7 +116,7 @@ describe('Project create page', function () {
         alertDialog.accept();
 
         helpers.logout();
-        
+
     });
 
     it('should not create project with empty form', function () {

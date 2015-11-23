@@ -12,8 +12,8 @@ describe('Adding payment in project view', function () {
         element(by.linkText("Project A")).click();
 
         element(by.model('project.payment.payment_date')).sendKeys('12.12.2015');
-        element(by.model('project.payment.sum_eur')).sendKeys(2000);
-        element(by.model('project.payment.sum_local')).sendKeys(4000);
+        element(by.model('project.payment.sum_eur')).sendKeys('2000');
+        element(by.model('project.payment.sum_local')).sendKeys('4000');
 
         element(by.buttonText('Tallenna')).click();
 
@@ -31,7 +31,7 @@ describe('Adding payment in project view', function () {
         element(by.linkText("Project A")).click();
 
         element(by.model('project.payment.payment_date')).sendKeys('12.12.2015');
-        element(by.model('project.payment.sum_local')).sendKeys("4000");
+        element(by.model('project.payment.sum_local')).sendKeys('4000');
 
         var btn = element(by.buttonText('Tallenna'));
         expect(btn.isEnabled()).toBe(false);

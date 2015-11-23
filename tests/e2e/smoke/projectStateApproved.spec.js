@@ -19,8 +19,10 @@ describe('Changing project state to "approved"', function () {
         element(by.model('project.approved.approved_date')).sendKeys('13.11.2015');
         element(by.model('project.approved.approved_by')).element(by.cssContainingText('option', 'Halko')).click();
         element(by.model('project.approved.board_notified')).sendKeys('15.11.2015');
-        element(by.model('project.approved.granted_sum.granted_curr_eur')).sendKeys(12000);
-        element(by.model('project.approved.granted_sum.granted_curr_local')).sendKeys(111000);
+        element(by.model('project.approved.granted_sum.granted_curr_eur'))
+                .sendKeys('12000');
+        element(by.model('project.approved.granted_sum.granted_curr_local'))
+                .sendKeys('111000');
 
         var checkBoxes = element.all(by.css('input[type=checkbox]'));
         checkBoxes.get(2).click();

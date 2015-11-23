@@ -30,6 +30,7 @@ describe('Changing project state to "in review"', function () {
         helpers.login();
 
         element(by.linkText("Hankelistaus")).click();
+        element(by.id("page-2")).click();
         element(by.linkText("Worklife rights")).click();
 
         element(by.model('project.changeTo')).element(by.cssContainingText('option', 'käsittelyssä')).click();
