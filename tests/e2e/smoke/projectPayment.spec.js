@@ -18,7 +18,6 @@ describe('Adding payment in project view', function () {
         element(by.model('project.payment.sum_local')).sendKeys(4000);
 
         element(by.buttonText('Tallenna')).click();
-        browser.pause();
 
         element(by.buttonText('Maksatus')).click();
 
