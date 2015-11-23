@@ -5,9 +5,15 @@ describe('Changing project state to "signed"', function () {
 //
 //    });
 
-    it('should change state if valid data filled in form', function () {
+    beforeAll(function() {
         helpers.login();
+    })
 
+    afterAll(function() {
+        helpers.logout();
+    });
+
+    it('should change state if valid data filled in form', function () {
         element(by.linkText("Hankelistaus")).click();
         element(by.linkText("Project nr 3")).click();
 
@@ -46,13 +52,9 @@ describe('Changing project state to "signed"', function () {
         expect(browser.getCurrentUrl()).toContain('/f2e7c9aeb017189911996768');
         var state = element(by.className('tila')).getText();
         expect(state).toContain('allekirjoitettu');
-
-        helpers.logout();
     });
 
     it('should not change state if user clicks "cancel"-button in change-view', function() {
-        helpers.login();
-
         element(by.linkText("Hankelistaus")).click();
         element(by.id("page-2")).click();
         element(by.linkText("Project for children")).click();
@@ -67,8 +69,6 @@ describe('Changing project state to "signed"', function () {
         expect(browser.getCurrentUrl()).toContain('/f2c7d9aeb017189911996768');
         var state = element(by.className('tila')).getText();
         expect(state).toContain('hyväksytty');
-
-        helpers.logout();
     });
 
     it('should show login page if trying to load "/projectId/change -view', function() {
@@ -76,5 +76,6 @@ describe('Changing project state to "signed"', function () {
         browser.get('/projects/f2c7d9aeb017189911996768/change');
 
         expect(browser.getCurrentUrl()).toContain('/auth/login');
+        helpers.login();
     });
 });

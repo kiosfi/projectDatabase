@@ -79,7 +79,7 @@ module.exports = function (Projects) {
                         }
                         res.json(projects)
                     });
-        },/**
+        }, /**
          * Gets all projects.
          *
          * @param {type} req    The request object. It should contain the
@@ -130,17 +130,17 @@ module.exports = function (Projects) {
             Project.find({}, {_id: 1, project_ref: 1, title: 1, state: 1,
                 organisation: 1}
             ).sort(orderingJSON)
-            .skip((page - 1) * pageSize)
-            .limit(pageSize)
-            .populate('organisation', {_id: 1, name : 1})
-            .exec(function (err, result) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Hankkeita ei voi näyttää'
+                    .skip((page - 1) * pageSize)
+                    .limit(pageSize)
+                    .populate('organisation', {_id: 1, name: 1})
+                    .exec(function (err, result) {
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Hankkeita ei voi näyttää'
+                            });
+                        }
+                        res.json(result);
                     });
-                }
-                res.json(result);
-            });
         },
         /**
          * Writes the number of projects present at the database as a json
@@ -151,7 +151,7 @@ module.exports = function (Projects) {
          * @param {type} res Response object.
          */
         countProjects: function (req, res) {
-            Project.count({}, function(error, result) {
+            Project.count({}, function (error, result) {
                 res.json({projectCount: result});
             });
         },
@@ -163,7 +163,7 @@ module.exports = function (Projects) {
                         error: 'Tiloja ei voi näyttää'
                     });
                 }
-                res.json(states)
+                res.json(states);
             });
         },
         /*
@@ -297,7 +297,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         addPayment: function (req, res) {
             var payment = new Payment(req.body.payment);
             payment.save(function (err) {
@@ -328,9 +327,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
-
-
         /*
          * Moves a project to IntReport state (or adds another) and saves the state object to
          * its collection.

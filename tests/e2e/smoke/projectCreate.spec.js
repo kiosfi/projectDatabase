@@ -3,16 +3,25 @@ var helpers = require('../helpers.e2e');
 
 describe('Project create page', function () {
 
+    beforeAll(function() {
+        helpers.login();
+    })
+
+    afterAll(function() {
+        helpers.logout();
+    });
+
     it('should not show create page if not logged in', function () {
+        helpers.logout();
 
         browser.get('/projects/create');
 
         expect(browser.getCurrentUrl()).toContain('/auth/login');
+
+        helpers.login();
     });
 
     it('should create project and new organisation with valid data filled in form', function () {
-        helpers.login();
-
         element(by.linkText("Hankkeen lisäys")).click();
         element(by.linkText("Hankkeen nimi, koordinaattori ja järjestö")).click();
         element(by.linkText("Hankkeen perustiedot")).click();
@@ -74,13 +83,9 @@ describe('Project create page', function () {
         var alertDialog = browser.switchTo().alert();
         alertDialog.accept();
 
-        helpers.logout();
-
     });
 
     it('should create project with valid data filled in form and organisation selected from list', function () {
-        helpers.login();
-
         element(by.linkText("Hankkeen lisäys")).click();
         element(by.linkText("Hankkeen nimi, koordinaattori ja järjestö")).click();
         element(by.linkText("Hankkeen perustiedot")).click();
@@ -115,13 +120,9 @@ describe('Project create page', function () {
         var alertDialog = browser.switchTo().alert();
         alertDialog.accept();
 
-        helpers.logout();
-
     });
 
     it('should not create project with empty form', function () {
-        helpers.login();
-
         element(by.linkText("Hankkeen lisäys")).click();
         element(by.linkText("Hankkeen nimi, koordinaattori ja järjestö")).click();
         element(by.linkText("Hankkeen perustiedot")).click();
@@ -129,7 +130,6 @@ describe('Project create page', function () {
         element(by.buttonText("Lähetä")).click();
 
         expect(browser.getCurrentUrl()).toContain('/projects/create');
-        helpers.logout();
     });
 
 });

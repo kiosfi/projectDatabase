@@ -66,9 +66,10 @@
         </table>
         <ul id="pagination" class="pagination pagination-sm"
             data-ng-init="paginate()">
-            <li id="page-{{pg.number}}" ng-repeat="pg in pages"
+            <li ng-repeat="pg in pages"
                 ng-class="pg.number == page ? 'active' : ''">
-                <a href="" ng-click="updatePage(pg.number)">{{pg.number}}</a>
+                <a id="page-{{pg.number}}" href=""
+                   ng-click="updatePage(pg.number)">{{pg.number}}</a>
             </li>
         </ul>
     </article>

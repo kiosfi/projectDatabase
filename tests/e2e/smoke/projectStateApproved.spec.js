@@ -4,13 +4,19 @@ describe('Changing project state to "approved"', function () {
 //    it('should not show change-page when not logged in', function (done) {
 //
 //    });
+    beforeAll(function() {
+        helpers.login();
+    })
+
+    afterAll(function() {
+        helpers.logout();
+    });
 
     it('should change state if valid data filled in form', function () {
-        helpers.login();
-
         element(by.linkText("Hankelistaus")).click();
         element(by.linkText("Minority rights")).click();
 
+//        browser.pause();
         element(by.model('project.changeTo')).element(by.cssContainingText('option', 'hyväksytty')).click();
         element(by.id('st')).click();
 
@@ -40,13 +46,9 @@ describe('Changing project state to "approved"', function () {
         expect(browser.getCurrentUrl()).toContain('/5c9ed9f94250406da7a7a41b');
         var state = element(by.css('h3')).element(by.className('tila')).getText();
         expect(state).toContain('hyväksytty');
-
-        helpers.logout();
     });
 
     it('should not change state if user clicks "cancel"-button in change-view', function() {
-        helpers.login();
-
         element(by.linkText("Hankelistaus")).click();
         element(by.linkText("Elder rights")).click();
 
@@ -60,8 +62,6 @@ describe('Changing project state to "approved"', function () {
         expect(browser.getCurrentUrl()).toContain('/5c9ed9f94250406da7a7a111');
         var state = element(by.css('h3')).element(by.className('tila')).getText();
         expect(state).toContain('käsittelyssä');
-
-        helpers.logout();
     });
 
     it('should show login page if trying to load "/projectId/change -view', function() {
@@ -69,5 +69,6 @@ describe('Changing project state to "approved"', function () {
         browser.get('/projects/5c9ed9f94250406da7a7a111/change');
 
         expect(browser.getCurrentUrl()).toContain('/auth/login');
+        helpers.login();
     });
 });

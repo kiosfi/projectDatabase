@@ -130,7 +130,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 ordering = 'project_ref';
             }
             if (typeof ascending === 'undefined') {
-                ascending = true;
+                ascending = 'true';
             }
             if (typeof page === 'undefined') {
                 page = 1;
