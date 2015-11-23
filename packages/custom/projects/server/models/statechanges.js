@@ -147,9 +147,6 @@ var IntReportSchema = new Schema({
         type: Number,
         required: true
     },
-    themes: {
-        type: Array
-    },
     methods: {
         type: Array
     },
