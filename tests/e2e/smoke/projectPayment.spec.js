@@ -11,13 +11,17 @@ describe('Adding payment in project view', function () {
         element(by.linkText("Hankelistaus")).click();
         element(by.linkText("Project A")).click();
 
-        element(by.model('project.payment.payment_date')).sendKeys('12.12.2015');
+        element(by.model('payment_day')).sendKeys(12);
+        element(by.model('payment_month')).sendKeys(12);
+        element(by.model('payment_year')).sendKeys(2015);
         element(by.model('project.payment.sum_eur')).sendKeys(2000);
         element(by.model('project.payment.sum_local')).sendKeys(4000);
 
         element(by.buttonText('Tallenna')).click();
+        browser.pause();
 
         element(by.buttonText('Maksatus')).click();
+
         var par = element(by.id('paid'));
         expect(par.getText()).toContain('1. Erä');
 
@@ -30,8 +34,9 @@ describe('Adding payment in project view', function () {
         element(by.linkText("Hankelistaus")).click();
         element(by.linkText("Project A")).click();
 
-        element(by.model('project.payment.payment_date')).sendKeys('12.12.2015');
-        element(by.model('project.payment.sum_local')).sendKeys("4000");
+        element(by.model('payment_day')).sendKeys('12');
+        element(by.model('payment_month')).sendKeys('12');
+        element(by.model('payment_year')).sendKeys('2015');
 
         var btn = element(by.buttonText('Tallenna'));
         expect(btn.isEnabled()).toBe(false);

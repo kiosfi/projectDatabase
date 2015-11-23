@@ -256,7 +256,9 @@ A form for project state change.
 
     <form name="signedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'allekirjoitettu'"  role="form" data-ng-submit="addSignedState(signedForm.$valid)" novalidate>
 
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12" ng-class="{
+                            'has-error'
+                            :  signedForm.signed_by.$invalid }">
             <label for="signed_by" class="col-md-2">Allekirjoittaja</label>
             <div class="col-md-10">
                 <input name="signed_by" type="text" class="form-control" data-ng-model="project.signed.signed_by" id="signed_by" placeholder="Sopimuksen allekirjoittajan nimi" required>
@@ -268,13 +270,19 @@ A form for project state change.
 
         <div class="form-group col-md-12">
             <label for="signed_date_day" class="col-md-2">Päivämäärä</label>
-            <div class="col-md-2" style="float:left;">
+            <div class="col-md-2" style="float:left;" ng-class="{
+                                'has-error'
+                                :  signedForm.signed_date_day.$invalid }">
                 <input name="signed_date_day" type="number" class="form-control" data-ng-model="signed_date.day" id="signed_date_day" placeholder="p" required>
             </div>
-            <div class="col-md-2" style="float:left;">
+            <div class="col-md-2" style="float:left;" ng-class="{
+                                'has-error'
+                                :  signedForm.signed_date_month.$invalid }">
                 <input name="signed_date_month" type="number" class="form-control" data-ng-model="signed_date.month" id="signed_date_month" placeholder="k" required>
             </div>
-            <div class="col-md-2" style="float:left;">
+            <div class="col-md-2" style="float:left;" ng-class="{
+                                'has-error'
+                                :  signedForm.signed_date_year.$invalid }">
                 <input name="signed_date_year" type="number" class="form-control" data-ng-model="signed_date.year" id="signed_date_year" placeholder="vvvv" required>
             </div>
             <div style="clear:both;">&nbsp;</div>
@@ -302,9 +310,6 @@ A form for project state change.
         <label for="plannedPaymentSelection" class="col-md-3">Maksusuunnitelma</label>
         <div class="form-group col-md-12" id="plPayments">
             <div class="col-md-12" name="plannedPaymentSelection" id="plannedPaymentSelection" data-ng-repeat="plannedPayment in plannedPayments">
-              <div ng-show="signedForm.$invalid" class="help-block">
-                  <p ng-show="signedForm.$error.required">Täytä kaikki kentät!</p>
-              </div>
               <div>
                 <label for="plannedDay" class="col-md-2 control-label">Päivämäärä</label>
                 <div class="col-md-2" style="float:left;">

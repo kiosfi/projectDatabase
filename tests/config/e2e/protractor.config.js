@@ -10,11 +10,11 @@ exports.config = {
     ],
     multiCapabilities: [
         {
-            browserName: 'chrome'
-        },
-        {
             browserName: 'firefox'
         }
+        /*{
+            browserName: 'firefox'
+        }*/
     ],
     onPrepare: function () {
         //Creates independent results files for each browser

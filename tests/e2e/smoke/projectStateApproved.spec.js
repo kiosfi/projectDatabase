@@ -16,9 +16,13 @@ describe('Changing project state to "approved"', function () {
 
         expect(browser.getCurrentUrl()).toContain('/change');
 
-        element(by.model('project.approved.approved_date')).sendKeys('13.11.2015');
+        element(by.model('approved_day')).sendKeys('13');
+        element(by.model('approved_month')).sendKeys('11');
+        element(by.model('approved_year')).sendKeys('2015');
         element(by.model('project.approved.approved_by')).element(by.cssContainingText('option', 'Halko')).click();
-        element(by.model('project.approved.board_notified')).sendKeys('15.11.2015');
+        element(by.model('notified_day')).sendKeys('15');
+        element(by.model('notified_month')).sendKeys('11');
+        element(by.model('notified_year')).sendKeys('2015');
         element(by.model('project.approved.granted_sum.granted_curr_eur')).sendKeys(12000);
         element(by.model('project.approved.granted_sum.granted_curr_local')).sendKeys(111000);
 
