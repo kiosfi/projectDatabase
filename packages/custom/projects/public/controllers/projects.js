@@ -65,7 +65,7 @@ angular.module('mean.projects').controller('ProjectsController',
                 page = 1;
             }
             $scope.ordering  = ordering;
-            $scope.ascending = ascending === "true";
+            $scope.ascending = ascending === 'true';
             $scope.page      = page;
             Projects.query({
                     ordering:   ordering,
@@ -102,7 +102,7 @@ angular.module('mean.projects').controller('ProjectsController',
         };
 
         $scope.confirm = function (project) {
-            if (confirm("Haluatko varmasti poistaa hankkeen '" + project.title + "'?")) {
+            if (confirm('Haluatko varmasti poistaa hankkeen "' + project.title + '"?')) {
                 $scope.remove(project);
             }
         };
@@ -139,7 +139,7 @@ angular.module('mean.projects').controller('ProjectsController',
             }, function (project) {
                 $scope.project = project;
                 $scope.global.newState = changeTo;
-                $location.path('projects/' + project._id + "/change")
+                $location.path('projects/' + project._id + '/change');
             });
         };
 
@@ -147,7 +147,7 @@ angular.module('mean.projects').controller('ProjectsController',
          * The sorting predicate used in project listing. Initial value is
          * "project_ref".
          */
-        $scope.ordering = "project_ref";
+        $scope.ordering = 'project_ref';
 
         /**
          * <tt>true</tt> iff the projects will be listed in ascending order.
@@ -176,10 +176,10 @@ angular.module('mean.projects').controller('ProjectsController',
          * @param {type} page       The page number.
          */
         $scope.update = function(ordering, page) {
-            $window.location = "/projects?ordering=" + ordering
-                    + "&ascending=" + (ordering === $scope.ordering
+            $window.location = '/projects?ordering=' + ordering
+                    + '&ascending=' + (ordering === $scope.ordering
                             ? !$scope.ascending : true)
-                    + "&page=" + page;
+                    + '&page=' + page;
         }
 
         /**
@@ -193,13 +193,13 @@ angular.module('mean.projects').controller('ProjectsController',
                 var pageCount, numberOfPages, pagination;
                 pageCount = result.projectCount;
                 numberOfPages = Math.ceil(pageCount / $scope.pageSize);
-                pagination = document.getElementById("pagination");
+                pagination = document.getElementById('pagination');
                 $scope.pages = [];
                 for (var i = 1; i <= numberOfPages; ++i) {
-                    $scope.pages.push({number: i, url: "/projects"
-                                + "?ordering=" + $scope.ordering
-                                + "&ascending=" + $scope.ascending
-                                + "&page=" + i});
+                    $scope.pages.push({number: i, url: '/projects'
+                                + '?ordering=' + $scope.ordering
+                                + '&ascending=' + $scope.ascending
+                                + '&page=' + i});
                 }
             });
         };
