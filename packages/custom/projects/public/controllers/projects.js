@@ -364,7 +364,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.report = project.intermediary_reports[$stateParams.reportId - 1];
-                console.log(project.intermediary_reports[$stateParams.reportId - 1]);
             });
         };
 
