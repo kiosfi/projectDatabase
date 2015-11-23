@@ -150,17 +150,17 @@
                 <article class="proj">
                     <section class="proj-body">
                         <h5 class="proj-header" ng-show="project.approved.granted_sum.granted_curr_eur">Myönnetty avustus</h5>
-                        <p>Summa: {{project.approved.granted_sum.granted_curr_eur}} EUR ({{project.approved.granted_sum.granted_curr_local}} paikallista valuuttaa), 12.10.2014</p>
+                        <p>Summa: {{project.approved.granted_sum.granted_curr_eur}} EUR ({{project.approved.granted_sum.granted_curr_local}} paikallista valuuttaa), {{project.approved.approved_date | date:'dd-MM-yyyy'}}</p>
                     </section>
                     <br>
                     <h5 class="proj-header">Suunniteltu maksuaikataulu</h5>
                     <section class="proj-body" ng-repeat="planned_payment in project.signed.planned_payments">
-                        <p>{{project.signed.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur}} EUR ({{planned_payment.sum_local}} paikallista valuuttaa), {{planned_payment.date}}</p>
+                        <p>{{project.signed.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur}} EUR ({{planned_payment.sum_local}} paikallista valuuttaa), {{planned_payment.date | date:'dd-MM-yyyy'}}</p>
                     </section>
                     <br>
                     <h5 class="proj-header">Maksetut erät</h5>
                     <section class="proj-body" ng-repeat="payment in project.payments">
-                        <p id="paid">{{payment.payment_number}}. Erä: {{payment.sum_eur}} EUR ({{payment.sum_local}} paikallista valuuttaa), {{payment.payment_date}}</p>
+                        <p id="paid">{{payment.payment_number}}. Erä: {{payment.sum_eur}} EUR ({{payment.sum_local}} paikallista valuuttaa), {{payment.payment_date| date:'dd-MM-yyyy'}}</p>
                     </section>
                     <br>
                     <h5 class="proj-header">Maksettu</h5>
@@ -198,23 +198,42 @@
           <h5>Lisää maksutieto</h5>
           <form name="paymentForm" class="form-horizonal" role="form" data-ng-submit="addPaymentInfo(paymentForm.$valid)" novalidate>
 
-              <div class="form-group col-xs-12" ng-class="{
-                                  'has-error'
-                                  :  paymentForm.paymentDate.$invalid }">
-                  <label for="paymentDate" class="col-xs-2 control-label">Päiväys</label>
-                  <div class="col-xs-4">
-                      <input name="paymentDate" type="text" class="form-control" data-ng-model="project.payment.payment_date" id="paymentDate" placeholder="Päiväys" required></input>
+              <div class="form-group col-xs-12" id="PaymentDate">
+                <label for="paymentDate" class="col-xs-2 control-label">Päiväys</label>
+                <div id="paymentDate">
+                  <div class="col-xs-3" style="float:left;" ng-class="{
+                                      'has-error'
+                                      :  paymentForm.paymentDay.$invalid }">
+                      <input name="paymentDay" type="number" class="form-control" data-ng-model="payment_day" id="paymentDay" placeholder="p" required></input>
                   </div>
-                  <div ng-show="paymentForm.paymentDate.$invalid" class="help-block">
-                      <p ng-show="paymentForm.paymentDate.$error.required">Kenttä on pakollinen</p>
+                  <div class="col-xs-3" style="float:left;" ng-class="{
+                                      'has-error'
+                                      :  paymentForm.paymentMonth.$invalid }">
+                      <input name="paymentMonth" type="number" class="form-control" data-ng-model="payment_month" id="paymentMonth" placeholder="k" required></input>
                   </div>
+                  <div class="col-xs-3" style="float:left;" ng-class="{
+                                      'has-error'
+                                      :  paymentForm.paymentYear.$invalid }">
+                      <input name="paymentYear" type="number" class="form-control" data-ng-model="payment_year" id="paymentYear" placeholder="vvvv" required></input>
+                  </div>
+                  <div style="clear:both;">&nbsp;</div>
+                  <div ng-show="paymentForm.paymentDay.$invalid" class="help-block" >
+                      <p ng-show="paymentForm.paymentDay.$error.required">Päivä on pakollinen</p>
+                  </div>
+                  <div ng-show="paymentForm.paymentMonth.$invalid" class="help-block">
+                      <p ng-show="paymentForm.paymentMonth.$error.required">Kuukausi on pakollinen</p>
+                  </div>
+                  <div ng-show="paymentForm.paymentYear.$invalid" class="help-block">
+                      <p ng-show="paymentForm.paymentYear.$error.required">Vuosi on pakollinen</p>
+                  </div>
+                </div>
               </div>
 
               <div class="form-group col-xs-12" ng-class="{
                                   'has-error'
                                   :  paymentForm.paymentSumEUR.$invalid }">
                   <label for="paymentSumEUR" class="col-xs-2 control-label">Summa (EUR)</label>
-                  <div class="col-xs-4">
+                  <div class="col-xs-4" >
                       <input name="paymentSumEUR" type="number" class="form-control" data-ng-model="project.payment.sum_eur" id="paymentSumEUR" placeholder="Summa (EUR)" required></input>
                   </div>
                   <div ng-show="paymentForm.paymentSumEUR.$invalid" class="help-block">
@@ -267,7 +286,7 @@
         </section>
 
         <section ng-show="project.approved._id" class="proj-body">
-            <p><b>**Rekisteröity hyväksytyksi</b>: {{project.approved.date| date:'dd-MM-yyyy'}}
+            <p><b>**Rekisteröity hyväksytyksi</b>: {{project.approved.date | date:'dd-MM-yyyy'}}
             <button class="btn small-btn" onclick="toggleCollapse('visibilityApprovedinfo')">Tiedot</button></p>
             <span class="proj-left" id="visibilityApprovedinfo">
                 <h5>Muokkaaja:</h5>
@@ -275,9 +294,9 @@
                 <h5>Hyväksyjä:</h5>
                 <p>{{project.approved.approved_by}}</p>
                 <h5>Hyväksymis pvm:</h5>
-                <p>{{project.approved.approved_date}}</p>
+                <p>{{project.approved.approved_date | date:'dd-MM-yyyy'}}</p>
                 <h5>Hallitukselle tiedoksi:</h5>
-                <p>{{project.approved.board_notified}}</p>
+                <p>{{project.approved.board_notified | date:'dd-MM-yyyy'}}</p>
                 <h5>Hyväksytty summa:</h5>
                 <p>{{project.approved.granted_sum.granted_curr_eur}} € ({{project.approved.granted_sum.granted_curr_local}} paikallista valuuttaa)</p>
                 <h5>Teemat:</h5>
@@ -320,7 +339,7 @@
                 <p>{{project.signed.user}}, {{project.signed.date| date:'dd-MM-yyyy, HH:mm'}}</p>
                 <br>
                 <h5>Allekirjoitettu:</h5>
-                <p>{{project.signed.signed_by}}, <i>päivämäärä</i>: {{project.signed.signed_date}}</p>
+                <p>{{project.signed.signed_by}}, <i>päivämäärä</i>: {{project.signed.signed_date| date:'dd-MM-yyyy'}}</p>
             </span>
 
         </section>

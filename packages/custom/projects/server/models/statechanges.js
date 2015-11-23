@@ -42,14 +42,14 @@ var ApprovedSchema = new Schema({
         required: true
     },
     approved_date: {
-        type: String
+        type: Date
     },
     approved_by: {
         type: String,
         required: true
     },
     board_notified: {
-        type: String
+        type: Date
     },
     granted_sum: {
         granted_curr_local: {
@@ -103,7 +103,7 @@ var SignedSchema = new Schema({
         required: true
     },
     signed_date: {
-      type: String,
+      type: Date,
       required: true
     },
     planned_payments: {
@@ -121,7 +121,7 @@ var PaymentSchema = new Schema({
         required: true
     },
     payment_date: {
-        type: String,
+        type: Date,
         required: true
     },
     sum_eur: {

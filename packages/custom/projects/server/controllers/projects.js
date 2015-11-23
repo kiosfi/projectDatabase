@@ -104,8 +104,11 @@ module.exports = function (Projects) {
             });
         },
         /*
-         * Moves a project to review state and saves the state object to
-         * its collection.
+         * Updates project to contain data required in review state
+         * @param {type} req project object to be updated, sent from frontend
+         * @param {type} res project object after update
+         * @returns updated project object in json to frontend, or error if
+         *  updating not possible
          */
         addReview: function (req, res) {
             var in_review = new InReview(req.body.in_review);
@@ -171,8 +174,11 @@ module.exports = function (Projects) {
             });
         },
         /*
-         * Moves a project to rejected state and saves the state object to
-         * its collection.
+         * Updates project to contain data required in rejected state
+         * @param {type} req project object to be updated, sent from frontend
+         * @param {type} res project object after update
+         * @returns updated project object in json to frontend, or error if
+         *  updating not possible
          */
         addRejected: function (req, res) {
             var rejected = new Rejected(req.body.rejected);
@@ -203,8 +209,11 @@ module.exports = function (Projects) {
             });
         },
         /*
-         * Moves a project to signed state and saves the state object to
-         * its collection.
+         * Updates project to contain data required in signed state
+         * @param {type} req project object to be updated, sent from frontend
+         * @param {type} res project object after update
+         * @returns updated project object in json to frontend, or error if
+         *  updating not possible
          */
         addSigned: function (req, res) {
             var signed = new Signed(req.body.signed);
@@ -234,7 +243,13 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
+        /*
+         * Updates project to contain payment data
+         * @param {type} req project object to be updated, sent from frontend
+         * @param {type} res project object after update
+         * @returns updated project object in json to frontend, or error if
+         *  updating not possible
+         */
         addPayment: function (req, res) {
             var payment = new Payment(req.body.payment);
             payment.save(function (err) {
@@ -265,11 +280,13 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-          /*
-         * Moves a project to IntReport state (or adds another) and saves the state object to
-         * its collection.
+        /*
+         * Updates project to contain data required in intermediary report state
+         * @param {type} req project object to be updated, sent from frontend
+         * @param {type} res project object after update
+         * @returns updated project object in json to frontend, or error if
+         *  updating not possible
          */
-
         addIntReport: function (req, res) {
             var intReport = new IntReport(req.body.intermediary_report);
             intReport.user = req.user.name;
@@ -303,8 +320,11 @@ module.exports = function (Projects) {
             });
         },
         /*
-         * Moves a project to endReport state and saves the state object to
-         * its collection.
+         * Updates project to contain data required in end report state
+         * @param {type} req project object to be updated, sent from frontend
+         * @param {type} res project object after update
+         * @returns updated project object in json to frontend, or error if
+         *  updating not possible
          */
 
         addEndReport: function (req, res) {
@@ -340,8 +360,11 @@ module.exports = function (Projects) {
         },
 
         /*
-         * Moves a project to ended state and saves the state object to
-         * its collection.
+         * Updates project to contain data required in ended state
+         * @param {type} req project object to be updated, sent from frontend
+         * @param {type} res project object after update
+         * @returns updated project object in json to frontend, or error if
+         *  updating not possible
          */
         addEnded: function (req, res) {
             console.log(req.body);
@@ -360,7 +383,7 @@ module.exports = function (Projects) {
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
-                        error: 'Hankkeen päivitys hyväksytyksi epäonnistui.'
+                        error: 'Hankkeen päivitys päätetyksi epäonnistui.'
                     });
                 }
 

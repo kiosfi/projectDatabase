@@ -78,7 +78,7 @@ db.signeds.insert(
             "date": "1.10.2016",
             "report": "1. väliraportti"
         }
-    ],        
+    ],
   }
 );
 
@@ -283,7 +283,7 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94260406da7a7a41b"),
 
 db.projects.insert({"_id": ObjectId("a2c8c9adb020176611996768"),
     "project_ref": "70007",
-    "title": "Project A",
+    "title": "Project B",
     "coordinator": "Tommi Testi",
     "organisation": ObjectId("8344235a153b2cf192bf74b2"),
     "state": "väliraportti",
@@ -307,7 +307,7 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176611996768"),
 
 db.projects.insert({"_id": ObjectId("a2c8c9adb020176622996766"),
     "project_ref": "70008",
-    "title": "Project A",
+    "title": "Project C",
     "coordinator": "Tommi Testi",
     "organisation": ObjectId("8344235a153b2cf192bf74b2"),
     "state": "loppuraportti",
