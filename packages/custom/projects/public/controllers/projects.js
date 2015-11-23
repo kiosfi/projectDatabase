@@ -358,24 +358,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
 
         };
-        
-        $scope.findIntReport = function() {
+
+        $scope.findIntReport = function () {
             Projects.get({
                 projectId: $stateParams.projectId
             }, function (project) {
-                $scope.report = project.intermediary_reports[$stateParams.reportId-1];
-                console.log(project.intermediary_reports[$stateParams.reportId-1]);
+                $scope.report = project.intermediary_reports[$stateParams.reportId - 1];
+                console.log(project.intermediary_reports[$stateParams.reportId - 1]);
             });
-            
-            
-//           for ( var i = 0; i < $scope.project.intermediary_reports.length; i++) {
-//               if ($scope.project.intermediary_reports[i]._id == $stateParams.reportId) {
-//                   $scope.report = $scope.project.intermediary_reports[i];
-//               }
-//           }
         };
-        
-        
+
+
 
 
         /**
