@@ -46,6 +46,16 @@ angular.module('mean.projects').config(['$stateProvider',
             return MeanUser.checkLoggedin();
           }
         }
+      })
+      
+      .state('project report by id', {
+        url: '/projects/:projectId/report/:reportId',
+        templateUrl: '/projects/views/report.html',
+        resolve: {
+          loggedin: function(MeanUser) {
+            return MeanUser.checkLoggedin();
+          }
+        }
       });
   }
 ]);

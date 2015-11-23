@@ -328,20 +328,14 @@
         <section ng-show="project.intermediary_reports.length > 0" class="proj-body">
           <article ng-repeat="intreport in project.intermediary_reports">
             <p><b>**{{intreport.reportNumber}}. väliraportti rekisteröity</b>:&nbsp&nbsp{{intreport.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
-            <button class="btn small-btn" ng-click="showDetails = ! showDetails">Tiedot</button></p>
+            <button class="btn small-btn" ng-click="showDetails = ! showDetails">Tiedot</button>
+            <a ng-href="/projects/{{project._id}}/report/{{intreport._id}}" ng-click="" class="btn">Näytä raportti</a></p>
             <span class="proj-left" ng-show="showDetails">
                 <h5>Muokkaaja:</h5>
                 <p>{{intreport.user}}, {{intreport.date| date:'dd-MM-yyyy, HH:mm'}}</p>
                 <p ng-show="intreport.processed === true">Väliraportti käsitelty</p>
                 <h5>Kommentit</h5>
-                <p>{{project.end_report.comments}}</p>
-                <h5>Teemat</h5>
-                <ul>
-                  <li ng-repeat="theme in project.approved.themes">
-                    <i>{{theme}}</i><br>
-                    {{intreport.themes[project.approved.themes.indexOf(theme)]}}
-                  </li>
-                </ul>
+                <p>{{intreport.comments}}</p>                
                 <h5>Metodit</h5>
                 <ul>
                   <li ng-repeat="method in project.approved.methods">

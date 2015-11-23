@@ -153,6 +153,17 @@ var IntReportSchema = new Schema({
     objectives: {
         type: Array
     },
+    overall_rating_kios: {
+        type: String,
+        required: true
+    },
+    approved_by: {
+        type: String,
+        required: true
+    },
+    date_approved: {
+        type: String
+    },
     comments: {
         type: String
     },
