@@ -29,7 +29,8 @@
         <form name="stateForm" class="states" data-ng-submit="changeState(project.changeTo);">
             <label for="stateSelect">Siirry tilaan: </label>
             <select id="stateSelect" data-ng-model="project.changeTo">
-                <option data-ng-repeat="next_state in state.next_states" value="{{next_state}}">{{next_state}}</option>
+                <option data-ng-repeat="next_state in state.next_states"
+                        value="{{next_state}}">{{next_state}}</option>
             </select>
             <button type="submit" class="btn-xs" id="st">
                 <span class="glyphicon glyphicon-arrow-right"></span>

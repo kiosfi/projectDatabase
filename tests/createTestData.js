@@ -2,11 +2,17 @@ db = connect("localhost:27017/testDB");
 
 db.organisations.drop();
 db.projects.drop();
+db.states.drop();
 db.bankaccounts.drop();
 db.users.drop();
+db.inreviews.drop();
+db.approveds.drop();
+db.signeds.drop();
+db.rejecteds.drop();
 
 db.createCollection("organisations");
 db.createCollection("projects");
+db.createCollection("states");
 db.createCollection("bankaccounts");
 db.createCollection("users");
 db.createCollection("inreviews");
@@ -78,7 +84,7 @@ db.signeds.insert(
             "date": "1.10.2016",
             "report": "1. väliraportti"
         }
-    ],        
+    ],
   }
 );
 
@@ -480,3 +486,38 @@ db.projects.insert({"_id": ObjectId("f2c7d9aeb017189911996768"),
     "in_review": ObjectId("564b78b0609e79f4514f961e"),
     "approved": ObjectId("564b0cdc9d87261b1bbf0009")}
 );
+
+db.states.insert([
+  {
+    current_state: "rekisteröity",
+    next_states: ["käsittelyssä", "päättynyt"]
+  },
+  {
+    current_state: "käsittelyssä",
+    next_states: ["hyväksytty", "hylätty", "päättynyt"]
+  },
+  {
+    current_state: "hyväksytty",
+    next_states: ["allekirjoitettu", "hylätty", "päättynyt"]
+  },
+  {
+    current_state: "hylätty",
+    next_states: []
+  },
+  {
+    current_state: "allekirjoitettu",
+    next_states: ["väliraportti", "loppuraportti", "päättynyt"]
+  },
+  {
+    current_state: "väliraportti",
+    next_states: ["väliraportti", "loppuraportti", "päättynyt"]
+  },
+  {
+    current_state: "loppuraportti",
+    next_states: ["päättynyt"]
+  },
+  {
+    current_state: "päättynyt",
+    next_states: []
+  }
+])

@@ -79,6 +79,81 @@ module.exports = function (Projects) {
                         }
                         res.json(projects)
                     });
+        }, /**
+         * Gets all projects.
+         *
+         * @param {type} req    The request object. It should contain the
+         * following GET-parameters: <tt>ordering</tt>, <tt>ascending</tt>, and
+         * <tt>page</tt>. The results will be sorted primarily by
+         * <tt>ordering</tt> and in ascending order if <tt>ascending</tt> was
+         * "true". Additionally, this function will take care of paging the
+         * results and only displaying the page requested with <tt>page</tt>.
+         * @param {type} res    The response object. The results of this query
+         * will be stored as JSON objects consisting of the form
+         * {_id: X_1, project_ref: X_2, organisation: {_id: Y_1, name: Y_2},
+         * title: X_3, state: X_4}, where X_1 .. X_4 are values from from
+         * Project schema and Y_1, Y_2 are from Organisation schema.
+         * @returns {undefined}
+         */
+        getProjects: function (req, res) {
+            var ordering = req.query.ordering;
+            var ascending = req.query.ascending;
+            var page = req.query.page;
+            if (typeof ordering === 'undefined') {
+                ordering = 'project_ref';
+            }
+            if (typeof ascending === 'undefined') {
+                ascending = true;
+            }
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+
+            var pageSize = 10;
+
+            // We want to sort organisations by title, not by _id:
+            if (ordering === 'organisation') {
+                ordering = 'organisation.title';
+            }
+            var orderingJSON = {};
+            orderingJSON[ordering] = ascending === "true" ? 1 : -1;
+
+            // Secondary sorting predicate will be title, except for when the
+            // primary was.
+            if (ordering !== 'title') {
+                orderingJSON["title"] = 1;
+            } else {
+                orderingJSON["project_ref"] = 1;
+            }
+            console.log(JSON.stringify(orderingJSON));
+
+            Project.find({}, {_id: 1, project_ref: 1, title: 1, state: 1,
+                organisation: 1}
+            ).sort(orderingJSON)
+                    .skip((page - 1) * pageSize)
+                    .limit(pageSize)
+                    .populate('organisation', {_id: 1, name: 1})
+                    .exec(function (err, result) {
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Hankkeita ei voi näyttää'
+                            });
+                        }
+                        res.json(result);
+                    });
+        },
+        /**
+         * Writes the number of projects present at the database as a json
+         * object {projectCount : &lt;n&gt;}, where &lt;n&gt; is the number of
+         * projects.
+         *
+         * @param {type} req Request object.
+         * @param {type} res Response object.
+         */
+        countProjects: function (req, res) {
+            Project.count({}, function (error, result) {
+                res.json({projectCount: result});
+            });
         },
         allStates: function (req, res) {
             var query = States.find();
@@ -88,7 +163,7 @@ module.exports = function (Projects) {
                         error: 'Tiloja ei voi näyttää'
                     });
                 }
-                res.json(states)
+                res.json(states);
             });
         },
         /*
@@ -222,8 +297,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
-
         addPayment: function (req, res) {
             var payment = new Payment(req.body.payment);
             payment.save(function (err) {
@@ -254,9 +327,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-        
-        
-          
         /*
          * Moves a project to IntReport state (or adds another) and saves the state object to
          * its collection.

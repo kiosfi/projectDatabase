@@ -30,7 +30,8 @@ module.exports = function (Projects, app, auth) {
 
 
     app.route('/api/projects')
-            .get(projects.all)
+            .get(projects.getProjects)
+            .put(projects.countProjects)
             .post(auth.requiresLogin, hasPermissions, projects.create);
     app.route('/api/states')
             .get(projects.allStates);
@@ -44,7 +45,7 @@ module.exports = function (Projects, app, auth) {
     app.route('/api/projects/sign/:projectId')
             .put(auth.isMongoId, auth.requiresLogin, projects.addSigned);
     app.route('/api/projects/payment/:projectId')
-            .put(auth.isMongoId, auth.requiresLogin, projects.addPayment);            
+            .put(auth.isMongoId, auth.requiresLogin, projects.addPayment);
     app.route('/api/projects/end/:projectId')
             .put(auth.isMongoId, auth.requiresLogin, projects.addEnded);
     app.route('/api/projects/appr/:projectId')
@@ -56,6 +57,6 @@ module.exports = function (Projects, app, auth) {
     app.route('/api/projects/byOrg/:organisationId')
             .get(projects.byOrg);
 
-
+    app.param('params', projects.getProjects);
     app.param('projectId', projects.project);
 };

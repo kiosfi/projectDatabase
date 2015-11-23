@@ -32,6 +32,14 @@ angular.module('mean.projects').factory('Projects', ['$resource',
             },
             addIntReport: {
                 method: 'PUT', url: 'api/projects/intReport/:projectId'
+            },
+            countProjects: {
+                method: 'PUT',
+                url:    'api/projects'
+            },
+            getProjects: {
+                method: 'GET',
+                url:    'api/projects'
             }
         });
     }

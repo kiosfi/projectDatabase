@@ -76,13 +76,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         /*
-         * Creates new project by checking if organisation already exists (i.e. organisation 
-         * has been selected from dropdown list) or if organisation is new. 
+         * Creates new project by checking if organisation already exists (i.e. organisation
+         * has been selected from dropdown list) or if organisation is new.
          * If organisation is new, first creates new organisation by calling
          * organisation server-side controller and after that creates project.
-         * If organisation is selected from list, uses existing organisation._id and 
-         * creates project. 
-         * 
+         * If organisation is selected from list, uses existing organisation._id and
+         * creates project.
+         *
          * @param {type} isValid checks if project creation form is valid
          * @returns {undefined}
          */
@@ -117,11 +117,36 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
+        /**
+         *
+         *
+         * @returns {undefined}
+         */
         $scope.find = function () {
-            Projects.query(function (projects) {
-                $scope.projects = projects;
-                $scope.displayedCollection = [].concat($scope.projects);
-            });
+            var ordering  = $location.search().ordering;
+            var ascending = $location.search().ascending;
+            var page      = $location.search().page;
+            if (typeof ordering === 'undefined') {
+                ordering = 'project_ref';
+            }
+            if (typeof ascending === 'undefined') {
+                ascending = 'true';
+            }
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            $scope.ordering  = ordering;
+            $scope.ascending = ascending === 'true';
+            $scope.page      = page;
+            Projects.query({
+                    ordering:   ordering,
+                    ascending:  ascending,
+                    page:       page
+                },
+                function(results) {
+                    $scope.projects = results;
+                }
+            );
         };
 
         $scope.findOne = function () {
@@ -146,7 +171,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.confirm = function (project) {
-            if (confirm("Haluatko varmasti poistaa hankkeen '" + project.title + "'?")) {
+            if (confirm('Haluatko varmasti poistaa hankkeen "' + project.title + '"?')) {
                 $scope.remove(project);
             }
         };
@@ -364,26 +389,71 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          * The sorting predicate used in project listing. Initial value is
          * "project_ref".
          */
-        $scope.predicate = "project_ref";
+        $scope.ordering = 'project_ref';
 
         /**
-         * <tt>true</tt> iff the projects will be listed in reverse order.
+         * <tt>true</tt> iff the projects will be listed in ascending order.
          */
-        $scope.reverse = false;
+        $scope.ascending = true;
 
         /**
-         * Changes the ordering to match the given predicate. If the new
-         * predicate is the same as the previous value, the order will be
-         * reversed.
+         * Current page number.
+         */
+        $scope.page = 1;
+
+        /**
+         * The number of projects to be listed on a single page.
+         */
+        $scope.pageSize = 10;
+
+        /**
+         * An array containing JSON objects for pagination.
+         */
+        $scope.pages;
+
+        /**
+         * Updates the page number and reloads the view.
          *
-         * @param {string} predicate Ordering predicate, i.e. name of the
-         * attribute used for ordering the list (e.g. "project_ref").
+         * @param {String} page Number of the page to be displayed.
+         */
+        $scope.updatePage = function(page) {
+            $window.location = '/projects?ordering=' + $scope.ordering
+                    + '&ascending=' + $scope.ascending
+                    + '&page=' + page;
+        };
+
+        /**
+         * Updates the ordering and reloads the view.
+         *
+         * @param {String} ordering The ordering predicate (eg. "project_ref").
+         */
+        $scope.updateOrdering = function(ordering) {
+            $window.location = '/projects?ordering=' + ordering
+                    + '&ascending=' + (ordering === $scope.ordering
+                            ? !$scope.ascending : true)
+                    + '&page=' + $scope.page;
+        };
+
+        /**
+         * Calculates the number of and links to pages and writes the output to
+         * $scope.pages.
+         *
          * @returns {undefined}
          */
-        $scope.order = function (predicate) {
-            $scope.reverse = ($scope.predicate === predicate)
-                    ? !$scope.reverse : false;
-            $scope.predicate = predicate;
+        $scope.paginate = function() {
+            Projects.countProjects(function(result) {
+                var pageCount, numberOfPages, pagination;
+                pageCount = result.projectCount;
+                numberOfPages = Math.ceil(pageCount / $scope.pageSize);
+                pagination = document.getElementById('pagination');
+                $scope.pages = [];
+                for (var i = 1; i <= numberOfPages; ++i) {
+                    $scope.pages.push({number: i, url: '/projects'
+                                + '?ordering=' + $scope.ordering
+                                + '&ascending=' + $scope.ascending
+                                + '&page=' + i});
+                }
+            });
         };
     }
 ]);
