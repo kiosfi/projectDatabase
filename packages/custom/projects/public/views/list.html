@@ -14,50 +14,58 @@
 
         <table class="col-md-12 table table-striped">
             <thead>
-<!--                <tr>
-                    <th>Haku</th>
-                    <th colspan="3">
-                        <input st-search="" class="form-control"
-                               placeholder="Hankehaku" type="text"/>
-                    </th>
-                </tr>-->
                 <tr>
-                    <th class="col-md-2">
-                        <a href="" ng-click="order('project_ref')">Tunnus</a>
+                    <th class="col-md-1">
+                        <a href="" ng-click="update('project_ref', page)">
+                            Tunnus
+                        </a>
                         <span class="sortorder"
-                              ng-show="predicate === 'project_ref'"
-                              ng-class="{reverse:reverse}"></span>
+                              ng-show="ordering === 'project_ref'"
+                              ng-class="{reverse:!ascending}"></span>
+                    </th>
+                    <th class="col-md-5">
+                        <a href="" ng-click="update('title', page)">
+                            Nimi
+                        </a>
+                        <span class="sortorder"
+                              ng-show="ordering === 'title'"
+                              ng-class="{reverse:!ascending}"></span>
+                    </th>
+                    <th class="col-md-2">
+                        <a href="" ng-click="update('state', page)">
+                            Tila
+                        </a>
+                        <span class="sortorder"
+                              ng-show="ordering === 'state'"
+                              ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-4">
-                        <a ng-href="" ng-click="order('title')">Nimi</a>
+                        <a href="" ng-click="update('organisation', page)">
+                            Järjestö
+                        </a>
                         <span class="sortorder"
-                              ng-show="predicate === 'title'"
-                              ng-class="{reverse:reverse}"></span>
-                    </th>
-                    <th class="col-md-2">
-                        <a href="" ng-click="order('state')">Tila</a>
-                        <span class="sortorder"
-                              ng-show="predicate === 'state'"
-                              ng-class="{reverse:reverse}"></span>
-                    </th>
-                    <th class="col-md-4">
-                        <a href="" ng-click="order('organisation.name')">Järjestö</a>
-                        <span class="sortorder"
-                              ng-show="predicate === 'organisation.name'"
-                              ng-class="{reverse:reverse}"></span>
+                              ng-show="ordering === 'organisation'"
+                              ng-class="{reverse:!ascending}"></span>
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr ng-repeat="project in projects| orderBy:predicate:reverse"
-                    id="proj-{{project.project_ref}}">
+            <tbody id="projtable">
+                <tr ng-repeat="project in projects">
                     <td>{{project.project_ref}}</td>
-                    <td><a ng-href="/projects/{{project._id}}">{{project.title}}</a></td>
+                    <td><a ng-href="/projects/{{project._id}}">
+                            {{project.title}}</a></td>
                     <td>{{project.state}}</td>
-                    <td>{{project.organisation.name}}</td>
+                    <td><a ng-href="/organisations/{{project.organisation._id}}">
+                            {{project.organisation.name}}</a></td>
                 </tr>
             </tbody>
         </table>
+        <ul id="pagination" class="pagination pagination-sm"
+            data-ng-init="paginate()">
+            <li ng-repeat="page in pages">
+                <a href="" ng-click="update(ordering, page.number)">{{page.number}}</a>
+            </li>
+        </ul>
     </article>
     <article data-ng-hide="!projects || projects.length">
         <h1>Hankkeita ei ole.</h1>
