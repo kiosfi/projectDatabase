@@ -46,7 +46,8 @@ db.organisations.insert(
             "legal_status": "hyväntekeväisyysjärjestö",
             "history_status": "järjestön historiaa...",
             "int_links": "link 1, link 2",
-            "nat_links": "link a, link b",
+            "nat_local_links": "link a, link b",
+            "other_funding": "some funders...",
             "bank_account": ObjectId("56150897b560c1fc0b9b3015")}
 );
 
@@ -67,7 +68,8 @@ db.organisations.insert(
             "legal_status": "hyväntekeväisyysjärjestö",
             "history_status": "järjestön historiaa...",
             "int_links": "link 1, link 2",
-            "nat_links": "link a, link b",
+            "nat_local_links": "link a, link b",
+            "other_funding": "some funders...",
             "bank_account": ObjectId("56150897b560c1fc0b9b3015")}
 );
 
@@ -88,7 +90,8 @@ db.organisations.insert(
             "legal_status": "hyväntekeväisyysjärjestö",
             "history_status": "järjestön historiaa...",
             "int_links": "link 1, link 2",
-            "nat_links": "link a, link b",
+            "nat_local_links": "link a, link b",
+            "other_funding": "some funders...",
             "bank_account": ObjectId("56150897b560c1fc0b9b3015")}
 );
 
