@@ -1,12 +1,10 @@
 var helpers = require('../helpers.e2e');
 
 describe('Changing project state to "approved"', function () {
-//    it('should not show change-page when not logged in', function (done) {
-//
-//    });
+
     beforeAll(function() {
         helpers.login();
-    })
+    });
 
     afterAll(function() {
         helpers.logout();
@@ -16,19 +14,21 @@ describe('Changing project state to "approved"', function () {
         element(by.linkText("Hankelistaus")).click();
         element(by.linkText("Minority rights")).click();
 
-//        browser.pause();
         element(by.model('project.changeTo')).element(by.cssContainingText('option', 'hyväksytty')).click();
         element(by.id('st')).click();
 
         expect(browser.getCurrentUrl()).toContain('/change');
 
-        element(by.model('project.approved.approved_date')).sendKeys('13.11.2015');
+        element(by.model('approved_day')).sendKeys('13');
+        element(by.model('approved_month')).sendKeys('11');
+        element(by.model('approved_year')).sendKeys('2015');
         element(by.model('project.approved.approved_by')).element(by.cssContainingText('option', 'Halko')).click();
-        element(by.model('project.approved.board_notified')).sendKeys('15.11.2015');
-        element(by.model('project.approved.granted_sum.granted_curr_eur'))
-                .sendKeys('12000');
-        element(by.model('project.approved.granted_sum.granted_curr_local'))
-                .sendKeys('111000');
+
+        element(by.model('notified_day')).sendKeys('15');
+        element(by.model('notified_month')).sendKeys('11');
+        element(by.model('notified_year')).sendKeys('2015');
+        element(by.model('project.approved.granted_sum.granted_curr_eur')).sendKeys(12000);
+        element(by.model('project.approved.granted_sum.granted_curr_local')).sendKeys(111000);
 
         var checkBoxes = element.all(by.css('input[type=checkbox]'));
         checkBoxes.get(2).click();

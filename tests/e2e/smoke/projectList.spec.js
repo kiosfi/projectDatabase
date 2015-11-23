@@ -46,9 +46,9 @@ describe('Project list page', function () {
         expect(rep.get(2).element(by.tagName('td')).getText()).toEqual("70004");
         expect(rep.get(3).element(by.tagName('td')).getText()).toEqual("70003");
         expect(rep.get(4).element(by.tagName('td')).getText()).toEqual("70014");
-        expect(rep.get(5).element(by.tagName('td')).getText()).toEqual("70006");
+        expect(rep.get(5).element(by.tagName('td')).getText()).toEqual("70008");
         expect(rep.get(6).element(by.tagName('td')).getText()).toEqual("70007");
-        expect(rep.get(7).element(by.tagName('td')).getText()).toEqual("70008");
+        expect(rep.get(7).element(by.tagName('td')).getText()).toEqual("70006");
         expect(rep.get(8).element(by.tagName('td')).getText()).toEqual("70002");
         expect(rep.get(9).element(by.tagName('td')).getText()).toEqual("70012");
     });

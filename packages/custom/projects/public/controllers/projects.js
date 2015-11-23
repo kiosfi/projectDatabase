@@ -55,18 +55,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
-        $scope.convertDate = function (day, month, year) {
-            var parsed = new Date(year + "-" + month + "-" + day);
-            var d = parsed.getDate();
-            var m = parsed.getMonth() + 1;
-            var y = parsed.getFullYear();
-            if (d < 10) {
-                d = '0' + d;
-            }
-            if (m < 10) {
-                m = '0' + m;
-            }
-            return (d + "-" + m + "-" + y);
+        $scope.convertDate = function(day, month, year) {
+          var parsed = new Date(year + "-" + month + "-" + day);
+          return parsed;
         };
 
         $scope.hasAuthorization = function (project) {
@@ -208,6 +199,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addApprovedState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                project.approved.approved_date = $scope.convertDate($scope.approved_day, $scope.approved_month, $scope.approved_year);
+                project.approved.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
                 project.approved.themes = $scope.themeSelection;
                 project.approved.methods = $scope.addedMethods;
                 project.state = $scope.global.newState;
@@ -267,6 +260,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addPaymentInfo = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                project.payment.payment_date = $scope.convertDate($scope.payment_day, $scope.payment_month, $scope.payment_year);
                 var index = project.payments.length;
                 if (index === undefined) {
                     project.payment.paymentNumber = 1;
@@ -368,7 +362,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $scope.removeDeadline = function () {
             $scope.deadlines.splice(-1, 1);
-        }
+        };
 
 
         $scope.addNewOrg = function () {
