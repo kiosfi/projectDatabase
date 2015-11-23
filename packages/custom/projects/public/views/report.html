@@ -2,7 +2,41 @@
     <a href="/projects/{{project._id}}">Palaa</a>
     <p>toimiiko? {{project.title}}</p>
     <article data-ng-init="findIntReport()">
-    <h2>{{report.reportNumber}}. raportti </h2>
-    <h4>Järjestö ja hanke: <i>{{project.organisation.name}}: {{project.title}}</i></h4>
+        <h2>{{report.reportNumber}}. raportti </h2>
+        <h4><b>Järjestö ja hanke: </b>{{project.organisation.name}}: {{project.title}}</h4>
+        <p><i>Hankenumero: </i>{{project.project_ref}}</p>
+        <p><i>Alue: </i>{{project.region}}</p>
+        <p><i>Alkanut: </i> mitä tähän?</p>
+
+        <h4><b>Maksatukset</b></h4>
+        <p>Hankkeelle myönnettiin {{project.approved.granted_sum.granted_curr_eur}} € hallituksen kokousessa {{project.approved.board_notified}}</p>
+        <p>Sopimus allekirjoitettiin {{project.signed.signed_date}}</p>
+        <p></p>
+        <p><i>Maksatus eriä: </i> {{project.signed.planned_payments.length}}</p> 
+        <p><i>Maksusuunnitelma: </i></p>
+        <section ng-repeat="planned_payment in project.signed.planned_payments">
+            <p>{{project.signed.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur}} EUR ({{planned_payment.sum_local}} paikallista valuuttaa), suunniteltu maksupvm {{planned_payment.date}}</p>
+        </section>       
+        <p><i>Maksetut erät: </i></p>
+        <section   ng-repeat="payment in project.payments">
+            <p>{{payment.sum_eur}} € / maksettu {{payment.payment_date}}</p>
+        </section>
+        
+        <p><i>Jäljellä oleva summa: </i> {{project.funding.left_eur}} €</p>
+
+
+        <h4><b>Raportointi ja yhteydenpito</b></h4>
+
+        <h4><b>Hankkeen suunniteltujen tavoitteiden ja toimintojen toteutuminen</b></h4>
+
+        <h4><b>Väliraportointiin mennessä toteutetut aktiviteetit</b></h4>
+
+        <h4><b>Budjetin toteutuminen ja raportoitu summa</b></h4>
+
+        <h4><b>Muita huomioita</b></h4>
+
+        <h4><b>Arvio</b></h4>
+
+        <h4><b>Toimiston päätös</b></h4>
     </article>
 </section>
