@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
-<testsuite name="PhantomJS 1.9.8 (Windows 8 0.0.0)" package="" timestamp="2015-11-17T11:27:41" id="0" hostname="Fupu" tests="12" errors="0" failures="0" time="0.34">
+<testsuite name="PhantomJS 1.9.8 (Windows 8 0.0.0)" package="" timestamp="2015-11-19T12:19:24" id="0" hostname="Fupu" tests="12" errors="0" failures="0" time="0.284">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
   </properties>
-  <testcase name="should expose some global scope" time="0.078" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="should expose some global scope" time="0.024" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="should expose some global scope" time="0.051" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="should expose some global scope" time="0.016" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="1 should be equals to 1" time="0.001" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).Test test case"/>
+  <testcase name="$scope.find() should create an array with at least one organisation object fetched from XHR" time="0.022" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.findOne() should create an array with one organisation object fetched from XHR using a projectId URL parameter" time="0.035" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
   <testcase name="1 should be equals to 1" time="0" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).Test test case"/>
-  <testcase name="$scope.find() should create an array with at least one organisation object fetched from XHR" time="0.031" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.findOne() should create an array with one organisation object fetched from XHR using a projectId URL parameter" time="0.034" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="1 should be equals to 1" time="0" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).Test test case"/>
-  <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.019" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.021" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
   <testcase name="$scope.findOne() should create an array with one project object fetched from XHR using a projectId URL parameter" time="0.019" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.create() with valid form data should send POST request " time="0.021" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.remove() should send a DELETE request with a valid projectId and remove the project from the scope" time="0.033" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.addReviewState(true) should update a valid project" time="0.027" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.addRejectedState(true) should update a valid project" time="0.054" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.create() with valid form data should send POST request " time="0.018" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.remove() should send a DELETE request with a valid projectId and remove the project from the scope" time="0.034" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.addReviewState(true) should update a valid project" time="0.018" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.addRejectedState(true) should update a valid project" time="0.049" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
   <system-out>
     <![CDATA[
 ]]>

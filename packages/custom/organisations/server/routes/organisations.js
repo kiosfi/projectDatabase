@@ -27,7 +27,8 @@ module.exports = function(Organisations, app, auth) {
   var organisations = require('../controllers/organisations')(Organisations);
 
   app.route('/api/organisations')
-    .get(organisations.all);
+    .get(organisations.all)
+    .post(auth.requiresLogin, hasPermissions, organisations.create);
   app.route('/api/organisations/:organisationId')
     .get(auth.isMongoId, organisations.show);
 

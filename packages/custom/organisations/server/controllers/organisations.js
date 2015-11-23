@@ -31,6 +31,22 @@ module.exports = function(Organisations) {
 
             res.json(req.organisation);
         },
+        
+        create: function(req,res) {
+            var bank_account;
+            var organisation = new Organisation(req.body);
+            var bank_account = new BankAccount(req.body.bank_account);
+            organisation.bank_account = bank_account._id;
+            bank_account.save();
+            organisation.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Järjestöä ei voi tallentaa'
+                    });
+                }
+                res.json(organisation);
+            });
+        },
 
          all: function(req, res) {
              var query = Organisation.find();
