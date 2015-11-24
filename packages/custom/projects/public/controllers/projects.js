@@ -361,8 +361,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
 /**
  * Finds project's intermediary report and puts the given report to $scope.report
- * so that report's details can be shown on intreport.html
- * 
+ * so that report's details can be shown on intreport.html 
  */
         $scope.findIntReport = function () {
             Projects.get({
