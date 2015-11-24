@@ -9,9 +9,9 @@ exports.config = {
         '../../e2e/helpers.e2e.js', '../../e2e/**/*.spec.js'
     ],
     multiCapabilities: [
-        {
-            browserName: 'chrome'
-        },
+//        {
+//            browserName: 'chrome'
+//        },
         {
             browserName: 'firefox'
         }

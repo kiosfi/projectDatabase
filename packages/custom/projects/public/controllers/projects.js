@@ -378,7 +378,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         };
 
-
         /**
          * The sorting predicate used in project listing. Initial value is
          * "project_ref".
@@ -388,7 +387,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         /**
          * <tt>true</tt> iff the projects will be listed in ascending order.
          */
-        $scope.ascending = true;
+        $scope.ascending = 'true';
 
         /**
          * Current page number.
@@ -442,10 +441,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 pagination = document.getElementById('pagination');
                 $scope.pages = [];
                 for (var i = 1; i <= numberOfPages; ++i) {
-                    $scope.pages.push({number: i, url: '/projects'
-                                + '?ordering=' + $scope.ordering
-                                + '&ascending=' + $scope.ascending
-                                + '&page=' + i});
+                    $scope.pages.push({number: i});
                 }
             });
         };

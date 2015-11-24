@@ -1,12 +1,58 @@
 <section data-ng-controller="OrganisationsController" data-ng-init="find()">
-    <h1>Järjestöt</h1>
-    <ul class="projects unstyled">
-        <li data-ng-repeat="organisation in organisations">
-            <h2>
-              <a data-ng-href="/organisations/{{organisation._id}}">{{organisation.name}}</a>
-            </h2>
-            <p>EDUSTAJA: {{organisation.representative}}</p>
-            <hr>
-        </li>
-    </ul>
+    <article ng-if="organisations && organisations.length > 0">
+        <style type="text/css">
+            .sortorder:after {
+                content: '\25b2';
+            }
+            .sortorder.reverse:after {
+                content: '\25bc';
+            }
+        </style>
+        <h1>Järjestöt</h1>
+        <hr>
+        <table class="col-md-9 table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-md-5">
+                        <a id="byName"
+                           href="" ng-click="updateOrdering('name')">
+                            Nimi
+                        </a>
+                        <span class="sortorder"
+                              ng-show="ordering === 'name'"
+                              ng-class="{reverse:!ascending}"></span>
+                    </th>
+                    <th class="col-md-4">
+                        <a id="byRep"
+                           href="" ng-click="updateOrdering('representative')">
+                            Edustaja
+                        </a>
+                        <span class="sortorder"
+                              ng-show="ordering === 'representative'"
+                              ng-class="{reverse:!ascending}"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="orgtable">
+                <tr id="org-{{org.name}}" ng-repeat="org in organisations">
+                    <td>{{org.name}}</td>
+                    <td>{{org.representative}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul id="pagination" class="pagination pagination-sm"
+            data-ng-init="paginate()">
+            <li ng-repeat="pg in pages"
+                ng-class="pg.number == page ? 'active' : ''">
+                <a id="page-{{pg.number}}" href=""
+                   ng-click="updatePage(pg.number)">{{pg.number}}</a>
+            </li>
+        </ul>
+
+    </article>
+    <article ng-hide="!organisations || organisations.length">
+        <h1>Järjestöjä ei ole.</h1>
+        <hr>
+        <a href="/organisations/create">Lisää järjestö.</a>
+    </article>
 </section>

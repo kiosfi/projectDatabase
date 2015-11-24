@@ -103,7 +103,7 @@ module.exports = function (Projects) {
                 ordering = 'project_ref';
             }
             if (typeof ascending === 'undefined') {
-                ascending = true;
+                ascending = 'true';
             }
             if (typeof page === 'undefined') {
                 page = 1;
@@ -116,9 +116,9 @@ module.exports = function (Projects) {
                 ordering = 'organisation.title';
             }
             var orderingJSON = {};
-            orderingJSON[ordering] = ascending === "true" ? 1 : -1;
+            orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
 
-            // Secondary sorting predicate will be title, except for when the
+            // Secondary sorting predicate will be "title", except for when the
             // primary was.
             if (ordering !== 'title') {
                 orderingJSON["title"] = 1;
