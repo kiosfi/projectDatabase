@@ -202,10 +202,10 @@
                 scope.project = project;
 
                 // test PUT happens correctly
-                $httpBackend.expectPUT(/api\/projects\/rev\/([0-9a-fA-F]{24})$/).respond();
+                $httpBackend.expectPUT(/api\/projects\/appr\/([0-9a-fA-F]{24})$/).respond();
 
                 // run controller
-                scope.addReviewState(true);
+                scope.addApprovedState(true);
                 $httpBackend.flush();
 
                 // test URL location to new object
