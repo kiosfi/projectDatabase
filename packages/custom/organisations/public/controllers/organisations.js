@@ -13,7 +13,7 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
 
 
         $scope.hasAuthorization = function (organisation) {
-            if (!project)
+            if (!organisation)
                 return false;
             return MeanUser.isAdmin;
         };
