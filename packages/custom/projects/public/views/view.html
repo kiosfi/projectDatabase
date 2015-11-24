@@ -329,7 +329,7 @@
           <article ng-repeat="intreport in project.intermediary_reports">
             <p><b>**{{intreport.reportNumber}}. väliraportti rekisteröity</b>:&nbsp&nbsp{{intreport.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
             <button class="btn small-btn" ng-click="showDetails = ! showDetails">Tiedot</button>
-            <a ng-href="/projects/{{project._id}}/report/{{intreport.reportNumber}}" class="btn">Näytä raportti</a></p>
+            <a ng-href="/projects/{{project._id}}/report/{{intreport.reportNumber}}" class="btn large-btn">Näytä raportti</a></p>
             <span class="proj-left" ng-show="showDetails">
                 <h5>Muokkaaja:</h5>
                 <p>{{intreport.user}}, {{intreport.date| date:'dd-MM-yyyy, HH:mm'}}</p>
