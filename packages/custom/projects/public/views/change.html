@@ -375,7 +375,7 @@ A form for project state change.
         <p class="col-md-12 strong-title comment-form-div">Tavoitteet ja niiden toteutuminen</p>
         <div class="form-group col-md-12">
             <div class="col-md-4">
-                <p>Hankkeen hakemusvaiheessa määritellyt tavoitteet</p>
+                <p>{{project.project_goal}}</p>
             </div>
             <div class="col-md-8">
                 <textarea name="objComments" type="text" class="form-control" data-ng-model="objectiveComments[0]" id="objComments" placeholder="Kommentteja tavoitteiden toteutumisesta" required></textarea>
@@ -384,7 +384,7 @@ A form for project state change.
 
         <div class="form-group col-md-12" ng-class="{
                     'has-error'
-                    intReportForm.overall_rating_kios.$invalid
+                    : intReportForm.overall_rating_kios.$invalid
                 }">
             <label for="overallKios" class="col-md-2">KIOS:in kokonaisarvio</label>
             <div class="col-md-10">
@@ -402,7 +402,7 @@ A form for project state change.
 
         <div class="form-group col-md-12" ng-class="{
                     'has-error'
-                    intReportForm.approved_by.$invalid
+                    : intReportForm.approved_by.$invalid
                 }">
             <label for="intRApprovedBy" class="col-md-2">Hyväksyjä</label>
             <div class="col-md-10">
@@ -412,7 +412,7 @@ A form for project state change.
 
         <div class="form-group col-md-12" ng-class="{
                     'has-error'
-                    intReportForm.date_approved.$invalid
+                    : intReportForm.date_approved.$invalid
                 }">
             <label for="intRDateAppr" class="col-md-2">Hyväksymis pvm</label>
             <div class="col-md-10">
