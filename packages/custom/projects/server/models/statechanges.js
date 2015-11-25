@@ -176,19 +176,25 @@ var EndReportSchema = new Schema({
     },
     audit: {
         date: {
-            type: String,
+            type: Date,
             required: true
         },
-
         review: {
-
             type: String,
             required: true
         }
     },
-
-    themes: {
-        type: Array
+    approved_by: {
+      type: String,
+      required: true
+    },
+    approved_date: {
+      type: Date,
+      required: true
+    },
+    general_review: {
+      type: String,
+      required: true,
     },
     methods: {
         type: Array

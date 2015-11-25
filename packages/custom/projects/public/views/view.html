@@ -379,36 +379,7 @@
 
         <section ng-show="project.end_report._id" class="proj-body">
             <p><b>**Loppuraportti rekisteröity</b>:&nbsp&nbsp{{project.end_report.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
-            <button class="btn small-btn" onclick="toggleCollapse('visibilityEndreportinfo')">Tiedot</button></p>
-            <span class="proj-left" id="visibilityEndreportinfo">
-                <h5>Muokkaaja:</h5>
-                <p>{{project.end_report.user}}, {{project.end_report.date| date:'dd-MM-yyyy, HH:mm'}}</p>
-                <p ng-show="project.end_report.processed === true">Loppuraportti käsitelty</p>
-                <h5>Tilintarkastus</h5>
-                <p>Tilintarkastus suoritettu {{project.end_report.audit.date}}</p>
-                <p>{{project.end_report.audit.review}}</p>
-                <h5>Kommentit</h5>
-                <p>{{project.end_report.comments}}</p>
-                <h5>Teemat</h5>
-                <ul>
-                  <li ng-repeat="theme in project.approved.themes">
-                     <i>{{theme}}</i><br>
-                    {{project.end_report.themes[project.approved.themes.indexOf(theme)]}}
-                  </li>
-                </ul>
-                <h5>Metodit</h5>
-                <ul>
-                  <li ng-repeat="method in project.approved.methods">
-                     <i>{{method.name}}</i>, taso: <i>{{method.level}}</i><br>
-                    {{project.end_report.methods[project.approved.methods.indexOf(method)]}}
-                  </li>
-                </ul>
-                <h5>Tavoitteet</h5>
-                <ul>
-                  <li ng-repeat="objective in project.intermediary_report.objectives">{{objective}}</li>
-                </ul>
-            </span>
-
+            <button class="btn small-btn"><a ng-href='/projects/endReport/{{project._id}}'>Tiedot</a></button></p>
         </section>
         <section ng-show="project.ended._id" class="proj-body">
             <p><b>**Rekisteröity päätetyksi</b>:&nbsp&nbsp{{project.ended.end_date| date:'dd-MM-yyyy'}}&nbsp&nbsp
