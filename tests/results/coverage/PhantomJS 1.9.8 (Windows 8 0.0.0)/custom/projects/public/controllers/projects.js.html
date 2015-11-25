@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">46.81% </span>
+        <span class="strong">52.41% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>88/188</span>
+        <span class='fraction'>98/187</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">21.43% </span>
+        <span class="strong">26.19% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>9/42</span>
+        <span class='fraction'>11/42</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">34.62% </span>
+        <span class="strong">38.46% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>18/52</span>
+        <span class='fraction'>20/52</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">46.81% </span>
+        <span class="strong">52.41% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>88/188</span>
+        <span class='fraction'>98/187</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -445,8 +445,7 @@
 400
 401
 402
-403
-404</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+403</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -705,21 +704,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10×</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1107,22 +1105,21 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 &nbsp;
         };
 &nbsp;
-        $scope.addIntReportState = <span class="fstat-no" title="function not covered" >function (isValid) {</span>
-<span class="cstat-no" title="statement not covered" >            if (isValid) {</span>
-<span class="cstat-no" title="statement not covered" >                var project = $scope.project;</span>
-<span class="cstat-no" title="statement not covered" >                project.state = $scope.global.newState;</span>
-<span class="cstat-no" title="statement not covered" >                project.intermediary_report.themes = $scope.themeSelection;</span>
-<span class="cstat-no" title="statement not covered" >                project.intermediary_report.methods = $scope.addedMethods;</span>
-<span class="cstat-no" title="statement not covered" >                project.intermediary_report.objectives = $scope.objectiveComments;</span>
-<span class="cstat-no" title="statement not covered" >                var index = project.intermediary_reports.length;</span>
-<span class="cstat-no" title="statement not covered" >                if (index === undefined) {</span>
+        $scope.addIntReportState = function (isValid) {
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (isValid) {
+                var project = $scope.project;
+                project.state = $scope.global.newState;
+                project.intermediary_report.methods = $scope.addedMethods;
+                project.intermediary_report.objectives = $scope.objectiveComments;
+                var index = project.intermediary_reports.length;
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (index === undefined) {
 <span class="cstat-no" title="statement not covered" >                    project.intermediary_report.reportNumber = 1;</span>
                 } else {
-<span class="cstat-no" title="statement not covered" >                    project.intermediary_report.reportNumber = project.intermediary_reports.length + 1;</span>
+                    project.intermediary_report.reportNumber = project.intermediary_reports.length + 1;
                 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                project.$addIntReport(<span class="fstat-no" title="function not covered" >function (response) {</span></span>
-<span class="cstat-no" title="statement not covered" >                    $location.path('projects/' + response._id);</span>
+                project.$addIntReport(function (response) {
+                    $location.path('projects/' + response._id);
                 });
             }
 &nbsp;
@@ -1258,7 +1255,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Nov 25 2015 14:14:09 GMT+0200 (FLE Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Nov 25 2015 14:50:36 GMT+0200 (FLE Standard Time)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

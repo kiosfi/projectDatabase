@@ -248,17 +248,16 @@
             }));
 
             it('$scope.addSignedState(true) should update a valid project', inject(function (Projects) {
-
-
-                // fixture rideshare
+                
+// fixture rideshare
                 var putProjectData = function () {
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
                         signed: {
-                            signed_by: 'Jaana Jantunen',
-                            signed_date: '22-12-2015',
-                            planned_payments: [{"date": "12-12-2015", "sum_eur": 50000, "sum_local": 80000}],
-                            intreport_deadlines: [{"report": "1. väliraportti", "date": "01-04-2016"}]
+                          signed_by: 'Jaana Jantunen',
+                          signed_date: '22-12-2015',
+                          planned_payments: [{"date": "12-12-2015", "sum_eur": 50000, "sum_local": 80000}],
+                          intreport_deadlines: [{"report": "1. väliraportti", "date": "01-04-2016"}]
                         },
                         state: 'hyväksytty',
                         to: 'allekirjoitettu'
@@ -288,6 +287,7 @@
                 var putProjectData = function () {
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
+                        intermediary_reports: [],
                         intermediary_report: {
                             methods: ["Onnistui", "Onnistui kohtalaisesti"],
                             objectives: ["Lorem ipsum"],
@@ -311,9 +311,9 @@
                 $httpBackend.expectPUT(/api\/projects\/intReport\/([0-9a-fA-F]{24})$/).respond();
 
                 // run controller
-                scope.addIntReport(true);
+                scope.addIntReportState(true);
                 $httpBackend.flush();
-                
+
                 // test URL location to new object
                 expect($location.path()).toBe('/projects/' + putProjectData()._id);
             }));

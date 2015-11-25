@@ -260,7 +260,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (isValid) {
                 var project = $scope.project;
                 project.state = $scope.global.newState;
-                project.intermediary_report.themes = $scope.themeSelection;
                 project.intermediary_report.methods = $scope.addedMethods;
                 project.intermediary_report.objectives = $scope.objectiveComments;
                 var index = project.intermediary_reports.length;
