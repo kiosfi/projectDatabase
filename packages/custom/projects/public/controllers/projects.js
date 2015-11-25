@@ -135,7 +135,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     page:       page
                 },
                 function(results) {
+                    $scope.now = new Date().toISOString();
                     $scope.projects = results;
+                    console.log($scope.projects);
                 }
             );
         };

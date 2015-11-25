@@ -22,7 +22,7 @@
                               ng-show="ordering === 'project_ref'"
                               ng-class="{reverse:!ascending}"></span>
                     </th>
-                    <th class="col-md-5">
+                    <th class="col-md-4">
                         <a id="byTitle"
                            href="" ng-click="updateOrdering('title')">
                             Nimi
@@ -40,7 +40,7 @@
                               ng-show="ordering === 'state'"
                               ng-class="{reverse:!ascending}"></span>
                     </th>
-                    <th class="col-md-4">
+                    <th class="col-md-3">
                         <a id="byOrg"
                            href="" ng-click="updateOrdering('organisation')">
                             Järjestö
@@ -49,6 +49,7 @@
                               ng-show="ordering === 'organisation'"
                               ng-class="{reverse:!ascending}"></span>
                     </th>
+                    <th class="col-md-4"></th>
                 </tr>
             </thead>
             <tbody id="projtable">
@@ -59,6 +60,13 @@
                     <td>{{project.state}}</td>
                     <td><a ng-href="/organisations/{{project.organisation._id}}">
                             {{project.organisation.name}}</a></td>
+                    <td>
+                      <p ng-repeat="deadline in project.signed.intreport_deadlines"
+                      style="color:red;"
+                      ng-if="deadline.date < now &&
+                      project.intermediary_reports[project.signed.intreport_deadlines.indexOf(deadline)] === undefined">
+                      {{deadline.report}} myöhässä!</p>
+                    </td>
                 </tr>
             </tbody>
         </table>

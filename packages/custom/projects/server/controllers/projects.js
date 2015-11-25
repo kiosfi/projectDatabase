@@ -127,10 +127,12 @@ module.exports = function (Projects) {
             }
 
             Project.find({}, {_id: 1, project_ref: 1, title: 1, state: 1,
-                organisation: 1}
+                organisation: 1, signed: 1, intermediary_reports: 1}
             ).sort(orderingJSON)
                     .skip((page - 1) * pageSize)
                     .limit(pageSize)
+                    .populate('intermediary_reports', {_id: 1})
+                    .populate('signed', {_id: 1, intreport_deadlines: 1})
                     .populate('organisation', {_id: 1, name: 1})
                     .exec(function (err, result) {
                         if (err) {
