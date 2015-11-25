@@ -228,7 +228,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addSignedState = function (isValid) {
             if (isValid) {
 
-                var signed_date = $scope.convertDate($scope.signed_date.day, $scope.signed_date.month, $scope.signed_date.year)
+                var signed_date = $scope.convertDate($scope.signed_day, $scope.signed_month, $scope.signed_year);
                 var project = $scope.project;
                 project.signed.signed_date = signed_date;
 

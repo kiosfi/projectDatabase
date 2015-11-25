@@ -273,17 +273,17 @@ A form for project state change.
             <div class="col-md-2" style="float:left;" ng-class="{
                                 'has-error'
                                 :  signedForm.signed_date_day.$invalid }">
-                <input name="signed_date_day" type="number" class="form-control" data-ng-model="signed_date.day" id="signed_date_day" placeholder="p" required>
+                <input name="signed_date_day" type="number" class="form-control" data-ng-model="signed_day" id="signed_date_day" placeholder="p" required>
             </div>
             <div class="col-md-2" style="float:left;" ng-class="{
                                 'has-error'
                                 :  signedForm.signed_date_month.$invalid }">
-                <input name="signed_date_month" type="number" class="form-control" data-ng-model="signed_date.month" id="signed_date_month" placeholder="k" required>
+                <input name="signed_date_month" type="number" class="form-control" data-ng-model="signed_month" id="signed_date_month" placeholder="k" required>
             </div>
             <div class="col-md-2" style="float:left;" ng-class="{
                                 'has-error'
                                 :  signedForm.signed_date_year.$invalid }">
-                <input name="signed_date_year" type="number" class="form-control" data-ng-model="signed_date.year" id="signed_date_year" placeholder="vvvv" required>
+                <input name="signed_date_year" type="number" class="form-control" data-ng-model="signed_year" id="signed_date_year" placeholder="vvvv" required>
             </div>
             <div style="clear:both;">&nbsp;</div>
             <div ng-show="signedForm.signed_date_day.$invalid" class="help-block">

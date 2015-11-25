@@ -382,10 +382,11 @@ describe('<Unit Test>', function () {
 
             it('should create a new "approved" state and update given project with its id', function (done) {
                 this.timeout(10000);
+                var date = new Date();
                 approved = new Approved({
-                    "approved_date": "12.5.2015",
+                    "approved_date": date,
                     "approved_by": "Toiminnanjohtaja",
-                    "board_notified": "15.5.2015",
+                    "board_notified": date,
                     "methods": [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen"}],
                     "themes": ["Oikeusvaltio ja demokratia"],
                     "granted_sum": {"granted_curr_eur": 60000, "granted_curr_local": 80000}});
@@ -428,11 +429,12 @@ describe('<Unit Test>', function () {
 
             it('should create a new "signed" state and update given project with its id', function (done) {
                 this.timeout(10000);
+                var date = new Date();
                 signed = new Signed({
                     "signed_by": "Jaana Jantunen",
-                    "signed_date": "12-12-2015",
-                    "planned_payments": [{"date": "12-12-2015", "sum_eur": 50000, "sum_local": 80000}],
-                    "intreport_deadlines": [{"report": "1. väliraportti", "date": "01-04-2016"}]});
+                    "signed_date": date,
+                    "planned_payments": [{"date": date, "sum_eur": 50000, "sum_local": 80000}],
+                    "intreport_deadlines": [{"report": "1. väliraportti", "date": date}]});
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
                     signed.user = user.name;
@@ -451,8 +453,9 @@ describe('<Unit Test>', function () {
 
             it('should create a new payment and add its id to the payments array of project', function (done) {
                 this.timeout(10000);
+                var date = new Date()
                 payment = new Payment({
-                    "payment_date": "12.12.2015",
+                    "payment_date": date,
                     "sum_eur": 20000, "sum_local": 20000});
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {

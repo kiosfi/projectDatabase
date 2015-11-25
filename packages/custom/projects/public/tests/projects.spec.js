@@ -177,15 +177,18 @@
 
             it('$scope.addApprovedState(true) should update a valid project', inject(function (Projects) {
 
-
+                scope.day = 12;
+                scope.month = 11;
+                scope.year = 2015;
+                scope.date = scope.convertDate(scope.day, scope.month, scope.year);
                 // fixture rideshare
                 var putProjectData = function () {
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
                         approved: {
-                          approved_date: "12.12.2015",
+                          approved_date: scope.date,
                           approved_by: "Toiminnanjohtaja",
-                          board_notified: "22.12.2015",
+                          board_notified: scope.date,
                           methods: [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen"}],
                           themes: ["Oikeusvaltio ja demokratia"],
                           granted_sum: {"granted_curr_eur": 60000, "granted_curr_local": 80000}
@@ -202,10 +205,10 @@
                 scope.project = project;
 
                 // test PUT happens correctly
-                $httpBackend.expectPUT(/api\/projects\/rev\/([0-9a-fA-F]{24})$/).respond();
+                $httpBackend.expectPUT(/api\/projects\/appr\/([0-9a-fA-F]{24})$/).respond();
 
                 // run controller
-                scope.addReviewState(true);
+                scope.addApprovedState(true);
                 $httpBackend.flush();
 
                 // test URL location to new object
@@ -249,16 +252,15 @@
 
             it('$scope.addSignedState(true) should update a valid project', inject(function (Projects) {
 
-
                 // fixture rideshare
                 var putProjectData = function () {
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
                         signed: {
                           signed_by: 'Jaana Jantunen',
-                          signed_date: '22-12-2015',
-                          planned_payments: [{"date": "12-12-2015", "sum_eur": 50000, "sum_local": 80000}],
-                          intreport_deadlines: [{"report": "1. väliraportti", "date": "01-04-2016"}]
+                          signed_date: scope.convertDate(11, 11, 2015).toISOString(),
+                          planned_payments: [{"date": scope.convertDate(11, 11, 2015).toISOString(), "sum_eur": 50000, "sum_local": 80000}],
+                          intreport_deadlines: [{"report": "1. väliraportti", "date": scope.convertDate(11, 11, 2015).toISOString()}]
                         },
                         state: 'hyväksytty',
                         to: 'allekirjoitettu'
@@ -270,12 +272,11 @@
 
                 // mock project in scope
                 scope.project = project;
-
                 // test PUT happens correctly
-                $httpBackend.expectPUT(/api\/projects\/rev\/([0-9a-fA-F]{24})$/).respond();
+                $httpBackend.expectPUT(/api\/projects\/sign\/([0-9a-fA-F]{24})$/).respond();
 
                 // run controller
-                scope.addReviewState(true);
+                scope.addSignedState(true);
                 $httpBackend.flush();
 
                 // test URL location to new object
@@ -308,10 +309,10 @@
                 scope.project = project;
 
                 // test PUT happens correctly
-                $httpBackend.expectPUT(/api\/projects\/rev\/([0-9a-fA-F]{24})$/).respond();
+                $httpBackend.expectPUT(/api\/projects\/end\/([0-9a-fA-F]{24})$/).respond();
 
                 // run controller
-                scope.addReviewState(true);
+                scope.addEndedState(true);
                 $httpBackend.flush();
 
                 // test URL location to new object

@@ -54,7 +54,7 @@
                     'fetched from XHR', function () {
 
                         MeanUser.login();
-                        $httpBackend.expectGET('api\/organisations?ascending=true&ordering=project_ref&page=1').respond([{
+                        $httpBackend.expectGET('api\/organisations?ascending=true&ordering=name&page=1').respond([{
                                 title: 'Human rights org'
                             }]);
                         // run controller
