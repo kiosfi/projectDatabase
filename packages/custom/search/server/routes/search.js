@@ -26,8 +26,11 @@ module.exports = function (Search, app, auth) {
 
   var search = require('../controllers/search')(Search)
 
-  app.route('/api/search')
+  /*app.route('/api/search')
       .get(search.all)
-      .post(auth.requiresLogin, hasPermissions, search.all);
+      .post(auth.requiresLogin, hasPermissions, search.all);*/
+
+  app.route('/api/search/:tag')
+      .get(search.searchAll);
 
 };

@@ -2,13 +2,25 @@
 
 angular.module('mean.search').config(['$stateProvider',
   function($stateProvider) {
-    $stateProvider.state('search example page', {
-      url: '/search/example',
-      templateUrl: 'search/views/index.html'
-    });
+
     $stateProvider.state('search main page', {
-      url: '/search/',
-      templateUrl: 'search/views/search.html'
+      url: '/search',
+      templateUrl: 'search/views/index.html',
+      resolve: {
+        loggedin: function(MeanUser) {
+          return MeanUser.checkLoggedin();
+        }
+      }
+    });
+
+    $stateProvider.state('search results page', {
+      url: '/search/results',
+      templateUrl: 'search/views/search.html',
+      resolve: {
+        loggedin: function(MeanUser) {
+          return MeanUser.checkLoggedin();
+        }
+      }
     });
   }
 ]);

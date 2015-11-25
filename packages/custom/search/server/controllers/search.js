@@ -5,14 +5,15 @@
 module.exports = function (Search) {
 
     return {
-        project: function (req, res, next, id) {
-            Project.load(id, function (err, project) {
-                if (err)
-                    return next(err);
-                if (!project)
-                    return next(new Error('Hankkeen ' + id + ' lataus epäonnistui.'));
-                req.project = project;
-                next();
+        searchAll: function (req, res) {
+            Search.find({'tag': req.params.tag}).sort('-project_ref').populate('title').exec(function(err, searchResults) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Virhe hankkeiden hakutoiminnossa'
+                    });
+                } else {
+                    res.json(searchResults);
+                }
             });
         },
 

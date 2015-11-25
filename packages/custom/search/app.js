@@ -11,18 +11,18 @@ var Search = new Module('search');
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
-Search.register(function(app, auth, database) {
+Search.register(function(app, auth, database, organisations) {
 
   //We enable routing. By default the Package Object is passed to the routes
-  Search.routes(app, auth, database);
+  Search.routes(app, auth, database, organisations);
 
   //We are adding a link to the main menu for all authenticated users
-  Search.menus.add({
+  /*Search.menus.add({
     title: 'search example page',
     link: 'search example page',
     roles: ['authenticated'],
     menu: 'main'
-  });
+  });*/
 
   Search.menus.add({
     title: 'Haku',
@@ -32,6 +32,11 @@ Search.register(function(app, auth, database) {
   });
   
   Search.aggregateAsset('css', 'search.css');
+
+  Search.events.defaultData({
+    type: 'post',
+    subtype: 'search'
+  });
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above

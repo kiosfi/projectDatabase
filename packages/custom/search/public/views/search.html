@@ -1,33 +1,15 @@
 <div class="" data-ng-controller="SearchController">
     <h1>Haku</h1>
 
-
-
-
-
-    <h2>Package: {{package.name}}</h2>
-
-
-    <!--<ol>
-        <li>
-            <a href="/api/search/example/anyone" target="_self">Server route that anyone can access</a>
-        </li>
-        <li>
-            <a href="/api/search/example/auth" target="_self">Server route that requires authentication</a>
-        </li>
-        <li>
-            <a href="/api/search/example/admin" target="_self">Server route that requires admin user</a>
-        </li>
-        <li>
-            <a href="/api/search/example/render" target="_self">Raw Html rendering example from using swig</a>
-        </li>
-    </ol>
-    <h3><img src="/search/assets/img/logo.png" /></h3>
-    </br>
-    <p class="alert alert-info">You can find your package in /packages/search</p>
-    </br>
-    <p class="alert alert-warning">MEAN versions prior to 0.3.2 will be in /node_modules/search</p>
-    </br>
-    <h3><a href="http://learn.mean.io">Documentation</a></h3>
-    </br>-->
+    <section data-ng-controller="SearchController" data-ng-init="search()">
+        <ul class="articles unstyled">
+            <li data-ng-repeat="project in projects">
+                <span>{{project.title}}</span> /
+                <!--<span>{{article.user.name}}</span>-->
+                <h2><a data-ng-href="#!/projects/{{project._id}}">{{project.title}}</a></h2>
+                <div>{{project.tag}}</div>
+            </li>
+        </ul>
+        <h1 data-ng-hide="!projects || projects.length">Your search hasn't returned any results. <br> Why don't you <a href="/#!/articles/create">Create One</a>?</h1>
+    </section>
 </div>
