@@ -19,6 +19,7 @@ var bank_account2;
 
 describe('<Unit Test>', function () {
     describe('Model Organisation:', function () {
+
         beforeEach(function (done) {
             this.timeout(10000);
 
@@ -70,6 +71,27 @@ describe('<Unit Test>', function () {
                 "other_funding": "other funders",
                 "bank_account": bank_account});
             organisation2.save();
+            organisation3 = new Organisation({
+                "name": "Women's Rights Org",
+                "representative": "Representative3",
+                "exec_manager": "Manager3",
+                "address": {
+                    "street": "Street 12",
+                    "postal_code": "02320",
+                    "city": "Espoo",
+                    "country": "Finland"
+                },
+                "tel": "5551234",
+                "email": "contact@wrng.org",
+                "website": "www.wrng.org",
+                "legal_status": "legal statuses",
+                "history_status": "history statuses",
+                "int_links": "international link",
+                "nat_local_links": "local human rights org 3",
+                "description": "description for organisation .....",
+                "other_funding": "other funders",
+                "bank_account": bank_account});
+            organisation3.save();
             done();
         });
 
@@ -79,12 +101,11 @@ describe('<Unit Test>', function () {
 
                 this.timeout(10000);
 
-
                 var query = Organisation.find();
 
                 return query.exec(function (err, orgs) {
                     expect(err).to.be(null);
-                    expect(orgs.length).to.equal(2);
+                    expect(orgs.length).to.equal(3);
                     done();
                 });
             });
@@ -170,6 +191,7 @@ describe('<Unit Test>', function () {
             this.timeout(10000);
             organisation.remove();
             organisation2.remove();
+            organisation3.remove();
             bank_account.remove();
             done();
         });
