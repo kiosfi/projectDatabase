@@ -1,20 +1,21 @@
 var helpers = require('../helpers.e2e');
 describe('Project list page', function () {
 
-    beforeAll(function() {
+    beforeAll(function () {
         helpers.login();
     })
 
-    beforeEach(function() {
+    beforeEach(function () {
         element(by.linkText('Hankelistaus')).click();
     });
 
-    afterAll(function() {
+    afterAll(function () {
         helpers.logout();
     });
 
     it('should list registered projects when user is logged in', function () {
-        expect(element.all(by.repeater('project in projects')).count()).toEqual(10);
+
+        expect(element.all(by.repeater('project in projects')).count()).toEqual(14);
 
         expect(element(by.id('proj-70001')).isPresent()).toBe(true);
         expect(element(by.id('proj-70002')).isPresent()).toBe(true);
@@ -22,7 +23,8 @@ describe('Project list page', function () {
         expect(element(by.id('proj-79999')).isPresent()).toBe(false);
     });
 
-    it('should list registered projects in correct order', function() {
+
+    it('should list registered projects in correct order', function () {
         expect(element(by.tagName('table')).isPresent()).toBe(true);
         element(by.id('byTitle')).click();
         var rep;
@@ -52,4 +54,10 @@ describe('Project list page', function () {
         expect(rep.get(8).element(by.tagName('td')).getText()).toEqual("70002");
         expect(rep.get(9).element(by.tagName('td')).getText()).toEqual("70012");
     });
+
 });
+
+//    it('should list registered projects in correct order', function() {
+//
+//    })
+

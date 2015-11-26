@@ -129,3 +129,22 @@ hr {
     height: 20px;
     padding: 1px;
 }
+
+.large-btn {
+    height: 30px;
+    width: 110px;
+    background: #b8b8b8;
+    background-image: -webkit-linear-gradient(top, #b8b8b8, #9c9a9c);
+    background-image: -moz-linear-gradient(top, #b8b8b8, #9c9a9c);
+    background-image: -ms-linear-gradient(top, #b8b8b8, #9c9a9c);
+    background-image: -o-linear-gradient(top, #b8b8b8, #9c9a9c);
+    background-image: linear-gradient(to bottom, #b8b8b8, #9c9a9c);
+    -webkit-border-radius: 4;
+    -moz-border-radius: 4;
+    border-radius: 4px;
+    font-family: Courier New;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 5px 15px 5px;
+    text-decoration: none;
+}

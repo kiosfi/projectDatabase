@@ -21,79 +21,93 @@ db.createCollection("signeds");
 db.createCollection("rejecteds");
 
 db.users.insert(
-  { "_id" : ObjectId("5614d428013b9a2f1ca236ce"),
-  "email" : "test@test.com",
-  "hashed_password" : "O2cdPpHlLOkwnQBnExKqwmRF3lpQRW8NDit/UCk+WQz06+CyUJjQOrrBf5mWrhGgE5YKn5y+DY4DZ6Q4zwT/3A==",
-  "salt" : "e5y3JfOstfMYQSZzpQ+acw==",
-  "username" : "testia",
-  "name" : "teppo testi",
-  "provider" : "local",
-  "roles" : [ "authenticated" ], "__v" : 0 }
+        {"_id": ObjectId("5614d428013b9a2f1ca236ce"),
+            "email": "test@test.com",
+            "hashed_password": "O2cdPpHlLOkwnQBnExKqwmRF3lpQRW8NDit/UCk+WQz06+CyUJjQOrrBf5mWrhGgE5YKn5y+DY4DZ6Q4zwT/3A==",
+            "salt": "e5y3JfOstfMYQSZzpQ+acw==",
+            "username": "testia",
+            "name": "teppo testi",
+            "provider": "local",
+            "roles": ["authenticated"], "__v": 0}
 );
 
 db.inreviews.insert(
-  {"_id" : ObjectId("564b78b0609e79f4514f961e"),
-   "user" : "Pekka Puupää",
-   "comments" : "Jep jep"
-  }
+        {"_id": ObjectId("564b78b0609e79f4514f961e"),
+            "user": "Pekka Puupää",
+            "comments": "Jep jep"
+        }
 );
 
 db.approveds.insert(
-  {
-    "_id": ObjectId("564b0cdc9d87261b1bbf0009"),
-    "user": "Maria",
-    "approved_date": "12.15.2015",
-    "approved_by": "Toiminnanjohtaja",
-    "board_notified": "13.15.2015",
-    "methods": [
-      {
-        "level": "Kansainvälinen",
-        "name": "Kapasiteetin vahvistaminen"
-      }
-    ],
-    "themes": [
-      "Oikeusvaltio ja demokratia"
-    ],
-    "granted_sum": {
-      "granted_curr_eur": 60000,
-      "granted_curr_local": 80000
-    }
-  }
+        {
+            "_id": ObjectId("564b0cdc9d87261b1bbf0009"),
+            "user": "Maria",
+            "approved_date": "12.15.2015",
+            "approved_by": "Toiminnanjohtaja",
+            "board_notified": "13.15.2015",
+            "methods": [
+                {
+                    "level": "Kansainvälinen",
+                    "name": "Kapasiteetin vahvistaminen"
+                }
+            ],
+            "themes": [
+                "Oikeusvaltio ja demokratia"
+            ],
+            "granted_sum": {
+                "granted_curr_eur": 60000,
+                "granted_curr_local": 80000
+            }
+        }
 );
 
 db.signeds.insert(
-  {
-    "_id": ObjectId("564b0d089d87261b1bbf000a"),
-    "user": "Maria",
-    "signed_by": "Maija Meri",
-    "signed_date": "3.1.2016",
-    "planned_payments": [
         {
-            "sum_local": 10000,
-            "sum_eur": 5000,
-            "date": "15.1.2016"
-        },
-        {
-            "sum_local": 10000,
-            "sum_eur": 5000,
-            "date": "15.3.2016"
+            "_id": ObjectId("564b0d089d87261b1bbf000a"),
+            "user": "Maria",
+            "signed_by": "Maija Meri",
+            "signed_date": "3.1.2016",
+            "planned_payments": [
+                {
+                    "sum_local": 10000,
+                    "sum_eur": 5000,
+                    "date": "15.1.2016"
+                },
+                {
+                    "sum_local": 10000,
+                    "sum_eur": 5000,
+                    "date": "15.3.2016"
+                }
+            ],
+            "intreport_deadlines": [
+                {
+                    "date": "1.10.2016",
+                    "report": "1. väliraportti"
+                }
+            ]
         }
-    ],
-    "intreport_deadlines": [
+);
+
+db.intreports.insert(
         {
-            "date": "1.10.2016",
-            "report": "1. väliraportti"
+            "_id": ObjectId("123b0d089d87261b1bbf000a"),
+            "user": "Sonja",
+            reportNumber: 1,
+            methods: ["Onnistui adglnbeanaeöajröjah", "Kohtalaisesti onnistui adkvökabknbslnbknadnan"],
+            objectives: ["Tavoitteiden arviointia ......."],
+            overall_rating_kios: "arvio kaf wrpwrpwrpwr",
+            approved_by: "Halko",
+            date_approved: "12.3.2015",
+            comments: "Muut kommentit hankkeen onnistumisesta"
         }
-    ],
-  }
 );
 
 db.bankaccounts.insert(
-      {"_id": ObjectId("56150897b560c1fc0b9b3015"),
-          "bank_contact_details": "Nordea Helsinki",
-          "iban": "FI1234456789000",
-          "swift": "NDEAFIHH",
-          "holder_name": "Järjestö1"}
+        {"_id": ObjectId("56150897b560c1fc0b9b3015"),
+            "bank_contact_details": "Nordea Helsinki",
+            "iban": "FI1234456789000",
+            "swift": "NDEAFIHH",
+            "holder_name": "Järjestö1"}
 );
 
 db.organisations.insert(
@@ -106,7 +120,7 @@ db.organisations.insert(
                 "postal_code": "00780",
                 "city": "Samppalinna",
                 "country": "Suomi"
-              },
+            },
             "tel": "123445",
             "email": "email@org.com",
             "website": "www.org.com",
@@ -128,7 +142,7 @@ db.organisations.insert(
                 "postal_code": "01780",
                 "city": "Vantaa",
                 "country": "Suomi"
-              },
+            },
             "tel": "555 1234 567",
             "email": "email@wr.org",
             "website": "www.wr.org",
@@ -150,7 +164,7 @@ db.organisations.insert(
                 "postal_code": "01280",
                 "city": "Ankkalinna",
                 "country": "Suomi"
-              },
+            },
             "tel": "555 9876 543",
             "email": "test@test.com",
             "website": "www.test.com",
@@ -311,7 +325,12 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176611996768"),
     "reporting_evaluation": "raportointityökalut ym.",
     "other_donors_proposed": "donorA, donorB",
     "dac": "ABC12355",
-    "region": "Afrikka"}
+    "region": "Afrikka",
+    "planned_payments": [{"date": "27.12.2015", "sum_eur": 5000, "sum_local": 10000}],
+    "in_review": ObjectId("564b78b0609e79f4514f961e"),
+    "approved": ObjectId("564b0cdc9d87261b1bbf0009"),
+    "signed": ObjectId("564b0d089d87261b1bbf000a"),
+    "intermediary_reports": [ObjectId("123b0d089d87261b1bbf000a")]}
 );
 
 db.projects.insert({"_id": ObjectId("a2c8c9adb020176622996766"),
@@ -487,6 +506,34 @@ db.projects.insert({"_id": ObjectId("f2c7d9aeb017189911996768"),
     "approved": ObjectId("564b0cdc9d87261b1bbf0009")}
 );
 
+db.projects.insert({"_id": ObjectId("123459f94260406da7a7a41b"),
+    "project_ref": "70015",
+    "title": "Project Signed",
+    "coordinator": "Tommi Testi",
+    "organisation": ObjectId("8344235a153b2cf192bf74b2"),
+    "state": "allekirjoitettu",
+    "reg_date": "12.12.2015",
+    "funding":
+            {"applied_curr_local": 100000,
+                "applied_curr_eur": 12000},
+    "duration_months": 20,
+    "description": "Lyhyt kuvaus",
+    "description_en": "A short description",
+    "background": "Hankkeen tausta",
+    "beneficiaries": "1, 2, 3",
+    "gender_aspect": "ei ole",
+    "project_goal": "Hankkeen päätavoite",
+    "sustainability_risks": "riskit...",
+    "reporting_evaluation": "raportointityökalut ym.",
+    "other_donors_proposed": "donor1, donorB",
+    "dac": "ABC12355",
+    "region": "Afrikka",
+    "planned_payments": [{"date": "27.12.2015", "sum_eur": 5000, "sum_local": 10000}],
+    "in_review": ObjectId("564b78b0609e79f4514f961e"),
+    "approved": ObjectId("564b0cdc9d87261b1bbf0009"),
+    "signed": ObjectId("564b0d089d87261b1bbf000a")}
+);
+
 db.states.insert([
   {
     current_state: "rekisteröity",
@@ -520,4 +567,7 @@ db.states.insert([
     current_state: "päättynyt",
     next_states: []
   }
-])
+]);
+
+
+
