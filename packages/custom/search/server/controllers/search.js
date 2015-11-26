@@ -21,7 +21,24 @@ module.exports = function (Search) {
 
     return {
         searchAll: function (req, res) {
-            Project.find(function(err, searchResults) {
+          var title = new RegExp(req.query.title, "i");
+          var description = new RegExp(req.query.description, "i");
+          var description_en = new RegExp(req.query.description_en, "i");
+
+          var query = Project.find({ $or:[ {'title':title}, {'description':description}, {'description_en': description_en} ]});
+          query
+          .populate('intermediary_reports payments')
+          .populate([
+            {path: 'organisation', model: 'Organisation'},
+            {path: 'in_review', model: 'InReview'},
+            {path: 'approved', model: 'Approved'},
+            {path: 'rejected', model: 'Rejected'},
+            {path: 'signed', model: 'Signed'},
+            {path: 'end_report', model: 'EndReport'},
+            {path: 'ended', model: 'Ended'}
+          ])
+          .exec(function(err, searchResults) {
+                console.log(searchResults)
                 if (err) {
                     return res.status(500).json({
                         error: 'Virhe hankkeiden hakutoiminnossa'

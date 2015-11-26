@@ -2,7 +2,7 @@
 
 angular.module('mean.search').factory('Search', ['$resource',
   function($resource) {
-    return $resource('api/search', {});
+    return $resource('api/search/', {});
     }
   ]);
 
