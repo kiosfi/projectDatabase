@@ -311,7 +311,10 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176611996768"),
     "reporting_evaluation": "raportointityökalut ym.",
     "other_donors_proposed": "donorA, donorB",
     "dac": "ABC12355",
-    "region": "Afrikka"}
+    "region": "Afrikka",
+    "in_review": ObjectId("564b78b0609e79f4514f961e"),
+    "approved": ObjectId("564b0cdc9d87261b1bbf0009"),
+    "signed": ObjectId("564b0d089d87261b1bbf000a")}
 );
 
 db.projects.insert({"_id": ObjectId("a2c8c9adb020176622996766"),
@@ -335,7 +338,10 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176622996766"),
     "reporting_evaluation": "raportointityökalut ym.",
     "other_donors_proposed": "donorA, donorB",
     "dac": "ABC12355",
-    "region": "Afrikka"}
+    "region": "Afrikka",
+    "in_review": ObjectId("564b78b0609e79f4514f961e"),
+    "approved": ObjectId("564b0cdc9d87261b1bbf0009"),
+    "signed": ObjectId("564b0d089d87261b1bbf000a")}
 );
 
 db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a111"),

@@ -137,7 +137,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 function(results) {
                     $scope.now = new Date().toISOString();
                     $scope.projects = results;
-                    console.log($scope.projects);
                 }
             );
         };
@@ -304,8 +303,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.state = $scope.global.newState;
                 project.end_report.approved_date = $scope.convertDate($scope.er_approved_day, $scope.er_approved_month, $scope.er_approved_year);
                 project.end_report.audit.date = $scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year);
-                project.end_report.methods = $scope.addedMethods;
-                project.end_report.objectives = $scope.objectiveComments;
+                console.log(project);
                 project.$addEndReport(function (response) {
                     $location.path('projects/' + response._id);
                 });

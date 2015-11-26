@@ -63,7 +63,7 @@
                     <td>
                       <p ng-repeat="deadline in project.signed.intreport_deadlines"
                       style="color:red;"
-                      ng-if="deadline.date < now &&
+                      ng-if="deadline.date < now && 
                       project.intermediary_reports[project.signed.intreport_deadlines.indexOf(deadline)] === undefined">
                       {{deadline.report}} myöhässä!</p>
                     </td>

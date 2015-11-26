@@ -199,8 +199,9 @@ var EndReportSchema = new Schema({
     methods: {
         type: Array
     },
-    objectives: {
-        type: Array
+    objective: {
+        type: String,
+        required: true
     },
     comments: {
         type: String
