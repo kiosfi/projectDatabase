@@ -31,7 +31,7 @@
                               ng-show="ordering === 'title'"
                               ng-class="{reverse:!ascending}"></span>
                     </th>
-                    <th class="col-md-2">
+                    <th class="col-md-1">
                         <a id="byState"
                            href="" ng-click="updateOrdering('state')">
                             Tila
@@ -40,6 +40,7 @@
                               ng-show="ordering === 'state'"
                               ng-class="{reverse:!ascending}"></span>
                     </th>
+                    <th class="col-md-3">Huomioita</th>
                     <th class="col-md-3">
                         <a id="byOrg"
                            href="" ng-click="updateOrdering('organisation')">
@@ -49,7 +50,6 @@
                               ng-show="ordering === 'organisation'"
                               ng-class="{reverse:!ascending}"></span>
                     </th>
-                    <th class="col-md-4"></th>
                 </tr>
             </thead>
             <tbody id="projtable">
@@ -57,16 +57,18 @@
                     <td>{{project.project_ref}}</td>
                     <td><a ng-href="/projects/{{project._id}}">
                             {{project.title}}</a></td>
-                    <td>{{project.state}}</td>
+                    <td>{{project.state}}
+                    </td>
+                    <td>
+                        <span ng-repeat="deadline in project.signed.intreport_deadlines"
+                              style="color:red;"
+                              ng-if="deadline.date < now &&
+                                          project.intermediary_reports[project.signed.intreport_deadlines.indexOf(deadline)] === undefined">
+                            {{deadline.report}} myöhässä!
+                        </span>
+                    </td>
                     <td><a ng-href="/organisations/{{project.organisation._id}}">
                             {{project.organisation.name}}</a></td>
-                    <td>
-                      <p ng-repeat="deadline in project.signed.intreport_deadlines"
-                      style="color:red;"
-                      ng-if="deadline.date < now &&
-                      project.intermediary_reports[project.signed.intreport_deadlines.indexOf(deadline)] === undefined">
-                      {{deadline.report}} myöhässä!</p>
-                    </td>
                 </tr>
             </tbody>
         </table>
