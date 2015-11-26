@@ -359,7 +359,7 @@ A form for project state change.
                     {{payment.sum_eur}} € / {{payment.payment_date}}
                 </div>
             </div>
-            
+
         </div>
 
         <p class="col-md-12 strong-title comment-form-div">Toimintatavat ja niiden toteutuminen</p>
@@ -368,7 +368,7 @@ A form for project state change.
                 {{method.name}} <br>- {{method.level}}
             </div>
             <div class="col-md-8">
-                <textarea name="intRMethods" type="text" class="form-control" data-ng-model="addedMethods[(project.approved.methods).indexOf(method)]" id="intRMethods" placeholder="Kommentteja" required></textarea>
+                <textarea name="intRMethods" type="text" class="form-control" data-ng-model="addedMethods[(project.approved.methods).indexOf(method)]" id="intRMethods" placeholder="Kommentteja"></textarea>
             </div>
         </div>
 
@@ -378,17 +378,21 @@ A form for project state change.
                 <p>{{project.project_goal}}</p>
             </div>
             <div class="col-md-8">
-                <textarea name="objComments" type="text" class="form-control" data-ng-model="objectiveComments[0]" id="objComments" placeholder="Kommentteja tavoitteiden toteutumisesta" required></textarea>
+                <textarea name="objComments" type="text" class="form-control" data-ng-model="objectiveComments[0]" id="objComments" placeholder="Kommentteja tavoitteiden toteutumisesta"></textarea>
             </div>
         </div>
 
         <div class="form-group col-md-12" ng-class="{
                     'has-error'
-                    : intReportForm.overall_rating_kios.$invalid
-                }">
+                    : intReportForm.overallKios.$invalid }">
             <label for="overallKios" class="col-md-2">KIOS:in kokonaisarvio</label>
             <div class="col-md-10">
-                <textarea name="overallKios" type="text" class="form-control" data-ng-model="project.intermediary_report.overall_rating_kios" id="overallKios" placeholder="KIOS:in arvio" required></textarea>
+                <textarea name="overallKios" type="text" class="form-control" data-ng-model="project.intermediary_report.overall_rating_kios" 
+                          id="overallKios" placeholder="KIOS:in arvio" required></textarea>
+
+                <div ng-show="intReportForm.overallKios.$invalid" class="help-block">
+                    <p ng-show="intReportForm.overallKios.$error.required">Kenttä on pakollinen</p>
+                </div>
             </div>
         </div>
 
@@ -396,34 +400,38 @@ A form for project state change.
         <div class="form-group col-md-12">
             <label for="comments" class="col-md-2">Muut kommentit</label>
             <div class="col-md-10">
-                <textarea name="intRComments" type="text" class="form-control" data-ng-model="project.intermediary_report.comments" id="intRcomments" placeholder="Muut raportin kommentit" required></textarea>
+                <textarea name="intRComments" type="text" class="form-control" data-ng-model="project.intermediary_report.comments" id="intRcomments" placeholder="Muut raportin kommentit"></textarea>
             </div>
         </div>
 
         <div class="form-group col-md-12" ng-class="{
                     'has-error'
-                    : intReportForm.approved_by.$invalid
-                }">
+                    : intReportForm.intRApprovedBy.$invalid }">
             <label for="intRApprovedBy" class="col-md-2">Hyväksyjä</label>
             <div class="col-md-10">
                 <input name="intRApprovedBy" type="text" class="form-control" data-ng-model="project.intermediary_report.approved_by" id="intRApprovedBy" placeholder="Väliraportin hyväksyjä" required>
+                <div ng-show="intReportForm.intRApprovedBy.$invalid" class="help-block">
+                    <p ng-show="intReportForm.intRApprovedBy.$error.required">Kenttä on pakollinen</p>
+                </div>
             </div>
         </div>
 
         <div class="form-group col-md-12" ng-class="{
                     'has-error'
-                    : intReportForm.date_approved.$invalid
-                }">
+                    : intReportForm.intRDateAppr.$invalid }">
             <label for="intRDateAppr" class="col-md-2">Hyväksymis pvm</label>
             <div class="col-md-10">
                 <input name="intRDateAppr" type="text" class="form-control" data-ng-model="project.intermediary_report.date_approved" id="intRDateAppr" placeholder="Hyväksymis pvm" required>
+                <div ng-show="intReportForm.intRDateAppr.$invalid" class="help-block">
+                    <p ng-show="intReportForm.intRDateAppr.$error.required">Kenttä on pakollinen</p>
+                </div>
             </div>
         </div>
 
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button id="intrep-btn" type="submit" class="btn btn-default">Tallenna</button>
+                <button id="intrep-btn" type="submit" class="btn btn-default" ng-disabled="intReportForm.$invalid">Tallenna</button>
             </div>
         </div>
     </form>
