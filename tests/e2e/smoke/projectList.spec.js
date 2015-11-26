@@ -16,7 +16,7 @@ describe('Project list page', function () {
         expect(element(by.id('proj-79999')).isPresent()).toBe(false);
 
         helpers.logout();
-    })
+    });
 
 //    it('should list registered projects in correct order', function() {
 //
