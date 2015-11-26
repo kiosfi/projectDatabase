@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('mean.search').controller('SearchController', ['$scope', '$stateParams',
-  '$location', '$window', '$http', 'Global', 'Projects', 'MeanUser',
+  '$location', '$window', '$http', 'Global', 'Search', 'MeanUser',
   function($scope, $stateParams, $location, $window, $http, Global, Search, MeanUser) {
     $scope.global = Global;
 
@@ -11,8 +11,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
     };*/
 
     $scope.search = function() {
-      Search.query(function(search) {
-        $scope.search = search;
+      Search.query(function(data) {
+        console.log(data);
       });
     };
    /* $scope.search = function() {
@@ -20,13 +20,13 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         $scope.articles = articles;
       });
     };*/
-    $scope.findOne = function() {
+    /*$scope.findOne = function() {
       Projects.get({
         projectId: $stateParams.projectId
       }, function(project) {
         $scope.project = project;
       });
-    };
+    };*/
 
   }
 ]);

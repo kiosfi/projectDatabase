@@ -1,11 +1,10 @@
 'use strict';
 
 angular.module('mean.search').factory('Search', ['$resource',
-  function() {
-    return {
-      name: 'search'
-    };
-  }
+  function($resource) {
+    return $resource('api/search', {});
+    }
+  ]);
 
   /*function($resource) {
     return $resource('projects/:projectId', {
@@ -16,4 +15,3 @@ angular.module('mean.search').factory('Search', ['$resource',
       }
     });
   }*/
-]);

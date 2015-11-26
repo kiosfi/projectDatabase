@@ -1,12 +1,27 @@
 'use strict';
 
 
+var mongoose = require('mongoose'),
+        Project = mongoose.model('Project'),
+        Organisation = mongoose.model('Organisation'),
+        BankAccount = mongoose.model('BankAccount'),
+        States = mongoose.model('States'),
+        InReview = mongoose.model('InReview'),
+        Rejected = mongoose.model('Rejected'),
+        Signed = mongoose.model('Signed'),
+        Payment = mongoose.model('Payment'),
+        Ended = mongoose.model('Ended'),
+        Approved = mongoose.model('Approved'),
+        IntReport = mongoose.model('IntReport'),
+        EndReport = mongoose.model('EndReport'),
+        config = require('meanio').loadConfig(),
+        _ = require('lodash');
 
 module.exports = function (Search) {
 
     return {
         searchAll: function (req, res) {
-            Search.find({'tag': req.params.tag}).sort('-project_ref').populate('title').exec(function(err, searchResults) {
+            Project.find(function(err, searchResults) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Virhe hankkeiden hakutoiminnossa'
@@ -35,4 +50,3 @@ module.exports = function (Search) {
         }
     };
 }
-
