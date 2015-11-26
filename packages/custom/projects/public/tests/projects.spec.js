@@ -145,7 +145,7 @@
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
                         in_review: {
-                          comments: "This is a comment"
+                            comments: "This is a comment"
                         },
                         state: 'rekisteröity',
                         to: 'käsittelyssä'
@@ -248,6 +248,7 @@
             it('$scope.addSignedState(true) should update a valid project', inject(function (Projects) {
 
                 // fixture rideshare
+
                 var putProjectData = function () {
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
@@ -279,6 +280,42 @@
 
             }));
 
+            it('$scope.addIntReportState(true) should update a valid project', inject(function (Projects) {
+                // fixture rideshare
+                var putProjectData = function () {
+                    return {
+                        _id: '525a8422f6d0f87f0e407a33',
+                        intermediary_reports: [],
+                        intermediary_report: {
+                            methods: ["Onnistui", "Onnistui kohtalaisesti"],
+                            objectives: ["Lorem ipsum"],
+                            overall_rating_kios: "Comments from kios",
+                            approved_by: "Halko",
+                            date_approved: "23-12-2015",
+                            comments: "General comments"
+                        },
+                        state: 'allekirjoitettu',
+                        to: 'väliraportti'
+                    };
+                };
+
+                // mock project object from form
+                var project = new Projects(putProjectData());
+
+                // mock project in scope
+                scope.project = project;
+
+                // test PUT happens correctly
+                $httpBackend.expectPUT(/api\/projects\/intReport\/([0-9a-fA-F]{24})$/).respond();
+
+                // run controller
+                scope.addIntReportState(true);
+                $httpBackend.flush();
+
+                // test URL location to new object
+                expect($location.path()).toBe('/projects/' + putProjectData()._id);
+            }));
+
             it('$scope.addEndedState(true) should update a valid project', inject(function (Projects) {
 
 
@@ -287,10 +324,10 @@
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
                         ended: {
-                          end_date: "12.12.2015",
-                          board_notified: "12.12.2015",
-                          approved_by: "toimitusjohtaja",
-                          other_comments: "kommentti"
+                            end_date: "12.12.2015",
+                            board_notified: "12.12.2015",
+                            approved_by: "toimitusjohtaja",
+                            other_comments: "kommentti"
                         },
                         state: 'loppuraportti',
                         to: 'päättynyt'

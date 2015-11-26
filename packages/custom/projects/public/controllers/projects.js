@@ -55,9 +55,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
-        $scope.convertDate = function(day, month, year) {
-          var parsed = new Date(year + "-" + month + "-" + day);
-          return parsed;
+        $scope.convertDate = function (day, month, year) {
+            var parsed = new Date(year + "-" + month + "-" + day);
+            return parsed;
         };
 
         $scope.hasAuthorization = function (project) {
@@ -114,9 +114,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          * @returns {undefined}
          */
         $scope.find = function () {
-            var ordering  = $location.search().ordering;
+            var ordering = $location.search().ordering;
             var ascending = $location.search().ascending;
-            var page      = $location.search().page;
+            var page = $location.search().page;
             if (typeof ordering === 'undefined') {
                 ordering = 'project_ref';
             }
@@ -126,19 +126,18 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (typeof page === 'undefined') {
                 page = 1;
             }
-            $scope.ordering  = ordering;
+            $scope.ordering = ordering;
             $scope.ascending = ascending === 'true';
-            $scope.page      = page;
+            $scope.page = page;
             Projects.query({
-                    ordering:   ordering,
-                    ascending:  ascending,
-                    page:       page
-                },
-                function(results) {
-                    $scope.now = new Date().toISOString();
-                    $scope.projects = results;
-                    console.log($scope.projects);
-                }
+                ordering: ordering,
+                ascending: ascending,
+                page: page
+            },
+            function (results) {
+                $scope.now = new Date().toISOString();
+                $scope.projects = results;                
+            }
             );
         };
 
@@ -281,7 +280,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (isValid) {
                 var project = $scope.project;
                 project.state = $scope.global.newState;
-                project.intermediary_report.themes = $scope.themeSelection;
                 project.intermediary_report.methods = $scope.addedMethods;
                 project.intermediary_report.objectives = $scope.objectiveComments;
                 var index = project.intermediary_reports.length;
@@ -381,6 +379,19 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         /**
+         * Finds project's intermediary report and puts the given report to $scope.report
+         * so that report's details can be shown on intreport.html 
+         */
+        $scope.findIntReport = function () {
+            Projects.get({
+                projectId: $stateParams.projectId
+            }, function (project) {
+                $scope.report = project.intermediary_reports[$stateParams.reportId - 1];
+            });
+        };
+
+
+        /**
          * The sorting predicate used in project listing. Initial value is
          * "project_ref".
          */
@@ -411,7 +422,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          *
          * @param {String} page Number of the page to be displayed.
          */
-        $scope.updatePage = function(page) {
+        $scope.updatePage = function (page) {
             $window.location = '/projects?ordering=' + $scope.ordering
                     + '&ascending=' + $scope.ascending
                     + '&page=' + page;
@@ -422,7 +433,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          *
          * @param {String} ordering The ordering predicate (eg. "project_ref").
          */
-        $scope.updateOrdering = function(ordering) {
+        $scope.updateOrdering = function (ordering) {
             $window.location = '/projects?ordering=' + ordering
                     + '&ascending=' + (ordering === $scope.ordering
                             ? !$scope.ascending : true)
@@ -435,8 +446,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          *
          * @returns {undefined}
          */
-        $scope.paginate = function() {
-            Projects.countProjects(function(result) {
+        $scope.paginate = function () {
+            Projects.countProjects(function (result) {
                 var pageCount, numberOfPages, pagination;
                 pageCount = result.projectCount;
                 numberOfPages = Math.ceil(pageCount / $scope.pageSize);
