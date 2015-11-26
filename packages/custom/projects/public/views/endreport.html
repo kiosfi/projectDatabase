@@ -2,11 +2,16 @@
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
   <p>Muokkaaja: {{project.end_report.user}}, {{project.end_report.date| date: 'dd-MM-yyyy HH:mm'}}</p>
   <br>
-  <h3>Loppuraportti</h3>
+  <h3>Loppuraportti: {{project.title}}</h3>
   <article class="proj-body">
     <p><b>Raportin hyväksyjä</b>: {{project.end_report.approved_by}}, {{project.end_report.approved_date| date: 'dd-MM-yyyy'}}</p>
   </article>
-  <br>
-  <article>
+  
+  <article class="er-body">
+    <h4>Hankkeen tilinpäätös</h4>
+    <h5>Päivämäärä</h5>
+    <p>{{project.end_report.audit.date| date: 'dd-MM-yyyy'}}</p>
+    <h5>Arvio</h5>
+    <p>{{project.end_report.audit.review}}</p>
   </article>
 </section>
