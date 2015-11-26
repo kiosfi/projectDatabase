@@ -13,7 +13,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
     $scope.search = function() {
 
       Search.query({'title':$scope.selected, 'description':$scope.selected, 'description_en': $scope.selected}, function(data) {
-        console.log(data);
+        $scope.searchresults = data;
       });
     };
    /* $scope.search = function() {
