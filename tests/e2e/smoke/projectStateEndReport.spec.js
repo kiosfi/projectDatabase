@@ -31,7 +31,7 @@ describe('Changing project state to "end report"', function () {
         element(by.model('audit_year')).sendKeys(2016);
         element(by.model('project.end_report.audit.review')).sendKeys('Arvio tilintarkastuksesta');
         browser.executeScript('window.scrollTo(0,100000)').then(function () {
-          element(by.model('method_comment')).sendKeys('Ihan ok');
+          element(by.id('er_methods')).sendKeys('Ihan ok');
           element(by.model('project.end_report.objective')).sendKeys('Hyvä');
           element(by.model('project.end_report.general_review')).sendKeys('Hyvin meni');
         });
