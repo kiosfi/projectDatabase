@@ -9,12 +9,13 @@ exports.config = {
         '../../e2e/helpers.e2e.js', '../../e2e/**/*.spec.js'
     ],
     multiCapabilities: [
-//        {
-//            browserName: 'chrome'
-//        },
         {
-            browserName: 'firefox'
+            browserName: 'chrome'
         }
+//        ,
+//        {
+//            browserName: 'firefox'
+//        }
     ],
     onPrepare: function () {
         //Creates independent results files for each browser
