@@ -32,4 +32,5 @@ module.exports = function(Organisations, app, auth) {
     .get(auth.isMongoId, organisations.show);
 
   app.param('organisationId', organisations.organisation);
+  app.param('orgName', organisations.organisation);
 };

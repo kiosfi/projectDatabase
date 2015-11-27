@@ -1,18 +1,37 @@
 <h1>Haku</h1>
-
+<br>
 <section data-ng-controller="SearchController">
-  <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="search()" novalidate>
-    <div>
+  <article class="search">
+    <h4>Hae järjestön nimellä</h4>
+    <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByOrgName()" novalidate>
       <div>
-        <input type="text" id="tag" ng-model="selected" class="form-control" placeholder="Hakusanat">
+        <div style="float:left;" class="col-md-6">
+          <input type="text" id="tag" ng-model="selected" class="form-control" placeholder="Hakusanat">
+        </div>
+        <div style="float:left;">
+          <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
+        </div>
       </div>
-      <div>
-        <button mean-token="'search-submit'"type="submit" class="btn btn-default">Hae</button>
-      </div>
-    </div>
-  </form>
+    </form>
+    <div style="clear:both;">&nbsp;</div>
+  </article>
   <br>
-  <article>
+  <article class="search">
+    <h4>Hae hankkeen tilan mukaan</h4>
+    <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByState()" novalidate>
+      <select ng-init="states()" class="dropdown col-md-6" ng-model="selectedState">
+          <option ng-repeat="state in states" value={{state.current_state}}>
+            {{state.current_state}}
+          </option>
+      </select>
+      <div style="float:left;">
+          <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
+      </div>
+      </form>
+    <div style="clear:both;">&nbsp;</div>
+  </article>
+  <br>
+  <article class="search">
     <h4>Hakutulokset</h4>
     <ul>
       <li data-ng-repeat="result in searchresults">

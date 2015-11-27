@@ -11,10 +11,10 @@ var Search = new Module('search');
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
-Search.register(function(app, auth, database, organisations) {
+Search.register(function(app, auth, database, organisations, projects) {
 
   //We enable routing. By default the Package Object is passed to the routes
-  Search.routes(app, auth, database, organisations);
+  Search.routes(app, auth, database, organisations, projects);
 
   //We are adding a link to the main menu for all authenticated users
   /*Search.menus.add({
@@ -30,7 +30,7 @@ Search.register(function(app, auth, database, organisations) {
     roles: ['authenticated'],
     menu: 'main'
   });
-  
+
   Search.aggregateAsset('css', 'search.css');
 
   Search.events.defaultData({

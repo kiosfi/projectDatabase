@@ -20,12 +20,10 @@ var mongoose = require('mongoose'),
 module.exports = function (Search) {
 
     return {
-        searchAll: function (req, res) {
-          var title = new RegExp(req.query.title, "i");
-          var description = new RegExp(req.query.description, "i");
-          var description_en = new RegExp(req.query.description_en, "i");
+        searchByState: function (req, res) {
+          console.log(req.params);
+          var query = Project.find({state: req.query.state});
 
-          var query = Project.find({ $or:[ {'title':title}, {'description':description}, {'description_en': description_en} ]});
           query
           .populate('intermediary_reports payments')
           .populate([
@@ -49,7 +47,19 @@ module.exports = function (Search) {
             });
         },
 
-        all: function (req, res) {
+        searchOrg: function (req, res) {
+            var param = new RegExp(req.params.name, 'i');
+            Organisation.findOne({name: param})
+                    .exec(function (err, organisation) {
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Järjestön hankkeiden lataaminen ei onnistu.'
+                            });
+                        }
+                        res.json(organisation);
+                    });
+        }
+        /*all: function (req, res) {
             var query = Project.find();
             query
                 .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
@@ -64,6 +74,6 @@ module.exports = function (Search) {
                     }
                     res.json(projects)
                 });
-        }
+        }*/
     };
 }

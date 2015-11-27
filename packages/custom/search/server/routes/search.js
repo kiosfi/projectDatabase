@@ -31,6 +31,7 @@ module.exports = function (Search, app, auth) {
       .post(auth.requiresLogin, hasPermissions, search.all);*/
 
   app.route('/api/search')
-      .get(search.searchAll);
-
+      .get(search.searchByState);
+  app.route('/api/search/org/:name')
+      .get(search.searchOrg);
 };

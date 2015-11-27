@@ -398,6 +398,16 @@ module.exports = function (Projects) {
          */
         byOrg: function (req, res) {
             Project.find({organisation: req.organisation})
+                    .populate('intermediary_reports payments')
+                    .populate([
+                      {path: 'organisation', model: 'Organisation'},
+                      {path: 'in_review', model: 'InReview'},
+                      {path: 'approved', model: 'Approved'},
+                      {path: 'rejected', model: 'Rejected'},
+                      {path: 'signed', model: 'Signed'},
+                      {path: 'end_report', model: 'EndReport'},
+                      {path: 'ended', model: 'Ended'}
+                    ])
                     .exec(function (err, projects) {
                         if (err) {
                             return res.status(500).json({
