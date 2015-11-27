@@ -167,8 +167,8 @@
                     <br>
                     <h5 class="proj-header">Maksettu</h5>
                     <section class="proj-body" ng-show="project.payments.length">
-                        <p>Maksettu yhteensä: {{project.funding.paid_eur | currency : ""}} euroa ({{project.funding.paid_local | currency : ""}} paikallista) </p>
-                        <p>Jäljellä: {{project.funding.left_eur | currency : ""}} euroa ({{project.funding.left_local | currency : ""}} paikallista) </p>
+                        <p>Maksettu yhteensä: {{project.funding.paid_eur | currency : ""}} EUR ({{project.funding.paid_local | currency : ""}} paikallista) </p>
+                        <p>Jäljellä: {{project.funding.left_eur | currency : ""}} EUR ({{project.funding.left_local | currency : ""}} paikallista) </p>
                     </section>
 
                 </article>
@@ -300,7 +300,7 @@
                 <h5>Hallitukselle tiedoksi:</h5>
                 <p>{{project.approved.board_notified| date:'dd-MM-yyyy'}}</p>
                 <h5>Hyväksytty summa:</h5>
-                <p>{{project.approved.granted_sum.granted_curr_eur | currency : ""}} € ({{project.approved.granted_sum.granted_curr_local | currency : ""}} paikallista valuuttaa)</p>
+                <p>{{project.approved.granted_sum.granted_curr_eur | currency : ""}} EUR ({{project.approved.granted_sum.granted_curr_local | currency : ""}} paikallista valuuttaa)</p>
                 <h5>Teemat:</h5>
                 <ul>
                     <li data-ng-repeat="theme in project.approved.themes">{{theme}}</li>
