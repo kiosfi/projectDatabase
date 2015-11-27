@@ -311,6 +311,7 @@ A form for project state change.
         </div>
 
         <label for="plannedPaymentSelection" class="col-md-3">Maksusuunnitelma</label>
+        <div><p>Myönnetty summa: {{project.approved.granted_sum.granted_curr_eur | currency : ""}} € / {{project.approved.granted_sum.granted_curr_local | currency : ""}} paik. val.</p></div>
         <div class="form-group col-md-12" id="plPayments">
             <div class="col-md-12" name="plannedPaymentSelection" id="plannedPaymentSelection" data-ng-repeat="plannedPayment in plannedPayments">
                 <div>
