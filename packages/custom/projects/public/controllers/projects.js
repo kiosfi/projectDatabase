@@ -136,9 +136,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             },
             function (results) {
                 $scope.now = new Date().toISOString();
-                $scope.projects = results;                
+                $scope.projects = results;
             }
-            );
+          );
         };
 
         $scope.findOne = function () {
@@ -300,9 +300,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (isValid) {
                 var project = $scope.project;
                 project.state = $scope.global.newState;
-                project.end_report.themes = $scope.themeSelection;
-                project.end_report.methods = $scope.addedMethods;
-                project.end_report.objectives = $scope.objectiveComments;
+                project.end_report.approved_date = $scope.convertDate($scope.er_approved_day, $scope.er_approved_month, $scope.er_approved_year);
+                project.end_report.audit.date = $scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year);
+                console.log(project);
                 project.$addEndReport(function (response) {
                     $location.path('projects/' + response._id);
                 });
@@ -380,7 +380,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         /**
          * Finds project's intermediary report and puts the given report to $scope.report
-         * so that report's details can be shown on intreport.html 
+         * so that report's details can be shown on intreport.html
          */
         $scope.findIntReport = function () {
             Projects.get({

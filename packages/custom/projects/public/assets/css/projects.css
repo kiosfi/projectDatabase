@@ -1,7 +1,6 @@
 
 #visibilityAppinfo, #visibilityPayments, #visibilityAttachments, #visibilityReviewinfo,
-#visibilityRejectedinfo, #visibilitySignedinfo, #visibilityApprovedinfo,
-#visibilityEndreportinfo, #visibilityEndedinfo{
+#visibilityRejectedinfo, #visibilitySignedinfo, #visibilityApprovedinfo, #visibilityEndedinfo {
 
     display: none;
 }
@@ -72,6 +71,13 @@ span ul li {
     line-height: 1.2;
     font-size: 14px;
     font-style: normal;
+}
+
+.er-body {
+  line-height: 1.2;
+  font-size: 14px;
+  font-style: normal;
+  padding: 1em;
 }
 
 hr {

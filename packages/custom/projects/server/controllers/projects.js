@@ -385,7 +385,7 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-        /*
+        /**
          * Updates project to contain data required in end report state
          * @param {type} req project object to be updated, sent from frontend
          * @param {type} res project object after update

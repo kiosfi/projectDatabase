@@ -16,6 +16,7 @@ var expect = require('expect.js'),
         Rejected = mongoose.model('Rejected'),
         Signed = mongoose.model('Signed'),
         Payment = mongoose.model('Payment'),
+        EndReport = mongoose.model('EndReport'),
         Ended = mongoose.model('Ended');
 
 var project1;
@@ -468,6 +469,34 @@ describe('<Unit Test>', function () {
                     done();
                 });
             });
+
+            it('should create a new "end report" state and update given project with its id', function (done) {
+                this.timeout(10000);
+                var date = new Date();
+                end_report = new EndReport({
+                    "audit": {"date": date, "review": "ihan ok"},
+                    "approved_by": "Jaana Jantunen",
+                    "approved_date": date,
+                    "general review": "Meni hyvin.",
+                    "methods": [{"name": "tavoite", "level": "paikallinen"}],
+                    "objectives": "hankkeen tavoite",
+                    "comments": "Kommentti"});
+
+                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                    end_report.user = user.name;
+                    end_report.save();
+                    proj.state = "loppuraportti";
+                    proj.end_report = end_report;
+                    proj.save();
+                    expect(err).to.be(null);
+                    expect(proj.state).to.be("loppuraportti");
+                    expect(proj.end_report.approved_by).to.be("Jaana Jantunen");
+                    end_report.remove();
+                    user.remove();
+                    done();
+                });
+            });
+
 
             it('should create a new "ended" state update given project with its id', function (done) {
                 this.timeout(10000);

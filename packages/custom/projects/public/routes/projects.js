@@ -37,8 +37,7 @@ angular.module('mean.projects').config(['$stateProvider',
           }
         }
       })
-      
-            .state('change project state', {
+      .state('change project state', {
         url: '/projects/:projectId/change',
         templateUrl: '/projects/views/change.html',
         resolve: {
@@ -47,10 +46,18 @@ angular.module('mean.projects').config(['$stateProvider',
           }
         }
       })
-      
       .state('project report by id', {
         url: '/projects/:projectId/intreport/:reportId',
         templateUrl: '/projects/views/intreport.html',
+        resolve: {
+          loggedin: function(MeanUser) {
+            return MeanUser.checkLoggedin();
+          }
+        }
+      })
+      .state('end report by project id', {
+        url: '/projects/endReport/:projectId',
+        templateUrl: '/projects/views/endreport.html',
         resolve: {
           loggedin: function(MeanUser) {
             return MeanUser.checkLoggedin();

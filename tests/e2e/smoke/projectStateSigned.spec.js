@@ -23,9 +23,9 @@ describe('Changing project state to "signed"', function () {
         expect(browser.getCurrentUrl()).toContain('/change');
 
         element(by.model('project.signed.signed_by')).sendKeys('Teija Testi');
-        element(by.model('signed_date.day')).sendKeys('12');
-        element(by.model('signed_date.month')).sendKeys('12');
-        element(by.model('signed_date.year')).sendKeys('2015');
+        element(by.model('signed_day')).sendKeys('12');
+        element(by.model('signed_month')).sendKeys('12');
+        element(by.model('signed_year')).sendKeys('2015');
 
         element(by.id('add-btn')).click();
 

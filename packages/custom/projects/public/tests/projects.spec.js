@@ -280,6 +280,7 @@
 
             }));
 
+
             it('$scope.addIntReportState(true) should update a valid project', inject(function (Projects) {
                 // fixture rideshare
                 var putProjectData = function () {
@@ -296,6 +297,7 @@
                         },
                         state: 'allekirjoitettu',
                         to: 'väliraportti'
+
                     };
                 };
 
@@ -310,6 +312,41 @@
 
                 // run controller
                 scope.addIntReportState(true);
+                $httpBackend.flush();
+
+                // test URL location to new object
+                expect($location.path()).toBe('/projects/' + putProjectData()._id);
+            }));
+
+            it('$scope.addEndReportState(true) should update a valid project', inject(function (Projects) {
+                        // fixture rideshare
+                  var putProjectData = function () {
+                        end_report: {
+                          audit: {"date": scope.convertDate(11, 12, 2015).toISOString(), "review": "arvio"},
+                          approved_by: "toimitusjohtaja",
+                          approved_date: scope.convertDate(12, 12, 2015).toISOString(),
+                          general_review: "kommentti",
+                          methods: [{"name": "metodi", "level": "paikallinen"}],
+                          objectives: "tavoite",
+                          comments: "kommenttia"
+                        },
+                        state: 'väliraportti',
+                        to: 'loppuraportti'
+
+                    };
+                };
+
+                // mock project object from form
+                var project = new Projects(putProjectData());
+
+                // mock project in scope
+                scope.project = project;
+
+                // test PUT happens correctly
+                $httpBackend.expectPUT(/api\/projects\/endReport\/([0-9a-fA-F]{24})$/).respond();
+
+                // run controller
+                scope.addEndReportState(true);
                 $httpBackend.flush();
 
                 // test URL location to new object
