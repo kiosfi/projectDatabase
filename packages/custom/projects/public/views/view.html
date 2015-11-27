@@ -355,19 +355,8 @@
                     <h5>Muokkaaja:</h5>
                     <p>{{intreport.user}}, {{intreport.date| date:'dd-MM-yyyy, HH:mm'}}</p>
                     <p ng-show="intreport.processed === true">Väliraportti käsitelty</p>
-                    <h5>Kommentit</h5>
-                    <p>{{intreport.comments}}</p>                
-                    <h5>Metodit</h5>
-                    <ul>
-                        <li ng-repeat="method in project.approved.methods">
-                            <i>{{method.name}}</i>, taso: <i>{{method.level}}</i><br>
-                            {{intreport.methods[project.approved.methods.indexOf(method)]}}
-                        </li>
-                    </ul>
-                    <h5>Tavoitteet</h5>
-                    <ul>
-                        <li ng-repeat="objective in intreport.objectives">{{objective}}</li>
-                    </ul>
+                    <h5>Hyväksytty:</h5>
+                    <p>{{intreport.approved_by}}, {{intreport.date_approved | date : 'dd-MM-yyyy'}}</p>
                 </span>
             </article>
         </section>
