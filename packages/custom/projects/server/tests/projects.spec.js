@@ -498,7 +498,7 @@ describe('<Unit Test>', function () {
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("väliraportti");
-                    expect(proj.end_report.approved_by).to.be("Halko");
+                    expect(proj.intermediary_report.approved_by).to.be("Halko");
                     int_report.remove();
                     user.remove();
                     done();
