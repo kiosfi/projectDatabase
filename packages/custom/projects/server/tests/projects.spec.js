@@ -16,7 +16,8 @@ var expect = require('expect.js'),
         Rejected = mongoose.model('Rejected'),
         Signed = mongoose.model('Signed'),
         Payment = mongoose.model('Payment'),
-        Ended = mongoose.model('Ended');
+        Ended = mongoose.model('Ended'),
+        IntReport = mongoose.model('IntReport');
 
 var project1;
 var project2;
@@ -465,6 +466,41 @@ describe('<Unit Test>', function () {
                     expect(err).to.be(null);
                     expect(proj.payments.length).to.be(1);
                     payment.remove();
+                    done();
+                });
+            });
+            
+            it('should create a new "int report" state and update given project with its id', function (done) {
+                this.timeout(10000);
+                var date = new Date();
+                int_report = new IntReport({
+                    "reportNumber": 1,
+                    "methods": ["Onnistui", "Onnistui kohtalaisesti"],
+                    "objectives": ["TAvoitteet saavutettiin"],
+                    "overall_rating_kios": "Arvio",
+                    "approved_by": "Halko",
+                    "date_approved": date,
+                    "comments": "Muita kommentteja hankkeen raportilta"});
+                
+//                return project1.addIntReport(function(err, proj) {
+//                    expect(err).to.be(null);
+//                    expect(proj.state).to.be("väliraportti");
+//                    expect(proj.intermediary_report.approved_by).to.be("Halko");
+//                    int_report.remove();
+//                    done();
+//                });
+
+                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                    int_report.user = user.name;
+                    int_report.save();
+                    proj.state = "väliraportti";
+                    proj.intermediary_report = int_report;
+                    proj.save();
+                    expect(err).to.be(null);
+                    expect(proj.state).to.be("väliraportti");
+                    expect(proj.end_report.approved_by).to.be("Halko");
+                    int_report.remove();
+                    user.remove();
                     done();
                 });
             });
