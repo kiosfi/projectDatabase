@@ -1,25 +1,25 @@
 <?xml version="1.0"?>
-<testsuite name="PhantomJS 1.9.8 (Linux 0.0.0)" package="" timestamp="2015-11-28T10:55:20" id="0" hostname="maria-X550LD" tests="17" errors="0" failures="0" time="0.24">
+<testsuite name="PhantomJS 1.9.8 (Linux 0.0.0)" package="" timestamp="2015-11-28T12:19:28" id="0" hostname="maria-X550LD" tests="17" errors="0" failures="0" time="0.234">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
   </properties>
   <testcase name="should expose some global scope" time="0.034" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
-  <testcase name="should expose some global scope" time="0.013" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
+  <testcase name="should expose some global scope" time="0.011" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
   <testcase name="1 should be equals to 1" time="0" classname="PhantomJS_1_9_8_(Linux_0_0_0).Test test case"/>
-  <testcase name="$scope.find() should create an array with at least one organisation object fetched from XHR" time="0.013" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.findOne() should create an array with one organisation object fetched from XHR using a projectId URL parameter" time="0.019" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.find() should create an array with at least one organisation object fetched from XHR" time="0.014" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.findOne() should create an array with one organisation object fetched from XHR using a projectId URL parameter" time="0.017" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
   <testcase name="1 should be equals to 1" time="0" classname="PhantomJS_1_9_8_(Linux_0_0_0).Test test case"/>
-  <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.012" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.014" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
   <testcase name="$scope.findOne() should create an array with one project object fetched from XHR using a projectId URL parameter" time="0.013" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.create() with valid form data should send POST request " time="0.012" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.remove() should send a DELETE request with a valid projectId and remove the project from the scope" time="0.018" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.addReviewState(true) should update a valid project" time="0.013" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.addApprovedState(true) should update a valid project" time="0.034" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.addRejectedState(true) should update a valid project" time="0.012" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.create() with valid form data should send POST request " time="0.01" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.remove() should send a DELETE request with a valid projectId and remove the project from the scope" time="0.019" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.addReviewState(true) should update a valid project" time="0.011" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.addApprovedState(true) should update a valid project" time="0.032" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.addRejectedState(true) should update a valid project" time="0.014" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
   <testcase name="$scope.addSignedState(true) should update a valid project" time="0.023" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
   <testcase name="$scope.addEndedState(true) should update a valid project" time="0.011" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
   <testcase name="1 should be equals to 1" time="0" classname="PhantomJS_1_9_8_(Linux_0_0_0).Test test case"/>
-  <testcase name="$scope.searchByState() should create an array with at least one project object fetched from XHR" time="0.013" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.searchByState() should create an array with at least one project object fetched from XHR" time="0.011" classname="PhantomJS_1_9_8_(Linux_0_0_0).MEAN controllers"/>
   <system-out>
     <![CDATA[
 ]]>
