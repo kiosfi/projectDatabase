@@ -30,8 +30,10 @@ module.exports = function (Search, app, auth) {
       .get(search.all)
       .post(auth.requiresLogin, hasPermissions, search.all);*/
 
-  app.route('/api/search')
+  app.route('/api/search/state')
       .get(search.searchByState);
   app.route('/api/search/org/:name')
       .get(search.searchOrg);
+  app.route('/api/search/region')
+      .get(search.searchByRegion);
 };

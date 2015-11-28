@@ -13,15 +13,25 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
     };
 
     $scope.searchByOrgName = function() {
-        OrgSearch.findOrgs($scope.selected).success(function(org) {
-          OrgProjects.findProjects(org._id).success(function (projects) {
+        OrgSearch.findOrgs($scope.selectedName).success(function(org) {
+          if (org) {
+            OrgProjects.findProjects(org._id).success(function (projects) {
               $scope.searchresults = projects;
-          });
+            });
+          } else {
+              $scope.searchresults = [];
+          }
         });
     };
 
     $scope.searchByState = function() {
-        Search.query({state: $scope.selectedState}, function(searchresults) {
+        Search.searchByState({state: $scope.selectedState}, function(searchresults) {
+            $scope.searchresults = searchresults;
+        });
+    };
+
+    $scope.searchByRegion = function() {
+        Search.searchByRegion({region: $scope.selectedRegion}, function(searchresults) {
             $scope.searchresults = searchresults;
         });
     };

@@ -21,7 +21,6 @@ module.exports = function (Search) {
 
     return {
         searchByState: function (req, res) {
-          console.log(req.params);
           var query = Project.find({state: req.query.state});
 
           query
@@ -36,7 +35,6 @@ module.exports = function (Search) {
             {path: 'ended', model: 'Ended'}
           ])
           .exec(function(err, searchResults) {
-                console.log(searchResults)
                 if (err) {
                     return res.status(500).json({
                         error: 'Virhe hankkeiden hakutoiminnossa'
@@ -50,15 +48,41 @@ module.exports = function (Search) {
         searchOrg: function (req, res) {
             var param = new RegExp(req.params.name, 'i');
             Organisation.findOne({name: param})
-                    .exec(function (err, organisation) {
+                    .exec(function (err, organisations) {
                         if (err) {
                             return res.status(500).json({
-                                error: 'Järjestön hankkeiden lataaminen ei onnistu.'
+                                error: 'Järjestön lataaminen ei onnistu.'
                             });
                         }
-                        res.json(organisation);
+                        res.json(organisations);
                     });
-        }
+        },
+
+        searchByRegion: function (req, res) {
+          var param = new RegExp(req.query.region, 'i');
+          var query = Project.find({region: param});
+
+          query
+          .populate('intermediary_reports payments')
+          .populate([
+            {path: 'organisation', model: 'Organisation'},
+            {path: 'in_review', model: 'InReview'},
+            {path: 'approved', model: 'Approved'},
+            {path: 'rejected', model: 'Rejected'},
+            {path: 'signed', model: 'Signed'},
+            {path: 'end_report', model: 'EndReport'},
+            {path: 'ended', model: 'Ended'}
+          ])
+          .exec(function(err, searchResults) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Virhe hankkeiden hakutoiminnossa'
+                    });
+                } else {
+                    res.json(searchResults);
+                }
+            });
+        },
         /*all: function (req, res) {
             var query = Project.find();
             query

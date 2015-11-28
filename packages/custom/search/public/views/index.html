@@ -1,25 +1,25 @@
 <h1>Haku</h1>
 <br>
 <section data-ng-controller="SearchController">
-  <article class="search">
+
+  <article class="search-div">
     <h4>Hae järjestön nimellä</h4>
     <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByOrgName()" novalidate>
       <div>
-        <div style="float:left;" class="col-md-6">
-          <input type="text" id="tag" ng-model="selected" class="form-control" placeholder="Hakusanat">
+        <div style="float:left;" class="col-md-10">
+          <input type="text" ng-model="selectedName" class="form-control" placeholder="Hakusanat">
         </div>
         <div style="float:left;">
           <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
         </div>
       </div>
     </form>
-    <div style="clear:both;">&nbsp;</div>
   </article>
-  <br>
-  <article class="search">
+
+  <article class="search-div">
     <h4>Hae hankkeen tilan mukaan</h4>
     <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByState()" novalidate>
-      <select ng-init="states()" class="dropdown col-md-6" ng-model="selectedState">
+      <select ng-init="states()" class="dropdown col-md-4" ng-model="selectedState">
           <option ng-repeat="state in states" value={{state.current_state}}>
             {{state.current_state}}
           </option>
@@ -27,17 +27,51 @@
       <div style="float:left;">
           <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
       </div>
-      </form>
+    </form>
     <div style="clear:both;">&nbsp;</div>
   </article>
+
+  <article class="search">
+    <h4>Hae maanosan nimellä</h4>
+    <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByRegion()" novalidate>
+      <div>
+        <div style="float:left;" class="col-md-5">
+          <input type="text" ng-model="selectedRegion" class="form-control" placeholder="Hakusanat">
+        </div>
+        <div style="float:left;">
+          <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
+        </div>
+      </div>
+    </form>
+  </article>
   <br>
+  <hr>
   <article class="search">
     <h4>Hakutulokset</h4>
-    <ul>
-      <li data-ng-repeat="result in searchresults">
-        <a ng-href="/projects/{{project._id}}">{{result.title}}</a>
-      </li>
-    </ul>
+    <p>Löydettyjen hankkeiden määrä: {{searchresults.length}}</p>
+    <table class="col-md-12 table table-striped">
+        <thead>
+            <tr>
+                <th class="col-md-1">Ref
+                </th>
+                <th class="col-md-3">Nimi
+                </th>
+                <th class="col-md-3">Järjestö
+                </th>
+                <th class="col-md-5">Kuvaus</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="result in searchresults | orderBy: 'project_ref'">
+                <td>{{result.project_ref}}</td>
+                <td><a ng-href="/projects/{{result._id}}">
+                        {{result.title}}</a></td>
+                <td><a ng-href="/organisations/{{result.organisation._id}}">{{result.organisation.name}}</a>
+                </td>
+                <td>{{result.description}}</td>
+            </tr>
+        </tbody>
+    </table>
   </article>
 
 </section>

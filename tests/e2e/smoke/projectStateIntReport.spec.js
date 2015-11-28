@@ -9,6 +9,7 @@ describe('Changing project state to "intermediary report"', function () {
         helpers.login();
 
         element(by.linkText("Hankelistaus")).click();
+        element(by.id("page-2")).click();
         element(by.linkText("Project Signed")).click();
 
         element(by.model('project.changeTo')).element(by.cssContainingText('option', 'väliraportti')).click();
@@ -24,11 +25,12 @@ describe('Changing project state to "intermediary report"', function () {
 
         helpers.logout();
     });
-    
+
     it('should change state if valid data filled in form', function () {
         helpers.login();
 
         element(by.linkText("Hankelistaus")).click();
+        element(by.id("page-2")).click();        
         element(by.linkText("Project Signed")).click();
 
         element(by.model('project.changeTo')).element(by.cssContainingText('option', 'väliraportti')).click();
@@ -42,9 +44,9 @@ describe('Changing project state to "intermediary report"', function () {
         element(by.model('project.intermediary_report.comments')).sendKeys('Muita kommentteja hankkeesta');
         element(by.model('project.intermediary_report.approved_by')).sendKeys('Halko');
         element(by.model('project.intermediary_report.date_approved')).sendKeys('12-10-2015');
-        
+
         element(by.id('intrep-btn')).click();
-        
+
         expect(browser.getCurrentUrl()).toContain('/123459f94260406da7a7a41b');
         var state = element(by.className('tila')).getText();
         expect(state).toContain('väliraportti');

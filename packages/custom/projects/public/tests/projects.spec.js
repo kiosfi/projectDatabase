@@ -321,6 +321,8 @@
             it('$scope.addEndReportState(true) should update a valid project', inject(function (Projects) {
                         // fixture rideshare
                   var putProjectData = function () {
+                    return {
+                        _id: '525a8422f6d0f87f0e407a33',
                         end_report: {
                           audit: {"date": scope.convertDate(11, 12, 2015).toISOString(), "review": "arvio"},
                           approved_by: "toimitusjohtaja",

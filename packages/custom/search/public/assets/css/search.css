@@ -9,3 +9,10 @@ h1 {
 .search {
   padding: 1em;
 }
+
+.search-div {
+    padding-right: 10%;
+    padding: 1em;
+    float: left;
+    width: 50%;
+}

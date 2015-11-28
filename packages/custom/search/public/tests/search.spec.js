@@ -53,11 +53,8 @@
             it('$scope.searchByState() should create an array with at least one project object ' +
                     'fetched from XHR', function () {
 
-                        MeanUser.login();
-
-                        scope.selectedState = "hyv%C3%A4ksytty";
-
-                        $httpBackend.expectGET('api\/search\?state=' + scope.selectedState ).respond([{
+                        scope.selectedState = "hyv%C3%A4ksytty"
+                        $httpBackend.expectGET('api\/search\/state\?state=' + scope.selectedState ).respond([{
                                 title: 'Disabled rights',
                                 state: 'hyväksytty'
                             }]);
@@ -70,6 +67,26 @@
                         expect(scope.searchresults).toEqualData([{
                                 "title": "Disabled rights",
                                 "state": "hyväksytty"
+                        }]);
+            });
+
+            it('$scope.searchByRegion() should create an array with at least one project object ' +
+                    'fetched from XHR', function () {
+
+                        scope.selectedRegion = "aasia";
+
+                        $httpBackend.expectGET('api\/search\/region\?region=' + scope.selectedRegion ).respond([{
+                                title: 'Disabled rights',
+                                region: 'Itä-Aasia'
+                            }]);
+                        // run controller
+
+                        scope.searchByRegion();
+
+                        $httpBackend.flush();
+                        expect(scope.searchresults).toEqualData([{
+                                "title": "Disabled rights",
+                                "region": "Itä-Aasia"
                         }]);
             });
 

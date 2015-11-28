@@ -14,6 +14,7 @@ var async = require('async');
 var organisation;
 var organisation2;
 var organisation3;
+var organisation4;
 var bank_account;
 var bank_account2;
 
@@ -122,7 +123,7 @@ describe('<Unit Test>', function () {
                     "swift": "NDEAFIHH",
                     "holder_name": "Jack Jackson"});
 
-                organisation3 = new Organisation({
+                organisation4 = new Organisation({
                     "name": "Children rights org",
                     "representative": "Mr Jackson",
                     "exec_manager": "Manager3",
@@ -150,11 +151,11 @@ describe('<Unit Test>', function () {
 
                 this.timeout(10000);
 
-                return organisation3.save(function (err, data) {
+                return organisation4.save(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.name).to.equal('Children rights org');
                     expect(data.bank_account.swift).to.equal('NDEAFIHH');
-                    organisation3.remove();
+                    organisation4.remove();
                     bank_account2.remove();
                     done();
                 });
@@ -163,11 +164,11 @@ describe('<Unit Test>', function () {
             it('should show an error when try to save without a name', function (done) {
                 this.timeout(10000);
 
-                organisation3.name = null;
+                organisation4.name = null;
 
-                return organisation3.save(function (err) {
+                return organisation4.save(function (err) {
                     expect(err).to.not.be(null);
-                    organisation3.remove();
+                    organisation4.remove();
                     bank_account2.remove();
                     done();
                 });
