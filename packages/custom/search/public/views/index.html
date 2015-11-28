@@ -35,7 +35,7 @@
     <h4>Hakutulokset</h4>
     <ul>
       <li data-ng-repeat="result in searchresults">
-        {{result.title}}
+        <a ng-href="/projects/{{project._id}}">{{result.title}}</a>
       </li>
     </ul>
   </article>
