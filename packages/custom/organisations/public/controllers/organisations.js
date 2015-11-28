@@ -58,7 +58,7 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
         $scope.findOrgProjects = function () {
             OrgProjects.findProjects($stateParams.organisationId).success(function (projects) {
                 $scope.orgProjects = projects;
-            })
+            });
         };
 
         /**

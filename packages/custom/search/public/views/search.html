@@ -1,0 +1,15 @@
+<div class="" data-ng-controller="SearchController">
+    <h1>Haku</h1>
+
+    <section data-ng-init="search()">
+        <ul class="articles unstyled">
+            <li data-ng-repeat="project in projects">
+                <span>{{project.title}}</span> /
+                <!--<span>{{article.user.name}}</span>
+                <h2><a data-ng-href="#!/projects/{{project._id}}">{{project.title}}</a></h2>
+                <div>{{project.tag}}</div>
+            </li>
+        </ul>
+        <h1 data-ng-hide="!projects || projects.length">Your search hasn't returned any results. <br> Why don't you <a href="/#!/articles/create">Create One</a>?</h1>
+    </section>
+</div>
