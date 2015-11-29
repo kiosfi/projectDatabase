@@ -1,17 +1,18 @@
 {
   "name": "mean",
   "dependencies": {
-    "jquery": "latest",
     "angular": "latest",
-    "angular-resource": "latest",
+    "angular-bootstrap": "latest",
     "angular-cookies": "latest",
     "angular-mocks": "latest",
+    "angular-resource": "latest",
     "angular-route": "latest",
-    "bootstrap": "latest",
-    "angular-bootstrap": "latest",
+    "angular-sanitize": "latest",
     "angular-ui-router": "#master",
-    "web-bootstrap": "./node_modules/meanio/resources/web-bootstrap.js",
     "angular-ui-select": "latest",
-    "angular-sanitize": "latest"
+    "bootstrap": "latest",
+    "jquery": "latest",
+    "ng-csv": "~0.3.6",
+    "web-bootstrap": "./node_modules/meanio/resources/web-bootstrap.js"
   }
 }
