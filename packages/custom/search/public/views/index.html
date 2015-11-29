@@ -2,7 +2,17 @@
 <br>
 <section data-ng-controller="SearchController">
 
-  <article class="search-div">
+  <h4>Valitse hakuvaihtoehto listalta:</h4>
+    <form name="searchForm" class="form-horizontal" role="form" novalidate>
+      <select class="dropdown col-md-3" ng-model="selectedTag">
+          <option ng-repeat="tag in tags" value={{tag}}>
+            {{tag}}
+          </option>
+      </select>
+    </form>
+  <div style="clear:both;">&nbsp;</div>
+
+  <article ng-show="selectedTag === 'Järjestö'">
     <h4>Hae järjestön nimellä</h4>
     <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByOrgName()" novalidate>
       <div>
@@ -16,7 +26,7 @@
     </form>
   </article>
 
-  <article class="search-div">
+  <article ng-show="selectedTag === 'Tila'">
     <h4>Hae hankkeen tilan mukaan</h4>
     <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByState()" novalidate>
       <select ng-init="states()" class="dropdown col-md-4" ng-model="selectedState">
@@ -28,19 +38,32 @@
           <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
       </div>
     </form>
-    <div style="clear:both;">&nbsp;</div>
   </article>
 
-  <article class="search">
-    <h4>Hae maanosan nimellä</h4>
+  <article ng-show="selectedTag === 'Maanosa tai maa'">
+    <h4>Hae maanosan tai maan nimellä</h4>
     <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByRegion()" novalidate>
       <div>
-        <div style="float:left;" class="col-md-5">
+        <div style="float:left;" class="col-md-10">
           <input type="text" ng-model="selectedRegion" class="form-control" placeholder="Hakusanat">
         </div>
         <div style="float:left;">
           <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
         </div>
+      </div>
+    </form>
+  </article>
+
+  <article ng-show="selectedTag === 'Teema'">
+    <h4>Hae teeman mukaan</h4>
+    <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByTheme()" novalidate>
+      <select class="dropdown col-md-4" ng-model="selectedTheme">
+          <option ng-repeat="theme in themes" value={{theme}}>
+            {{theme}}
+          </option>
+      </select>
+      <div style="float:left;">
+          <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
       </div>
     </form>
   </article>

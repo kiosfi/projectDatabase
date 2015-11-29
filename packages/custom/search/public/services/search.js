@@ -16,10 +16,18 @@ angular.module('mean.search').factory('Search', ['$resource',
 
 angular.module('mean.search').service('OrgSearch', ['$http',
     function($http) {
-        this.findOrgs = function(name) {
-            return $http.get('api/search/org/' + name);
+        this.findOrg = function(tag) {
+            return $http.get('api/search/org/' + tag);
         }
       }
+  ]);
+
+  angular.module('mean.search').service('ThemeSearch', ['$http',
+      function($http) {
+          this.findTheme = function(tag) {
+              return $http.get('api/search/approved/' + tag);
+          }
+        }
   ]);
 
   /*function($resource) {

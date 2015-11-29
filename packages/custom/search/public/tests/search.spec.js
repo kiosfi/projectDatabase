@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 (function () {
     describe('Test test case', function () {
         it('1 should be equals to 1', function () {
@@ -111,4 +111,4 @@ angular.module('authMock', [])
                     }
                 };
             };
-        });
+        });*/

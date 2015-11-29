@@ -35,7 +35,7 @@
             </thead>
             <tbody id="orgtable">
                 <tr id="org-{{org.name}}" ng-repeat="org in organisations">
-                    <td>{{org.name}}</td>
+                    <td><a ng-href="/organisations/{{org._id}}">{{org.name}}</a></td>
                     <td>{{org.representative}}</td>
                 </tr>
             </tbody>

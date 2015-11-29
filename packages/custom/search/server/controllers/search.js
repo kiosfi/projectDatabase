@@ -21,20 +21,10 @@ module.exports = function (Search) {
 
     return {
         searchByState: function (req, res) {
-          var query = Project.find({state: req.query.state});
 
-          query
-          .populate('intermediary_reports payments')
-          .populate([
-            {path: 'organisation', model: 'Organisation'},
-            {path: 'in_review', model: 'InReview'},
-            {path: 'approved', model: 'Approved'},
-            {path: 'rejected', model: 'Rejected'},
-            {path: 'signed', model: 'Signed'},
-            {path: 'end_report', model: 'EndReport'},
-            {path: 'ended', model: 'Ended'}
-          ])
-          .exec(function(err, searchResults) {
+            Project.find({state: req.query.state})
+            .populate({path: 'organisation', model: 'Organisation'})
+            .exec(function(err, searchResults) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Virhe hankkeiden hakutoiminnossa'
@@ -45,59 +35,78 @@ module.exports = function (Search) {
             });
         },
 
-        searchOrg: function (req, res) {
-            var param = new RegExp(req.params.name, 'i');
-            Organisation.findOne({name: param})
-                    .exec(function (err, organisations) {
-                        if (err) {
-                            return res.status(500).json({
-                                error: 'Järjestön lataaminen ei onnistu.'
-                            });
-                        }
-                        res.json(organisations);
-                    });
-        },
+        searchByOrg: function (req, res) {
 
-        searchByRegion: function (req, res) {
-          var param = new RegExp(req.query.region, 'i');
-          var query = Project.find({region: param});
+            var param = new RegExp(req.params.tag, 'i');
 
-          query
-          .populate('intermediary_reports payments')
-          .populate([
-            {path: 'organisation', model: 'Organisation'},
-            {path: 'in_review', model: 'InReview'},
-            {path: 'approved', model: 'Approved'},
-            {path: 'rejected', model: 'Rejected'},
-            {path: 'signed', model: 'Signed'},
-            {path: 'end_report', model: 'EndReport'},
-            {path: 'ended', model: 'Ended'}
-          ])
-          .exec(function(err, searchResults) {
+            Organisation.find({'name': param}, function (err, organisations) {
                 if (err) {
                     return res.status(500).json({
-                        error: 'Virhe hankkeiden hakutoiminnossa'
+                        error: 'Järjestön lataaminen ei onnistu.'
                     });
-                } else {
-                    res.json(searchResults);
                 }
-            });
-        },
-        /*all: function (req, res) {
-            var query = Project.find();
-            query
-                .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
-                    {path: 'rejected', model: 'Rejected'}, {path: 'signed', model: 'Signed'},
-                    {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'},
-                    {path: 'intermediary_reports.intermediary_report', model: 'IntReport'}])
-                .exec(function (err, projects) {
+
+                organisations = organisations.map(function(organisation) {
+                      return organisation._id;
+                });
+
+                Project.find({organisation: {$in: organisations}})
+                .populate({path: 'organisation', model: 'Organisation'})
+                .exec(function(err, projects) {
                     if (err) {
                         return res.status(500).json({
-                            error: 'Hankkeita ei voi näyttää'
+                            error: 'Järjestön lataaminen ei onnistu.'
                         });
                     }
                     res.json(projects)
                 });
-        }*/
+            });
+        },
+
+        searchByRegion: function (req, res) {
+
+            var param = new RegExp(req.query.region, 'i');
+
+            Project.find({region: param})
+            .populate({path: 'organisation', model: 'Organisation'})
+            .exec(function(err, searchResults) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Virhe hankkeiden hakutoiminnossa'
+                    });
+                } else {
+                    res.json(searchResults);
+                }
+            });
+        },
+
+        searchByTheme: function (req, res) {
+
+            Approved.find({themes: req.params.tag}, function(err, results) {
+
+              if (err) {
+                  return res.status(500).json({
+                      error: 'Teemojen lataaminen ei onnistu.'
+                    });
+              }
+
+              results = results.map(function(result) {
+                  return result._id
+              });
+
+              Project.find({approved: {$in: results}})
+              .populate({path: 'approved', model: 'Approved'})
+              .exec(function(err, projects) {
+                  if (err) {
+                      return res.status(500).json({
+                          error: 'Teemojen lataaminen ei onnistu.'
+                      });
+                  }
+
+                  res.json(projects);
+              });
+          });
+        }
+        
     };
 }

@@ -2,9 +2,16 @@
 
 /* jshint -W098 */
 angular.module('mean.search').controller('SearchController', ['$scope', '$stateParams',
-  '$location', '$window', '$http', 'Global', 'Search', 'OrgSearch', 'OrgProjects', 'MeanUser',
-  function($scope, $stateParams, $location, $window, $http, Global, Search, OrgSearch, OrgProjects, MeanUser) {
+ '$http', 'Global', 'Search', 'OrgSearch', 'ThemeSearch', 'MeanUser',
+  function($scope, $stateParams, $http, Global, Search, OrgSearch, ThemeSearch, MeanUser) {
     $scope.global = Global;
+
+    $scope.tags = ['Järjestö', 'Tila', 'Maanosa tai maa', 'Teema'];
+
+    $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
+        'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
+        'Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet', 'Etniset vähemmistöt ja alkuperäiskansat',
+        'LHBTIQ', 'Ihmisoikeuspuolustajat'];
 
     $scope.states = function() {
       $http.get('api/states').success(function(states) {
@@ -13,14 +20,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
     };
 
     $scope.searchByOrgName = function() {
-        OrgSearch.findOrgs($scope.selectedName).success(function(org) {
-          if (org) {
-            OrgProjects.findProjects(org._id).success(function (projects) {
-              $scope.searchresults = projects;
-            });
-          } else {
-              $scope.searchresults = [];
-          }
+        OrgSearch.findOrg($scope.selectedName).success(function(projects) {
+          $scope.searchresults = projects;
         });
     };
 
@@ -33,6 +34,13 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
     $scope.searchByRegion = function() {
         Search.searchByRegion({region: $scope.selectedRegion}, function(searchresults) {
             $scope.searchresults = searchresults;
+        });
+    };
+
+    $scope.searchByTheme = function() {
+        ThemeSearch.findTheme($scope.selectedTheme).success(function(results) {
+          console.log(results);
+          $scope.searchresults = results;
         });
     };
    /* $scope.search = function() {
