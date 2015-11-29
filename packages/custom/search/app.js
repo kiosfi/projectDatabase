@@ -6,6 +6,7 @@
 var Module = require('meanio').Module;
 
 var Search = new Module('search');
+Search.angularDependencies(['ngSanitize', 'ngCsv']);
 
 /*
  * All MEAN packages require registration

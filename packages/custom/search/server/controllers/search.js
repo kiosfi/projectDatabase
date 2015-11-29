@@ -22,8 +22,9 @@ module.exports = function (Search) {
     return {
         searchByState: function (req, res) {
 
-            Project.find({state: req.query.state})
-            .populate({path: 'organisation', model: 'Organisation'})
+            Project.find({state: req.query.state}, {_id: 1, project_ref: 1, title: 1,
+                organisation: 1, description: 1})
+            .populate('organisation', {name: 1})
             .exec(function(err, searchResults) {
                 if (err) {
                     return res.status(500).json({
@@ -50,8 +51,9 @@ module.exports = function (Search) {
                       return organisation._id;
                 });
 
-                Project.find({organisation: {$in: organisations}})
-                .populate({path: 'organisation', model: 'Organisation'})
+                Project.find({organisation: {$in: organisations}}, {_id: 1, project_ref: 1, title: 1,
+                    organisation: 1, description: 1})
+                .populate('organisation', {name: 1})
                 .exec(function(err, projects) {
                     if (err) {
                         return res.status(500).json({
@@ -67,8 +69,9 @@ module.exports = function (Search) {
 
             var param = new RegExp(req.query.region, 'i');
 
-            Project.find({region: param})
-            .populate({path: 'organisation', model: 'Organisation'})
+            Project.find({region: param}, {_id: 1, project_ref: 1, title: 1,
+                organisation: 1, description: 1})
+            .populate('organisation', {name: 1})
             .exec(function(err, searchResults) {
                 if (err) {
                     return res.status(500).json({
@@ -94,8 +97,9 @@ module.exports = function (Search) {
                   return result._id
               });
 
-              Project.find({approved: {$in: results}})
-              .populate({path: 'organisation', model: 'Organisation'})
+              Project.find({approved: {$in: results}}, {_id: 1, project_ref: 1, title: 1,
+                  organisation: 1, description: 1})
+              .populate('organisation', {name: 1})
               .exec(function(err, projects) {
                   if (err) {
                       return res.status(500).json({

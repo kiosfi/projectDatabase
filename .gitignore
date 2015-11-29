@@ -11,11 +11,6 @@ nbactions.xml
 nb-configuration.xml
 .nb-gradle/
 
-# Bower/
-.bower-cache
-.bower-registry/bower.herokuapp.com/lookup/
-bower_components/
-
 docs/api/
 **/doxygen_sqlite3.db
 tests/config/e2e/tests/results/*

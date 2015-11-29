@@ -72,12 +72,14 @@
   <article class="search">
     <h4>Hakutulokset</h4>
     <p>Löydettyjen hankkeiden määrä: {{searchresults.length}}</p>
+    <button ng-show="searchresults" type="button" charset="utf-8" csv-header="['Id', 'Ref', 'Hanke', 'Järjestö', 'Kuvaus']"
+    ng-csv="searchresults" filename="tiedot.csv">Export</button>
     <table class="col-md-12 table table-striped">
         <thead>
             <tr>
                 <th class="col-md-1">Ref
                 </th>
-                <th class="col-md-3">Nimi
+                <th class="col-md-3">Hanke
                 </th>
                 <th class="col-md-3">Järjestö
                 </th>
