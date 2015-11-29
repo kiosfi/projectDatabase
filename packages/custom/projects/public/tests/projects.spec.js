@@ -282,6 +282,11 @@
 
 
             it('$scope.addIntReportState(true) should update a valid project', inject(function (Projects) {
+//                scope.day = 12;
+//                scope.month = 11;
+//                scope.year = 2015;
+//                scope.date = scope.convertDate(scope.day, scope.month, scope.year);
+//                
                 // fixture rideshare
                 var putProjectData = function () {
                     return {
@@ -292,7 +297,7 @@
                             objectives: ["Lorem ipsum"],
                             overall_rating_kios: "Comments from kios",
                             approved_by: "Halko",
-                            date_approved: "23-12-2015",
+                            date_approved: scope.convertDate(11, 11, 2015).toISOString(),
                             comments: "General comments"
                         },
                         state: 'allekirjoitettu',

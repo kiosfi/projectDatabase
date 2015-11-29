@@ -162,7 +162,8 @@ var IntReportSchema = new Schema({
         required: true
     },
     date_approved: {
-        type: String
+        type: Date,
+        required: true
     },
     comments: {
         type: String

@@ -42,8 +42,10 @@ describe('Changing project state to "intermediary report"', function () {
         element(by.id('objComments')).sendKeys('Kohtalaisesti onnistui');
         element(by.model('project.intermediary_report.overall_rating_kios')).sendKeys('Arvio hankkeen onnistuimisesta');
         element(by.model('project.intermediary_report.comments')).sendKeys('Muita kommentteja hankkeesta');
-        element(by.model('project.intermediary_report.approved_by')).sendKeys('Halko');
-        element(by.model('project.intermediary_report.date_approved')).sendKeys('12-10-2015');
+        element(by.model('project.intermediary_report.approved_by')).sendKeys('Halko');        
+        element(by.model('intRDateAppr_day')).sendKeys('31');
+        element(by.model('intRDateAppr_month')).sendKeys('10');
+        element(by.model('intRDateAppr_year')).sendKeys('2015');
 
         element(by.id('intrep-btn')).click();
 
