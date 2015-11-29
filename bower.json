@@ -12,7 +12,6 @@
     "angular-ui-select": "latest",
     "bootstrap": "latest",
     "jquery": "latest",
-    "ng-csv": "~0.3.6",
     "web-bootstrap": "./node_modules/meanio/resources/web-bootstrap.js"
   }
 }
