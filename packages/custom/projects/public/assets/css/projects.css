@@ -80,6 +80,11 @@ span ul li {
   padding: 1em;
 }
 
+.border-body {
+    border-style: solid;
+    padding: 1em;
+}
+
 hr {
     border: 0;
     border-bottom: 1px dashed #ccc;

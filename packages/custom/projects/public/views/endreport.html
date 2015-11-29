@@ -1,43 +1,87 @@
 
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
-  <p>Muokkaaja: {{project.end_report.user}}, {{project.end_report.date| date: 'dd-MM-yyyy HH:mm'}}</p>
-  <br>
-  <h3>Loppuraportti: {{project.title}}</h3>
-  <article class="proj-body">
-    <p><b>Raportin hyväksyjä</b>: {{project.end_report.approved_by}}, {{project.end_report.approved_date| date: 'dd-MM-yyyy'}}</p>
-  </article>
+    <a href="/projects/{{project._id}}" class="btn">Takaisin</a>
+    <h2><b>Loppuraportti: </b>{{project.organisation.name}} : {{project.title}}</h2>
+    <article class="border-body">
+        <p><b>Hankenumero: </b>{{project.project_ref}}</p>
+        <p><b>Alue: </b>{{project.region}}</p>
+        <p><b>Myönnetty tuki ja pvm: </b>{{project.approved.granted_sum.granted_curr_eur| currency : ""}} euroa, {{project.approved.approved_date| date : 'dd-MM-yyyy'}}</p>
+        <p><b>Hankkeen kesto: </b>Mistä lasketaan?</p>
+        <p><b>Hankekuvaus: </b>{{project.description}}</p>
+        <p><b>Oikeudellinen fokus: </b>{{}}</p>
+    </article>
+    <article class="er-body">
+        <h4><b>Järjestö</b></h4>
+        <p>{{project.organisation.description}}</p>
+    </article>
+    <article class="er-body">
+        <h4><b>Maksatukset</b></h4>
+        <p>Hankkeelle myönnettiin {{project.approved.granted_sum.granted_curr_eur| currency : ""}} EUR hallituksen kokousessa {{project.approved.board_notified| date : 'dd-MM-yyyy'}}</p>
+        <p>Sopimus allekirjoitettiin {{project.signed.signed_date| date: 'dd-MM-yyyy'}}</p>
+        <p></p>
+        <p><b>Maksatus eriä: </b> {{project.signed.planned_payments.length}}</p> 
+        <p><b>Maksusuunnitelma: </b></p>
+        <ul>
+            <li ng-repeat="planned_payment in project.signed.planned_payments">
+                {{project.signed.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur| currency : ""}} EUR ({{planned_payment.sum_local| currency : ""}} paikallista valuuttaa), suunniteltu maksupvm {{planned_payment.date| date : 'dd-MM-yyyy'}}
+            </li> 
+        </ul>
+        <p><b>Maksetut erät: </b></p>
+        <section   ng-repeat="payment in project.payments">
+            <p>{{payment.sum_eur| currency : ""}} EUR / maksettu {{payment.payment_date| date : 'dd-MM-yyyy'}}</p>
+        </section>
 
-  <article class="er-body">
-    <h4>Hankkeen tilinpäätös</h4>
-    <h5>Päivämäärä</h5>
-    <p>{{project.end_report.audit.date| date: 'dd-MM-yyyy'}}</p>
-    <h5>Arvio</h5>
-    <p>{{project.end_report.audit.review}}</p>
-  </article>
+        <p><b>Jäljellä oleva summa: </b> {{project.funding.left_eur| currency : ""}} EUR</p>
+    </article>
 
-  <article class="er-body">
-    <h4>Toimintatapojen toteutuminen</h4>
-    <ul>
-      <li ng-repeat="method in project.approved.methods" style="list-style-type: disc;">
-        <h5>{{method.name}}, <i>taso: </i>{{method.level}}</h5>
-        <p>{{project.end_report.methods[project.approved.methods.indexOf(method)]}}</p>
-      </li>
-    </ul>
-  </article>
+    <article class="er-body">
+        <h4><b>Raportointi ja yhteydenpito</b></h4>
+    </article>
 
-  <article class="er-body">
-    <h4>Kokonaistavoitteen toteutuminen</h4>
-    <h5>{{project.project_goal}}</h5>
-    <p>{{project.end_report.objectives}}</p>
-  </article>
+    <article class="er-body">
+        <h4><b>Hankkeen suunniteltujen tavoitteiden ja toimintojen toteutuminen</b></h4>
+        <ol>
+            <li ng-repeat="method in project.approved.methods">
+                <i>{{method.name}} ({{method.level}})</i><br>                    
+            </li>
+        </ol>
+    </article>
 
-  <article class="er-body">
-    <h4>KIOS:in kokonaisarvio</h4>
-    <p>{{project.end_report.general_review}}</p>
-  </article>
+    <article class="er-body">
+        <h4><b>Hankkeessa toteutetut toimintatavat</b></h4>
+        <ol>
+            <li ng-repeat="method in project.approved.methods">
+                <i>{{method.name}} ({{method.level}})</i><br>
+                {{project.end_report.methods[project.approved.methods.indexOf(method)]}}
+            </li>
+        </ol>
+    </article>
 
-  <article class="er-body">
-    <h4>Muita kommentteja</h4>
-    <p>{{project.end_report.comments}}</p>
-  </article>
+    <article class="er-body">
+        <h4><b>Kokonaistavoitteen toteutuminen</b></h4>
+        <h5>{{project.project_goal}}</h5>
+        <p>{{project.end_report.objectives[0]}}</p>
+    </article>
+
+    <article class="er-body">
+        <h4><b>Budjetin toteutuminen ja raportoitu summa</b></h4>
+    </article>
+
+    <article class="er-body">
+        <h4><b>Huomioita tilintarkastuksesta</b></h4>
+        <h5>Tilintarkastuksen päivämäärä</h5>
+        <p>{{project.end_report.audit.date| date: 'dd-MM-yyyy'}}</p>
+        <h5>Arvio</h5>
+        <p>{{project.end_report.audit.review}}</p>
+    </article>    
+
+    <article class="er-body">
+        <h4><b>KIOS:in arvio</b></h4>
+        <p>{{project.end_report.general_review}}</p>
+    </article>
+
+    <article class="er-body">
+        <h4><b>Muita kommentteja</b></h4>
+        <p>{{project.end_report.comments}}</p>
+    </article>
 </section>
