@@ -8,7 +8,8 @@
         <p><b>Myönnetty tuki ja pvm: </b>{{project.approved.granted_sum.granted_curr_eur| currency : ""}} euroa, {{project.approved.approved_date| date : 'dd-MM-yyyy'}}</p>
         <p><b>Hankkeen kesto: </b>Mistä lasketaan?</p>
         <p><b>Hankekuvaus: </b>{{project.description}}</p>
-        <p><b>Oikeudellinen fokus: </b>{{}}</p>
+        <h5><b>Oikeudellinen fokus: </b>{{}}</h5>
+        <p ng-repeat="theme in project.approved.themes">{{theme}}</p>
     </article>
     <article class="er-body">
         <h4><b>Järjestö</b></h4>
