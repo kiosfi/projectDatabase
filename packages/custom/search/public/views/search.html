@@ -1,15 +1,29 @@
-<div class="" data-ng-controller="SearchController">
-    <h1>Haku</h1>
+<section data-ng-controller="SearchController">
+    <h1>Hakutulokset</h1>
 
-    <section data-ng-init="search()">
-        <ul class="articles unstyled">
-            <li data-ng-repeat="project in projects">
-                <span>{{project.title}}</span> /
-                <!--<span>{{article.user.name}}</span>
-                <h2><a data-ng-href="#!/projects/{{project._id}}">{{project.title}}</a></h2>
-                <div>{{project.tag}}</div>
-            </li>
-        </ul>
-        <h1 data-ng-hide="!projects || projects.length">Your search hasn't returned any results. <br> Why don't you <a href="/#!/articles/create">Create One</a>?</h1>
-    </section>
-</div>
+    <article>
+      <table class="col-md-12 table table-striped">
+          <thead>
+              <tr>
+                  <th class="col-md-1">Ref
+                  </th>
+                  <th class="col-md-3">Nimi
+                  </th>
+                  <th class="col-md-3">Järjestö
+                  </th>
+                  <th class="col-md-5">Kuvaus</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr ng-repeat="result in searchresults | orderBy: 'project_ref'">
+                  <td>{{result.project_ref}}</td>
+                  <td><a ng-href="/projects/{{result._id}}">
+                          {{result.title}}</a></td>
+                  <td><a ng-href="/organisations/{{result.organisation._id}}">{{result.organisation.name}}</a>
+                  </td>
+                  <td>{{result.description}}</td>
+              </tr>
+          </tbody>
+      </table>
+    </article>
+</section>

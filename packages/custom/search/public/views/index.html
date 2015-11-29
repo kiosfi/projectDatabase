@@ -87,9 +87,9 @@
         <tbody>
             <tr ng-repeat="result in searchresults | orderBy: 'project_ref'">
                 <td>{{result.project_ref}}</td>
-                <td><a ng-href="/projects/{{result._id}}">
+                <td><a ng-href="/projects/{{result._id}}" target="_blank">
                         {{result.title}}</a></td>
-                <td><a ng-href="/organisations/{{result.organisation._id}}">{{result.organisation.name}}</a>
+                <td><a ng-href="/organisations/{{result.organisation._id}}" target="_blank">{{result.organisation.name}}</a>
                 </td>
                 <td>{{result.description}}</td>
             </tr>
