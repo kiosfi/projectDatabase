@@ -1,48 +1,48 @@
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
     <a href="/projects/{{project._id}}" class="btn">Takaisin</a>
     <article data-ng-init="findIntReport()">
-        <div>
+        <article class="er-body">
             <h2>{{report.reportNumber}}. väliraportti </h2>
             <h4><b>Järjestö ja hanke: </b>{{project.organisation.name}} : {{project.title}}</h4>
             <p><b>Koordinaattori: </b>{{project.coordinator}}</p>
             <p><b>Hankenumero: </b>{{project.project_ref}}</p>
             <p><b>Alue: </b>{{project.region}}</p>
             <p><b>Alkanut: </b> mitä tähän?</p>
-        </div>
-        <div>
+        </article>
+        <article class="er-body">
             <h4><b>Maksatukset</b></h4>
-            <p>Hankkeelle myönnettiin {{project.approved.granted_sum.granted_curr_eur| currency : ""}} EUR hallituksen kokousessa {{project.approved.board_notified | date : 'dd-MM-yyyy'}}</p>
-            <p>Sopimus allekirjoitettiin {{project.signed.signed_date | date: 'dd-MM-yyyy'}}</p>
+            <p>Hankkeelle myönnettiin {{project.approved.granted_sum.granted_curr_eur| currency : ""}} EUR hallituksen kokousessa {{project.approved.board_notified| date : 'dd-MM-yyyy'}}</p>
+            <p>Sopimus allekirjoitettiin {{project.signed.signed_date| date: 'dd-MM-yyyy'}}</p>
             <p></p>
             <p><b>Maksatus eriä: </b> {{project.signed.planned_payments.length}}</p> 
             <p><b>Maksusuunnitelma: </b></p>
             <ul>
                 <li ng-repeat="planned_payment in project.signed.planned_payments">
-                    {{project.signed.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur| currency : ""}} EUR ({{planned_payment.sum_local| currency : ""}} paikallista valuuttaa), suunniteltu maksupvm {{planned_payment.date | date : 'dd-MM-yyyy'}}
+                    {{project.signed.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur| currency : ""}} EUR ({{planned_payment.sum_local| currency : ""}} paikallista valuuttaa), suunniteltu maksupvm {{planned_payment.date| date : 'dd-MM-yyyy'}}
                 </li> 
             </ul>
             <p><b>Maksetut erät: </b></p>
             <section   ng-repeat="payment in project.payments">
-                <p>{{payment.sum_eur| currency : ""}} EUR / maksettu {{payment.payment_date | date : 'dd-MM-yyyy'}}</p>
+                <p>{{payment.sum_eur| currency : ""}} EUR / maksettu {{payment.payment_date| date : 'dd-MM-yyyy'}}</p>
             </section>
 
             <p><b>Jäljellä oleva summa: </b> {{project.funding.left_eur| currency : ""}} EUR</p>
-        </div>
+        </article>
 
-        <div>
+        <article class="er-body">
             <h4><b>Raportointi ja yhteydenpito</b></h4>
-        </div>
+        </article>
 
-        <div>
+        <article class="er-body">
             <h4><b>Hankkeen suunniteltujen tavoitteiden ja toimintojen toteutuminen</b></h4>
             <ol>
                 <li ng-repeat="method in project.approved.methods">
                     <i>{{method.name}} ({{method.level}})</i><br>                    
                 </li>
             </ol>
-        </div>
+        </article>
 
-        <div>
+        <article class="er-body">
             <h4><b>Väliraportointiin mennessä toteutetut aktiviteetit</b></h4>
             <ol>
                 <li ng-repeat="method in project.approved.methods">
@@ -50,24 +50,24 @@
                     {{report.methods[project.approved.methods.indexOf(method)]}}
                 </li>
             </ol>
-        </div>
+        </article>
 
-        <div>
+        <article class="er-body">
             <h4><b>Budjetin toteutuminen ja raportoitu summa</b></h4>
-        </div>
+        </article>
 
-        <div>
+        <article class="er-body">
             <h4><b>Muita huomioita</b></h4>
             <p>{{report.comments}}</p>
-        </div>
+        </article>
 
-        <div>
+        <article class="er-body">
             <h4><b>KIOS:in arvio</b></h4>
             <p>{{report.overall_rating_kios}}</p>
-        </div>
+        </article>
 
-        <div>
+        <article class="er-body">
             <h4><b>Toimiston päätös</b></h4>
-        </div>
+        </article>
     </article>
 </section>
