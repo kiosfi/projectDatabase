@@ -279,6 +279,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addIntReportState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                project.intermediary_report.date_approved = $scope.convertDate($scope.intRDateAppr_day, $scope.intRDateAppr_month, $scope.intRDateAppr_year);
                 project.state = $scope.global.newState;
                 project.intermediary_report.methods = $scope.addedMethods;
                 project.intermediary_report.objectives = $scope.objectiveComments;
