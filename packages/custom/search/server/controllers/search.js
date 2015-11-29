@@ -95,7 +95,7 @@ module.exports = function (Search) {
               });
 
               Project.find({approved: {$in: results}})
-              .populate({path: 'approved', model: 'Approved'})
+              .populate({path: 'organisation', model: 'Organisation'})
               .exec(function(err, projects) {
                   if (err) {
                       return res.status(500).json({
@@ -107,6 +107,6 @@ module.exports = function (Search) {
               });
           });
         }
-        
+
     };
 }
