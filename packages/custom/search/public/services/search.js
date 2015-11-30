@@ -9,6 +9,9 @@ angular.module('mean.search').factory('Search', ['$resource',
       },
       searchByRegion: {
         method: 'GET', url: 'api/search/region', isArray: true
+      },
+      searchByTitle: {
+        method: 'GET', url: 'api/search/title', isArray: true
       }
     });
   }
