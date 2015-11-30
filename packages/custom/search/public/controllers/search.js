@@ -13,12 +13,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         'Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet', 'Etniset vähemmistöt ja alkuperäiskansat',
         'LHBTIQ', 'Ihmisoikeuspuolustajat'];
 
-    $scope.results = []
-    $scope.states = function() {
-      $http.get('api/states').success(function(states) {
-        $scope.states = states;
-      });
-    };
+    $scope.states = ['rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty', 'allekirjoitettu', 'väliraportti', 'loppuraportti', 'päättynyt'];
 
     $scope.searchByOrgName = function() {
         OrgSearch.findOrg($scope.selectedName).success(function(projects) {

@@ -224,6 +224,8 @@ module.exports = function (Projects) {
             var project = req.project;
             project.approved = approved._id;
             project.state = req.body.state;
+            project.funding.left_eur = approved.granted_sum.granted_curr_eur;
+            project.funding.left_local = approved.granted_sum.granted_curr_local;
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -329,8 +331,8 @@ module.exports = function (Projects) {
             var project = req.project;
             project.funding.paid_eur = project.funding.paid_eur + payment.sum_eur;
             project.funding.paid_local = project.funding.paid_local + payment.sum_local;
-            project.funding.left_eur = project.approved.granted_sum.granted_curr_eur - payment.sum_eur;
-            project.funding.left_local = project.approved.granted_sum.granted_curr_local - payment.sum_local;
+            project.funding.left_eur = project.funding.left_eur - payment.sum_eur;
+            project.funding.left_local = project.funding.left_local - payment.sum_local;
             project.payments.push(payment._id);
             project.save(function (err) {
                 if (err) {
