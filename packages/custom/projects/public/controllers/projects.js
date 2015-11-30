@@ -391,7 +391,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
-
         /**
          * The sorting predicate used in project listing. Initial value is
          * "project_ref".

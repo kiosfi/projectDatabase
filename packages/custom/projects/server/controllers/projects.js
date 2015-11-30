@@ -127,7 +127,7 @@ module.exports = function (Projects) {
             }
 
             Project.find({}, {_id: 1, project_ref: 1, title: 1, state: 1,
-                organisation: 1, signed: 1, intermediary_reports: 1, description: 1}
+                organisation: 1, signed: 1, intermediary_reports: 1}
             ).sort(orderingJSON)
                     .skip((page - 1) * pageSize)
                     .limit(pageSize)

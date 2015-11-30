@@ -2,136 +2,158 @@
 <br>
 <section data-ng-controller="SearchController">
 
-  <h4>Valitse hakuvaihtoehto listalta:</h4>
+    <h4>Valitse hakuvaihtoehto listalta:</h4>
     <form name="searchForm" class="form-horizontal" role="form" novalidate>
-      <select class="dropdown col-md-3" ng-model="selectedTag">
-          <option ng-repeat="tag in tags" value={{tag}}>
-            {{tag}}
-          </option>
-      </select>
+        <select class="dropdown col-md-3" ng-model="selectedTag">
+            <option ng-repeat="tag in tags" value={{tag}}>
+                {{tag}}
+            </option>
+        </select>
     </form>
-  <div style="clear:both;">&nbsp;</div>
+    <div style="clear:both;">&nbsp;</div>
 
-  <article ng-show="selectedTag === 'Nimi'">
-    <h4>Hae hankkeen nimellä</h4>
-    <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByTitle()" novalidate>
-      <div>
-        <div style="float:left;" class="col-md-10">
-          <input type="text" ng-model="selectedTitle" class="form-control" placeholder="Hakusanat">
-        </div>
-        <div style="float:left;">
-          <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
-        </div>
-      </div>
-    </form>
-  </article>
+    <article ng-show="selectedTag === 'Nimi'">
+        <h4>Hae hankkeen nimellä</h4>
+        <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByTitle()" novalidate>
+            <div>
+                <div style="float:left;" class="col-md-10">
+                    <input type="text" ng-model="selectedTitle" class="form-control" placeholder="Hakusanat">
+                </div>
+                <div style="float:left;">
+                    <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
+                </div>
+            </div>
+        </form>
+    </article>
 
-  <article ng-show="selectedTag === 'Järjestö'">
-    <h4>Hae järjestön nimellä</h4>
-    <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByOrgName()" novalidate>
-      <div>
-        <div style="float:left;" class="col-md-10">
-          <input type="text" ng-model="selectedName" class="form-control" placeholder="Hakusanat">
-        </div>
-        <div style="float:left;">
-          <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
-        </div>
-      </div>
-    </form>
-  </article>
+    <article ng-show="selectedTag === 'Järjestö'">
+        <h4>Hae järjestön nimellä</h4>
+        <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByOrgName()" novalidate>
+            <div>
+                <div style="float:left;" class="col-md-10">
+                    <input type="text" ng-model="selectedName" class="form-control" placeholder="Hakusanat">
+                </div>
+                <div style="float:left;">
+                    <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
+                </div>
+            </div>
+        </form>
+    </article>
 
-  <article ng-show="selectedTag === 'Tila'">
-    <h4>Hae hankkeen tilan mukaan</h4>
-    <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByState()" novalidate>
-      <select class="dropdown col-md-4" ng-model="selectedState">
-          <option ng-repeat="state in states" value={{state}}>
-            {{state}}
-          </option>
-      </select>
-      <div style="float:left;">
-          <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
-      </div>
-    </form>
-  </article>
+    <article ng-show="selectedTag === 'Tila'">
+        <h4>Hae hankkeen tilan mukaan</h4>
+        <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByState()" novalidate>
+            <select class="dropdown col-md-4" ng-model="selectedState">
+                <option ng-repeat="state in states" value={{state}}>
+                    {{state}}
+                </option>
+            </select>
+            <div style="float:left;">
+                <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
+            </div>
+        </form>
+    </article>
 
-  <article ng-show="selectedTag === 'Maanosa tai maa'">
-    <h4>Hae maanosan tai maan nimellä</h4>
-    <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByRegion()" novalidate>
-      <div>
-        <div style="float:left;" class="col-md-10">
-          <input type="text" ng-model="selectedRegion" class="form-control" placeholder="Hakusanat">
-        </div>
-        <div style="float:left;">
-          <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
-        </div>
-      </div>
-    </form>
-  </article>
+    <article ng-show="selectedTag === 'Maanosa tai maa'">
+        <h4>Hae maanosan tai maan nimellä</h4>
+        <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByRegion()" novalidate>
+            <div>
+                <div style="float:left;" class="col-md-10">
+                    <input type="text" ng-model="selectedRegion" class="form-control" placeholder="Hakusanat">
+                </div>
+                <div style="float:left;">
+                    <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
+                </div>
+            </div>
+        </form>
+    </article>
 
-  <article ng-show="selectedTag === 'Teema'">
-    <h4>Hae teeman mukaan</h4>
-    <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByTheme()" novalidate>
-      <select class="dropdown col-md-4" ng-model="selectedTheme">
-          <option ng-repeat="theme in themes" value={{theme}}>
-            {{theme}}
-          </option>
-      </select>
-      <div style="float:left;">
-          <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
-      </div>
-    </form>
-  </article>
-  <br>
-  <hr>
-  <article class="search">
-    <h4>Hakutulokset</h4>
-    <p>Löydettyjen hankkeiden määrä: {{searchresults.length}}</p>
-    <table class="col-md-12 table table-striped">
-        <thead>
-            <tr>
-                <th class="col-md-1">Ref
-                </th>
-                <th class="col-md-3">Hanke
-                </th>
-                <th class="col-md-3">Järjestö
-                </th>
-                <th class="col-md-5">Kuvaus</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="result in searchresults | orderBy: 'project_ref'">
-                <td>{{result.project_ref}}</td>
-                <td><a ng-href="/projects/{{result._id}}" target="_blank">
-                        {{result.title}}</a></td>
-                <td><a ng-href="/organisations/{{result.organisation._id}}" target="_blank">{{result.organisation.name}}</a>
-                </td>
-                <td>{{result.description}}</td>
-            </tr>
-        </tbody>
-    </table>
-  </article>
+    <article ng-show="selectedTag === 'Teema'">
+        <h4>Hae teeman mukaan</h4>
+        <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByTheme()" novalidate>
+            <select class="dropdown col-md-4" ng-model="selectedTheme">
+                <option ng-repeat="theme in themes" value={{theme}}>
+                    {{theme}}
+                </option>
+            </select>
+            <div style="float:left;">
+                <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
+            </div>
+        </form>
+    </article>
+    <br>
+    <hr>
+    <article class="search">
+        <style type="text/css">
+            .sortorder:after {
+                content: '\25b2';
+            }
+            .sortorder.reverse:after {
+                content: '\25bc';
+            }
+        </style>
+        <h4>Hakutulokset</h4>
+        <p>Löydettyjen hankkeiden määrä: {{searchresults.length}}</p>
+        <table class="col-md-12 table table-striped">
+            <thead>
+                <!-- TODO: Check the names for the ordering predicates. -->
+                <tr>
+                    <th class="col-md-1">
+                        <a id="byRef" href="" ng-click="updateOrdering('project_ref')">
+                            Tunnus
+                        </a>
+                    </th>
+                    <th class="col-md-3">
+                        <a id="byProject" href="" ng-click="updateOrdering('project_title')">
+                            Hanke
+                        </a>
+                    </th>
+                    <th class="col-md-3">
+                        <a id="byOrg" href="" ng-click="updateOrdering('organisation.name')">
+                            Järjestö
+                        </a>
+                    </th>
+                    <th class="col-md-5">
+                        <a id="byDescription" href="" ng-click="updateOrdering('description')">
+                            Kuvaus
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="result in results| orderBy: 'project_ref'">
+                    <td>{{result.project_ref}}</td>
+                    <td><a ng-href="/projects/{{result._id}}" target="_blank">
+                            {{result.title}}</a></td>
+                    <td><a ng-href="/organisations/{{result.organisation._id}}" target="_blank">{{result.organisation.name}}</a>
+                    </td>
+                    <td>{{result.description}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
 
 </section>
 
 <!--<section data-ng-controller="SearchController" data-ng-init="find()">-->
-  <!--<div class="page-header">-->
-    <!--<h1>Categories</h1>-->
-  <!--</div>-->
-  <!--&lt;!&ndash; this is the new search input field &ndash;&gt;-->
-  <!--<div class="form-group">-->
-    <!--<input type="text" ng-model="search" typeahead="category as category.name for category in categories | filter:$viewValue | limitTo:8" class="form-control" typeahead-on-select="categorySearch($item)" placeholder="Search Category...">-->
-  <!--</div>-->
-  <!--&lt;!&ndash; end &ndash;&gt;-->
-  <!--<div class="list-group">-->
-    <!--<a data-ng-repeat="category in categories | limitTo: offset - categories.length | limitTo: pageSize" data-ng-href="#!/categories/{{category._id}}" class="list-group-item">-->
-      <!--<h4 class="list-group-item-heading" data-ng-bind="category.name"></h4>-->
-      <!--<span data-ng-bind="category.description"></span>-->
-    <!--</a>-->
-  <!--</div>-->
-  <!--&lt;!&ndash; this is the paging control &ndash;&gt;-->
-  <!--<pagination total-items="categories.length" ng-model="currentPage" ng-change="pageChanged()" max-size="pageSize" ng-show="categories.length > pageSize"></pagination>-->
-  <!--&lt;!&ndash; end &ndash;&gt;-->
-  <!--<div class="alert alert-warning text-center" data-ng-hide="!categories.$resolved || categories.length">-->
-    <!--No categories yet, why don't you <a href="/#!/categories/create">create one</a>?-->
-  <!--</div>-->
+<!--<div class="page-header">-->
+<!--<h1>Categories</h1>-->
+<!--</div>-->
+<!--&lt;!&ndash; this is the new search input field &ndash;&gt;-->
+<!--<div class="form-group">-->
+<!--<input type="text" ng-model="search" typeahead="category as category.name for category in categories | filter:$viewValue | limitTo:8" class="form-control" typeahead-on-select="categorySearch($item)" placeholder="Search Category...">-->
+<!--</div>-->
+<!--&lt;!&ndash; end &ndash;&gt;-->
+<!--<div class="list-group">-->
+<!--<a data-ng-repeat="category in categories | limitTo: offset - categories.length | limitTo: pageSize" data-ng-href="#!/categories/{{category._id}}" class="list-group-item">-->
+<!--<h4 class="list-group-item-heading" data-ng-bind="category.name"></h4>-->
+<!--<span data-ng-bind="category.description"></span>-->
+<!--</a>-->
+<!--</div>-->
+<!--&lt;!&ndash; this is the paging control &ndash;&gt;-->
+<!--<pagination total-items="categories.length" ng-model="currentPage" ng-change="pageChanged()" max-size="pageSize" ng-show="categories.length > pageSize"></pagination>-->
+<!--&lt;!&ndash; end &ndash;&gt;-->
+<!--<div class="alert alert-warning text-center" data-ng-hide="!categories.$resolved || categories.length">-->
+<!--No categories yet, why don't you <a href="/#!/categories/create">create one</a>?-->
+<!--</div>-->
 <!--</section>-->
