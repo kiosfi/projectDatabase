@@ -71,6 +71,7 @@
   <hr>
   <article class="search">
     <h4>Hakutulokset</h4>
+    <button type="button" ng-csv="searchresults" csv-header="['Id', 'Tunnus', 'Hanke', 'Järjestö', 'Kuvaus']" filename="tiedot.csv">Export</button>    
     <p>Löydettyjen hankkeiden määrä: {{searchresults.length}}</p>
     <table class="col-md-12 table table-striped">
         <thead>

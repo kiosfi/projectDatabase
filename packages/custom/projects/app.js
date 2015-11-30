@@ -6,6 +6,7 @@
 var Module = require('meanio').Module;
 
 var Projects = new Module('projects');
+Projects.angularDependencies(['ngSanitize', 'ngCsv']);
 
 /**
  * All MEAN packages require registration
