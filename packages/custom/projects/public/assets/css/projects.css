@@ -1,9 +1,10 @@
 
-#visibilityAppinfo, #visibilityPayments, #visibilityAttachments, #visibilityReviewinfo,
-#visibilityRejectedinfo, #visibilitySignedinfo, #visibilityApprovedinfo, #visibilityEndedinfo {
+.visibilityAppinfo, .visibilityPayments,  .visibilityAttachments,  .visibilityReviewinfo,
+.visibilityRejectedinfo,  .visibilitySignedinfo,  .visibilityApprovedinfo, .visibilityEndedinfo {
 
     display: none;
 }
+
 
 body {
     padding-bottom: 50px;

@@ -88,7 +88,7 @@
 
             <button class="btn" onclick="toggleCollapse('visibilityAppinfo')">Hakemustiedot</button>
 
-            <article id="visibilityAppinfo">
+            <article class="visibilityAppinfo">
 
                 <article class="proj">
                     <h4 class="proj-header">Hankkeen taustat</h4>
@@ -146,7 +146,7 @@
         <article class="proj-right">
 
             <button class="btn" onclick="toggleCollapse('visibilityPayments')">Maksatus</button>
-            <article id="visibilityPayments">
+            <article class="visibilityPayments">
 
                 <article class="proj">
                     <section class="proj-body">
@@ -178,7 +178,7 @@
         <article class="proj-right">
             <button class="btn" onclick="toggleCollapse('visibilityAttachments')">Liitteet</button>
 
-            <article id="visibilityAttachments">
+            <article class="visibilityAttachments">
                 <h4 class="proj-header">Liitteet</h4>
                 <section class="proj-body">
                     <p><a href="">Hakemus</a> - Hyväksytty 1.1.2014</p>
@@ -278,7 +278,7 @@
         <section ng-show="project.in_review._id" class="proj-body">
             <p><b>**Rekisteröity käsittelyyn</b>:&nbsp&nbsp{{project.in_review.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityReviewinfo')">Tiedot</button></p>
-            <span class="proj-left" id="visibilityReviewinfo">
+            <span class="proj-left visibilityReviewinfo">
                 <h5>Muokkaaja:</h5>
                 <p>{{project.in_review.user}}, {{project.in_review.date| date:'dd-MM-yyyy, HH:mm'}}</p>
                 <h5>Kommentit: </h5>
@@ -290,7 +290,7 @@
         <section ng-show="project.approved._id" class="proj-body">
             <p><b>**Rekisteröity hyväksytyksi</b>: {{project.approved.date| date:'dd-MM-yyyy'}}
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityApprovedinfo')">Tiedot</button></p>
-            <span class="proj-left" id="visibilityApprovedinfo">
+            <span class="proj-left visibilityApprovedinfo">
                 <h5>Muokkaaja:</h5>
                 <p>{{project.approved.user}}, {{project.approved.date| date:'dd-MM-yyyy, HH:mm'}}</p>
                 <h5>Hyväksyjä:</h5>
@@ -318,7 +318,7 @@
         <section ng-show="project.rejected._id" class="proj-body">
             <p><b>**Rekisteröity hylätyksi</b>:&nbsp&nbsp{{project.rejected.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityRejectedinfo')">Tiedot</button></p>
-            <span class="proj-left" id="visibilityRejectedinfo">
+            <span class="proj-left visibilityRejectedinfo">
                 <h5>Muokkaaja:</h5>
                 <p>{{project.rejected.user}}, {{project.rejected.date| date:'dd-MM-yyyy, HH:mm'}}</p>
                 <br>
@@ -336,7 +336,7 @@
         <section ng-show="project.signed._id" class="proj-body">
             <p><b>**Rekisteröity allekirjoitetuksi</b>:&nbsp&nbsp{{project.signed.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilitySignedinfo')">Tiedot</button></p>
-            <span class="proj-left" id="visibilitySignedinfo">
+            <span class="proj-left visibilitySignedinfo">
                 <h5>Muokkaaja:</h5>
                 <p>{{project.signed.user}}, {{project.signed.date| date:'dd-MM-yyyy, HH:mm'}}</p>
                 <br>
@@ -378,7 +378,7 @@
         <section ng-show="project.ended._id" class="proj-body">
             <p><b>**Rekisteröity päätetyksi</b>:&nbsp&nbsp{{project.ended.end_date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityEndedinfo')">Tiedot</button></p>
-            <span class="proj-left" id="visibilityEndedinfo">
+            <span class="proj-left visibilityEndedinfo">
                 <h5>Tiedot lisäsi:</h5>
                 <p>{{project.ended.user}}, {{project.ended.date| date:'dd-MM-yyyy, HH:mm'}}</p>
                 <br>

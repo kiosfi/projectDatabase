@@ -5,15 +5,15 @@
                 <a onclick="toggleCollapse2('fs1', 'btn1')">
                     Hankkeen nimi, koordinaattori ja järjestö
                 </a>
-                <button id="btn1" class="btn-default btn-xs"
+                <button class="btn1 btn-default btn-xs"
                         onclick="toggleCollapse2('fs1', 'btn1')">+
                 </button>
             </legend>
-            <div id="fs1" style="display: none;">
+            <div class="fs1" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         : projectForm.title.$invalid }">
-                    <label mean-token="'create-title'" class="col-md-3 control-label">Nimi</label>
+                    <label class="col-md-3 control-label">Nimi</label>
 
                     <div class="col-md-9">
                         <input name="title" type="text" class="form-control" data-ng-model="project.title" id="title"
@@ -28,7 +28,7 @@
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         : projectForm.coordinator.$invalid }">
-                    <label mean-token="'create-coordinator'" class="col-md-3 control-label">Koordinaattori</label>
+                    <label  class="col-md-3 control-label">Koordinaattori</label>
 
                     <div class="col-md-9">
                         <label>
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-group col-md-6" data-ng-show="!newOrg">
-                    <label mean-token="'create-organisation'" class="col-md-3 control-label">Järjestö</label>
+                    <label  class="col-md-3 control-label">Järjestö</label>
                     <div data-ng-if="!newOrg" class="col-md-9" id="orgSelection" data-ng-init="addOrgFromDb()">
                         <label>
                             <select data-ng-if="!newOrg" data-ng-model="project.listOrganisation">
@@ -66,15 +66,15 @@
         <fieldset data-ng-show="newOrg">
             <legend>
                 <a onclick="toggleCollapse2('fs2', 'btn2')">Järjestö</a>
-                <button id="btn2" class="btn-default btn-xs"
+                <button class="btn2 btn-default btn-xs"
                         onclick="toggleCollapse2('fs2', 'btn2')">+
                 </button>
             </legend>
-            <div id="fs2" style="display: none;">
+            <div class="fs2" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
                                 'has-error'
                                 : projectForm.orgname.$invalid }">
-                    <label mean-token="'create-orgname'" class="col-md-3 control-label">Nimi</label>
+                    <label class="col-md-3 control-label">Nimi</label>
 
                     <div class="col-md-9">
                         <input data-ng-if="newOrg" name="orgname" type="text" class="form-control" data-ng-model="project.organisation.name"
@@ -89,7 +89,7 @@
                 <div class="form-group col-md-6" ng-class="{
                                 'has-error'
                                 : projectForm.orgrep.$invalid }">
-                    <label mean-token="'create-orgrep'" class="col-md-3 control-label">Edustaja</label>
+                    <label class="col-md-3 control-label">Edustaja</label>
 
                     <div class="col-md-9">
                         <input data-ng-if="newOrg" name="orgrep" type="text" class="form-control"
@@ -104,7 +104,7 @@
                 <div class="form-group col-md-6" ng-class="{
                                 'has-error'
                                 : projectForm.orgexecMan.$invalid }">
-                    <label mean-token="'create-orgexecMan'" class="col-md-3 control-label">Vastuullinen johtaja</label>
+                    <label class="col-md-3 control-label">Vastuullinen johtaja</label>
 
                     <div class="col-md-9">
                         <input data-ng-if="newOrg" name="orgexecMan" type="text" class="form-control"
@@ -120,7 +120,7 @@
                     <div class="form-group" ng-class="{
                                 'has-error'
                                 :  projectForm.orgaddr.$invalid }">
-                        <label mean-token="'create-orgaddr'" class="col-md-3 control-label">Osoite</label>
+                        <label class="col-md-3 control-label">Osoite</label>
 
                         <div class="col-md-9">
                             <input data-ng-if="newOrg" name="orgaddr" type="text" class="form-control"
@@ -135,7 +135,7 @@
                     <div class="form-group" ng-class="{
                                 'has-error'
                                 : projectForm.orgaddrcode.$invalid }">
-                        <label mean-token="'create-orgaddrcode'" class="col-md-3 control-label">Postinumero</label>
+                        <label class="col-md-3 control-label">Postinumero</label>
 
                         <div class="col-md-9">
                             <input data-ng-if="newOrg" name="orgaddrcode" type="text" class="form-control"
@@ -150,7 +150,7 @@
                     <div class="form-group" ng-class="{
                                 'has-error'
                                 : projectForm.orgaddrcity.$invalid }">
-                        <label mean-token="'create-orgaddrcity'" class="col-md-3 control-label">Kaupunki</label>
+                        <label  class="col-md-3 control-label">Kaupunki</label>
 
                         <div class="col-md-9">
                             <input data-ng-if="newOrg" name="orgaddrcity" type="text" class="form-control"
@@ -165,7 +165,7 @@
                     <div class="form-group" ng-class="{
                                 'has-error'
                                 :projectForm.orgaddrcntry.$invalid }">
-                        <label mean-token="'create-orgaddrcntry'" class="col-md-3 control-label">Maa</label>
+                        <label  class="col-md-3 control-label">Maa</label>
 
                         <div class="col-md-9">
                             <input data-ng-if="newOrg" name="orgaddrcntry" type="text" class="form-control"
@@ -182,7 +182,7 @@
                 <div class="form-group col-md-6" ng-class="{
                                 'has-error'
                                 :  projectForm.orgtel.$invalid }">
-                    <label mean-token="'create-orgtel'" class="col-md-3 control-label">Puhelinnumero</label>
+                    <label class="col-md-3 control-label">Puhelinnumero</label>
 
                     <div class="col-md-9">
                         <input data-ng-if="newOrg" name="orgtel" type="text" class="form-control" data-ng-model="project.organisation.tel"
@@ -197,7 +197,7 @@
                 <div class="form-group col-md-6" ng-class="{
                                 'has-error'
                                 :  projectForm.orgemail.$invalid }">
-                    <label mean-token="'create-orgemail'" class="col-md-3 control-label">Sähköpostiosoite</label>
+                    <label  class="col-md-3 control-label">Sähköpostiosoite</label>
 
                     <div class="col-md-9">
                         <input data-ng-if="newOrg" name="orgemail" type="email" class="form-control"
@@ -216,7 +216,7 @@
                 <div class="form-group col-md-6" ng-class="{
                                 'has-error'
                                 :  projectForm.orgwww.$invalid }">
-                    <label mean-token="'create-orgwww'" class="col-md-3 control-label">Websivut</label>
+                    <label  class="col-md-3 control-label">Websivut</label>
 
                     <div class="col-md-9">
                         <input data-ng-if="newOrg" name="orgwww" type="text" class="form-control"
@@ -229,19 +229,197 @@
                 </div>
             </div>
         </fieldset>
+        
+               <fieldset data-ng-show="newOrg">
+            <legend><a onclick="toggleCollapse2('fs5', 'btn5')">Hakijajärjestön
+                    lisätiedot</a>
+                <button class="btn5 btn-default btn-xs"
+                        onclick="toggleCollapse2('fs5', 'btn5')">+
+                </button>
+            </legend>
+            <div class="fs5" style="display: none;">
+                <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                :  projectForm.orgLegal.$invalid }">
+                    <label for="orgLegal" class="col-md-3 control-label">Oikeudellinen
+                        status</label>
+
+                    <div class="col-md-9">
+                        <textarea data-ng-if="newOrg" name="orgLegal" data-ng-model="project.organisation.legal_status" id="orgLegal"
+                                  placeholder="Oikeudellinen status" class="form-control" required></textarea>
+
+                        <div ng-show=" projectForm.orgLegal.$invalid" class="help-block">
+                            <p ng-show="projectForm.orgLegal.$error.required">Kenttä on pakollinen</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                :  projectForm.orgDescription.$invalid }">
+                    <label for="orgDescription" class="col-md-3 control-label">Kuvaus</label>
+
+                    <div class="col-md-9">
+                        <textarea data-ng-if="newOrg" name="orgDescription" data-ng-model="project.organisation.description" id="orgDescription"
+                                  placeholder="Kuvaus järjestöstä" class="form-control" required></textarea>
+
+                        <div ng-show=" projectForm.orgDescription.$invalid" class="help-block">
+                            <p ng-show="projectForm.orgDescription.$error.required">Kenttä on pakollinen</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                :  projectForm.orgHist.$invalid }">
+                    <label for="orgHist" class="col-md-3 control-label">Järjestön
+                        historia</label>
+
+                    <div class="col-md-9">
+                        <textarea data-ng-if="newOrg" name="orgHist" data-ng-model="project.organisation.history_status" id="orgHist"
+                                  placeholder="Historia" class="form-control" required></textarea>
+
+                        <div ng-show=" projectForm.orgHist.$invalid" class="help-block">
+                            <p ng-show="projectForm.orgHist.$error.required">Kenttä on pakollinen</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                :  projectForm.orgLinks.$invalid }">
+                    <label for="orgLinks" class="col-md-3 control-label">Kansainväliset
+                        yhteydet</label>
+
+                    <div class="col-md-9">
+                        <textarea data-ng-if="newOrg" name="orgLinks" data-ng-model="project.organisation.int_links" id="orgLinks"
+                                  placeholder="Kansainväliset yhteydet" class="form-control" required></textarea>
+
+                        <div ng-show=" projectForm.orgLinks.$invalid" class="help-block">
+                            <p ng-show="projectForm.orgLinks.$error.required">Kenttä on pakollinen</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                : projectForm.orgNatLocLinks.$invalid }">
+                    <label for="orgNatLocLinks" class="col-md-3 control-label">Kansalliset ja paikalliset
+                        yhteydet</label>
+
+                    <div class="col-md-9">
+                        <textarea data-ng-if="newOrg" name="orgNatLocLinks" data-ng-model="project.organisation.nat_local_links" id="orgNatLocLinks"
+                                  placeholder="Kansalliset ja paikalliset yhteydet" class="form-control" required></textarea>
+
+                        <div ng-show=" projectForm.orgNatLocLinks.$invalid" class="help-block">
+                            <p ng-show="projectForm.orgNatLocLinks.$error.required">Kenttä on pakollinen</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                : projectForm.orgOthFund.$invalid }">
+                    <label for="orgOthFund" class="col-md-3 control-label">Muut rahoittajat</label>
+
+                    <div class="col-md-9">
+                        <textarea data-ng-if="newOrg" name="orgOthFund" data-ng-model="project.organisation.other_funding" id="orgOthFund"
+                                  placeholder="Järjestön muut rahoittajat" class="form-control" required></textarea>
+
+                        <div ng-show=" projectForm.orgOthFund.$invalid" class="help-block">
+                            <p ng-show="projectForm.orgOthFund.$error.required">Kenttä on pakollinen</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset data-ng-show="newOrg">
+            <legend>
+                <a onclick="toggleCollapse2('fs6', 'btn6')">Pankkitili</a>
+                <button class="btn6 btn-default btn-xs"
+                        onclick="toggleCollapse2('fs6', 'btn6')">+
+                </button>
+            </legend>
+            <div class="fs6" style="display: none;">
+                <div class="form-group">
+                    <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                :  projectForm.bankIban.$invalid }">
+                        <label class="col-md-3 control-label">Tilinumero (IBAN)</label>
+
+                        <div class="col-md-9">
+                            <input data-ng-if="newOrg" name="bankIban" type="text" class="form-control"
+                                   data-ng-model="project.organisation.bank_account.iban" id="bankIban"
+                                   placeholder="Tilinumero (IBAN)" required>
+
+                            <div ng-show=" projectForm.bankIban.$invalid" class="help-block">
+                                <p ng-show="projectForm.bankIban.$error.required">Kenttä on pakollinen</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                :  projectForm.bankSwift.$invalid }">
+                        <label class="col-md-3 control-label">Pankin SWIFT</label>
+
+                        <div class="col-md-9">
+                            <input data-ng-if="newOrg" name="bankSwift" type="text" class="form-control"
+                                   data-ng-model="project.organisation.bank_account.swift" id="bankSwift"
+                                   placeholder="Pankin SWIFT" required>
+
+                            <div ng-show=" projectForm.bankSwift.$invalid" class="help-block">
+                                <p ng-show="projectForm.bankSwift.$error.required">Kenttä on pakollinen</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                :  projectForm.bankHolder.$invalid }">
+                        <label class="col-md-3 control-label">Tilin haltija</label>
+
+                        <div class="col-md-9">
+                            <input data-ng-if="newOrg" name="bankHolder" type="text" class="form-control"
+                                   data-ng-model="project.organisation.bank_account.holder_name" id="bankHolder"
+                                   placeholder="Tilinhaltija" required>
+
+                            <div ng-show=" projectForm.bankHolder.$invalid" class="help-block">
+                                <p ng-show="projectForm.bankHolder.$error.required">Kenttä on pakollinen</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                :  projectForm.bankCont.$invalid }">
+                        <label class="col-md-3 control-label">Pankin yhteystiedot</label>
+
+                        <div class="col-md-9">
+                            <input data-ng-if="newOrg" name="bankCont" type="text" class="form-control"
+                                   data-ng-model="project.organisation.bank_account.bank_contact_details" id="bankCont"
+                                   placeholder="Pankin yhteystiedot" required>
+
+                            <div ng-show=" projectForm.bankCont.$invalid" class="help-block">
+                                <p ng-show="projectForm.bankCont.$error.required">Kenttä on pakollinen</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        
         <fieldset>
             <legend>
                 <a onclick="toggleCollapse2('fs3', 'btn3')">
                     Hankkeen perustiedot</a>
-                <button id="btn3" class="btn-default btn-xs"
+                <button class="btn3 btn-default btn-xs"
                         onclick="toggleCollapse2('fs3', 'btn3')">+
                 </button>
             </legend>
-            <div id="fs3" style="display: none;">
+            <div class="fs3" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         :  projectForm.description.$invalid }">
-                    <label mean-token="'create-description'" for="description"
+                    <label for="description"
                            class="col-md-3 control-label">Kuvaus</label>
 
                     <div class="col-md-9">
@@ -257,7 +435,7 @@
                 <div class="form-group col-md-6" ng-class="{
                             'has-error'
                             :  projectForm.description_en.$invalid }">
-                    <label mean-token="'create-description_en'" for="description_en" class="col-md-3 control-label">Kuvaus
+                    <label for="description_en" class="col-md-3 control-label">Kuvaus
                         (ENG)</label>
 
                     <div class="col-md-9">
@@ -273,7 +451,7 @@
                 <div class="form-group col-md-6" ng-class="{
                                 'has-error'
                                 :projectForm.appliedlocal.$invalid }">
-                    <label mean-token="'create-appliedlocal'" class="col-md-3 control-label">Haettu avustus (paikallinen
+                    <label class="col-md-3 control-label">Haettu avustus (paikallinen
                         valuutta)</label>
 
                     <div class="col-md-9">
@@ -293,7 +471,7 @@
                 <div class="form-group col-md-6" ng-class="{
                                     'has-error'
                                     :  projectForm.appliedeur.$invalid }">
-                    <label mean-token="'create-appliedeur'" class="col-md-3 control-label">Haettu avustus (EUR)</label>
+                    <label  class="col-md-3 control-label">Haettu avustus (EUR)</label>
 
                     <div class="col-md-9">
                         <input name="appliedeur" type="number" class="form-control"
@@ -312,7 +490,7 @@
                 <div class="form-group col-md-6" ng-class="{
                                 'has-error'
                                 :  projectForm.duration.$invalid }">
-                    <label mean-token="'create-duration'" class="col-md-3 control-label">Kesto (kk)</label>
+                    <label class="col-md-3 control-label">Kesto (kk)</label>
 
                     <div class="col-md-9">
                         <input name="duration" type="number" class="form-control"
@@ -350,15 +528,15 @@
         <fieldset>
             <legend><a onclick="toggleCollapse2('fs4', 'btn4')">
                     Hankkeen lisätiedot</a>
-                <button id="btn4" class="btn-default btn-xs"
+                <button class="btn4 btn-default btn-xs"
                         onclick="toggleCollapse2('fs4', 'btn4')">+
                 </button>
             </legend>
-            <div id="fs4" style="display: none;">
+            <div class="fs4" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         :  projectForm.background.$invalid }">
-                    <label mean-token="'create-background'" for="background"
+                    <label for="background"
                            class="col-md-3 control-label">Tausta</label>
 
                     <div class="col-md-9">
@@ -373,7 +551,7 @@
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         :  projectForm.beneficiaries.$invalid }">
-                    <label mean-token="'create-beneficiaries'" for="beneficiaries" class="col-md-3 control-label">Hyödynsaajat
+                    <label for="beneficiaries" class="col-md-3 control-label">Hyödynsaajat
                         ja vastuunkantajat</label>
 
                     <div class="col-md-9">
@@ -390,7 +568,7 @@
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         :  projectForm.gender_aspect.$invalid }">
-                    <label mean-token="'create-gender_aspect'" for="gender_aspect" class="col-md-3 control-label">Gender
+                    <label for="gender_aspect" class="col-md-3 control-label">Gender
                         analyysi</label>
 
                     <div class="col-md-9">
@@ -406,7 +584,7 @@
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         :  projectForm.project_goal.$invalid }">
-                    <label mean-token="'create-project_goal'" for="project_goal" class="col-md-3 control-label">Päätavoite</label>
+                    <label for="project_goal" class="col-md-3 control-label">Päätavoite</label>
 
                     <div class="col-md-9">
                         <textarea name="project_goal" data-ng-model="project.project_goal" id="project_goal"
@@ -421,7 +599,7 @@
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         :  projectForm.sustainability_risks.$invalid }">
-                    <label mean-token="'create-sustainability_risks'" for="sustainability_risks"
+                    <label for="sustainability_risks"
                            class="col-md-3 control-label">Kestävyys ja arvio riskeistä</label>
 
                     <div class="col-md-9">
@@ -438,7 +616,7 @@
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         :  projectForm.reporting_evaluation.$invalid }">
-                    <label mean-token="'create-reporting_evaluation'" for="reporting_evaluation"
+                    <label for="reporting_evaluation"
                            class="col-md-3 control-label">Raportointi ja evaluointi</label>
 
                     <div class="col-md-9">
@@ -455,7 +633,7 @@
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         :  projectForm.other_donors_proposed.$invalid }">
-                    <label mean-token="'create-other_donors_proposed'" for="other_donors_proposed"
+                    <label for="other_donors_proposed"
                            class="col-md-3 control-label">Muualta haettu rahoitus</label>
 
                     <div class="col-md-9">
@@ -470,7 +648,7 @@
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         :  projectForm.region.$invalid }">
-                    <label mean-token="'create-region'" class="col-md-3 control-label">Vaikutusalue tai -maa</label>
+                    <label class="col-md-3 control-label">Vaikutusalue tai -maa</label>
 
                     <div class="col-md-9">
                         <input name="region" type="text" class="form-control" data-ng-model="project.region" id="region"
@@ -484,7 +662,7 @@
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         : projectForm.dac.$invalid }">
-                    <label mean-token="'create-dac'" class="col-md-3 control-label">DAC-koodi</label>
+                    <label class="col-md-3 control-label">DAC-koodi</label>
 
                     <div class="col-md-9">
                         <input name="dac" type="text" class="form-control" data-ng-model="project.dac" id="dac"
@@ -492,182 +670,6 @@
 
                         <div ng-show=" projectForm.dac.$invalid" class="help-block">
                             <p ng-show="projectForm.dac.$error.required">DAC-koodi on pakollinen</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset data-ng-show="newOrg">
-            <legend><a onclick="toggleCollapse2('fs5', 'btn5')">Hakijajärjestön
-                    lisätiedot</a>
-                <button id="btn5" class="btn-default btn-xs"
-                        onclick="toggleCollapse2('fs5', 'btn5')">+
-                </button>
-            </legend>
-            <div id="fs5" style="display: none;">
-                <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                :  projectForm.orgLegal.$invalid }">
-                    <label mean-token="'create-orgLegal'" for="orgLegal" class="col-md-3 control-label">Oikeudellinen
-                        status</label>
-
-                    <div class="col-md-9">
-                        <textarea data-ng-if="newOrg" name="orgLegal" data-ng-model="project.organisation.legal_status" id="orgLegal"
-                                  placeholder="Oikeudellinen status" class="form-control" required></textarea>
-
-                        <div ng-show=" projectForm.orgLegal.$invalid" class="help-block">
-                            <p ng-show="projectForm.orgLegal.$error.required">Kenttä on pakollinen</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                :  projectForm.orgDescription.$invalid }">
-                    <label mean-token="'create-orgDescription'" for="orgDescription" class="col-md-3 control-label">Kuvaus</label>
-
-                    <div class="col-md-9">
-                        <textarea data-ng-if="newOrg" name="orgDescription" data-ng-model="project.organisation.description" id="orgDescription"
-                                  placeholder="Kuvaus järjestöstä" class="form-control" required></textarea>
-
-                        <div ng-show=" projectForm.orgDescription.$invalid" class="help-block">
-                            <p ng-show="projectForm.orgDescription.$error.required">Kenttä on pakollinen</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                :  projectForm.orgHist.$invalid }">
-                    <label mean-token="'create-orgHist'" for="orgHist" class="col-md-3 control-label">Järjestön
-                        historia</label>
-
-                    <div class="col-md-9">
-                        <textarea data-ng-if="newOrg" name="orgHist" data-ng-model="project.organisation.history_status" id="orgHist"
-                                  placeholder="Historia" class="form-control" required></textarea>
-
-                        <div ng-show=" projectForm.orgHist.$invalid" class="help-block">
-                            <p ng-show="projectForm.orgHist.$error.required">Kenttä on pakollinen</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                :  projectForm.orgLinks.$invalid }">
-                    <label mean-token="'create-orgLinks'" for="orgLinks" class="col-md-3 control-label">Kansainväliset
-                        yhteydet</label>
-
-                    <div class="col-md-9">
-                        <textarea data-ng-if="newOrg" name="orgLinks" data-ng-model="project.organisation.int_links" id="orgLinks"
-                                  placeholder="Kansainväliset yhteydet" class="form-control" required></textarea>
-
-                        <div ng-show=" projectForm.orgLinks.$invalid" class="help-block">
-                            <p ng-show="projectForm.orgLinks.$error.required">Kenttä on pakollinen</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                : projectForm.orgNatLocLinks.$invalid }">
-                    <label mean-token="'create-orgNatLocLinks'" for="orgNatLocLinks" class="col-md-3 control-label">Kansalliset ja paikalliset
-                        yhteydet</label>
-
-                    <div class="col-md-9">
-                        <textarea data-ng-if="newOrg" name="orgNatLocLinks" data-ng-model="project.organisation.nat_local_links" id="orgNatLocLinks"
-                                  placeholder="Kansalliset ja paikalliset yhteydet" class="form-control" required></textarea>
-
-                        <div ng-show=" projectForm.orgNatLocLinks.$invalid" class="help-block">
-                            <p ng-show="projectForm.orgNatLocLinks.$error.required">Kenttä on pakollinen</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                : projectForm.orgOthFund.$invalid }">
-                    <label mean-token="'create-orgOthFund'" for="orgOthFund" class="col-md-3 control-label">Muut rahoittajat</label>
-
-                    <div class="col-md-9">
-                        <textarea data-ng-if="newOrg" name="orgOthFund" data-ng-model="project.organisation.other_funding" id="orgOthFund"
-                                  placeholder="Järjestön muut rahoittajat" class="form-control" required></textarea>
-
-                        <div ng-show=" projectForm.orgOthFund.$invalid" class="help-block">
-                            <p ng-show="projectForm.orgOthFund.$error.required">Kenttä on pakollinen</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset data-ng-show="newOrg">
-            <legend>
-                <a onclick="toggleCollapse2('fs6', 'btn6')">Pankkitili</a>
-                <button id="btn6" class="btn-default btn-xs"
-                        onclick="toggleCollapse2('fs6', 'btn6')">+
-                </button>
-            </legend>
-            <div id="fs6" style="display: none;">
-                <div class="form-group">
-                    <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                :  projectForm.bankIban.$invalid }">
-                        <label mean-token="'create-bankIban'" class="col-md-3 control-label">Tilinumero (IBAN)</label>
-
-                        <div class="col-md-9">
-                            <input data-ng-if="newOrg" name="bankIban" type="text" class="form-control"
-                                   data-ng-model="project.organisation.bank_account.iban" id="bankIban"
-                                   placeholder="Tilinumero (IBAN)" required>
-
-                            <div ng-show=" projectForm.bankIban.$invalid" class="help-block">
-                                <p ng-show="projectForm.bankIban.$error.required">Kenttä on pakollinen</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                :  projectForm.bankSwift.$invalid }">
-                        <label mean-token="'create-bankSwift'" class="col-md-3 control-label">Pankin SWIFT</label>
-
-                        <div class="col-md-9">
-                            <input data-ng-if="newOrg" name="bankSwift" type="text" class="form-control"
-                                   data-ng-model="project.organisation.bank_account.swift" id="bankSwift"
-                                   placeholder="Pankin SWIFT" required>
-
-                            <div ng-show=" projectForm.bankSwift.$invalid" class="help-block">
-                                <p ng-show="projectForm.bankSwift.$error.required">Kenttä on pakollinen</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                :  projectForm.bankHolder.$invalid }">
-                        <label mean-token="'create-bankHolder'" class="col-md-3 control-label">Tilin haltija</label>
-
-                        <div class="col-md-9">
-                            <input data-ng-if="newOrg" name="bankHolder" type="text" class="form-control"
-                                   data-ng-model="project.organisation.bank_account.holder_name" id="bankHolder"
-                                   placeholder="Tilinhaltija" required>
-
-                            <div ng-show=" projectForm.bankHolder.$invalid" class="help-block">
-                                <p ng-show="projectForm.bankHolder.$error.required">Kenttä on pakollinen</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                :  projectForm.bankCont.$invalid }">
-                        <label mean-token="'create-bankCont'" class="col-md-3 control-label">Pankin yhteystiedot</label>
-
-                        <div class="col-md-9">
-                            <input data-ng-if="newOrg" name="bankCont" type="text" class="form-control"
-                                   data-ng-model="project.organisation.bank_account.bank_contact_details" id="bankCont"
-                                   placeholder="Pankin yhteystiedot" required>
-
-                            <div ng-show=" projectForm.bankCont.$invalid" class="help-block">
-                                <p ng-show="projectForm.bankCont.$error.required">Kenttä on pakollinen</p>
-                            </div>
                         </div>
                     </div>
                 </div>

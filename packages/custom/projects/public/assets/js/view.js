@@ -7,12 +7,12 @@
  * @returns {undefined}
  */
 function toggleCollapse(id) {
-    var element = document.getElementById(id);
+    var element = document.querySelector("." + id);
 
     if (element.style.display !== 'block') {
-        document.getElementById(id).style.display = 'block';
+       element.style.display = 'block';
     } else {
-        document.getElementById(id).style.display = 'none';
+        element.style.display = 'none';
     }
 }
 
@@ -25,8 +25,8 @@ function toggleCollapse(id) {
  * @return {undefined}
  */
 function toggleCollapse2(elementID, buttonID) {
-    var element = document.getElementById(elementID);
-    var indicator = document.getElementById(buttonID);
+    var element = document.querySelector("." + elementID);
+    var indicator = document.querySelector("." + buttonID);
     if (element.style.display !== 'block') {
         element.style.display = 'block';
         indicator.innerHTML = '-';
