@@ -12,6 +12,20 @@
     </form>
   <div style="clear:both;">&nbsp;</div>
 
+  <article ng-show="selectedTag === 'Nimi'">
+    <h4>Hae järjestön nimellä</h4>
+    <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByTitle()" novalidate>
+      <div>
+        <div style="float:left;" class="col-md-10">
+          <input type="text" ng-model="selectedTitle" class="form-control" placeholder="Hakusanat">
+        </div>
+        <div style="float:left;">
+          <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
+        </div>
+      </div>
+    </form>
+  </article>
+
   <article ng-show="selectedTag === 'Järjestö'">
     <h4>Hae järjestön nimellä</h4>
     <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByOrgName()" novalidate>
