@@ -29,9 +29,9 @@
   <article ng-show="selectedTag === 'Tila'">
     <h4>Hae hankkeen tilan mukaan</h4>
     <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByState()" novalidate>
-      <select ng-init="states()" class="dropdown col-md-4" ng-model="selectedState">
-          <option ng-repeat="state in states" value={{state.current_state}}>
-            {{state.current_state}}
+      <select class="dropdown col-md-4" ng-model="selectedState">
+          <option ng-repeat="state in states" value={{state}}>
+            {{state}}
           </option>
       </select>
       <div style="float:left;">
