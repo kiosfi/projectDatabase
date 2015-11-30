@@ -186,7 +186,7 @@
                           board_notified: scope.date,
                           methods: [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen"}],
                           themes: ["Oikeusvaltio ja demokratia"],
-                          granted_sum: {"granted_curr_eur": 60000, "granted_curr_local": 80000}
+                          granted_sum_eur: 60000
                         },
                         state: 'käsittelyssä',
                         to: 'hyväksytty'
@@ -286,7 +286,7 @@
 //                scope.month = 11;
 //                scope.year = 2015;
 //                scope.date = scope.convertDate(scope.day, scope.month, scope.year);
-//                
+//
                 // fixture rideshare
                 var putProjectData = function () {
                     return {

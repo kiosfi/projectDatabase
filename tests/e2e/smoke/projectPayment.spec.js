@@ -21,8 +21,7 @@ describe('Adding payment in project view', function () {
         element(by.model('payment_day')).sendKeys(12);
         element(by.model('payment_month')).sendKeys(12);
         element(by.model('payment_year')).sendKeys(2015);
-        element(by.model('project.payment.sum_eur')).sendKeys(2000);
-        element(by.model('project.payment.sum_local')).sendKeys(4000);
+        element(by.model('project.payment_eur')).sendKeys(2000);
         element(by.buttonText('Tallenna')).click();
         element(by.buttonText('Maksatus')).click();
 

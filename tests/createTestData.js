@@ -5,20 +5,12 @@ db.projects.drop();
 db.states.drop();
 db.bankaccounts.drop();
 db.users.drop();
-db.inreviews.drop();
-db.approveds.drop();
-db.signeds.drop();
-db.rejecteds.drop();
 
 db.createCollection("organisations");
 db.createCollection("projects");
 db.createCollection("states");
 db.createCollection("bankaccounts");
 db.createCollection("users");
-db.createCollection("inreviews");
-db.createCollection("approveds");
-db.createCollection("signeds");
-db.createCollection("rejecteds");
 
 db.users.insert(
         {"_id": ObjectId("5614d428013b9a2f1ca236ce"),
@@ -29,77 +21,6 @@ db.users.insert(
             "name": "teppo testi",
             "provider": "local",
             "roles": ["authenticated"], "__v": 0}
-);
-
-db.inreviews.insert(
-        {"_id": ObjectId("564b78b0609e79f4514f961e"),
-            "user": "Pekka Puupää",
-            "comments": "Jep jep"
-        }
-);
-
-db.approveds.insert(
-        {
-            "_id": ObjectId("564b0cdc9d87261b1bbf0009"),
-            "user": "Maria",
-            "approved_date": "12.15.2015",
-            "approved_by": "Toiminnanjohtaja",
-            "board_notified": "13.15.2015",
-            "methods": [
-                {
-                    "level": "Kansainvälinen",
-                    "name": "Kapasiteetin vahvistaminen"
-                }
-            ],
-            "themes": [
-                "Oikeusvaltio ja demokratia"
-            ],
-            "granted_sum": {
-                "granted_curr_eur": 60000,
-                "granted_curr_local": 80000
-            }
-        }
-);
-
-db.signeds.insert(
-        {
-            "_id": ObjectId("564b0d089d87261b1bbf000a"),
-            "user": "Maria",
-            "signed_by": "Maija Meri",
-            "signed_date": "3.1.2016",
-            "planned_payments": [
-                {
-                    "sum_local": 10000,
-                    "sum_eur": 5000,
-                    "date": "15.1.2016"
-                },
-                {
-                    "sum_local": 10000,
-                    "sum_eur": 5000,
-                    "date": "15.3.2016"
-                }
-            ],
-            "intreport_deadlines": [
-                {
-                    "date": "1.10.2016",
-                    "report": "1. väliraportti"
-                }
-            ]
-        }
-);
-
-db.intreports.insert(
-        {
-            "_id": ObjectId("123b0d089d87261b1bbf000a"),
-            "user": "Sonja",
-            reportNumber: 1,
-            methods: ["Onnistui adglnbeanaeöajröjah", "Kohtalaisesti onnistui adkvökabknbslnbknadnan"],
-            objectives: ["Tavoitteiden arviointia ......."],
-            overall_rating_kios: "arvio kaf wrpwrpwrpwr",
-            approved_by: "Halko",
-            date_approved: "12.3.2015",
-            comments: "Muut kommentit hankkeen onnistumisesta"
-        }
 );
 
 db.bankaccounts.insert(
@@ -222,7 +143,7 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a41b"),
     "other_donors_proposed": "donor1, donorB",
     "dac": "ABC1C345",
     "region": "Afrikka",
-    "in_review": ObjectId("564b78b0609e79f4514f961e")}
+    "in_review": { "user": "Pekka Puupää", "comments": "Jep jep"}}
 );
 
 db.projects.insert({"_id": ObjectId("f2e7c9aeb017189911996768"),
@@ -247,8 +168,21 @@ db.projects.insert({"_id": ObjectId("f2e7c9aeb017189911996768"),
     "other_donors_proposed": "donor1, donor2",
     "dac": "ABC12355",
     "region": "Aasia",
-    "in_review": ObjectId("564b78b0609e79f4514f961e"),
-    "approved": ObjectId("564b0cdc9d87261b1bbf0009")}
+    "in_review": { "user": "Pekka Puupää", "comments": "Jep jep"},
+    "approved": {"user": "Maria",
+                "approved_date": "12.15.2015",
+                "approved_by": "Toiminnanjohtaja",
+                "board_notified": "13.15.2015",
+                "methods": [
+                    {
+                        "level": "Kansainvälinen",
+                        "name": "Kapasiteetin vahvistaminen"
+                    }
+                ],
+                "themes": [
+                    "Oikeusvaltio ja demokratia"
+                ],
+                "granted_sum_eur": 60000}}
 );
 
 db.projects.insert({"_id": ObjectId("f2e7c9adb017176611996768"),
@@ -273,7 +207,7 @@ db.projects.insert({"_id": ObjectId("f2e7c9adb017176611996768"),
     "other_donors_proposed": "donor1, donorB",
     "dac": "ABC12355",
     "region": "Afrikka",
-    "in_review": ObjectId("564b78b0609e79f4514f961e")}
+    "in_review": { "user": "Pekka Puupää", "comments": "Jep jep"}}
 );
 
 db.projects.insert({"_id": ObjectId("5c9ed9f94260406da7a7a41b"),
@@ -299,9 +233,43 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94260406da7a7a41b"),
     "dac": "ABC12355",
     "region": "Afrikka",
     "planned_payments": [{"date": "27.12.2015", "sum_eur": 5000, "sum_local": 10000}],
-    "in_review": ObjectId("564b78b0609e79f4514f961e"),
-    "approved": ObjectId("564b0cdc9d87261b1bbf0009"),
-    "signed": ObjectId("564b0d089d87261b1bbf000a")}
+    "in_review": { "user": "Pekka Puupää", "comments": "Jep jep"},
+    "approved": {"user": "Maria",
+                "approved_date": "12.15.2015",
+                "approved_by": "Toiminnanjohtaja",
+                "board_notified": "13.15.2015",
+                "methods": [
+                    {
+                        "level": "Kansainvälinen",
+                        "name": "Kapasiteetin vahvistaminen"
+                    }
+                ],
+                "themes": [
+                    "Oikeusvaltio ja demokratia"
+                ],
+                "granted_sum_eur": 60000},
+    "signed": {"user": "Maria",
+                "signed_by": "Maija Meri",
+                "signed_date": "3.1.2016",
+                "planned_payments": [
+                    {
+                        "sum_local": 10000,
+                        "sum_eur": 5000,
+                        "date": "15.1.2016"
+                    },
+                    {
+                        "sum_local": 10000,
+                        "sum_eur": 5000,
+                        "date": "15.3.2016"
+                    }
+                ],
+                "intreport_deadlines": [
+                    {
+                        "date": "1.10.2016",
+                        "report": "1. väliraportti"
+                    }
+                ]
+            }}
 );
 
 db.projects.insert({"_id": ObjectId("a2c8c9adb020176611996768"),
@@ -327,10 +295,53 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176611996768"),
     "dac": "ABC12355",
     "region": "Afrikka",
     "planned_payments": [{"date": "27.12.2015", "sum_eur": 5000, "sum_local": 10000}],
-    "in_review": ObjectId("564b78b0609e79f4514f961e"),
-    "approved": ObjectId("564b0cdc9d87261b1bbf0009"),
-    "signed": ObjectId("564b0d089d87261b1bbf000a"),
-    "intermediary_reports": [ObjectId("123b0d089d87261b1bbf000a")]}
+    "in_review": { "user": "Pekka Puupää", "comments": "Jep jep"},
+    "approved": {"user": "Maria",
+                "approved_date": "12.15.2015",
+                "approved_by": "Toiminnanjohtaja",
+                "board_notified": "13.15.2015",
+                "methods": [
+                    {
+                        "level": "Kansainvälinen",
+                        "name": "Kapasiteetin vahvistaminen"
+                    }
+                ],
+                "themes": [
+                    "Oikeusvaltio ja demokratia"
+                ],
+                "granted_sum_eur": 60000},
+      "signed": {"user": "Maria",
+                "signed_by": "Maija Meri",
+                "signed_date": "3.1.2016",
+                "planned_payments": [
+                    {
+                        "sum_local": 10000,
+                        "sum_eur": 5000,
+                        "date": "15.1.2016"
+                    },
+                    {
+                        "sum_local": 10000,
+                        "sum_eur": 5000,
+                        "date": "15.3.2016"
+                    }
+                ],
+                "intreport_deadlines": [
+                    {
+                        "date": "1.10.2016",
+                        "report": "1. väliraportti"
+                    }
+                ]
+            },
+    "intermediary_reports": [{
+                "user": "Sonja",
+                reportNumber: 1,
+                methods: ["Onnistui adglnbeanaeöajröjah", "Kohtalaisesti onnistui adkvökabknbslnbknadnan"],
+                objectives: ["Tavoitteiden arviointia ......."],
+                overall_rating_kios: "arvio kaf wrpwrpwrpwr",
+                approved_by: "Halko",
+                date_approved: "12.3.2015",
+                comments: "Muut kommentit hankkeen onnistumisesta"
+            }]}
 );
 
 db.projects.insert({"_id": ObjectId("a2c8c9adb020176622996766"),
@@ -355,9 +366,43 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176622996766"),
     "other_donors_proposed": "donorA, donorB",
     "dac": "ABC12355",
     "region": "Afrikka",
-    "in_review": ObjectId("564b78b0609e79f4514f961e"),
-    "approved": ObjectId("564b0cdc9d87261b1bbf0009"),
-    "signed": ObjectId("564b0d089d87261b1bbf000a")}
+    "in_review": { "user": "Pekka Puupää", "comments": "Jep jep"},
+    "approved": {"user": "Maria",
+                "approved_date": "12.15.2015",
+                "approved_by": "Toiminnanjohtaja",
+                "board_notified": "13.15.2015",
+                "methods": [
+                    {
+                        "level": "Kansainvälinen",
+                        "name": "Kapasiteetin vahvistaminen"
+                    }
+                ],
+                "themes": [
+                    "Oikeusvaltio ja demokratia"
+                ],
+                "granted_sum_eur": 60000},
+    "signed": {"user": "Maria",
+                "signed_by": "Maija Meri",
+                "signed_date": "3.1.2016",
+                "planned_payments": [
+                    {
+                        "sum_local": 10000,
+                        "sum_eur": 5000,
+                        "date": "15.1.2016"
+                    },
+                    {
+                        "sum_local": 10000,
+                        "sum_eur": 5000,
+                        "date": "15.3.2016"
+                    }
+                ],
+                "intreport_deadlines": [
+                    {
+                        "date": "1.10.2016",
+                        "report": "1. väliraportti"
+                    }
+                ]
+            }}
 );
 
 db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a111"),
@@ -382,7 +427,7 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a111"),
     "other_donors_proposed": "donor1",
     "dac": "ABC1C345",
     "region": "Aasia",
-    "in_review": ObjectId("564b78b0609e79f4514f961e")}
+    "in_review": { "user": "Pekka Puupää", "comments": "Jep jep"}}
 );
 
 db.projects.insert({"_id": ObjectId("779ed9f94250406da7a7a111"),
@@ -407,7 +452,7 @@ db.projects.insert({"_id": ObjectId("779ed9f94250406da7a7a111"),
     "other_donors_proposed": "donor1",
     "dac": "ABC1C345",
     "region": "Aasia",
-    "in_review": ObjectId("564b78b0609e79f4514f961e")}
+    "in_review": { "user": "Pekka Puupää", "comments": "Jep jep"}}
 );
 
 db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7aabc"),
@@ -432,7 +477,7 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7aabc"),
     "other_donors_proposed": "donor567",
     "dac": "ABC1C345",
     "region": "Aasia",
-    "in_review": ObjectId("564b78b0609e79f4514f961e")}
+    "in_review": { "user": "Pekka Puupää", "comments": "Jep jep"}}
 );
 
 db.projects.insert({"_id": ObjectId("56091ded00fccd6d66bc5cc3"),
@@ -505,8 +550,21 @@ db.projects.insert({"_id": ObjectId("f2c7d9aeb017189911996768"),
     "other_donors_proposed": "donor1, donor2",
     "dac": "ABC12355",
     "region": "Aasia",
-    "in_review": ObjectId("564b78b0609e79f4514f961e"),
-    "approved": ObjectId("564b0cdc9d87261b1bbf0009")}
+    "in_review": { "user": "Pekka Puupää", "comments": "Jep jep"},
+    "approved": {"user": "Maria",
+                "approved_date": "12.15.2015",
+                "approved_by": "Toiminnanjohtaja",
+                "board_notified": "13.15.2015",
+                "methods": [
+                    {
+                        "level": "Kansainvälinen",
+                        "name": "Kapasiteetin vahvistaminen"
+                    }
+                ],
+                "themes": [
+                    "Oikeusvaltio ja demokratia"
+                ],
+                "granted_sum_eur": 60000}}
 );
 
 db.projects.insert({"_id": ObjectId("123459f94260406da7a7a41b"),
@@ -532,9 +590,43 @@ db.projects.insert({"_id": ObjectId("123459f94260406da7a7a41b"),
     "dac": "ABC12355",
     "region": "Afrikka",
     "planned_payments": [{"date": "27.12.2015", "sum_eur": 5000, "sum_local": 10000}],
-    "in_review": ObjectId("564b78b0609e79f4514f961e"),
-    "approved": ObjectId("564b0cdc9d87261b1bbf0009"),
-    "signed": ObjectId("564b0d089d87261b1bbf000a")}
+    "in_review": { "user": "Pekka Puupää", "comments": "Jep jep"},
+    "approved": {"user": "Maria",
+                "approved_date": "12.15.2015",
+                "approved_by": "Toiminnanjohtaja",
+                "board_notified": "13.15.2015",
+                "methods": [
+                    {
+                        "level": "Kansainvälinen",
+                        "name": "Kapasiteetin vahvistaminen"
+                    }
+                ],
+                "themes": [
+                    "Oikeusvaltio ja demokratia"
+                ],
+                "granted_sum_eur": 60000},
+    "signed": {"user": "Maria",
+                    "signed_by": "Maija Meri",
+                    "signed_date": "3.1.2016",
+                    "planned_payments": [
+                        {
+                            "sum_local": 10000,
+                            "sum_eur": 5000,
+                            "date": "15.1.2016"
+                        },
+                        {
+                            "sum_local": 10000,
+                            "sum_eur": 5000,
+                            "date": "15.3.2016"
+                        }
+                    ],
+                    "intreport_deadlines": [
+                        {
+                            "date": "1.10.2016",
+                            "report": "1. väliraportti"
+                        }
+                    ]
+                }}
 );
 
 db.states.insert([

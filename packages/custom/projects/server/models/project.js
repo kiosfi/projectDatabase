@@ -50,15 +50,7 @@ var ProjectSchema = new Schema({
             type: Number,
             default: 0
         },
-        paid_local: {
-            type: Number,
-            default: 0
-        },
         left_eur: {
-            type: Number,
-            default: 0
-        },
-        left_local: {
             type: Number,
             default: 0
         }
@@ -124,35 +116,147 @@ var ProjectSchema = new Schema({
         trim: true
     },
     in_review: {
-        type: Schema.ObjectId,
-        ref: 'InReview'
+        date: {
+          type: Date,
+          default: Date.now()
+        },
+        user: {
+          type: String
+        },
+        comments: {
+          type: String
+        }
     },
     approved: {
-        type: Schema.ObjectId,
-        ref: 'Approved'
+        date: {
+          type: Date,
+          default: Date.now
+        },
+        user: {
+          type: String
+        },
+        approved_date: {
+          type: Date
+        },
+        approved_by: {
+          type: String
+        },
+        board_notified: {
+          type: Date
+        },
+        granted_sum_eur: {
+          type: Number
+        },
+        themes: {
+          type: Array
+        },
+        methods: {
+          type: Array
+        }
     },
     rejected: {
-        type: Schema.ObjectId,
-        ref: 'Rejected'
+        date: {
+          type: Date,
+          default: Date.now
+        },
+        user: {
+          type: String
+        },
+        rejection_categories: {
+          type: Array
+        },
+        rejection_comments: {
+          type: String
+        }
     },
     signed: {
-        type: Schema.ObjectId,
-        ref: 'Signed'
+        date: {
+          type: Date,
+          default: Date.now
+        },
+        user: {
+          type: String
+        },
+        signed_by: {
+          type: String
+        },
+        signed_date: {
+          type: Date
+        },
+        planned_payments: {
+          type: Array
+        },
+        intreport_deadlines: {
+          type: Array
+      }
     },
-    planned_payments: {
+    payments: {
       type: Array
     },
-    payments: [{ type : Schema.ObjectId, ref: 'Payment'}],
-    intermediary_reports: [{ type : Schema.ObjectId, ref: 'IntReport' }],
+    intermediary_reports:
+    {
+      type: Array
+    },
     end_report: {
-        type: Schema.ObjectId,
-        ref: 'EndReport'
+        date: {
+          type: Date,
+          default: Date.now
+        },
+        user: {
+          type: String
+        },
+        audit: {
+            date: {
+              type: Date
+            },
+            review: {
+              type: String
+            }
+        },
+        approved_by: {
+          type: String
+        },
+        approved_date: {
+          type: Date
+        },
+        general_review: {
+          type: String
+        },
+        methods: {
+          type: Array
+        },
+        objective: {
+          type: String
+        },
+        comments: {
+          type: String
+        },
+        processed: {
+          type: Boolean,
+          default: false
+        }
     },
     ended: {
-        type: Schema.ObjectId,
-        ref: 'Ended'
+        date: {
+          type: Date,
+          default: Date.now
+        },
+        user: {
+          type: String
+        },
+        end_date: {
+          type: String
+        },
+        board_notified: {
+          type: String
+        },
+        approved_by: {
+          type: String
+        },
+        other_comments: {
+          type: String
+      }
     }
-
 
 });
 
@@ -173,15 +277,8 @@ ProjectSchema.path('coordinator').validate(function (coordinator) {
 ProjectSchema.statics.load = function (id, cb) {
     this.findOne({
         _id: id
-    }).populate('intermediary_reports payments')
-      .populate([
-        {path: 'organisation', model: 'Organisation'},
-        {path: 'in_review', model: 'InReview'},
-        {path: 'signed', model: 'Signed'},
-        {path: 'rejected', model: 'Rejected'},
-        {path: 'ended', model: 'Ended'},
-        {path: 'approved', model: 'Approved'},
-        {path: 'end_report', model: 'EndReport'}
+    }).populate([
+        {path: 'organisation', model: 'Organisation'}
       ]).exec(cb);
 };
 

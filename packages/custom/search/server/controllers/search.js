@@ -6,14 +6,6 @@ var mongoose = require('mongoose'),
         Organisation = mongoose.model('Organisation'),
         BankAccount = mongoose.model('BankAccount'),
         States = mongoose.model('States'),
-        InReview = mongoose.model('InReview'),
-        Rejected = mongoose.model('Rejected'),
-        Signed = mongoose.model('Signed'),
-        Payment = mongoose.model('Payment'),
-        Ended = mongoose.model('Ended'),
-        Approved = mongoose.model('Approved'),
-        IntReport = mongoose.model('IntReport'),
-        EndReport = mongoose.model('EndReport'),
         config = require('meanio').loadConfig(),
         _ = require('lodash');
 
@@ -83,6 +75,7 @@ module.exports = function (Search) {
                         }
                     });
         },
+
         searchByOrg: function (req, res) {
             var params = processRequest(req);
             Organisation.find({'name': new RegExp(req.params.tag, 'i')},
@@ -110,6 +103,7 @@ module.exports = function (Search) {
                         });
             }).sort(params.sort).skip(params.skip).limit(params.limit);
         },
+
         searchByRegion: function (req, res) {
             var params = processRequest(req);
             Project.find({region: new RegExp(req.query.region, 'i')},
@@ -129,9 +123,10 @@ module.exports = function (Search) {
                         }
                     });
         },
+
         searchByTheme: function (req, res) {
             var params = processRequest(req);
-            Approved.find({themes: req.params.tag}, function (err, results) {
+            Project.find({"approved.themes": req.params.tag}, function (err, results) {
 
                 if (err) {
                     return res.status(500).json({
@@ -139,23 +134,8 @@ module.exports = function (Search) {
                     });
                 }
 
-                results = results.map(function (result) {
-                    return result._id
-                });
-
-                Project.find({approved: {$in: results}}, {_id: 1, project_ref: 1,
-                    title: 1, organisation: 1, description: 1})
-                        .populate('organisation', {name: 1})
-                        .exec(function (err, projects) {
-                            if (err) {
-                                return res.status(500).json({
-                                    error: 'Teemojen lataaminen ei onnistu.'
-                                });
-                            }
-
-                            res.json(projects);
-                        });
-            }).sort(params.sort).skip(params.skip).limit(params.limit);
+                res.json(results);
+              }).sort(params.sort).skip(params.skip).limit(params.limit);
         }
 
     };

@@ -8,14 +8,6 @@ var mongoose = require('mongoose'),
         Organisation = mongoose.model('Organisation'),
         BankAccount = mongoose.model('BankAccount'),
         States = mongoose.model('States'),
-        InReview = mongoose.model('InReview'),
-        Rejected = mongoose.model('Rejected'),
-        Signed = mongoose.model('Signed'),
-        Payment = mongoose.model('Payment'),
-        Ended = mongoose.model('Ended'),
-        Approved = mongoose.model('Approved'),
-        IntReport = mongoose.model('IntReport'),
-        EndReport = mongoose.model('EndReport'),
         config = require('meanio').loadConfig(),
         _ = require('lodash');
 
@@ -64,7 +56,7 @@ module.exports = function (Projects) {
             });
             res.json(req.project);
         },
-        all: function (req, res) {
+        /*all: function (req, res) {
             var query = Project.find();
             query
                     .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
@@ -79,7 +71,8 @@ module.exports = function (Projects) {
                         }
                         res.json(projects)
                     });
-        }, /**
+        },*/
+        /**
          * Gets all projects.
          *
          * @param {type} req    The request object. It should contain the
@@ -127,12 +120,10 @@ module.exports = function (Projects) {
             }
 
             Project.find({}, {_id: 1, project_ref: 1, title: 1, state: 1,
-                organisation: 1, signed: 1, intermediary_reports: 1}
+                organisation: 1, intermediary_reports: 1}
             ).sort(orderingJSON)
                     .skip((page - 1) * pageSize)
                     .limit(pageSize)
-                    .populate('intermediary_reports', {_id: 1})
-                    .populate('signed', {_id: 1, intreport_deadlines: 1})
                     .populate('organisation', {_id: 1, name: 1})
                     .exec(function (err, result) {
                         if (err) {
@@ -168,7 +159,7 @@ module.exports = function (Projects) {
                 res.json(states);
             });
         },
-        /*
+        /**
          * Updates project to contain data required in review state
          * @param {type} req project object to be updated, sent from frontend
          * @param {type} res project object after update
@@ -176,17 +167,11 @@ module.exports = function (Projects) {
          *  updating not possible
          */
         addReview: function (req, res) {
-            var in_review = new InReview(req.body.in_review);
+            var in_review = req.body.in_review;
             in_review.user = req.user.name;
-            in_review.save(function (err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Tilatietojen tallennus epäonnistui'
-                    });
-                }
-            });
+
             var project = req.project;
-            project.in_review = in_review._id;
+            project.in_review = in_review;
             project.state = req.body.state;
             project.save(function (err) {
                 if (err) {
@@ -203,7 +188,7 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-        /*
+        /**
          * Updates project to contain data required in approved state
          * @param {type} req project object to be updated, sent from frontend
          * @param {type} res project object after update
@@ -211,21 +196,12 @@ module.exports = function (Projects) {
          *  updating not possible
          */
         addApproved: function (req, res) {
-            var approved = new Approved(req.body.approved);
+            var approved = req.body.approved;
             approved.user = req.user.name;
-            approved.save(function (err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Tilatietojen tallennus epäonnistui.'
-                    });
-                }
-
-            });
             var project = req.project;
-            project.approved = approved._id;
+            project.approved = approved;
             project.state = req.body.state;
-            project.funding.left_eur = approved.granted_sum.granted_curr_eur;
-            project.funding.left_local = approved.granted_sum.granted_curr_local;
+            project.funding.left_eur = approved.granted_sum_eur;
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -240,7 +216,7 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-        /*
+        /**
          * Updates project to contain data required in rejected state
          * @param {type} req project object to be updated, sent from frontend
          * @param {type} res project object after update
@@ -248,17 +224,10 @@ module.exports = function (Projects) {
          *  updating not possible
          */
         addRejected: function (req, res) {
-            var rejected = new Rejected(req.body.rejected);
+            var rejected = req.body.rejected;
             rejected.user = req.user.name;
-            rejected.save(function (err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Tilatietojen tallennus epäonnistui.'
-                    });
-                }
-            });
             var project = req.project;
-            project.rejected = rejected._id;
+            project.rejected = rejected;
             project.state = req.body.state;
             project.save(function (err) {
                 if (err) {
@@ -275,7 +244,7 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-        /*
+        /**
          * Updates project to contain data required in signed state
          * @param {type} req project object to be updated, sent from frontend
          * @param {type} res project object after update
@@ -283,17 +252,10 @@ module.exports = function (Projects) {
          *  updating not possible
          */
         addSigned: function (req, res) {
-            var signed = new Signed(req.body.signed);
+            var signed = req.body.signed;
             signed.user = req.user.name;
-            signed.save(function (err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Tilatietojen tallennus epäonnistui.'
-                    });
-                }
-            });
             var project = req.project;
-            project.signed = signed._id;
+            project.signed = signed;
             project.state = req.body.state;
             project.save(function (err) {
                 if (err) {
@@ -320,20 +282,12 @@ module.exports = function (Projects) {
          */
 
         addPayment: function (req, res) {
-            var payment = new Payment(req.body.payment);
-            payment.save(function (err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Maksun tallennus epäonnistui.'
-                    });
-                }
-            });
+            var payment = req.body.payment;
             var project = req.project;
+            project.payments.push(payment);
             project.funding.paid_eur = project.funding.paid_eur + payment.sum_eur;
-            project.funding.paid_local = project.funding.paid_local + payment.sum_local;
             project.funding.left_eur = project.funding.left_eur - payment.sum_eur;
-            project.funding.left_local = project.funding.left_local - payment.sum_local;
-            project.payments.push(payment._id);
+
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -357,16 +311,9 @@ module.exports = function (Projects) {
          *  updating not possible
          */
         addIntReport: function (req, res) {
-            var intReport = new IntReport(req.body.intermediary_report);
+            var intReport = req.body.intermediary_report;
             intReport.user = req.user.name;
             intReport.reportNumber = req.body.intermediary_report.reportNumber;
-            intReport.save(function (err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Tilatietojen tallennus epäonnistui.'
-                    });
-                }
-            });
 
             var project = req.project;
             project.intermediary_reports.push(intReport);
@@ -397,18 +344,11 @@ module.exports = function (Projects) {
          */
 
         addEndReport: function (req, res) {
-            var endReport = new EndReport(req.body.end_report);
+            var endReport = req.body.end_report;
             endReport.user = req.user.name;
-            endReport.save(function (err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Tilatietojen tallennus epäonnistui.'
-                    });
-                }
-            });
 
             var project = req.project;
-            project.end_report = endReport._id;
+            project.end_report = endReport;
             project.state = req.body.state;
 
             project.save(function (err) {
@@ -435,18 +375,10 @@ module.exports = function (Projects) {
          *  updating not possible
          */
         addEnded: function (req, res) {
-            console.log(req.body);
-            var ended = new Ended(req.body.ended);
+            var ended = req.body.ended;
             ended.user = req.user.name;
-            ended.save(function (err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Tilatietojen tallennus epäonnistui.'
-                    });
-                }
-            });
             var project = req.project;
-            project.ended = ended._id;
+            project.ended = ended;
             project.state = req.body.state;
             project.save(function (err) {
                 if (err) {
@@ -487,16 +419,7 @@ module.exports = function (Projects) {
          */
         byOrg: function (req, res) {
             Project.find({organisation: req.organisation})
-                    .populate('intermediary_reports payments')
-                    .populate([
-                      {path: 'organisation', model: 'Organisation'},
-                      {path: 'in_review', model: 'InReview'},
-                      {path: 'approved', model: 'Approved'},
-                      {path: 'rejected', model: 'Rejected'},
-                      {path: 'signed', model: 'Signed'},
-                      {path: 'end_report', model: 'EndReport'},
-                      {path: 'ended', model: 'Ended'}
-                    ])
+                    .populate({path: 'organisation', model: 'Organisation'})
                     .exec(function (err, projects) {
                         if (err) {
                             return res.status(500).json({

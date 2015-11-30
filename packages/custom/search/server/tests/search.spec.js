@@ -5,12 +5,11 @@
 /**
  * Module dependencies.
  */
-var expect = require('expect.js'),
+/*var expect = require('expect.js'),
         mongoose = require('mongoose'),
         Project = mongoose.model('Project'),
         Organisation = mongoose.model('Organisation'),
-        BankAccount = mongoose.model('BankAccount'),
-        Approved = mongoose.model('Approved');
+        BankAccount = mongoose.model('BankAccount');
 
 var project1;
 var project2;
@@ -49,30 +48,7 @@ describe('<Unit Test>', function () {
                 "nat_links": "local human rights org",
                 "bank_account": bank_account});
             organisation.save();
-            approved = new Approved({
-                "user": "Maria",
-                "approved_date": "4.12.2015",
-                "approved_by": "Toiminnanjohtaja",
-                "board_notified": "5.12.2015",
-                "methods": [
-                  {
-                    "level": "Paikallinen",
-                    "name": "Alueellinen yhteistyö"
-                  },
-                  {
-                    "level": "Kansallinen",
-                    "name": "Vaikuttamistyö"
-                  }
-                ],
-                "themes": [
-                  "Oikeus koskemattomuuteen ja inhimilliseen kohteluun",
-                  "Ihmisoikeuspuolustajat"
-                ],
-                "granted_sum": {
-                  "granted_curr_eur": 12000,
-                  "granted_curr_local": 50000
-                }});
-            approved.save();
+
             project1 = new Project(
                     {"title": "Human rights",
                         "coordinator": "Teppo Tenhunen",
@@ -123,7 +99,29 @@ describe('<Unit Test>', function () {
                         "other_donors_proposed": "Donated amount",
                         "dac": "abcd123",
                         "region": "Itä-Aasia",
-                        "approved": approved
+                        "approved": {
+                                    "user": "Maria",
+                                    "approved_date": "4.12.2015",
+                                    "approved_by": "Toiminnanjohtaja",
+                                    "board_notified": "5.12.2015",
+                                    "methods": [
+                                      {
+                                        "level": "Paikallinen",
+                                        "name": "Alueellinen yhteistyö"
+                                      },
+                                      {
+                                        "level": "Kansallinen",
+                                        "name": "Vaikuttamistyö"
+                                      }
+                                    ],
+                                    "themes": [
+                                      "Oikeus koskemattomuuteen ja inhimilliseen kohteluun",
+                                      "Ihmisoikeuspuolustajat"
+                                    ],
+                                    "granted_sum": {
+                                      "granted_curr_eur": 12000,
+                                      "granted_curr_local": 50000
+                                    }});
                     });
             project2.save();
             done();
@@ -163,7 +161,7 @@ describe('<Unit Test>', function () {
             });
         });
 
-        /*describe('Method searchByOrg', function () {
+        describe('Method searchByOrg', function () {
 
             it('should find projects by organisation name', function (done) {
 
@@ -189,7 +187,7 @@ describe('<Unit Test>', function () {
                     done();
                 });
             });
-        });*/
+        });
 
         describe('Method searchByTheme', function () {
 
@@ -228,4 +226,4 @@ describe('<Unit Test>', function () {
             done();
         });
     });
-});
+});*/

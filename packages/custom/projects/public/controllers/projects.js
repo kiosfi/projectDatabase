@@ -252,6 +252,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
                 project.state = $scope.global.newState;
                 project.$addSigned(function (response) {
+
                     $location.path('projects/' + response._id);
                 });
             }
@@ -261,14 +262,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addPaymentInfo = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
-                project.payment.payment_date = $scope.convertDate($scope.payment_day, $scope.payment_month, $scope.payment_year);
+                var payment_date = $scope.convertDate($scope.payment_day, $scope.payment_month, $scope.payment_year);
+                //var payment = {"payment_date": payment_date, "sum_eur": $scope.payment_eur};
+                project.payment.payment_date = payment_date;
                 var index = project.payments.length;
                 if (index === undefined) {
-                    project.payment.paymentNumber = 1;
+                    project.payment.payment_number = 1;
                 } else {
                     project.payment.payment_number = project.payments.length + 1;
                 }
-
                 project.$addPayment(function (response) {
                     $window.location.reload();
                 });
@@ -303,7 +305,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.state = $scope.global.newState;
                 project.end_report.approved_date = $scope.convertDate($scope.er_approved_day, $scope.er_approved_month, $scope.er_approved_year);
                 project.end_report.audit.date = $scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year);
-                console.log(project);
                 project.$addEndReport(function (response) {
                     $location.path('projects/' + response._id);
                 });
@@ -316,6 +317,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 var project = $scope.project;
                 project.state = $scope.global.newState;
                 project.$addEnded(function (response) {
+                    console.log(response);
                     $location.path('projects/' + response._id)
                 });
             }
@@ -350,7 +352,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
 
         $scope.addPlannedPayment = function () {
-            $scope.plannedPayments.push({day: '', month: '', year: '', sum_eur: '', sum_local: ''});
+            $scope.plannedPayments.push({day: '', month: '', year: '', sum_eur: ''});
         };
 
         $scope.removePlannedPayment = function () {

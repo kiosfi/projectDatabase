@@ -10,16 +10,8 @@ var expect = require('expect.js'),
         Project = mongoose.model('Project'),
         Organisation = mongoose.model('Organisation'),
         BankAccount = mongoose.model('BankAccount'),
-        User = mongoose.model('User'),
-        InReview = mongoose.model('InReview'),
-        Approved = mongoose.model('Approved'),
-        Rejected = mongoose.model('Rejected'),
-        Signed = mongoose.model('Signed'),
-        Payment = mongoose.model('Payment'),
-        IntReport = mongoose.model('IntReport'),
-        EndReport = mongoose.model('EndReport'),
-        Ended = mongoose.model('Ended');
-        
+        User = mongoose.model('User');
+
 
 var project1;
 var project2;
@@ -365,19 +357,18 @@ describe('<Unit Test>', function () {
 
             it('should create a new "in review" state and update given project with its id', function (done) {
                 this.timeout(10000);
-                in_review = new InReview({
-                    "comments": "this is a comment"});
+                var in_review = {
+                    "user": user.name,
+                    "comments": "this is a comment"};
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
-                    in_review.user = user.name;
-                    in_review.save();
+
                     proj.state = "käsittelyssä";
                     proj.in_review = in_review;
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("käsittelyssä");
                     expect(proj.in_review.comments).to.be("this is a comment");
-                    in_review.remove();
                     user.remove();
                     done();
                 });
@@ -386,24 +377,22 @@ describe('<Unit Test>', function () {
             it('should create a new "approved" state and update given project with its id', function (done) {
                 this.timeout(10000);
                 var date = new Date();
-                approved = new Approved({
+                var approved = {
+                    "user": user.name,
                     "approved_date": date,
                     "approved_by": "Toiminnanjohtaja",
                     "board_notified": date,
                     "methods": [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen"}],
                     "themes": ["Oikeusvaltio ja demokratia"],
-                    "granted_sum": {"granted_curr_eur": 60000, "granted_curr_local": 80000}});
+                    "granted_sum_eur": 600000};
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
-                    approved.user = user.name;
-                    approved.save();
                     proj.state = "hyväksytty";
                     proj.approved = approved;
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("hyväksytty");
-                    expect(proj.approved.granted_sum.granted_curr_local).to.be(80000);
-                    approved.remove();
+                    expect(proj.approved.granted_sum_eur).to.be(600000);
                     user.remove();
                     done();
                 });
@@ -411,20 +400,18 @@ describe('<Unit Test>', function () {
 
             it('should create a new "rejected" state and update given project with its id', function (done) {
                 this.timeout(10000);
-                rejected = new Rejected({
+                var rejected = {
+                    "user": user.name,
                     "rejection_categories": [{rejection: "7 Strategia"}, {rejection: "8 Muu, mikä?"}],
-                    "rejection_comments": "this is a comment"});
+                    "rejection_comments": "this is a comment"};
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
-                    rejected.user = user.name;
-                    rejected.save();
                     proj.state = "hylätty";
                     proj.rejected = rejected;
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("hylätty");
                     expect(proj.rejected.rejection_comments).to.be("this is a comment");
-                    rejected.remove();
                     user.remove();
                     done();
                 });
@@ -433,22 +420,20 @@ describe('<Unit Test>', function () {
             it('should create a new "signed" state and update given project with its id', function (done) {
                 this.timeout(10000);
                 var date = new Date();
-                signed = new Signed({
+                var signed = {
+                    "user": user.name,
                     "signed_by": "Jaana Jantunen",
                     "signed_date": date,
-                    "planned_payments": [{"date": date, "sum_eur": 50000, "sum_local": 80000}],
-                    "intreport_deadlines": [{"report": "1. väliraportti", "date": date}]});
+                    "planned_payments": [{"date": date, "sum_eur": 50000}],
+                    "intreport_deadlines": [{"report": "1. väliraportti", "date": date}]};
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
-                    signed.user = user.name;
-                    signed.save();
                     proj.state = "allekirjoitettu";
                     proj.signed = signed;
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("allekirjoitettu");
                     expect(proj.signed.signed_by).to.be("Jaana Jantunen");
-                    signed.remove();
                     user.remove();
                     done();
                 });
@@ -457,51 +442,39 @@ describe('<Unit Test>', function () {
             it('should create a new payment and add its id to the payments array of project', function (done) {
                 this.timeout(10000);
                 var date = new Date()
-                payment = new Payment({
+                var payment = {
                     "payment_date": date,
-                    "sum_eur": 20000, "sum_local": 20000});
+                    "sum_eur": 20000};
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
-                    payment.save();
-                    proj.payments.push(payment._id);
+                    proj.payments.push(payment);
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.payments.length).to.be(1);
-                    payment.remove();
                     done();
                 });
             });
-            
+
             it('should create a new "int report" state and update given project with its id', function (done) {
                 this.timeout(10000);
                 var date = new Date();
-                int_report = new IntReport({
+                var int_report = {
+                    "user": user.name,
                     "reportNumber": 1,
                     "methods": ["Onnistui", "Onnistui kohtalaisesti"],
                     "objectives": ["TAvoitteet saavutettiin"],
                     "overall_rating_kios": "Arvio",
                     "approved_by": "Halko",
                     "date_approved": date,
-                    "comments": "Muita kommentteja hankkeen raportilta"});
-                
-//                return project1.addIntReport(function(err, proj) {
-//                    expect(err).to.be(null);
-//                    expect(proj.state).to.be("väliraportti");
-//                    expect(proj.intermediary_report.approved_by).to.be("Halko");
-//                    int_report.remove();
-//                    done();
-//                });
+                    "comments": "Muita kommentteja hankkeen raportilta"};
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
-                    int_report.user = user.name;
-                    int_report.save();
                     proj.state = "väliraportti";
                     proj.intermediary_report = int_report;
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("väliraportti");
                     expect(proj.intermediary_report.approved_by).to.be("Halko");
-                    int_report.remove();
                     user.remove();
                     done();
                 });
@@ -510,25 +483,23 @@ describe('<Unit Test>', function () {
             it('should create a new "end report" state and update given project with its id', function (done) {
                 this.timeout(10000);
                 var date = new Date();
-                end_report = new EndReport({
+                var end_report = {
+                    "user": user.name,
                     "audit": {"date": date, "review": "ihan ok"},
                     "approved_by": "Jaana Jantunen",
                     "approved_date": date,
                     "general review": "Meni hyvin.",
                     "methods": [{"name": "tavoite", "level": "paikallinen"}],
                     "objectives": "hankkeen tavoite",
-                    "comments": "Kommentti"});
+                    "comments": "Kommentti"};
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
-                    end_report.user = user.name;
-                    end_report.save();
                     proj.state = "loppuraportti";
                     proj.end_report = end_report;
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("loppuraportti");
                     expect(proj.end_report.approved_by).to.be("Jaana Jantunen");
-                    end_report.remove();
                     user.remove();
                     done();
                 });
@@ -537,22 +508,20 @@ describe('<Unit Test>', function () {
 
             it('should create a new "ended" state update given project with its id', function (done) {
                 this.timeout(10000);
-                ended = new Ended({
+                var ended = {
+                    "user": user.name,
                     "end_date": "12.12.2015",
                     "board_notified": "12.12.2015",
                     "approved_by": "toimitusjohtaja",
-                    "other_comments": "kommentti"});
+                    "other_comments": "kommentti"};
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
-                    ended.user = user.name;
-                    ended.save();
                     proj.state = "päättynyt";
                     proj.ended = ended;
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("päättynyt");
                     expect(proj.ended.board_notified).to.be("12.12.2015");
-                    ended.remove();
                     user.remove();
                     done();
                 });
