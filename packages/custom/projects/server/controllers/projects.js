@@ -100,13 +100,19 @@ module.exports = function (Projects) {
             var ascending = req.query.ascending;
             var page = req.query.page;
             if (typeof ordering === 'undefined') {
-                ordering = 'project_ref';
+                return res.status(500).json({
+                                error: 'Kyselystä puuttuu kenttä "ordering"'
+                            });
             }
             if (typeof ascending === 'undefined') {
-                ascending = 'true';
+                return res.status(500).json({
+                                error: 'Kyselystä puuttuu kenttä "ascending"'
+                            });
             }
             if (typeof page === 'undefined') {
-                page = 1;
+                return res.status(500).json({
+                                error: 'Kyselystä puuttuu kenttä "page"'
+                            });
             }
 
             var pageSize = 10;
@@ -125,7 +131,7 @@ module.exports = function (Projects) {
             } else {
                 orderingJSON["project_ref"] = 1;
             }
-
+            
             Project.find({}, {_id: 1, project_ref: 1, title: 1, state: 1,
                 organisation: 1, signed: 1, intermediary_reports: 1}
             ).sort(orderingJSON)
@@ -156,7 +162,6 @@ module.exports = function (Projects) {
                 res.json({projectCount: result});
             });
         },
-
         allStates: function (req, res) {
             var query = States.find();
             query.exec(function (err, states) {
@@ -310,7 +315,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /**
          * Updates project to contain payment data
          * @param {type} req project object to be updated, sent from frontend
@@ -489,13 +493,13 @@ module.exports = function (Projects) {
             Project.find({organisation: req.organisation})
                     .populate('intermediary_reports payments')
                     .populate([
-                      {path: 'organisation', model: 'Organisation'},
-                      {path: 'in_review', model: 'InReview'},
-                      {path: 'approved', model: 'Approved'},
-                      {path: 'rejected', model: 'Rejected'},
-                      {path: 'signed', model: 'Signed'},
-                      {path: 'end_report', model: 'EndReport'},
-                      {path: 'ended', model: 'Ended'}
+                        {path: 'organisation', model: 'Organisation'},
+                        {path: 'in_review', model: 'InReview'},
+                        {path: 'approved', model: 'Approved'},
+                        {path: 'rejected', model: 'Rejected'},
+                        {path: 'signed', model: 'Signed'},
+                        {path: 'end_report', model: 'EndReport'},
+                        {path: 'ended', model: 'Ended'}
                     ])
                     .exec(function (err, projects) {
                         if (err) {
