@@ -62,8 +62,8 @@ Search.register(function (app, auth, database, organisations, projects) {
      });
      */
 
-    Search.aggregateAsset('js', 'packages/custom/search/public/assets/lib/angular-sanitize/angular-sanitize.min.js');
-    Search.aggregateAsset('js', 'packages/custom/search/public/assets/lib/ng-csv/build/ng-csv.min.js');
+    Search.aggregateAsset('js', '../lib/angular-sanitize/angular-sanitize.min.js', {global: true});
+    Search.aggregateAsset('js', '../lib/ng-csv/build/ng-csv.min.js', {global: true});
 
     Search.angularDependencies(['ngSanitize', 'ngCsv']);
 
