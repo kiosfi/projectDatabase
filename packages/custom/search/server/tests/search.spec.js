@@ -9,8 +9,7 @@ var expect = require('expect.js'),
         mongoose = require('mongoose'),
         Project = mongoose.model('Project'),
         Organisation = mongoose.model('Organisation'),
-        BankAccount = mongoose.model('BankAccount'),
-        Approved = mongoose.model('Approved');
+        BankAccount = mongoose.model('BankAccount');
 
 var project1;
 var project2;
@@ -49,30 +48,7 @@ describe('<Unit Test>', function () {
                 "nat_links": "local human rights org",
                 "bank_account": bank_account});
             organisation.save();
-            approved = new Approved({
-                "user": "Maria",
-                "approved_date": "4.12.2015",
-                "approved_by": "Toiminnanjohtaja",
-                "board_notified": "5.12.2015",
-                "methods": [
-                  {
-                    "level": "Paikallinen",
-                    "name": "Alueellinen yhteistyö"
-                  },
-                  {
-                    "level": "Kansallinen",
-                    "name": "Vaikuttamistyö"
-                  }
-                ],
-                "themes": [
-                  "Oikeus koskemattomuuteen ja inhimilliseen kohteluun",
-                  "Ihmisoikeuspuolustajat"
-                ],
-                "granted_sum": {
-                  "granted_curr_eur": 12000,
-                  "granted_curr_local": 50000
-                }});
-            approved.save();
+
             project1 = new Project(
                     {"title": "Human rights",
                         "coordinator": "Teppo Tenhunen",
@@ -123,97 +99,43 @@ describe('<Unit Test>', function () {
                         "other_donors_proposed": "Donated amount",
                         "dac": "abcd123",
                         "region": "Itä-Aasia",
-                        "approved": approved
-                    });
+                        "approved":
+                          {
+                          "user": "Maria",
+                          "approved_date": "4.12.2015",
+                          "approved_by": "Toiminnanjohtaja",
+                          "board_notified": "5.12.2015",
+                          "methods":
+                            [{
+                              "level": "Paikallinen",
+                              "name": "Alueellinen yhteistyö"
+                              },
+                              {
+                              "level": "Kansallinen",
+                              "name": "Vaikuttamistyö"
+                              }],
+                          "themes":
+                              ["Oikeus koskemattomuuteen ja inhimilliseen kohteluun",
+                              "Ihmisoikeuspuolustajat"],
+                          "granted_sum_eur": 12000}});
             project2.save();
             done();
         });
 
-        describe('Method searchByRegion', function () {
+        describe('Method twoParamsSearch', function () {
 
-            it('should find projects by their region', function (done) {
+            it('should find projects with selected params', function (done) {
 
                 this.timeout(10000);
-                var region = "aasia";
-                var param = new RegExp(region, "i");
-                var query = Project.find({"region": param});
+                var state = "rekisteröity"
+                var region = "Itä-Aasia";
+                var query = Project.find({"state": state, "region": region});
 
                 return query.exec(function (err, data) {
                     expect(err).to.be(null);
-                    expect(data.length).to.be(2);
-                    expect(data[1].dac).to.be("abcd123");
-                    done();
-                });
-            });
-        });
-
-        describe('Method SearchByState', function () {
-
-            it('should find projects by their state', function (done) {
-
-                this.timeout(10000);
-                var state = "hyväksytty";
-
-                return Project.find({"state": state}, function (err, data) {
-                    expect(err).to.be(null);
                     expect(data.length).to.be(1);
-                    expect(data[0].region).to.be("Itä-Aasia");
+                    expect(data[0].dac).to.be("abcd123");
                     done();
-                });
-            });
-        });
-
-        /*describe('Method searchByOrg', function () {
-
-            it('should find projects by organisation name', function (done) {
-
-                this.timeout(10000);
-
-                var name = "activists";
-                var param = new RegExp(name, "i");
-
-                return Organisation.find({"name": param}, function (err, data) {
-
-                    expect(err).to.be(null);
-                    expect(data.length).to.be(0);
-
-                    data = data.map(function(org) {
-                      return org._id;
-                    });
-
-                    Project.find({organisation: data}, function(err, projects) {
-                        expect(projects.length).to.be(undefined);
-                    //expect(data.name).to.be("Rights Activists");
-
-                    });
-                    done();
-                });
-            });
-        });*/
-
-        describe('Method searchByTheme', function () {
-
-            it('should find projects by theme', function (done) {
-
-                this.timeout(10000);
-
-                var theme = "Ihmisoikeuspuolustajat";
-
-                return Approved.find({"themes": theme}, function (err, data) {
-
-                    expect(err).to.be(null);
-                    expect(data.length).to.be(1);
-
-                    data = data.map(function(theme) {
-                      return theme._id;
-                    });
-
-                    Project.find({approved: data}, function(err, projects) {
-                        expect(err).to.be(null);
-                        expect(projects.length).to.be(1);
-                        expect(projects[0].duration_months).to.be(12);
-                    });
-                  done();
                 });
             });
         });
@@ -224,7 +146,6 @@ describe('<Unit Test>', function () {
             project2.remove();
             organisation.remove();
             bank_account.remove();
-            approved.remove();
             done();
         });
     });

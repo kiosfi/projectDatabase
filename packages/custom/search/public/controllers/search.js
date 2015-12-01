@@ -6,7 +6,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
     function ($scope, $stateParams, $http, $window, Global, Search, OrgSearch, ThemeSearch, MeanUser) {
         $scope.global = Global;
 
-        $scope.tags = ['Nimi', 'Järjestö', 'Tila', 'Maanosa tai maa', 'Teema'];
+        $scope.fields = [{"name": "state", "fi": "Tila"}, {"name": "region", "fi": "Alue"}];
 
         $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
             'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
@@ -20,47 +20,20 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.results;
 
-        $scope.searchByTitle = function () {
-            Search.searchByTitle({title: $scope.selectedTitle}, function (searchresults) {
+        /**
+         * Creates search query object
+         *
+         * @returns {JSON} response from server.
+         */
+        $scope.twoParams = function () {
+            var query = {};
+            query[$scope.field1] = $scope.param1;
+            query[$scope.field2] = $scope.param2;
+            console.log(query)
+            Search.twoParamsSearch(query, function (searchresults) {
                 $scope.results = searchresults;
             });
         };
-
-        $scope.searchByOrgName = function () {
-            OrgSearch.findOrg($scope.selectedName).success(function (projects) {
-                $scope.results = projects;
-            });
-        };
-
-        $scope.searchByState = function () {
-            Search.searchByState({state: $scope.selectedState}, function (searchresults) {
-                $scope.results = searchresults;
-            });
-        };
-
-        $scope.searchByRegion = function () {
-            Search.searchByRegion({region: $scope.selectedRegion}, function (searchresults) {
-                $scope.results = searchresults;
-            });
-        };
-
-        $scope.searchByTheme = function () {
-            ThemeSearch.findTheme($scope.selectedTheme).success(function (results) {
-                $scope.results = results;
-            });
-        };
-        /* $scope.search = function() {
-         Search.query({tag:$scope.selectedTag}, function(articles) {
-         $scope.articles = articles;
-         });
-         };*/
-        /*$scope.findOne = function() {
-         Projects.get({
-         projectId: $stateParams.projectId
-         }, function(project) {
-         $scope.project = project;
-         });
-         };*/
 
         // We need this string to catenate it into the url:
         $scope.searchBy = 'organisation';

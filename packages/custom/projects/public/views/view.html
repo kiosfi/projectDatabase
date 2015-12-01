@@ -72,9 +72,8 @@
                 <p>Tila: {{project.state}}</p>
 
                 <p>Kirjattu: {{project.reg_date| date:'dd-MM-yyyy'}}</p>
-                <p ng-show="project.approved.granted_sum.granted_curr_eur" class="ng-hide">
-                    Myönnetty: {{project.approved.granted_sum.granted_curr_eur| currency : ""}} EUR ({{project.approved.granted_sum.granted_curr_local| currency : ""}} paikallista valuuttaa)
-                </p>
+                <p ng-show="project.approved.granted_sum_eur" class="ng-hide">
+                    Myönnetty: {{project.approved.granted_sum_eur| currency : ""}} EUR</p>
                 <p ng-show="!project.approved.granted_sum.granted_curr_eur" class="ng-hide">
                     Haettu: {{project.funding.applied_curr_eur| currency : ""}} EUR ({{project.funding.applied_curr_local| currency : ""}} paikallista valuuttaa)</p>
                 <p>Kesto: {{project.duration_months}} kk</p>
@@ -150,25 +149,25 @@
 
                 <article class="proj">
                     <section class="proj-body">
-                        <h5 class="proj-header" ng-show="project.approved.granted_sum.granted_curr_eur">Myönnetty avustus</h5>
-                        <p>Summa: {{project.approved.granted_sum.granted_curr_eur| currency : ""}} EUR ({{project.approved.granted_sum.granted_curr_local| currency : ""}} paikallista valuuttaa), {{project.approved.approved_date| date:'dd-MM-yyyy'}}</p>
+                        <h5 class="proj-header" ng-show="project.approved.granted_sum_eur">Myönnetty avustus</h5>
+                        <p>Summa: {{project.approved.granted_sum_eur| currency : ""}} EUR, {{project.approved.approved_date| date:'dd-MM-yyyy'}}</p>
 
                     </section>
                     <br>
                     <h5 class="proj-header">Suunniteltu maksuaikataulu</h5>
                     <section class="proj-body" ng-repeat="planned_payment in project.signed.planned_payments">
-                        <p>{{project.signed.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur| currency : ""}} EUR ({{planned_payment.sum_local| currency : ""}} paikallista valuuttaa), {{planned_payment.date| date:'dd-MM-yyyy'}}</p>
+                        <p>{{project.signed.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur| currency : ""}} EUR, {{planned_payment.date| date:'dd-MM-yyyy'}}</p>
                     </section>
                     <br>
                     <h5 class="proj-header">Maksetut erät</h5>
                     <section class="proj-body" ng-repeat="payment in project.payments">
-                        <p id="paid">{{payment.payment_number}}. Erä: {{payment.sum_eur| currency : ""}} EUR ({{payment.sum_local| currency : ""}} paikallista valuuttaa), {{payment.payment_date| date:'dd-MM-yyyy'}}</p>
+                        <p id="paid">{{payment.payment_number}}. Erä: {{payment.sum_eur| currency : ""}} EUR, {{payment.payment_date| date:'dd-MM-yyyy'}}</p>
                     </section>
                     <br>
                     <h5 class="proj-header">Maksettu</h5>
-                    <section class="proj-body" ng-show="project.payments.length">
-                        <p>Maksettu yhteensä: {{project.funding.paid_eur| currency : ""}} EUR ({{project.funding.paid_local| currency : ""}} paikallista) </p>
-                        <p>Jäljellä: {{project.funding.left_eur| currency : ""}} EUR ({{project.funding.left_local| currency : ""}} paikallista) </p>
+                    <section class="proj-body">
+                        <p>Maksettu yhteensä: {{project.funding.paid_eur| currency : ""}} EUR </p>
+                        <p>Jäljellä: {{project.funding.left_eur| currency : ""}} EUR</p>
                     </section>
 
                 </article>
@@ -196,7 +195,7 @@
             </article>
         </article>
 
-        <article class="proj-right" ng-show="project.signed._id">
+        <article class="proj-right" ng-show="project.signed.signed_by">
             <h5>Lisää maksutieto</h5>
             <form name="paymentForm" class="form-horizonal" role="form" data-ng-submit="addPaymentInfo(paymentForm.$valid)" novalidate>
 
@@ -246,21 +245,6 @@
                     </div>
                 </div>
 
-                <div class="form-group col-xs-12" ng-class="{
-                                  'has-error'
-                                  :  paymentForm.paymentSumLocal.$invalid }">
-                    <label for="paymentSumLocal" class="col-xs-2 control-label">Summa (pv)</label>
-                    <div class="col-xs-4">
-                        <input name="paymentSumLocal" type="number" class="form-control" data-ng-model="project.payment.sum_local" id="paymentSumLocal" placeholder="Summa (pv)" required></input>
-                    </div>
-                    <div ng-show="paymentForm.paymentSumLocal.$invalid" class="help-block">
-                        <p ng-show="paymentForm.paymentSumLocal.$error.number">Summan täytyy olla numero</p>
-                    </div>
-                    <div ng-show="paymentForm.paymentSumLocal.$invalid" class="help-block">
-                        <p ng-show="paymentForm.paymentSumLocal.$error.required">Kenttä on pakollinen</p>
-                    </div>
-                </div>
-
                 <div class="form-group col-xs-12">
                     <div class="col-xs-4">
                         <button type="submit" class="btn btn-default" ng-disabled="paymentForm.$invalid">Tallenna</button>
@@ -275,7 +259,7 @@
 
     <article>
         <h4 class="proj-header">Aikataulu</h4>
-        <section ng-show="project.in_review._id" class="proj-body">
+        <section ng-show="project.in_review.comments" class="proj-body">
             <p><b>**Rekisteröity käsittelyyn</b>:&nbsp&nbsp{{project.in_review.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityReviewinfo')">Tiedot</button></p>
             <span class="proj-left visibilityReviewinfo">
@@ -287,7 +271,7 @@
 
         </section>
 
-        <section ng-show="project.approved._id" class="proj-body">
+        <section ng-show="project.approved.approved_by" class="proj-body">
             <p><b>**Rekisteröity hyväksytyksi</b>: {{project.approved.date| date:'dd-MM-yyyy'}}
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityApprovedinfo')">Tiedot</button></p>
             <span class="proj-left visibilityApprovedinfo">
@@ -300,7 +284,7 @@
                 <h5>Hallitukselle tiedoksi:</h5>
                 <p>{{project.approved.board_notified| date:'dd-MM-yyyy'}}</p>
                 <h5>Hyväksytty summa:</h5>
-                <p>{{project.approved.granted_sum.granted_curr_eur| currency : ""}} EUR ({{project.approved.granted_sum.granted_curr_local| currency : ""}} paikallista valuuttaa)</p>
+                <p>{{project.approved.granted_sum_eur| currency : ""}} EUR</p>
                 <h5>Teemat:</h5>
                 <ul>
                     <li data-ng-repeat="theme in project.approved.themes">{{theme}}</li>
@@ -315,7 +299,7 @@
 
         </section>
 
-        <section ng-show="project.rejected._id" class="proj-body">
+        <section ng-show="project.rejected.rejection_comments" class="proj-body">
             <p><b>**Rekisteröity hylätyksi</b>:&nbsp&nbsp{{project.rejected.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityRejectedinfo')">Tiedot</button></p>
             <span class="proj-left visibilityRejectedinfo">
@@ -333,7 +317,7 @@
         </section>
 
 
-        <section ng-show="project.signed._id" class="proj-body">
+        <section ng-show="project.signed.signed_by" class="proj-body">
             <p><b>**Rekisteröity allekirjoitetuksi</b>:&nbsp&nbsp{{project.signed.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilitySignedinfo')">Tiedot</button></p>
             <span class="proj-left visibilitySignedinfo">
@@ -356,12 +340,12 @@
                     <p>{{intreport.user}}, {{intreport.date| date:'dd-MM-yyyy, HH:mm'}}</p>
                     <h5>Raportti hyväksytty:</h5>
                     <p>{{intreport.approved_by}}, {{intreport.date_approved| date : 'dd-MM-yyyy'}}</p>
-                    <p ng-show="intreport.processed === true">Väliraportti käsitelty</p>                    
+                    <p ng-show="intreport.processed === true">Väliraportti käsitelty</p>
                 </span>
             </article>
         </section>
 
-        <section ng-show="project.end_report._id" class="proj-body">
+        <section ng-show="project.end_report.approved_by" class="proj-body">
             <p><b>**Loppuraportti rekisteröity</b>:&nbsp&nbsp{{project.end_report.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <!--            <button class="btn small-btn"><a ng-href='/projects/endReport/{{project._id}}'>Tiedot</a></button></p>-->
                 <button class="btn small-btn" ng-click="showEndDetails = ! showEndDetails">Tiedot</button>
@@ -371,11 +355,11 @@
                 <p>{{project.end_report.user}}, {{project.end_report.date| date:'dd-MM-yyyy, HH:mm'}}</p>
                 <h5>Raportti hyväksytty:</h5>
                 <p>{{project.end_report.approved_by}}, {{project.end_report.date_approved| date : 'dd-MM-yyyy'}}</p>
-                <p ng-show="project.end_report.processed === true">Väliraportti käsitelty</p>                    
+                <p ng-show="project.end_report.processed === true">Väliraportti käsitelty</p>
             </span>
         </section>
 
-        <section ng-show="project.ended._id" class="proj-body">
+        <section ng-show="project.ended.approved_by" class="proj-body">
             <p><b>**Rekisteröity päätetyksi</b>:&nbsp&nbsp{{project.ended.end_date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityEndedinfo')">Tiedot</button></p>
             <span class="proj-left visibilityEndedinfo">
