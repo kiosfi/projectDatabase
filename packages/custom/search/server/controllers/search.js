@@ -41,7 +41,6 @@ module.exports = function (Search) {
 
     return {
         twoParamsSearch: function (req, res) {
-          console.log(req.query);
           Project.find(req.query)
           .populate('organisation', {name: 1})
           .exec(function(err, searchResults) {

@@ -15,10 +15,9 @@
         <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="twoParams()" novalidate>
             <label for="par1">Hakuehto 1</label>
             <div id="par1">
-                <select id="fld1" class="dropdown col-md-4" ng-model="field1">
-                  <option value="state">Tila</option>
-                  <option value="region">Alue</option>
-                </select>
+              <select id="field1" class="dropdown col-md-4" ng-model="field1">
+                <option ng-repeat="field in fields" value={{field.name}}>{{field.fi}}</option>
+              </select>
                 <div style="clear:both;">&nbsp;</div>
                 <select class="dropdown col-md-4" ng-model="param1" ng-show="field1 === 'state'">
                     <option ng-repeat="state in states" value={{state}}>
@@ -33,10 +32,9 @@
             <label for="par2">Hakuehto 2</label>
             <div id="par2">
                 <select id="field2" class="dropdown col-md-4" ng-model="field2">
-                  <option value="state">Tila</option>
-                  <option value="region">Alue</option>
+                  <option ng-repeat="field in fields" value={{field.name}}>{{field.fi}}</option>
                 </select>
-                <div style="clear:both;">&nbsp;</div>                
+                <div style="clear:both;">&nbsp;</div>
                 <select class="dropdown col-md-4" ng-model="param2" ng-show="field2 === 'state'">
                     <option ng-repeat="state in states" value={{state}}>
                         {{state}}
