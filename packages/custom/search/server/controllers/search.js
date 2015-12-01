@@ -22,7 +22,8 @@ module.exports = function (Search) {
     return {
         searchByState: function (req, res) {
 
-            Project.find({state: req.query.state})
+            Project.find({state: req.query.state}, {_id: 1, project_ref: 1, title: 1,
+                    organisation: 1, description: 1})
             .populate('organisation', {name: 1})
             .exec(function(err, searchResults) {
                 if (err) {
