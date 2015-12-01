@@ -6,7 +6,7 @@
 var Module = require('meanio').Module;
 
 var Organisations = new Module('organisations');
-Organisations.angularDependencies(['ngSanitize', 'ngCsv']);
+//Organisations.angularDependencies(['ngSanitize', 'ngCsv']);
 
 /**
  * All MEAN packages require registration
