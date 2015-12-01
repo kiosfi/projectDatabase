@@ -66,7 +66,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             return MeanUser.isAdmin;
         };
 
-        /*
+        /**
          * Creates new project by checking if organisation already exists (i.e. organisation
          * has been selected from dropdown list) or if organisation is new.
          * If organisation is new, first creates new organisation by calling
@@ -149,6 +149,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
+        /**
+         * Fetches states
+         *
+         * @param {String}
+         * @returns {undefined}
+         */
         $scope.findState = function () {
             Projects.get({
                 projectId: $stateParams.projectId}, function (project) {
@@ -186,6 +192,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
+        /**
+         * Updates project with "in review" state data
+         *
+         * @param {type} isValid checks if project creation form is valid
+         * @returns {undefined}
+         */
         $scope.addReviewState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
@@ -197,6 +209,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         };
 
+        /**
+         * Updates project with "approved" state data
+         *
+         * @param {type} isValid checks if project creation form is valid
+         * @returns {undefined}
+         */
         $scope.addApprovedState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
@@ -212,6 +230,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         };
 
+        /**
+         * Updates project with "rejected" state data
+         *
+         * @param {type} isValid checks if project creation form is valid
+         * @returns {undefined}
+         */
         $scope.addRejectedState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
@@ -224,6 +248,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         };
 
+        /**
+         * Updates project with "signed" state data
+         *
+         * @param {type} isValid checks if project creation form is valid
+         * @returns {undefined}
+         */
         $scope.addSignedState = function (isValid) {
             if (isValid) {
 
@@ -258,7 +288,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
 
         };
-
+        /**
+         * Adds payment to project
+         *
+         * @param {type} isValid checks if project creation form is valid
+         * @returns {undefined}
+         */
         $scope.addPaymentInfo = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
@@ -278,6 +313,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         };
 
+        /**
+         * Updates project with "int report" state data
+         *
+         * @param {type} isValid checks if project creation form is valid
+         * @returns {undefined}
+         */
         $scope.addIntReportState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
@@ -299,6 +340,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         };
 
+        /**
+         * Updates project with "end report" state data
+         *
+         * @param {type} isValid checks if project creation form is valid
+         * @returns {undefined}
+         */
         $scope.addEndReportState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
@@ -312,6 +359,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         };
 
+        /**
+         * Updates project with "ended" state data
+         *
+         * @param {type} isValid checks if project creation form is valid
+         * @returns {undefined}
+         */
         $scope.addEndedState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;

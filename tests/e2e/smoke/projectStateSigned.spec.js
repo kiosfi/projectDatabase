@@ -34,7 +34,6 @@ describe('Changing project state to "signed"', function () {
         element(by.model('plannedPayment.year')).sendKeys('2015');
 
         element(by.model('plannedPayment.sum_eur')).sendKeys('30000');
-        element(by.model('plannedPayment.sum_local')).sendKeys('50000');
 
         browser.executeScript('window.scrollTo(0,100000)').then(function () {
             element(by.id('add-btn2')).click();

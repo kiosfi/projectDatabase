@@ -44,8 +44,8 @@ module.exports = function (Projects) {
                 name: project.title
             });
         },
-        /*
-         * Loads a project for display and populates its state fields.
+        /**
+         * Loads a project for display.
          */
         show: function (req, res) {
 

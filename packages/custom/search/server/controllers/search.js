@@ -40,6 +40,14 @@ module.exports = function (Search) {
     };*/
 
     return {
+
+      /**
+       * Queries project collection with query object
+       * received from frontend.
+       *
+       * @param {type} req    The request object.
+       * @returns {JSON}
+       */
         twoParamsSearch: function (req, res) {
           Project.find(req.query)
           .populate('organisation', {name: 1})

@@ -12,15 +12,7 @@ exports.config = {
 
         {
             browserName: 'chrome'
-        },
-
-        {
-            browserName: 'chrome'
         }
-//        ,
-//        {
-//            browserName: 'firefox'
-//        }
     ],
     onPrepare: function () {
         //Creates independent results files for each browser

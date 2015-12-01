@@ -20,6 +20,11 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.results;
 
+        /**
+         * Creates search query object
+         *
+         * @returns {JSON} response from server.
+         */
         $scope.twoParams = function () {
             var query = {};
             query[$scope.field1] = $scope.param1;

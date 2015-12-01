@@ -25,14 +25,18 @@ describe('Project create page', function () {
         element(by.linkText("Hankkeen lisäys")).click();
         element(by.linkText("Hankkeen nimi, koordinaattori ja järjestö")).click();
         element(by.linkText("Hankkeen perustiedot")).click();
-        element(by.linkText("Hankkeen lisätiedot")).click();
+        browser.executeScript('window.scrollTo(0,100000)').then(function () {
+          element(by.linkText("Hankkeen lisätiedot")).click();
+        });
 
-        element(by.model('project.title')).sendKeys('Test title');
+        browser.executeScript('window.scrollTo(100000,0)').then(function () {
+          element(by.model('project.title')).sendKeys('Test title');
+        });
+
         element(by.model('project.coordinator')).element(by.cssContainingText('option', 'Maija Maa')).click();
         element(by.buttonText('Lisää uusi järjestö')).click();
         element(by.linkText("Järjestö")).click();
 
-        //element(by.model('project.coordinator')).sendKeys('Tets coordinator');
         element(by.model('project.organisation.name')).sendKeys('Test organisation');
         element(by.model('project.organisation.representative')).sendKeys('Test prep');
         element(by.model('project.organisation.exec_manager')).sendKeys('Matti Manageri');
@@ -43,13 +47,19 @@ describe('Project create page', function () {
         element(by.model('project.organisation.tel')).sendKeys('+123456789');
         element(by.model('project.organisation.email')).sendKeys('org@test.com');
         element(by.model('project.organisation.website')).sendKeys('www.testorg.com');
-        //element(by.model('project.status')).element(by.cssContainingText('option', 'rekisteröity')).click();
-        element(by.model('project.funding.applied_curr_local')).sendKeys('100000');
-        element(by.model('project.funding.applied_curr_eur')).sendKeys('19000');
+
+        browser.executeScript('window.scrollTo(0,100000)').then(function () {
+          element(by.model('project.funding.applied_curr_eur')).sendKeys('19000');
+        });
+        element(by.model('project.funding.applied_curr_local')).sendKeys('19000');
         element(by.model('project.duration_months')).sendKeys('20');
         element(by.model('project.description')).sendKeys('Short description of project');
         element(by.model('project.description_en')).sendKeys('Short summary in english');
-        element(by.model('project.background')).sendKeys('Test projects background');
+
+        browser.executeScript('window.scrollTo(0,100000)').then(function () {
+          element(by.model('project.background')).sendKeys('Test projects background');
+        });
+
         element(by.model('project.beneficiaries')).sendKeys('Test beneficiaries');
         element(by.model('project.gender_aspect')).sendKeys('Test projects gender aspects are...');
         element(by.model('project.project_goal')).sendKeys('Goals in test project are...');
@@ -59,7 +69,10 @@ describe('Project create page', function () {
         element(by.model('project.region')).sendKeys('Asia');
         element(by.model('project.dac')).sendKeys('12345677');
 
-        element(by.linkText("Hakijajärjestön lisätiedot")).click();
+        browser.executeScript('window.scrollTo(100000,0)').then(function () {
+          element(by.linkText("Hakijajärjestön lisätiedot")).click();
+        });
+
         element(by.model('project.organisation.legal_status')).sendKeys('Orgs legal status is...');
         element(by.model('project.organisation.history_status')).sendKeys('Orgs history...');
         element(by.model('project.organisation.int_links')).sendKeys('Orgs history...');
@@ -73,7 +86,10 @@ describe('Project create page', function () {
         element(by.model('project.organisation.bank_account.swift')).sendKeys('iffifihh');
         element(by.model('project.organisation.bank_account.holder_name')).sendKeys('Test holder');
 
-        element(by.buttonText("Lähetä")).click();
+        browser.executeScript('window.scrollTo(100000,0)').then(function () {
+          element(by.buttonText("Lähetä")).click();
+        });
+
         var header = element(by.id('projtitle'));
         expect(header.getText()).toContain('Test title');
 
@@ -133,4 +149,3 @@ describe('Project create page', function () {
     });
 
 });
-
