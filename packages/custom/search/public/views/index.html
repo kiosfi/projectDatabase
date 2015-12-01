@@ -71,12 +71,14 @@
   <hr>
   <article class="search">
     <h4>Hakutulokset</h4>
-    <button type="button" ng-csv="searchresults" csv-header="['Id', 'Tunnus', 'Hanke', 'Järjestö', 'Kuvaus']" filename="tiedot.csv" field-separator=";">Export</button>    
+    <button type="button" ng-csv="searchresults" csv-header="['Id', 'Tunnus', 'Hanke', 'Järjestö', 'Kuvaus']" filename="tiedot.csv" field-separator=";" add-bom="true">Export</button>    
     <p>Löydettyjen hankkeiden määrä: {{searchresults.length}}</p>
     <table class="col-md-12 table table-striped">
         <thead>
             <tr>
-                <th class="col-md-1">Ref
+                <th class="col-md-1">ID
+                </th>
+                <th class="col-md-1">Tunnus
                 </th>
                 <th class="col-md-3">Hanke
                 </th>
@@ -87,9 +89,11 @@
         </thead>
         <tbody>
             <tr ng-repeat="result in searchresults | orderBy: 'project_ref'">
+                <td>{{result._id}}</td>
                 <td>{{result.project_ref}}</td>
-                <td><a ng-href="/projects/{{result._id}}" target="_blank">
-                        {{result.title}}</a></td>
+                <td>{{result.title}}</td>
+<!--                <a ng-href="/projects/{{result._id}}" target="_blank">
+                        {{result.title}}</a>-->
                 <td><a ng-href="/organisations/{{result.organisation._id}}" target="_blank">{{result.organisation.name}}</a>
                 </td>
                 <td>{{result.description}}</td>
