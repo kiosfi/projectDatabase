@@ -2,11 +2,12 @@
 
 /* jshint -W098 */
 angular.module('mean.search').controller('SearchController', ['$scope', '$stateParams',
-    '$http', '$window', 'Global', 'Search', 'OrgSearch', 'ThemeSearch', 'MeanUser',
-    function ($scope, $stateParams, $http, $window, Global, Search, OrgSearch, ThemeSearch, MeanUser) {
+    '$http', '$window', '$location', 'Global', 'Search', 'OrgSearch', 'ThemeSearch', 'MeanUser',
+    function ($scope, $stateParams, $http, $window, $location, Global, Search, OrgSearch, ThemeSearch, MeanUser) {
         $scope.global = Global;
 
-        $scope.fields = [{"name": "state", "fi": "Tila"}, {"name": "region", "fi": "Alue"}];
+        $scope.fields = [{"name": "state", "fi": "Tila"},
+            {"name": "region", "fi": "Alue"}];
 
         $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
             'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
@@ -20,18 +21,59 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.results;
 
-        $scope.twoParams = function () {
-            var query = {};
-            query[$scope.field1] = $scope.param1;
-            query[$scope.field2] = $scope.param2;
-            console.log(query)
-            Search.twoParamsSearch(query, function (searchresults) {
-                $scope.results = searchresults;
+        /**
+         * Performs the search operation. The search parameters are sent via
+         * HTTP GET method. The results are written into $scope.results.
+         */
+        $scope.search = function () {
+            var searchBy    = $location.search().searchBy;
+            var ordering    = $location.search().ordering;
+            var ascending   = $location.search().ascending;
+            var page        = $location.search().page;
+            if (typeof searchBy === 'undefined') {
+                searchBy = [{key: 'organisation.name', value: '', type: 'regex'}];
+            }
+            if (typeof ordering === 'undefined') {
+                ordering = 'project_ref';
+            }
+            if (typeof ascending === 'undefined') {
+                ascending = 'true';
+            }
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            $scope.searchBy     = searchBy;
+            $scope.ordering     = ordering;
+            $scope.ascending    = ascending;
+            $scope.page         = page;
+            Search.query({
+                "searchBy":     searchBy,
+                "ordering":     ordering,
+                "ascending":    ascending,
+                "page":         page
+            }, function(results) {
+                $scope.results = results;
             });
-        };
+        }
 
-        // We need this string to catenate it into the url:
-        $scope.searchBy = 'organisation';
+//        $scope.twoParams = function () {
+//            var query = {};
+//            query[$scope.field1] = $scope.param1;
+//            query[$scope.field2] = $scope.param2;
+//            console.log(query)
+//            Search.twoParamsSearch(query, function (searchresults) {
+//                $scope.results = searchresults;
+//            });
+//        };
+
+        /**
+         * The search array. Consists of objects having the following three
+         * fields: <tt>key</tt> for the name of the key to be searched by,
+         * </tt>value</tt> for the value to be matched against, and
+         * <tt>type</tt> for distinguishing between literal string matches and
+         * regular expressions.
+         */
+        $scope.searchBy = undefined;
 
         /**
          * The sorting predicate used in project listing. Initial value is
@@ -59,15 +101,14 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.pages;
 
-        // TODO: Fix these three functions:
-
         /**
          * Updates the page number and reloads the view.
          *
          * @param {String} page Number of the page to be displayed.
          */
         $scope.updatePage = function (page) {
-            $window.location = '/search?ordering=' + $scope.ordering
+            $window.location = '/search?searchBy=' + $scope.searchBy
+                    + '&ordering=' + $scope.ordering
                     + '&ascending=' + $scope.ascending
                     + '&page=' + page;
         };
@@ -78,30 +119,44 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * @param {String} ordering The ordering predicate (eg. "project_ref").
          */
         $scope.updateOrdering = function (ordering) {
-            $window.location = '/search?ordering=' + ordering
+            $window.location = '/search?searchBy=' + $scope.searchBy
+                    + '&ordering=' + ordering
                     + '&ascending=' + (ordering === $scope.ordering
                             ? !$scope.ascending : true)
                     + '&page=' + $scope.page;
         };
 
         /**
-         * Calculates the number of and links to pages and writes the output to
-         * $scope.pages.
+         * Updates the search criterion and reloads the view.
          *
-         * @returns {undefined}
+         * @param {Array} criterion Array of JSON objects containing key, value
+         * and type information.
          */
-        $scope.paginate = function () {
-            Projects.countProjects(function (result) {
-                var pageCount, numberOfPages, pagination;
-                pageCount = result.projectCount;
-                numberOfPages = Math.ceil(pageCount / $scope.pageSize);
-                pagination = document.getElementById('pagination');
-                $scope.pages = [];
-                for (var i = 1; i <= numberOfPages; ++i) {
-                    $scope.pages.push({number: i});
-                }
-            });
-        };
+        $scope.updateCriterion = function (criterion) {
+            $window.location = '/search?searchBy=' + criterion
+                    + '&ordering=' + $scope.ordering
+                    + '&ascending=' + $scope.ascending
+                    + '&page=' + $scope.page;
+        }
+
+//        /**
+//         * Calculates the number of and links to pages and writes the output to
+//         * $scope.pages.
+//         *
+//         * @returns {undefined}
+//         */
+//        $scope.paginate = function () {
+//            Projects.countProjects(function (result) {
+//                var pageCount, numberOfPages, pagination;
+//                pageCount = result.projectCount;
+//                numberOfPages = Math.ceil(pageCount / $scope.pageSize);
+//                pagination = document.getElementById('pagination');
+//                $scope.pages = [];
+//                for (var i = 1; i <= numberOfPages; ++i) {
+//                    $scope.pages.push({number: i});
+//                }
+//            });
+//        };
 
     }
 ]);
