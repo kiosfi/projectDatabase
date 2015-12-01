@@ -30,14 +30,6 @@ module.exports = function (Search, app, auth) {
       .get(search.all)
       .post(auth.requiresLogin, hasPermissions, search.all);*/
 
-  app.route('/api/search/title')
-      .get(search.searchByTitle);
-  app.route('/api/search/state')
-      .get(search.searchByState);
-  app.route('/api/search/org/:tag')
-      .get(search.searchByOrg);
-  app.route('/api/search/region')
-      .get(search.searchByRegion);
-  app.route('/api/search/approved/:tag')
-      .get(search.searchByTheme);
+  app.route('/api/search/twoParams')
+      .get(search.twoParamsSearch);
 };

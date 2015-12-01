@@ -21,11 +21,12 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.results;
 
-        $scope.searchByTitle = function () {
-          console.log($scope.selectedTag);
-            var query = {}
-            query[$scope.selectedTag] = $scope.selected;
-            Search.searchByTitle(query, function (searchresults) {
+        $scope.twoParams = function () {
+            var query = {};
+            query[$scope.field1] = $scope.param1;
+            query[$scope.field2] = $scope.param2;
+            console.log(query)
+            Search.twoParamsSearch(query, function (searchresults) {
                 $scope.results = searchresults;
             });
         };

@@ -4,54 +4,54 @@
 
     <h4>Valitse hakuparametrien määrä listalta:</h4>
     <form name="searchForm" class="form-horizontal" role="form" novalidate>
-        <select class="dropdown col-md-3" ng-model="selectedTag">
+        <select class="dropdown col-md-3" ng-model="paramNo">
             <option value="2">Kaksi parametria</option>
             <option value="3">Kolme paramentria</option>
         </select>
     </form>
     <div style="clear:both;">&nbsp;</div>
 
-    <article ng-show="selectedTag === '2'">
-        <h4>Hae hankkeen nimellä</h4>
-        <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByTitle()" novalidate>
-            <div>
-                <div style="float:left;" class="col-md-10">
-                    <input type="text" ng-model="selected" class="form-control" placeholder="Hakusanat" ng-pattern="/^[A-Z0-9]+$/i">
-                </div>
-                <div>
-                    <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
-                </div>
-            </div>
-        </form>
-    </article>
-
-    <article ng-show="selectedTag === 'Järjestö'">
-        <h4>Hae järjestön nimellä</h4>
-        <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByOrgName()" novalidate>
-            <div>
-                <div style="float:left;" class="col-md-10">
-                    <input type="text" ng-model="selectedName" class="form-control" placeholder="Hakusanat">
-                </div>
-                <div style="float:left;">
-                    <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
+    <article ng-show="paramNo === '2'">
+        <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="twoParams()" novalidate>
+            <label for="par1">Hakuehto 1</label>
+            <div id="par1">
+                <select id="fld1" class="dropdown col-md-4" ng-model="field1">
+                  <option value="state">Tila</option>
+                  <option value="region">Alue</option>
+                </select>
+                <div style="clear:both;">&nbsp;</div>
+                <select class="dropdown col-md-4" ng-model="param1" ng-show="field1 === 'state'">
+                    <option ng-repeat="state in states" value={{state}}>
+                        {{state}}
+                    </option>
+                </select>
+                <div class="col-md-10" ng-show="field1 == 'region'">
+                    <input type="text" ng-model="param1" class="form-control" placeholder="Hakusanat">
                 </div>
             </div>
-        </form>
-    </article>
-
-    <article ng-show="selectedTag === 'Tila'">
-        <h4>Hae hankkeen tilan mukaan</h4>
-        <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByState()" novalidate>
-            <select class="dropdown col-md-4" ng-model="selectedState">
-                <option ng-repeat="state in states" value={{state}}>
-                    {{state}}
-                </option>
-            </select>
-            <div style="float:left;">
+            <div style="clear:both;">&nbsp;</div>
+            <label for="par2">Hakuehto 2</label>
+            <div id="par2">
+                <select id="field2" class="dropdown col-md-4" ng-model="field2">
+                  <option value="state">Tila</option>
+                  <option value="region">Alue</option>
+                </select>
+                <div style="clear:both;">&nbsp;</div>                
+                <select class="dropdown col-md-4" ng-model="param2" ng-show="field2 === 'state'">
+                    <option ng-repeat="state in states" value={{state}}>
+                        {{state}}
+                    </option>
+                </select>
+                <div class="col-md-10" ng-show="field2 === 'region'">
+                    <input type="text" ng-model="param2" class="form-control" placeholder="Hakusanat">
+                </div>
+            </div>
+            <div>
                 <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
             </div>
         </form>
     </article>
+
 
     <article ng-show="selectedTag === 'Maanosa tai maa'">
         <h4>Hae maanosan tai maan nimellä</h4>

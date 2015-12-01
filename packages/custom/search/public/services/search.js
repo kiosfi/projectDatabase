@@ -4,14 +4,8 @@ angular.module('mean.search').factory('Search', ['$resource',
   function($resource) {
     return $resource('api/search/', {},
     {
-      searchByState: {
-        method: 'GET', url: 'api/search/state', isArray: true
-      },
-      searchByRegion: {
-        method: 'GET', url: 'api/search/region', isArray: true
-      },
-      searchByTitle: {
-        method: 'GET', url: 'api/search/title', isArray: true
+      twoParamsSearch: {
+        method: 'GET', url: 'api/search/twoParams', isArray: true
       }
     });
   }
