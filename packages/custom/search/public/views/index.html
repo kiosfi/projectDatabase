@@ -2,24 +2,23 @@
 <br>
 <section data-ng-controller="SearchController">
 
-    <h4>Valitse hakuvaihtoehto listalta:</h4>
+    <h4>Valitse hakuparametrien määrä listalta:</h4>
     <form name="searchForm" class="form-horizontal" role="form" novalidate>
         <select class="dropdown col-md-3" ng-model="selectedTag">
-            <option ng-repeat="tag in tags" value={{tag}}>
-                {{tag}}
-            </option>
+            <option value="2">Kaksi parametria</option>
+            <option value="3">Kolme paramentria</option>
         </select>
     </form>
     <div style="clear:both;">&nbsp;</div>
 
-    <article ng-show="selectedTag === 'Nimi'">
+    <article ng-show="selectedTag === '2'">
         <h4>Hae hankkeen nimellä</h4>
         <form name="searchForm" class="form-horizontal" role="form" data-ng-submit="searchByTitle()" novalidate>
             <div>
                 <div style="float:left;" class="col-md-10">
-                    <input type="text" ng-model="selectedTitle" class="form-control" placeholder="Hakusanat">
+                    <input type="text" ng-model="selected" class="form-control" placeholder="Hakusanat" ng-pattern="/^[A-Z0-9]+$/i">
                 </div>
-                <div style="float:left;">
+                <div>
                     <button mean-token="'search-submit'"type="submit" class="btn-sm">Hae</button>
                 </div>
             </div>

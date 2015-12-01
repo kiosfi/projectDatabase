@@ -6,7 +6,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
     function ($scope, $stateParams, $http, $window, Global, Search, OrgSearch, ThemeSearch, MeanUser) {
         $scope.global = Global;
 
-        $scope.tags = ['Nimi', 'Järjestö', 'Tila', 'Maanosa tai maa', 'Teema'];
+        $scope.tags = [{"name": "title", "finn": "Nimi"}];
+        $scope.fields = ["title"];
 
         $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
             'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
@@ -21,7 +22,10 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         $scope.results;
 
         $scope.searchByTitle = function () {
-            Search.searchByTitle({title: $scope.selectedTitle}, function (searchresults) {
+          console.log($scope.selectedTag);
+            var query = {}
+            query[$scope.selectedTag] = $scope.selected;
+            Search.searchByTitle(query, function (searchresults) {
                 $scope.results = searchresults;
             });
         };

@@ -20,7 +20,7 @@ module.exports = function (Search) {
      * @param {type} req    The request object.
      * @returns {JSON}
      */
-    function processRequest(req) {
+    /*function processRequest(req) {
         var ordering = req.query.ordering;
         var ascending = req.query.ascending;
         var page = req.query.page;
@@ -37,14 +37,12 @@ module.exports = function (Search) {
         orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
         return {"sort": orderingJSON, "skip": (page - 1) * pageSize,
             "limit": pageSize};
-    };
+    };*/
 
     return {
         searchByTitle: function (req, res) {
-
-          var param = new RegExp(req.query.title, 'i');
-          Project.find({title: param}, {_id: 1, project_ref: 1, title: 1,
-              organisation: 1, description: 1})
+          console.log(req.query);
+          Project.find(req.query)
           .populate('organisation', {name: 1})
           .exec(function(err, searchResults) {
               if (err) {
