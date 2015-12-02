@@ -33,7 +33,6 @@ module.exports = function (Organisations) {
             res.json(req.organisation);
         },
         create: function (req, res) {
-            var bank_account;
             var organisation = new Organisation(req.body);
             var bank_account = new BankAccount(req.body.bank_account);
             organisation.bank_account = bank_account._id;

@@ -11,45 +11,25 @@ var mongoose = require('mongoose'),
 
 module.exports = function (Search) {
 
-    var pageSize = 10;
-
-    /**
-     * Processes thre request object returning a JSON object containing the
-     * fields for ordering, skip and limit.
-     *
-     * @param {type} req    The request object.
-     * @returns {JSON}
-     */
-    /*function processRequest(req) {
-        var ordering = req.query.ordering;
-        var ascending = req.query.ascending;
-        var page = req.query.page;
-        if (typeof ordering === 'undefined') {
-            ordering = 'state';
-        }
-        if (typeof ascending === 'undefined') {
-            ascending = 'true';
-        }
-        if (typeof page === 'undefined') {
-            page = 1;
-        }
-        var orderingJSON = {};
-        orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
-        return {"sort": orderingJSON, "skip": (page - 1) * pageSize,
-            "limit": pageSize};
-    };*/
-
     return {
 
       /**
-       * Queries project collection with query object
-       * received from frontend.
-       *
        * @param {type} req    The request object.
        * @returns {JSON}
        */
-        twoParamsSearch: function (req, res) {
-          Project.find(req.query)
+        searchProjects: function (req, res) {
+          var params = _.map(req.query, function(param) {
+            return JSON.parse(param);
+          });
+          var queries = _.map(params, function(query) {
+            var search = {};
+            if (typeof query.value === 'string') {
+              query.value = new RegExp(query.value, 'i');
+            }
+            search[query.field] = query.value;
+            return search;
+          });
+          Project.find({$and: queries})
           .populate('organisation', {name: 1})
           .exec(function(err, searchResults) {
               if (err) {
@@ -60,7 +40,7 @@ module.exports = function (Search) {
                   res.json(searchResults);
               }
           });
-        }
+        },
 
     };
 }

@@ -4,8 +4,8 @@ angular.module('mean.search').factory('Search', ['$resource',
   function($resource) {
     return $resource('api/search/', {},
     {
-      twoParamsSearch: {
-        method: 'GET', url: 'api/search/twoParams', isArray: true
+      searchProjects: {
+        method: 'GET', url: 'api/search/params', isArray: true
       }
     });
   }

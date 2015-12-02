@@ -119,21 +119,64 @@ describe('<Unit Test>', function () {
                               "Ihmisoikeuspuolustajat"],
                           "granted_sum_eur": 12000}});
             project2.save();
+            project3 = new Project(
+                    {"title": "Earth Life",
+                        "coordinator": "Maija Maa",
+                        "organisation": organisation,
+                        "reg_date": "12.9.2014",
+                        "state": "hyväksytty",
+                        "funding": {
+                            "applied_curr_local": 50000,
+                            "applied_curr_eur": 11000},
+                        "duration_months": 12,
+                        "description": "A short description of project",
+                        "description_en": "Description in english",
+                        "categories": [
+                            "lapset"
+                        ],
+                        "background": "Project background 2",
+                        "beneficiaries": "The project benefits such and such",
+                        "gender_aspect": "Gender aspects include this and that",
+                        "project_goal": "Project goal is...",
+                        "sustainability_risks": "Some data here",
+                        "reporting_evaluation": "More data",
+                        "other_donors_proposed": "Donated amount",
+                        "dac": "abcd123",
+                        "region": "Itä-Aasia",
+                        "approved":
+                          {
+                          "user": "Maria",
+                          "approved_date": "4.12.2015",
+                          "approved_by": "Toiminnanjohtaja",
+                          "board_notified": "5.12.2015",
+                          "methods":
+                            [{
+                              "level": "Paikallinen",
+                              "name": "Alueellinen yhteistyö"
+                              },
+                              {
+                              "level": "Kansallinen",
+                              "name": "Vaikuttamistyö"
+                              }],
+                          "themes":
+                              ["Oikeus koskemattomuuteen ja inhimilliseen kohteluun",
+                              "Ihmisoikeuspuolustajat"],
+                          "granted_sum_eur": 12000}});
+            project3.save();
             done();
         });
 
-        describe('Method twoParamsSearch', function () {
+        describe('Method searchProjects', function () {
 
             it('should find projects with selected params', function (done) {
 
                 this.timeout(10000);
-                var state = "rekisteröity"
-                var region = "Itä-Aasia";
-                var query = Project.find({"state": state, "region": region});
+                var params = [{"state": new RegExp('hyväksytty', 'i')}, {"region": new RegExp('aasia', 'i')}]
+                var query = Project.find({$and: params});
 
                 return query.exec(function (err, data) {
                     expect(err).to.be(null);
-                    expect(data.length).to.be(1);
+                    expect(data.length).to.be(2);
                     expect(data[0].dac).to.be("abcd123");
                     done();
                 });
@@ -144,6 +187,7 @@ describe('<Unit Test>', function () {
             this.timeout(10000);
             project1.remove();
             project2.remove();
+            project3.remove();
             organisation.remove();
             bank_account.remove();
             done();
