@@ -18,16 +18,17 @@ module.exports = function (Search) {
        * @returns {JSON}
        */
         searchProjects: function (req, res) {
-          var params = _.map(req.query, function(param) {
-            return JSON.parse(param);
-          });
-          var queries = _.map(params, function(query) {
+//          var params = _.map(req.query.searchBy, function(param) {
+//            return JSON.parse(param);
+//          });
+          var queries = _.map(req.query.searchBy, function(query) {
             var search = {};
             if (typeof query.value === 'string') {
               query.value = new RegExp(query.value, 'i');
             }
             search[query.field] = query.value;
-            return search;
+            console.log(query);
+            return JSON.parse(search);
           });
           Project.find({$and: queries})
           .populate('organisation', {name: 1})
@@ -40,7 +41,7 @@ module.exports = function (Search) {
                   res.json(searchResults);
               }
           });
-        },
+        }
 
     };
 }

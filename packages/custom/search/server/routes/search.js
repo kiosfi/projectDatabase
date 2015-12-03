@@ -30,6 +30,6 @@ module.exports = function (Search, app, auth) {
       .get(search.all)
       .post(auth.requiresLogin, hasPermissions, search.all);*/
 
-  app.route('/api/search/params')
+  app.route('/api/search')
       .get(search.searchProjects);
 };
