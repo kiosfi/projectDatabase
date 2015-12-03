@@ -41,9 +41,12 @@
     <article class="search">
         <h4>Hakutulokset</h4>
         <p>Löydettyjen hankkeiden määrä: {{results.length}}</p>
-        <button type="button" ng-csv="parsedData" lazy-load="true" csv-header="['Tunnus', 'Hanke', 'Koordinaattori', 'Järjestö', 
+        <button type="button" ng-csv="parsedData" lazy-load="true" csv-header="['Tunnus', 'Tila', 'Hanke', 'Koordinaattori', 'Järjestö', 
                 'Kuvaus', 'Kuvaus (eng)', 'Kesto (kk)', 'Haettu summa (eur)', 'Hyväksytty summa (eur)', 'Jäljellä (eur)', 'Hankkeen taustat', 'Gender analyysi', 'Edunsaajat', 'Tavoitteet', 
-                'Raportointi', 'Kestävyys ja riskit', 'Muut rahoittajat', 'Alue', 'DAC', 'Käsittelyssä (pvm)', 'Käsittelyn kommentit']" 
+                'Raportointi', 'Kestävyys ja riskit', 'Muut rahoittajat', 'Alue', 'DAC', 'Käsittelyyn (pvm)', 'Käsittelyn kommentit', 'Hyväksytty (pvm)',
+                'Hyväksyjä', 'Toimintatavat', 'Teemat', 'Allekirjoitettu (pvm)', 'Allekirjoittaja', 'Raporttien aikataulu', 'Maksusuunnitelma', 
+                'Hylätty (pvm)', 'Hylkäyssyyt', 'Hylkäys kommentit', 'Maksatukset', 'Loppuraportti hyväksytty (pvm)', 'Loppuraportin hyväksyjä', 'Tilintarkastus (pvm)',
+                'Tilintarkastus arvio', 'Kios:in arvio', 'Loppuraportin kommentit', 'Loppuraportti - toimintatapojen arvio', 'Loppuraportti - tavoitteiden arvio']" 
                 filename="tiedot.csv" field-separator=";" add-bom="true">Lataa tulokset tiedostoon</button>
         <table class="col-md-12 table table-striped">
             <thead>
