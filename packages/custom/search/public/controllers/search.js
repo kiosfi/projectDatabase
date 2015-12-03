@@ -23,7 +23,9 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         $scope.stringParams = ["title", "coordinator", "description", "description_en",
             "background", "beneficiaries", "gender_aspect", "project_goal", "sustainability_risk",
             "reporting_evaluation", "other_donors_proposed", "dac", "region", "in_review.comments",
-            "rejected.rejection_comments", "signed.signed_by", "end_report.audit.review",
+            "rejected.rejection_comments", "signed.signed_by", "intermediary_reports.methods",
+            "end_report.audit.review", "intermediary_reports.overall_rating_kios",
+            "intermediary_reports.comments", "intermediary_reports.approved_by",
             "end_report.approved_by", "end_report.general_review", "end_report.objective",
             "end_report.comments", "ended.approved_by", "ended.other_comments"];
 
