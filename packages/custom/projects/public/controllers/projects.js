@@ -510,9 +510,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.paginate = function () {
             Projects.countProjects(function (result) {
-                var pageCount, numberOfPages, pagination;
-                pageCount = result.projectCount;
-                numberOfPages = Math.ceil(pageCount / $scope.pageSize);
+                var numberOfPages, pagination;
+                numberOfPages = Math.ceil(result.projectCount / $scope.pageSize);
                 pagination = document.getElementById('pagination');
                 $scope.pages = [];
                 for (var i = 1; i <= numberOfPages; ++i) {

@@ -31,5 +31,8 @@ module.exports = function (Search, app, auth) {
       .post(auth.requiresLogin, hasPermissions, search.all);*/
 
   app.route('/api/search')
-      .get(search.searchProjects);
+      .get(search.searchProjects)
+      .post(search.searchAllProjects);
+  app.route('/api/search/count')
+      .post(search.countSearchResults);
 };

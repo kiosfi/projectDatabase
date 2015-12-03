@@ -78,14 +78,14 @@ module.exports = function (Search) {
                     });
         },
         /**
-         * Returns all projects matching the given search query in the HTTP GET
+         * Returns all projects matching the given search query in the HTTP POST
          * parameter <tt>searchBy</tt>.
          *
          * @param {type} req Request object.
          * @param {type} res Response object.
          */
         searchAllProjects: function (req, res) {
-            var queries = processQuery(req.query.searchBy);
+            var queries = processQuery(req.body.searchBy);
 
             Project.find({$and: queries})
                     .populate('organisation', {name: 1})
@@ -101,14 +101,14 @@ module.exports = function (Search) {
         },
         /**
          * Returns the number of all projects matching the search query given by
-         * the HTTP GET parameter <tt>searchBy</tt>.
+         * the HTTP POST parameter <tt>searchBy</tt>.
          *
          * @param {type} req
          * @param {type} res
          * @returns {undefined}
          */
         countSearchResults: function (req, res) {
-            var queries = processQuery(req.query.searchBy);
+            var queries = processQuery(req.body.searchBy);
 
             Project.count({$and: queries})
                     .populate('organisation', {name: 1})

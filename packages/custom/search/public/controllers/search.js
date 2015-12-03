@@ -45,8 +45,15 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
 
         $scope.states = ['rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty', 'allekirjoitettu', 'väliraportti', 'loppuraportti', 'päättynyt'];
 
+<<<<<<< Updated upstream
 
         /**
+=======
+        /**
+         * Creates search query object
+         =======
+         /**
+>>>>>>> Stashed changes
          * Contains the search results.
          */
         $scope.results;
@@ -93,10 +100,10 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * @returns {JSON} response from server.
          */
         $scope.search = function () {
-            var searchBy        = $location.search().searchBy;
-            var ordering        = $location.search().ordering;
-            var ascending       = $location.search().ascending;
-            var page            = $location.search().page;
+            var searchBy = $location.search().searchBy;
+            var ordering = $location.search().ordering;
+            var ascending = $location.search().ascending;
+            var page = $location.search().page;
             if (typeof searchBy === 'undefined') {
                 $scope.results = [];
                 return;
@@ -110,39 +117,30 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             if (typeof page === 'undefined') {
                 page = 1;
             }
-            $scope.searchBy     = JSON.parse(searchBy);
-            $scope.ordering     = ordering;
-            $scope.ascending    = ascending;
-            $scope.page         = page;
-//            Search.searchProjects($scope.addedQueries, function (searchresults) {
-//                $scope.results = searchresults;
-//            });
-//            var foo = $scope.searchBy.map(function (x) {
-//                var bar = {};
-//                bar[x.field] = x.value;
-//                return JSON.stringify(bar);
-//            })
-//            console.log(JSON.stringify(foo));
+            $scope.searchBy = JSON.parse(searchBy);
+            $scope.ordering = ordering;
+            $scope.ascending = ascending;
+            $scope.page = page;
             Search.query({
                 "searchBy": searchBy,
                 "ordering": ordering,
                 "ascending": ascending,
                 "page": page
-            }, function(results) {
+            }, function (results) {
                 $scope.results = results;
             });
         };
 
         /**
-        * Creates query object from each $scope.field/
-        * $scope.value pair
-        */
+         * Creates query object from each $scope.field/
+         * $scope.value pair
+         */
         $scope.addQuery = function () {
-          $scope.searchBy.push({});
+            $scope.searchBy.push({});
         };
 
         $scope.removeQuery = function () {
-          $scope.searchBy.splice(-1, 1);
+            $scope.searchBy.splice(-1, 1);
         };
 
         $scope.update = function () {
@@ -185,24 +183,25 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                     + '&page=' + $scope.page;
         };
 
-//        /**
-//         * Calculates the number of and links to pages and writes the output to
-//         * $scope.pages.
-//         *
-//         * @returns {undefined}
-//         */
-//        $scope.paginate = function () {
-//            Search.countResults(function (result) {
-//                var pageCount, numberOfPages, pagination;
-//                pageCount = result.projectCount;
-//                numberOfPages = Math.ceil(pageCount / $scope.pageSize);
-//                pagination = document.getElementById('pagination');
-//                $scope.pages = [];
-//                for (var i = 1; i <= numberOfPages; ++i) {
-//                    $scope.pages.push({number: i});
-//                }
-//            });
-//        };
+        /**
+         * Calculates the number of and links to pages and writes the output to
+         * $scope.pages.
+         *
+         * @returns {undefined}
+         */
+        $scope.paginate = function () {
+            Search.countSearchResults(
+                    {"searchBy": JSON.stringify($scope.searchBy)},
+            function (result) {
+                var numberOfPages, pagination;
+                numberOfPages = Math.ceil(result.projectCount / $scope.pageSize);
+                pagination = document.getElementById('pagination');
+                $scope.pages = [];
+                for (var i = 1; i <= numberOfPages; ++i) {
+                    $scope.pages.push({number: i});
+                }
+            });
+        };
 
     }
 ]);
