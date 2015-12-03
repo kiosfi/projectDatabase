@@ -65,7 +65,6 @@ module.exports = function (Search) {
             var orderingJSON = {};
             orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
 
-            console.log(orderingJSON);
             Project.find({$and: queries}, {_id: 1, project_ref: 1, title: 1,
                 organisation: 1, description: 1})
                     .populate('organisation', {_id: 1, name: 1})

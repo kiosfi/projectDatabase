@@ -2,47 +2,53 @@
 <br>
 <section data-ng-controller="SearchController">
 
-    <h3>Lisää hakukenttiä</h3>
-    <article>
-        <form name="searchForm" class="form-horizontal col-md-8" role="form"
-              data-ng-submit="update()" novalidate>
+  <h3>Lisää hakukenttiä</h3>
+  <article>
+      <form name="searchForm" class="form-horizontal col-md-8" role="form"
+            data-ng-init="getFields()" data-ng-submit="update()" novalidate>
 
-            <div class="form-group col-md-12">
-                <div class="col-md-12" id="fieldSelection"
-                     data-ng-repeat="query in searchBy">
-                    <label class="col-md-6">Valitse hakuparametri:</label>
-                    <select id="fieldSelect" data-ng-model="query.field"
-                            class="col-md-6" style="float:left;">
-                        <option data-ng-repeat="field in fields"
-                                value="{{field.name}}">{{field.fi}}</option>
-                    </select>
-                    <select ng-show="query.field === 'state'"
-                            data-ng-model="query.value" class="col-md-6"
-                            style="float:left;">
-                        <option data-ng-repeat="state in states"
-                                value="{{state}}">{{state}}</option>
-                    </select>
-                    <select ng-show="query.field === 'approved.themes'"
-                            data-ng-model="query.value" class="col-md-6"
-                            style="float:left;">
-                        <option data-ng-repeat="theme in themes"
-                                value="{{theme}}">{{theme}}</option>
-                    </select>
-                    <div ng-show="stringParams.indexOf(query.field) > -1" class="col-md-6"
-                         style="float:left">
-                        <input type="text" class="form-control"
-                               data-ng-model="query.value"
-                               placeholder="Kirjoita hakusana(t)">
-                    </div>
-                    <div style="clear:both;">&nbsp;</div>
-                </div>
+          <div class="form-group col-md-12">
+              <div class="col-md-12" id="fieldSelection"
+                   data-ng-repeat="query in searchBy">
+                  <label class="col-md-6">Valitse hakuparametri:</label>
+                  <select id="fieldSelect" data-ng-model="query.field"
+                          class="col-md-6" style="float:left;">
+                      <option data-ng-repeat="field in fields"
+                              value="{{field.name}}">{{field.fi}}</option>
+                  </select>
+                  <select ng-show="query.field === 'state'"
+                          data-ng-model="query.value" class="col-md-6"
+                          style="float:left;">
+                      <option data-ng-repeat="state in states"
+                              value="{{state}}">{{state}}</option>
+                  </select>
+                  <select ng-show="query.field === 'approved.themes'"
+                          data-ng-model="query.value" class="col-md-6"
+                          style="float:left;">
+                      <option data-ng-repeat="theme in themes"
+                              value="{{theme}}">{{theme}}</option>
+                  </select>
+                  <div ng-show="stringParams.indexOf(query.field) > -1" class="col-md-6"
+                       style="float:left">
+                      <input type="text" class="form-control"
+                             data-ng-model="query.value"
+                             placeholder="Kirjoita hakusana(t)">
+                  </div>
+                  <select ng-show="query.field === 'approved.methods.level'"
+                          data-ng-model="query.value" class="col-md-6"
+                          style="float:left;">
+                      <option data-ng-repeat="level in levels"
+                              value="{{level}}">{{level}}</option>
+                  </select>
+              <div style="clear:both;">&nbsp;</div>
+              </div>
 
-                <div class="col-md-12">
-                    <input type="button" value="Lisää hakukenttä"
-                           ng-click="addQuery();"/>
-                    <input type="button" ng-show="searchBy.length > 0"
-                           value="Poista viimeinen" ng-click="removeQuery();"/>
-                </div>
+              <div class="col-md-12">
+                  <input type="button" value="Lisää hakukenttä"
+                          ng-click="addQuery();"/>
+                  <input type="button" ng-show="searchBy.length > 0"
+                          value="Poista viimeinen" ng-click="removeQuery();"/>
+              </div>
             </div>
             <div class="form-group">
                 <div class="col-md-10">

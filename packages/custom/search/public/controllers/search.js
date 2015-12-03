@@ -5,31 +5,21 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
     '$http', '$window', '$location', 'Global', 'Search', 'OrgSearch', 'ThemeSearch', 'MeanUser',
     function ($scope, $stateParams, $http, $window, $location, Global, Search, OrgSearch, ThemeSearch, MeanUser) {
         $scope.global = Global;
-        $scope.fields = [{"name": "title", "fi": "Nimi"},
-            {"name": "coordinator", "fi": "Koordinaattori"},
-            {"name": "description", "fi": "Kuvaus"},
-            {"name": "description_en", "fi": "Kuvaus (EN)"},
-            {"name": "background", "fi": "Hankkeen tausta"},
-            {"name": "beneficiaries", "fi": "Hyödynsaajat"},
-            {"name": "gender_aspect", "fi": "Gender-näkökulmat"},
-            {"name": "project_goal", "fi": "Päätavoite"},
-            {"name": "sustainability_risks", "fi": "Kestävyys ja riskit"},
-            {"name": "reporting_evaluation", "fi": "Raportointi ja evaluointi"},
-            {"name": "other_donors_proposed", "fi": "Muut rahoittajat"},
-            {"name": "dac", "fi": "DAC-koodi"},
-            {"name": "region", "fi": "Alue"},
-            {"name": "in_review.comments", "fi": "Käsittelyvaiheen kommentit"},
-            {"name": "approved.themes", "fi": "Teemat"},
-            {"name": "rejected.rejection_comments", "fi": "Hylkäyskommentit"},
-            {"name": "signed.signed_by", "fi": "Allekirjoittaja"},
-            {"name": "end_report.audit.review", "fi": "Tilintarkastuksen arvio"},
-            {"name": "end_report.approved_by", "fi": "Loppuraportin hyväksyjä"},
-            {"name": "end_report.general_review", "fi": "Loppuraportin KIOSin yleisarvio"},
-            {"name": "end_report.objective", "fi": "Loppuraportin arvio tavoitteen toteutumisesta"},
-            {"name": "end_report.comments", "fi": "Loppuraportin muut kommentit"},
-            {"name": "ended.approved_by", "fi": "Päättämisen hyväksyjä"},
-            {"name": "ended.other_comments", "fi": "Päättämisen kommentit"}];
 
+        /**
+         * Fetches project schema attributes to populate search view
+         * fields dropdown.
+         */
+        $scope.getFields = function() {
+          $http.get('search/assets/fields.json').success(function(response) {
+              $scope.fields = response;
+            });
+        }
+
+        /**
+         * Helper array of fields requiring a basic text input field to
+         * show correct input type with ng-show in search form
+         */
         $scope.stringParams = ["title", "coordinator", "description", "description_en",
             "background", "beneficiaries", "gender_aspect", "project_goal", "sustainability_risk",
             "reporting_evaluation", "other_donors_proposed", "dac", "region", "in_review.comments",
@@ -42,17 +32,13 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             'Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet', 'Etniset vähemmistöt ja alkuperäiskansat',
             'LHBTIQ', 'Ihmisoikeuspuolustajat'];
 
+        $scope.levels = ['Kansainvälinen', 'Kansallinen', 'Paikallinen', 'Yhteisö'];
         $scope.states = ['rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty', 'allekirjoitettu', 'väliraportti', 'loppuraportti', 'päättynyt'];
 
-        /**
-         =======
          /**
          * Creates search query object
-         =======
-         /**
-         >>>>>>> Stashed changes
-         * Contains the search results.
          */
+
         $scope.results;
 
         /**
@@ -131,7 +117,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 "ordering": ordering,
                 "ascending": ascending,
                 "page": page
-            }, function (results) {
+            }, function(results) {
                 $scope.results = results;
             });
         };
@@ -150,7 +136,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
 
         /**
          * Reloads the view.
-         * 
+         *
          */
         $scope.update = function () {
             $window.location = '/search?searchBy=' + JSON.stringify($scope.searchBy)
