@@ -1,38 +1,43 @@
 'use strict';
 
 angular.module('mean.search').factory('Search', ['$resource',
-  function($resource) {
-    return $resource('api/search', {},
-    {
-      searchProjects: {
-        method: 'GET', isArray: true
-      }
-    });
-  }
+    function ($resource) {
+        return $resource('api/search', {},
+                {
+                    searchProjects: {
+                        method: 'GET', isArray: true
+                    },
+                    searchAllProjects: {
+                        method: 'GET',
+                        isArray: true,
+                        url: 'api/search/export'
+                    }
+                });
+    }
 ]);
 
 angular.module('mean.search').service('OrgSearch', ['$http',
-    function($http) {
-        this.findOrg = function(tag) {
+    function ($http) {
+        this.findOrg = function (tag) {
             return $http.get('api/search/org/' + tag);
         }
-      }
-  ]);
+    }
+]);
 
-  angular.module('mean.search').service('ThemeSearch', ['$http',
-      function($http) {
-          this.findTheme = function(tag) {
-              return $http.get('api/search/approved/' + tag);
-          }
+angular.module('mean.search').service('ThemeSearch', ['$http',
+    function ($http) {
+        this.findTheme = function (tag) {
+            return $http.get('api/search/approved/' + tag);
         }
-  ]);
+    }
+]);
 
-  /*function($resource) {
-    return $resource('projects/:projectId', {
-      articleId: '@_id'
-    }, {
-      update: {
-        method: 'PUT'
-      }
-    });
-  }*/
+/*function($resource) {
+ return $resource('projects/:projectId', {
+ articleId: '@_id'
+ }, {
+ update: {
+ method: 'PUT'
+ }
+ });
+ }*/

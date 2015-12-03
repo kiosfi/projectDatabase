@@ -22,5 +22,15 @@ angular.module('mean.search').config(['$stateProvider',
         }
       }
     });
+    
+    $stateProvider.state('search results export page', {
+      url: '/search/export',
+      templateUrl: 'search/views/export.html',
+      resolve: {
+        loggedin: function(MeanUser) {
+          return MeanUser.checkLoggedin();
+        }
+      }
+    });
   }
 ]);

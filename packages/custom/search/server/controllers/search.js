@@ -17,6 +17,7 @@ module.exports = function (Search) {
      */
     var pageSize = 10;
 
+
     /**
      *
      * @param {JSON} searchBy

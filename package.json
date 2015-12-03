@@ -80,6 +80,7 @@
     "mpromise": "^0.5.5",
     "ms": "latest",
     "muri": "^1.1.0",
+    "ng-csv": "^0.3.6",
     "nodemailer": "latest",
     "npm": "^2.1.0",
     "npmconf": "^2.1.2",
