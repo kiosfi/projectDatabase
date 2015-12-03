@@ -94,17 +94,17 @@ module.exports = function (Projects) {
             var page = req.query.page;
             if (typeof ordering === 'undefined') {
                 return res.status(500).json({
-                                error: 'Kyselystä puuttuu kenttä "ordering"'
+                                error: 'Kyselystä puuttuu kenttä "ordering"!'
                             });
             }
             if (typeof ascending === 'undefined') {
                 return res.status(500).json({
-                                error: 'Kyselystä puuttuu kenttä "ascending"'
+                                error: 'Kyselystä puuttuu kenttä "ascending"!'
                             });
             }
             if (typeof page === 'undefined') {
                 return res.status(500).json({
-                                error: 'Kyselystä puuttuu kenttä "page"'
+                                error: 'Kyselystä puuttuu kenttä "page"!'
                             });
             }
 

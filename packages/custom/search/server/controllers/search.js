@@ -11,38 +11,55 @@ var mongoose = require('mongoose'),
 
 module.exports = function (Search) {
 
-    return {
+    var pageSize = 10;
 
-      /**
-       * @param {type} req    The request object.
-       * @returns {JSON}
-       */
+    return {
+        /**
+         * @param {type} req    The request object.
+         * @returns {JSON}
+         */
         searchProjects: function (req, res) {
-//          var params = _.map(req.query.searchBy, function(param) {
-//            return JSON.parse(param);
-//          });
-//            console.log(req.query);
-          var queries = _.map(JSON.parse(req.query.searchBy), function(query) {
-            var search = {};
-            if (typeof query.value === 'string') {
-              query.value = new RegExp(query.value, 'i');
+            var ordering = req.query.ordering;
+            var ascending = req.query.ascending;
+            var page = req.query.page;
+            if (typeof ordering === 'undefined') {
+                return res.status(500).json({
+                    error: 'Kyselystä puuttuu kenttä "ordering"!'
+                });
             }
-            search[query.field] = query.value;
-//            console.log(query);
-//            return JSON.parse(search);
-            return search;
-          });
-          Project.find({$and: queries})
-          .populate('organisation', {name: 1})
-          .exec(function(err, searchResults) {
-              if (err) {
-                  return res.status(500).json({
-                      error: 'Virhe hankkeiden hakutoiminnossa'
-                  });
-              } else {
-                  res.json(searchResults);
-              }
-          });
+            if (typeof ascending === 'undefined') {
+                return res.status(500).json({
+                    error: 'Kyselystä puuttuu kenttä "ascending"!'
+                });
+            }
+            if (typeof page === 'undefined') {
+                return res.status(500).json({
+                    error: 'Kyselystä puuttuu kenttä "page"!'
+                });
+            }
+            var queries = _.map(JSON.parse(req.query.searchBy), function (query) {
+                var search = {};
+                if (typeof query.value === 'string') {
+                    query.value = new RegExp(query.value, 'i');
+                }
+                search[query.field] = query.value;
+                return search;
+            });
+
+            Project.find({$and: queries})
+                    .sort(ordering)
+                    .skip((page - 1) * pageSize)
+                    .limit(pageSize)
+                    .populate('organisation', {name: 1})
+                    .exec(function (err, searchResults) {
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Virhe hankkeiden hakutoiminnossa'
+                            });
+                        } else {
+                            res.json(searchResults);
+                        }
+                    });
         }
 
     };
