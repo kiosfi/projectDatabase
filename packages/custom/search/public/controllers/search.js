@@ -116,14 +116,14 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
 
         $scope.removeQuery = function () {
           $scope.searchBy.splice(-1, 1);
-        }
+        };
 
         $scope.update = function () {
             $window.location = '/search?searchBy=' + JSON.stringify($scope.searchBy)
                     + '&ordering=' + $scope.ordering
                     + '&ascending=' + $scope.ascending
                     + '&page=' + $scope.page;
-        }
+        };
 
         $scope.updatePage = function (page) {
             $window.location = '/search?searchBy=' + $scope.searchBy
@@ -156,7 +156,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                     + '&ordering=' + $scope.ordering
                     + '&ascending=' + $scope.ascending
                     + '&page=' + $scope.page;
-        }
+        };
 
 //        /**
 //         * Calculates the number of and links to pages and writes the output to
@@ -165,7 +165,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
 //         * @returns {undefined}
 //         */
 //        $scope.paginate = function () {
-//            Projects.countProjects(function (result) {
+//            Search.countResults(function (result) {
 //                var pageCount, numberOfPages, pagination;
 //                pageCount = result.projectCount;
 //                numberOfPages = Math.ceil(pageCount / $scope.pageSize);
