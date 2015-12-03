@@ -148,6 +148,10 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             $scope.searchBy.splice(-1, 1);
         };
 
+        /**
+         * Reloads the view.
+         * 
+         */
         $scope.update = function () {
             $window.location = '/search?searchBy=' + JSON.stringify($scope.searchBy)
                     + '&ordering=' + $scope.ordering
@@ -155,6 +159,11 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                     + '&page=' + $scope.page;
         };
 
+        /**
+         * Updates the page number and reloads the view.
+         *
+         * @param {String} page New page number.
+         */
         $scope.updatePage = function (page) {
             $window.location = '/search?searchBy=' + JSON.stringify($scope.searchBy)
                     + '&ordering=' + $scope.ordering
@@ -165,7 +174,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         /**
          * Updates the ordering and reloads the view.
          *
-         * @param {String} ordering The ordering predicate (eg. "project_ref").
+         * @param {String} ordering The ordering predicate.
          */
         $scope.updateOrdering = function (ordering) {
             $window.location = '/search?searchBy=' + JSON.stringify($scope.searchBy)

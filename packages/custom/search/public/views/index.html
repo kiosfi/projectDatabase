@@ -103,7 +103,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="result in results| orderBy: 'project_ref'">
+                <tr ng-repeat="result in results">
                     <td>{{result.project_ref}}</td>
                     <td><a ng-href="/projects/{{result._id}}" target="_blank">
                             {{result.title}}</a></td>

@@ -18,11 +18,12 @@ module.exports = function (Search) {
     var pageSize = 10;
 
     /**
+     * Returns the queries in a format that can be used in Project.find().
      *
      * @param {JSON} searchBy
      * @returns {JSON}
      */
-    function processQuery(searchBy) {
+    function prepareQueries(searchBy) {
         return _.map(JSON.parse(searchBy), function (query) {
             var search = {};
             if (typeof query.value === 'string') {
@@ -60,13 +61,17 @@ module.exports = function (Search) {
                     error: 'Kyselystä puuttuu kenttä "page"!'
                 });
             }
-            var queries = processQuery(req.query.searchBy);
+            var queries = prepareQueries(req.query.searchBy);
+            var orderingJSON = {};
+            orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
 
-            Project.find({$and: queries})
-                    .sort(ordering)
+            console.log(orderingJSON);
+            Project.find({$and: queries}, {_id: 1, project_ref: 1, title: 1,
+                organisation: 1, description: 1})
+                    .populate('organisation', {_id: 1, name: 1})
+                    .sort(orderingJSON)
                     .skip((page - 1) * pageSize)
                     .limit(pageSize)
-                    .populate('organisation', {name: 1})
                     .exec(function (err, results) {
                         if (err) {
                             return res.status(500).json({
@@ -85,7 +90,7 @@ module.exports = function (Search) {
          * @param {type} res Response object.
          */
         searchAllProjects: function (req, res) {
-            var queries = processQuery(req.body.searchBy);
+            var queries = prepareQueries(req.body.searchBy);
 
             Project.find({$and: queries})
                     .populate('organisation', {name: 1})
@@ -108,7 +113,7 @@ module.exports = function (Search) {
          * @returns {undefined}
          */
         countSearchResults: function (req, res) {
-            var queries = processQuery(req.body.searchBy);
+            var queries = prepareQueries(req.body.searchBy);
 
             Project.count({$and: queries})
                     .populate('organisation', {name: 1})
