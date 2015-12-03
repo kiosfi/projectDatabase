@@ -52,7 +52,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 var plpayments = [];
                 var payments = [];
 
-                angular.forEach(obj.methods, function (method) {
+                angular.forEach(obj.approved.methods, function (method) {
                     var parsedMethod = method.name + '(' + method.level + ')';
                     methods.push(parsedMethod);
                 });
@@ -77,19 +77,21 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 });
 
                 $q.all(methods, dls, plpayments, payments).then(function () {
-                    $scope.parsedData.push({project_ref: obj.project_ref, state: obj.state, title: obj.title, coordinator: obj.coordinator,
-                        organisation: obj.organisation.name, description: obj.description, description_en: obj.description_en,
-                        duration_months: obj.duration_months, applied_sum_eur: obj.funding.applied_curr_eur, granted_sum: obj.approved.granted_sum_eur,
-                        left_eur: obj.funding.left_eur, background: obj.background, gender_aspect: obj.gender_aspect, beneficiaries: obj.beneficiaries,
-                        project_goal: obj.project_goal, reporting_evalation: obj.reporting_evaluation, sustainability_risks: obj.sustainability_risks,
+                    $scope.parsedData.push({project_ref: obj.project_ref, state: obj.state, title: obj.title,
+                        coordinator: obj.coordinator, organisation: obj.organisation.name, description: obj.description,
+                        description_en: obj.description_en, duration_months: obj.duration_months, applied_sum_eur: obj.funding.applied_curr_eur,
+                        granted_sum: obj.approved.granted_sum_eur, left_eur: obj.funding.left_eur, background: obj.background,
+                        gender_aspect: obj.gender_aspect, beneficiaries: obj.beneficiaries, project_goal: obj.project_goal,
+                        reporting_evalation: obj.reporting_evaluation, sustainability_risks: obj.sustainability_risks,
                         other_donors_proposed: obj.other_donors_proposed, region: obj.region, dac: obj.dac, in_review_date: obj.in_review.date,
-                        in_review_comments: obj.in_review.comments, approved_date: obj.approved.approved_date, approved_by: obj.approved.approved_by,
-                        approved_methods: methods, approved_themes: obj.approved.themes, signed_date: obj.signed.signed_date,
-                        signed_by: obj.signed.signed_by, intrep_dls: dls, planned_payments: plpayments, rejected_date: obj.rejected.date,
-                        rejected_categories: obj.rejected.rejection_categories, rejected_comments: obj.rejected.rejection_comments, payments: payments,
-                        end_report_approved_date: obj.end_report.approved_date, end_report_approved_by: obj.end_report.approved_by, audit_date: obj.end_report.audit.date,
-                        audit_review: obj.end_report.audit.review, kios_review: obj.end_report.general_review, end_report_comments: obj.end_report.comments,
-                        end_report_methods: obj.end_report.methods, end_report_objective: obj.end_report.objective
+                        in_review_comments: obj.in_review.comments, approved_date: obj.approved.approved_date,
+                        approved_by: obj.approved.approved_by, approved_methods: methods, approved_themes: obj.approved.themes,
+                        signed_date: obj.signed.signed_date, signed_by: obj.signed.signed_by, intrep_dls: dls, planned_payments: plpayments,
+                        rejected_date: obj.rejected.date, rejected_categories: obj.rejected.rejection_categories,
+                        rejected_comments: obj.rejected.rejection_comments, payments: payments, end_report_approved_date: obj.end_report.approved_date,
+                        end_report_approved_by: obj.end_report.approved_by, audit_date: obj.end_report.audit.date, audit_review: obj.end_report.audit.review,
+                        kios_review: obj.end_report.general_review, end_report_comments: obj.end_report.comments, end_report_methods: obj.end_report.methods, 
+                        end_report_objective: obj.end_report.objectives
                     });
                 });
 
