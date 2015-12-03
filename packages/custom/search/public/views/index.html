@@ -28,7 +28,7 @@
                       <option data-ng-repeat="theme in themes"
                               value="{{theme}}">{{theme}}</option>
                   </select>
-                  <div ng-show="query.field === 'region'" class="col-md-6"
+                  <div ng-show="stringParams.indexOf(query.field) > -1" class="col-md-6"
                        style="float:left">
                       <input type="text" class="form-control"
                              data-ng-model="query.value"
