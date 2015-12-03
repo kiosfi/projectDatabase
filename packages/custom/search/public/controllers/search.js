@@ -5,7 +5,6 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
     '$http', '$window', '$location', 'Global', 'Search', 'OrgSearch', 'ThemeSearch', 'MeanUser',
     function ($scope, $stateParams, $http, $window, $location, Global, Search, OrgSearch, ThemeSearch, MeanUser) {
         $scope.global = Global;
-
         $scope.fields = [{"name": "title", "fi": "Nimi"},
         {"name": "coordinator", "fi": "Koordinaattori"},
         {"name": "description", "fi": "Kuvaus"},
@@ -44,8 +43,6 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             'LHBTIQ', 'Ihmisoikeuspuolustajat'];
 
         $scope.states = ['rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty', 'allekirjoitettu', 'väliraportti', 'loppuraportti', 'päättynyt'];
-
-<<<<<<< Updated upstream
 
         /**
 =======
@@ -190,6 +187,11 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * @returns {undefined}
          */
         $scope.paginate = function () {
+            if ($scope.searchBy.length === 0) {
+                $scope.pages = [];
+                return;
+            }
+
             Search.countSearchResults(
                     {"searchBy": JSON.stringify($scope.searchBy)},
             function (result) {
