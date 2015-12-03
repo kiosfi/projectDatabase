@@ -61,6 +61,7 @@ module.exports = function (Search) {
                 });
             }
             var queries = processQuery(req.query.searchBy);
+            console.log(queries);
 
             Project.find({$and: queries})
                     .sort(ordering)

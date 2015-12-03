@@ -302,7 +302,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (isValid) {
                 var project = $scope.project;
                 var payment_date = $scope.convertDate($scope.payment_day, $scope.payment_month, $scope.payment_year);
-                //var payment = {"payment_date": payment_date, "sum_eur": $scope.payment_eur};
                 project.payment.payment_date = payment_date;
                 var index = project.payments.length;
                 if (index === undefined) {
