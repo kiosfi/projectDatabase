@@ -25,10 +25,14 @@ module.exports = function (Search) {
     function processQuery(searchBy) {
         return _.map(JSON.parse(searchBy), function (query) {
             var search = {};
+            if (query.value === 'Käynnissä olevat hankkeet') {
+              query.value = {$in: ["allekirjoitettu", "väliraportti", "loppuraportti"]};
+            }
             if (typeof query.value === 'string') {
                 query.value = new RegExp(query.value, 'i');
             }
             search[query.field] = query.value;
+            console.log(search);
             return search;
         });
     }

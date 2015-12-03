@@ -11,8 +11,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * fields dropdown.
          */
         $scope.getFields = function() {
-          $http.get('search/assets/fields.json').success(function(response) {
-              $scope.fields = response;
+          $http.get('search/assets/projectFields.json').success(function(response) {
+              $scope.projectFields = response;
             });
         }
 
@@ -21,11 +21,11 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * show correct input type with ng-show in search form
          */
         $scope.stringParams = ["title", "coordinator", "description", "description_en",
-        "background", "beneficiaries", "gender_aspect", "project_goal", "sustainability_risk",
-        "reporting_evaluation", "other_donors_proposed", "dac", "region", "in_review.comments",
-        "rejected.rejection_comments", "signed.signed_by", "end_report.audit.review",
-        "end_report.approved_by", "end_report.general_review", "end_report.objective",
-        "end_report.comments", "ended.approved_by", "ended.other_comments"];
+            "background", "beneficiaries", "gender_aspect", "project_goal", "sustainability_risk",
+            "reporting_evaluation", "other_donors_proposed", "dac", "region", "in_review.comments",
+            "rejected.rejection_comments", "signed.signed_by", "end_report.audit.review",
+            "end_report.approved_by", "end_report.general_review", "end_report.objective",
+            "end_report.comments", "ended.approved_by", "ended.other_comments"];
 
         $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
             'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
@@ -33,7 +33,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             'LHBTIQ', 'Ihmisoikeuspuolustajat'];
 
         $scope.levels = ['Kansainvälinen', 'Kansallinen', 'Paikallinen', 'Yhteisö'];
-        $scope.states = ['rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty', 'allekirjoitettu', 'väliraportti', 'loppuraportti', 'päättynyt'];
+        $scope.states = ['Käynnissä olevat hankkeet', 'rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty', 'allekirjoitettu', 'väliraportti', 'loppuraportti', 'päättynyt'];
 
 
         /**

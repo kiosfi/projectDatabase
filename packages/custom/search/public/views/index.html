@@ -13,7 +13,7 @@
                   <label class="col-md-6">Valitse hakuparametri:</label>
                   <select id="fieldSelect" data-ng-model="query.field"
                           class="col-md-6" style="float:left;">
-                      <option data-ng-repeat="field in fields"
+                      <option data-ng-repeat="field in projectFields"
                               value="{{field.name}}">{{field.fi}}</option>
                   </select>
                   <select ng-show="query.field === 'state'"
