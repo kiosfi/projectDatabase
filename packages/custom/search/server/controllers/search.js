@@ -21,14 +21,16 @@ module.exports = function (Search) {
 //          var params = _.map(req.query.searchBy, function(param) {
 //            return JSON.parse(param);
 //          });
-          var queries = _.map(req.query.searchBy, function(query) {
+//            console.log(req.query);
+          var queries = _.map(JSON.parse(req.query.searchBy), function(query) {
             var search = {};
             if (typeof query.value === 'string') {
               query.value = new RegExp(query.value, 'i');
             }
             search[query.field] = query.value;
-            console.log(query);
-            return JSON.parse(search);
+//            console.log(query);
+//            return JSON.parse(search);
+            return search;
           });
           Project.find({$and: queries})
           .populate('organisation', {name: 1})
