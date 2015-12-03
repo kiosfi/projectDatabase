@@ -2,12 +2,14 @@
 
 /* jshint -W098 */
 angular.module('mean.search').controller('SearchController', ['$scope', '$stateParams',
+
     '$http', '$window', 'Global', 'Search', 'OrgSearch', 'ThemeSearch', 'MeanUser',
     function ($scope, $stateParams, $http, $window, Global, Search, OrgSearch, ThemeSearch, MeanUser) {
         $scope.global = Global;
 
         $scope.fields = [{"name": "state", "fi": "Tila"}, {"name": "region", "fi": "Alue"},
         {"name": "approved.themes", "fi": "Teemat"}]
+
 
         $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
             'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
@@ -40,6 +42,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         $scope.removeQuery = function () {
           $scope.addedQueries.splice(-1, 1);
         }
+
 
     }
 ]);

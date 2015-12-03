@@ -13,6 +13,7 @@ module.exports = function (Search) {
 
     return {
 
+
       /**
        * @param {type} req    The request object.
        * @returns {JSON}
@@ -37,10 +38,13 @@ module.exports = function (Search) {
                       error: 'Virhe hankkeiden hakutoiminnossa'
                   });
               } else {
+                  console.log(searchResults);
                   res.json(searchResults);
+                  
               }
           });
-        },
+        }
+
 
     };
 }

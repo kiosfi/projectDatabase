@@ -14,7 +14,6 @@ nb-configuration.xml
 # Bower/
 .bower-cache
 .bower-registry/bower.herokuapp.com/lookup/
-bower_components
 
 docs/api/
 **/doxygen_sqlite3.db
