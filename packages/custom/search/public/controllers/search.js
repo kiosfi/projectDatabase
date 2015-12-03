@@ -11,8 +11,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * fields dropdown.
          */
         $scope.getFields = function() {
-          $http.get('search/assets/fields.json').success(function(response) {
-              $scope.fields = response;
+          $http.get('search/assets/projectFields.json').success(function(response) {
+              $scope.projectFields = response;
             });
         }
 
@@ -33,7 +33,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             'LHBTIQ', 'Ihmisoikeuspuolustajat'];
 
         $scope.levels = ['Kansainvälinen', 'Kansallinen', 'Paikallinen', 'Yhteisö'];
-        $scope.states = ['rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty', 'allekirjoitettu', 'väliraportti', 'loppuraportti', 'päättynyt'];
+        $scope.states = ['Käynnissä olevat hankkeet', 'rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty', 'allekirjoitettu', 'väliraportti', 'loppuraportti', 'päättynyt'];
 
          /**
          * Creates search query object
