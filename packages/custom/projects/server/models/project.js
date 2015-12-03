@@ -117,8 +117,7 @@ var ProjectSchema = new Schema({
     },
     in_review: {
         date: {
-          type: Date,
-          default: Date.now()
+          type: Date
         },
         user: {
           type: String
@@ -129,8 +128,7 @@ var ProjectSchema = new Schema({
     },
     approved: {
         date: {
-          type: Date,
-          default: Date.now
+          type: Date
         },
         user: {
           type: String
@@ -156,8 +154,7 @@ var ProjectSchema = new Schema({
     },
     rejected: {
         date: {
-          type: Date,
-          default: Date.now
+          type: Date
         },
         user: {
           type: String
@@ -171,8 +168,7 @@ var ProjectSchema = new Schema({
     },
     signed: {
         date: {
-          type: Date,
-          default: Date.now
+          type: Date
         },
         user: {
           type: String
@@ -199,8 +195,7 @@ var ProjectSchema = new Schema({
     },
     end_report: {
         date: {
-          type: Date,
-          default: Date.now
+          type: Date
         },
         user: {
           type: String
@@ -238,8 +233,7 @@ var ProjectSchema = new Schema({
     },
     ended: {
         date: {
-          type: Date,
-          default: Date.now
+          type: Date
         },
         user: {
           type: String

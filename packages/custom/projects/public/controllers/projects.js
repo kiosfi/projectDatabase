@@ -201,6 +201,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addReviewState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                project.in_review.date = Date.now();
                 project.state = $scope.global.newState;
                 project.$addReview(function (response) {
                     $location.path('projects/' + project._id);
@@ -218,6 +219,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addApprovedState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                project.approved.date = Date.now();
                 project.approved.approved_date = $scope.convertDate($scope.approved_day, $scope.approved_month, $scope.approved_year);
                 project.approved.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
                 project.approved.themes = $scope.themeSelection;
@@ -239,6 +241,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addRejectedState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                project.rejected.date = Date.now();
                 project.rejected.rejection_categories = $scope.addedRejections;
                 project.state = $scope.global.newState;
                 project.$addRejected(function (response) {
@@ -259,6 +262,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
                 var signed_date = $scope.convertDate($scope.signed_day, $scope.signed_month, $scope.signed_year);
                 var project = $scope.project;
+                project.signed.date = Date.now();
                 project.signed.signed_date = signed_date;
 
                 $scope.parsedDeadlines = [];
@@ -322,6 +326,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addIntReportState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                project.intermediary_report.date = Date.now();
                 project.intermediary_report.date_approved = $scope.convertDate($scope.intRDateAppr_day, $scope.intRDateAppr_month, $scope.intRDateAppr_year);
                 project.state = $scope.global.newState;
                 project.intermediary_report.methods = $scope.addedMethods;
@@ -349,6 +354,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addEndReportState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                project.end_report.date() = Date.now();
                 project.state = $scope.global.newState;
                 project.end_report.approved_date = $scope.convertDate($scope.er_approved_day, $scope.er_approved_month, $scope.er_approved_year);
                 project.end_report.audit.date = $scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year);
@@ -368,6 +374,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addEndedState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                project.ended.date = Date.now();
                 project.state = $scope.global.newState;
                 project.$addEnded(function (response) {
                     console.log(response);
