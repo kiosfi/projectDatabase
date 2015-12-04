@@ -10,32 +10,16 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * Fetches project schema attributes to populate search view
          * fields dropdown.
          */
-        $scope.getFields = function() {
+        $scope.getProjectFields = function() {
           $http.get('search/assets/projectFields.json').success(function(response) {
-              $scope.projectFields = response;
+              $scope.projectFields = response.main_menu;
+              $scope.dateFields = response.date_fields;
+              $scope.stringParams = response.string_params;
+              $scope.themes = response.themes;
+              $scope.levels = response.levels;
+              $scope.states = response.states;
             });
         }
-
-        /**
-         * Helper array of fields requiring a basic text input field to
-         * show correct input type with ng-show in search form
-         */
-        $scope.stringParams = ["title", "coordinator", "description", "description_en",
-            "background", "beneficiaries", "gender_aspect", "project_goal", "sustainability_risk",
-            "reporting_evaluation", "other_donors_proposed", "dac", "region", "in_review.comments",
-            "rejected.rejection_comments", "signed.signed_by", "intermediary_reports.methods",
-            "end_report.audit.review", "intermediary_reports.overall_rating_kios",
-            "intermediary_reports.comments", "intermediary_reports.approved_by",
-            "end_report.approved_by", "end_report.general_review", "end_report.objective",
-            "end_report.comments", "ended.approved_by", "ended.other_comments"];
-
-        $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
-            'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
-            'Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet', 'Etniset vähemmistöt ja alkuperäiskansat',
-            'LHBTIQ', 'Ihmisoikeuspuolustajat'];
-
-        $scope.levels = ['Kansainvälinen', 'Kansallinen', 'Paikallinen', 'Yhteisö'];
-        $scope.states = ['Käynnissä olevat hankkeet', 'rekisteröity', 'käsittelyssä', 'hyväksytty', 'hylätty', 'allekirjoitettu', 'väliraportti', 'loppuraportti', 'päättynyt'];
 
          /**
          * Creates search query object
