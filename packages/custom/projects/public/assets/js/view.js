@@ -7,7 +7,7 @@
  * @returns {undefined}
  */
 function toggleCollapse(id) {
-    var element = document.querySelector("." + id);
+    var element = document.getElementById(id);
 
     if (element.style.display !== 'block') {
        element.style.display = 'block';
