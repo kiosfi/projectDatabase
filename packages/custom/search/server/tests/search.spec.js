@@ -53,7 +53,7 @@ describe('<Unit Test>', function () {
                     {"title": "Human rights",
                         "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
-                        "reg_date": "12.10.2014",
+                        "reg_date": new Date(2015,11-1,30+1),
                         "state": "rekisteröity",
                         "funding": {
                             "applied_curr_local": 50000,
@@ -79,7 +79,7 @@ describe('<Unit Test>', function () {
                     {"title": "Humans",
                         "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
-                        "reg_date": "12.9.2014",
+                        "reg_date": new Date(2015,11-1,30+1),
                         "state": "hyväksytty",
                         "funding": {
                             "applied_curr_local": 50000,
@@ -123,7 +123,7 @@ describe('<Unit Test>', function () {
                     {"title": "Earth Life",
                         "coordinator": "Maija Maa",
                         "organisation": organisation,
-                        "reg_date": "12.9.2014",
+                        "reg_date": new Date(2015,11-1,30+1),
                         "state": "hyväksytty",
                         "funding": {
                             "applied_curr_local": 50000,
@@ -177,6 +177,21 @@ describe('<Unit Test>', function () {
                 return query.exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
+                    expect(data[0].dac).to.be("abcd123");
+                    done();
+                });
+            });
+
+            it('should find projects by date', function (done) {
+
+                this.timeout(10000);
+                var params = [{"reg_date": {$gte: new Date(2015,11-1,30+1).toISOString()}}]
+                console.log(params);
+                var query = Project.find({$and: params});
+
+                return query.exec(function (err, data) {
+                    expect(err).to.be(null);
+                    expect(data.length).to.be(3);
                     expect(data[0].dac).to.be("abcd123");
                     done();
                 });

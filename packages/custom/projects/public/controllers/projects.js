@@ -353,7 +353,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addEndReportState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
-                project.end_report.date() = Date.now();
+                project.end_report.date = Date.now();
                 project.state = $scope.global.newState;
                 project.end_report.approved_date = $scope.convertDate($scope.er_approved_day, $scope.er_approved_month, $scope.er_approved_year);
                 project.end_report.audit.date = $scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year);

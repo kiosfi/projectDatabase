@@ -18,13 +18,33 @@ module.exports = function (Search) {
     var pageSize = 10;
 
     /**
-     *
+     * Formulates search query received in searchBy depending on the type of
+     * data searched 
      * @param {JSON} searchBy
      * @returns {JSON}
      */
     function processQuery(searchBy) {
         return _.map(JSON.parse(searchBy), function (query) {
             var search = {};
+            if (query.startYear && !query.endYear) {
+              query.field = query.dateField;
+              query.value = {
+                $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString()
+              };
+            }
+            if (query.endYear && !query.startYear) {
+              query.field = query.dateField;
+              query.value = {
+                $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
+              };
+            }
+            if (query.startYear && query.endYear) {
+              query.field = query.dateField;
+              query.value = {
+                $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString(),
+                $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
+              };
+            }
             if (query.value === 'Käynnissä olevat hankkeet') {
               query.value = {$in: ["allekirjoitettu", "väliraportti", "loppuraportti"]};
             }
@@ -32,7 +52,6 @@ module.exports = function (Search) {
                 query.value = new RegExp(query.value, 'i');
             }
             search[query.field] = query.value;
-            console.log(search);
             return search;
         });
     }
@@ -65,7 +84,6 @@ module.exports = function (Search) {
                 });
             }
             var queries = processQuery(req.query.searchBy);
-            console.log(queries);
 
             Project.find({$and: queries})
                     .sort(ordering)
