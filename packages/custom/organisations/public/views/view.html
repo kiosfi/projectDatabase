@@ -1,7 +1,7 @@
 
 <section data-ng-controller="OrganisationsController" data-ng-init="findOne()">
 
-    <h2><span class="name">{{organisation.name}}</span>
+    <h2><span class="name">{{organisation.name}}</span></h2>
 
     <h3>Edustaja: <a href="">{{organisation.representative}}</a></h3>
 
@@ -12,7 +12,7 @@
             <section class="proj-body">
                 <p>Edustaja <a href="">{{organisation.representative}}</a></p>
                 <p>Vastuullinen johtaja: {{organisation.exec_manager}}</p>
-                <h5>Osoite:</h5> 
+                <h5>Osoite:</h5>
                 <p>{{organisation.address.street}}<br>
                 {{organisation.address.postal_code}} {{organisation.address.city}}<br>
                 {{organisation.address.country}}</p>
@@ -34,10 +34,10 @@
             </section>
 
         </article>
-        
+
         <article class="org-div" data-ng-init="findOrgProjects()">
             <h4 class="org-header">KIOS:lta rahoitusta hakeneet hankkeet</h4>
-            
+
             <section>
                 <ul>
                     <li data-ng-repeat="project in orgProjects">
@@ -63,7 +63,7 @@
     </article>
 
     <br>
-    
+
     <article>
         <h4 class="org-header">Kuvaus</h4>
         <br>
@@ -73,7 +73,7 @@
     </article>
 
     <br>
-    
+
     <article>
         <h4 class="org-header">Historia</h4>
         <br>
@@ -92,9 +92,9 @@
             <p> {{organisation.nat_local_links}}</p>
         </section>
     </article>
-    
+
     <br>
-    
+
     <article>
         <h4 class="org-header">Muut rahoittajat</h4>
         <br>
