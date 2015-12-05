@@ -4,6 +4,7 @@
     {"name": "region", "fi": "Alue"},
     {"name": "state", "fi": "Tila"},
     {"name": "dates", "fi": "Päivämäärät"},
+    {"name": "funds", "fi": "Rahoitustiedot"},
     {"name": "approved.themes", "fi": "Teemat"},
     {"name": "approved.methods.level", "fi": "Tasot"},
     {"name": "description", "fi": "Hankkeen kuvaus"},
@@ -54,5 +55,8 @@
     "levels": ["Kansainvälinen", "Kansallinen", "Paikallinen", "Yhteisö"],
     "states":
     ["Käynnissä olevat hankkeet", "rekisteröity", "käsittelyssä", "hyväksytty",
-        "hylätty", "allekirjoitettu", "väliraportti", "loppuraportti", "päättynyt"]
+        "hylätty", "allekirjoitettu", "väliraportti", "loppuraportti", "päättynyt"],
+    "funding":
+    [{"name": "approved.granted_sum_eur", "fi": "Myönnetyt summat"},
+     {"name": "payments", "fi": "Suoritetut maksut"}]
   }

@@ -8,7 +8,7 @@
             data-ng-init="getProjectFields()" data-ng-submit="update()" novalidate>
 
           <div class="form-group col-md-12">
-              <div class="col-md-12" id="fieldSelection"
+              <div class="col-md-12"
                    data-ng-repeat="query in searchBy">
                   <label class="col-md-6">Valitse hakuparametri:</label>
                   <select id="fieldSelect" data-ng-model="query.field"
@@ -47,46 +47,52 @@
                               value="{{dateField.name}}">{{dateField.fi}}</option>
                   </select>
                   <div style="clear:both;">&nbsp;</div>
-                  <div id="startDate" ng-show="query.dateField" class="col-md-9">
-                  <label for="startDate">Alkupäivä</label>
-                       <div class="col-md-3" style="float:left;">
-                         <input type="number" class="form-control"
-                             data-ng-model="query.startDay"
-                             placeholder="p">
-                       </div>
-                       <div class="col-md-3" style="float:left;">
-                         <input type="number" class="form-control"
-                             data-ng-model="query.startMonth"
-                             placeholder="k">
-                       </div>
-                       <div class="col-md-3" style="float:left;">
-                         <input type="number" class="form-control"
+                  <div ng-show="query.dateField" class="col-md-12" style="float:left;">
+                      <label for="startDate">Alkupäivä</label>
+                      <div id="startDate">
+                          <div class="col-md-2" style="float:left;">
+                            <input type="number" class="form-control"
+                              data-ng-model="query.startDay"
+                              placeholder="p">
+                        </div>
+                        <div class="col-md-2" style="float:left;">
+                          <input type="number" class="form-control"
+                              data-ng-model="query.startMonth"
+                              placeholder="k">
+                          </div>
+                        <div class="col-md-2" style="float:left;">
+                          <input type="number" class="form-control"
                              data-ng-model="query.startYear"
                              placeholder="yyyy">
-                       </div>
-                  </div>
-                  <div style="clear:both;">&nbsp;</div>
-                  <div id="endDate" ng-show="query.dateField" class="col-md-9">
-                  <label for="endDate">Loppupäivä</label>
-                       <div class="col-md-3" style="float:left;">
-                         <input type="number" class="form-control"
+                        </div>
+                      </div>
+                      <div style="clear:both;">&nbsp;</div>
+                      <label for="endDate">Loppupäivä</label>
+                      <div id="endDate">
+                          <div class="col-md-2" style="float:left;">
+                            <input type="number" class="form-control"
                              data-ng-model="query.endDay"
                              placeholder="p">
-                       </div>
-                       <div class="col-md-3" style="float:left;">
-                         <input type="number" class="form-control"
+                          </div>
+                          <div class="col-md-2" style="float:left;">
+                          <input type="number" class="form-control"
                              data-ng-model="query.endMonth"
                              placeholder="k">
-                       </div>
-                       <div class="col-md-3" style="float:left;">
-                         <input type="number" class="form-control"
+                          </div>
+                          <div class="col-md-2" style="float:left;">
+                            <input type="number" class="form-control"
                              data-ng-model="query.endYear"
                              placeholder="yyyy">
-                       </div>
+                          </div>
+                      </div>
                   </div>
-              <div style="clear:both;">&nbsp;</div>
+                  <select id="funds" ng-show="query.field === 'funds'"
+                          data-ng-model="query.value" class="col-md-6" style="float:right">
+                      <option data-ng-repeat="funds in funding"
+                              value="{{funds.name}}">{{funds.fi}}</option>
+                  </select>
               </div>
-
+              <div style="clear:both;">&nbsp;</div>
               <div class="col-md-12">
                   <input type="button" value="Lisää hakukenttä"
                           ng-click="addQuery();"/>

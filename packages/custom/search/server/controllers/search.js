@@ -26,24 +26,34 @@ module.exports = function (Search) {
     function prepareQueries(searchBy) {
         return _.map(JSON.parse(searchBy), function (query) {
             var search = {};
-            if (query.startYear && !query.endYear) {
-              query.field = query.dateField;
-              query.value = {
-                $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString()
-              };
+            if (query.value === 'payments') {
+              query.field = 'payments';
+                query.value = {$exists: true, $gt: {$size: 0}};
             }
-            if (query.endYear && !query.startYear) {
-              query.field = query.dateField;
-              query.value = {
-                $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
-              };
+            if (query.value === 'approved.granted_sum_eur') {
+              query.field = 'approved.granted_sum_eur';
+              query.value =  {$exists: true};
             }
-            if (query.startYear && query.endYear) {
-              query.field = query.dateField;
-              query.value = {
-                $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString(),
-                $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
-              };
+            if (query.dateField) {
+              if (query.startYear && !query.endYear) {
+                query.field = query.dateField;
+                query.value = {
+                  $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString()
+                };
+              }
+              if (query.endYear && !query.startYear) {
+                query.field = query.dateField;
+                query.value = {
+                  $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
+                };
+              }
+              if (query.startYear && query.endYear) {
+                query.field = query.dateField;
+                query.value = {
+                  $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString(),
+                  $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
+                };
+              }
             }
             if (query.value === 'Käynnissä olevat hankkeet') {
               query.value = {$in: ["allekirjoitettu", "väliraportti", "loppuraportti"]};

@@ -18,6 +18,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
               $scope.themes = response.themes;
               $scope.levels = response.levels;
               $scope.states = response.states;
+              $scope.funding = response.funding;
             });
         }
 
