@@ -259,6 +259,15 @@
 
     <article>
         <h4 class="proj-header">Aikataulu</h4>
+        <section ng-show="project.signed.signed_by">
+          <h5>Raporttien eräpäivät:</h5>
+          <ul>
+            <li ng-repeat="deadline in project.signed.intreport_deadlines">
+              {{deadline.report}}: {{deadline.date| date:'dd-MM-yyyy'}}
+            </li>
+          </ul>
+        </section>
+        <br>
         <section ng-show="project.in_review.comments" class="proj-body">
             <p><b>**Rekisteröity käsittelyyn</b>:&nbsp&nbsp{{project.in_review.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityReviewinfo')">Tiedot</button></p>
