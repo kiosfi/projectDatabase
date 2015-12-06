@@ -374,6 +374,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (isValid) {
                 var project = $scope.project;
                 project.ended.date = Date.now();
+                project.ended.end_date = $scope.convertDate($scope.end_day, $scope.end_month, $scope.end_year);
+                project.ended.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
                 project.state = $scope.global.newState;
                 project.$addEnded(function (response) {
                     console.log(response);

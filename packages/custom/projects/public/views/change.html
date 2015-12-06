@@ -540,11 +540,18 @@ A form for project state change.
     <form name="endedForm" class="form-horizontal col-md-8" ng-show="global.newState === 'päättynyt'"  role="form" data-ng-submit="addEndedState(endedForm.$valid)" novalidate>
 
         <div class="form-group col-md-12">
-            <label for="end_date" class="col-md-2">Päivämäärä</label>
-            <div class="col-md-10">
-                <input name="end_date" type="text" class="form-control" data-ng-model="project.ended.end_date" id="end_date" placeholder="Päättymispäivämäärä">
+            <div>
+                <label for="endDay" class="col-md-2 control-label">Päivämäärä</label>
+                <div class="col-md-2" style="float:left;">
+                    <input name="endDay" type="number" class="form-control" data-ng-model="end_day" id="endDay" placeholder="p">
+                </div>
+                <div class="col-md-2" style="float:left;">
+                    <input name="endMonth" type="number" class="form-control" data-ng-model="end_month" id="endMonth" placeholder="k">
+                </div>
+                <div class="col-md-2" style="float:left;">
+                    <input name="endYear" type="number" class="form-control" data-ng-model="end_year" id="endYear" placeholder="vvvv">
+                </div>
             </div>
-
         </div>
 
         <div class="form-group col-md-12">
@@ -558,9 +565,17 @@ A form for project state change.
         </div>
 
         <div class="form-group col-md-12">
-            <label for="board_notified" class="col-md-2">Tiedoksiannnon päivämäärä</label>
-            <div class="col-md-10">
-                <input name="board_notified" type="text" class="form-control" data-ng-model="project.ended.board_notified" id="board_notified" placeholder="Hallitukselle tiedoksi pvm">
+            <div>
+                <label for="notifiedDay" class="col-md-2">Tiedoksiannnon päivämäärä</label>
+                <div class="col-md-2" style="float:left;">
+                    <input name="notifiedDay" type="number" class="form-control" data-ng-model="notified_day" id="notifiedDay" placeholder="p">
+                </div>
+                <div class="col-md-2" style="float:left;">
+                    <input name="notifiedMonth" type="number" class="form-control" data-ng-model="notified_month" id="notifiedMonth" placeholder="k">
+                </div>
+                <div class="col-md-2" style="float:left;">
+                    <input name="notifiedYear" type="number" class="form-control" data-ng-model="notified_year" id="notifiedYear" placeholder="vvvv">
+                </div>
             </div>
 
         </div>
@@ -576,7 +591,7 @@ A form for project state change.
 
         <div class="form-group col-md-12">
             <div class="col-md-offset-2 col-md-10">
-                <button id="endrep-btn" type="submit" class="btn btn-default">Tallenna</button>
+                <button id="end-btn" type="submit" class="btn btn-default">Tallenna</button>
             </div>
         </div>
     </form>

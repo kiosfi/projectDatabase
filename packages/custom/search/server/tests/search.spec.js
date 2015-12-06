@@ -168,7 +168,7 @@ describe('<Unit Test>', function () {
 
         describe('Method searchProjects', function () {
 
-            it('should find projects with selected params', function (done) {
+            it('should find projects with two params', function (done) {
 
                 this.timeout(10000);
                 var params = [{"state": new RegExp('hyväksytty', 'i')}, {"region": new RegExp('aasia', 'i')}]
@@ -178,6 +178,21 @@ describe('<Unit Test>', function () {
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
                     expect(data[0].dac).to.be("abcd123");
+                    done();
+                });
+            });
+
+            it('should find projects with three params', function (done) {
+
+                this.timeout(10000);
+                var params = [{"state": new RegExp('hyväksytty', 'i')}, {"region": new RegExp('aasia', 'i')},
+                              {"coordinator": new RegExp('maija m', 'i')}]
+                var query = Project.find({$and: params});
+
+                return query.exec(function (err, data) {
+                    expect(err).to.be(null);
+                    expect(data.length).to.be(1);
+                    expect(data[0].region).to.be("Itä-Aasia");
                     done();
                 });
             });

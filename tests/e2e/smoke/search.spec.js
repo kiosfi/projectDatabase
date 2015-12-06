@@ -17,13 +17,9 @@ describe('Search page', function () {
         element(by.buttonText('Hae')).click();
         browser.pause();
 
-        browser.getCurrentUrl().then(function (currentUrl) {
-            browser.wait(function () {
-               return browser.getCurrentUrl().then(function () {
-                 var results = element.all(by.repeater('result in results'));
-                 expect(results.count()).not.toEqual(0);
-               });
-            });
+        browser.wait().then(function () {
+            var results = element.all(by.repeater('result in results'));
+            expect(results.count()).not.toEqual(0);
         });
 
 
