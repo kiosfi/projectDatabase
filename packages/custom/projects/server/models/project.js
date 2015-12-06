@@ -239,7 +239,7 @@ var ProjectSchema = new Schema({
           type: String
         },
         end_date: {
-          type: String
+          type: Date
         },
         board_notified: {
           type: String

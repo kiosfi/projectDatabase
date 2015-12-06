@@ -13,13 +13,19 @@ describe('Search page', function () {
 
         element(by.buttonText('Lisää hakukenttä')).click();
         element.all(by.model('query.field')).get(1).element(by.cssContainingText('option', 'Alue')).click();
-
         element.all(by.model('query.value')).get(1).sendKeys("aasia");
         element(by.buttonText('Hae')).click();
-        browser.executeScript('window.scrollTo(0,100000)').then(function () {
-          var results = element.all(by.repeater('result in results'));
+        browser.pause();
+
+        browser.getCurrentUrl().then(function (currentUrl) {
+            browser.wait(function () {
+               return browser.getCurrentUrl().then(function () {
+                 var results = element.all(by.repeater('result in results'));
+                 expect(results.count()).not.toEqual(0);
+               });
+            });
         });
-        expect(results.count()).not.toEqual(0)
+
 
         helpers.logout();
     });
