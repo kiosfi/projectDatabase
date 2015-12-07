@@ -1,9 +1,10 @@
 <article data-ng-controller="ProjectsController" data-ng-init="findOne()">
-    <!--<div data-spy="scroll" data-target="#menu" style="position: relative">-->
+    <style>
+        td {padding-left: 3em;}
+    </style>
     <div class="panel panel-default">
         <div class="panel-heading">
             <article id="header">
-            <!--<article id="header" class="col-md-12">-->
                 <h2 id="projtitle">
                     <span class="name">{{project.project_ref}}: {{project.title}}</span>
                     <span>
@@ -18,34 +19,14 @@
                     <span class="tila" id="state">{{project.state}}</span>
                 </h3>
             </article>
-            <article class="col-md-12">
-                <div class="col-md-6" ng-show="project.approved">
-                    <h4>Teemat:</h4>
-                    <button type="button" data-ng-model="project.approved.themes" data-ng-repeat="theme in project.approved.themes" disabled>
-                        <span class="glyphicon glyphicon-tag">
-                        </span> {{theme}}
-                    </button>
-                </div>
-                <div class="col-md-6" ng-show="state.next.length !== 0 && project.state !== 'hylätty' && project.state !== 'päättynyt'" data-ng-init="findState()">
-                    <form name="stateForm" class="states" data-ng-submit="changeState(project.changeTo);">
-                        <label for="stateSelect">Siirry tilaan:</label>
-                        <select id="stateSelect" data-ng-model="project.changeTo">
-                            <option data-ng-repeat="next_state in state.next_states"
-                                    value="{{next_state}}">{{next_state}}</option>
-                        </select>
-                        <button type="submit" class="btn-xs" id="st">
-                            <span class="glyphicon glyphicon-arrow-right"></span>
-                        </button>
-                    </form>
-                </div>
-            </article>
         </div>
         <div class="panel-content">
             <ul id="menu" class="col-md-3 nav nav-list" data-spy="affix">
                 <li>
                     <label><a href="#header">Hanke</a></label>
                     <ul>
-                        <li><a href="#basics">Perustiedot ja kuvaus</a></li>
+                        <li><a href="#summary">Perustiedot</a></li>
+                        <li><a href="#description">Kuvaus</a></li>
                         <li><a href="#details">Lisätiedot</a></li>
                     </ul>
                 </li>
@@ -66,55 +47,77 @@
                 </li>
             </ul>
             <div class="col-md-9">
-                <article id="basics">
-                    <section>
-                        <h4>Perustiedot</h4>
-                        <table>
-                            <tr>
-                                <th>Alue</th>
-                                <td>{{project.region}}</td>
-                            </tr>
-                            <tr>
-                                <th>DAC</th>
-                                <td>{{project.dac}}</td>
-                            </tr>
-                            <tr>
-                                <th>Tila</th>
-                                <td>{{project.state}}</td>
-                            </tr>
-                            <tr>
-                                <th>Kirjattu</th>
-                                <td>{{project.reg_date| date:'dd-MM-yyyy'}}</td>
-                            </tr>
-                            <tr ng-show="project.approved.granted_sum_eur" class="ng-hide">
-                                <th>Myönnetty EUR</th>
-                                <td>{{project.approved.granted_sum_eur| currency : ""}}</td>
-                            </tr>
-                            <tr ng-show="!project.approved.granted_sum.granted_curr_eur" class="ng-hide">
-                                <th>Haettu EUR</th>
-                                <td>{{project.funding.applied_curr_eur| currency : ""}}</td>
-                            </tr>
-                            <tr ng-show="!project.approved.granted_sum.granted_curr_eur" class="ng-hide">
-                                <th>Haettu paik.</th>
-                                <td>{{project.funding.applied_curr_local| currency : ""}}</td>
-                            </tr>
-                            <tr>
-                                <th>Kesto</th>
-                                <td>{{project.duration_months}} kk</td>
-                            </tr>
-                        </table>
-                    </section>
-                    <section>
-                        <h4>Kuvaus</h4>
-                        <span>
-                            {{project.description}}
-                        </span>
-                    </section>
+                <article ng-show="project.approved" class="proj-article">
+                    <h4>Teemat</h4>
+                    <button type="button" class="proj-content"
+                            data-ng-model="project.approved.themes"
+                            data-ng-repeat="theme in project.approved.themes"
+                            disabled>
+                        <span class="glyphicon glyphicon-tag">
+                        </span> {{theme}}
+                    </button>
                 </article>
-                <hr>
-                <article id="organisation">
+                <article class="proj-article" ng-show="state.next.length !== 0
+                                        && project.state !== 'hylätty'
+                                        && project.state !== 'päättynyt'"
+                         data-ng-init="findState()">
+                    <form name="stateForm" class="states" data-ng-submit="changeState(project.changeTo);">
+                        <label for="stateSelect">Siirry tilaan</label>
+                        <select id="stateSelect" data-ng-model="project.changeTo">
+                            <option data-ng-repeat="next_state in state.next_states"
+                                    value="{{next_state}}">{{next_state}}</option>
+                        </select>
+                        <button type="submit" class="btn-xs" id="st">
+                            <span class="glyphicon glyphicon-arrow-right"></span>
+                        </button>
+                    </form>
+                </article>
+                <article id="summary" class="proj-article">
+                    <h4>Perustiedot</h4>
+                    <table class="proj-content">
+                        <tr>
+                            <th>Alue</th>
+                            <td>{{project.region}}</td>
+                        </tr>
+                        <tr>
+                            <th>DAC</th>
+                            <td>{{project.dac}}</td>
+                        </tr>
+                        <tr>
+                            <th>Tila</th>
+                            <td>{{project.state}}</td>
+                        </tr>
+                        <tr>
+                            <th>Kirjattu</th>
+                            <td>{{project.reg_date| date:'dd-MM-yyyy'}}</td>
+                        </tr>
+                        <tr ng-show="project.approved.granted_sum_eur" class="ng-hide">
+                            <th>Myönnetty EUR</th>
+                            <td>{{project.approved.granted_sum_eur| currency : ""}}</td>
+                        </tr>
+                        <tr ng-show="!project.approved.granted_sum.granted_curr_eur" class="ng-hide">
+                            <th>Haettu EUR</th>
+                            <td>{{project.funding.applied_curr_eur| currency : ""}}</td>
+                        </tr>
+                        <tr ng-show="!project.approved.granted_sum.granted_curr_eur" class="ng-hide">
+                            <th>Haettu paik.</th>
+                            <td>{{project.funding.applied_curr_local| currency : ""}}</td>
+                        </tr>
+                        <tr>
+                            <th>Kesto</th>
+                            <td>{{project.duration_months}} kk</td>
+                        </tr>
+                    </table>
+                </article>
+                <article id="description" class="proj-article">
+                    <h4>Kuvaus</h4>
+                    <div class="proj-content">
+                        {{project.description}}
+                    </div>
+                </article>
+                <article id="organisation" class="proj-article">
                     <h4>Järjestö</h4>
-                    <table>
+                    <table class="proj-content">
                         <tr>
                             <th>Nimi</th>
                             <td><a data-ng-href="/organisations/{{project.organisation._id}}">{{project.organisation.name}}</a></td>
@@ -143,10 +146,9 @@
                         </tr>
                     </table>
                 </article>
-                <hr>
-                <article id="details">
+                <article id="details" class="proj-article">
                     <h4>Lisätiedot</h4>
-                    <section id="appinfo">
+                    <section id="appinfo" class="proj-content">
                         <div>
                             <h5>Hankkeen taustat</h5>
                             <p>
@@ -191,123 +193,121 @@
                         </div>
                     </section>
                 </article>
-                <hr>
-                <article id="schedule">
-                    <div>
+                <article id="schedule" class="proj-article">
+                    <section>
                         <h4>Aikataulu</h4>
-                        <section ng-show="project.in_review.comments">
-                            <p><b>**Rekisteröity käsittelyyn</b>:&nbsp&nbsp{{project.in_review.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
-                                <button class="btn small-btn" onclick="toggleCollapse('reviewinfo')">Tiedot</button></p>
-                            <div id="reviewinfo">
-                                <h5>Muokkaaja:</h5>
-                                <p>{{project.in_review.user}}, {{project.in_review.date| date:'dd-MM-yyyy, HH:mm'}}</p>
-                                <h5>Kommentit: </h5>
-                                <p>{{project.in_review.comments}}</p>
-                            </div>
-                        </section>
-                        <section ng-show="project.approved.approved_by">
-                            <p><b>**Rekisteröity hyväksytyksi</b>: {{project.approved.date| date:'dd-MM-yyyy'}}
-                                <button class="btn small-btn" onclick="toggleCollapse('approvedinfo')">Tiedot</button></p>
-                            <div id="approvedinfo">
-                                <h5>Muokkaaja:</h5>
-                                <p>{{project.approved.user}}, {{project.approved.date| date:'dd-MM-yyyy, HH:mm'}}</p>
-                                <h5>Hyväksyjä:</h5>
-                                <p>{{project.approved.approved_by}}</p>
-                                <h5>Hyväksymis pvm:</h5>
-                                <p>{{project.approved.approved_date| date:'dd-MM-yyyy'}}</p>
-                                <h5>Hallitukselle tiedoksi:</h5>
-                                <p>{{project.approved.board_notified| date:'dd-MM-yyyy'}}</p>
-                                <h5>Hyväksytty summa:</h5>
-                                <p>{{project.approved.granted_sum_eur| currency : ""}} EUR</p>
-                                <h5>Teemat:</h5>
-                                <ul>
-                                    <li data-ng-repeat="theme in project.approved.themes">{{theme}}</li>
-                                </ul>
-                                <h5>Toimintatavat:</h5>
-                                <ul>
-                                    <li data-ng-repeat="method in project.approved.methods">{{method.name}},
-                                        <i>taso:</i> {{method.level}}
-                                    </li>
-                                </ul>
-                            </div>
-                        </section>
-                        <section ng-show="project.rejected.rejection_comments">
-                            <p><b>**Rekisteröity hylätyksi</b>:&nbsp&nbsp{{project.rejected.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
-                                <button class="btn small-btn" onclick="toggleCollapse('rejectedinfo')">Tiedot</button></p>
-                            <div id="rejectedinfo">
-                                <h5>Muokkaaja:</h5>
-                                <p>{{project.rejected.user}}, {{project.rejected.date| date:'dd-MM-yyyy, HH:mm'}}</p>
-                                <br>
-                                <h5>Hylkäyssyyt:</h5>
-                                <ul>
-                                    <li ng-repeat="rej in project.rejected.rejection_categories">{{rej.rejection}} </li>
-                                </ul>
-                                <h5>Kommentit: </h5>
-                                <p>{{project.rejected.rejection_comments}}</p>
-                            </div>
-                        </section>
-                        <section ng-show="project.signed.signed_by">
-                            <p><b>**Rekisteröity allekirjoitetuksi</b>:&nbsp&nbsp{{project.signed.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
-                                <button class="btn small-btn" onclick="toggleCollapse('signedinfo')">Tiedot</button></p>
-                            <div id="signedinfo">
-                                <h5>Muokkaaja:</h5>
-                                <p>{{project.signed.user}}, {{project.signed.date| date:'dd-MM-yyyy, HH:mm'}}</p>
-                                <br>
-                                <h5>Allekirjoitettu:</h5>
-                                <p>{{project.signed.signed_by}}, <i>päivämäärä</i>: {{project.signed.signed_date| date:'dd-MM-yyyy'}}</p>
-                            </div>
-                        </section>
-                        <section ng-show="project.intermediary_reports.length > 0">
-                            <article ng-repeat="intreport in project.intermediary_reports">
-                                <p><b>**{{intreport.reportNumber}}. väliraportti rekisteröity</b>:&nbsp&nbsp{{intreport.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
-                                    <button class="btn small-btn" ng-click="showIntDetails = !showIntDetails">Tiedot</button>
-                                    <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}" class="btn large-btn">Näytä raportti</a></p>
-                                <div ng-show="showIntDetails">
+                        <section  class="proj-content">
+                            <section ng-show="project.in_review.comments">
+                                <p><b>**Rekisteröity käsittelyyn</b>:&nbsp&nbsp{{project.in_review.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
+                                    <button class="btn small-btn" onclick="toggleCollapse('reviewinfo')">Tiedot</button></p>
+                                <div id="reviewinfo" class="proj-subcontent" style="display: none">
                                     <h5>Muokkaaja:</h5>
-                                    <p>{{intreport.user}}, {{intreport.date| date:'dd-MM-yyyy, HH:mm'}}</p>
-                                    <h5>Raportti hyväksytty:</h5>
-                                    <p>{{intreport.approved_by}}, {{intreport.date_approved| date : 'dd-MM-yyyy'}}</p>
-                                    <p ng-show="intreport.processed === true">Väliraportti käsitelty</p>
+                                    <p>{{project.in_review.user}}, {{project.in_review.date| date:'dd-MM-yyyy, HH:mm'}}</p>
+                                    <h5>Kommentit: </h5>
+                                    <p>{{project.in_review.comments}}</p>
                                 </div>
-                            </article>
+                            </section>
+                            <section ng-show="project.approved.approved_by">
+                                <p><b>**Rekisteröity hyväksytyksi</b>: {{project.approved.date| date:'dd-MM-yyyy'}}
+                                    <button class="btn small-btn" onclick="toggleCollapse('approvedinfo')">Tiedot</button></p>
+                                <div id="approvedinfo" class="proj-subcontent" style="display: none">
+                                    <h5>Muokkaaja:</h5>
+                                    <p>{{project.approved.user}}, {{project.approved.date| date:'dd-MM-yyyy, HH:mm'}}</p>
+                                    <h5>Hyväksyjä:</h5>
+                                    <p>{{project.approved.approved_by}}</p>
+                                    <h5>Hyväksymis pvm:</h5>
+                                    <p>{{project.approved.approved_date| date:'dd-MM-yyyy'}}</p>
+                                    <h5>Hallitukselle tiedoksi:</h5>
+                                    <p>{{project.approved.board_notified| date:'dd-MM-yyyy'}}</p>
+                                    <h5>Hyväksytty summa:</h5>
+                                    <p>{{project.approved.granted_sum_eur| currency : ""}} EUR</p>
+                                    <h5>Teemat:</h5>
+                                    <ul>
+                                        <li data-ng-repeat="theme in project.approved.themes">{{theme}}</li>
+                                    </ul>
+                                    <h5>Toimintatavat:</h5>
+                                    <ul>
+                                        <li data-ng-repeat="method in project.approved.methods">{{method.name}},
+                                            <i>taso:</i> {{method.level}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                            <section ng-show="project.rejected.rejection_comments">
+                                <p><b>**Rekisteröity hylätyksi</b>:&nbsp&nbsp{{project.rejected.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
+                                    <button class="btn small-btn" onclick="toggleCollapse('rejectedinfo')">Tiedot</button></p>
+                                <div id="rejectedinfo" class="proj-subcontent" style="display: none">
+                                    <h5>Muokkaaja:</h5>
+                                    <p>{{project.rejected.user}}, {{project.rejected.date| date:'dd-MM-yyyy, HH:mm'}}</p>
+                                    <br>
+                                    <h5>Hylkäyssyyt:</h5>
+                                    <ul>
+                                        <li ng-repeat="rej in project.rejected.rejection_categories">{{rej.rejection}} </li>
+                                    </ul>
+                                    <h5>Kommentit: </h5>
+                                    <p>{{project.rejected.rejection_comments}}</p>
+                                </div>
+                            </section>
+                            <section ng-show="project.signed.signed_by">
+                                <p><b>**Rekisteröity allekirjoitetuksi</b>:&nbsp&nbsp{{project.signed.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
+                                    <button class="btn small-btn" onclick="toggleCollapse('signedinfo')">Tiedot</button></p>
+                                <div id="signedinfo" class="proj-subcontent" style="display: none">
+                                    <h5>Muokkaaja:</h5>
+                                    <p>{{project.signed.user}}, {{project.signed.date| date:'dd-MM-yyyy, HH:mm'}}</p>
+                                    <br>
+                                    <h5>Allekirjoitettu:</h5>
+                                    <p>{{project.signed.signed_by}}, <i>päivämäärä</i>: {{project.signed.signed_date| date:'dd-MM-yyyy'}}</p>
+                                </div>
+                            </section>
+                            <section ng-show="project.intermediary_reports.length > 0">
+                                <article ng-repeat="intreport in project.intermediary_reports">
+                                    <p><b>**{{intreport.reportNumber}}. väliraportti rekisteröity</b>:&nbsp&nbsp{{intreport.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
+                                        <button class="btn small-btn" ng-click="showIntDetails = !showIntDetails">Tiedot</button>
+                                        <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}" class="btn large-btn">Näytä raportti</a></p>
+                                    <div ng-show="showIntDetails" class="proj-subcontent">
+                                        <h5>Muokkaaja:</h5>
+                                        <p>{{intreport.user}}, {{intreport.date| date:'dd-MM-yyyy, HH:mm'}}</p>
+                                        <h5>Raportti hyväksytty:</h5>
+                                        <p>{{intreport.approved_by}}, {{intreport.date_approved| date : 'dd-MM-yyyy'}}</p>
+                                        <p ng-show="intreport.processed === true">Väliraportti käsitelty</p>
+                                    </div>
+                                </article>
+                            </section>
+                            <section ng-show="project.end_report.approved_by">
+                                <p><b>**Loppuraportti rekisteröity</b>:&nbsp&nbsp{{project.end_report.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
+                                    <!--            <button class="btn small-btn"><a ng-href='/projects/endReport/{{project._id}}'>Tiedot</a></button></p>-->
+                                    <button class="btn small-btn" ng-click="showEndDetails = !showEndDetails">Tiedot</button>
+                                    <a ng-href="/projects/endReport/{{project._id}}" class="btn large-btn">Näytä raportti</a></p>
+                                <div ng-show="showEndDetails" class="proj-subcontent">
+                                    <h5>Muokkaaja:</h5>
+                                    <p>{{project.end_report.user}}, {{project.end_report.date| date:'dd-MM-yyyy, HH:mm'}}</p>
+                                    <h5>Raportti hyväksytty:</h5>
+                                    <p>{{project.end_report.approved_by}}, {{project.end_report.date_approved| date : 'dd-MM-yyyy'}}</p>
+                                    <p ng-show="project.end_report.processed === true">Väliraportti käsitelty</p>
+                                </div>
+                            </section>
+                            <section ng-show="project.ended.approved_by">
+                                <p><b>**Rekisteröity päätetyksi</b>:&nbsp&nbsp{{project.ended.end_date| date:'dd-MM-yyyy'}}&nbsp&nbsp
+                                    <button class="btn small-btn" onclick="toggleCollapse('endedinfo')">Tiedot</button></p>
+                                <div id="endedinfo" class="proj-subcontent">
+                                    <h5>Tiedot lisäsi:</h5>
+                                    <p>{{project.ended.user}}, {{project.ended.date| date:'dd-MM-yyyy, HH:mm'}}</p>
+                                    <br>
+                                    <h5>Hyväksyjä:</h5>
+                                    <p>{{project.ended.approved_by}}</p>
+                                    <h5>Hallitukselle tiedotettu (pvm):</h5>
+                                    <p>{{project.ended.board_notified}}</p>
+                                    <br>
+                                    <h5>Muut päättämiseen liittyvät kommentit:</h5>
+                                    <p>{{project.ended.other_comments}}</p>
+                                </div>
+                            </section>
                         </section>
-                        <section ng-show="project.end_report.approved_by">
-                            <p><b>**Loppuraportti rekisteröity</b>:&nbsp&nbsp{{project.end_report.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
-                                <!--            <button class="btn small-btn"><a ng-href='/projects/endReport/{{project._id}}'>Tiedot</a></button></p>-->
-                                <button class="btn small-btn" ng-click="showEndDetails = !showEndDetails">Tiedot</button>
-                                <a ng-href="/projects/endReport/{{project._id}}" class="btn large-btn">Näytä raportti</a></p>
-                            <div ng-show="showEndDetails">
-                                <h5>Muokkaaja:</h5>
-                                <p>{{project.end_report.user}}, {{project.end_report.date| date:'dd-MM-yyyy, HH:mm'}}</p>
-                                <h5>Raportti hyväksytty:</h5>
-                                <p>{{project.end_report.approved_by}}, {{project.end_report.date_approved| date : 'dd-MM-yyyy'}}</p>
-                                <p ng-show="project.end_report.processed === true">Väliraportti käsitelty</p>
-                            </div>
-                        </section>
-                        <section ng-show="project.ended.approved_by">
-                            <p><b>**Rekisteröity päätetyksi</b>:&nbsp&nbsp{{project.ended.end_date| date:'dd-MM-yyyy'}}&nbsp&nbsp
-                                <button class="btn small-btn" onclick="toggleCollapse('visibilityEndedinfo')">Tiedot</button></p>
-                            <div>
-                                <h5>Tiedot lisäsi:</h5>
-                                <p>{{project.ended.user}}, {{project.ended.date| date:'dd-MM-yyyy, HH:mm'}}</p>
-                                <br>
-                                <h5>Hyväksyjä:</h5>
-                                <p>{{project.ended.approved_by}}</p>
-                                <h5>Hallitukselle tiedotettu (pvm):</h5>
-                                <p>{{project.ended.board_notified}}</p>
-                                <br>
-                                <h5>Muut päättämiseen liittyvät kommentit:</h5>
-                                <p>{{project.ended.other_comments}}</p>
-                            </div>
-                        </section>
-                    </div>
+                    </section>
                 </article>
-                <hr>
-                <article id="payments">
-                    <h4>
-                        Maksatus
-                    </h4>
-                    <div>
+                <article id="payments" class="proj-article">
+                    <h4>Maksatus</h4>
+                    <section class="proj-content">
                         <section>
                             <h5 ng-show="project.approved.granted_sum_eur">Myönnetty avustus</h5>
                             <p>Summa: {{project.approved.granted_sum_eur| currency : ""}} EUR, {{project.approved.approved_date| date:'dd-MM-yyyy'}}</p>
@@ -328,12 +328,14 @@
                             <p>Maksettu yhteensä: {{project.funding.paid_eur| currency : ""}} EUR </p>
                             <p>Jäljellä: {{project.funding.left_eur| currency : ""}} EUR</p>
                         </section>
-                    </div>
+                    </section>
                 </article>
-                <hr>
-                <article id="addPayment" ng-show="project.signed.signed_by">
+                <article id="addPayment" ng-show="project.signed.signed_by" class="proj-article">
                     <h4>Lisää maksutieto</h4>
-                    <form name="paymentForm" class="form-horizonal" role="form" data-ng-submit="addPaymentInfo(paymentForm.$valid)" novalidate>
+                    <form name="paymentForm" class="form-horizonal proj-content"
+                          role="form"
+                          data-ng-submit="addPaymentInfo(paymentForm.$valid)"
+                          novalidate>
                         <div class="form-group col-xs-12" id="PaymentDate">
                             <label for="paymentDate" class="col-xs-2 control-label">Päiväys</label>
                             <div id="paymentDate">
@@ -384,12 +386,9 @@
                         </div>
                     </form>
                 </article>
-                <hr>
-                <article id="appendices">
-                    <h4>
-                        Liitteet
-                    </h4>
-                    <table>
+                <article id="appendices" class="proj-article">
+                    <h4>Liitteet</h4>
+                    <table class="proj-content">
                         <tr>
                             <th><a href="">Hakemus</a></th>
                             <td>Hyväksytty 1.1.2014</td>
