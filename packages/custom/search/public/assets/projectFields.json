@@ -5,7 +5,7 @@
     {"name": "state", "fi": "Tila"},
     {"name": "dates", "fi": "Päivämäärät"},
     {"name": "funds", "fi": "Rahoitustiedot"},
-    {"name": "organisation_fields", "fi": "Järjestötiedot"},
+    {"name": "org_fields", "fi": "Järjestötiedot"},
     {"name": "approved.themes", "fi": "Teemat"},
     {"name": "approved.methods.level", "fi": "Tasot"},
     {"name": "description", "fi": "Hankkeen kuvaus"},

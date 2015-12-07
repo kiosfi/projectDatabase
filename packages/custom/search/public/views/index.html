@@ -16,8 +16,21 @@
                       <option data-ng-repeat="field in projectFields"
                               value="{{field.name}}">{{field.fi}}</option>
                   </select>
+                  <div style="clear:both;">&nbsp;</div>
+                  <label ng-show="query.field" class="col-md-6">Valitse tai kirjoita hakuarvo: </label>
+                  <select ng-show="query.field === 'org_fields'" id="fieldSelect"
+                          data-ng-model="query.orgField"
+                          class="col-md-6" style="float:left;">
+                      <option data-ng-repeat="orgField in orgFields"
+                              value="{{orgField.name}}">{{orgField.fi}}</option>
+                  </select>
+                  <div ng-show="query.field === 'org_fields'" class="col-md-6" style="float:left;">
+                      <input type="text" class="form-control"
+                             data-ng-model="query.orgValue"
+                             placeholder="Kirjoita hakusana(t)">
+                  </div>
                   <select ng-show="query.field === 'state'"
-                          data-ng-model="query.value" class="col-md-6"
+                          data-ng-model="query.orgvalue" class="col-md-6"
                           style="float:left;">
                       <option data-ng-repeat="state in states"
                               value="{{state}}">{{state}}</option>

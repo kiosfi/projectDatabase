@@ -24,8 +24,14 @@ module.exports = function (Search) {
      * @returns {JSON}
      */
     function prepareQueries(searchBy) {
+
         return _.map(JSON.parse(searchBy), function (query) {
             var search = {};
+
+            if (query.field === 'org_fields') {
+              search['orgParam'] = query.orgField;
+              search['orgValue'] = new RegExp(query.orgValue, 'i');
+            }
             if (query.value === 'payments') {
               query.field = 'payments';
                 query.value = {$exists: true, $gt: {$size: 0}};
@@ -93,11 +99,23 @@ module.exports = function (Search) {
                     error: 'Kyselystä puuttuu kenttä "page"!'
                 });
             }
+
             var queries = prepareQueries(req.query.searchBy);
+
             var orderingJSON = {};
             orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
 
-            Project.find({$and: queries}, {_id: 1, project_ref: 1, title: 1,
+            console.log(queries);
+
+            for (var i in queries) {
+              if (queries[i].orgParam) {
+                Organisation.find({$and: queries[i]}, function(results) {
+                  console.log(results);
+                })
+              }
+            }
+
+            /*Project.find({$and: queries}, {_id: 1, project_ref: 1, title: 1,
                 organisation: 1, description: 1})
                     .populate('organisation', {_id: 1, name: 1})
                     .sort(orderingJSON)
@@ -111,7 +129,7 @@ module.exports = function (Search) {
                         } else {
                             res.json(results);
                         }
-                    });
+                    });*/
         },
         /**
          * Returns all projects matching the given search query in the HTTP POST
