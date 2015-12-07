@@ -28,10 +28,6 @@ module.exports = function (Search) {
         return _.map(JSON.parse(searchBy), function (query) {
             var search = {};
 
-            if (query.field === 'org_fields') {
-              search['orgParam'] = query.orgField;
-              search['orgValue'] = new RegExp(query.orgValue, 'i');
-            }
             if (query.value === 'payments') {
               query.field = 'payments';
                 query.value = {$exists: true, $gt: {$size: 0}};
@@ -105,23 +101,56 @@ module.exports = function (Search) {
             var orderingJSON = {};
             orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
 
-            //console.log(queries);
+            /**
+            * Search includes data from organisations collection
+            *
+            */
 
-            var params = _.map(queries, function(query) {
-              var search = {};
-              if (query.orgParam !== 'undefined') {
-                search[query.orgParam] = query.orgValue;
+            var params = _.map(JSON.parse(req.query.searchBy), function(query) {
+              var search = {}
+              if (typeof query.orgField !== 'undefined') {
+                search[query.orgField] = new RegExp(query.orgValue, 'i');
               }
               return search;
-            })
-            console.log(params);
+            });
 
             if (params.length > 0) {
               Organisation.find({$and: params}, function(err, orgs) {
-                console.log(orgs);
-              })
-            }
-            /*Project.find({$and: queries}, {_id: 1, project_ref: 1, title: 1,
+
+                orgs = orgs.map(function(org) {
+                  return org._id;
+                });
+
+                queries = _.filter(queries, function(query) {
+                  return query;
+                })
+
+                queries.push({organisation: orgs});
+                console.log(queries);
+                Project.find({$and: queries})
+                  .populate('organisation')
+                  .sort(orderingJSON)
+                  .skip((page - 1) * pageSize)
+                  .limit(pageSize)
+                  .exec(function (err, results) {
+                      if (err) {
+                          return res.status(500).json({
+                              error: 'Virhe hankkeiden hakutoiminnossa'
+                          });
+                      } else {
+                        res.json(results);
+                      }
+                });
+              });
+
+            /**
+            * Search does not include data from organisations collection
+            *
+            */
+
+          } else {
+              console.log(queries);
+              Project.find({$and: queries}, {_id: 1, project_ref: 1, title: 1,
                 organisation: 1, description: 1})
                     .populate('organisation', {_id: 1, name: 1})
                     .sort(orderingJSON)
@@ -135,7 +164,8 @@ module.exports = function (Search) {
                         } else {
                             res.json(results);
                         }
-                    });*/
+                    });
+            }
         },
         /**
          * Returns all projects matching the given search query in the HTTP POST
