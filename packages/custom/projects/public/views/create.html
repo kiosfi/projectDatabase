@@ -375,7 +375,7 @@
                     <div class="col-md-9">
                         <input name="appliedlocal" type="number" class="form-control"
                                data-ng-model="project.funding.applied_curr_local" id="appliedlocal"
-                               placeholder="Haettu avustus (paikallinen)">
+                               placeholder="Haettu avustus (paikallinen)" min="0">
                     </div>
                 </div>
 
@@ -385,7 +385,7 @@
                     <div class="col-md-9">
                         <input name="appliedeur" type="number" class="form-control"
                                data-ng-model="project.funding.applied_curr_eur" id="appliedeur"
-                               placeholder="Haettu avustus (EUR)">
+                               placeholder="Haettu avustus (EUR)" min="0">
                     </div>
                 </div>
 
@@ -394,7 +394,7 @@
 
                     <div class="col-md-9">
                         <input name="duration" type="number" class="form-control"
-                               data-ng-model="project.duration_months" id="duration" placeholder="Kesto (kk)">
+                               data-ng-model="project.duration_months" id="duration" placeholder="Kesto (kk)" min="0">
                     </div>
                 </div>
 

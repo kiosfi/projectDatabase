@@ -39,80 +39,64 @@ var ProjectSchema = new Schema({
     },
     funding: {
         applied_curr_local: {
-            type: Number,
-            required: true
+            type: Number
         },
         applied_curr_eur: {
-            type: Number,
-            required: true
+            type: Number
         },
         paid_eur: {
-            type: Number,
-            default: 0
+            type: Number
         },
         left_eur: {
-            type: Number,
-            default: 0
+            type: Number
         }
     },
     duration_months: {
         type: Number,
-        required: true,
         trim: true
     },
     description: {
         type: String,
-        required: true,
         trim: true
     },
     description_en: {
         type: String,
-        required: true,
         trim: true
     },
     background: {
         type: String,
-        required: true,
         trim: true
     },
     beneficiaries: {
         type: String,
-        required: true,
         trim: true
     },
     gender_aspect: {
         type: String,
-        required: true,
         trim: true
     },
     project_goal: {
         type: String,
-        required: true,
         trim: true
     },
     sustainability_risks: {
         type: String,
-        required: true,
         trim: true
     },
     reporting_evaluation: {
         type: String,
-        required: true,
         trim: true
     },
     other_donors_proposed: {
         type: String,
-        required: false,
         trim: true
     },
     dac: {
         type: String,
-        required: true,
         trim: true
     },
     region: {
         type: String,
-        required: true,
         trim: true
     },
     in_review: {
