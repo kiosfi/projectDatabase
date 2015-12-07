@@ -105,16 +105,22 @@ module.exports = function (Search) {
             var orderingJSON = {};
             orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
 
-            console.log(queries);
+            //console.log(queries);
 
-            for (var i in queries) {
-              if (queries[i].orgParam) {
-                Organisation.find({$and: queries[i]}, function(results) {
-                  console.log(results);
-                })
+            var params = _.map(queries, function(query) {
+              var search = {};
+              if (query.orgParam !== 'undefined') {
+                search[query.orgParam] = query.orgValue;
               }
-            }
+              return search;
+            })
+            console.log(params);
 
+            if (params.length > 0) {
+              Organisation.find({$and: params}, function(err, orgs) {
+                console.log(orgs);
+              })
+            }
             /*Project.find({$and: queries}, {_id: 1, project_ref: 1, title: 1,
                 organisation: 1, description: 1})
                     .populate('organisation', {_id: 1, name: 1})
