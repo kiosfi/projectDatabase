@@ -17,6 +17,7 @@ module.exports = function (Search) {
      */
     var pageSize = 10;
 
+
     /**
      * Formulates search query received in searchBy depending on the type of
      * data searched
@@ -27,36 +28,36 @@ module.exports = function (Search) {
         return _.map(JSON.parse(searchBy), function (query) {
             var search = {};
             if (query.value === 'payments') {
-              query.field = 'payments';
+                query.field = 'payments';
                 query.value = {$exists: true, $gt: {$size: 0}};
             }
             if (query.value === 'approved.granted_sum_eur') {
-              query.field = 'approved.granted_sum_eur';
-              query.value =  {$exists: true};
+                query.field = 'approved.granted_sum_eur';
+                query.value = {$exists: true};
             }
             if (query.dateField) {
-              if (query.startYear && !query.endYear) {
-                query.field = query.dateField;
-                query.value = {
-                  $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString()
-                };
-              }
-              if (query.endYear && !query.startYear) {
-                query.field = query.dateField;
-                query.value = {
-                  $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
-                };
-              }
-              if (query.startYear && query.endYear) {
-                query.field = query.dateField;
-                query.value = {
-                  $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString(),
-                  $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
-                };
-              }
+                if (query.startYear && !query.endYear) {
+                    query.field = query.dateField;
+                    query.value = {
+                        $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString()
+                    };
+                }
+                if (query.endYear && !query.startYear) {
+                    query.field = query.dateField;
+                    query.value = {
+                        $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
+                    };
+                }
+                if (query.startYear && query.endYear) {
+                    query.field = query.dateField;
+                    query.value = {
+                        $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString(),
+                        $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
+                    };
+                }
             }
             if (query.value === 'Käynnissä olevat hankkeet') {
-              query.value = {$in: ["allekirjoitettu", "väliraportti", "loppuraportti"]};
+                query.value = {$in: ["allekirjoitettu", "väliraportti", "loppuraportti"]};
             }
             if (typeof query.value === 'string') {
                 query.value = new RegExp(query.value, 'i');
@@ -121,7 +122,7 @@ module.exports = function (Search) {
          * @param {type} res Response object.
          */
         searchAllProjects: function (req, res) {
-            var queries = prepareQueries(req.body.searchBy);
+            var queries = prepareQueries(req.query.searchBy);
 
             Project.find({$and: queries})
                     .populate('organisation', {name: 1})

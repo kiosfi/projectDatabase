@@ -7,7 +7,6 @@
     "angular-mocks": "latest",
     "angular-resource": "latest",
     "angular-route": "latest",
-    "angular-sanitize": "latest",
     "angular-ui-router": "#master",
     "angular-ui-select": "latest",
     "bootstrap": "latest",

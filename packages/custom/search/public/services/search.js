@@ -8,7 +8,9 @@ angular.module('mean.search').factory('Search', ['$resource',
                         method: 'GET', isArray: true
                     },
                     searchAllProjects: {
-                        method: 'POST', isarray: true
+                        method: 'GET',
+                        isArray: true,
+                        url: 'api/search/export'
                     },
                     countSearchResults: {
                         method: 'POST', isarray: false,
