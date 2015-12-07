@@ -1,106 +1,123 @@
-
 <section data-ng-controller="OrganisationsController" data-ng-init="findOne()">
-
-    <h2><span class="name">{{organisation.name}}</span></h2>
-
-    <h3>Edustaja: <a href="">{{organisation.representative}}</a></h3>
-
-    <hr>
-    <article class="proj-box-left">
-        <article class="proj-div">
-            <h4 class="proj-header">Perustiedot</h4>
-            <section class="proj-body">
-                <p>Edustaja <a href="">{{organisation.representative}}</a></p>
-                <p>Vastuullinen johtaja: {{organisation.exec_manager}}</p>
-                <h5>Osoite:</h5>
-                <p>{{organisation.address.street}}<br>
-                {{organisation.address.postal_code}} {{organisation.address.city}}<br>
-                {{organisation.address.country}}</p>
-                <p><em>Puhelinnumero</em>: {{organisation.tel}}</p>
-                <p><em>Sähköposti</em>: {{organisation.email}}</p>
-                <p><em>Websivut</em>: {{organisation.website}}</p>
-
-
-            </section>
-        </article>
-
-        <article class="org-div">
-            <h4 class="org-header">Tilitiedot</h4>
-            <section class="org-body">
-                <p><em>Tilin haltija</em>:  {{organisation.bank_account.holder_name}}</p>
-                <p><em>Tilinumero (IBAN)</em>:  {{organisation.bank_account.iban}}</p>
-                <p><em>SWIFT</em>:  {{organisation.bank_account.swift}}</p>
-                <p><em>Pankin yhteystiedot</em>:  {{organisation.bank_account.bank_contact_details}}</p>
-            </section>
-
-        </article>
-
-        <article class="org-div" data-ng-init="findOrgProjects()">
-            <h4 class="org-header">KIOS:lta rahoitusta hakeneet hankkeet</h4>
-
-            <section>
-                <ul>
-                    <li data-ng-repeat="project in orgProjects">
-                        <a data-ng-href="/projects/{{project._id}}">{{project.title}}</a>
-                    </li>
-                    <li data-ng-if="!orgProjects.length">Ei rahoitusta hakeneita hankkeita</li>
-                </ul>
-            </section>
-        </article>
-
-      </article>
-
-
-  <article class="org-box">
-
-    <hr>
-    <article>
-        <h4 class="org-header">Oikeudellinen status</h4>
-        <br>
-          <section class="org-body">
-              <p>{{organisation.legal_status}}</p>
-            </section>
-    </article>
-
-    <br>
-
-    <article>
-        <h4 class="org-header">Kuvaus</h4>
-        <br>
-          <section class="org-body">
-              <p>{{organisation.description}}</p>
-            </section>
-    </article>
-
-    <br>
-
-    <article>
-        <h4 class="org-header">Historia</h4>
-        <br>
-        <section class="org-body">
-            <p>{{organisation.history_status}}</p>
-        </section>
-    </article>
-
-    <br>
-
-    <article>
-        <h4 class="org-header">Kansalliset ja kansainväliset yhteydet</h4>
-        <br>
-        <section class="org-body">
-            <p>{{organisation.int_links}}</p>
-            <p> {{organisation.nat_local_links}}</p>
-        </section>
-    </article>
-
-    <br>
-
-    <article>
-        <h4 class="org-header">Muut rahoittajat</h4>
-        <br>
-          <section class="org-body">
-              <p>{{organisation.other_funding}}</p>
-            </section>
-    </article>
-  </article>
+    <style>
+        td {padding-left: 3em;}
+    </style>
+    <div>
+        <div id="header">
+            <h2><span class="name">{{organisation.name}}</span></h2>
+            <h3>Edustaja: <a href="">{{organisation.representative}}</a></h3>
+        </div>
+        <div>
+            <ul id="menu" class="col-md-3 nav nav-list" style="position: fixed">
+                <li>
+                    <label><a href="#header">Järjestö</a></label>
+                    <ul>
+                        <li><a href="#summary">Perustiedot</a></li>
+                        <li><a href="#legalStatus">Oikeudellinen status</a></li>
+                        <li><a href="#description">Kuvaus</a></li>
+                        <li><a href="#history">Historia</a></li>
+                        <li><a href="#connections">Yhteydet</a></li>
+                        <li><a href="#bankInfo">Tilitiedot</a></li>
+                        <li><a href="#prevApp">Aiemmat hakemukset</a></li>
+                        <li><a href="#otherDonors">Muut rahoittajat</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div style="margin-left: 192px">
+            <article id="summary" class="org-article">
+                <h4>Perustiedot</h4>
+                <table class="org-content">
+                    <tr>
+                        <th>Edustaja</th>
+                        <td><a href="">{{organisation.representative}}</a></td>
+                    </tr>
+                    <tr>
+                        <th>Vastuullinen johtaja</th>
+                        <td>{{organisation.exec_manager}}</td>
+                    </tr>
+                    <tr>
+                        <th>Osoite</th>
+                        <td>{{organisation.address.street}}
+                            {{organisation.address.postal_code}} {{organisation.address.city}}
+                            {{organisation.address.country}}</td>
+                    </tr>
+                    <tr>
+                        <th>Puhelinnumero</th>
+                        <td>{{organisation.tel}}</td></tr>
+                    <tr>
+                        <th>Sähköposti</th>
+                        <td>{{organisation.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>Websivut</th>
+                        <td>{{organisation.website}}</td>
+                    </tr>
+                </table>
+            </article>
+            <article id="bankInfo" class="org-article">
+                <h4>Tilitiedot</h4>
+                <table class="org-content">
+                    <tr>
+                        <th>Tilin haltija</th>
+                        <td>{{organisation.bank_account.holder_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Tilinumero (IBAN)</th>
+                        <td>{{organisation.bank_account.iban}}</td>
+                    </tr>
+                    <tr>
+                        <th>SWIFT</th>
+                        <td>{{organisation.bank_account.swift}}</td>
+                    </tr>
+                    <tr>
+                        <th>Pankin yhteystiedot</th>
+                        <td>{{organisation.bank_account.bank_contact_details}}</td>
+                    </tr>
+                </table>
+            </article>
+            <article id="prevApp" class="org-article" data-ng-init="findOrgProjects()">
+                <h4>KIOS:lta rahoitusta hakeneet hankkeet</h4>
+                <section>
+                    <ul>
+                        <li data-ng-repeat="project in orgProjects">
+                            <a data-ng-href="/projects/{{project._id}}">{{project.title}}</a>
+                        </li>
+                        <li data-ng-if="!orgProjects.length">Ei rahoitusta hakeneita hankkeita</li>
+                    </ul>
+                </section>
+            </article>
+            <article id="legalStatus" class="org-article">
+                <h4>Oikeudellinen status</h4>
+                <section class="org-content">
+                    <p>{{organisation.legal_status}}</p>
+                </section>
+            </article>
+            <article id="description" class="org-article">
+                <h4>Kuvaus</h4>
+                <section class="org-content">
+                    <p>{{organisation.description}}</p>
+                </section>
+            </article>
+            <article id="history" class="org-article">
+                <h4>Historia</h4>
+                <section class="org-content">
+                    <p>{{organisation.history_status}}</p>
+                </section>
+            </article>
+            <article id="connections" class="org-article">
+                <h4>Kansalliset ja kansainväliset yhteydet</h4>
+                <section class="org-content">
+                    <p>{{organisation.int_links}}</p>
+                    <p>{{organisation.nat_local_links}}</p>
+                </section>
+            </article>
+            <article id="otherDonors" class="org-article">
+                <h4>Muut rahoittajat</h4>
+                <section class="org-content">
+                    <p>{{organisation.other_funding}}</p>
+                </section>
+            </article>
+        </div>
+    </div>
 </section>

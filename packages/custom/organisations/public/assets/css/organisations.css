@@ -71,3 +71,20 @@ hr {
     background-image: linear-gradient(to bottom, #919191, #474647);
     text-decoration: none;
 }*/
+
+.org-content {
+    margin-left: 3em;
+}
+
+.org-subcontent {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.org-article {
+    border-style:       none;
+    border-radius:      0.5em;
+    background-color:   #F9F9F9;
+    margin:             1em;
+    padding:            1em;
+}
