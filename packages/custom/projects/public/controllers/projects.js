@@ -58,7 +58,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.convertDate = function (day, month, year) {
             var parsed = new Date(year + "-" + month + "-" + day);
             return parsed;
-        };
+        };       
 
         $scope.hasAuthorization = function (project) {
             if (!project)
@@ -128,6 +128,37 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             } else {
                 $scope.submitted = true;
             }
+        };
+
+        /**
+         * 
+         * @returns {undefined}
+         */
+        $scope.initEditing = function () {
+
+            Projects.get({
+                projectId: $stateParams.projectId
+            }, function (project) {
+                $scope.project = project;
+
+                $scope.addedMethods = [];
+                $scope.plannedPayments = [];
+
+                if (project.approved.date) {
+                    angular.forEach(project.approved.methods, function (obj) {
+                        $scope.addedMethods.push({name: obj.name, level: obj.level});
+                    });
+                    angular.forEach(project.approved.themes, function (obj) {
+                        $scope.themeSelection.push(obj);
+                    });
+                }
+                
+//                if(project.signed.date) {
+//                    angular.forEach(project.signed.planned_payments, function(obj) {
+//                        $scope.plannedPayments.push({})
+//                    })
+//                }
+            });
         };
 
         /**
