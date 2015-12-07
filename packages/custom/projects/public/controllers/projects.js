@@ -114,6 +114,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          * @returns {undefined}
          */
         $scope.update = function (isValid) {
+            // TODO: add convertDate to all date-objects!!
             if (isValid) {
                 var project = $scope.project;
                 if (!project.updated) {
@@ -145,6 +146,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.plannedPayments = [];
 
                 if (project.approved.date) {
+                    
                     angular.forEach(project.approved.methods, function (obj) {
                         $scope.addedMethods.push({name: obj.name, level: obj.level});
                     });
