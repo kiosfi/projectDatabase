@@ -13,6 +13,13 @@
             <span class="glyphicon glyphicon-edit"></span>
         </a>
     </h2>
+    
+    <p ng-show="project.updated.length > 0">Muokattu:</p>
+    <ul>
+        <li data-ng-repeat="update in project.updated">
+            {{update.time | date: 'dd-MM-yyyy HH:mm'}}, muokkaaja: {{update.user}}
+        </li>
+    </ul>
 
     <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
         <span class="tila" id="state">{{project.state}}</span></h3>

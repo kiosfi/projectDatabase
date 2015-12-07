@@ -119,7 +119,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 if (!project.updated) {
                     project.updated = [];
                 }
-                project.updated.push(new Date().getTime());
+
+                project.updated.push({time: new Date().getTime(), user: MeanUser.user.name});
 
                 project.$update(function () {
                     $location.path('projects/' + project._id);

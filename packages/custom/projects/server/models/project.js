@@ -250,6 +250,9 @@ var ProjectSchema = new Schema({
         other_comments: {
           type: String
       }
+    },
+    updated: {
+        type: Array
     }
 
 });
