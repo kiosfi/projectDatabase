@@ -2,8 +2,8 @@
     <style>
         td {padding-left: 3em;}
     </style>
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div>
+        <div>
             <article id="header">
                 <h2 id="projtitle">
                     <span class="name">{{project.project_ref}}: {{project.title}}</span>
@@ -20,8 +20,8 @@
                 </h3>
             </article>
         </div>
-        <div class="panel-content">
-            <ul id="menu" class="col-md-3 nav nav-list" data-spy="affix">
+        <div>
+            <ul id="menu" class="col-md-3 nav nav-list" style="position: fixed">
                 <li>
                     <label><a href="#header">Hanke</a></label>
                     <ul>
@@ -46,7 +46,7 @@
                     <label><a href="#appendices">Liitteet</a></label>
                 </li>
             </ul>
-            <div class="col-md-9">
+            <div style="margin-left: 200px">
                 <article ng-show="project.approved" class="proj-article">
                     <h4>Teemat</h4>
                     <button type="button" class="proj-content"

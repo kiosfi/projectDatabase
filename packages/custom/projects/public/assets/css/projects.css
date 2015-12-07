@@ -130,18 +130,6 @@ hr {
     text-decoration: none;
 }
 
-/*#menu.affix-top {
-    position: static;
-    margin-top:30px;
-    width:228px;
-}
-
-#menu.affix {
-    position: fixed;
-    top:70px;
-    width:228px;
-}*/
-
 .proj-content {
     margin-left: 3em;
 }
