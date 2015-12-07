@@ -200,8 +200,9 @@ module.exports = function (Search) {
          */
         countSearchResults: function (req, res) {
             var queries = prepareQueries(req.body.searchBy);
+            console.log(queries);
 
-            var params = _.map(queries, function(query) {
+            var params = _.map(JSON.parse(req.body.searchBy), function(query) {
               var search = {};
               if (typeof query.orgField !== 'undefined') {
                 search[query.orgField] = new RegExp(query.orgValue, 'i');
@@ -220,7 +221,6 @@ module.exports = function (Search) {
                 })
 
                 queries.push({organisation: {$in: orgs}});
-                console.log(queries);
 
                 Project.count({$and: queries})
                     .populate('organisation', {name: 1})
@@ -230,10 +230,10 @@ module.exports = function (Search) {
                                 error: 'Virhe hankkeiden hakutoiminnossa'
                             });
                         } else {
-                            console.log(result);
                             res.json({projectCount: result});
                         }
                     });
+               });
         }
 
     };
