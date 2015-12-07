@@ -19,6 +19,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
               $scope.levels = response.levels;
               $scope.states = response.states;
               $scope.funding = response.funding;
+              $scope.orgFields = response.main_menu_org;
             });
         }
 
@@ -41,6 +42,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * regular expressions.
          */
         $scope.searchBy = [];
+        $scope.searchByOrg = [];
 
         /**
          * The sorting predicate used in project listing. Initial value is
@@ -69,7 +71,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         $scope.pages;
 
         /**
-         * Performs the search operation. The parameters are fetched from the
+         * Performs project search operation. The parameters are fetched from the
          * URL.
          *
          * @returns {JSON} response from server.
