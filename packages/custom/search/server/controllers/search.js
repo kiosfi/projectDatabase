@@ -23,11 +23,12 @@ module.exports = function (Search) {
      * @param {JSON} searchBy
      * @returns {JSON}
      */
+
+
     function prepareQueries(searchBy) {
 
         return _.map(JSON.parse(searchBy), function (query) {
             var search = {};
-
             if (query.value === 'payments') {
               query.field = 'payments';
                 query.value = {$exists: true, $gt: {$size: 0}};
@@ -40,20 +41,24 @@ module.exports = function (Search) {
               if (query.startYear && !query.endYear) {
                 query.field = query.dateField;
                 query.value = {
-                  $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString()
+                  $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1)
+                  .toISOString()
                 };
               }
               if (query.endYear && !query.startYear) {
                 query.field = query.dateField;
                 query.value = {
-                  $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
+                  $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1)
+                  .toISOString()
                 };
               }
               if (query.startYear && query.endYear) {
                 query.field = query.dateField;
                 query.value = {
-                  $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString(),
-                  $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
+                  $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1)
+                  .toISOString(),
+                  $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1)
+                  .toISOString()
                 };
               }
             }
@@ -97,7 +102,6 @@ module.exports = function (Search) {
             }
 
             var queries = prepareQueries(req.query.searchBy);
-
             var orderingJSON = {};
             orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
 
@@ -107,51 +111,27 @@ module.exports = function (Search) {
             */
 
             var params = _.map(JSON.parse(req.query.searchBy), function(query) {
-              var search = {}
+              var search = {};
               if (typeof query.orgField !== 'undefined') {
                 search[query.orgField] = new RegExp(query.orgValue, 'i');
               }
               return search;
-            });
+            })
 
-            if (params.length > 0) {
-              Organisation.find({$and: params}, function(err, orgs) {
+            Organisation.find({$and: params}, function(err, orgs) {
 
                 orgs = orgs.map(function(org) {
                   return org._id;
                 });
 
                 queries = _.filter(queries, function(query) {
-                  return query;
+                  return typeof query.orgField === 'undefined';
                 })
 
-                queries.push({organisation: orgs});
-                console.log(queries);
-                Project.find({$and: queries})
-                  .populate('organisation')
-                  .sort(orderingJSON)
-                  .skip((page - 1) * pageSize)
-                  .limit(pageSize)
-                  .exec(function (err, results) {
-                      if (err) {
-                          return res.status(500).json({
-                              error: 'Virhe hankkeiden hakutoiminnossa'
-                          });
-                      } else {
-                        res.json(results);
-                      }
-                });
-              });
+                queries.push({organisation: {$in: orgs}});
 
-            /**
-            * Search does not include data from organisations collection
-            *
-            */
-
-          } else {
-              console.log(queries);
-              Project.find({$and: queries}, {_id: 1, project_ref: 1, title: 1,
-                organisation: 1, description: 1})
+                Project.find({$and: queries}, {_id: 1, project_ref: 1, title: 1,
+                  organisation: 1, description: 1})
                     .populate('organisation', {_id: 1, name: 1})
                     .sort(orderingJSON)
                     .skip((page - 1) * pageSize)
@@ -165,7 +145,7 @@ module.exports = function (Search) {
                             res.json(results);
                         }
                     });
-            }
+                });
         },
         /**
          * Returns all projects matching the given search query in the HTTP POST
@@ -177,7 +157,27 @@ module.exports = function (Search) {
         searchAllProjects: function (req, res) {
             var queries = prepareQueries(req.body.searchBy);
 
-            Project.find({$and: queries})
+            var params = _.map(JSON.parse(req.query.searchBy), function(query) {
+              var search = {};
+              if (typeof query.orgField !== 'undefined') {
+                search[query.orgField] = new RegExp(query.orgValue, 'i');
+              }
+              return search;
+            });
+            
+            Organisation.find({$and: params}, function(err, orgs) {
+
+                orgs = orgs.map(function(org) {
+                  return org._id;
+                });
+
+                queries = _.filter(queries, function(query) {
+                  return typeof query.orgField === 'undefined';
+                })
+
+                queries.push({organisation: {$in: orgs}});
+
+                Project.find({$and: queries})
                     .populate('organisation', {name: 1})
                     .exec(function (err, results) {
                         if (err) {
@@ -188,6 +188,7 @@ module.exports = function (Search) {
                             res.json(results);
                         }
                     });
+              });
         },
         /**
          * Returns the number of all projects matching the search query given by

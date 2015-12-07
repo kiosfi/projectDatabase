@@ -98,15 +98,18 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             $scope.ordering = ordering;
             $scope.ascending = ascending;
             $scope.page = page;
-            Search.countSearchResults({"searchBy": searchBy}, function (result) {
+            /*Search.countSearchResults({"searchBy": searchBy}, function (result) {
                 $scope.numberOfResults = result.projectCount;
-            });
+            });*/
             Search.query({
                 "searchBy": searchBy,
                 "ordering": ordering,
                 "ascending": ascending,
                 "page": page
             }, function(results) {
+              Search.countSearchResults({"searchBy": searchBy}, function (result) {
+                  $scope.numberOfResults = result.projectCount;
+              });
                 $scope.results = results;
             });
         };
