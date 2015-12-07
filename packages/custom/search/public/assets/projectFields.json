@@ -1,17 +1,18 @@
 {"main_menu":
-  [{"name": "title", "fi": "Nimi"},
+  [{"name": "title", "fi": "Hankkeen nimi"},
     {"name": "coordinator", "fi": "Koordinaattori"},
     {"name": "region", "fi": "Alue"},
     {"name": "state", "fi": "Tila"},
     {"name": "dates", "fi": "Päivämäärät"},
     {"name": "funds", "fi": "Rahoitustiedot"},
+    {"name": "org_fields", "fi": "Järjestötiedot"},
     {"name": "approved.themes", "fi": "Teemat"},
     {"name": "approved.methods.level", "fi": "Tasot"},
     {"name": "description", "fi": "Hankkeen kuvaus"},
     {"name": "description_en", "fi": "Hankkeen kuvaus (EN)"},
     {"name": "background", "fi": "Hankkeen tausta"},
     {"name": "beneficiaries", "fi": "Hyödynsaajat"},
-    {"name": "gender_aspect", "fi": "Gender-näkökulmat"},
+    {"name": "gender_aspect", "fi": "Gender-analyysi"},
     {"name": "project_goal", "fi": "Päätavoite"},
     {"name": "sustainability_risks", "fi": "Kestävyys ja riskit"},
     {"name": "reporting_evaluation", "fi": "Raportointi ja evaluointi"},
@@ -32,7 +33,7 @@
     {"name": "end_report.comments", "fi": "Loppuraportin muut kommentit"},
     {"name": "ended.approved_by", "fi": "Päättämisen hyväksyjä"},
     {"name": "ended.other_comments", "fi": "Päättämisen kommentit"}],
-    "date_fields":
+  "date_fields":
     [{"name": "reg_date", "fi": "Hankkeen rekisteröintipäivä"},
       {"name": "in_review.date", "fi": "Käsittelyyn siirto pvm"},
       {"name": "approved.approved_date", "fi": "Hyväksymispäivämäärä"},
@@ -45,7 +46,7 @@
       {"name": "end_report.approved_date", "fi": "Loppuraportin hyväksymispäivämäärä"},
       {"name": "end_report.audit.date", "fi": "Tilintarkastuksen päivämäärä"},
       {"name": "ended.end_date", "fi": "Päättämispäivämäärä"}],
-    "string_params":
+  "string_params":
     ["title", "coordinator", "description", "description_en",
         "background", "beneficiaries", "gender_aspect", "project_goal", "sustainability_risk",
         "reporting_evaluation", "other_donors_proposed", "dac", "region", "in_review.comments",
@@ -54,16 +55,28 @@
         "end_report.audit.review", "intermediary_reports.comments", "intermediary_reports.approved_by",
         "end_report.approved_by", "end_report.general_review", "end_report.objective",
         "end_report.comments", "ended.approved_by", "ended.other_comments"],
-    "themes":
+  "themes":
     ["Oikeusvaltio ja demokratia", "TSS-oikeudet", "Oikeus koskemattomuuteen ja inhimilliseen kohteluun",
         "Naisten oikeudet ja sukupuolten välinen tasa-arvo", "Lapsen oikeudet",
         "Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet", "Etniset vähemmistöt ja alkuperäiskansat",
         "LHBTIQ", "Ihmisoikeuspuolustajat"],
-    "levels": ["Kansainvälinen", "Kansallinen", "Paikallinen", "Yhteisö"],
-    "states":
+  "levels": ["Kansainvälinen", "Kansallinen", "Paikallinen", "Yhteisö"],
+  "states":
     ["Käynnissä olevat hankkeet", "rekisteröity", "käsittelyssä", "hyväksytty",
         "hylätty", "allekirjoitettu", "väliraportti", "loppuraportti", "päättynyt"],
-    "funding":
+  "funding":
     [{"name": "approved.granted_sum_eur", "fi": "Myönnetyt summat"},
-     {"name": "payments", "fi": "Suoritetut maksut"}]
+     {"name": "payments", "fi": "Suoritetut maksut"}],
+  "main_menu_org":
+    [{"name": "name", "fi": "Järjestön nimi"},
+     {"name": "representative", "fi": "Edustaja"},
+     {"name": "exec_manager", "fi": "Vastuullinen johtaja"},
+     {"name": "address.city", "fi": "Kaupunki"},
+     {"name": "address.country", "fi": "Maa"},
+     {"name": "legal_status", "fi": "Oikeudellinen asema"},
+     {"name": "history_status", "fi": "Järjestön historia"},
+     {"name": "int_links", "fi": "Kansainväliset yhteydet"},
+     {"name": "nat_local_links", "fi": "Kansalliset ja paikalliset yhteydet"},
+     {"name": "description", "fi": "Kuvaus"},
+     {"name": "other_funding", "fi": "Muut rahoittajat"}]
   }

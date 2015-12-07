@@ -10,15 +10,18 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * Fetches project schema attributes to populate search view
          * fields dropdown.
          */
-        $scope.getProjectFields = function () {
-            $http.get('search/assets/projectFields.json').success(function (response) {
-                $scope.projectFields = response.main_menu;
-                $scope.dateFields = response.date_fields;
-                $scope.stringParams = response.string_params;
-                $scope.themes = response.themes;
-                $scope.levels = response.levels;
-                $scope.states = response.states;
-                $scope.funding = response.funding;
+
+        $scope.getProjectFields = function() {
+          $http.get('search/assets/projectFields.json').success(function(response) {
+              $scope.projectFields = response.main_menu;
+              $scope.dateFields = response.date_fields;
+              $scope.stringParams = response.string_params;
+              $scope.themes = response.themes;
+              $scope.levels = response.levels;
+              $scope.states = response.states;
+              $scope.funding = response.funding;
+              $scope.orgFields = response.main_menu_org;
+
             });
         }
 
@@ -41,6 +44,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * regular expressions.
          */
         $scope.searchBy = [];
+        $scope.searchByOrg = [];
 
         /**
          * The sorting predicate used in project listing. Initial value is
@@ -69,7 +73,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         $scope.pages;
 
         /**
-         * Performs the search operation. The parameters are fetched from the
+         * Performs project search operation. The parameters are fetched from the
          * URL.
          *
          * @returns {JSON} response from server.
@@ -106,17 +110,17 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 "ordering": ordering,
                 "ascending": ascending,
                 "page": page
-            }, function (results) {
+            }, function(results) {
                 $scope.results = results;
             });
         };
 
 
         /**
-         * Fetches search parameters from URL when clicking button to export 
+         * Fetches search parameters from URL when clicking button to export
          * results.
-         * 
-         * @returns {JSON} response from server 
+         *
+         * @returns {JSON} response from server
          * and changes location to export-page.
          */
         $scope.getResultsForCsv = function () {
@@ -202,7 +206,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
 
 
         /**
-         * Parses search results to exportable format. Puts parsed data to 
+         * Parses search results to exportable format. Puts parsed data to
          * $scope.parsedData -array.
          */
         $scope.getCsvData = function () {

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"expires":1449777293050,"value":{"type":"alias","url":"git://github.com/angular/bower-angular-mocks.git"}}
+=======
+{"expires":1449956715247,"value":{"type":"alias","url":"git://github.com/angular/bower-angular-mocks.git"}}
+>>>>>>> orgsearch

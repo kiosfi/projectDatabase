@@ -201,7 +201,28 @@ module.exports = function (Search) {
         countSearchResults: function (req, res) {
             var queries = prepareQueries(req.body.searchBy);
 
-            Project.count({$and: queries})
+            var params = _.map(queries, function(query) {
+              var search = {};
+              if (typeof query.orgField !== 'undefined') {
+                search[query.orgField] = new RegExp(query.orgValue, 'i');
+              }
+              return search;
+            })
+
+            Organisation.find({$and: params}, function(err, orgs) {
+
+                orgs = orgs.map(function(org) {
+                  return org._id;
+                });
+
+                queries = _.filter(queries, function(query) {
+                  return typeof query.orgField === 'undefined';
+                })
+
+                queries.push({organisation: {$in: orgs}});
+                console.log(queries);
+
+                Project.count({$and: queries})
                     .populate('organisation', {name: 1})
                     .exec(function (err, result) {
                         if (err) {
@@ -209,6 +230,7 @@ module.exports = function (Search) {
                                 error: 'Virhe hankkeiden hakutoiminnossa'
                             });
                         } else {
+                            console.log(result);
                             res.json({projectCount: result});
                         }
                     });
