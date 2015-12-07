@@ -11,37 +11,7 @@ body {
 }
 
 h5 {
-  font-weight: bold;
-}
-
-.proj-left {
-    padding: 1em;
-}
-
-.proj-right {
-    padding: 1em;
-}
-
-.proj-box-left {
-    float: left;
-    width: 50%;
-}
-
-.proj-box-right {
-/*    padding-top: 5%;*/
-    float: left;
-    width: 50%;
-}
-
-.proj-div {
-    padding-right: 10%;
-    padding: 1em;
-    float: left;
-    width: 50%;
-}
-
-.projects-example h1 {
-    background-color: purple;
+    font-weight: bold;
 }
 
 ul li {
@@ -75,10 +45,10 @@ span ul li {
 }
 
 .er-body {
-  line-height: 1.2;
-  font-size: 14px;
-  font-style: normal;
-  padding: 1em;
+    line-height: 1.2;
+    font-size: 14px;
+    font-style: normal;
+    padding: 1em;
 }
 
 .border-body {
@@ -160,3 +130,15 @@ hr {
     padding: 5px 5px 15px 5px;
     text-decoration: none;
 }
+
+/*#menu.affix-top {
+    position: static;
+    margin-top:30px;
+    width:228px;
+}
+
+#menu.affix {
+    position: fixed;
+    top:70px;
+    width:228px;
+}*/

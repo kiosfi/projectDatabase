@@ -1,5 +1,19 @@
 "use strict";
 
+//$('#menu').affix({
+//      offset: {
+//        top: 245
+//      }
+//});
+//
+//var $body   = $(document.body);
+//var navHeight = $('.nav').outerHeight(true) + 10;
+//
+//$body.scrollspy({
+//	target: '#leftCol',
+//	offset: navHeight
+//});
+
 /**
  * Hides or shows the given HTML element.
  *
@@ -25,13 +39,13 @@ function toggleCollapse(id) {
  * @return {undefined}
  */
 function toggleCollapse2(elementID, buttonID) {
-    var element = document.querySelector("." + elementID);
-    var indicator = document.querySelector("." + buttonID);
+    var element = document.getElementById(elementID);
+    var button = document.getElementById(buttonID);
     if (element.style.display !== 'block') {
         element.style.display = 'block';
-        indicator.innerHTML = '-';
+        button.innerHTML = '-';
     } else {
         element.style.display = 'none';
-        indicator.innerHTML = '+';
+        button.innerHTML = '+';
     }
 }
