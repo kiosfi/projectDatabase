@@ -17,47 +17,53 @@ module.exports = function (Search) {
      */
     var pageSize = 10;
 
-
     /**
      * Formulates search query received in searchBy depending on the type of
      * data searched
      * @param {JSON} searchBy
      * @returns {JSON}
      */
+
+
     function prepareQueries(searchBy) {
+
         return _.map(JSON.parse(searchBy), function (query) {
             var search = {};
             if (query.value === 'payments') {
-                query.field = 'payments';
+              query.field = 'payments';
                 query.value = {$exists: true, $gt: {$size: 0}};
             }
             if (query.value === 'approved.granted_sum_eur') {
-                query.field = 'approved.granted_sum_eur';
-                query.value = {$exists: true};
+              query.field = 'approved.granted_sum_eur';
+              query.value =  {$exists: true};
             }
             if (query.dateField) {
-                if (query.startYear && !query.endYear) {
-                    query.field = query.dateField;
-                    query.value = {
-                        $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString()
-                    };
-                }
-                if (query.endYear && !query.startYear) {
-                    query.field = query.dateField;
-                    query.value = {
-                        $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
-                    };
-                }
-                if (query.startYear && query.endYear) {
-                    query.field = query.dateField;
-                    query.value = {
-                        $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1).toISOString(),
-                        $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1).toISOString()
-                    };
-                }
+              if (query.startYear && !query.endYear) {
+                query.field = query.dateField;
+                query.value = {
+                  $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1)
+                  .toISOString()
+                };
+              }
+              if (query.endYear && !query.startYear) {
+                query.field = query.dateField;
+                query.value = {
+                  $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1)
+                  .toISOString()
+                };
+              }
+              if (query.startYear && query.endYear) {
+                query.field = query.dateField;
+                query.value = {
+                  $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1)
+                  .toISOString(),
+                  $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1)
+                  .toISOString()
+                };
+              }
             }
             if (query.value === 'Käynnissä olevat hankkeet') {
-                query.value = {$in: ["allekirjoitettu", "väliraportti", "loppuraportti"]};
+              query.value = {$in: ["allekirjoitettu", "väliraportti", "loppuraportti"]};
             }
             if (typeof query.value === 'string') {
                 query.value = new RegExp(query.value, 'i');
@@ -94,12 +100,38 @@ module.exports = function (Search) {
                     error: 'Kyselystä puuttuu kenttä "page"!'
                 });
             }
+
             var queries = prepareQueries(req.query.searchBy);
             var orderingJSON = {};
             orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
 
-            Project.find({$and: queries}, {_id: 1, project_ref: 1, title: 1,
-                organisation: 1, description: 1})
+            /**
+            * Search includes data from organisations collection
+            *
+            */
+
+            var params = _.map(JSON.parse(req.query.searchBy), function(query) {
+              var search = {};
+              if (typeof query.orgField !== 'undefined') {
+                search[query.orgField] = new RegExp(query.orgValue, 'i');
+              }
+              return search;
+            })
+
+            Organisation.find({$and: params}, function(err, orgs) {
+
+                orgs = orgs.map(function(org) {
+                  return org._id;
+                });
+
+                queries = _.filter(queries, function(query) {
+                  return typeof query.orgField === 'undefined';
+                })
+
+                queries.push({organisation: {$in: orgs}});
+
+                Project.find({$and: queries}, {_id: 1, project_ref: 1, title: 1,
+                  organisation: 1, description: 1})
                     .populate('organisation', {_id: 1, name: 1})
                     .sort(orderingJSON)
                     .skip((page - 1) * pageSize)
@@ -113,6 +145,7 @@ module.exports = function (Search) {
                             res.json(results);
                         }
                     });
+                });
         },
         /**
          * Returns all projects matching the given search query in the HTTP POST
@@ -124,7 +157,27 @@ module.exports = function (Search) {
         searchAllProjects: function (req, res) {
             var queries = prepareQueries(req.query.searchBy);
 
-            Project.find({$and: queries})
+            var params = _.map(JSON.parse(req.query.searchBy), function(query) {
+              var search = {};
+              if (typeof query.orgField !== 'undefined') {
+                search[query.orgField] = new RegExp(query.orgValue, 'i');
+              }
+              return search;
+            });
+
+            Organisation.find({$and: params}, function(err, orgs) {
+
+                orgs = orgs.map(function(org) {
+                  return org._id;
+                });
+
+                queries = _.filter(queries, function(query) {
+                  return typeof query.orgField === 'undefined';
+                })
+
+                queries.push({organisation: {$in: orgs}});
+
+                Project.find({$and: queries})
                     .populate('organisation', {name: 1})
                     .exec(function (err, results) {
                         if (err) {
@@ -135,6 +188,7 @@ module.exports = function (Search) {
                             res.json(results);
                         }
                     });
+              });
         },
         /**
          * Returns the number of all projects matching the search query given by
