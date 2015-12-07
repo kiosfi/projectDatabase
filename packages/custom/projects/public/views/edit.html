@@ -1,29 +1,206 @@
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
-  <form name="projectForm" class="form-horizontal col-md-6" role="form" data-ng-submit="update(projectForm.$valid)" novalidate>
-    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.title.$invalid }">
-      <label mean-token="'edit-title'" for="title" class="col-md-2 control-label">Title</label>
-      <div class="col-md-10">
-        <input name="title" type="text" class="form-control" data-ng-model="project.title" id="title" placeholder="Title" required>
-        <div ng-show="submitted && projectForm.title.$invalid" class="help-block">
-          <p ng-show="projectForm.title.$error.required">Title is required</p>
-        </div>
-      </div>
+    <a ng-href="/projects/{{project._id}}" class="btn btn-danger">Peruuta</a>
+    <form name="projectForm" class="form-horizontal" role="form" data-ng-submit="update(projectForm.$valid)" novalidate>
+        <h2>Hankkeen tietojen muokkaus</h2>
+        <fieldset>            
+            <div class="fs1" >
+                <div class="form-group col-md-6" ng-class="{
+                        'has-error'
+                        : projectForm.title.$invalid }">
+                    <label class="col-md-3 control-label">Nimi</label>
 
-    </div>
-    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.status.$invalid }">
-      <label mean-token="'edit-status'" for="status" class="col-md-2 control-label">Status</label>
-      <div class="col-md-10">
-        <input name="status" type="text" class="form-control" data-ng-model="project.status" id="status" placeholder="Status" required>
-        <div ng-show="submitted && projectForm.status.$invalid" class="help-block">
-          <p ng-show="projectForm.status.$error.required">Status is required</p>
-        </div>
-      </div>
+                    <div class="col-md-9">
+                        <input name="title" type="text" class="form-control" data-ng-model="project.title" id="title"
+                               placeholder="Hanke" required>
 
-    </div>
-    <div class="form-group">
-      <div class="col-md-offset-2 col-md-10">
-        <button mean-token="'edit-submit'" type="submit" class="btn btn-default">Submit</button>
-      </div>
-    </div>
-  </form>
+                        <div ng-show="projectForm.title.$invalid" class="help-block">
+                            <p ng-show="projectForm.title.$error.required">Nimi on pakollinen</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group col-md-6" ng-class="{
+                        'has-error'
+                        : projectForm.coordinator.$invalid }">
+                    <label  class="col-md-3 control-label">Koordinaattori</label>
+
+                    <div class="col-md-9">
+                        <input name="coordinator" type="text" class="form-control" data-ng-model="project.coordinator" id="coordinator"
+                               placeholder="Koordinaattori" required>
+                        <div ng-show="projectForm.coordinator.$invalid" class="help-block">
+                            <p ng-show="projectForm.coordinator.$error.required">Koordinaattori on pakollinen</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>            
+            <div class="fs3">
+                <div class="form-group col-md-6" >
+                    <label for="description"
+                           class="col-md-3 control-label">Kuvaus</label>
+                    <div class="col-md-9">
+                        <textarea name="description" data-ng-model="project.description" id="description"
+                                  placeholder="Kuvaus" class="form-control" ></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6" >
+                    <label for="description_en" class="col-md-3 control-label">Kuvaus
+                        (ENG)</label>
+
+                    <div class="col-md-9">
+                        <textarea name="description_en" data-ng-model="project.description_en" id="description_en"
+                                  placeholder="Kuvaus englanniksi" class="form-control"></textarea>                       
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="col-md-3 control-label">Haettu avustus (paikallinen
+                        valuutta)</label>
+
+                    <div class="col-md-9">
+                        <input name="appliedlocal" type="number" class="form-control"
+                               data-ng-model="project.funding.applied_curr_local" id="appliedlocal"
+                               placeholder="Haettu avustus (paikallinen)">                        
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label  class="col-md-3 control-label">Haettu avustus (EUR)</label>
+
+                    <div class="col-md-9">
+                        <input name="appliedeur" type="number" class="form-control"
+                               data-ng-model="project.funding.applied_curr_eur" id="appliedeur"
+                               placeholder="Haettu avustus (EUR)">                        
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="col-md-3 control-label">Kesto (kk)</label>
+
+                    <div class="col-md-9">
+                        <input name="duration" type="number" class="form-control"
+                               data-ng-model="project.duration_months" id="duration" placeholder="Kesto (kk)">     
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <div class="fs4">
+                <div class="form-group col-md-6">
+                    <label for="background"
+                           class="col-md-3 control-label">Tausta</label>
+                    <div class="col-md-9">
+                        <textarea name="background" data-ng-model="project.background" id="background"
+                                  placeholder="Tausta" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="beneficiaries" class="col-md-3 control-label">Hyödynsaajat
+                        ja vastuunkantajat</label>
+
+                    <div class="col-md-9">
+                        <textarea name="beneficiaries" data-ng-model="project.beneficiaries" id="beneficiaries"
+                                  placeholder="Hyödynsaajat ja vastuunkantajat" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="gender_aspect" class="col-md-3 control-label">Gender
+                        analyysi</label>
+
+                    <div class="col-md-9">
+                        <textarea name="gender_aspect" data-ng-model="project.gender_aspect" id="gender_aspect"
+                                  placeholder="Gender analyysi" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="project_goal" class="col-md-3 control-label">Päätavoite</label>
+
+                    <div class="col-md-9">
+                        <textarea name="project_goal" data-ng-model="project.project_goal" id="project_goal"
+                                  placeholder="Päätavoite" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="sustainability_risks"
+                           class="col-md-3 control-label">Kestävyys ja arvio riskeistä</label>
+
+                    <div class="col-md-9">
+                        <textarea name="sustainability_risks" data-ng-model="project.sustainability_risks"
+                                  id="sustainability_risks" placeholder="Kestävyys ja riskit" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="reporting_evaluation"
+                           class="col-md-3 control-label">Raportointi ja evaluointi</label>
+
+                    <div class="col-md-9">
+                        <textarea name="reporting_evaluation" data-ng-model="project.reporting_evaluation"
+                                  id="reporting_evaluation" placeholder="Raportointi ja evaluointi" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="other_donors_proposed"
+                           class="col-md-3 control-label">Muualta haettu rahoitus</label>
+
+                    <div class="col-md-9">
+                        <textarea name="other_donors_proposed" data-ng-model="project.other_donors_proposed"
+                                  id="other_donors_proposed" placeholder="Muu rahoitus" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="col-md-3 control-label">Vaikutusalue tai -maa</label>
+
+                    <div class="col-md-9">
+                        <input name="region" type="text" class="form-control" data-ng-model="project.region" id="region"
+                               placeholder="Vaikutusalue">
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="col-md-3 control-label">DAC-koodi</label>
+
+                    <div class="col-md-9">
+                        <input name="dac" type="text" class="form-control" data-ng-model="project.dac" id="dac"
+                               placeholder="DAC">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+
+        <!--    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.title.$invalid }">
+              <label mean-token="'edit-title'" for="title" class="col-md-2 control-label">Title</label>
+              <div class="col-md-10">
+                <input name="title" type="text" class="form-control" data-ng-model="project.title" id="title" placeholder="Title" required>
+                <div ng-show="submitted && projectForm.title.$invalid" class="help-block">
+                  <p ng-show="projectForm.title.$error.required">Title is required</p>
+                </div>
+              </div>
+        
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.status.$invalid }">
+              <label mean-token="'edit-status'" for="status" class="col-md-2 control-label">Status</label>
+              <div class="col-md-10">
+                <input name="status" type="text" class="form-control" data-ng-model="project.status" id="status" placeholder="Status" required>
+                <div ng-show="submitted && projectForm.status.$invalid" class="help-block">
+                  <p ng-show="projectForm.status.$error.required">Status is required</p>
+                </div>
+              </div>
+        
+            </div>
+        -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button mean-token="'edit-submit'" type="submit" class="btn btn-default">Tallenna</button>
+            </div>
+        </div>
+    </form>
 </section>

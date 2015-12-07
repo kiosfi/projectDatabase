@@ -6,9 +6,12 @@
             <!--                Confirm action here-->
 
             <a class="btn-lg" id="delete" data-ng-click="confirm(project);">
-                <i class="glyphicon glyphicon-trash"></i>
+                <span class="glyphicon glyphicon-trash"></span>
             </a>
         </span>
+        <a ng-href="/projects/{{project._id}}/edit" class="btn-lg" id="edit">
+            <span class="glyphicon glyphicon-edit"></span>
+        </a>
     </h2>
 
     <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>

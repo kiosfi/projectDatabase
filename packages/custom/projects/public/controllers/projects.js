@@ -109,6 +109,27 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         /**
+         * 
+         * @param {type} isValid
+         * @returns {undefined}
+         */
+        $scope.update = function (isValid) {
+            if (isValid) {
+                var project = $scope.project;
+                if (!project.updated) {
+                    project.updated = [];
+                }
+                project.updated.push(new Date().getTime());
+
+                project.$update(function () {
+                    $location.path('projects/' + project._id);
+                });
+            } else {
+                $scope.submitted = true;
+            }
+        };
+
+        /**
          *
          *
          * @returns {undefined}
@@ -138,7 +159,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.now = new Date().toISOString();
                 $scope.projects = results;
             }
-          );
+            );
         };
 
         $scope.findOne = function () {

@@ -56,22 +56,51 @@ module.exports = function (Projects) {
             });
             res.json(req.project);
         },
-        /*all: function (req, res) {
-            var query = Project.find();
-            query
-                    .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
-                        {path: 'rejected', model: 'Rejected'}, {path: 'signed', model: 'Signed'},
-                        {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'},
-                        {path: 'intermediary_reports.intermediary_report', model: 'IntReport'}])
-                    .exec(function (err, projects) {
-                        if (err) {
-                            return res.status(500).json({
-                                error: 'Hankkeita ei voi näyttää'
-                            });
-                        }
-                        res.json(projects)
+        
+        /**
+         * Update a project
+         */
+        update: function (req, res) {
+            var project = req.project;
+
+            project = _.extend(project, req.body);
+
+
+            project.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Hanketta ei voi päivittää'
                     });
-        },*/
+                }
+
+                Projects.events.publish({
+                    action: 'updated',
+                    user: {
+                        name: req.user.name
+                    },
+                    name: project.title,
+                    url: config.hostname + '/projects/' + project._id
+                });
+
+                res.json(project);
+            });
+        },
+        /*all: function (req, res) {
+         var query = Project.find();
+         query
+         .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
+         {path: 'rejected', model: 'Rejected'}, {path: 'signed', model: 'Signed'},
+         {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'},
+         {path: 'intermediary_reports.intermediary_report', model: 'IntReport'}])
+         .exec(function (err, projects) {
+         if (err) {
+         return res.status(500).json({
+         error: 'Hankkeita ei voi näyttää'
+         });
+         }
+         res.json(projects)
+         });
+         },*/
         /**
          * Gets all projects.
          *
@@ -94,18 +123,18 @@ module.exports = function (Projects) {
             var page = req.query.page;
             if (typeof ordering === 'undefined') {
                 return res.status(500).json({
-                                error: 'Kyselystä puuttuu kenttä "ordering"!'
-                            });
+                    error: 'Kyselystä puuttuu kenttä "ordering"!'
+                });
             }
             if (typeof ascending === 'undefined') {
                 return res.status(500).json({
-                                error: 'Kyselystä puuttuu kenttä "ascending"!'
-                            });
+                    error: 'Kyselystä puuttuu kenttä "ascending"!'
+                });
             }
             if (typeof page === 'undefined') {
                 return res.status(500).json({
-                                error: 'Kyselystä puuttuu kenttä "page"!'
-                            });
+                    error: 'Kyselystä puuttuu kenttä "page"!'
+                });
             }
 
             var pageSize = 10;
