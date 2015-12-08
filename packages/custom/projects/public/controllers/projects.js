@@ -11,40 +11,27 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     '$location', '$window', '$http', 'Global', 'Projects', 'MeanUser', 'Circles', 'Organisations',
     function ($scope, $stateParams, $location, $window, $http, Global, Projects, MeanUser, Circles, Organisations) {
         $scope.global = Global;
-
         $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
-
         $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
             'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
             'Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet', 'Etniset vähemmistöt ja alkuperäiskansat',
             'LHBTIQ', 'Ihmisoikeuspuolustajat'];
-
         $scope.methodNames = ['Tietoisuuden lisääminen', 'Ihmisoikeuskasvatus ja -koulutus', 'Kapasiteetin vahvistaminen',
             'Kampanjointi ja/tai lobbaus', 'Vaikuttamistyö', 'Dokumentaatio ja monitorointi', 'Oikeusapu ja -neuvonta',
             'Strategiset ja/tai perusoikeuskanteet ja/tai ryhmäkanteet', 'Oikeusturvan saatavuuden parantaminen', 'Palveluiden saatavuuden parantaminen',
             'Ihmisoikeuspuolustajien suojelu', 'Verkostoituminen', 'Alueellinen yhteistyö', 'Toimintatuki', 'Muu'];
-
         $scope.methodLevels = ['Kansainvälinen', 'Kansallinen', 'Paikallinen', 'Yhteisö'];
-
         $scope.addedMethods = [];
-
         $scope.plannedPayments = [];
-
         $scope.deadlines = [];
-
         $scope.themeSelection = [];
-
         $scope.objectiveComments = [];
-
         $scope.rejcategories = ["1 Hanke ei ole ihmisoikeushanke", "2 Järjestöllä ei ole ihmisoikeushankkeen toteutuskapasiteettia",
             "3 Järjestöllä ei ole hallintokapasiteettia", "4 Hanke on epärealistinen tai muuten heikosti suunniteltu",
             "5 Hankkeen budjetti on epärealistinen", "6 Huonot tai puuttuvat referenssit", "7 Strategia", "8 Muu, mikä?"];
-
         $scope.addedRejections = [];
-
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
             var idx = $scope.themeSelection.indexOf(theme);
-
             // is currently selected
             if (idx > -1) {
                 $scope.themeSelection.splice(idx, 1);
@@ -54,18 +41,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.themeSelection.push(theme);
             }
         };
-
         $scope.convertDate = function (day, month, year) {
             var parsed = new Date(year + "-" + month + "-" + day);
             return parsed;
-        };       
-
+        };
         $scope.hasAuthorization = function (project) {
             if (!project)
                 return false;
             return MeanUser.isAdmin;
         };
-
         /**
          * Creates new project by checking if organisation already exists (i.e. organisation
          * has been selected from dropdown list) or if organisation is new.
@@ -82,32 +66,25 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 var project = new Projects($scope.project);
                 if ($scope.newOrg) {
                     var org = new Organisations($scope.project.organisation);
-
                     org.$save(function (response) {
                         var orgId = response._id;
                         project.organisation = orgId;
-
                         project.$save(function (response) {
                             $location.path('projects/' + response._id);
                         });
-
                         $scope.project = {};
                     });
-
                 } else {
                     project.organisation = $scope.project.listOrganisation;
-
                     project.$save(function (response) {
                         $location.path('projects/' + response._id);
                     });
-
                     $scope.project = {};
                 }
             } else {
                 $scope.submitted = true;
             }
         };
-
         /**
          * 
          * @param {type} isValid
@@ -117,12 +94,52 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             // TODO: add convertDate to all date-objects!!
             if (isValid) {
                 var project = $scope.project;
+                if ($scope.projectEditForm.approved_day.$dirty || $scope.projectEditForm.approved_month.$dirty
+                        || $scope.projectEditForm.approved_year.$dirty) {
+                    project.approved.approved_date = $scope.convertDate($scope.approved_day, $scope.approved_month, $scope.approved_year);
+                }
+                if ($scope.projectEditForm.board_notified_day.$dirty || $scope.projectEditForm.board_notified_month.$dirty
+                        || $scope.projectEditForm.board_notified_year.$dirty) {
+                    project.approved.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
+                }
+                if ($scope.projectEditForm.signed_date_day.$dirty || $scope.projectEditForm.signed_date_day.$dirty
+                        || $scope.projectEditForm.signed_date_day.$dirty) {
+                    project.signed.signed_date = $scope.convertDate($scope.signed_day, $scope.signed_month, $scope.signed_year);
+                }
+
+//                for (var i = 0; i < $scope.plannedPayments.length; i++) {
+//                    $scope.parsedPlannedPayments = [];
+//                    if ($scope.plannedForm.plannedDay_indexOf(i).$dirty || $scope.plannedForm.plannedMonth_indexOf(i).$dirty 
+//                            || $scope.plannedForm.plannedYear_indexOf(i).$dirty) {
+//                        var date = $scope.convertDate($scope.plannedPayments(i).day, $scope.plannedPayments(i).month, $scope.plannedPayments(i).year);
+//                        $scope.parsedPlannedPayments.push({date: date, sum_eur: $scope.plannedPayments(i).sum_eur});
+//                    }
+//                }    
+
+                // first need to go through all int_reports and then check if current int_report date is dirty
+//                if ($scope.projectEditForm.intRDateAppr_day.$dirty || $scope.projectEditForm.intRDateAppr_month.$dirty 
+//                        || $scope.projectEditForm.intRDateAppr_year.$dirty) {
+//                    project.intermediary_reports[i].date_approved = $scope.convertDate($scope.intRDateAppr_day, $scope.intRDateAppr_month, $scope.intRDateAppr_year);
+//                }
+
+                if ($scope.projectEditForm.audit_day.$dirty || $scope.projectEditForm.audit_month.$dirty
+                        || $scope.projectEditForm.audit_year.$dirty) {
+                    console.log($scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year));
+                    project.end_report.audit.date = new Date($scope.audit_year, $scope.audit_month+1, $scope.audit_day+1);
+                    console.log('audit date: '+project.end_report.audit.date);
+                }
+                
+                if ($scope.projectEditForm.er_approved_day.$dirty || $scope.projectEditForm.er_approved_month.$dirty
+                        || $scope.projectEditForm.er_approved_year.$dirty) {                    
+                    project.end_report.approved_date = new Date($scope.er_approved_year, $scope.er_approved_month+1, $scope.er_approved_day+1);
+                    console.log('approved date: '+project.end_report.approved_date);
+                }
+
                 if (!project.updated) {
                     project.updated = [];
                 }
 
                 project.updated.push({time: new Date().getTime(), user: MeanUser.user.name});
-
                 project.$update(function () {
                     $location.path('projects/' + project._id);
                 });
@@ -130,7 +147,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.submitted = true;
             }
         };
-
         /**
          * 
          * @returns {undefined}
@@ -141,12 +157,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
-
                 $scope.addedMethods = [];
                 $scope.plannedPayments = [];
-
+                $scope.deadlines = [];
                 if (project.approved.date) {
-                    
+
                     angular.forEach(project.approved.methods, function (obj) {
                         $scope.addedMethods.push({name: obj.name, level: obj.level});
                     });
@@ -154,15 +169,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         $scope.themeSelection.push(obj);
                     });
                 }
-                
-//                if(project.signed.date) {
-//                    angular.forEach(project.signed.planned_payments, function(obj) {
-//                        $scope.plannedPayments.push({})
-//                    })
-//                }
+
+                if (project.signed.date) {
+                    angular.forEach(project.signed.planned_payments, function (obj) {
+                        $scope.plannedPayments.push({date: obj.date, sum_eur: obj.sum_eur});
+                    });
+                    angular.forEach(project.signed.intreport_deadlines, function (obj) {
+                        $scope.deadlines.push({report: obj.report, date: obj.date});
+                    });
+                }
             });
         };
-
         /**
          *
          *
@@ -195,7 +212,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
             );
         };
-
         $scope.findOne = function () {
             Projects.get({
                 projectId: $stateParams.projectId
@@ -203,7 +219,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.project = project;
             });
         };
-
         /**
          * Fetches states
          *
@@ -222,13 +237,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 });
             });
         };
-
         $scope.confirm = function (project) {
             if (confirm('Haluatko varmasti poistaa hankkeen "' + project.title + '"?')) {
                 $scope.remove(project);
             }
         };
-
         $scope.remove = function (project) {
             if (project) {
                 project.$remove(function (response) {
@@ -246,7 +259,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 });
             }
         };
-
         /**
          * Updates project with "in review" state data
          *
@@ -264,7 +276,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
 
         };
-
         /**
          * Updates project with "approved" state data
          *
@@ -286,7 +297,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
 
         };
-
         /**
          * Updates project with "rejected" state data
          *
@@ -305,7 +315,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
 
         };
-
         /**
          * Updates project with "signed" state data
          *
@@ -319,26 +328,20 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 var project = $scope.project;
                 project.signed.date = Date.now();
                 project.signed.signed_date = signed_date;
-
                 $scope.parsedDeadlines = [];
                 $scope.parsedPlannedPayments = [];
-
                 var plpms = $scope.plannedPayments;
-
                 for (var i = 0; i < plpms.length; i++) {
                     var pp = $scope.convertDate(plpms[i].day, plpms[i].month, plpms[i].year);
                     $scope.parsedPlannedPayments.push({date: pp, sum_eur: plpms[i].sum_eur, sum_local: plpms[i].sum_local})
                 }
                 project.signed.planned_payments = $scope.parsedPlannedPayments;
-
                 var dls = $scope.deadlines;
-
                 for (var i = 0; i < dls.length; i++) {
                     var dl = $scope.convertDate(dls[i].day, dls[i].month, dls[i].year);
                     $scope.parsedDeadlines.push({report: dls[i].report, date: dl});
                 }
                 project.signed.intreport_deadlines = $scope.parsedDeadlines;
-
                 project.state = $scope.global.newState;
                 project.$addSigned(function (response) {
 
@@ -370,7 +373,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
 
         };
-
         /**
          * Updates project with "int report" state data
          *
@@ -398,7 +400,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
 
         };
-
         /**
          * Updates project with "end report" state data
          *
@@ -418,7 +419,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
 
         };
-
         /**
          * Updates project with "ended" state data
          *
@@ -439,7 +439,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
 
         };
-
         $scope.changeState = function (changeTo) {
             Projects.get({
                 projectId: $stateParams.projectId
@@ -449,54 +448,40 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $location.path('projects/' + project._id + "/change");
             });
         };
-
         $scope.addMethod = function () {
             $scope.addedMethods.push({name: '', level: ''});
         };
-
         $scope.removeMethod = function () {
             $scope.addedMethods.splice(-1, 1);
         };
-
         $scope.addRejection = function () {
             $scope.addedRejections.push({rejection: ''});
         };
-
         $scope.removeRejection = function () {
             $scope.addedRejections.splice(-1, 1);
         };
-
-
         $scope.addPlannedPayment = function () {
             $scope.plannedPayments.push({day: '', month: '', year: '', sum_eur: ''});
         };
-
         $scope.removePlannedPayment = function () {
             $scope.plannedPayments.splice(-1, 1);
         };
-
         $scope.addDeadline = function () {
             $scope.deadlines.push({report: '', day: '', month: '', year: ''});
         };
-
         $scope.removeDeadline = function () {
             $scope.deadlines.splice(-1, 1);
         };
-
-
         $scope.addNewOrg = function () {
             $scope.newOrg = true;
             $scope.orgs = null;
         };
-
         $scope.addOrgFromDb = function () {
             $scope.newOrg = false;
             Organisations.query(function (organisations) {
                 $scope.orgs = organisations;
             });
-
         };
-
         /**
          * Finds project's intermediary report and puts the given report to $scope.report
          * so that report's details can be shown on intreport.html
@@ -508,33 +493,27 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.report = project.intermediary_reports[$stateParams.reportId - 1];
             });
         };
-
         /**
          * The sorting predicate used in project listing. Initial value is
          * "project_ref".
          */
         $scope.ordering = 'project_ref';
-
         /**
          * <tt>true</tt> iff the projects will be listed in ascending order.
          */
         $scope.ascending = 'true';
-
         /**
          * Current page number.
          */
         $scope.page = 1;
-
         /**
          * The number of projects to be listed on a single page.
          */
         $scope.pageSize = 10;
-
         /**
          * An array containing JSON objects for pagination.
          */
         $scope.pages;
-
         /**
          * Updates the page number and reloads the view.
          *
@@ -545,7 +524,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     + '&ascending=' + $scope.ascending
                     + '&page=' + page;
         };
-
         /**
          * Updates the ordering and reloads the view.
          *
@@ -557,7 +535,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                             ? !$scope.ascending : true)
                     + '&page=' + $scope.page;
         };
-
         /**
          * Calculates the number of and links to pages and writes the output to
          * $scope.pages.
