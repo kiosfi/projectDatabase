@@ -3,7 +3,7 @@ describe('Organisation list page', function() {
 
     beforeAll(function() {
         helpers.login();
-    })
+    });
 
     beforeEach(function() {
         element(by.linkText('Järjestölistaus')).click();
@@ -28,7 +28,7 @@ describe('Organisation list page', function() {
                 .toEqual('Organization nr 3');
         expect(rep.get(2).element(by.tagName('td')).getText())
                 .toEqual("Womens' rights");
-        
+
         element(by.id('byName')).click();
         rep = element.all(by.repeater('org in organisations'));
         expect(rep.get(2).element(by.tagName('td')).getText())
@@ -55,5 +55,12 @@ describe('Organisation list page', function() {
                 .toEqual("Womens' rights");
         expect(rep.get(0).element(by.tagName('td')).getText())
                 .toEqual('Human rights org');
-    })
-})
+    });
+
+    it('should redirect to login page if not logged in ', function () {
+        helpers.logout();
+        browser.get('/organisations');
+        expect(browser.getCurrentUrl()).toContain('/auth/login');
+        helpers.login();
+    });
+});

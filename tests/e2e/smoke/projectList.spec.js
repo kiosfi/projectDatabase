@@ -55,8 +55,11 @@ describe('Project list page', function () {
         expect(rep.get(9).element(by.tagName('td')).getText()).toEqual("70002");
     });
 
-});
+    it('should redirect to login page if not logged in ', function () {
+        helpers.logout();
+        browser.get('/projects');
+        expect(browser.getCurrentUrl()).toContain('/auth/login');
+        helpers.login();
+    });
 
-//    it('should list registered projects in correct order', function() {
-//
-//    })
+});

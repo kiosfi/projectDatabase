@@ -29,11 +29,11 @@ module.exports = function (Organisations, app, auth) {
     var organisations = require('../controllers/organisations')(Organisations);
 
     app.route('/api/organisations')
-            .get(organisations.getOrganisations)
-            .put(organisations.countOrganisations)
+            .get(auth.requiresLogin, organisations.getOrganisations)
+            .put(auth.requiresLogin, organisations.countOrganisations)
             .post(auth.requiresLogin, hasPermissions, organisations.create);
     app.route('/api/organisations/:organisationId')
-            .get(auth.isMongoId, organisations.show);
+            .get(auth.requiresLogin, auth.isMongoId, organisations.show);
 
     app.param('organisationId', organisations.organisation);
     app.param('orgName', organisations.organisation);
