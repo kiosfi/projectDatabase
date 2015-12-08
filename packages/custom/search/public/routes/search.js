@@ -22,9 +22,19 @@ angular.module('mean.search').config(['$stateProvider',
         }
       }
     });
-    
+
     $stateProvider.state('search results export page', {
       url: '/search/export',
+      templateUrl: 'search/views/export.html',
+      resolve: {
+        loggedin: function(MeanUser) {
+          return MeanUser.checkLoggedin();
+        }
+      }
+    });
+
+    $stateProvider.state('other search options page', {
+      url: '/search/others',
       templateUrl: 'search/views/export.html',
       resolve: {
         loggedin: function(MeanUser) {

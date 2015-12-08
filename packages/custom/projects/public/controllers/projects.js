@@ -56,7 +56,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.convertDate = function (day, month, year) {
-            var parsed = new Date(year + "-" + month + "-" + day);
+            var parsed = new Date(year, month-1, day+1).toISOString();
             return parsed;
         };
 
@@ -146,6 +146,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
+                console.log(project.approved.approved_date.getDate());
             });
         };
 
@@ -222,6 +223,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.approved.date = Date.now();
                 project.approved.approved_date = $scope.convertDate($scope.approved_day, $scope.approved_month, $scope.approved_year);
                 project.approved.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
+                console.log(project.approved.approved_date);
+                console.log(project.approved.board_notified);
                 project.approved.themes = $scope.themeSelection;
                 project.approved.methods = $scope.addedMethods;
                 project.state = $scope.global.newState;
