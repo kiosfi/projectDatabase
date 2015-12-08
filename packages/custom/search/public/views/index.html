@@ -2,7 +2,7 @@
 <br>
 <section data-ng-controller="SearchController">
 
-  <h3>Lisää hakukenttiä</h3>
+  <h3>Hae hankkeita</h3>
   <article>
       <form name="searchForm" class="form-horizontal col-md-8" role="form"
             data-ng-init="getProjectFields()" data-ng-submit="update()" novalidate>
@@ -14,17 +14,23 @@
                   <select id="fieldSelect" data-ng-model="query.field"
                           class="col-md-6" style="float:left;">
                       <option data-ng-repeat="field in projectFields"
-                              value="{{field.name}}">{{field.fi}}</option>
+                              value="{{field.name}}">
+                              {{projectFields.indexOf(field) + 1}}. {{field.fi}}
+                      </option>
                   </select>
                   <div style="clear:both;">&nbsp;</div>
-                  <label ng-show="query.field" class="col-md-6">Valitse tai kirjoita hakuarvo: </label>
+                  <label ng-show="query.field" class="col-md-6">
+                    Valitse/kirjoita hakuarvo: </label>
                   <select ng-show="query.field === 'org_fields'" id="fieldSelect"
                           data-ng-model="query.orgField"
                           class="col-md-6" style="float:left;">
                       <option data-ng-repeat="orgField in orgFields"
-                              value="{{orgField.name}}">{{orgField.fi}}</option>
+                              value="{{orgField.name}}">
+                              {{orgFields.indexOf(orgField) + 1}}. {{orgField.fi}}
+                      </option>
                   </select>
-                  <div ng-show="query.field === 'org_fields'" class="col-md-6" style="float:left;">
+                  <div ng-show="query.field === 'org_fields'"
+                       class="col-md-6" style="float:left;">
                       <input type="text" class="form-control"
                              data-ng-model="query.orgValue"
                              placeholder="Kirjoita hakusana(t)">
@@ -33,13 +39,17 @@
                           data-ng-model="query.value" class="col-md-6"
                           style="float:left;">
                       <option data-ng-repeat="state in states"
-                              value="{{state}}">{{state}}</option>
+                              value="{{state}}">
+                              {{states.indexOf(state) + 1}}. {{state}}
+                      </option>
                   </select>
                   <select ng-show="query.field === 'approved.themes'"
                           data-ng-model="query.value" class="col-md-6"
                           style="float:left;">
                       <option data-ng-repeat="theme in themes"
-                              value="{{theme}}">{{theme}}</option>
+                              value="{{theme}}">
+                              {{themes.indexOf(theme) + 1}}. {{theme}}
+                      </option>
                   </select>
                   <div ng-show="stringParams.indexOf(query.field) > -1" class="col-md-6"
                        style="float:left">
@@ -51,13 +61,17 @@
                           data-ng-model="query.value" class="col-md-6"
                           style="float:left;">
                       <option data-ng-repeat="level in levels"
-                              value="{{level}}">{{level}}</option>
+                              value="{{level}}">
+                              {{levels.indexOf(level) + 1}}. {{level}}
+                      </option>
                   </select>
                   <select ng-show="query.field === 'dates'"
                           data-ng-model="query.dateField" class="col-md-6"
                           style="float:left;">
                       <option data-ng-repeat="dateField in dateFields"
-                              value="{{dateField.name}}">{{dateField.fi}}</option>
+                              value="{{dateField.name}}">
+                              {{dateFields.indexOf(dateField) + 1}}. {{dateField.fi}}
+                      </option>
                   </select>
                   <div style="clear:both;">&nbsp;</div>
                   <div ng-show="query.dateField" class="col-md-12" style="float:left;">
@@ -102,7 +116,9 @@
                   <select id="funds" ng-show="query.field === 'funds'"
                           data-ng-model="query.value" class="col-md-6" style="float:right">
                       <option data-ng-repeat="funds in funding"
-                              value="{{funds.name}}">{{funds.fi}}</option>
+                              value="{{funds.name}}">
+                              {{funding.indexOf(funds) + 1}}. {{funds.fi}}
+                      </option>
                   </select>
               </div>
               <div style="clear:both;">&nbsp;</div>
@@ -185,14 +201,16 @@
                 </tr>
             </tbody>
         </table>
-        <ul id="pagination" class="pagination pagination-sm"
-            data-ng-init="paginate()">
-            <li ng-repeat="pg in pages"
-                ng-class="pg.number == page ? 'active' : ''">
-                <a id="page-{{pg.number}}" href=""
-                   ng-click="updatePage(pg.number)">{{pg.number}}</a>
-            </li>
-        </ul>
+
+    </article>
+    <article>
+      <ul id="pagination" class="pagination pagination-sm">
+          <li ng-repeat="pg in pages"
+              ng-class="pg.number == page ? 'active' : ''">
+              <a id="page-{{pg.number}}" href=""
+                 ng-click="updatePage(pg.number)">{{pg.number}}</a>
+          </li>
+      </ul>
     </article>
 
 </section>

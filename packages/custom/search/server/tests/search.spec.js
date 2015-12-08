@@ -211,6 +211,18 @@ describe('<Unit Test>', function () {
                     done();
                 });
             });
+
+            it('should find projects by organisation fields', function (done) {
+
+                this.timeout(10000);
+
+                Project.find({organisation: organisation._id}, function(err, projs) {
+                      expect(err).to.be(null);
+                      expect(projs.length).to.be(3);
+                      expect(projs[0].dac).to.be("abcd123");
+                      done();
+                });
+            });
         });
 
         afterEach(function (done) {

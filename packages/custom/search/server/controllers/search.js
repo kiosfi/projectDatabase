@@ -106,8 +106,8 @@ module.exports = function (Search) {
             orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
 
             /**
-            * Search includes data from organisations collection
-            *
+            * Format search query when search involves the organisations
+            * collection, and perform search using Organisation model.
             */
 
             var params = _.map(JSON.parse(req.query.searchBy), function(query) {
@@ -120,10 +120,17 @@ module.exports = function (Search) {
 
             Organisation.find({$and: params}, function(err, orgs) {
 
+                /**
+                * Map found organisations to an array of ids
+                */
                 orgs = orgs.map(function(org) {
                   return org._id;
                 });
 
+                /**
+                * Combine organisation and project parameters in one query
+                * and query the projects collection
+                */
                 queries = _.filter(queries, function(query) {
                   return typeof query.orgField === 'undefined';
                 })
