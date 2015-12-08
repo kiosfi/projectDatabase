@@ -151,6 +151,16 @@
         <h4>Hakutulokset</h4>
 
         <p>Löydettyjen hankkeiden määrä: {{numberOfResults}}</p>
+
+        <article>
+          <ul id="pagination" class="pagination pagination-sm">
+              <li ng-repeat="pg in pages"
+                  ng-class="pg.number == page ? 'active' : ''">
+                  <a id="page-{{pg.number}}" href=""
+                     ng-click="updatePage(pg.number)">{{pg.number}}</a>
+              </li>
+          </ul>
+        </article>
         <button ng-click="getResultsForCsv()">Lataa tulokset tiedostoon</button>
         <table class="col-md-12 table table-striped">
             <thead>
@@ -203,14 +213,6 @@
         </table>
 
     </article>
-    <article>
-      <ul id="pagination" class="pagination pagination-sm">
-          <li ng-repeat="pg in pages"
-              ng-class="pg.number == page ? 'active' : ''">
-              <a id="page-{{pg.number}}" href=""
-                 ng-click="updatePage(pg.number)">{{pg.number}}</a>
-          </li>
-      </ul>
-    </article>
+
 
 </section>
