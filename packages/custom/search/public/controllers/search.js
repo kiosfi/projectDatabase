@@ -102,9 +102,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             $scope.page = page;
 
             Search.countSearchResults({"searchBy": searchBy}, function (result) {
-                console.log("Projektien määrä: " + result.projectCount);
                 $scope.numberOfResults = result.projectCount;
-                $scope.paginate();              
+                $scope.paginate();
             });
 
             Search.query({

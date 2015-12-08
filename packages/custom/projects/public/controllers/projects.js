@@ -146,7 +146,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
-                console.log(project.approved.approved_date.getDate());
             });
         };
 
