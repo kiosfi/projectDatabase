@@ -14,10 +14,20 @@ module.exports = function (Organisations) {
     return {
         organisation: function (req, res, next, id) {
             Organisation.load(id, function (err, organisation) {
-                if (err)
+                if (err) {
                     return next(err);
-                if (!organisation)
-                    return next(new Error('Järjestön ' + id + ' lataus epäonnistui.'));
+                }
+                if (!organisation) {
+                    if (err === null) {
+                        return res.status(404).json(
+                                {status: 404, message: 'Pyydettyä järjestöä ei ole.'}
+                        );
+                    }
+                    return res.status(500).json(
+                            {status: 500, message: 'Järjestön lataus epäonnistui.'}
+                    );
+                }
+
                 req.organisation = organisation;
                 next();
             });

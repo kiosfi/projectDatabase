@@ -7,7 +7,7 @@
  * @returns {undefined}
  */
 function toggleCollapse(id) {
-    var element = document.querySelector("." + id);
+    var element = document.getElementById(id);
 
     if (element.style.display !== 'block') {
        element.style.display = 'block';
@@ -25,13 +25,13 @@ function toggleCollapse(id) {
  * @return {undefined}
  */
 function toggleCollapse2(elementID, buttonID) {
-    var element = document.querySelector("." + elementID);
-    var indicator = document.querySelector("." + buttonID);
+    var element = document.getElementById(elementID);
+    var button = document.getElementById(buttonID);
     if (element.style.display !== 'block') {
         element.style.display = 'block';
-        indicator.innerHTML = '-';
+        button.innerHTML = '-';
     } else {
         element.style.display = 'none';
-        indicator.innerHTML = '+';
+        button.innerHTML = '+';
     }
 }

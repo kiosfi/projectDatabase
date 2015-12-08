@@ -25,10 +25,9 @@ module.exports = function (Projects, app, auth) {
 
     var projects = require('../controllers/projects')(Projects)
 
-
     app.route('/api/projects')
-            .get(projects.getProjects)
-            .put(projects.countProjects)
+            .get(auth.requiresLogin, projects.getProjects)
+            .put(auth.requiresLogin, projects.countProjects)
             .post(auth.requiresLogin, hasPermissions, projects.create);
     app.route('/api/states')
             .get(projects.allStates);
@@ -52,7 +51,7 @@ module.exports = function (Projects, app, auth) {
     app.route('/api/projects/intReport/:projectId')
             .put(auth.isMongoId, auth.requiresLogin, projects.addIntReport);
     app.route('/api/projects/byOrg/:organisationId')
-            .get(projects.byOrg);
+            .get(auth.requiresLogin, projects.byOrg);
 
     app.param('params', projects.getProjects);
     app.param('projectId', projects.project);

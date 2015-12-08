@@ -6,8 +6,8 @@
  * @param {type} param1
  * @param {type} param2
  */
-angular.module('mean.organisations').controller('OrganisationsController', ['$scope', '$stateParams', '$location', '$window', 'Global', 'Organisations', 'MeanUser', 'Circles', 'Projects', 'OrgProjects',
-    function ($scope, $stateParams, $location, $window, Global, Organisations, MeanUser, Circles, Projects, OrgProjects) {
+angular.module('mean.organisations').controller('OrganisationsController', ['$scope', '$stateParams', '$location', '$window', '$http', 'Global', 'Organisations', 'MeanUser', 'Circles', 'Projects', 'OrgProjects',
+    function ($scope, $stateParams, $location, $window, $http, Global, Organisations, MeanUser, Circles, Projects, OrgProjects) {
         $scope.global = Global;
 
         $scope.organisation = undefined;
@@ -47,11 +47,21 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
         };
 
         $scope.findOne = function () {
-            Organisations.get({
-                organisationId: $stateParams.organisationId
-            }, function (organisation) {
-                $scope.organisation = organisation;
-            });
+            // For some unknown reason,
+            // $http.get(...).then(success(...), error(...)) doesn't seem to be
+            // working here, so we need to use the deprecated
+            // $http.get(...).success(...).error(...) instead.
+            $http.get('/api/organisations/' + $stateParams.organisationId).success(
+                    function (organisation) {
+                        $scope.statusCode = 200;
+                        $scope.organisation = organisation;
+                    }
+            ).error(
+                    function (error) {
+                        $scope.statusCode = error.status;
+                        $scope.errorMessage = error.message;
+                    }
+            );
         };
 
 

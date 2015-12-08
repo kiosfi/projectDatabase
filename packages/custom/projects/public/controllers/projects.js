@@ -138,15 +138,25 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.now = new Date().toISOString();
                 $scope.projects = results;
             }
-          );
+            );
         };
 
         $scope.findOne = function () {
-            Projects.get({
-                projectId: $stateParams.projectId
-            }, function (project) {
-                $scope.project = project;
-            });
+            // For some unknown reason,
+            // $http.get(...).then(success(...), error(...)) doesn't seem to be
+            // working here, so we need to use the deprecated
+            // $http.get(...).success(...).error(...) instead.
+            $http.get('/api/projects/' + $stateParams.projectId).success(
+                    function (project) {
+                        $scope.statusCode = 200;
+                        $scope.project = project;
+                    }
+            ).error(
+                    function (error) {
+                        $scope.statusCode = error.status;
+                        $scope.errorMessage = error.message;
+                    }
+            );
         };
 
         /**
