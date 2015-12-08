@@ -16,10 +16,19 @@ module.exports = function (Projects) {
     return {
         project: function (req, res, next, id) {
             Project.load(id, function (err, project) {
-                if (err)
+                if (err) {
                     return next(err);
-                if (!project)
-                    return next(new Error('Hankkeen ' + id + ' lataus epäonnistui.'));
+                }
+                if (!project) {
+                    if (err === null) {
+                        return res.status(404).json(
+                                {status: 404, message: 'Pyydettyä hanketta ei ole.'}
+                        );
+                    }
+                    return res.status(500).json(
+                            {status: 500, message: 'Hankkeen lataus epäonnistui.'}
+                    );
+                }
                 req.project = project;
                 next();
             });
@@ -57,21 +66,21 @@ module.exports = function (Projects) {
             res.json(req.project);
         },
         /*all: function (req, res) {
-            var query = Project.find();
-            query
-                    .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
-                        {path: 'rejected', model: 'Rejected'}, {path: 'signed', model: 'Signed'},
-                        {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'},
-                        {path: 'intermediary_reports.intermediary_report', model: 'IntReport'}])
-                    .exec(function (err, projects) {
-                        if (err) {
-                            return res.status(500).json({
-                                error: 'Hankkeita ei voi näyttää'
-                            });
-                        }
-                        res.json(projects)
-                    });
-        },*/
+         var query = Project.find();
+         query
+         .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
+         {path: 'rejected', model: 'Rejected'}, {path: 'signed', model: 'Signed'},
+         {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'},
+         {path: 'intermediary_reports.intermediary_report', model: 'IntReport'}])
+         .exec(function (err, projects) {
+         if (err) {
+         return res.status(500).json({
+         error: 'Hankkeita ei voi näyttää'
+         });
+         }
+         res.json(projects)
+         });
+         },*/
         /**
          * Gets all projects.
          *
@@ -94,18 +103,18 @@ module.exports = function (Projects) {
             var page = req.query.page;
             if (typeof ordering === 'undefined') {
                 return res.status(500).json({
-                                error: 'Kyselystä puuttuu kenttä "ordering"!'
-                            });
+                    error: 'Kyselystä puuttuu kenttä "ordering"!'
+                });
             }
             if (typeof ascending === 'undefined') {
                 return res.status(500).json({
-                                error: 'Kyselystä puuttuu kenttä "ascending"!'
-                            });
+                    error: 'Kyselystä puuttuu kenttä "ascending"!'
+                });
             }
             if (typeof page === 'undefined') {
                 return res.status(500).json({
-                                error: 'Kyselystä puuttuu kenttä "page"!'
-                            });
+                    error: 'Kyselystä puuttuu kenttä "page"!'
+                });
             }
 
             var pageSize = 10;

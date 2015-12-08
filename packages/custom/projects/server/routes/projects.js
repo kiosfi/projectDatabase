@@ -25,7 +25,6 @@ module.exports = function (Projects, app, auth) {
 
     var projects = require('../controllers/projects')(Projects)
 
-
     app.route('/api/projects')
             .get(projects.getProjects)
             .put(projects.countProjects)

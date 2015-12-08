@@ -2,7 +2,11 @@
     <style>
         td {padding-left: 3em;}
     </style>
-    <div>
+    <div class="panel panel-danger" ng-show="statusCode !== 200">
+        <div class="panel-heading">Virhe - {{statusCode}}</div>
+        <div class="panel-body">{{errorMessage}}</div>
+    </div>
+    <div ng-show="statusCode === 200">
         <div id="header">
             <h2><span class="name">{{organisation.name}}</span></h2>
             <h3>Edustaja: <a href="">{{organisation.representative}}</a></h3>
