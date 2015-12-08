@@ -27,6 +27,9 @@ module.exports = function (Search) {
 
     function prepareQueries(searchBy) {
 
+        /**
+        * Formats queries to correct form
+        */
         return _.map(JSON.parse(searchBy), function (query) {
             var search = {};
             if (query.value === 'payments') {
@@ -207,7 +210,6 @@ module.exports = function (Search) {
          */
         countSearchResults: function (req, res) {
             var queries = prepareQueries(req.body.searchBy);
-            console.log(queries);
 
             var params = _.map(JSON.parse(req.body.searchBy), function(query) {
               var search = {};
