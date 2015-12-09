@@ -43,7 +43,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
         $scope.convertDate = function (day, month, year) {
             var parsed = new Date(year + '-' + month + '-' + day);
-            console.log('parsittu date: '+parsed);
+            console.log('parsittu date: ' + parsed);
             return parsed;
         };
         $scope.hasAuthorization = function (project) {
@@ -95,17 +95,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             // TODO: add convertDate to all date-objects!!
             if (isValid) {
                 var project = $scope.project;
-                console.log($scope.er_approved_day)
-                console.log($scope.er_approved_month)
-                console.log($scope.er_approved_year)
+
                 if ($scope.projectEditForm.approved_day.$dirty || $scope.projectEditForm.approved_month.$dirty
                         || $scope.projectEditForm.approved_year.$dirty) {
                     project.approved.approved_date = $scope.convertDate($scope.approved_day, $scope.approved_month, $scope.approved_year);
                 }
+
                 if ($scope.projectEditForm.board_notified_day.$dirty || $scope.projectEditForm.board_notified_month.$dirty
                         || $scope.projectEditForm.board_notified_year.$dirty) {
                     project.approved.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
                 }
+
                 if ($scope.projectEditForm.signed_date_day.$dirty || $scope.projectEditForm.signed_date_day.$dirty
                         || $scope.projectEditForm.signed_date_day.$dirty) {
                     project.signed.signed_date = $scope.convertDate($scope.signed_day, $scope.signed_month, $scope.signed_year);
@@ -114,46 +114,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
                 if ($scope.projectEditForm.audit_day.$dirty || $scope.projectEditForm.audit_month.$dirty
                         || $scope.projectEditForm.audit_year.$dirty) {
-                    console.log($scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year));
                     project.end_report.audit.date = $scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year);
-                    console.log('audit vuosi: '+$scope.audit_year);
-                    console.log('audit date: '+project.end_report.audit.date);
                 }
-                
+
                 if ($scope.projectEditForm.er_approved_day.$dirty || $scope.projectEditForm.er_approved_month.$dirty
                         || $scope.projectEditForm.er_approved_year.$dirty) {
-                    
+
                     project.end_report.approved_date = $scope.convertDate($scope.er_approved_day, $scope.er_approved_month, $scope.er_approved_year);
-//                    var day;
-//                    var month;
-//                    var year;
-//                    if(typeof $scope.er_approved_day === 'undefined') {
-//                        day = $scope.projectEditForm.er_approved_day.value;
-//                        console.log('päivää ei muokattu');
-//                    } else {
-//                        day = $scope.er_approved_day;
-//                    }
-//                    if(typeof $scope.er_approved_month === 'undefined') {
-//                        console.log('kuukautta ei muokattu');
-//                        month = $scope.projectEditForm.er_approved_month.value;
-//                        console.log($scope.project.end_report.approved_date);
-//                    } else {
-//                        month = $scope.er_approved_month;
-//                    }
-//                    if(typeof $scope.er_approved_year === 'undefined') {
-//                        console.log('vuotta ei muokattu');
-//                        year = $scope.projectEditForm.er_approved_year.value;
-//                    } else {
-//                        year = $scope.er_approved_year;
-//                    }
-                    
-//                    $q.all(day, month, year).then(function() {
-//                        project.end_report.approved_date = $scope.convertDate(day, month, year);
-//                    });       
-                                       
                 }
-                
-                
+
                 if (!project.updated) {
                     project.updated = [];
                 }
@@ -166,8 +135,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.submitted = true;
             }
         };
-        
-        
+
+
 //                for (var i = 0; i < $scope.plannedPayments.length; i++) {
 //                    $scope.parsedPlannedPayments = [];
 //                    if ($scope.plannedForm.plannedDay_indexOf(i).$dirty || $scope.plannedForm.plannedMonth_indexOf(i).$dirty 
@@ -177,7 +146,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 //                    }
 //                }    
 
-                // first need to go through all int_reports and then check if current int_report date is dirty
+        // first need to go through all int_reports and then check if current int_report date is dirty
 //                if ($scope.projectEditForm.intRDateAppr_day.$dirty || $scope.projectEditForm.intRDateAppr_month.$dirty 
 //                        || $scope.projectEditForm.intRDateAppr_year.$dirty) {
 //                    project.intermediary_reports[i].date_approved = $scope.convertDate($scope.intRDateAppr_day, $scope.intRDateAppr_month, $scope.intRDateAppr_year);
@@ -196,6 +165,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.plannedPayments = [];
                 $scope.deadlines = [];
                 if (project.approved.date) {
+                    var date = new Date(project.approved.approved_date);
+                    $scope.approved_day = date.getDate();
+                    $scope.approved_month = date.getMonth() + 1;
+                    $scope.approved_year = date.getFullYear();
+
+                    var notified_date = new Date(project.approved.board_notified);
+                    $scope.notified_day = notified_date.getDate();
+                    $scope.notified_month = notified_date.getMonth() + 1;
+                    $scope.notified_year = notified_date.getFullYear();
 
                     angular.forEach(project.approved.methods, function (obj) {
                         $scope.addedMethods.push({name: obj.name, level: obj.level});
@@ -206,6 +184,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 }
 
                 if (project.signed.date) {
+                    var date = new Date(project.signed.signed_date);
+                    $scope.signed_day = date.getDate();
+                    $scope.signed_month = date.getMonth()+1;
+                    $scope.signed_year = date.getFullYear();
+                    
                     angular.forEach(project.signed.planned_payments, function (obj) {
                         $scope.plannedPayments.push({date: obj.date, sum_eur: obj.sum_eur});
                     });
@@ -213,12 +196,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         $scope.deadlines.push({report: obj.report, date: obj.date});
                     });
                 }
-                
-                if(project.end_report.date) {
+
+                if (project.end_report.date) {
                     var date = new Date(project.end_report.approved_date);
                     $scope.er_approved_year = date.getFullYear();
-                    $scope.er_approved_month = date.getMonth()+1;
+                    $scope.er_approved_month = date.getMonth() + 1;
                     $scope.er_approved_day = date.getDate();
+
+                    var audit_date = new Date(project.end_report.audit.date);
+                    $scope.audit_day = audit_date.getDate();
+                    $scope.audit_month = audit_date.getMonth() + 1;
+                    $scope.audit_year = audit_date.getFullYear();
                 }
             });
         };
