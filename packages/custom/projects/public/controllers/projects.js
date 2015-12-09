@@ -142,22 +142,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.findOne = function () {
-            // For some unknown reason,
-            // $http.get(...).then(success(...), error(...)) doesn't seem to be
-            // working here, so we need to use the deprecated
-            // $http.get(...).success(...).error(...) instead.
-            $http.get('/api/projects/' + $stateParams.projectId).success(
-                    function (project) {
-                        $scope.statusCode = 200;
-                        $scope.project = project;
-                    }
-            ).error(
-                    function (error) {
-                        $scope.statusCode = error.status;
-                        $scope.errorMessage = error.message;
-                    }
-            );
-        };
+             Projects.get({
+                 projectId: $stateParams.projectId
+             }, function (project) {
+                 $scope.project = project;
+             });
+         };
 
         /**
          * Fetches states
@@ -214,7 +204,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.in_review.date = Date.now();
                 project.state = $scope.global.newState;
                 project.$addReview(function (response) {
-                    $location.path('projects/' + project._id);
+                    $location.path('projects/' + response._id);
                 });
             }
 
@@ -343,7 +333,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.intermediary_report.methods = $scope.addedMethods;
                 project.intermediary_report.objectives = $scope.objectiveComments;
                 var index = project.intermediary_reports.length;
-                if (index === undefined) {
+                if (index === undefined || index === 0) {
                     project.intermediary_report.reportNumber = 1;
                 } else {
                     project.intermediary_report.reportNumber = project.intermediary_reports.length + 1;
