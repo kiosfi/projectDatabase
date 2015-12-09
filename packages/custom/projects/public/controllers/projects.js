@@ -8,8 +8,8 @@
  */
 
 angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams',
-    '$location', '$window', '$http', 'Global', 'Projects', 'MeanUser', 'Circles', 'Organisations',
-    function ($scope, $stateParams, $location, $window, $http, Global, Projects, MeanUser, Circles, Organisations) {
+    '$location', '$window', '$q', '$http', 'Global', 'Projects', 'MeanUser', 'Circles', 'Organisations',
+    function ($scope, $stateParams, $location, $window, $q, $http, Global, Projects, MeanUser, Circles, Organisations) {
         $scope.global = Global;
         $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
         $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
@@ -42,7 +42,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
         $scope.convertDate = function (day, month, year) {
-            var parsed = new Date(year + "-" + month + "-" + day);
+            var parsed = new Date(year + '-' + month + '-' + day);
+            console.log('parsittu date: '+parsed);
             return parsed;
         };
         $scope.hasAuthorization = function (project) {
@@ -94,6 +95,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             // TODO: add convertDate to all date-objects!!
             if (isValid) {
                 var project = $scope.project;
+                console.log($scope.er_approved_day)
+                console.log($scope.er_approved_month)
+                console.log($scope.er_approved_year)
                 if ($scope.projectEditForm.approved_day.$dirty || $scope.projectEditForm.approved_month.$dirty
                         || $scope.projectEditForm.approved_year.$dirty) {
                     project.approved.approved_date = $scope.convertDate($scope.approved_day, $scope.approved_month, $scope.approved_year);
@@ -107,6 +111,63 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     project.signed.signed_date = $scope.convertDate($scope.signed_day, $scope.signed_month, $scope.signed_year);
                 }
 
+
+                if ($scope.projectEditForm.audit_day.$dirty || $scope.projectEditForm.audit_month.$dirty
+                        || $scope.projectEditForm.audit_year.$dirty) {
+                    console.log($scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year));
+                    project.end_report.audit.date = $scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year);
+                    console.log('audit vuosi: '+$scope.audit_year);
+                    console.log('audit date: '+project.end_report.audit.date);
+                }
+                
+                if ($scope.projectEditForm.er_approved_day.$dirty || $scope.projectEditForm.er_approved_month.$dirty
+                        || $scope.projectEditForm.er_approved_year.$dirty) {
+                    
+                    project.end_report.approved_date = $scope.convertDate($scope.er_approved_day, $scope.er_approved_month, $scope.er_approved_year);
+//                    var day;
+//                    var month;
+//                    var year;
+//                    if(typeof $scope.er_approved_day === 'undefined') {
+//                        day = $scope.projectEditForm.er_approved_day.value;
+//                        console.log('päivää ei muokattu');
+//                    } else {
+//                        day = $scope.er_approved_day;
+//                    }
+//                    if(typeof $scope.er_approved_month === 'undefined') {
+//                        console.log('kuukautta ei muokattu');
+//                        month = $scope.projectEditForm.er_approved_month.value;
+//                        console.log($scope.project.end_report.approved_date);
+//                    } else {
+//                        month = $scope.er_approved_month;
+//                    }
+//                    if(typeof $scope.er_approved_year === 'undefined') {
+//                        console.log('vuotta ei muokattu');
+//                        year = $scope.projectEditForm.er_approved_year.value;
+//                    } else {
+//                        year = $scope.er_approved_year;
+//                    }
+                    
+//                    $q.all(day, month, year).then(function() {
+//                        project.end_report.approved_date = $scope.convertDate(day, month, year);
+//                    });       
+                                       
+                }
+                
+                
+                if (!project.updated) {
+                    project.updated = [];
+                }
+
+                project.updated.push({time: new Date().getTime(), user: MeanUser.user.name});
+                project.$update(function () {
+                    $location.path('projects/' + project._id);
+                });
+            } else {
+                $scope.submitted = true;
+            }
+        };
+        
+        
 //                for (var i = 0; i < $scope.plannedPayments.length; i++) {
 //                    $scope.parsedPlannedPayments = [];
 //                    if ($scope.plannedForm.plannedDay_indexOf(i).$dirty || $scope.plannedForm.plannedMonth_indexOf(i).$dirty 
@@ -121,32 +182,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 //                        || $scope.projectEditForm.intRDateAppr_year.$dirty) {
 //                    project.intermediary_reports[i].date_approved = $scope.convertDate($scope.intRDateAppr_day, $scope.intRDateAppr_month, $scope.intRDateAppr_year);
 //                }
-
-                if ($scope.projectEditForm.audit_day.$dirty || $scope.projectEditForm.audit_month.$dirty
-                        || $scope.projectEditForm.audit_year.$dirty) {
-                    console.log($scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year));
-                    project.end_report.audit.date = new Date($scope.audit_year, $scope.audit_month+1, $scope.audit_day+1);
-                    console.log('audit date: '+project.end_report.audit.date);
-                }
-                
-                if ($scope.projectEditForm.er_approved_day.$dirty || $scope.projectEditForm.er_approved_month.$dirty
-                        || $scope.projectEditForm.er_approved_year.$dirty) {                    
-                    project.end_report.approved_date = new Date($scope.er_approved_year, $scope.er_approved_month+1, $scope.er_approved_day+1);
-                    console.log('approved date: '+project.end_report.approved_date);
-                }
-
-                if (!project.updated) {
-                    project.updated = [];
-                }
-
-                project.updated.push({time: new Date().getTime(), user: MeanUser.user.name});
-                project.$update(function () {
-                    $location.path('projects/' + project._id);
-                });
-            } else {
-                $scope.submitted = true;
-            }
-        };
         /**
          * 
          * @returns {undefined}
@@ -177,6 +212,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     angular.forEach(project.signed.intreport_deadlines, function (obj) {
                         $scope.deadlines.push({report: obj.report, date: obj.date});
                     });
+                }
+                
+                if(project.end_report.date) {
+                    var date = new Date(project.end_report.approved_date);
+                    $scope.er_approved_year = date.getFullYear();
+                    $scope.er_approved_month = date.getMonth()+1;
+                    $scope.er_approved_day = date.getDate();
                 }
             });
         };
