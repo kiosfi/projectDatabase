@@ -21,7 +21,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
               $scope.states = response.states;
               $scope.funding = response.funding;
               $scope.orgFields = response.main_menu_org;
-
+              $scope.paymentFields = response.payment_search;
+              $scope.paymentDates = response.payment_search_dates;
             });
         }
 
@@ -44,7 +45,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * regular expressions.
          */
         $scope.searchBy = [];
-        $scope.searchByOrg = [];
+        $scope.searchPay = [];
+
 
         /**
          * The sorting predicate used in project listing. Initial value is
@@ -106,7 +108,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 $scope.paginate();
             });
 
-            Search.query({
+            Search.searchProjects({
                 "searchBy": searchBy,
                 "ordering": ordering,
                 "ascending": ascending,
@@ -116,6 +118,26 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             });
         };
 
+        $scope.searchPayments = function () {
+
+            var search = $location.search();
+
+            if (typeof search.searchPay === 'undefined' ||
+                  typeof search.choice === 'undefined') {
+              $scope.results = [];
+              return;
+            }
+
+            $scope.searchPay = JSON.parse(search.searchPay);
+            $scope.choice = JSON.parse(search.choice);
+
+            Search.searchPayments({
+                "searchPay": search.searchPay,
+                "choice": search.choice
+            }, function(results) {
+                $scope.payments = results;
+            });
+        };
 
         /**
          * Fetches search parameters from URL when clicking button to export
@@ -152,6 +174,14 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             $scope.searchBy.splice(-1, 1);
         };
 
+        $scope.addPayQuery = function () {
+            $scope.searchPay.push({});
+        };
+
+        $scope.removePayQuery = function () {
+            $scope.searchPay.splice(-1, 1);
+        };
+
         /**
          * Reloads the view.
          *
@@ -161,6 +191,16 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                     + '&ordering=' + $scope.ordering
                     + '&ascending=' + $scope.ascending
                     + '&page=' + $scope.page;
+        };
+
+        /**
+         * Reloads the payment search view.
+         *
+         */
+        $scope.updateSearch = function () {
+          var search = {"choice": $scope.searchChoice}
+          $window.location = '/search/payments?searchPay=' + JSON.stringify($scope.searchPay)
+                  + '&choice=' + JSON.stringify(search);
         };
 
         /**

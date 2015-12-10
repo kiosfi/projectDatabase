@@ -1,9 +1,9 @@
-<h1>Haku</h1>
+<h1>Hankehaku</h1>
 <br>
 <section data-ng-controller="SearchController">
 
-  <h3>Hae hankkeita</h3>
-  <a ng-href="/search/others">Muita hakuvaihtoehtoja</a>
+  <h3>Hae hankkeita <a style="float:right;" ng-href="/search/payments">Maksujen hakuun</a></h3>
+
   <article>
       <form name="searchForm" class="form-horizontal col-md-8" role="form"
             data-ng-init="getProjectFields()" data-ng-submit="update()" novalidate>
@@ -91,7 +91,7 @@
                         <div class="col-md-2" style="float:left;">
                           <input type="number" class="form-control"
                              data-ng-model="query.startYear"
-                             placeholder="yyyy">
+                             placeholder="vvvv">
                         </div>
                       </div>
                       <div style="clear:both;">&nbsp;</div>
@@ -110,7 +110,7 @@
                           <div class="col-md-2" style="float:left;">
                             <input type="number" class="form-control"
                              data-ng-model="query.endYear"
-                             placeholder="yyyy">
+                             placeholder="vvvv">
                           </div>
                       </div>
                   </div>

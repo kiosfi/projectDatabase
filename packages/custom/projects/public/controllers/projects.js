@@ -141,13 +141,14 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             );
         };
 
+
         $scope.findOne = function () {
-             Projects.get({
-                 projectId: $stateParams.projectId
-             }, function (project) {
-                 $scope.project = project;
-             });
-         };
+            Projects.get({
+                projectId: $stateParams.projectId
+            }, function (project) {
+                $scope.project = project;
+            });
+        };
 
         /**
          * Fetches states
@@ -222,8 +223,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.approved.date = Date.now();
                 project.approved.approved_date = $scope.convertDate($scope.approved_day, $scope.approved_month, $scope.approved_year);
                 project.approved.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
-                console.log(project.approved.approved_date);
-                console.log(project.approved.board_notified);
                 project.approved.themes = $scope.themeSelection;
                 project.approved.methods = $scope.addedMethods;
                 project.state = $scope.global.newState;
@@ -380,7 +379,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.ended.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
                 project.state = $scope.global.newState;
                 project.$addEnded(function (response) {
-                    console.log(response);
                     $location.path('projects/' + response._id)
                 });
             }

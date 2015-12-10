@@ -33,9 +33,9 @@ angular.module('mean.search').config(['$stateProvider',
       }
     });
 
-    $stateProvider.state('other search options page', {
-      url: '/search/others',
-      templateUrl: 'search/views/export.html',
+    $stateProvider.state('payments search page', {
+      url: '/search/payments',
+      templateUrl: 'search/views/payments.html',
       resolve: {
         loggedin: function(MeanUser) {
           return MeanUser.checkLoggedin();

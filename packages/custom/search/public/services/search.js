@@ -5,7 +5,13 @@ angular.module('mean.search').factory('Search', ['$resource',
         return $resource('api/search', {},
                 {
                     searchProjects: {
-                        method: 'GET', isArray: true
+                        method: 'GET',
+                        isArray: true
+                    },
+                    searchPayments: {
+                        method: 'GET',
+                        url: 'api/search/payments',
+                        isArray: true
                     },
                     searchAllProjects: {
                         method: 'GET',
@@ -13,7 +19,8 @@ angular.module('mean.search').factory('Search', ['$resource',
                         url: 'api/search/export'
                     },
                     countSearchResults: {
-                        method: 'POST', isarray: false,
+                        method: 'POST',
+                        isarray: false,
                         url: 'api/search/count'
                     }
                 });
@@ -35,13 +42,3 @@ angular.module('mean.search').service('ThemeSearch', ['$http',
         }
     }
 ]);
-
-/*function($resource) {
- return $resource('projects/:projectId', {
- articleId: '@_id'
- }, {
- update: {
- method: 'PUT'
- }
- });
- }*/

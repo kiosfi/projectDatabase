@@ -37,7 +37,7 @@
     [{"name": "reg_date", "fi": "Hankkeen rekisteröintipäivä"},
       {"name": "approved.approved_date", "fi": "Hyväksymispäivämäärä"},
       {"name": "signed.signed_date", "fi": "Allekirjoituspäivämäärä"},
-      {"name": "payments.date", "fi": "Maksujen päivämäärät"},
+      {"name": "payments.payment_date", "fi": "Maksujen päivämäärät"},
       {"name": "ended.end_date", "fi": "Päättämispäivämäärä"},
       {"name": "in_review.date", "fi": "Käsittelyyn siirto pvm"},
       {"name": "approved.board_notified", "fi": "Hyväksymisestä hallitukselle tiedottaminen pvm"},
@@ -79,5 +79,20 @@
      {"name": "int_links", "fi": "Kansainväliset yhteydet"},
      {"name": "nat_local_links", "fi": "Kansalliset ja paikalliset yhteydet"},
      {"name": "description", "fi": "Kuvaus"},
-     {"name": "other_funding", "fi": "Muut rahoittajat"}]
+     {"name": "other_funding", "fi": "Muut rahoittajat"}],
+  "payment_search":
+    [{"name": "title", "fi": "Hankkeen nimi"},
+      {"name": "coordinator", "fi": "Koordinaattori"},
+      {"name": "region", "fi": "Alue"},
+      {"name": "dac", "fi": "DAC-koodi"},
+      {"name": "state", "fi": "Tila"},
+      {"name": "dates", "fi": "Päivämäärät"}],
+  "payment_search_dates":
+    [{"name": "payments.payment_date", "fi": "Maksujen päivämäärät"},
+      {"name": "approved.approved_date", "fi": "Hyväksymispäivämäärä"},
+      {"name": "signed.signed_date", "fi": "Allekirjoituspäivämäärä"},
+      {"name": "intermediary_reports.approved_date", "fi": "Väliraporttien hyväksymispäivämäärät"},
+      {"name": "end_report.approved_date", "fi": "Loppuraportin hyväksymispäivämäärä"},
+      {"name": "end_report.audit.date", "fi": "Tilintarkastuksen päivämäärä"},
+      {"name": "ended.end_date", "fi": "Päättämispäivämäärä"}]
   }
