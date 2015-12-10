@@ -226,7 +226,7 @@ var ProjectSchema = new Schema({
           type: Date
         },
         board_notified: {
-          type: String
+          type: Date
         },
         approved_by: {
           type: String

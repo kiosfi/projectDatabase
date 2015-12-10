@@ -373,24 +373,24 @@
                 <label for="plannedPaymentSelection" class="col-md-3">Maksusuunnitelma</label>
                 <div class="form-group col-md-12"><p>Myönnetty summa: {{project.approved.granted_sum_eur| currency : ""}} €</p></div>
                 <div class="form-group col-md-12" id="plPayments">
-                    <div class="col-md-12" name="plannedPaymentSelection" id="plannedPaymentSelection"data-ng-repeat="plannedPayment in plannedPaymentsEdit">
+                    <div class="col-md-12" name="plannedPaymentSelection" id="plannedPaymentSelection"data-ng-repeat="plannedPayment in plannedPayments">
                         <div>
                             <label for="plannedDay" class="col-md-2 control-label">Päivämäärä</label>
                             <div class="col-md-2" style="float:left;">
-                                <input name="plannedDay" type="number" class="form-control" data-ng-model="plannedPaymentsEdit[$index].planned_day" id="plannedDay" placeholder="p" min="1">
+                                <input name="plannedDay" type="number" class="form-control" data-ng-model="plannedPayments[$index].planned_day" id="plannedDay" placeholder="p" min="1">
                             </div>
                             <div class="col-md-2" style="float:left;">
-                                <input name="plannedMonth" type="number" class="form-control" data-ng-model="plannedPaymentsEdit[$index].planned_month" id="plannedMonth" placeholder="k" min="1">
+                                <input name="plannedMonth" type="number" class="form-control" data-ng-model="plannedPayments[$index].planned_month" id="plannedMonth" placeholder="k" min="1">
                             </div>
                             <div class="col-md-2" style="float:left;">
-                                <input name="plannedYear" type="number" class="form-control" data-ng-model="plannedPaymentsEdit[$index].planned_year" id="plannedYear" placeholder="vvvv" min="1">
+                                <input name="plannedYear" type="number" class="form-control" data-ng-model="plannedPayments[$index].planned_year" id="plannedYear" placeholder="vvvv" min="1">
                             </div>
                         </div>
                         <div style="clear:both;">&nbsp;</div>
                         <div>
                             <label for="plannedSumEUR" class="col-md-2 control-label">Summa (EUR)</label>
                             <div class="col-md-5">
-                                <input name="plannedSumEUR" type="number" class="form-control" data-ng-model="plannedPaymentsEdit[$index].sum_eur" id="plannedSumEUR" placeholder="Summa (EUR)" min="0">
+                                <input name="plannedSumEUR" type="number" class="form-control" data-ng-model="plannedPayments[$index].sum_eur" id="plannedSumEUR" placeholder="Summa (EUR)" min="0">
                             </div>
                         </div>
                         <div style="clear:both;">&nbsp;</div>
@@ -407,22 +407,22 @@
                 <label for="reportDeadlines" class="col-md-3">Raporttien eräpäivät</label>
                 <div class="form-group col-md-12">
 
-                    <div class="col-md-12" name="reportDeadlines" id="reportDeadlines" data-ng-repeat="deadline in deadlinesEdit">
+                    <div class="col-md-12" name="reportDeadlines" id="reportDeadlines" data-ng-repeat="deadline in deadlines">
                         <label for="dlRep" class="col-md-2 control-label">Raportti</label>
                         <div class="col-md-5" style="float:left;">
-                            <input name="dlRep" type="text" class="form-control" data-ng-model="deadlinesEdit[$index].report" id="dlRep" placeholder="Raportti">
+                            <input name="dlRep" type="text" class="form-control" data-ng-model="deadlines[$index].report" id="dlRep" placeholder="Raportti">
                         </div>
                         <div style="clear:both;">&nbsp;</div>
                         <div name="dlDate">
                             <label for="dlDay" class="col-md-2 control-label">Eräpäivä</label>
                             <div class="col-md-2">
-                                <input name="dlDay" type="number" class="form-control" data-ng-model="deadlinesEdit[$index].deadline_day" id="dlDay" placeholder="p" min="1">
+                                <input name="dlDay" type="number" class="form-control" data-ng-model="deadlines[$index].deadline_day" id="dlDay" placeholder="p" min="1">
                             </div>
                             <div class="col-md-2" style="float:left;">
-                                <input name="dlMonth" type="number" class="form-control" data-ng-model="deadlinesEdit[$index].deadline_month" id="dlMonth" placeholder="k" min="1">
+                                <input name="dlMonth" type="number" class="form-control" data-ng-model="deadlines[$index].deadline_month" id="dlMonth" placeholder="k" min="1">
                             </div>
                             <div class="col-md-2" style="float:left;">
-                                <input name="dlYear" type="number" class="form-control" data-ng-model="deadlinesEdit[$index].deadline_year" id="dlYear" placeholder="vvvv"  min="1">
+                                <input name="dlYear" type="number" class="form-control" data-ng-model="deadlines[$index].deadline_year" id="dlYear" placeholder="vvvv"  min="1">
                             </div>
                             <div style="clear:both;">&nbsp;</div>
                             <br>
@@ -634,13 +634,13 @@
                     <div>
                         <label for="endDay" class="col-md-2 control-label">Päivämäärä</label>
                         <div class="col-md-2" style="float:left;">
-                            <input name="endDay" type="number" class="form-control" data-ng-model="end_day" id="endDay" placeholder="p" value="{{project.ended.end_date| date : 'd'}}">
+                            <input name="endDay" type="number" class="form-control" data-ng-model="end_day" id="endDay" placeholder="p">
                         </div>
                         <div class="col-md-2" style="float:left;">
-                            <input name="endMonth" type="number" class="form-control" data-ng-model="end_month" id="endMonth" placeholder="k" value="{{project.ended.end_date| date : 'M'}}">
+                            <input name="endMonth" type="number" class="form-control" data-ng-model="end_month" id="endMonth" placeholder="k">
                         </div>
                         <div class="col-md-2" style="float:left;">
-                            <input name="endYear" type="number" class="form-control" data-ng-model="end_year" id="endYear" placeholder="vvvv" value="{{project.ended.end_date| date : 'yyyy'}}">
+                            <input name="endYear" type="number" class="form-control" data-ng-model="end_year" id="endYear" placeholder="vvvv">
                         </div>
                     </div>
                 </div>
@@ -659,13 +659,13 @@
                     <div>
                         <label for="notifiedDay" class="col-md-2">Tiedoksiannnon päivämäärä</label>
                         <div class="col-md-2" style="float:left;">
-                            <input name="notifiedDay" type="number" class="form-control" data-ng-model="notified_day" id="notifiedDay" placeholder="p" value="{{project.ended.board_notified| date : 'd'}}">
+                            <input name="endNotifiedDay" type="number" class="form-control" data-ng-model="end_notified_day" id="notifiedDay" placeholder="p">
                         </div>
                         <div class="col-md-2" style="float:left;">
-                            <input name="notifiedMonth" type="number" class="form-control" data-ng-model="notified_month" id="notifiedMonth" placeholder="k" value="{{project.ended.board_notified| date : 'M'}}">
+                            <input name="endNotifiedMonth" type="number" class="form-control" data-ng-model="end_notified_month" id="notifiedMonth" placeholder="k">
                         </div>
                         <div class="col-md-2" style="float:left;">
-                            <input name="notifiedYear" type="number" class="form-control" data-ng-model="notified_year" id="notifiedYear" placeholder="vvvv" value="{{project.ended.board_notified| date : 'yyyy'}}">
+                            <input name="endNotifiedYear" type="number" class="form-control" data-ng-model="end_notified_year" id="notifiedYear" placeholder="vvvv">
                         </div>
                     </div>
 
@@ -674,7 +674,7 @@
                 <div class="form-group col-md-12">
                     <label for="comments" class="col-md-2">Muut kommentit</label>
                     <div class="col-md-10">
-                        <textarea name="comments" type="text" class="form-control" data-ng-model="project.ended.other_comments" id="comments" placeholder="Muut päättämiseen liittyvät kommentit"></textarea>
+                        <textarea name="endComments" type="text" class="form-control" data-ng-model="project.ended.other_comments" id="comments" placeholder="Muut päättämiseen liittyvät kommentit"></textarea>
                     </div>
 
                 </div>
