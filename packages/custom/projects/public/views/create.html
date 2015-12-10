@@ -9,7 +9,7 @@
                         onclick="toggleCollapse2('fs1', 'btn1')">+
                 </button>
             </legend>
-            <div class="fs1" style="display: none;">
+            <div id="fs1" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         : projectForm.title.$invalid }">
@@ -71,7 +71,7 @@
                             onclick="toggleCollapse2('fs2', 'btn2')">+
                     </button>
                 </legend>
-                <div class="fs2" style="display: none;">
+                <div id="fs2" style="display: none;">
                     <div class="form-group col-md-6" ng-class="{
                                 'has-error'
                                 : projectForm.orgname.$invalid }">
@@ -238,7 +238,7 @@
                             onclick="toggleCollapse2('fs5', 'btn5')">+
                     </button>
                 </legend>
-                <div class="fs5" style="display: none;">
+                <div id="fs5" style="display: none;">
                     <div class="form-group col-md-6" ng-class="{
                                 'has-error'
                                 :  projectForm.orgLegal.$invalid }">
@@ -339,7 +339,7 @@
                             onclick="toggleCollapse2('fs6', 'btn6')">+
                     </button>
                 </legend>
-                <div class="fs6" style="display: none;">
+                <div id="fs6" style="display: none;">
                     <div class="form-group">
                         <div class="form-group col-md-6" ng-class="{
                                 'has-error'
@@ -417,7 +417,8 @@
                         onclick="toggleCollapse2('fs3', 'btn3')">+
                 </button>
             </legend>
-            <div class="fs3" style="display: none;">
+            <div id
+                 ="fs3" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         :  projectForm.description.$invalid }">
@@ -534,7 +535,7 @@
                         onclick="toggleCollapse2('fs4', 'btn4')">+
                 </button>
             </legend>
-            <div class="fs4" style="display: none;">
+            <div id="fs4" style="display: none;">
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         :  projectForm.background.$invalid }">
