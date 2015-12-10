@@ -254,9 +254,9 @@
                         _id: '525a8422f6d0f87f0e407a33',
                         signed: {
                           signed_by: 'Jaana Jantunen',
-                          signed_date: scope.convertDate(11, 11, 2015).toISOString(),
-                          planned_payments: [{"date": scope.convertDate(11, 11, 2015).toISOString(), "sum_eur": 50000, "sum_local": 80000}],
-                          intreport_deadlines: [{"report": "1. väliraportti", "date": scope.convertDate(11, 11, 2015).toISOString()}]
+                          signed_date: scope.convertDate(11, 11, 2015),
+                          planned_payments: [{"date": scope.convertDate(11, 11, 2015), "sum_eur": 50000, "sum_local": 80000}],
+                          intreport_deadlines: [{"report": "1. väliraportti", "date": scope.convertDate(11, 11, 2015)}]
                         },
                         state: 'hyväksytty',
                         to: 'allekirjoitettu'
@@ -297,7 +297,7 @@
                             objectives: ["Lorem ipsum"],
                             overall_rating_kios: "Comments from kios",
                             approved_by: "Halko",
-                            date_approved: scope.convertDate(11, 11, 2015).toISOString(),
+                            date_approved: scope.convertDate(11, 11, 2015),
                             comments: "General comments"
                         },
                         state: 'allekirjoitettu',
@@ -329,9 +329,9 @@
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
                         end_report: {
-                          audit: {"date": scope.convertDate(11, 12, 2015).toISOString(), "review": "arvio"},
+                          audit: {"date": scope.convertDate(11, 12, 2015), "review": "arvio"},
                           approved_by: "toimitusjohtaja",
-                          approved_date: scope.convertDate(12, 12, 2015).toISOString(),
+                          approved_date: scope.convertDate(12, 12, 2015),
                           general_review: "kommentti",
                           methods: [{"name": "metodi", "level": "paikallinen"}],
                           objectives: "tavoite",
@@ -368,8 +368,8 @@
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
                         ended: {
-                            end_date: "12.12.2015",
-                            board_notified: "12.12.2015",
+                            end_date: new Date(2015,12,12),
+                            board_notified: new Date(2015,12,12),
                             approved_by: "toimitusjohtaja",
                             other_comments: "kommentti"
                         },

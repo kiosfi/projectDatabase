@@ -54,7 +54,7 @@ describe('<Unit Test>', function () {
                         "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
                         "reg_date": new Date(2015,11-1,30+1),
-                        "state": "rekisteröity",
+                        "state": "allekirjoitettu",
                         "funding": {
                             "applied_curr_local": 50000,
                             "applied_curr_eur": 10000},
@@ -73,7 +73,10 @@ describe('<Unit Test>', function () {
                         "reporting_evaluation": "Data",
                         "other_donors_proposed": "Donated amount",
                         "dac": "abcd123",
-                        "region": "Itä-Aasia"});
+                        "region": "Itä-Aasia",
+                        "payments": [
+                          {"payment_number": 1, "payment_date": new Date(2016,11-1,30+1),
+                          "sum_eur": 200000}]});
             project1.save();
             project2 = new Project(
                     {"title": "Humans",
@@ -102,9 +105,9 @@ describe('<Unit Test>', function () {
                         "approved":
                           {
                           "user": "Maria",
-                          "approved_date": "4.12.2015",
+                          "approved_date": new Date(2015, 12-1, 4+1),
                           "approved_by": "Toiminnanjohtaja",
-                          "board_notified": "5.12.2015",
+                          "board_notified": new Date(2015, 12-1, 4+1),
                           "methods":
                             [{
                               "level": "Paikallinen",
@@ -146,9 +149,9 @@ describe('<Unit Test>', function () {
                         "approved":
                           {
                           "user": "Maria",
-                          "approved_date": "4.12.2015",
+                          "approved_date": new Date(2015, 12-1, 4+1),
                           "approved_by": "Toiminnanjohtaja",
-                          "board_notified": "5.12.2015",
+                          "board_notified": new Date(2015, 12-1, 4+1),
                           "methods":
                             [{
                               "level": "Paikallinen",
@@ -164,6 +167,24 @@ describe('<Unit Test>', function () {
                           "granted_sum_eur": 12000}});
             project3.save();
             done();
+        });
+
+        describe('Method searchPayments', function () {
+
+            it('should find payments by searched field', function (done) {
+
+              this.timeout(10000);
+
+              var queries=  [{"title": new RegExp('human rights', 'i')},
+                           {"payments": {$exists: true, $gt: {$size: 0}}}]
+              Project.find({$and: queries}, function(err, projs) {
+                    expect(err).to.be(null);
+                    expect(projs.length).to.be(1);
+                    expect(projs[0].title).to.be("Human rights");
+                    done();
+              });
+            });
+
         });
 
         describe('Method searchProjects', function () {
@@ -223,6 +244,8 @@ describe('<Unit Test>', function () {
                       done();
                 });
             });
+
+
         });
 
         afterEach(function (done) {
