@@ -385,6 +385,8 @@
                 <h5>Tiedot lisäsi:</h5>
                 <p>{{project.ended.user}}, {{project.ended.date| date:'dd-MM-yyyy, HH:mm'}}</p>
                 <br>
+                <h5>Päättymispäivä:</h5>
+                <p>{{project.ended.end_date | date : 'dd-MM-yyyy'}}</p>
                 <h5>Hyväksyjä:</h5>
                 <p>{{project.ended.approved_by}}</p>
                 <h5>Hallitukselle tiedotettu (pvm):</h5>
