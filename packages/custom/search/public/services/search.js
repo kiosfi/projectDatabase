@@ -13,6 +13,11 @@ angular.module('mean.search').factory('Search', ['$resource',
                         url: 'api/search/payments',
                         isArray: true
                     },
+                    searchOrgs: {
+                        method: 'GET',
+                        url: 'api/search/orgs',
+                        isArray: true
+                    },
                     searchAllProjects: {
                         method: 'GET',
                         isArray: true,

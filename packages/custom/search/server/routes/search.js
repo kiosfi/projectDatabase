@@ -39,4 +39,6 @@ module.exports = function (Search, app, auth) {
             .get(search.searchAllProjects);
     app.route('/api/search/payments')
             .get(search.searchPayments);
+    app.route('/api/search/orgs')
+            .get(search.searchOrgs);
 };

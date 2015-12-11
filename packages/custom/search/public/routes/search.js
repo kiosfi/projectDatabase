@@ -42,5 +42,16 @@ angular.module('mean.search').config(['$stateProvider',
         }
       }
     });
+
+    $stateProvider.state('orgs search page', {
+      url: '/search/orgs',
+      templateUrl: 'search/views/orgs.html',
+      resolve: {
+        loggedin: function(MeanUser) {
+          return MeanUser.checkLoggedin();
+        }
+      }
+    });
+
   }
 ]);
