@@ -58,6 +58,7 @@ describe('<Unit Test>', function () {
                     "phone": "12345"
                 },
                 "exec_manager": "Manager",
+                "communications_rep": "rep",
                 "address": {
                     "street": "Street 123911",
                     "postal_code": "22039",
@@ -71,7 +72,8 @@ describe('<Unit Test>', function () {
                 "int_links": "international links",
                 "nat_local_links": "local human rights org",
                 "description": "description for organisation .....",
-                "other_funding": "other funders",
+                "other_funding_budget": "other funders",
+                "accounting_audit": "audit",
                 "bank_account": bank_account});
             organisation.save();
             project1 = new Project(
@@ -175,6 +177,7 @@ describe('<Unit Test>', function () {
                         "phone": "12345"
                     },
                     "exec_manager": "Manager3",
+                    "communications_rep": "rep3",
                     "address": {
                         "street": "Address Road 123",
                         "postal_code": "011325",
@@ -188,7 +191,8 @@ describe('<Unit Test>', function () {
                     "int_links": "international links",
                     "nat__local_links": "local human rights org 2",
                     "description": "description for organisation .....",
-                    "other_funding": "other funders",
+                    "other_funding_budget": "other funders",
+                    "accounting_audit": "audit",
                     "bank_account": bank_account});
                 bank_account3 = new BankAccount({
                     "bank_contact_details": "Bank Branch, address",
@@ -276,6 +280,7 @@ describe('<Unit Test>', function () {
                         "phone": "12345"
                     },
                     "exec_manager": "Manager4",
+                    "communications_rep": "reps",
                     "address": {
                         "street": "Street road 123",
                         "postal_code": "211325",
@@ -289,7 +294,8 @@ describe('<Unit Test>', function () {
                     "int_links": "international links",
                     "nat_local_links": "local human rights org 4",
                     "description": "description for organisation .....",
-                    "other_funding": "other funders",
+                    "other_funding_budget": "other funders",
+                    "accounting_audit": "account",
                     "bank_account": bank_account4});
 
                 bank_account4 = new BankAccount({

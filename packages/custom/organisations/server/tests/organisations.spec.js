@@ -38,6 +38,7 @@ describe('<Unit Test>', function () {
                     "phone": "12345"
                 },
                 "exec_manager": "Manager",
+                "communications_rep": "Rep",
                 "address": {
                     "street": "Street 123",
                     "postal_code": "011325",
@@ -52,7 +53,8 @@ describe('<Unit Test>', function () {
                 "int_links": "international links",
                 "nat_local_links": "local human rights org",
                 "description": "description for organisation .....",
-                "other_funding": "other funders",
+                "other_funding_budget": "other funders",
+                "accounting_audit": "accounting",
                 "bank_account": bank_account});
             organisation.save();
             organisation2 = new Organisation({
@@ -63,6 +65,7 @@ describe('<Unit Test>', function () {
                     "phone": "12345"
                 },
                 "exec_manager": "Manager2",
+                "communications_rep": "Rep2",
                 "address": {
                     "street": "Street 123567",
                     "postal_code": "020333",
@@ -77,7 +80,8 @@ describe('<Unit Test>', function () {
                 "int_links": "international link",
                 "nat_local_links": "local human rights org 2",
                 "description": "description for organisation .....",
-                "other_funding": "other funders",
+                "other_funding_budget": "other funders",
+                "accounting_audit": "audit",
                 "bank_account": bank_account});
             organisation2.save();
             organisation3 = new Organisation({
@@ -88,6 +92,7 @@ describe('<Unit Test>', function () {
                     "phone": "12345"
                 },
                 "exec_manager": "Manager3",
+                "communications_rep": "rep3",
                 "address": {
                     "street": "Street 12",
                     "postal_code": "02320",
@@ -102,7 +107,8 @@ describe('<Unit Test>', function () {
                 "int_links": "international link",
                 "nat_local_links": "local human rights org 3",
                 "description": "description for organisation .....",
-                "other_funding": "other funders",
+                "other_funding_budget": "other funders",
+                "accounting_audit": "audit",
                 "bank_account": bank_account});
             organisation3.save();
             done();
@@ -143,6 +149,7 @@ describe('<Unit Test>', function () {
                         "phone": "12345"
                     },
                     "exec_manager": "Manager3",
+                    "communications_rep": "New rep",
                     "address": {
                         "street": "Address Road 123",
                         "postal_code": "011325",
@@ -157,7 +164,8 @@ describe('<Unit Test>', function () {
                     "int_links": "international links",
                     "nat_local_links": "local human rights org 2",
                     "description": "description for organisation .....",
-                    "other_funding": "other funders",
+                    "other_funding_budget": "other funders",
+                    "accounting_audit": "Auditing",
                     "bank_account": bank_account2});
 
                 done();

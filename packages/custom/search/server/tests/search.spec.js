@@ -37,6 +37,7 @@ describe('<Unit Test>', function () {
                     "phone": "12345"
                 },
                 "exec_manager": "Manager A",
+                "communications_rep": "rep",
                 "address": {
                     "street": "Street 123911",
                     "postal_code": "22039",
@@ -49,6 +50,8 @@ describe('<Unit Test>', function () {
                 "legal_status": "legal status",
                 "int_links": "international links",
                 "nat_links": "local human rights org",
+                "other_funding_budget": "funding",
+                "accounting_audit": "audit",
                 "bank_account": bank_acct});
             org.save();
 
