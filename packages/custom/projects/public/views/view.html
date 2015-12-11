@@ -27,6 +27,13 @@
                 <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
                     <span class="tila" id="state">{{project.state}}</span>
                 </h3>
+
+                <span><a ng-click="showEditLog = !showEditLog" ng-show="project.updated.length > 0">Tietoja muokattu</a>
+                <ul ng-show="showEditLog">
+                    <li data-ng-repeat="update in project.updated">            
+                        {{update.time| date: 'dd-MM-yyyy HH:mm'}}, muokkaaja: {{update.user}}
+                    </li>
+                </ul></span>
             </article>
         </div>
         <div>
