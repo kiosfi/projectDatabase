@@ -34,7 +34,11 @@ db.bankaccounts.insert(
 db.organisations.insert(
         {"_id": ObjectId("56091a0525f75ebc0c486338"),
             "name": "Human rights org",
-            "representative": "Representative",
+            "representative": {
+                "name": "Representative",
+                "email": "email@email.com",
+                "phone": "12345"
+            },
             "exec_manager": "Mrs Manager",
             "address": {
                 "street": "Samppalinnantie 20 C 22",
@@ -56,7 +60,11 @@ db.organisations.insert(
 db.organisations.insert(
         {"_id": ObjectId("6f25e7cf1526771eee2a0043"),
             "name": "Womens' rights",
-            "representative": "Matti Meikäläinen",
+            "representative": {
+                "name": "Matti Meikäläinen",
+                "email": "email@email.com",
+                "phone": "12345"
+            },
             "exec_manager": "Matti Manageri",
             "address": {
                 "street": "Ankkalinnankatu 123 A 45",
@@ -78,7 +86,11 @@ db.organisations.insert(
 db.organisations.insert(
         {"_id": ObjectId("8344235a153b2cf192bf74b2"),
             "name": "Organization nr 3",
-            "representative": "John Doe",
+            "representative": {
+                "name": "John Doe",
+                "email": "email@email.com",
+                "phone": "12345"
+            },
             "exec_manager": "Piia Pomo",
             "address": {
                 "street": "Ankkalinnankatu 123 A 46",

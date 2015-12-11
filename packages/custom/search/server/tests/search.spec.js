@@ -31,7 +31,11 @@ describe('<Unit Test>', function () {
             bank_acct.save();
             org = new Organisation({
                 "name": "Rights Activists",
-                "representative": "Representative",
+                "representative": {
+                    "name": "Representative",
+                    "email": "email@email.com",
+                    "phone": "12345"
+                },
                 "exec_manager": "Manager A",
                 "address": {
                     "street": "Street 123911",
@@ -43,7 +47,6 @@ describe('<Unit Test>', function () {
                 "email": "email@org.com",
                 "website": "www.org.com",
                 "legal_status": "legal status",
-                "history_status": "historical status",
                 "int_links": "international links",
                 "nat_links": "local human rights org",
                 "bank_account": bank_acct});

@@ -32,7 +32,11 @@ describe('<Unit Test>', function () {
             bank_account.save();
             organisation = new Organisation({
                 "name": "Human rights org",
-                "representative": "Representative",
+                "representative": {
+                    "name": "Representative",
+                    "email": "email@email.com",
+                    "phone": "12345"
+                },
                 "exec_manager": "Manager",
                 "address": {
                     "street": "Street 123",
@@ -53,7 +57,11 @@ describe('<Unit Test>', function () {
             organisation.save();
             organisation2 = new Organisation({
                 "name": "Children's Rights Org",
-                "representative": "Representative2",
+                "representative": {
+                    "name": "Representative2",
+                    "email": "email@email.com",
+                    "phone": "12345"
+                },
                 "exec_manager": "Manager2",
                 "address": {
                     "street": "Street 123567",
@@ -74,7 +82,11 @@ describe('<Unit Test>', function () {
             organisation2.save();
             organisation3 = new Organisation({
                 "name": "Women's Rights Org",
-                "representative": "Representative3",
+                "representative": {
+                    "name": "Representative3",
+                    "email": "email@email.com",
+                    "phone": "12345"
+                },
                 "exec_manager": "Manager3",
                 "address": {
                     "street": "Street 12",
@@ -125,7 +137,11 @@ describe('<Unit Test>', function () {
 
                 organisation4 = new Organisation({
                     "name": "Children rights org",
-                    "representative": "Mr Jackson",
+                    "representative": {
+                        "name": "Mr Jackson",
+                        "email": "email@email.com",
+                        "phone": "12345"
+                    },
                     "exec_manager": "Manager3",
                     "address": {
                         "street": "Address Road 123",
