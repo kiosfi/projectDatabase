@@ -492,7 +492,7 @@
                         <div class="col-md-2" style="float:left;" ng-class="{
                     'has-error'
                             :  projectEditForm.intRDateAppr_day.$invalid }">
-                            <input name="intRDateAppr_day" type="number" class="form-control" data-ng-model="intRDateAppr_day" id="intRDateAppr_day" placeholder="p" min="1" value="{{intreport.date_approved| date : 'd'}}">
+                            <input name="intRDateAppr_day" type="number" class="form-control" data-ng-model="project.intermediary_reports[$index].intRDateAppr_day" id="intRDateAppr_day" placeholder="p" min="1">
                             <div ng-show="projectEditForm.intRDateAppr_day.$invalid" class="help-block">
                                 <p ng-show="projectEditForm.intRDateAppr_day.$error.number">Päivän täytyy olla numero</p>
                             </div>
@@ -500,7 +500,7 @@
                         <div class="col-md-2" style="float:left;" ng-class="{
                     'has-error'
                             :  projectEditForm.intRDateAppr_month.$invalid }">
-                            <input name="intRDateAppr_month" type="number" class="form-control" data-ng-model="intRDateAppr_month" id="intRDateAppr_month" placeholder="k" min="1" value="{{intreport.date_approved| date : 'M'}}">
+                            <input name="intRDateAppr_month" type="number" class="form-control" data-ng-model="project.intermediary_reports[$index].intRDateAppr_month" id="intRDateAppr_month" placeholder="k" min="1">
                             <div ng-show="projectEditForm.intRDateAppr_month.$invalid" class="help-block">
                                 <p ng-show="projectEditForm.intRDateAppr_month.$error.number">Kuukauden täytyy olla numero</p>
                             </div>
@@ -508,7 +508,7 @@
                         <div class="col-md-2" style="float:left;" ng-class="{
                     'has-error'
                             :  projectEditForm.intRDateAppr_year.$invalid }">
-                            <input name="intRDateAppr_year" type="number" class="form-control" data-ng-model="intRDateAppr_year" id="intRDateAppr_year" placeholder="vvvv" min="1" value="{{intreport.date_approved| date : 'yyyy'}}">
+                            <input name="intRDateAppr_year" type="number" class="form-control" data-ng-model="project.intermediary_reports[$index].intRDateAppr_year" id="intRDateAppr_year" placeholder="vvvv" min="1">
                             <div ng-show="projectEditForm.intRDateAppr_year.$invalid" class="help-block">
                                 <p ng-show="projectEditForm.intRDateAppr_year.$error.number">Vuoden täytyy olla numero</p>
                             </div>

@@ -269,7 +269,7 @@
 
     <article>
         <h4 class="proj-header">Aikataulu</h4>
-        <section ng-show="project.signed.signed_by">
+        <section ng-show="project.signed.date">
           <h5>Raporttien eräpäivät:</h5>
           <ul>
             <li ng-repeat="deadline in project.signed.intreport_deadlines">
@@ -278,7 +278,7 @@
           </ul>
         </section>
         <br>
-        <section ng-show="project.in_review.comments" class="proj-body">
+        <section ng-show="project.in_review.date" class="proj-body">
             <p><b>**Rekisteröity käsittelyyn</b>:&nbsp&nbsp{{project.in_review.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityReviewinfo')">Tiedot</button></p>
             <span class="proj-left visibilityReviewinfo">
@@ -290,7 +290,7 @@
 
         </section>
 
-        <section ng-show="project.approved.approved_by" class="proj-body">
+        <section ng-show="project.approved.date" class="proj-body">
             <p><b>**Rekisteröity hyväksytyksi</b>: {{project.approved.date| date:'dd-MM-yyyy'}}
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityApprovedinfo')">Tiedot</button></p>
             <span class="proj-left visibilityApprovedinfo">
@@ -318,7 +318,7 @@
 
         </section>
 
-        <section ng-show="project.rejected.rejection_comments" class="proj-body">
+        <section ng-show="project.rejected.date" class="proj-body">
             <p><b>**Rekisteröity hylätyksi</b>:&nbsp&nbsp{{project.rejected.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityRejectedinfo')">Tiedot</button></p>
             <span class="proj-left visibilityRejectedinfo">
@@ -336,7 +336,7 @@
         </section>
 
 
-        <section ng-show="project.signed.signed_by" class="proj-body">
+        <section ng-show="project.signed.date" class="proj-body">
             <p><b>**Rekisteröity allekirjoitetuksi</b>:&nbsp&nbsp{{project.signed.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilitySignedinfo')">Tiedot</button></p>
             <span class="proj-left visibilitySignedinfo">
@@ -364,7 +364,7 @@
             </article>
         </section>
 
-        <section ng-show="project.end_report.approved_by" class="proj-body">
+        <section ng-show="project.end_report.date" class="proj-body">
             <p><b>**Loppuraportti rekisteröity</b>:&nbsp&nbsp{{project.end_report.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <!--            <button class="btn small-btn"><a ng-href='/projects/endReport/{{project._id}}'>Tiedot</a></button></p>-->
                 <button class="btn small-btn" ng-click="showEndDetails = ! showEndDetails">Tiedot</button>
@@ -378,8 +378,8 @@
             </span>
         </section>
 
-        <section ng-show="project.ended.approved_by" class="proj-body">
-            <p><b>**Rekisteröity päätetyksi</b>:&nbsp&nbsp{{project.ended.end_date| date:'dd-MM-yyyy'}}&nbsp&nbsp
+        <section ng-show="project.ended.date" class="proj-body">
+            <p><b>**Rekisteröity päätetyksi</b>:&nbsp&nbsp{{project.ended.date | date:'dd-MM-yyyy'}}&nbsp&nbsp
                 <button class="btn small-btn" onclick="toggleCollapse('visibilityEndedinfo')">Tiedot</button></p>
             <span class="proj-left visibilityEndedinfo">
                 <h5>Tiedot lisäsi:</h5>
