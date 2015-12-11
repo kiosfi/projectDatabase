@@ -1,7 +1,8 @@
 <section data-ng-controller="ProjectsController" data-ng-init="initEditing()">
     <a ng-href="/projects/{{project._id}}" class="btn btn-danger">Peruuta</a>
     <form name="projectEditForm" class="form-horizontal" role="form" data-ng-submit="update(projectEditForm.$valid)" novalidate>
-        <h2>Hankkeen tietojen muokkaus</h2>
+        <h2>{{project.title}} ({{project.organisation.name}})</h2>
+        <h2>Tietojen muokkaus</h2>
         <fieldset>
             <a href="" ng-click="showRegDetails = ! showRegDetails">Rekisteröinti -tilan tiedot</a>
             <div class="fs1" ng-show="showRegDetails">

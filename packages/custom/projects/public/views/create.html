@@ -341,13 +341,15 @@
 
         <fieldset>
             <legend>
-                <a onclick="toggleCollapse2('fs3', 'btn3')">
-                    Hankkeen perustiedot</a>
-                <button id="btn3" class="btn-default btn-xs"
-                        onclick="toggleCollapse2('fs3', 'btn3')">+
-                </button>
+                <a ng-click="showProjInfo = !showProjInfo">Hankkeen perustiedot</a>
+                <!--                <a onclick="toggleCollapse2('fs3', 'btn3')">
+                                    Hankkeen perustiedot</a>
+                                <button id="btn3" class="btn-default btn-xs"
+                                        onclick="toggleCollapse2('fs3', 'btn3')">+
+                                </button>-->
             </legend>
-            <div class="fs3" style="display: none;">
+            <!--            <div class="fs3" style="display: none;" ng-show="showProjInfo">-->
+            <div ng-show="showProjInfo">
                 <div class="form-group col-md-6">
                     <label for="description"
                            class="col-md-3 control-label">Kuvaus</label>
@@ -418,13 +420,16 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend><a onclick="toggleCollapse2('fs4', 'btn4')">
-                    Hankkeen lisätiedot</a>
-                <button id="btn4" class="btn-default btn-xs"
-                        onclick="toggleCollapse2('fs4', 'btn4')">+
-                </button>
+            <legend>
+                <a ng-click="showProjDetails = !showProjDetails">Hankkeen lisätiedot</a>
+                <!--                <a onclick="toggleCollapse2('fs4', 'btn4')">
+                                    Hankkeen lisätiedot</a>
+                                <button id="btn4" class="btn-default btn-xs"
+                                        onclick="toggleCollapse2('fs4', 'btn4')">+
+                                </button>-->
             </legend>
-            <div class="fs4" style="display: none;">
+            <!--            <div class="fs4" style="display: none;">-->
+            <div ng-show="showProjDetails">
                 <div class="form-group col-md-6">
                     <label for="background"
                            class="col-md-3 control-label">Tausta</label>
