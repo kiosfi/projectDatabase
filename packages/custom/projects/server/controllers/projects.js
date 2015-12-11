@@ -65,6 +65,36 @@ module.exports = function (Projects) {
             });
             res.json(req.project);
         },
+        
+        /**
+         * Update a project
+         */
+        update: function (req, res) {
+            var project = req.project;
+
+            project = _.extend(project, req.body);
+
+
+            project.save(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Hanketta ei voi päivittää'
+                    });
+                }
+
+                Projects.events.publish({
+                    action: 'updated',
+                    user: {
+                        name: req.user.name
+                    },
+                    name: project.title,
+                    url: config.hostname + '/projects/' + project._id
+                });
+
+                res.json(project);
+            });
+        },
+
         /*all: function (req, res) {
          var query = Project.find();
          query
