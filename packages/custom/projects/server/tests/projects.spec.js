@@ -354,6 +354,25 @@
 //        });
 //
 //        describe('Method Update', function () {
+//        
+//        it('should update given project', function (done) {
+//                this.timeout(10000);
+//                var in_review = {
+//                    "user": user.name,
+//                    "comments": "this is a comment"};
+//
+//                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+//
+//                    proj.state = "käsittelyssä";
+//                    proj.in_review = in_review;
+//                    proj.save();
+//                    expect(err).to.be(null);
+//                    expect(proj.state).to.be("käsittelyssä");
+//                    expect(proj.in_review.comments).to.be("this is a comment");
+//                    user.remove();
+//                    done();
+//                });
+//            });
 //
 //            it('should create a new "in review" state and update given project with its id', function (done) {
 //                this.timeout(10000);

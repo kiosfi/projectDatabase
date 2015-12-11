@@ -142,8 +142,13 @@
                 // fixture rideshare
                 var putProjectData = function () {
                     return {
-                        _id: '525a8422f6d0f87f0e407a33',
-                        title: 'Human Rights'
+                        _id: '525a8422f6d0117f0e407a33',
+                        state: 'rekisteröity',
+                        end_report: {
+                            date: undefined
+                        },
+                        title: 'Human Rights',
+                        to: 'Children rights'
                     };
                 };
 

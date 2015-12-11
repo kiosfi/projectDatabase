@@ -42,10 +42,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
         $scope.convertDate = function (day, month, year) {
-            var parsed = new Date(year, month-1, day+1).toISOString();
+            var parsed = new Date(year, month - 1, day + 1).toISOString();
             return parsed;
         };
-        
+
         $scope.hasAuthorization = function (project) {
             if (!project)
                 return false;
@@ -96,22 +96,24 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (isValid) {
                 var project = $scope.project;
 
-                if ($scope.projectEditForm.approved_day.$dirty || $scope.projectEditForm.approved_month.$dirty
-                        || $scope.projectEditForm.approved_year.$dirty) {
-                    project.approved.approved_date = $scope.convertDate($scope.approved_day, $scope.approved_month, $scope.approved_year);
+                if (typeof project.approved !== 'undefined') {
+                    if ($scope.projectEditForm.approved_day.$dirty || $scope.projectEditForm.approved_month.$dirty
+                            || $scope.projectEditForm.approved_year.$dirty) {
+                        project.approved.approved_date = $scope.convertDate($scope.approved_day, $scope.approved_month, $scope.approved_year);
+                    }
+
+                    if ($scope.projectEditForm.board_notified_day.$dirty || $scope.projectEditForm.board_notified_month.$dirty
+                            || $scope.projectEditForm.board_notified_year.$dirty) {
+                        project.approved.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
+                    }
                 }
 
-                if ($scope.projectEditForm.board_notified_day.$dirty || $scope.projectEditForm.board_notified_month.$dirty
-                        || $scope.projectEditForm.board_notified_year.$dirty) {
-                    project.approved.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
-                }
+                if (typeof project.signed !== 'undefined') {
+                    if ($scope.projectEditForm.signed_date_day.$dirty || $scope.projectEditForm.signed_date_day.$dirty
+                            || $scope.projectEditForm.signed_date_day.$dirty) {
+                        project.signed.signed_date = $scope.convertDate($scope.signed_day, $scope.signed_month, $scope.signed_year);
+                    }
 
-                if ($scope.projectEditForm.signed_date_day.$dirty || $scope.projectEditForm.signed_date_day.$dirty
-                        || $scope.projectEditForm.signed_date_day.$dirty) {
-                    project.signed.signed_date = $scope.convertDate($scope.signed_day, $scope.signed_month, $scope.signed_year);
-                }
-
-                if (typeof project.signed.date !== 'undefined') {
                     project.signed.intreport_deadlines = [];
                     angular.forEach($scope.deadlines, function (obj) {
                         project.signed.intreport_deadlines.push({report: obj.report,
@@ -125,30 +127,30 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     });
                 }
 
-                if (project.intermediary_reports.length > 0) {
-                    
+                if (typeof project.end_report.date !== 'undefined') {
+                    if ($scope.projectEditForm.audit_day.$dirty || $scope.projectEditForm.audit_month.$dirty
+                            || $scope.projectEditForm.audit_year.$dirty) {
+                        project.end_report.audit.date = $scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year);
+                    }
+
+                    if ($scope.projectEditForm.er_approved_day.$dirty || $scope.projectEditForm.er_approved_month.$dirty
+                            || $scope.projectEditForm.er_approved_year.$dirty) {
+
+                        project.end_report.approved_date = $scope.convertDate($scope.er_approved_day, $scope.er_approved_month, $scope.er_approved_year);
+                    }
                 }
 
-                if ($scope.projectEditForm.audit_day.$dirty || $scope.projectEditForm.audit_month.$dirty
-                        || $scope.projectEditForm.audit_year.$dirty) {
-                    project.end_report.audit.date = $scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year);
+                if (typeof project.ended !== 'undefined') {
+                    if ($scope.projectEditForm.endNotifiedDay.$dirty || $scope.projectEditForm.endNotifiedMonth.$dirty ||
+                            $scope.projectEditForm.endNotifiedYear.$dirty) {
+                        project.ended.board_notified = $scope.convertDate($scope.end_notified_day, $scope.end_notified_month, $scope.end_notified_year);
+                    }
+
+                    if ($scope.projectEditForm.endDay.$dirty || $scope.projectEditForm.endMonth.$dirty || $scope.projectEditForm.endYear.$dirty) {
+                        project.ended.end_date = $scope.convertDate($scope.end_day, $scope.end_month, $scope.end_year);
+                    }
                 }
-
-                if ($scope.projectEditForm.er_approved_day.$dirty || $scope.projectEditForm.er_approved_month.$dirty
-                        || $scope.projectEditForm.er_approved_year.$dirty) {
-
-                    project.end_report.approved_date = $scope.convertDate($scope.er_approved_day, $scope.er_approved_month, $scope.er_approved_year);
-                }
-
-                if ($scope.projectEditForm.endNotifiedDay.$dirty || $scope.projectEditForm.endNotifiedMonth.$dirty ||
-                        $scope.projectEditForm.endNotifiedYear.$dirty) {
-                    project.ended.board_notified = $scope.convertDate($scope.end_notified_day, $scope.end_notified_month, $scope.end_notified_year);
-                }
-
-                if ($scope.projectEditForm.endDay.$dirty || $scope.projectEditForm.endMonth.$dirty || $scope.projectEditForm.endYear.$dirty) {
-                    project.ended.end_date = $scope.convertDate($scope.end_day, $scope.end_month, $scope.end_year);
-                }
-
+                
                 if (!project.updated) {
                     project.updated = [];
                 }
@@ -213,15 +215,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     });
                 }
 
-                if (project.intermediary_reports.length > 0) {
-                    angular.forEach(project.intermediary_reports, function (obj) {
-                        var date = new Date(obj.date_approved);
-
-                        $scope.project.intermediary_reports[project.intermediary_reports.indexOf(obj)].intRDateAppr_day = date.getDate();
-                        $scope.project.intermediary_reports[project.intermediary_reports.indexOf(obj)].intRDateAppr_month = date.getMonth() + 1;
-                        $scope.project.intermediary_reports[project.intermediary_reports.indexOf(obj)].intRDateAppr_year = date.getFullYear();
-                    });
-                }
+//                if (project.intermediary_reports.length > 0) {
+//                    angular.forEach(project.intermediary_reports, function (obj) {
+//                        var date = new Date(obj.date_approved);
+//
+//                        $scope.project.intermediary_reports[project.intermediary_reports.indexOf(obj)].intRDateAppr_day = date.getDate();
+//                        $scope.project.intermediary_reports[project.intermediary_reports.indexOf(obj)].intRDateAppr_month = date.getMonth() + 1;
+//                        $scope.project.intermediary_reports[project.intermediary_reports.indexOf(obj)].intRDateAppr_year = date.getFullYear();
+//                    });
+//                }
 
                 //                        $scope.int_reports.push({methods: obj.methods, overall_rating_kios: obj.overall_rating_kios,
 //                        comments: obj.comments, approved_by: obj.approved_by, date: obj.date, })
