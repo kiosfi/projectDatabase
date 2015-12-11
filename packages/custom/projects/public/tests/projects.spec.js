@@ -137,6 +137,30 @@
 
                     }));
 
+            it('$scope.update(true) should a valid project', inject(function (Projects) {
+
+                // fixture rideshare
+                var putProjectData = function () {
+                    return {
+                        _id: '525a8422f6d0f87f0e407a33',
+                        title: 'Human Rights'
+                    };
+                };
+
+                var project = new Projects(putProjectData);
+                scope.project = project;
+
+                // test PUT happens correctly
+                $httpBackend.expectPUT(/api\/projects\/([0-9a-fA-F]{24})$\/edit/).respond();
+                
+                // run controller
+                scope.update(true);
+                $httpBackend.flush();
+                
+                // test URL location to new object
+                expect($location.path()).toBe('/projects/' + putProjectData()._id);
+            }))
+
             it('$scope.addReviewState(true) should update a valid project', inject(function (Projects) {
 
 
@@ -181,12 +205,12 @@
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
                         approved: {
-                          approved_date: scope.date,
-                          approved_by: "Toiminnanjohtaja",
-                          board_notified: scope.date,
-                          methods: [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen"}],
-                          themes: ["Oikeusvaltio ja demokratia"],
-                          granted_sum_eur: 60000
+                            approved_date: scope.date,
+                            approved_by: "Toiminnanjohtaja",
+                            board_notified: scope.date,
+                            methods: [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen"}],
+                            themes: ["Oikeusvaltio ja demokratia"],
+                            granted_sum_eur: 60000
                         },
                         state: 'käsittelyssä',
                         to: 'hyväksytty'
@@ -253,10 +277,10 @@
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
                         signed: {
-                          signed_by: 'Jaana Jantunen',
-                          signed_date: scope.convertDate(11, 11, 2015),
-                          planned_payments: [{"date": scope.convertDate(11, 11, 2015), "sum_eur": 50000, "sum_local": 80000}],
-                          intreport_deadlines: [{"report": "1. väliraportti", "date": scope.convertDate(11, 11, 2015)}]
+                            signed_by: 'Jaana Jantunen',
+                            signed_date: scope.convertDate(11, 11, 2015),
+                            planned_payments: [{"date": scope.convertDate(11, 11, 2015), "sum_eur": 50000, "sum_local": 80000}],
+                            intreport_deadlines: [{"report": "1. väliraportti", "date": scope.convertDate(11, 11, 2015)}]
                         },
                         state: 'hyväksytty',
                         to: 'allekirjoitettu'
@@ -324,18 +348,18 @@
             }));
 
             it('$scope.addEndReportState(true) should update a valid project', inject(function (Projects) {
-                        // fixture rideshare
-                  var putProjectData = function () {
+                // fixture rideshare
+                var putProjectData = function () {
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
                         end_report: {
-                          audit: {"date": scope.convertDate(11, 12, 2015), "review": "arvio"},
-                          approved_by: "toimitusjohtaja",
-                          approved_date: scope.convertDate(12, 12, 2015),
-                          general_review: "kommentti",
-                          methods: [{"name": "metodi", "level": "paikallinen"}],
-                          objectives: "tavoite",
-                          comments: "kommenttia"
+                            audit: {"date": scope.convertDate(11, 12, 2015), "review": "arvio"},
+                            approved_by: "toimitusjohtaja",
+                            approved_date: scope.convertDate(12, 12, 2015),
+                            general_review: "kommentti",
+                            methods: [{"name": "metodi", "level": "paikallinen"}],
+                            objectives: "tavoite",
+                            comments: "kommenttia"
                         },
                         state: 'väliraportti',
                         to: 'loppuraportti'
@@ -368,8 +392,8 @@
                     return {
                         _id: '525a8422f6d0f87f0e407a33',
                         ended: {
-                            end_date: new Date(2015,12,12),
-                            board_notified: new Date(2015,12,12),
+                            end_date: new Date(2015, 12, 12),
+                            board_notified: new Date(2015, 12, 12),
                             approved_by: "toimitusjohtaja",
                             other_comments: "kommentti"
                         },
