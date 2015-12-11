@@ -49,21 +49,26 @@
   <article data-ng-init="searchOrgs()">
     <h4>Hakutulokset</h4>
     <p>Hakutulosten määrä: {{organisations.length}}</p>
+
+    <h4>Lataa hakutulokset tiedostoon</h4>
+    <button type="button" ng-csv="organisations" lazy-load="true" csv-header="orgHeaders"
+            csv-column-order="csvColOrder" filename="tiedot.csv" field-separator=";"
+            add-bom="true">Lataa</button>
     <table class="col-md-12 table table-striped">
         <thead>
             <tr>
                 <th class="col-md-3">Nimi</th>
                 <th class="col-md-3">Edustaja</th>
-                <th class="col-md-3">Kaupunki</th>
-                <th class="col-md-3">Maa</th>
+                <th class="col-md-3">Osoite</th>
+                <th class="col-md-3">Sähköposti</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="org in organisations">
                 <td><a ng-href="/organisations/{{org._id}}" target="_blank">{{org.name}}</a></td>
                 <td>{{org.representative}}</td>
-                <td>{{org.address.city}}</td>
-                <td>{{org.address.country}}</td>
+                <td>{{org.address}}</td>
+                <td>{{org.email}}</td>
             </tr>
         </tbody>
     </table>

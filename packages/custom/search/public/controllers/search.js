@@ -165,7 +165,21 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 "searchOrg": searchOrg
             }, function(results) {
                 $scope.organisations = results;
-                console.log(results);
+
+                /**
+                * Column order and headers for csv
+                *
+                */
+
+                $scope.csvColOrder = ['_id', 'name', 'representative', 'exec_manager',
+                'communications_rep', 'address', 'tel', 'email', 'website', 'legal_status',
+                'description', 'int_links', 'nat_local_links', 'other_funding_budget',
+                'accounting_audit'];
+
+                $scope.orgHeaders = ['Tunnus', 'Nimi', 'Edustaja', 'Vastuullinen johtaja',
+                'Viestintävastaava', 'Osoite', 'Puh', 'Email', 'WWW', 'Hallintomalli ja henkilöstö', 'Kuvaus',
+                'Kansainväliset linkit', 'Kansalliset/paikalliset linkit',
+                'Muu rahoitus ja budjetti', 'Taloushallinto ja tilintarkastus'];
             });
         };
 
@@ -191,6 +205,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 $location.path('search/export');
             });
         };
+
 
         /**
          * Creates project query object from each $scope.field/

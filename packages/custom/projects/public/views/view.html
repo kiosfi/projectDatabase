@@ -94,7 +94,7 @@
                         </tr>
                         <tr>
                             <th>Kirjattu</th>
-                            <td>{{project.reg_date| date:'dd-MM-yyyy'}}</td>
+                            <td>{{project.reg_date| date:'dd-MM-yyyy': 'UTC'}}</td>
                         </tr>
                         <tr ng-show="project.approved.granted_sum_eur" class="ng-hide">
                             <th>Myönnetty EUR</th>
@@ -129,7 +129,7 @@
                         </tr>
                         <tr>
                             <th>Edustaja</th>
-                            <td><a href="">{{project.organisation.representative}}</a></td>
+                            <td>{{project.organisation.representative.name}}</td>
                         </tr>
                         <tr>
                             <th>Osoite</th>

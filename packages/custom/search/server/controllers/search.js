@@ -288,8 +288,20 @@ module.exports = function (Search) {
                       error: 'Virhe järjestöjen hakutoiminnossa'
                   });
               } else {
-                  orgs = _.mapValues(orgs, function(value) {
-                    return (value == null) ? "" : value
+                  orgs = _.map(orgs, function(org) {
+                    return {"_id": org._id,
+                            "name": org.name,
+                            "representative": org.representative.name + ", " +
+                            org.representative.email + ", " + org.representative.phone,
+                            "exec_manager": org.exec_manager,
+                            "communications_rep": org.communications_rep,
+                            "address": org.address.street + ", " + org.address.postal_code +
+                            " " + org.address.city + ", " + org.address.country,
+                           "tel": org.tel, "email": org.email, "website": org.website,
+                           "legal_status": org.legal_status, "description": org.description,
+                           "int_links": org.int_links, "nat_local_links": org.nat_local_links,
+                           "other_funding_budget": org.other_funding_budget,
+                           "accounting_audit": org.accounting_audit}
                   })
                   res.json(orgs);
               }
