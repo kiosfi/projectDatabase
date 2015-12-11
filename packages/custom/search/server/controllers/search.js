@@ -18,9 +18,9 @@ module.exports = function (Search) {
     var pageSize = 10;
 
     /**
-     * Formulates search query received in searchBy depending on the type of
+     * Formulates received search query depending on the type of
      * data searched
-     * @param {JSON} searchBy
+     * @param {JSON}
      * @returns {JSON}
      */
 
@@ -77,6 +77,7 @@ module.exports = function (Search) {
         });
     }
     return {
+
         /**
          * Searches for projects. The results are ordered and paginated
          * according to the given HTTP GET parameters in the request object.
@@ -109,7 +110,7 @@ module.exports = function (Search) {
             orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
 
             /**
-            * Format search query when search involves the organisations
+            * Format search query when search involves organisations
             * collection, and perform search using Organisation model.
             */
 
@@ -203,7 +204,7 @@ module.exports = function (Search) {
 
         /**
          * Returns all payments matching the given search query in the HTTP POST
-         * parameter <tt>searchBy</tt>.
+         * parameter <tt>searchPay</tt>.
          *
          * @param {type} req Request object.
          * @param {type} res Response object.
@@ -229,13 +230,8 @@ module.exports = function (Search) {
                 } else {
                   projects = _.flattenDeep(_.map(projects, function(project) {
                       var payments = _.map(project.payments, function(payment) {
-                        var date = new Date(payment.payment_date);
-                        var day = date.getUTCDate();
-                        var month = date.getUTCMonth() + 1;
-                        var year = date.getUTCFullYear();
-                        var parsed = day + "-" + month + "-" + year;
                         return {"sum": payment.sum_eur,
-                              "date": parsed,
+                              "date": payment.payment_date,
                               "ref": project.project_ref,
                               "title": project.title,
                               "id": project._id};
@@ -259,13 +255,9 @@ module.exports = function (Search) {
                   } else {
                     projects = _.map(projects, function(project) {
 
-                        var date = new Date(project.approved.approved_date);
-                        var day = date.getUTCDate();
-                        var month = date.getUTCMonth() + 1;
-                        var year = date.getUTCFullYear();
-                        var parsed = day + "-" + month + "-" + year;
+
                         return {"sum": project.approved.granted_sum_eur,
-                                "date": parsed,
+                                "date": project.approved.approved_date,
                                 "ref": project.project_ref,
                                 "title": project.title,
                                 "id": project._id}
@@ -275,6 +267,46 @@ module.exports = function (Search) {
                 });
 
               }
+
+        },
+
+        /**
+         * Returns all organisations matching the given search query in the HTTP POST
+         * parameter <tt>searchOrg</tt>.
+         *
+         * @param {type} req Request object.
+         * @param {type} res Response object.
+         */
+
+        searchOrgs: function (req, res) {
+
+            var queries = prepareQueries(req.query.searchOrg);
+
+            Organisation.find({$and: queries}, function (err, orgs) {
+              if (err) {
+                  return res.status(500).json({
+                      error: 'Virhe järjestöjen hakutoiminnossa'
+                  });
+              } else {
+                  orgs = _.map(orgs, function(org) {
+                    return {"_id": org._id,
+                            "name": org.name,
+                            "representative": org.representative.name + ", " +
+                            org.representative.email + ", " + org.representative.phone,
+                            "exec_manager": org.exec_manager,
+                            "communications_rep": org.communications_rep,
+                            "address": org.address.street + ", " + org.address.postal_code +
+                            " " + org.address.city + ", " + org.address.country,
+                           "tel": org.tel, "email": org.email, "website": org.website,
+                           "legal_status": org.legal_status, "description": org.description,
+                           "int_links": org.int_links, "nat_local_links": org.nat_local_links,
+                           "other_funding_budget": org.other_funding_budget,
+                           "accounting_audit": org.accounting_audit}
+                  })
+                  res.json(orgs);
+              }
+
+            });
 
         },
 

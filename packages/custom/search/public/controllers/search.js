@@ -38,15 +38,14 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         $scope.numberOfResults = 0;
 
         /**
-         * The search array. Consists of objects having the following three
-         * fields: <tt>key</tt> for the name of the key to be searched by,
-         * </tt>value</tt> for the value to be matched against, and
-         * <tt>type</tt> for distinguishing between literal string matches and
-         * regular expressions.
+         * The search arrays for projects, payments and organisations.
+         * They consist of objects having the following two
+         * fields: <tt>key</tt> for the name of the key to be searched by and
+         * </tt>value</tt> for the value to be matched against.
          */
         $scope.searchBy = [];
         $scope.searchPay = [];
-
+        $scope.searchOrg = [];
 
         /**
          * The sorting predicate used in project listing. Initial value is
@@ -118,13 +117,19 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             });
         };
 
+        /**
+         * Performs payment search operation. The parameters are fetched from the
+         * URL.
+         *
+         * @returns {JSON} response from server.
+         */
         $scope.searchPayments = function () {
 
             var search = $location.search();
 
             if (typeof search.searchPay === 'undefined' ||
                   typeof search.choice === 'undefined') {
-              $scope.results = [];
+              $scope.payments = [];
               return;
             }
 
@@ -136,6 +141,45 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 "choice": search.choice
             }, function(results) {
                 $scope.payments = results;
+            });
+        };
+
+        /**
+         * Performs organisation search operation. The parameters are fetched from the
+         * URL.
+         *
+         * @returns {JSON} response from server.
+         */
+        $scope.searchOrgs = function () {
+
+            var searchOrg = $location.search().searchOrg;
+
+            if (typeof searchOrg === 'undefined') {
+              $scope.organisations = [];
+              return;
+            }
+
+            $scope.searchOrg = JSON.parse(searchOrg);
+
+            Search.searchOrgs({
+                "searchOrg": searchOrg
+            }, function(results) {
+                $scope.organisations = results;
+
+                /**
+                * Column order and headers for csv
+                *
+                */
+
+                $scope.csvColOrder = ['_id', 'name', 'representative', 'exec_manager',
+                'communications_rep', 'address', 'tel', 'email', 'website', 'legal_status',
+                'description', 'int_links', 'nat_local_links', 'other_funding_budget',
+                'accounting_audit'];
+
+                $scope.orgHeaders = ['Tunnus', 'Nimi', 'Edustaja', 'Vastuullinen johtaja',
+                'Viestintävastaava', 'Osoite', 'Puh', 'Email', 'WWW', 'Hallintomalli ja henkilöstö', 'Kuvaus',
+                'Kansainväliset linkit', 'Kansalliset/paikalliset linkit',
+                'Muu rahoitus ja budjetti', 'Taloushallinto ja tilintarkastus'];
             });
         };
 
@@ -162,8 +206,9 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             });
         };
 
+
         /**
-         * Creates query object from each $scope.field/
+         * Creates project query object from each $scope.field/
          * $scope.value pair
          */
         $scope.addQuery = function () {
@@ -174,6 +219,10 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             $scope.searchBy.splice(-1, 1);
         };
 
+        /**
+         * Creates payment query object from each $scope.field/
+         * $scope.value pair
+         */
         $scope.addPayQuery = function () {
             $scope.searchPay.push({});
         };
@@ -183,7 +232,19 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         };
 
         /**
-         * Reloads the view.
+         * Creates organisation query object from each $scope.field/
+         * $scope.value pair
+         */
+        $scope.addOrgQuery = function () {
+            $scope.searchOrg.push({});
+        };
+
+        $scope.removeOrgQuery = function () {
+            $scope.searchOrg.splice(-1, 1);
+        };
+
+        /**
+         * Reloads project search view.
          *
          */
         $scope.update = function () {
@@ -194,13 +255,21 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         };
 
         /**
-         * Reloads the payment search view.
+         * Reloads payment search view.
          *
          */
         $scope.updateSearch = function () {
           var search = {"choice": $scope.searchChoice}
           $window.location = '/search/payments?searchPay=' + JSON.stringify($scope.searchPay)
                   + '&choice=' + JSON.stringify(search);
+        };
+
+        /**
+         * Reloads organisation search view.
+         *
+         */
+        $scope.updateOrgSearch = function () {
+          $window.location = '/search/orgs?searchOrg=' + JSON.stringify($scope.searchOrg);
         };
 
         /**

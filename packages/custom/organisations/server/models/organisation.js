@@ -13,13 +13,28 @@ var OrganisationSchema = new Schema({
         trim: true
     },
     representative: {
-        type: String,
-        required: true,
-        trim: true
+        name: {
+          type: String,
+          required: true,
+          trim: true
+        },
+        email: {
+          type: String,
+          required: true,
+          trim: true
+        },
+        phone: {
+          type: String,
+          required: true,
+          trim: true
+        }
     },
     exec_manager: {
         type: String,
-        required: true,
+        trim: true
+    },
+    communications_rep: {
+        type: String,
         trim: true
     },
     address: {
@@ -57,64 +72,54 @@ var OrganisationSchema = new Schema({
     },
     website: {
         type: String,
-        required: true,
         trim: true
     },
     legal_status: {
         type: String,
-        required: true,
-        trim: true
-    },
-    history_status: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    int_links: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    nat_local_links: {
-        type: String,
-        required: true,
         trim: true
     },
     description: {
         type: String,
-        required: true,
         trim: true
     },
-    other_funding: {
+    int_links: {
         type: String,
-        required: true,
+        trim: true
+    },
+    nat_local_links: {
+        type: String,
+        trim: true
+    },
+    other_funding_budget: {
+        type: String,
+        trim: true
+    },
+    accounting_audit: {
+        type: String,
         trim: true
     },
     bank_account: {
         type: Schema.ObjectId,
-        ref: 'BankAccount',
-        required: true
+        ref: 'BankAccount'
     }
 });
 
 var BankAccountSchema = new Schema({
     bank_contact_details: {
         type: String,
-        required: true,
         trim: true
     },
     iban: {
         type: String,
-        required: true,
         trim: true
     },
     swift: {
         type: String,
-        required: true,
         trim: true
     },
     holder_name: {
-        type: String
+        type: String,
+        trim: true
     }
 });
 

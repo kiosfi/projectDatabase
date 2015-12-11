@@ -5,7 +5,7 @@
     <article class="border-body">
         <p><b>Hankenumero: </b>{{project.project_ref}}</p>
         <p><b>Alue: </b>{{project.region}}</p>
-        <p><b>Myönnetty tuki ja pvm: </b>{{project.approved.granted_sum_eur| currency : ""}} euroa, {{project.approved.approved_date| date : 'dd-MM-yyyy'}}</p>
+        <p><b>Myönnetty tuki ja pvm: </b>{{project.approved.granted_sum_eur| currency : ""}} euroa, {{project.approved.approved_date| date : 'dd-MM-yyyy': 'UTC'}}</p>
         <p><b>Hankkeen kesto: </b>Mistä lasketaan?</p>
         <p><b>Hankekuvaus: </b>{{project.description}}</p>
         <h5><b>Oikeudellinen fokus: </b>{{}}</h5>
@@ -17,19 +17,19 @@
     </article>
     <article class="er-body">
         <h4><b>Maksatukset</b></h4>
-        <p>Hankkeelle myönnettiin {{project.approved.granted_sum_eur| currency : ""}} EUR hallituksen kokousessa {{project.approved.board_notified| date : 'dd-MM-yyyy'}}</p>
-        <p>Sopimus allekirjoitettiin {{project.signed.signed_date| date: 'dd-MM-yyyy'}}</p>
+        <p>Hankkeelle myönnettiin {{project.approved.granted_sum_eur| currency : ""}} EUR hallituksen kokousessa {{project.approved.board_notified| date : 'dd-MM-yyyy': 'UTC'}}</p>
+        <p>Sopimus allekirjoitettiin {{project.signed.signed_date| date: 'dd-MM-yyyy': 'UTC'}}</p>
         <p></p>
         <p><b>Maksatus eriä: </b> {{project.signed.planned_payments.length}}</p>
         <p><b>Maksusuunnitelma: </b></p>
         <ul>
             <li ng-repeat="planned_payment in project.signed.planned_payments">
-                {{project.signed.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur| currency : ""}} EUR ({{planned_payment.sum_local| currency : ""}} paikallista valuuttaa), suunniteltu maksupvm {{planned_payment.date| date : 'dd-MM-yyyy'}}
+                {{project.signed.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur| currency : ""}} EUR, suunniteltu maksupvm {{planned_payment.date| date : 'dd-MM-yyyy': 'UTC'}}
             </li>
         </ul>
         <p><b>Maksetut erät: </b></p>
         <section   ng-repeat="payment in project.payments">
-            <p>{{payment.sum_eur| currency : ""}} EUR / maksettu {{payment.payment_date| date : 'dd-MM-yyyy'}}</p>
+            <p>{{payment.sum_eur| currency : ""}} EUR / maksettu {{payment.payment_date| date : 'dd-MM-yyyy': 'UTC'}}</p>
         </section>
 
         <p><b>Jäljellä oleva summa: </b> {{project.funding.left_eur| currency : ""}} EUR</p>
@@ -71,7 +71,7 @@
     <article class="er-body">
         <h4><b>Huomioita tilintarkastuksesta</b></h4>
         <h5>Tilintarkastuksen päivämäärä</h5>
-        <p>{{project.end_report.audit.date| date: 'dd-MM-yyyy'}}</p>
+        <p>{{project.end_report.audit.date| date: 'dd-MM-yyyy': 'UTC'}}</p>
         <h5>Arvio</h5>
         <p>{{project.end_report.audit.review}}</p>
     </article>

@@ -1,0 +1,76 @@
+<section data-ng-controller="SearchController">
+<h1>Järjestöhaku</h1>
+<br>
+
+<article>
+    <h3>Lisää hakukenttiä
+      <a style="float:right;" ng-href="/search">Hankehakuun</a>
+      <br>
+      <a style="float:right;" ng-href="/search/payments">Maksuhakuun</a>
+    </h3>
+    <form name="orgForm" class="form-horizontal col-md-8" role="form"
+        data-ng-init="getProjectFields()" data-ng-submit="updateOrgSearch()" novalidate>
+
+      <div class="form-group col-md-12">
+          <div class="col-md-12" data-ng-repeat="query in searchOrg">
+            <div id="search" style="float:left;" class="col-md-5">
+              <select data-ng-model="query.field">
+                  <option ng-repeat="orgField in orgFields"
+                          value="{{orgField.name}}">{{orgField.fi}}
+                  </option>
+                </select>
+            </div>
+            <div ng-show="query.field" class="col-md-6"
+               style="float:left">
+              <input type="text" class="form-control"
+                     data-ng-model="query.value"
+                     placeholder="Kirjoita hakusana(t)">
+            </div>
+          </div>
+          <div style="clear:both;">&nbsp;</div>
+          <div class="col-md-12">
+              <input type="button" value="Lisää hakukenttä"
+                      ng-click="addOrgQuery();"/>
+              <input type="button" ng-show="searchOrg.length > 0"
+                      value="Poista viimeinen" ng-click="removeOrgQuery();"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <button id="appr-btn" type="submit" class="btn btn-default">
+                Hae</button>
+            </div>
+        </div>
+    </form>
+  </article>
+
+  <div style="clear:both;">&nbsp;</div>
+  <article data-ng-init="searchOrgs()">
+    <h4>Hakutulokset</h4>
+    <p>Hakutulosten määrä: {{organisations.length}}</p>
+
+    <h4>Lataa hakutulokset tiedostoon</h4>
+    <button type="button" ng-csv="organisations" lazy-load="true" csv-header="orgHeaders"
+            csv-column-order="csvColOrder" filename="tiedot.csv" field-separator=";"
+            add-bom="true">Lataa</button>
+    <table class="col-md-12 table table-striped">
+        <thead>
+            <tr>
+                <th class="col-md-3">Nimi</th>
+                <th class="col-md-3">Edustaja</th>
+                <th class="col-md-3">Osoite</th>
+                <th class="col-md-3">Sähköposti</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="org in organisations">
+                <td><a ng-href="/organisations/{{org._id}}" target="_blank">{{org.name}}</a></td>
+                <td>{{org.representative}}</td>
+                <td>{{org.address}}</td>
+                <td>{{org.email}}</td>
+            </tr>
+        </tbody>
+    </table>
+  </article>
+</section>

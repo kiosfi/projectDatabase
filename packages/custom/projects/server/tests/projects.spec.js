@@ -52,7 +52,11 @@ describe('<Unit Test>', function () {
             bank_account.save();
             organisation = new Organisation({
                 "name": "Humanrights org",
-                "representative": "Representative",
+                "representative": {
+                    "name": "Representative",
+                    "email": "email@email.com",
+                    "phone": "12345"
+                },
                 "exec_manager": "Manager",
                 "address": {
                     "street": "Street 123911",
@@ -64,7 +68,6 @@ describe('<Unit Test>', function () {
                 "email": "email@org.com",
                 "website": "www.org.com",
                 "legal_status": "legal status",
-                "history_status": "history status",
                 "int_links": "international links",
                 "nat_local_links": "local human rights org",
                 "description": "description for organisation .....",
@@ -166,7 +169,11 @@ describe('<Unit Test>', function () {
 
                 organisation3 = new Organisation({
                     "name": "Children rights org",
-                    "representative": "Mr Jackson",
+                    "representative": {
+                        "name": "Mr Jackson",
+                        "email": "email@email.com",
+                        "phone": "12345"
+                    },
                     "exec_manager": "Manager3",
                     "address": {
                         "street": "Address Road 123",
@@ -178,7 +185,6 @@ describe('<Unit Test>', function () {
                     "email": "email@childrenorg.com",
                     "website": "www.childrenorg.com",
                     "legal_status": "non-profit",
-                    "history_status": "history status",
                     "int_links": "international links",
                     "nat__local_links": "local human rights org 2",
                     "description": "description for organisation .....",
@@ -264,7 +270,11 @@ describe('<Unit Test>', function () {
                 this.timeout(1000);
                 organisation4 = new Organisation({
                     "name": "Humanrights org",
-                    "representative": "Representative",
+                    "representative": {
+                        "name": "Representative",
+                        "email": "email@email.com",
+                        "phone": "12345"
+                    },
                     "exec_manager": "Manager4",
                     "address": {
                         "street": "Street road 123",
@@ -276,7 +286,6 @@ describe('<Unit Test>', function () {
                     "email": "email@hrorg.com",
                     "website": "www.hrorg.com",
                     "legal_status": "legal status",
-                    "history_status": "history status",
                     "int_links": "international links",
                     "nat_local_links": "local human rights org 4",
                     "description": "description for organisation .....",

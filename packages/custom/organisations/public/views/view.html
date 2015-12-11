@@ -9,7 +9,7 @@
     <div ng-show="statusCode === 200">
         <div id="header">
             <h2><span class="name">{{organisation.name}}</span></h2>
-            <h3>Edustaja: <a href="">{{organisation.representative}}</a></h3>
+            <h3>Edustaja: {{organisation.representative.name}}</h3>
         </div>
         <div>
             <ul id="menu" class="col-md-3 nav nav-list" style="position: fixed">
@@ -17,13 +17,12 @@
                     <label><a href="#header">Järjestö</a></label>
                     <ul>
                         <li><a href="#summary">Perustiedot</a></li>
-                        <li><a href="#legalStatus">Oikeudellinen status</a></li>
+                        <li><a href="#legalStatus">Hallintomalli ja henkilöstö</a></li>
                         <li><a href="#description">Kuvaus</a></li>
-                        <li><a href="#history">Historia</a></li>
                         <li><a href="#connections">Yhteydet</a></li>
                         <li><a href="#bankInfo">Tilitiedot</a></li>
                         <li><a href="#prevApp">Aiemmat hakemukset</a></li>
-                        <li><a href="#otherDonors">Muut rahoittajat</a></li>
+                        <li><a href="#otherDonors">Järjestön taloustilanne</a></li>
                     </ul>
                 </li>
             </ul>
@@ -34,11 +33,18 @@
                 <table class="org-content">
                     <tr>
                         <th>Edustaja</th>
-                        <td><a href="">{{organisation.representative}}</a></td>
+                        <td>{{organisation.representative.name}},
+                            {{organisation.representative.email}},
+                            {{organisation.representative.phone}}
+                        </td>
                     </tr>
                     <tr>
                         <th>Vastuullinen johtaja</th>
                         <td>{{organisation.exec_manager}}</td>
+                    </tr>
+                    <tr>
+                        <th>Viestintävastaava</th>
+                        <td>{{organisation.communications_rep}}</td>
                     </tr>
                     <tr>
                         <th>Osoite</th>
@@ -92,7 +98,7 @@
                 </section>
             </article>
             <article id="legalStatus" class="org-article">
-                <h4>Oikeudellinen status</h4>
+                <h4>Hallintomalli ja henkilöstö</h4>
                 <section class="org-content">
                     <p>{{organisation.legal_status}}</p>
                 </section>
@@ -103,12 +109,6 @@
                     <p>{{organisation.description}}</p>
                 </section>
             </article>
-            <article id="history" class="org-article">
-                <h4>Historia</h4>
-                <section class="org-content">
-                    <p>{{organisation.history_status}}</p>
-                </section>
-            </article>
             <article id="connections" class="org-article">
                 <h4>Kansalliset ja kansainväliset yhteydet</h4>
                 <section class="org-content">
@@ -117,9 +117,13 @@
                 </section>
             </article>
             <article id="otherDonors" class="org-article">
-                <h4>Muut rahoittajat</h4>
+                <h4>Muut rahoittajat ja budjetti</h4>
                 <section class="org-content">
-                    <p>{{organisation.other_funding}}</p>
+                    <p>{{organisation.other_funding_budget}}</p>
+                </section>
+                <h4>Taloushallinto ja tilintarkastus</h4>
+                <section class="org-content">
+                    <p>{{organisation.accounting_audit}}</p>
                 </section>
             </article>
         </div>
