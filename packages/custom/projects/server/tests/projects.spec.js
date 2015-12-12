@@ -363,7 +363,10 @@ describe('<Unit Test>', function () {
                     proj.title = 'Children rights';
                     proj.update();
                     expect(err).to.be(null);
-                    expect(proj.title).to.be("Children rights");    
+                    expect(proj.title).to.be("Children rights");  
+                    proj.title = 'Humans';
+                    proj.update();
+                    expect(proj.title).to.be("Humans"); 
                     done();
                 });
             });
