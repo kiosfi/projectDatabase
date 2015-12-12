@@ -149,23 +149,6 @@ A form for project state change.
             </div>
         </div>
 
-        <div class="form-group col-md-12">
-            <label mean-token="'create-methods'" class="col-md-2">Toimintatavat</label>
-            <div class="col-md-12" id="methodsSelection" data-ng-repeat="method in addedMethods">
-                <select id="methodSelect" data-ng-model="method.name">
-                    <option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>
-                </select>
-
-                <select id="levelSelect" data-ng-model="method.level">
-                    <option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>
-                </select>
-            </div>
-
-            <div class="col-md-12">
-                <input type="button" value="Lisää uusi" ng-click="addMethod();"/>
-                <input type="button" value="Poista viimeinen" ng-click="removeMethod();"/>
-            </div>
-        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button id="appr-btn" type="submit" class="btn btn-default">Tallenna</button>
@@ -339,7 +322,7 @@ A form for project state change.
         </div>
 
         <p class="col-md-12 strong-title comment-form-div">Toimintatavat ja niiden toteutuminen</p>
-        <div class="form-group col-md-12" ng-repeat="method in project.approved.methods">
+        <div class="form-group col-md-12" ng-repeat="method in project.methods">
             <div class="col-md-4">
                 {{method.name}} <br>- {{method.level}}
             </div>
@@ -461,7 +444,7 @@ A form for project state change.
         </div>
 
         <p class="col-md-12 strong-title comment-form-div">Toimintatavat ja niiden toteutuminen</p>
-        <div class="form-group col-md-12" ng-repeat="method in project.approved.methods">
+        <div class="form-group col-md-12" ng-repeat="method in project.methods">
             <div class="col-md-4">
                 {{method.name}} <br>- {{method.level}}
             </div>

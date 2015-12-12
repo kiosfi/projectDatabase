@@ -70,6 +70,9 @@ var ProjectSchema = new Schema({
         required: true,
         trim: true
     },
+    methods: {
+        type: Array,
+    },
     background: {
         type: String,
         required: true,
@@ -146,9 +149,6 @@ var ProjectSchema = new Schema({
           type: Number
         },
         themes: {
-          type: Array
-        },
-        methods: {
           type: Array
         }
     },

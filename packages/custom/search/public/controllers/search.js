@@ -530,8 +530,12 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                     }
                 }
 
-                angular.forEach(obj.approved.methods, function (method) {
-                    var parsedMethod = method.name + '(' + method.level + ')';
+                angular.forEach(obj.methods, function (method) {
+                    if (typeof method.comment === 'undefined') {
+                      method.comment = "";
+                    }
+                    var parsedMethod = method.name + ' (' + method.level + '): ' +
+                                       method.comment;
                     methods.push(parsedMethod);
                 });
 
@@ -557,13 +561,12 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                     $scope.parsedData.push({project_ref: obj.project_ref, state: obj.state, title: obj.title,
                         coordinator: obj.coordinator, organisation: obj.organisation.name, description: obj.description,
                         description_en: obj.description_en, duration_months: obj.duration_months, applied_sum_eur: obj.funding.applied_curr_eur,
-                        granted_sum: obj.approved.granted_sum_eur, left_eur: obj.funding.left_eur, background: obj.background,
+                        granted_sum: obj.approved.granted_sum_eur, left_eur: obj.funding.left_eur, methods: methods, background: obj.background,
                         gender_aspect: obj.gender_aspect, beneficiaries: obj.beneficiaries, project_goal: obj.project_goal,
                         reporting_evalation: obj.reporting_evaluation, sustainability_risks: obj.sustainability_risks,
                         other_donors_proposed: obj.other_donors_proposed, region: obj.region, dac: obj.dac, in_review_date: in_review_date,
                         in_review_comments: in_review_comments, approved_date: approved_date,
-                        approved_by: approved_by, approved_methods: methods, approved_themes: themes,
-                        signed_date: signed_date, signed_by: signed_by, intrep_dls: dls, planned_payments: plpayments,
+                        approved_by: approved_by, approved_themes: themes, signed_date: signed_date, signed_by: signed_by, intrep_dls: dls, planned_payments: plpayments,
                         rejected_date: rejected_date, rejected_categories: rejection_categories,
                         rejected_comments: rejection_comments, payments: payments, end_report_approved_date: end_report_approved_date,
                         end_report_approved_by: end_report_approved_by, audit_date: audit_date, audit_review: audit_review,

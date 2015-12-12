@@ -556,6 +556,27 @@
                 </button>
             </legend>
             <div id="fs4" style="display: none;">
+                <div class="form-group col-md-12">
+                  <label mean-token="'create-methods'" class="col-md-2">Toimintatavat</label>
+                    <div class="col-md-12" id="methodsSelection" data-ng-repeat="method in addedMethods">
+                        <select id="methodSelect" data-ng-model="method.name">
+                            <option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>
+                        </select>
+
+                        <select id="levelSelect" data-ng-model="method.level">
+                            <option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>
+                        </select>
+                        <div style="clear:both;">&nbsp;</div>
+                        <textarea name="methodComment" data-ng-model="method.comment" id="methodComment"
+                                  placeholder="Toimintatavan kuvaus" class="form-control" required></textarea>
+
+                    </div>
+                    <div style="clear:both;">&nbsp;</div>
+                    <div class="col-md-12">
+                        <input type="button" value="Lisää uusi" ng-click="addMethod();"/>
+                        <input type="button" value="Poista viimeinen" ng-click="removeMethod();"/>
+                    </div>
+                </div>
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         :  projectForm.background.$invalid }">

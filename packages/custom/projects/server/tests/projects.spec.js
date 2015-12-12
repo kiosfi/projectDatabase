@@ -316,6 +316,7 @@ describe('<Unit Test>', function () {
                             "duration_months": 29,
                             "description": "A short description of project",
                             "description_en": "Description in english",
+                            "methods": [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen", "comment": "Näin..."}],                            
                             "background": "Project background 3",
                             "beneficiaries": "The project benefits such and such",
                             "gender_aspect": "Gender aspects include this and that",
@@ -397,7 +398,6 @@ describe('<Unit Test>', function () {
                     "approved_date": date,
                     "approved_by": "Toiminnanjohtaja",
                     "board_notified": date,
-                    "methods": [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen"}],
                     "themes": ["Oikeusvaltio ja demokratia"],
                     "granted_sum_eur": 600000};
 

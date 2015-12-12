@@ -155,6 +155,14 @@
                     <h4>Lisätiedot</h4>
                     <section id="appinfo" class="proj-content">
                         <div>
+                            <h5>Suunnitellut toimintatavat</h5>
+                            <ol>
+                                <li ng-repeat="method in project.methods">
+                                    <i>{{method.name}} ({{method.level}})</i><br>
+                                    Kuvaus: {{method.comment}}<br>
+                                </li>
+                            </ol>
+                        <div>
                             <h5>Hankkeen taustat</h5>
                             <p>
                                 {{project.background}}
@@ -229,12 +237,6 @@
                                     <h5>Teemat:</h5>
                                     <ul>
                                         <li data-ng-repeat="theme in project.approved.themes">{{theme}}</li>
-                                    </ul>
-                                    <h5>Toimintatavat:</h5>
-                                    <ul>
-                                        <li data-ng-repeat="method in project.approved.methods">{{method.name}},
-                                            <i>taso:</i> {{method.level}}
-                                        </li>
                                     </ul>
                                 </div>
                             </section>

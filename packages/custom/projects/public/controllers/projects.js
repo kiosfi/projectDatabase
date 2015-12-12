@@ -96,6 +96,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
                 } else {
                     project.organisation = $scope.project.listOrganisation;
+                    project.methods = $scope.addedMethods;
 
                     project.$save(function (response) {
                         $location.path('projects/' + response._id);
@@ -223,7 +224,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.approved.approved_date = $scope.convertDate($scope.approved_day, $scope.approved_month, $scope.approved_year);
                 project.approved.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
                 project.approved.themes = $scope.themeSelection;
-                project.approved.methods = $scope.addedMethods;
                 project.state = $scope.global.newState;
                 project.$addApproved(function (response) {
                     $location.path('projects/' + response._id)
@@ -395,7 +395,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.addMethod = function () {
-            $scope.addedMethods.push({name: '', level: ''});
+            $scope.addedMethods.push({name: '', level: '', comment: ''});
         };
 
         $scope.removeMethod = function () {

@@ -84,7 +84,8 @@
             it('$scope.create() with valid form data should send POST request ', function () {
 
                 scope.project = {
-                    title: 'Human rights'
+                    title: 'Human rights',
+                    methods: []
                 };
 
                 var postProjectData = function () {
@@ -94,7 +95,8 @@
                 var responseProjectData = function () {
                     return {
                         _id: '525cf20451979dea2c000001',
-                        title: 'Human rights'
+                        title: 'Human rights',
+                        methods: []                        
                     };
                 };
 
@@ -184,7 +186,6 @@
                           approved_date: scope.date,
                           approved_by: "Toiminnanjohtaja",
                           board_notified: scope.date,
-                          methods: [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen"}],
                           themes: ["Oikeusvaltio ja demokratia"],
                           granted_sum_eur: 60000
                         },

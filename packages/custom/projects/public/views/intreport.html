@@ -36,8 +36,9 @@
         <article class="er-body">
             <h4><b>Hankkeen suunniteltujen tavoitteiden ja toimintojen toteutuminen</b></h4>
             <ol>
-                <li ng-repeat="method in project.approved.methods">
+                <li ng-repeat="method in project.methods">
                     <i>{{method.name}} ({{method.level}})</i><br>
+                    Kuvaus: {{method.comment}}<br>
                 </li>
             </ol>
         </article>
@@ -45,9 +46,10 @@
         <article class="er-body">
             <h4><b>Väliraportointiin mennessä toteutetut aktiviteetit</b></h4>
             <ol>
-                <li ng-repeat="method in project.approved.methods">
+                <li ng-repeat="method in project.methods">
                     <i>{{method.name}} ({{method.level}})</i><br>
-                    {{report.methods[project.approved.methods.indexOf(method)]}}
+                    Kuvaus: {{method.comment}}<br>
+                    Kommentit: {{report.methods[project.methods.indexOf(method)]}}<br>
                 </li>
             </ol>
         </article>
