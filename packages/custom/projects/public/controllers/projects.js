@@ -87,12 +87,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
         /**
-         * 
-         * @param {type} isValid
+         * Updates project as per edit form and goes to project view if form is valid.
+         * @param {type} isValid checkes if form is valid
          * @returns {undefined}
          */
         $scope.update = function (isValid) {
-            // TODO: add convertDate to all date-objects!!
             if (isValid) {
                 var project = $scope.project;
 
@@ -176,8 +175,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         /**
+         * Initializes scope-arrays and dates when going to edit-form.
          * 
-         * @returns {undefined}
          */
         $scope.initEditing = function () {
 
@@ -189,6 +188,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.plannedPayments = [];
                 $scope.deadlines = [];
                 $scope.int_reports = [];
+                
+//                angular.forEach(project.methods, function (obj) {
+//                        $scope.addedMethods.push({name: obj.name, level: obj.level});
+//                    });
+                
                 if (typeof project.approved !== 'undefined') {
                     var date = new Date(project.approved.approved_date);
                     $scope.approved_day = date.getDate();
