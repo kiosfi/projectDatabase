@@ -73,8 +73,12 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
 
         $scope.confirm = function (organisation) {
             OrgProjects.findProjects(organisation._id).success(function (projects) {
-              if (projects.length > 0) {
+              if (projects.length > 1) {
                 if (confirm('Järjestöllä on ' + projects.length + ' hanketta tietokannassa! Haluatko varmasti poistaa järjestön?')) {
+                  $scope.remove(organisation);
+                }
+              } else if (projects.length === 1) {
+                if (confirm('Järjestöllä on ' + projects.length + ' hanke tietokannassa! Haluatko varmasti poistaa järjestön?')) {
                   $scope.remove(organisation);
                 }
               } else {
