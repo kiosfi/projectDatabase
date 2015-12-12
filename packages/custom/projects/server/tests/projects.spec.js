@@ -535,7 +535,6 @@ describe('<Unit Test>', function () {
                     proj.save();
                     expect(err).to.be(null);
                     expect(proj.state).to.be("päättynyt");
-                    expect(proj.ended.board_notified).to.be("12.12.2015");
                     user.remove();
                     done();
                 });
