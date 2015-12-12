@@ -79,6 +79,32 @@
                         // test scope value
                         expect(scope.organisation).toEqualData(testOrganisationData());
                     });
+
+            it('$scope.remove() should send a DELETE request with a valid organisationId ' +
+                    'and remove the organisation from the scope', inject(function (Organisations) {
+
+                        // fixture rideshare
+                        var organisation = new Organisations({
+                          _id: '525a8422f6d0f87f0e407a33'
+                        });
+
+                        // mock rideshares in scope
+                        scope.organisations = [];
+                        scope.organisations.push(organisation);
+
+                        // test expected rideshare DELETE request
+                        $httpBackend.expectDELETE(/api\/organisations\/([0-9a-fA-F]{24})$/).respond(204);
+
+                        // run controller
+                        scope.remove(organisation);
+                        $httpBackend.flush();
+
+                        // test after successful delete URL location projects list
+                        expect($location.path()).toBe('/organisations');
+                        expect(scope.organisations.length).toBe(0);
+
+                  }));
+
         });
     });
 }());

@@ -212,6 +212,18 @@ describe('<Unit Test>', function () {
             });
         });
 
+        describe('Method Destroy', function () {
+            it('should delete given organisation', function (done) {
+                this.timeout(10000);
+                var query = Organisation;
+                return query.remove({name: "Human rights org"}).exec(function (err) {
+                    expect(err).to.be(null);
+                    done();
+                });
+            });
+
+        });
+
         afterEach(function (done) {
             this.timeout(10000);
             organisation.remove();

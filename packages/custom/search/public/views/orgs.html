@@ -47,11 +47,12 @@
 
   <div style="clear:both;">&nbsp;</div>
   <article data-ng-init="searchOrgs()">
-    <h4>Hakutulokset</h4>
+    <h3>Hakutulokset</h3>
+    <br>
     <p>Hakutulosten määrä: {{organisations.length}}</p>
-
-    <h4>Lataa hakutulokset tiedostoon</h4>
-    <button type="button" ng-csv="organisations" lazy-load="true" csv-header="orgHeaders"
+    <br>
+    <h4>Lataa hakutulokset tiedostoon:</h4>
+      <button type="button" ng-csv="organisations" lazy-load="true" csv-header="orgHeaders"
             csv-column-order="csvColOrder" filename="tiedot.csv" field-separator=";"
             add-bom="true">Lataa</button>
     <table class="col-md-12 table table-striped">

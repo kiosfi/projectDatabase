@@ -47,6 +47,13 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
         };
 
         $scope.findOne = function () {
+            Organisations.get({
+                organisationId: $stateParams.organisationId
+            }, function (organisation) {
+                $scope.organisation = organisation;
+            });
+        };
+        /*$scope.findOne = function () {
             // For some unknown reason,
             // $http.get(...).then(success(...), error(...)) doesn't seem to be
             // working here, so we need to use the deprecated
@@ -62,8 +69,35 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
                         $scope.errorMessage = error.message;
                     }
             );
+        };*/
+
+        $scope.confirm = function (organisation) {
+            OrgProjects.findProjects(organisation._id).success(function (projects) {
+              if (projects) {
+                if (confirm('Järjestöllä on ' + projects.length + ' hanketta tietokannassa! Haluatko varmasti poistaa järjestön?')) {
+                  $scope.remove(organisation);
+                }
+              }
+          });
         };
 
+        $scope.remove = function (organisation) {
+            if (organisation) {
+                organisation.$remove(function (response) {
+                    for (var i in $scope.organisations) {
+                        if ($scope.organisations[i] === organisation) {
+                            $scope.organisations.splice(i, 1);
+                        }
+                    }
+                    $location.path('organisations');
+                });
+            } else {
+                $scope.organisation.$remove(function (response) {
+                    $location.path('organisations');
+                    $window.location.reload();
+                });
+            }
+        };
 
         $scope.findOrgProjects = function () {
             OrgProjects.findProjects($stateParams.organisationId).success(function (projects) {

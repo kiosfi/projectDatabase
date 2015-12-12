@@ -137,5 +137,31 @@ module.exports = function (Organisations) {
                 res.json({orgCount: result});
             });
         },
+
+        /**
+         * Deletes requested organisation from organisations collection.
+         * object {orgCount : &lt;n&gt;}, where &lt;n&gt; is the number of
+         * @param {type} req Request object.
+         * @param {type} res Response object.
+         */
+        destroy: function (req, res) {
+            var organisation = req.organisation;
+            organisation.remove(function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Järjestön poistaminen ei onnistu.'
+                    });
+                }
+
+                Organisations.events.publish({
+                    action: 'deleted',
+                    user: {
+                        name: req.user.name
+                    },
+                    name: organisation.name
+                });
+                res.json(organisation);
+            });
+        },
     };
 }

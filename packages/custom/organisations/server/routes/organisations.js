@@ -33,8 +33,8 @@ module.exports = function (Organisations, app, auth) {
             .put(auth.requiresLogin, organisations.countOrganisations)
             .post(auth.requiresLogin, hasPermissions, organisations.create);
     app.route('/api/organisations/:organisationId')
-            .get(auth.requiresLogin, auth.isMongoId, organisations.show);
-
+            .get(auth.requiresLogin, auth.isMongoId, organisations.show)
+            .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, organisations.destroy);
     app.param('organisationId', organisations.organisation);
     app.param('orgName', organisations.organisation);
 };

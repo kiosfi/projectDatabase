@@ -408,6 +408,14 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
+
+        /**
+         * Deletes requested project from projects collection.
+         * object {orgCount : &lt;n&gt;}, where &lt;n&gt; is the number of
+         * @param {type} req Request object.
+         * @param {type} res Response object.
+         */
+
         destroy: function (req, res) {
             var project = req.project;
             project.remove(function (err) {

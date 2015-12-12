@@ -2,13 +2,21 @@
     <style>
         td {padding-left: 3em;}
     </style>
-    <div id="error" class="panel panel-danger" ng-show="statusCode !== 200">
+    <!--<div id="error" class="panel panel-danger" ng-show="statusCode !== 200">
         <div class="panel-heading">Virhe - {{statusCode}}</div>
         <div class="panel-body">{{errorMessage}}</div>
-    </div>
-    <div ng-show="statusCode === 200">
+    </div>-->
+    <div>
         <div id="header">
-            <h2><span class="name">{{organisation.name}}</span></h2>
+            <h2><span class="name">{{organisation.name}}</span>
+                <span>
+                  <!--                Confirm action here-->
+
+                  <a class="btn-lg" id="delete" data-ng-click="confirm(organisation);">
+                      <i class="glyphicon glyphicon-trash"></i>
+                  </a>
+                </span>
+            </h2>
             <h3>Edustaja: {{organisation.representative.name}}</h3>
         </div>
         <div>
