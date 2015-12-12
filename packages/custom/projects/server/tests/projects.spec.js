@@ -357,19 +357,13 @@ describe('<Unit Test>', function () {
         
         it('should update given project', function (done) {
                 this.timeout(10000);
-                var in_review = {
-                    "user": user.name,
-                    "comments": "this is a comment"};
 
                 return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
 
-                    proj.state = "käsittelyssä";
-                    proj.in_review = in_review;
-                    proj.save();
+                    proj.title = 'Children rights';
+                    proj.update();
                     expect(err).to.be(null);
-                    expect(proj.state).to.be("käsittelyssä");
-                    expect(proj.in_review.comments).to.be("this is a comment");
-                    user.remove();
+                    expect(proj.title).to.be("Children rights");    
                     done();
                 });
             });
@@ -527,10 +521,11 @@ describe('<Unit Test>', function () {
 
             it('should create a new "ended" state update given project with its id', function (done) {
                 this.timeout(10000);
+                var date = new Date();
                 var ended = {
                     "user": user.name,
-                    "end_date": "12.12.2015",
-                    "board_notified": "12.12.2015",
+                    "end_date": date,
+                    "board_notified": date,
                     "approved_by": "toimitusjohtaja",
                     "other_comments": "kommentti"};
 
