@@ -441,7 +441,7 @@
         <fieldset ng-show="project.intermediary_reports.length > 0">
             <a href="" ng-click="showIntRepDetails = !showIntRepDetails">Väliraportti -tilan tiedot</a>
             <div ng-show="showIntRepDetails">
-                <div data-ng-repeat="intreport in project.intermediary_reports">
+                <div data-ng-repeat="intreport in int_reports">
                     <h4>{{intreport.reportNumber}}. väliraportti</h4>                    
 
                     <p class="col-md-12 strong-title comment-form-div">Toimintatavat ja niiden toteutuminen</p>
@@ -487,13 +487,13 @@
                         </div>
                     </div>
 
-<!--                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-12">
                         <label for="intRDateAppr" class="col-md-2">Hyväksymis pvm</label>
 
                         <div class="col-md-2" style="float:left;" ng-class="{
                     'has-error'
                             :  projectEditForm.intRDateAppr_day.$invalid }">
-                            <input name="intRDateAppr_day" type="number" class="form-control" data-ng-model="project.intermediary_reports[$index].intRDateAppr_day" id="intRDateAppr_day" placeholder="p" min="1">
+                            <input name="intRDateAppr_day" type="number" class="form-control" data-ng-model="intreport.date_day" id="intRDateAppr_day" placeholder="p" min="1">
                             <div ng-show="projectEditForm.intRDateAppr_day.$invalid" class="help-block">
                                 <p ng-show="projectEditForm.intRDateAppr_day.$error.number">Päivän täytyy olla numero</p>
                             </div>
@@ -501,7 +501,7 @@
                         <div class="col-md-2" style="float:left;" ng-class="{
                     'has-error'
                             :  projectEditForm.intRDateAppr_month.$invalid }">
-                            <input name="intRDateAppr_month" type="number" class="form-control" data-ng-model="project.intermediary_reports[$index].intRDateAppr_month" id="intRDateAppr_month" placeholder="k" min="1">
+                            <input name="intRDateAppr_month" type="number" class="form-control" data-ng-model="intreport.date_month" id="intRDateAppr_month" placeholder="k" min="1">
                             <div ng-show="projectEditForm.intRDateAppr_month.$invalid" class="help-block">
                                 <p ng-show="projectEditForm.intRDateAppr_month.$error.number">Kuukauden täytyy olla numero</p>
                             </div>
@@ -509,12 +509,12 @@
                         <div class="col-md-2" style="float:left;" ng-class="{
                     'has-error'
                             :  projectEditForm.intRDateAppr_year.$invalid }">
-                            <input name="intRDateAppr_year" type="number" class="form-control" data-ng-model="project.intermediary_reports[$index].intRDateAppr_year" id="intRDateAppr_year" placeholder="vvvv" min="1">
+                            <input name="intRDateAppr_year" type="number" class="form-control" data-ng-model="intreport.date_year" id="intRDateAppr_year" placeholder="vvvv" min="1">
                             <div ng-show="projectEditForm.intRDateAppr_year.$invalid" class="help-block">
                                 <p ng-show="projectEditForm.intRDateAppr_year.$error.number">Vuoden täytyy olla numero</p>
                             </div>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </fieldset>

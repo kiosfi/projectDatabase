@@ -127,6 +127,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     });
                 }
 
+                if (project.intermediary_reports.length > 0) {
+                    project.intermediary_reports = [];
+
+                    angular.forEach($scope.int_reports, function (obj) {
+                        project.intermediary_reports.push({methods: obj.methods, overall_rating_kios: obj.overall_rating_kios,
+                            objectives: obj.objectives, comments: obj.comments, approved_by: obj.approved_by,
+                            date_approved: $scope.convertDate(obj.date_day, obj.date_month, obj.date_year),
+                            reportNumber: obj.reportNumber, user: obj.user, date: obj.date});
+                    });
+                }
+
                 if (typeof project.end_report.date !== 'undefined') {
                     if ($scope.projectEditForm.audit_day.$dirty || $scope.projectEditForm.audit_month.$dirty
                             || $scope.projectEditForm.audit_year.$dirty) {
@@ -150,7 +161,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         project.ended.end_date = $scope.convertDate($scope.end_day, $scope.end_month, $scope.end_year);
                     }
                 }
-                
+
                 if (!project.updated) {
                     project.updated = [];
                 }
@@ -177,7 +188,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.addedMethods = [];
                 $scope.plannedPayments = [];
                 $scope.deadlines = [];
-//                $scope.int_reports = [];
+                $scope.int_reports = [];
                 if (typeof project.approved !== 'undefined') {
                     var date = new Date(project.approved.approved_date);
                     $scope.approved_day = date.getDate();
@@ -215,15 +226,21 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     });
                 }
 
-//                if (project.intermediary_reports.length > 0) {
-//                    angular.forEach(project.intermediary_reports, function (obj) {
-//                        var date = new Date(obj.date_approved);
-//
+                if (project.intermediary_reports.length > 0) {
+                    angular.forEach(project.intermediary_reports, function (obj) {
+                        var date = new Date(obj.date_approved);
+
+                        $scope.int_reports.push({methods: obj.methods, overall_rating_kios: obj.overall_rating_kios, objectives: obj.objectives,
+                            comments: obj.comments, approved_by: obj.approved_by, date_day: date.getDate(),
+                            date_month: date.getMonth() + 1, date_year: date.getFullYear(), reportNumber: obj.reportNumber, date: obj.date,
+                            user: obj.user});
 //                        $scope.project.intermediary_reports[project.intermediary_reports.indexOf(obj)].intRDateAppr_day = date.getDate();
 //                        $scope.project.intermediary_reports[project.intermediary_reports.indexOf(obj)].intRDateAppr_month = date.getMonth() + 1;
 //                        $scope.project.intermediary_reports[project.intermediary_reports.indexOf(obj)].intRDateAppr_year = date.getFullYear();
-//                    });
-//                }
+
+
+                    });
+                }
 
                 //                        $scope.int_reports.push({methods: obj.methods, overall_rating_kios: obj.overall_rating_kios,
 //                        comments: obj.comments, approved_by: obj.approved_by, date: obj.date, })
@@ -457,7 +474,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (isValid) {
                 var project = $scope.project;
                 project.intermediary_report.date = Date.now();
-                project.intermediary_report.date_approved = $scope.convertDate($scope.intRDateAppr_day, $scope.intRDateAppr_month, $scope.intRDateAppr_year);
+
+                if (typeof $scope.intRDateAppr_day !== 'undefined' && typeof $scope.intRDateAppr_month !== 'undefined' &&
+                        typeof $scope.intRDateAppr_year !== 'undefined') {
+                    project.intermediary_report.date_approved = $scope.convertDate($scope.intRDateAppr_day,
+                            $scope.intRDateAppr_month, $scope.intRDateAppr_year);
+                }
+
                 project.state = $scope.global.newState;
                 project.intermediary_report.methods = $scope.addedMethods;
                 project.intermediary_report.objectives = $scope.objectiveComments;
