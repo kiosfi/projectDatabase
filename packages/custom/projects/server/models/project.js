@@ -254,10 +254,19 @@ var ProjectSchema = new Schema({
 
 });
 
+var number = 1
+var prefix = new Date().getFullYear().toString().slice(-2);
+if (number < 10) {
+  prefix = prefix + "00"
+} else if (number >= 10 && number <= 99) {
+  prefix = prefix + "0"
+}
+
 ProjectSchema.plugin(autoIncrement.plugin, {
     model: 'Project',
     field: 'project_ref',
-    startAt: 15000
+    startAt: number,
+    prefix: prefix
 });
 
 ProjectSchema.path('title').validate(function (title) {
