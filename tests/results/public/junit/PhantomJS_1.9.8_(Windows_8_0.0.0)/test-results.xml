@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
-<testsuite name="PhantomJS 1.9.8 (Windows 8 0.0.0)" package="" timestamp="2015-12-12T13:13:31" id="0" hostname="Fupu" tests="16" errors="0" failures="1" time="0.443">
+<testsuite name="PhantomJS 1.9.8 (Windows 8 0.0.0)" package="" timestamp="2015-12-12T13:32:50" id="0" hostname="Fupu" tests="16" errors="0" failures="1" time="0.452">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
   </properties>
-  <testcase name="should expose some global scope" time="0.048" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="should expose some global scope" time="0.022" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.find() should create an array with at least one organisation object fetched from XHR" time="0.038" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.findOne() should create an array with one organisation object fetched from XHR using a projectId URL parameter" time="0.019" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.028" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.findOne() should create an array with one project object fetched from XHR using a projectId URL parameter" time="0.028" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.create() with valid form data should send POST request " time="0.022" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="should expose some global scope" time="0.043" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="should expose some global scope" time="0.018" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.find() should create an array with at least one organisation object fetched from XHR" time="0.043" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.findOne() should create an array with one organisation object fetched from XHR using a projectId URL parameter" time="0.026" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.find() should create an array with at least one project object fetched from XHR" time="0.02" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.findOne() should create an array with one project object fetched from XHR using a projectId URL parameter" time="0.027" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.create() with valid form data should send POST request " time="0.021" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
   <testcase name="$scope.remove() should send a DELETE request with a valid projectId and remove the project from the scope" time="0.022" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.update(true) should a valid project" time="0.018" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers">
+  <testcase name="$scope.update(true) should a valid project" time="0.02" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers">
     <failure type="">TypeError: 'undefined' is not an object (evaluating 'project.intermediary_reports.length')
 undefined
     at C:/Users/Sonja/Documents/ohtu-projekti/projectDatabase/packages/custom/projects/public/controllers/projects.js:9
@@ -20,13 +20,13 @@ undefined
     at workFn (C:/Users/Sonja/Documents/ohtu-projekti/projectDatabase/bower_components/angular-mocks/angular-mocks.js:2439)
 </failure>
   </testcase>
-  <testcase name="$scope.addReviewState(true) should update a valid project" time="0.017" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.addApprovedState(true) should update a valid project" time="0.033" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.addRejectedState(true) should update a valid project" time="0.022" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.addSignedState(true) should update a valid project" time="0.019" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.addIntReportState(true) should update a valid project" time="0.052" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.addEndReportState(true) should update a valid project" time="0.036" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
-  <testcase name="$scope.addEndedState(true) should update a valid project" time="0.019" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.addReviewState(true) should update a valid project" time="0.018" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.addApprovedState(true) should update a valid project" time="0.031" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.addRejectedState(true) should update a valid project" time="0.02" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.addSignedState(true) should update a valid project" time="0.02" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.addIntReportState(true) should update a valid project" time="0.051" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.addEndReportState(true) should update a valid project" time="0.041" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
+  <testcase name="$scope.addEndedState(true) should update a valid project" time="0.031" classname="PhantomJS_1_9_8_(Windows_8_0_0_0).MEAN controllers"/>
   <system-out>
     <![CDATA[
 ]]>

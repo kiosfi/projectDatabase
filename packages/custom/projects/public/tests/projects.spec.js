@@ -143,11 +143,11 @@
                 var putProjectData = function () {
                     return {
                         _id: '525a8422f6d0117f0e407a33',
-                        state: 'rekisteröity',
+                        intermediary_reports: [],                        
                         end_report: {
                             date: undefined
                         },
-                        intermediary_reports: [],
+                        state: 'rekisteröity',
                         title: 'Human Rights',
                         to: 'Children rights'
                     };

@@ -234,16 +234,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                             comments: obj.comments, approved_by: obj.approved_by, date_day: date.getDate(),
                             date_month: date.getMonth() + 1, date_year: date.getFullYear(), reportNumber: obj.reportNumber, date: obj.date,
                             user: obj.user});
-//                        $scope.project.intermediary_reports[project.intermediary_reports.indexOf(obj)].intRDateAppr_day = date.getDate();
-//                        $scope.project.intermediary_reports[project.intermediary_reports.indexOf(obj)].intRDateAppr_month = date.getMonth() + 1;
-//                        $scope.project.intermediary_reports[project.intermediary_reports.indexOf(obj)].intRDateAppr_year = date.getFullYear();
-
-
                     });
                 }
-
-                //                        $scope.int_reports.push({methods: obj.methods, overall_rating_kios: obj.overall_rating_kios,
-//                        comments: obj.comments, approved_by: obj.approved_by, date: obj.date, })
 
                 if (typeof project.end_report.date !== 'undefined') {
                     var date = new Date(project.end_report.approved_date);
@@ -303,6 +295,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             );
         };
 
+        /**
+         * Finds project with its _id
+         * @returns project-object from server
+         */
         $scope.findOne = function () {
             Projects.get({
                 projectId: $stateParams.projectId
