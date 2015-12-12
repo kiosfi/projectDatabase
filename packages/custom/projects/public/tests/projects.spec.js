@@ -147,6 +147,7 @@
                         end_report: {
                             date: undefined
                         },
+                        intermediary_reports: [],
                         title: 'Human Rights',
                         to: 'Children rights'
                     };

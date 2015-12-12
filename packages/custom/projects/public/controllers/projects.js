@@ -166,7 +166,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     project.updated = [];
                 }
 
-                project.updated.push({time: new Date().getTime(), user: MeanUser.user.name});
+                project.updated.push({time: Date.now(), user: MeanUser.user.name});
                 project.$update(function () {
                     $location.path('projects/' + project._id);
                 });
@@ -377,8 +377,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (isValid) {
                 var project = $scope.project;
                 project.approved.date = Date.now();
-                project.approved.approved_date = $scope.convertDate($scope.approved_day, $scope.approved_month, $scope.approved_year);
-                project.approved.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
+                if (typeof $scope.approved_day !== 'undefined' && typeof $scope.approved_month !== 'undefined' &&
+                        typeof $scope.approved_year !== 'undefined') {
+                    project.approved.approved_date = $scope.convertDate($scope.approved_day, $scope.approved_month, $scope.approved_year);
+                }
+
+                if (typeof $scope.notified_day !== 'undefined' && typeof $scope.notified_month !== 'undefined' &&
+                        typeof $scope.notified_year !== 'undefined') {
+                    project.approved.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
+                }
+
                 project.approved.themes = $scope.themeSelection;
                 project.approved.methods = $scope.addedMethods;
                 project.state = $scope.global.newState;
@@ -414,11 +422,14 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.addSignedState = function (isValid) {
             if (isValid) {
-
-                var signed_date = $scope.convertDate($scope.signed_day, $scope.signed_month, $scope.signed_year);
                 var project = $scope.project;
+
+                if (typeof $scope.signed_day !== 'undefined' && typeof $scope.signed_month !== 'undefined' &&
+                        typeof $scope.signed_year !== 'undefined') {
+                    project.signed.signed_date = $scope.convertDate($scope.signed_day, $scope.signed_month, $scope.signed_year);
+                }
+
                 project.signed.date = Date.now();
-                project.signed.signed_date = signed_date;
                 $scope.parsedDeadlines = [];
                 $scope.parsedPlannedPayments = [];
                 var plpms = $scope.plannedPayments;
@@ -508,8 +519,18 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 var project = $scope.project;
                 project.end_report.date = Date.now();
                 project.state = $scope.global.newState;
-                project.end_report.approved_date = $scope.convertDate($scope.er_approved_day, $scope.er_approved_month, $scope.er_approved_year);
-                project.end_report.audit.date = $scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year);
+
+                if (typeof $scope.er_approved_day !== 'undefined' && typeof $scope.er_approved_month !== 'undefined' &&
+                        typeof $scope.er_approved_year !== 'undefined') {
+                    project.end_report.approved_date = $scope.convertDate($scope.er_approved_day,
+                            $scope.er_approved_month, $scope.er_approved_year);
+                }
+
+                if (typeof $scope.audit_day !== 'undefined' && typeof $scope.audit_month !== 'undefined' &&
+                        typeof $scope.audit_year !== 'undefined') {
+                    project.end_report.audit.date = $scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year);
+                }
+
                 project.$addEndReport(function (response) {
                     $location.path('projects/' + response._id);
                 });
@@ -526,8 +547,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (isValid) {
                 var project = $scope.project;
                 project.ended.date = Date.now();
-                project.ended.end_date = $scope.convertDate($scope.end_day, $scope.end_month, $scope.end_year);
-                project.ended.board_notified = $scope.convertDate($scope.notified_day, $scope.notified_month, $scope.notified_year);
+
+                if (typeof $scope.end_day !== 'undefined' && typeof $scope.end_month !== 'undefined' &&
+                        typeof $scope.end_year !== 'undefined') {
+                    project.ended.end_date = $scope.convertDate($scope.end_day, $scope.end_month, $scope.end_year);
+                }
+
+                if (typeof $scope.notified_day !== 'undefined' && typeof $scope.notified_month !== 'undefined' &&
+                        typeof $scope.notified_year !== 'undefined') {
+                    project.ended.board_notified = $scope.convertDate($scope.end_notified_day, $scope.end_notified_month, $scope.end_notified_year);
+                }
+
                 project.state = $scope.global.newState;
                 project.$addEnded(function (response) {
                     $location.path('projects/' + response._id)
