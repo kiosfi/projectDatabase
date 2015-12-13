@@ -95,6 +95,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.update = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                
+                project.methods = [];
+                angular.forEach($scope.addedMethods, function(obj) {
+                    project.methods.push({name: obj.name, level: obj.level, comment: obj.comment});
+                });
 
                 if (typeof project.approved !== 'undefined') {
                     if ($scope.projectEditForm.approved_day.$dirty || $scope.projectEditForm.approved_month.$dirty
@@ -190,9 +195,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.deadlines = [];
                 $scope.int_reports = [];
 
-//                angular.forEach(project.methods, function (obj) {
-//                        $scope.addedMethods.push({name: obj.name, level: obj.level});
-//                    });
+                angular.forEach(project.methods, function (obj) {
+                        $scope.addedMethods.push({name: obj.name, level: obj.level, comment: obj.comment});
+                    });
 
                 if (typeof project.approved !== 'undefined') {
                     var date = new Date(project.approved.approved_date);
@@ -205,9 +210,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     $scope.notified_month = notified_date.getMonth() + 1;
                     $scope.notified_year = notified_date.getFullYear();
 
-                    angular.forEach(project.approved.methods, function (obj) {
-                        $scope.addedMethods.push({name: obj.name, level: obj.level});
-                    });
                     angular.forEach(project.approved.themes, function (obj) {
                         $scope.themeSelection.push(obj);
                     });
