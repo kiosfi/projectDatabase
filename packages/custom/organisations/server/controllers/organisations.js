@@ -166,9 +166,12 @@ module.exports = function (Organisations) {
         
         update: function (req, res) {
             var organisation = req.organisation;
+            var bank_account = req.organisation.bank_account;
             
             organisation = _.extend(organisation, req.body);
-
+            bank_account = _.extend(bank_account, req.body.bank_account);
+            
+            bank_account.save();
 
             organisation.save(function(err) {
                 if (err) {
