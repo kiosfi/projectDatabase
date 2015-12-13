@@ -121,8 +121,8 @@
     <h4>Hakutulokset</h4>
     <p>Hakutulosten määrä: {{payments.length}}</p>
     <button ng-show="payments" type="button" ng-csv="payments" lazy-load="true"
-            csv-header="['Maksu', 'Päivämäärä', 'Hankkeen tunnus', 'Hanke', 'Hankeid']"
-            filename="maksut.csv" field-separator=";" add-bom="true">
+            csv-header="['Maksu', 'Päivämäärä', 'Hankkeen tunnus', 'Hanke', 'Koordinaattori',
+            'Alue', 'Hankeid']" filename="maksut.csv" field-separator=";" add-bom="true">
       Lataa tiedostoon</button>
     <table class="col-md-12 table table-striped">
         <thead>

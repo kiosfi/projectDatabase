@@ -234,6 +234,8 @@ module.exports = function (Search) {
                               "date": payment.payment_date,
                               "ref": project.project_ref,
                               "title": project.title,
+                              "coordinator": project.coordinator,
+                              "region": project.region,
                               "id": project._id};
                       });
                       return payments;
