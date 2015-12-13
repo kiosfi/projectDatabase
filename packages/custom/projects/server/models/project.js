@@ -254,16 +254,11 @@ var ProjectSchema = new Schema({
 
 });
 
-var number = 0;
-function addZ(n) {
-  return (n.toString().length == 1 ? '00' : n.toString().length == 2 ? '0' : '');
-}
-
 ProjectSchema.plugin(autoIncrement.plugin, {
     model: 'Project',
     field: 'project_ref',
-    startAt: number,
-    prefix: new Date().getFullYear().toString().slice(-2) + addZ(number)
+    startAt: 1,
+    prefix: new Date().getFullYear().toString().slice(-2)
 });
 
 ProjectSchema.path('title').validate(function (title) {
