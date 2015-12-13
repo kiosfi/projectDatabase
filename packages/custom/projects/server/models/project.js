@@ -4,10 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-        Schema = mongoose.Schema,
-        autoIncrement = require('mongoose-auto-increment');
-
-//autoIncrement.initialize(mongoose);
+        Schema = mongoose.Schema;
 
 var ProjectSchema = new Schema({
     project_ref: {
@@ -253,14 +250,6 @@ var ProjectSchema = new Schema({
     }
 
 });
-
-
-/*ProjectSchema.plugin(autoIncrement.plugin, {
-    model: 'Project',
-    field: 'project_ref',
-    startAt: 1,
-    prefix: prefix
-});*/
 
 ProjectSchema.path('title').validate(function (title) {
     return !!title;
