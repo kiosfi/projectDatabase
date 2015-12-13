@@ -706,7 +706,8 @@
         -->
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button mean-token="'edit-submit'" type="submit" class="btn btn-default">Tallenna</button>
+                <button mean-token="'edit-submit'" type="submit" class="btn btn-default"
+                        ng-disabled="projectEditForm.$invalid">Tallenna</button>
             </div>
         </div>
     </form>

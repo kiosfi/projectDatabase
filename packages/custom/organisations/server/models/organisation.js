@@ -14,19 +14,19 @@ var OrganisationSchema = new Schema({
     },
     representative: {
         name: {
-          type: String,
-          required: true,
-          trim: true
+            type: String,
+            required: true,
+            trim: true
         },
         email: {
-          type: String,
-          required: true,
-          trim: true
+            type: String,
+            required: true,
+            trim: true
         },
         phone: {
-          type: String,
-          required: true,
-          trim: true
+            type: String,
+            required: true,
+            trim: true
         }
     },
     exec_manager: {
@@ -101,6 +101,9 @@ var OrganisationSchema = new Schema({
     bank_account: {
         type: Schema.ObjectId,
         ref: 'BankAccount'
+    },
+    updated: {
+        type: Array
     }
 });
 
