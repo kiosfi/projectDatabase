@@ -23,3 +23,5 @@ docs/api/
 tests/config/e2e/tests/results/*
 *.log
 tests/results
+
+search/public/assets/lib

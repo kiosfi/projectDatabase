@@ -2,12 +2,12 @@
     <style>
         td {padding-left: 3em;}
     </style>
-<!--    <div id="error" class="panel panel-danger" ng-show="statusCode !== 200">
-        <div class="panel-heading">Virhe - {{statusCode}}</div>
-        <div class="panel-body">{{errorMessage}}</div>
-    </div>
--->
-<div>
+    <!--    <div id="error" class="panel panel-danger" ng-show="statusCode !== 200">
+            <div class="panel-heading">Virhe - {{statusCode}}</div>
+            <div class="panel-body">{{errorMessage}}</div>
+        </div>
+    -->
+    <div>
         <div>
             <article id="header">
                 <h2 id="projtitle">
@@ -18,11 +18,22 @@
                         <a class="btn-lg" id="delete" data-ng-click="confirm(project);">
                             <i class="glyphicon glyphicon-trash"></i>
                         </a>
+                        <a ng-href="/projects/{{project._id}}/edit" class="btn-lg" id="edit">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+
                     </span>
                 </h2>
                 <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
                     <span class="tila" id="state">{{project.state}}</span>
                 </h3>
+
+                <span><a ng-click="showEditLog = !showEditLog" ng-show="project.updated.length > 0">Tietoja muokattu</a>
+                <ul ng-show="showEditLog">
+                    <li data-ng-repeat="update in project.updated">            
+                        {{update.time| date: 'dd-MM-yyyy HH:mm'}}, muokkaaja: {{update.user}}
+                    </li>
+                </ul></span>
             </article>
         </div>
         <div>
@@ -202,28 +213,28 @@
                     <section>
                         <h4>Aikataulu</h4>
                         <section  class="proj-content">
-                            <section ng-show="project.in_review.comments">
+                            <section ng-show="project.in_review.date">
                                 <p><b>**Rekisteröity käsittelyyn</b>:&nbsp&nbsp{{project.in_review.date| date:'dd-MM-yyyy': 'UTC'}}&nbsp&nbsp
                                     <button class="btn small-btn" onclick="toggleCollapse('reviewinfo')">Tiedot</button></p>
                                 <div id="reviewinfo" class="proj-subcontent" style="display: none">
-                                    <h5>Muokkaaja:</h5>
+                                    <h5>Tiedot lisäsi:</h5>
                                     <p>{{project.in_review.user}}, {{project.in_review.date| date:'dd-MM-yyyy, HH:mm': 'UTC'}}</p>
                                     <h5>Kommentit: </h5>
                                     <p>{{project.in_review.comments}}</p>
                                 </div>
                             </section>
-                            <section ng-show="project.approved.approved_by">
-                                <p><b>**Rekisteröity hyväksytyksi</b>: {{project.approved.date| date:'dd-MM-yyyy': 'UTC'}}
+                            <section ng-show="project.approved.date">
+                                <p><b>**Rekisteröity hyväksytyksi</b>: {{project.approved.date| date:'dd-MM-yyyy':'UTC'}}
                                     <button class="btn small-btn" onclick="toggleCollapse('approvedinfo')">Tiedot</button></p>
                                 <div id="approvedinfo" class="proj-subcontent" style="display: none">
-                                    <h5>Muokkaaja:</h5>
-                                    <p>{{project.approved.user}}, {{project.approved.date| date:'dd-MM-yyyy, HH:mm': 'UTC'}}</p>
+                                    <h5>Tiedot lisäsi:</h5>
+                                    <p>{{project.approved.user}}, {{project.approved.date| date:'dd-MM-yyyy, HH:mm':'UTC'}}</p>
                                     <h5>Hyväksyjä:</h5>
                                     <p>{{project.approved.approved_by}}</p>
                                     <h5>Hyväksymis pvm:</h5>
-                                    <p>{{project.approved.approved_date| date:'dd-MM-yyyy': 'UTC'}}</p>
+                                    <p>{{project.approved.approved_date| date:'dd-MM-yyyy':'UTC'}}</p>
                                     <h5>Hallitukselle tiedoksi:</h5>
-                                    <p>{{project.approved.board_notified| date:'dd-MM-yyyy': 'UTC'}}</p>
+                                    <p>{{project.approved.board_notified| date:'dd-MM-yyyy':'UTC'}}</p>
                                     <h5>Hyväksytty summa:</h5>
                                     <p>{{project.approved.granted_sum_eur| currency : ""}} EUR</p>
                                     <h5>Teemat:</h5>
@@ -238,11 +249,11 @@
                                     </ul>
                                 </div>
                             </section>
-                            <section ng-show="project.rejected.rejection_comments">
+                            <section ng-show="project.rejected.date">
                                 <p><b>**Rekisteröity hylätyksi</b>:&nbsp&nbsp{{project.rejected.date| date:'dd-MM-yyyy': 'UTC'}}&nbsp&nbsp
                                     <button class="btn small-btn" onclick="toggleCollapse('rejectedinfo')">Tiedot</button></p>
                                 <div id="rejectedinfo" class="proj-subcontent" style="display: none">
-                                    <h5>Muokkaaja:</h5>
+                                    <h5>Tiedot lisäsi:</h5>
                                     <p>{{project.rejected.user}}, {{project.rejected.date| date:'dd-MM-yyyy, HH:mm': 'UTC'}}</p>
                                     <br>
                                     <h5>Hylkäyssyyt:</h5>
@@ -253,11 +264,10 @@
                                     <p>{{project.rejected.rejection_comments}}</p>
                                 </div>
                             </section>
-                            <section ng-show="project.signed.signed_by">
+                            <section ng-show="project.signed.date">
                                 <p><b>**Rekisteröity allekirjoitetuksi</b>:&nbsp&nbsp{{project.signed.date| date:'dd-MM-yyyy': 'UTC'}}&nbsp&nbsp
                                     <button class="btn small-btn" onclick="toggleCollapse('signedinfo')">Tiedot</button></p>
                                 <div id="signedinfo" class="proj-subcontent" style="display: none">
-                                    <h5>Muokkaaja:</h5>
                                     <p>{{project.signed.user}}, {{project.signed.date| date:'dd-MM-yyyy, HH:mm': 'UTC'}}</p>
                                     <br>
                                     <h5>Allekirjoitettu:</h5>
@@ -270,7 +280,7 @@
                                         <button class="btn small-btn" ng-click="showIntDetails = !showIntDetails">Tiedot</button>
                                         <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}" class="btn large-btn">Näytä raportti</a></p>
                                     <div ng-show="showIntDetails" class="proj-subcontent">
-                                        <h5>Muokkaaja:</h5>
+                                        <h5>Tiedot lisäsi:</h5>
                                         <p>{{intreport.user}}, {{intreport.date| date:'dd-MM-yyyy, HH:mm': 'UTC'}}</p>
                                         <h5>Raportti hyväksytty:</h5>
                                         <p>{{intreport.approved_by}}, {{intreport.date_approved| date : 'dd-MM-yyyy': 'UTC'}}</p>
@@ -278,23 +288,23 @@
                                     </div>
                                 </article>
                             </section>
-                            <section ng-show="project.end_report.approved_by">
-                                <p><b>**Loppuraportti rekisteröity</b>:&nbsp&nbsp{{project.end_report.date| date:'dd-MM-yyyy'}}&nbsp&nbsp
+                            <section ng-show="project.end_report.date">
+                                <p><b>**Loppuraportti rekisteröity</b>:&nbsp&nbsp{{project.end_report.date| date:'dd-MM-yyyy': 'UTC'}}&nbsp&nbsp
                                     <!--            <button class="btn small-btn"><a ng-href='/projects/endReport/{{project._id}}'>Tiedot</a></button></p>-->
                                     <button class="btn small-btn" ng-click="showEndDetails = !showEndDetails">Tiedot</button>
                                     <a ng-href="/projects/endReport/{{project._id}}" class="btn large-btn">Näytä raportti</a></p>
                                 <div ng-show="showEndDetails" class="proj-subcontent">
-                                    <h5>Muokkaaja:</h5>
+                                    <h5>Tiedot lisäsi:</h5>
                                     <p>{{project.end_report.user}}, {{project.end_report.date| date:'dd-MM-yyyy, HH:mm': 'UTC'}}</p>
                                     <h5>Raportti hyväksytty:</h5>
                                     <p>{{project.end_report.approved_by}}, {{project.end_report.date_approved| date : 'dd-MM-yyyy': 'UTC'}}</p>
                                     <p ng-show="project.end_report.processed === true">Väliraportti käsitelty</p>
                                 </div>
                             </section>
-                            <section ng-show="project.ended.approved_by">
+                            <section ng-show="project.ended.date">
                                 <p><b>**Rekisteröity päätetyksi</b>:&nbsp&nbsp{{project.ended.end_date| date:'dd-MM-yyyy': 'UTC'}}&nbsp&nbsp
-                                    <button class="btn small-btn" ng-click="showEndedDetails = !showEndedDetails">Tiedot</button></p>
-                                <div ng-show="showEndedDetails" class="proj-subcontent">
+                                    <button class="btn small-btn" onclick="toggleCollapse('endedinfo')">Tiedot</button></p>
+                                <div id="endedinfo" class="proj-subcontent">
                                     <h5>Tiedot lisäsi:</h5>
                                     <p>{{project.ended.user}}, {{project.ended.date| date:'dd-MM-yyyy, HH:mm': 'UTC'}}</p>
                                     <br>
