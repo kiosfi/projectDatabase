@@ -20,9 +20,9 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
         };
 
         $scope.find = function () {
-            var ordering  = $location.search().ordering;
+            var ordering = $location.search().ordering;
             var ascending = $location.search().ascending;
-            var page      = $location.search().page;
+            var page = $location.search().page;
             if (typeof ordering === 'undefined') {
                 ordering = 'name';
             }
@@ -32,17 +32,17 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
             if (typeof page === 'undefined') {
                 page = 1;
             }
-            $scope.ordering  = ordering;
+            $scope.ordering = ordering;
             $scope.ascending = ascending === 'true';
-            $scope.page      = page;
+            $scope.page = page;
             Organisations.query({
-                    ordering:   ordering,
-                    ascending:  ascending,
-                    page:       page
-                },
-                function(results) {
-                    $scope.organisations = results;
-                }
+                ordering: ordering,
+                ascending: ascending,
+                page: page
+            },
+            function (results) {
+                $scope.organisations = results;
+            }
             );
         };
 
@@ -54,39 +54,60 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
             });
         };
         /*$scope.findOne = function () {
-            // For some unknown reason,
-            // $http.get(...).then(success(...), error(...)) doesn't seem to be
-            // working here, so we need to use the deprecated
-            // $http.get(...).success(...).error(...) instead.
-            $http.get('/api/organisations/' + $stateParams.organisationId).success(
-                    function (organisation) {
-                        $scope.statusCode = 200;
-                        $scope.organisation = organisation;
-                    }
-            ).error(
-                    function (error) {
-                        $scope.statusCode = error.status;
-                        $scope.errorMessage = error.message;
-                    }
-            );
-        };*/
+         // For some unknown reason,
+         // $http.get(...).then(success(...), error(...)) doesn't seem to be
+         // working here, so we need to use the deprecated
+         // $http.get(...).success(...).error(...) instead.
+         $http.get('/api/organisations/' + $stateParams.organisationId).success(
+         function (organisation) {
+         $scope.statusCode = 200;
+         $scope.organisation = organisation;
+         }
+         ).error(
+         function (error) {
+         $scope.statusCode = error.status;
+         $scope.errorMessage = error.message;
+         }
+         );
+         };*/
+        
+        /**
+         * Updates organisation's details as per edit-form and goes to org-view 
+         * if form was valid
+         * @param {type} isValid checkes if edit-form is valid
+         */
+        $scope.update = function (isValid) {
+            if (isValid) {
+                var organisation = $scope.organisation;
+                if (!organisation.updated) {
+                    organisation.updated = [];
+                }
+                organisation.updated.push({time: Date.now(), user: MeanUser.user.name});
+
+                organisation.$update(function () {
+                    $location.path('organisations/' + organisation._id);
+                });
+            } else {
+                $scope.submitted = true;
+            }
+        };
 
         $scope.confirm = function (organisation) {
             OrgProjects.findProjects(organisation._id).success(function (projects) {
-              if (projects.length > 1) {
-                if (confirm('Järjestöllä on ' + projects.length + ' hanketta tietokannassa! Haluatko varmasti poistaa järjestön?')) {
-                  $scope.remove(organisation);
+                if (projects.length > 1) {
+                    if (confirm('Järjestöllä on ' + projects.length + ' hanketta tietokannassa! Haluatko varmasti poistaa järjestön?')) {
+                        $scope.remove(organisation);
+                    }
+                } else if (projects.length === 1) {
+                    if (confirm('Järjestöllä on ' + projects.length + ' hanke tietokannassa! Haluatko varmasti poistaa järjestön?')) {
+                        $scope.remove(organisation);
+                    }
+                } else {
+                    if (confirm('Järjestöllä ei ole hankkeita tietokannassa. Haluatko varmasti poistaa järjestön?')) {
+                        $scope.remove(organisation);
+                    }
                 }
-              } else if (projects.length === 1) {
-                if (confirm('Järjestöllä on ' + projects.length + ' hanke tietokannassa! Haluatko varmasti poistaa järjestön?')) {
-                  $scope.remove(organisation);
-                }
-              } else {
-                if (confirm('Järjestöllä ei ole hankkeita tietokannassa. Haluatko varmasti poistaa järjestön?')) {
-                  $scope.remove(organisation);
-                }
-              }
-          });
+            });
         };
 
         $scope.remove = function (organisation) {
@@ -144,7 +165,7 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
          *
          * @param {String} page Number of the page to be displayed.
          */
-        $scope.updatePage = function(page) {
+        $scope.updatePage = function (page) {
             $window.location = '/organisations?ordering=' + $scope.ordering
                     + '&ascending=' + $scope.ascending
                     + '&page=' + page;
@@ -155,7 +176,7 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
          *
          * @param {String} ordering The ordering predicate (eg. "name").
          */
-        $scope.updateOrdering = function(ordering) {
+        $scope.updateOrdering = function (ordering) {
             $window.location = '/organisations?ordering=' + ordering
                     + '&ascending=' + (ordering === $scope.ordering
                             ? !$scope.ascending : true)
@@ -168,8 +189,8 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
          *
          * @returns {undefined}
          */
-        $scope.paginate = function() {
-            Organisations.countOrganisations(function(result) {
+        $scope.paginate = function () {
+            Organisations.countOrganisations(function (result) {
                 var pageCount, numberOfPages, pagination;
                 pageCount = result.orgCount;
                 numberOfPages = Math.ceil(pageCount / $scope.pageSize);

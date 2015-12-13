@@ -34,6 +34,7 @@ module.exports = function (Organisations, app, auth) {
             .post(auth.requiresLogin, hasPermissions, organisations.create);
     app.route('/api/organisations/:organisationId')
             .get(auth.requiresLogin, auth.isMongoId, organisations.show)
+            .put(auth.isMongoId, auth.requiresLogin, organisations.update)
             .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, organisations.destroy);
     app.param('organisationId', organisations.organisation);
     app.param('orgName', organisations.organisation);

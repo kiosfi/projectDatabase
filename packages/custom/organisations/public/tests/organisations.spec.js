@@ -85,7 +85,7 @@
 
                         // fixture rideshare
                         var organisation = new Organisations({
-                          _id: '525a8422f6d0f87f0e407a33'
+                            _id: '525a8422f6d0f87f0e407a33'
                         });
 
                         // mock rideshares in scope
@@ -103,7 +103,41 @@
                         expect($location.path()).toBe('/organisations');
                         expect(scope.organisations.length).toBe(0);
 
-                  }));
+                    }));
+
+            // TODO: update-function is using MeanUser.user.name to get
+            // user's name for updated-array and test fails there.
+//            it('$scope.update(true) should a valid project', inject(function (Organisations) {
+//
+//
+//                // fixture rideshare
+//                var testOrganisationData = function () {
+//                    return {
+//                        updated: {
+//                            time: Date.now(),
+//                            user: "test user"
+//                        },
+//                        title: 'Human rights',
+//                        to: 'Children rights'
+//                    };
+//                };
+//                
+//                // mock project object from form
+//                var organisation = new Organisations(testOrganisationData());
+//
+//                // mock project in scope
+//                scope.organisation = organisation;
+//
+//                // test PUT happens correctly
+//                $httpBackend.expectPUT(/api\/organisations\/([0-9a-fA-F]{24})$\/edit/).respond();
+//
+//                // run controller
+//                scope.update(true);
+//                $httpBackend.flush();
+//
+//                // test URL location to new object
+//                expect($location.path()).toBe('/organisations/' + testOrganisationData()._id);
+//            }));
 
         });
     });
