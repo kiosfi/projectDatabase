@@ -137,6 +137,8 @@
 
                     }));
 
+                    // TODO: update-function is using MeanUser.user.name to get
+                    // user's name for updated-array and test fails there.
 //            it('$scope.update(true) should a valid project', inject(function (Projects) {
 //
 //                MeanUser.login();
