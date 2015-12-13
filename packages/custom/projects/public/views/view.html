@@ -30,7 +30,7 @@
 
                 <span><a ng-click="showEditLog = !showEditLog" ng-show="project.updated.length > 0">Tietoja muokattu</a>
                 <ul ng-show="showEditLog">
-                    <li data-ng-repeat="update in project.updated">            
+                    <li data-ng-repeat="update in project.updated">
                         {{update.time| date: 'dd-MM-yyyy HH:mm'}}, muokkaaja: {{update.user}}
                     </li>
                 </ul></span>
@@ -220,6 +220,16 @@
                 <article id="schedule" class="proj-article">
                     <section>
                         <h4>Aikataulu</h4>
+                        <br>
+                        <section class="proj-content">
+                          <h5>Raporttien eräpäivät</h5>
+                          <ul>
+                            <li ng-repeat="deadline in project.signed.intreport_deadlines">
+                              {{deadline.report}}: {{deadline.date | date: 'dd-MM-yyyy': 'UTC'}}
+                            </li>
+                          </ul>
+                        </section>
+                        <br>
                         <section  class="proj-content">
                             <section ng-show="project.in_review.date">
                                 <p><b>**Rekisteröity käsittelyyn</b>:&nbsp&nbsp{{project.in_review.date| date:'dd-MM-yyyy': 'UTC'}}&nbsp&nbsp
@@ -405,7 +415,9 @@
                 </article>
                 <article id="appendices" class="proj-article">
                     <h4>Liitteet</h4>
-                    <table class="proj-content">
+
+                    **LIITETOIMINNOT TULOSSA**
+                    <!--<table class="proj-content">
                         <tr>
                             <th><a href="">Hakemus</a></th>
                             <td>Hyväksytty 1.1.2014</td>
@@ -446,7 +458,7 @@
                             <th><a href="">Sopimus</a></th>
                             <td>Hyväksytty 1.1.2014</td>
                         </tr>
-                    </table>
+                    </table>-->
                 </article>
             </div>
         </div>
