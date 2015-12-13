@@ -97,6 +97,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 } else {
                     project.organisation = $scope.project.listOrganisation;
 
+                    console.log(project);
                     project.$save(function (response) {
                         $location.path('projects/' + response._id);
                     });

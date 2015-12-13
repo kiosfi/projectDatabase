@@ -7,11 +7,11 @@ var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         autoIncrement = require('mongoose-auto-increment');
 
-autoIncrement.initialize(mongoose);
+//autoIncrement.initialize(mongoose);
 
 var ProjectSchema = new Schema({
     project_ref: {
-        type: Number,
+        type: String,
         required: true
     },
     title: {
@@ -254,12 +254,13 @@ var ProjectSchema = new Schema({
 
 });
 
-ProjectSchema.plugin(autoIncrement.plugin, {
+
+/*ProjectSchema.plugin(autoIncrement.plugin, {
     model: 'Project',
     field: 'project_ref',
     startAt: 1,
-    prefix: new Date().getFullYear().toString().slice(-2)
-});
+    prefix: prefix
+});*/
 
 ProjectSchema.path('title').validate(function (title) {
     return !!title;
