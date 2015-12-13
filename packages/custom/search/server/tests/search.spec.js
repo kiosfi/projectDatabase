@@ -57,6 +57,7 @@ describe('<Unit Test>', function () {
 
             project1 = new Project(
                     {"title": "Human rights",
+                    "project_ref": "15006",
                         "coordinator": "Teppo Tenhunen",
                         "organisation": org,
                         "reg_date": new Date(2015,11-1,30+1),
@@ -86,6 +87,7 @@ describe('<Unit Test>', function () {
             project1.save();
             project2 = new Project(
                     {"title": "Humans",
+                    "project_ref": "15009",
                         "coordinator": "Teppo Tenhunen",
                         "organisation": org,
                         "reg_date": new Date(2015,11-1,30+1),
@@ -130,6 +132,7 @@ describe('<Unit Test>', function () {
             project2.save();
             project3 = new Project(
                     {"title": "Earth Life",
+                      "project_ref": "15010",
                         "coordinator": "Maija Maa",
                         "organisation": org,
                         "reg_date": new Date(2015,11-1,30+1),
@@ -245,7 +248,6 @@ describe('<Unit Test>', function () {
 
                 this.timeout(10000);
                 var params = [{"reg_date": {$gte: new Date(2015,11-1,30+1).toISOString()}}]
-                console.log(params);
                 var query = Project.find({$and: params});
 
                 return query.exec(function (err, data) {

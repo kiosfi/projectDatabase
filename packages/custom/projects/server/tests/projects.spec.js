@@ -78,6 +78,7 @@ describe('<Unit Test>', function () {
             organisation.save();
             project1 = new Project(
                     {"title": "Human rights",
+                     "project_ref": "15001",
                         "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
                         "reg_date": "12.10.2014",
@@ -99,6 +100,7 @@ describe('<Unit Test>', function () {
             project1.save();
             project2 = new Project(
                     {"title": "Humans",
+                      "project_ref": "15002",
                         "coordinator": "Teppo Tenhunen",
                         "organisation": organisation,
                         "reg_date": "12.9.2014",
@@ -201,6 +203,7 @@ describe('<Unit Test>', function () {
                     "holder_name": "Jack Jackson"});
                 project3 = new Project(
                         {"title": "Children rights",
+                          "project_ref": "15003",
                             "coordinator": "Maija Maa",
                             "organisation": organisation3,
                             "funding": {
@@ -308,6 +311,7 @@ describe('<Unit Test>', function () {
 
                 project4 = new Project(
                         {"title": "Women rights",
+                         "project_ref": "15005",
                             "coordinator": "Maija Maa",
                             "organisation": organisation4,
                             "funding": {
@@ -316,7 +320,7 @@ describe('<Unit Test>', function () {
                             "duration_months": 29,
                             "description": "A short description of project",
                             "description_en": "Description in english",
-                            "methods": [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen", "comment": "Näin..."}],                            
+                            "methods": [{"name": "kapasiteetin vahvistaminen", "level": "Kansainvälinen", "comment": "Näin..."}],
                             "background": "Project background 3",
                             "beneficiaries": "The project benefits such and such",
                             "gender_aspect": "Gender aspects include this and that",
@@ -370,7 +374,7 @@ describe('<Unit Test>', function () {
         });
 
         describe('Method Update', function () {
-        
+
         it('should update given project', function (done) {
                 this.timeout(10000);
 
@@ -379,10 +383,10 @@ describe('<Unit Test>', function () {
                     proj.title = 'Children rights';
                     proj.update();
                     expect(err).to.be(null);
-                    expect(proj.title).to.be("Children rights");  
+                    expect(proj.title).to.be("Children rights");
                     proj.title = 'Humans';
                     proj.update();
-                    expect(proj.title).to.be("Humans"); 
+                    expect(proj.title).to.be("Humans");
                     done();
                 });
             });

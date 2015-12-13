@@ -36,9 +36,42 @@ module.exports = function (Projects) {
         create: function (req, res) {
             var project = new Project(req.body);
 
-            project.organisation = req.body.organisation;
+            Project.count(function(err, count) {
+              function pad(n) {
+                  if (n < 10) {
+                    return "00" + n
+                  } else if (n >= 10 && n < 100) {
+                    return "0" + n
+                  } else {
+                    return n
+                  }
+              }
 
-            project.save(function (err) {
+              var prefix = new Date().getFullYear().toString().slice(-2);
+
+              project.project_ref = prefix + pad(count + 1);
+              project.organisation = req.body.organisation;
+
+              project.save(function (err) {
+                  if (err) {
+                      return res.status(500).json({
+                          error: 'Hanketta ei voi tallentaa'
+                      });
+                  }
+                  res.json(project);
+              });
+
+              Projects.events.publish({
+                  action: 'created',
+                  url: config.hostname + '/projects/' + project._id,
+                  name: project.title
+              });
+
+            });
+
+            //project.organisation = req.body.organisation;
+
+            /*project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Hanketta ei voi tallentaa'
@@ -51,7 +84,7 @@ module.exports = function (Projects) {
                 action: 'created',
                 url: config.hostname + '/projects/' + project._id,
                 name: project.title
-            });
+            });*/
         },
         /**
          * Loads a project for display.

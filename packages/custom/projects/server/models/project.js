@@ -4,14 +4,11 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-        Schema = mongoose.Schema,
-        autoIncrement = require('mongoose-auto-increment');
-
-autoIncrement.initialize(mongoose);
+        Schema = mongoose.Schema;
 
 var ProjectSchema = new Schema({
     project_ref: {
-        type: Number,
+        type: String,
         required: true
     },
     title: {
@@ -239,12 +236,6 @@ var ProjectSchema = new Schema({
         type: Array
     }
 
-});
-
-ProjectSchema.plugin(autoIncrement.plugin, {
-    model: 'Project',
-    field: 'project_ref',
-    startAt: 15000
 });
 
 ProjectSchema.path('title').validate(function (title) {
