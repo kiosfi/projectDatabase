@@ -15,6 +15,15 @@ angular.module('mean.organisations').config(['$stateProvider',
           return MeanUser.checkLoggedin();
         }
       }
-    });
+    })
+    .state('edit organisation', {
+        url: '/organisations/:organisationId/edit',
+        templateUrl: '/organisations/views/edit.html',
+        resolve: {
+          loggedin: function(MeanUser) {
+            return MeanUser.checkLoggedin();
+          }
+        }
+      });
   }
 ]);

@@ -163,5 +163,31 @@ module.exports = function (Organisations) {
                 res.json(organisation);
             });
         },
+        
+        update: function (req, res) {
+            var organisation = req.organisation;
+            
+            organisation = _.extend(organisation, req.body);
+
+
+            organisation.save(function(err) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Järjestöä ei voi päivittää'
+                    });
+                }
+
+                Organisations.events.publish({
+                    action: 'updated',
+                    user: {
+                        name: req.user.name
+                    },
+                    name: organisation.name,
+                    url: config.hostname + '/organisations/' + organisation._id
+                });
+
+                res.json(organisation);
+            });
+        }
     };
 }
