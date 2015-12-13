@@ -223,20 +223,18 @@ describe('<Unit Test>', function () {
             });
 
         });
-        
+
         describe('Method Update', function () {
             it('should update given organisation', function (done) {
                 this.timeout(10000);
                 var query = Organisation;
                 return query.findOne({name: "Human rights org"}).exec(function (err, data) {
                     data.name = 'Children rights';
-                    data.update(function (err, org) {
-                        expect(err).to.be(null);
-                        expect(org.name).to.be("Children rights");
-                        done();
-                    });
-                    
-                    
+                    data.update();
+                    expect(err).to.be(null);
+                    expect(data.name).to.be("Children rights");
+                    done();
+
                 });
             });
 
