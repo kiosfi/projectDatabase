@@ -33,6 +33,7 @@ module.exports = function (Projects, app, auth) {
             .get(projects.allStates);
     app.route('/api/projects/:projectId')
             .get(auth.isMongoId, auth.requiresLogin, projects.show)
+            .put(auth.isMongoId, auth.requiresLogin, projects.update)
             .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, projects.destroy);
     app.route('/api/projects/rev/:projectId')
             .put(auth.isMongoId, auth.requiresLogin, projects.addReview);

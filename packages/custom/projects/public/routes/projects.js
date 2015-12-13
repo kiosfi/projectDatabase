@@ -28,6 +28,15 @@ angular.module('mean.projects').config(['$stateProvider',
           }
         }
       })
+      .state('edit project', {
+        url: '/projects/:projectId/edit',
+        templateUrl: '/projects/views/edit.html',
+        resolve: {
+          loggedin: function(MeanUser) {
+            return MeanUser.checkLoggedin();
+          }
+        }
+      })
       .state('project by id', {
         url: '/projects/:projectId',
         templateUrl: '/projects/views/view.html',
