@@ -35,8 +35,11 @@ module.exports = function (Projects) {
         },
         create: function (req, res) {
             var project = new Project(req.body);
+            
+                       var prefix = new Date(project.reg_date).getFullYear().toString().slice(-2);
 
-            Project.count(function(err, count) {
+
+            Project.find({project_ref: new RegExp('^' + prefix)}).count(function(err, count) {
               function pad(n) {
                   if (n < 10) {
                     return "00" + n
@@ -47,7 +50,7 @@ module.exports = function (Projects) {
                   }
               }
 
-              var prefix = new Date().getFullYear().toString().slice(-2);
+   
 
               project.project_ref = prefix + pad(count + 1);
               project.organisation = req.body.organisation;
