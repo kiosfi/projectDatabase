@@ -45,7 +45,7 @@ module.exports = function (Projects) {
                     return "00" + n
                   } else if (n >= 10 && n < 100) {
                     return "0" + n
-                  } else {
+                  }  else {
                     return n
                   }
               }
