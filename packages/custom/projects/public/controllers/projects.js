@@ -30,6 +30,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             "3 Järjestöllä ei ole hallintokapasiteettia", "4 Hanke on epärealistinen tai muuten heikosti suunniteltu",
             "5 Hankkeen budjetti on epärealistinen", "6 Huonot tai puuttuvat referenssit", "7 Strategia", "8 Muu, mikä?"];
         $scope.addedRejections = [];
+        $scope.currentDate = new Date();
+        
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
             var idx = $scope.themeSelection.indexOf(theme);
             // is currently selected
@@ -65,6 +67,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
+                
+                var reg_date = $scope.convertDate($scope.register_day, $scope.register_month, $scope.register_year);
+                project.reg_date = reg_date;
+
+                
                 if ($scope.newOrg) {
                     var org = new Organisations($scope.project.organisation);
                     org.$save(function (response) {
