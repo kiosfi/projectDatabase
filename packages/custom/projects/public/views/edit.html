@@ -449,12 +449,12 @@
                     <h4>{{intreport.reportNumber}}. väliraportti</h4>                    
 
                     <p class="col-md-12 strong-title comment-form-div">Toimintatavat ja niiden toteutuminen</p>
-                    <div class="form-group col-md-12" ng-repeat="method in project.approved.methods">
+                    <div class="form-group col-md-12" ng-repeat="method in project.methods">
                         <div class="col-md-4">
-                            {{method.name}} <br>- {{method.level}}
+                            {{method.name}} <br>- {{method.level}} <br>{{method.comment}}
                         </div>
                         <div class="col-md-8">
-                            <textarea name="intRMethods" type="text" class="form-control" data-ng-model="intreport.methods[project.approved.methods.indexOf(method)]" id="intRMethods" placeholder="Kommentteja"></textarea>
+                            <textarea name="intRMethods" type="text" class="form-control" data-ng-model="intreport.methods[project.methods.indexOf(method)]" id="intRMethods" placeholder="Kommentteja"></textarea>
                         </div>
                     </div>
 
@@ -563,12 +563,12 @@
                 </div>
 
                 <p class="col-md-12 strong-title comment-form-div">Toimintatavat ja niiden toteutuminen</p>
-                <div class="form-group col-md-12" ng-repeat="method in project.approved.methods">
+                <div class="form-group col-md-12" ng-repeat="method in project.methods">
                     <div class="col-md-4">
-                        {{method.name}} <br>- {{method.level}}
+                        {{method.name}} <br>- {{method.level}} <br>{{method.comment}}
                     </div>
                     <div class="col-md-8">
-                        <textarea name="er_methods" type="text" class="form-control" data-ng-model="project.end_report.methods[project.approved.methods.indexOf(method)]" id="er_methods" placeholder="Kommentteja"></textarea>
+                        <textarea name="er_methods" type="text" class="form-control" data-ng-model="project.end_report.methods[project.methods.indexOf(method)]" id="er_methods" placeholder="Kommentteja"></textarea>
                     </div>
 
                 </div>
