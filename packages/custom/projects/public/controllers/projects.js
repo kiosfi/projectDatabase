@@ -527,6 +527,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (isValid) {
                 var project = $scope.project;
                 project.end_report.date = Date.now();
+                project.end_report.methods = $scope.addedMethods;
                 project.state = $scope.global.newState;
 
                 if (typeof $scope.er_approved_day !== 'undefined' && typeof $scope.er_approved_month !== 'undefined' &&
