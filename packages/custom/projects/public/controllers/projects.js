@@ -31,7 +31,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             "5 Hankkeen budjetti on epärealistinen", "6 Huonot tai puuttuvat referenssit", "7 Strategia", "8 Muu, mikä?"];
         $scope.addedRejections = [];
         $scope.currentDate = new Date();
-        
+
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
             var idx = $scope.themeSelection.indexOf(theme);
             // is currently selected
@@ -67,11 +67,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
-                
+
                 var reg_date = $scope.convertDate($scope.register_day, $scope.register_month, $scope.register_year);
                 project.reg_date = reg_date;
 
-                
+
                 if ($scope.newOrg) {
                     var org = new Organisations($scope.project.organisation);
                     org.$save(function (response) {
@@ -102,7 +102,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.update = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
-                
+
                 project.methods = [];
                 angular.forEach($scope.addedMethods, function(obj) {
                     project.methods.push({name: obj.name, level: obj.level, comment: obj.comment});
@@ -614,7 +614,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
         $scope.addOrgFromDb = function () {
             $scope.newOrg = false;
-            Organisations.query(function (organisations) {
+            Organisations.getAllOrganisations(function (organisations) {
                 $scope.orgs = organisations;
             });
         };

@@ -32,6 +32,8 @@ module.exports = function (Organisations, app, auth) {
             .get(auth.requiresLogin, organisations.getOrganisations)
             .put(auth.requiresLogin, organisations.countOrganisations)
             .post(auth.requiresLogin, hasPermissions, organisations.create);
+    app.route('/api/organisations/all')
+            .get(organisations.getAllOrganisations);
     app.route('/api/organisations/:organisationId')
             .get(auth.requiresLogin, auth.isMongoId, organisations.show)
             .put(auth.isMongoId, auth.requiresLogin, organisations.update)

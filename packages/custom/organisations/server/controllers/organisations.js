@@ -72,6 +72,23 @@ module.exports = function (Organisations) {
                     });
 
         },
+
+        getAllOrganisations: function(req, res) {
+          var query = Organisation.find();
+
+          query
+                  .sort({name: 'asc'})
+                  .populate({path: 'bank_account', model: 'BankAccount'})
+                  .exec(function (err, organisations) {
+                      if (err) {
+                          return res.status(500).json({
+                              error: 'Järjestöjä ei voi näyttää'
+                          });
+                      }
+                      res.json(organisations)
+                  });
+
+      },
         /**
          * Gets all organisations.
          *
@@ -163,14 +180,14 @@ module.exports = function (Organisations) {
                 res.json(organisation);
             });
         },
-        
+
         update: function (req, res) {
             var organisation = req.organisation;
             var bank_account = req.organisation.bank_account;
-            
+
             organisation = _.extend(organisation, req.body);
             bank_account = _.extend(bank_account, req.body.bank_account);
-            
+
             bank_account.save();
 
             organisation.save(function(err) {

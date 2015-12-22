@@ -20,6 +20,11 @@ angular.module('mean.organisations').factory('Organisations', ['$resource',
             getOrganisations: {
                 method: 'GET',
                 url: 'api/organisations'
+            },
+            getAllOrganisations: {
+                method: 'GET',
+                url: 'api/organisations/all',
+                isArray: true
             }
         });
     }
