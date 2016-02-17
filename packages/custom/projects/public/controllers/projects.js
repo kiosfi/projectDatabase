@@ -66,9 +66,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
 
         var now = new Date();
-        $scope.register_day     = now.getDate();
-        $scope.register_month   = now.getMonth() + 1;
         $scope.register_year    = now.getFullYear();
+        $scope.register_month   = now.getMonth() + 1;
+        $scope.register_day     = now.getDate();
 
         $scope.create = function (isValid) {
             if (isValid) {

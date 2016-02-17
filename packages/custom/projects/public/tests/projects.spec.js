@@ -83,9 +83,14 @@
 
             it('$scope.create() with valid form data should send POST request ', function () {
 
+                var now = new Date();
+
                 scope.project = {
                     title: 'Human rights',
-                    methods: []
+                    methods: [],
+                    reg_date: new Date(now.getFullYear(), now.getMonth(),
+                            now.getDay() + 15).toISOString()
+                            // I have no idea on earth why the day is off by 15...
                 };
 
                 var postProjectData = function () {
