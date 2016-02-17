@@ -64,6 +64,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          * @param {type} isValid checks if project creation form is valid
          * @returns {undefined}
          */
+
+        var now = new Date();
+        $scope.register_day     = now.getDate();
+        $scope.register_month   = now.getMonth() + 1;
+        $scope.register_year    = now.getFullYear();
+
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
@@ -104,7 +110,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 var project = $scope.project;
 
                 project.methods = [];
-                angular.forEach($scope.addedMethods, function(obj) {
+                angular.forEach($scope.addedMethods, function (obj) {
                     project.methods.push({name: obj.name, level: obj.level, comment: obj.comment});
                 });
 
@@ -203,8 +209,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.int_reports = [];
 
                 angular.forEach(project.methods, function (obj) {
-                        $scope.addedMethods.push({name: obj.name, level: obj.level, comment: obj.comment});
-                    });
+                    $scope.addedMethods.push({name: obj.name, level: obj.level, comment: obj.comment});
+                });
 
                 if (typeof project.approved !== 'undefined') {
                     var date = new Date(project.approved.approved_date);

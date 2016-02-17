@@ -36,7 +36,7 @@
                     </div>
                 </div>
 
-                
+
                 <div class="form-group col-md-12">
                 <div class="form-group col-md-6">
                     <label class="col-md-3 control-label">Rekisteröintipäivä</label>
@@ -45,7 +45,7 @@
                         <div class="col-md-4"  ng-class="{
                                       'has-error'
                                       :  registerForm.registerMonth.$invalid }">
-                            <input name="registerDay" type="number" class="form-control" data-ng-model="register_day" id="registerDay" value="{{currentDate.getDate()}}" required>
+                            <input name="registerDay" type="number" class="form-control" data-ng-model="register_day" id="registerDay" required>
                             <div ng-show="projectForm.registerDay.$invalid" class="help-block" >
                                 <p ng-show="projectForm.registerDay.$error.required">Päivä on pakollinen</p>
                             </div>
@@ -53,7 +53,7 @@
                         <div class="col-md-4" ng-class="{
                                       'has-error'
                                       :  registerForm.registerMonth.$invalid }">
-                            <input name="registerMonth" type="number" class="form-control" data-ng-model="register_month" id="registerMonth" value="{{currentDate.getMonth() + 1}}" required>
+                            <input name="registerMonth" type="number" class="form-control" data-ng-model="register_month" id="registerMonth" required>
                             <div ng-show="projectForm.registerMonth.$invalid" class="help-block">
                                 <p ng-show="projectForm.registerMonth.$error.required">Kuukausi on pakollinen</p>
                             </div>
@@ -61,7 +61,7 @@
                         <div class="col-md-4" ng-class="{
                                       'has-error'
                                       :  projectForm.registerYear.$invalid }">
-                            <input name="registerYear" type="number" class="form-control" data-ng-model="register_year" id="registerYear" value="{{currentDate.getFullYear()}}" required>
+                            <input name="registerYear" type="number" class="form-control" data-ng-model="register_year" id="registerYear" required>
                             <div ng-show="projectForm.registerYear.$invalid" class="help-block">
                                 <p ng-show="projectForm.registerYear.$error.required">Vuosi on pakollinen</p>
                             </div>
@@ -69,7 +69,7 @@
                     </div>
                     <div style="clear:both;">&nbsp;</div>
                 </div>
-                </div>                
+                </div>
 
 
 
