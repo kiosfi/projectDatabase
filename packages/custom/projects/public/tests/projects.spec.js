@@ -89,7 +89,7 @@
                     title: 'Human rights',
                     methods: [],
                     reg_date: new Date(now.getFullYear(), now.getMonth(),
-                            now.getDay() + 15).toISOString()
+                            now.getDate() + 1).toISOString()
                             // I have no idea on earth why the day is off by 15...
                 };
 
