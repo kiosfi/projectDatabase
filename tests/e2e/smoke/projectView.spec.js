@@ -23,11 +23,6 @@ describe('Project view page', function () {
                 .toEqual('70001: Human rights');
     });
 
-    it('should not find non-existent projects', function () {
-        browser.get('/projects/56091ded00fccd6d66bc5cc4');
-        expect(element(by.id('error')).$('div').getText()).toEqual('Virhe - 404');
-    });
-
     it('should redirect to login page if not logged in ', function () {
         helpers.logout();
         browser.get('/projects/56091cbc00fccd6d66bc5cc3');

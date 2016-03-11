@@ -7,11 +7,11 @@ describe('Search page', function () {
         helpers.login();
 
         element(by.linkText("Haku")).click();
-        element(by.buttonText('Lisää hakukenttä')).click();
+        element(by.buttonText('Lisää')).click();
         element(by.model('query.field')).element(by.cssContainingText('option', 'Tila')).click();
         element(by.model('query.value')).element(by.cssContainingText('option', 'rekisteröity')).click();
 
-        element(by.buttonText('Lisää hakukenttä')).click();
+        element(by.buttonText('Lisää')).click();
         element.all(by.model('query.field')).get(1).element(by.cssContainingText('option', 'Alue')).click();
         element.all(by.model('query.value')).get(1).sendKeys("aasia");
         element(by.buttonText('Hae')).click();
