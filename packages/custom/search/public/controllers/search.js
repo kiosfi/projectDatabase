@@ -10,7 +10,6 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * Fetches project schema attributes to populate search view
          * fields dropdown.
          */
-
         $scope.getProjectFields = function() {
           $http.get('search/assets/projectFields.json').success(function(response) {
               $scope.projectFields = response.main_menu;
@@ -27,9 +26,21 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         }
 
         /**
+         * Whether to show the search criteria in the HTML view or not. The
+         * default behaviour is to always show the criteria.
+         */
+        $scope.showCriteria = true;
+
+        /**
+         * Whether to show the search results in the HTML view or not. The
+         * default behaviour is to hide the results when loading the page for
+         * the first time (i.e. when the search query in URL is empty).
+         */
+        $scope.showResults = Object.keys($location.search()).length !== 0;
+
+        /**
          * Creates search query object
          */
-
         $scope.results;
 
         /**
