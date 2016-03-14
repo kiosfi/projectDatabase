@@ -2,10 +2,6 @@
     <style>
         td {padding-left: 3em;}
     </style>
-    <!--<div id="error" class="panel panel-danger" ng-show="statusCode !== 200">
-        <div class="panel-heading">Virhe - {{statusCode}}</div>
-        <div class="panel-body">{{errorMessage}}</div>
-    </div>-->
     <div>
         <div id="header">
             <h2><span class="name">{{organisation.name}}</span>
@@ -23,7 +19,7 @@
             <h3>Edustaja: {{organisation.representative.name}}</h3>
             <span><a ng-click="orgEditLog = !orgEditLog" ng-show="organisation.updated.length > 0">Tietoja muokattu</a>
                 <ul ng-show="orgEditLog">
-                    <li data-ng-repeat="update in organisation.updated">            
+                    <li data-ng-repeat="update in organisation.updated">
                         {{update.time| date: 'dd-MM-yyyy HH:mm'}}, muokkaaja: {{update.user}}
                     </li>
                 </ul></span>

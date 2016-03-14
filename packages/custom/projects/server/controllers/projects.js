@@ -21,74 +21,61 @@ module.exports = function (Projects) {
                 }
                 if (!project) {
                     if (err === null) {
-                        return res.status(404).json(
-                                {status: 404, message: 'Pyydettyä hanketta ei ole.'}
-                        );
+                        return res.status(404).json({
+                            status:     404,
+                            message:    'Pyydettyä hanketta ei ole.'
+                        });
                     }
-                    return res.status(500).json(
-                            {status: 500, message: 'Hankkeen lataus epäonnistui.'}
-                    );
+                    return res.status(500).json({
+                        status:     500,
+                        message:    'Hankkeen lataus epäonnistui.'
+                    });
                 }
                 req.project = project;
                 next();
             });
         },
+
         create: function (req, res) {
             var project = new Project(req.body);
-            
-                       var prefix = new Date(project.reg_date).getFullYear().toString().slice(-2);
+
+            var prefix = new Date(project.reg_date).getFullYear().toString().slice(-2);
 
 
-            Project.find({project_ref: new RegExp('^' + prefix)}).count(function(err, count) {
-              function pad(n) {
-                  if (n < 10) {
-                    return "00" + n
-                  } else if (n >= 10 && n < 100) {
-                    return "0" + n
-                  }  else {
-                    return n
-                  }
-              }
-
-   
-
-              project.project_ref = prefix + pad(count + 1);
-              project.organisation = req.body.organisation;
-
-              project.save(function (err) {
-                  if (err) {
-                      return res.status(500).json({
-                          error: 'Hanketta ei voi tallentaa'
-                      });
-                  }
-                  res.json(project);
-              });
-
-              Projects.events.publish({
-                  action: 'created',
-                  url: config.hostname + '/projects/' + project._id,
-                  name: project.title
-              });
-
-            });
-
-            //project.organisation = req.body.organisation;
-
-            /*project.save(function (err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Hanketta ei voi tallentaa'
-                    });
+            Project.find({project_ref: new RegExp('^' + prefix)}).count(function (err, count) {
+                function pad(n) {
+                    if (n < 10) {
+                        return "00" + n
+                    } else if (n >= 10 && n < 100) {
+                        return "0" + n
+                    } else {
+                        return n
+                    }
                 }
-                res.json(project);
-            });
 
-            Projects.events.publish({
-                action: 'created',
-                url: config.hostname + '/projects/' + project._id,
-                name: project.title
-            });*/
+                project.schema_version = 2;
+
+                project.project_ref = prefix + pad(count + 1);
+                project.organisation = req.body.organisation;
+
+                project.save(function (err) {
+                    if (err) {
+                        return res.status(500).json({
+                            error: 'Hanketta ei voi tallentaa'
+                        });
+                    }
+                    res.json(project);
+                });
+
+                Projects.events.publish({
+                    action: 'created',
+                    url: config.hostname + '/projects/' + project._id,
+                    name: project.title
+                });
+
+            });
         },
+        
         /**
          * Loads a project for display.
          */
@@ -101,7 +88,7 @@ module.exports = function (Projects) {
             });
             res.json(req.project);
         },
-        
+
         /**
          * Update a project
          */
@@ -130,23 +117,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
-        /*all: function (req, res) {
-         var query = Project.find();
-         query
-         .populate([{path: 'organisation', model: 'Organisation'}, {path: 'in_review', model: 'InReview'},
-         {path: 'rejected', model: 'Rejected'}, {path: 'signed', model: 'Signed'},
-         {path: 'ended', model: 'Ended'}, {path: 'approved', model: 'Approved'},
-         {path: 'intermediary_reports.intermediary_report', model: 'IntReport'}])
-         .exec(function (err, projects) {
-         if (err) {
-         return res.status(500).json({
-         error: 'Hankkeita ei voi näyttää'
-         });
-         }
-         res.json(projects)
-         });
-         },*/
         /**
          * Gets all projects.
          *
@@ -352,6 +322,7 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
+
         /**
          * Updates project to contain payment data
          * @param {type} req project object to be updated, sent from frontend
@@ -359,7 +330,6 @@ module.exports = function (Projects) {
          * @returns updated project object in json to frontend, or error if
          *  updating not possible
          */
-
         addPayment: function (req, res) {
             var payment = req.body.payment;
             var project = req.project;
@@ -382,6 +352,7 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
+
         /**
          * Updates project to contain data required in intermediary report state
          * @param {type} req project object to be updated, sent from frontend
@@ -414,6 +385,7 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
+
         /**
          * Updates project to contain data required in end report state
          * @param {type} req project object to be updated, sent from frontend
@@ -421,7 +393,6 @@ module.exports = function (Projects) {
          * @returns updated project object in json to frontend, or error if
          *  updating not possible
          */
-
         addEndReport: function (req, res) {
             var endReport = req.body.end_report;
             endReport.user = req.user.name;
@@ -446,6 +417,7 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
+
         /**
          * Updates project to contain data required in ended state
          * @param {type} req project object to be updated, sent from frontend
@@ -481,7 +453,6 @@ module.exports = function (Projects) {
          * @param {type} req Request object.
          * @param {type} res Response object.
          */
-
         destroy: function (req, res) {
             var project = req.project;
             project.remove(function (err) {
@@ -501,6 +472,7 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
+
         /**
          * Finds projects by organisationId and returns list of projects in json
          */

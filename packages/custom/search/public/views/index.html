@@ -1,22 +1,17 @@
 <section data-ng-controller="SearchController">
     <h1>Haku</h1>
-    <hr>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!--<div class="navbar-header"><a class="navbar-brand">Haku</a></div>-->
-            <ul class="nav navbar-nav">
-                <li class="active"><a ng-href="/search">Hankehaku</a></li>
-                <li><a ng-href="/search/orgs">Järjestöhaku</a></li>
-                <li><a ng-href="/search/payments">Maksuhaku</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4><a ng-click="showCriteria = !showCriteria">Kriteerit</a></h4>
-        </div>
-        <div class="panel-body" ng-show="showCriteria">
-            <article>
+    <ul class="nav nav-tabs">
+        <li class="active"><a ng-href="/search">Hankkeet</a></li>
+        <li><a ng-href="/search/orgs">Järjestöt</a></li>
+        <li><a ng-href="/search/payments">Maksut</a></li>
+    </ul>
+    <article>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><a ng-click="showCriteria = !showCriteria"
+                       class="panel-button">Kriteerit</a></h4>
+            </div>
+            <div class="panel-body" ng-show="showCriteria">
                 <form name="searchForm" class="form-horizontal col-md-8" role="form"
                       data-ng-init="getProjectFields()" data-ng-submit="update()"
                       novalidate>
@@ -146,16 +141,17 @@
                         </div>
                     </div>
                 </form>
-            </article>
+            </div>
         </div>
-    </div>
+    </article>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4><a ng-click="showResults = !showResults">Tulokset</a></h4>
-        </div>
-        <div class="panel-body" ng-show="showResults">
-            <article class="search" data-ng-init="search()">
+    <article class="search" data-ng-init="search()">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><a ng-click="showResults = !showResults"
+                       class="panel-button">Tulokset</a></h4>
+            </div>
+            <div class="panel-body" ng-show="showResults">
                 <style type="text/css">
                     .sortorder:after {
                         content: '\25b2';
@@ -164,12 +160,12 @@
                         content: '\25bc';
                     }
                 </style>
-                <button ng-click="getResultsForCsv()">Lataa tulokset tiedostoon</button>
                 <table class="col-md-12 table table-striped">
                     <thead>
                         <tr>
                             <th class="col-md-1">
-                                <a id="byRef" ng-click="updateOrdering('project_ref')">
+                                <a id="byRef"
+                                   ng-click="updateOrdering('project_ref')">
                                     Tunnus
                                 </a>
                                 <span class="sortorder"
@@ -177,7 +173,8 @@
                                       ng-class="{reverse:!ascending}"></span>
                             </th>
                             <th class="col-md-4">
-                                <a id="byTitle" ng-click="updateOrdering('title')">
+                                <a id="byTitle"
+                                   ng-click="updateOrdering('title')">
                                     Hanke
                                 </a>
                                 <span class="sortorder"
@@ -185,7 +182,8 @@
                                       ng-class="{reverse:!ascending}"></span>
                             </th>
                             <th class="col-md-3">
-                                <a id="byOrg" ng-click="updateOrdering('organisation.name')">
+                                <a id="byOrg"
+                                   ng-click="updateOrdering('organisation.name')">
                                     Järjestö
                                 </a>
                                 <span class="sortorder"
@@ -193,7 +191,8 @@
                                       ng-class="{reverse:!ascending}"></span>
                             </th>
                             <th class="col-md-4">
-                                <a id="byDesc" ng-click="updateOrdering('description')">
+                                <a id="byDesc"
+                                   ng-click="updateOrdering('description')">
                                     Hankkeen kuvaus
                                 </a>
                                 <span class="sortorder"
@@ -205,7 +204,8 @@
                     <tbody>
                         <tr ng-repeat="result in results">
                             <td id="resultRef">{{result.project_ref}}</td>
-                            <td><a ng-href="/projects/{{result._id}}" target="_blank">
+                            <td><a ng-href="/projects/{{result._id}}"
+                                   target="_blank">
                                     {{result.title}}</a></td>
                             <td><a ng-href="/organisations/{{result.organisation._id}}"
                                    target="_blank">{{result.organisation.name}}</a>
@@ -224,9 +224,20 @@
                     </ul>
                 </div>
 
-                <p>Hankkeita löydettiin {{numberOfResults}}.</p>
-            </article>
+            </div>
         </div>
-    </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><a ng-click="showExport = !showExport"
+                       class="panel-button">Vienti</a></h4>
+            </div>
+            <div class="panel-body" ng-show="showExport">
+                <p>Hankkeita löydettiin {{numberOfResults}}.</p>
+                <button ng-click="getResultsForCsv()">
+                    Vie CSV-tiedostoon
+                </button>
+            </div>
+        </div>
+    </article>
 
 </section>

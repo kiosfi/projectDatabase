@@ -1,22 +1,17 @@
 <section data-ng-controller="SearchController">
     <h1>Haku</h1>
-    <hr>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!--<div class="navbar-header"><a class="navbar-brand">Haku</a></div>-->
-            <ul class="nav navbar-nav">
-                <li><a ng-href="/search">Hankehaku</a></li>
-                <li class="active"><a ng-href="/search/orgs">Järjestöhaku</a></li>
-                <li><a ng-href="/search/payments">Maksuhaku</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4><a ng-click="showCriteria = !showCriteria">Kriteerit</a></h4>
-        </div>
-        <div class="panel-body" ng-show="showCriteria">
-            <article>
+    <ul class="nav nav-tabs">
+        <li><a ng-href="/search">Hankkeet</a></li>
+        <li class="active"><a ng-href="/search/orgs">Järjestöt</a></li>
+        <li><a ng-href="/search/payments">Maksut</a></li>
+    </ul>
+    <article>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><a ng-click="showCriteria = !showCriteria"
+                       class="panel-button">Kriteerit</a></h4>
+            </div>
+            <div class="panel-body" ng-show="showCriteria">
                 <form name="orgForm" class="form-horizontal col-md-8" role="form"
                       data-ng-init="getProjectFields()" data-ng-submit="updateOrgSearch()" novalidate>
 
@@ -51,19 +46,16 @@
                         </div>
                     </div>
                 </form>
-            </article>
+            </div>
         </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4><a ng-click="showResults = !showResults">Tulokset</a></h4>
-        </div>
-        <div class="panel-body" ng-show="showResults">
-            <article data-ng-init="searchOrgs()">
-                <button type="button" ng-csv="organisations" lazy-load="true" csv-header="orgHeaders"
-                        csv-column-order="csvColOrder" filename="tiedot.csv" field-separator=";"
-                        add-bom="true">Lataa tulokset tiedostoon</button>
+    </article>
+    <article data-ng-init="searchOrgs()">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><a ng-click="showResults = !showResults"
+                       class="panel-button">Tulokset</a></h4>
+            </div>
+            <div class="panel-body" ng-show="showResults">
                 <table class="col-md-12 table table-striped">
                     <thead>
                         <tr>
@@ -75,15 +67,28 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="org in organisations">
-                            <td><a ng-href="/organisations/{{org._id}}" target="_blank">{{org.name}}</a></td>
+                            <td><a ng-href="/organisations/{{org._id}}"
+                                   target="_blank">{{org.name}}</a></td>
                             <td>{{org.representative}}</td>
                             <td>{{org.address}}</td>
                             <td>{{org.email}}</td>
                         </tr>
                     </tbody>
                 </table>
-                <p>Hankkeita löydettiin {{organisations.length}}.</p>
-            </article>
+            </div>
         </div>
-    </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><a ng-click="showExport = !showExport"
+                       class="panel-button">Vienti</a></h4>
+            </div>
+            <div class="panel-body" ng-show="showExport">
+                <p>Järjestöjä löydettiin {{organisations.length}}.</p>
+                <button type="button" ng-csv="organisations" lazy-load="true"
+                        csv-header="orgHeaders" csv-column-order="csvColOrder"
+                        filename="tiedot.csv" field-separator=";"
+                        add-bom="true">Vie CSV-tiedostoon</button>
+            </div>
+        </div>
+    </article>
 </section>

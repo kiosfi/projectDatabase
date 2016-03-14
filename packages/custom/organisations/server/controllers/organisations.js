@@ -19,13 +19,15 @@ module.exports = function (Organisations) {
                 }
                 if (!organisation) {
                     if (err === null) {
-                        return res.status(404).json(
-                                {status: 404, message: 'Pyydettyä järjestöä ei ole.'}
-                        );
+                        return res.status(404).json({
+                            status:     404,
+                            message:    'Pyydettyä järjestöä ei ole.'
+                        });
                     }
-                    return res.status(500).json(
-                            {status: 500, message: 'Järjestön lataus epäonnistui.'}
-                    );
+                    return res.status(500).json({
+                        status:     500,
+                        message:    'Järjestön lataus epäonnistui.'
+                    });
                 }
 
                 req.organisation = organisation;

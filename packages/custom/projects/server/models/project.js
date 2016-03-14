@@ -7,6 +7,16 @@ var mongoose = require('mongoose'),
         Schema = mongoose.Schema;
 
 var ProjectSchema = new Schema({
+
+    /**
+     * This piece of metadata tells the version number of the scheme. It is used
+     * for updating old entries to the newest version during runtime.
+     */
+    schema_version: {
+        type: Number,
+        required: true,
+        trim: true
+    },
     project_ref: {
         type: String,
         required: true
@@ -234,8 +244,13 @@ var ProjectSchema = new Schema({
     },
     updated: {
         type: Array
+    },
+    /**
+     * An array containing paths of the appendix files of a project.
+     */
+    appendices: {
+        type: Array
     }
-
 });
 
 ProjectSchema.path('title').validate(function (title) {

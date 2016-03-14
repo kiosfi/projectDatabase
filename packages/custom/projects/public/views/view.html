@@ -378,8 +378,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-3" ng-class="{
-                                    'has-error'
-                                            : paymentForm.paymentYear.$invalid }">
+                                    'has-error': paymentForm.paymentYear.$invalid }">
                                     <input name="paymentYear" type="number" class="form-control" data-ng-model="payment_year" id="paymentYear" placeholder="vvvv" required />
                                     <div ng-show="paymentForm.paymentYear.$invalid" class="help-block">
                                         <p ng-show="paymentForm.paymentYear.$error.required">Vuosi on pakollinen</p>
@@ -388,8 +387,7 @@
                             </div>
                         </div>
                         <div class="form-group col-xs-12" ng-class="{
-                            'has-error'
-                                    : paymentForm.paymentSumEUR.$invalid }">
+                            'has-error': paymentForm.paymentSumEUR.$invalid }">
                             <label for="paymentSumEUR" class="col-xs-2 control-label">Summa (EUR)</label>
                             <div class="col-xs-4" >
                                 <input name="paymentSumEUR" type="number" class="form-control" data-ng-model="project.payment.sum_eur" id="paymentSumEUR" placeholder="Summa (EUR)" required />
@@ -412,48 +410,6 @@
                     <h4>Liitteet</h4>
 
                     **LIITETOIMINNOT TULOSSA**
-                    <!--<table class="proj-content">
-                        <tr>
-                            <th><a href="">Hakemus</a></th>
-                            <td>Hyväksytty 1.1.2014</td>
-                        </tr>
-                        <tr>
-                            <th><a href="">Budjetti</a></th>
-                            <td>Hyväksytty 1.1.2014</td>
-                        </tr>
-                        <tr>
-                            <th><a href="">1. väliraportti</a></th>
-                            <td>Hyväksytty 1.1.2014</td>
-                        </tr>
-                        <tr>
-                            <th><a href="">2. väliraportti</a></th>
-                            <td>ODOTTAA</td>
-                        </tr>
-                        <tr>
-                            <th><a href="">Suosituskirje A</a></th>
-                            <td>Hyväksytty 1.1.2014</td>
-                        </tr>
-                        <tr>
-                            <th><a href="">Suosituskirje B</a></th>
-                            <td>Hyväksytty 1.1.2014</td>
-                        </tr>
-                        <tr>
-                            <th><a href="">Evaluointi</a></th>
-                            <td>Hyväksytty 1.1.2014</td>
-                        </tr>
-                        <tr>
-                            <th><a href="">Esitys 1</a></th>
-                            <td>Hyväksytty 1.1.2014</td>
-                        </tr>
-                        <tr>
-                            <th><a href="">Esitys 2</a></th>
-                            <td>ODOTTAA</td>
-                        </tr>
-                        <tr>
-                            <th><a href="">Sopimus</a></th>
-                            <td>Hyväksytty 1.1.2014</td>
-                        </tr>
-                    </table>-->
                 </article>
             </div>
         </div>

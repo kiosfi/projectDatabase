@@ -39,6 +39,14 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         $scope.showResults = Object.keys($location.search()).length !== 0;
 
         /**
+         * Whether to show the export options for the search results in the HTML
+         * view or not. The default behaviour is to hide the results when
+         * loading the page for the first time (i.e. when the search query in
+         * URL is empty).
+         */
+        $scope.showExport = Object.keys($location.search()).length !== 0;
+
+        /**
          * Creates search query object
          */
         $scope.results;
@@ -181,16 +189,19 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 * Column order and headers for csv
                 *
                 */
-
-                $scope.csvColOrder = ['_id', 'name', 'representative', 'exec_manager',
-                'communications_rep', 'address', 'tel', 'email', 'website', 'legal_status',
-                'description', 'int_links', 'nat_local_links', 'other_funding_budget',
+                $scope.csvColOrder = ['_id', 'name', 'representative',
+                    'exec_manager', 'communications_rep', 'address', 'tel',
+                    'email', 'website', 'legal_status', 'description',
+                    'int_links', 'nat_local_links', 'other_funding_budget',
                 'accounting_audit'];
 
-                $scope.orgHeaders = ['Tunnus', 'Nimi', 'Edustaja', 'Vastuullinen johtaja',
-                'Viestintävastaava', 'Osoite', 'Puh', 'Email', 'WWW', 'Hallintomalli ja henkilöstö', 'Kuvaus',
-                'Kansainväliset linkit', 'Kansalliset/paikalliset linkit',
-                'Muu rahoitus ja budjetti', 'Taloushallinto ja tilintarkastus'];
+                $scope.orgHeaders = ['Tunnus', 'Nimi', 'Edustaja',
+                    'Vastuullinen johtaja', 'Viestintävastaava', 'Osoite',
+                    'Puh', 'Email', 'WWW', 'Hallintomalli ja henkilöstö',
+                    'Kuvaus', 'Kansainväliset linkit',
+                    'Kansalliset/paikalliset linkit',
+                    'Muu rahoitus ja budjetti',
+                    'Taloushallinto ja tilintarkastus'];
             });
         };
 
