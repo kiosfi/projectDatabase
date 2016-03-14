@@ -369,7 +369,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
-                $scope.ensureCompatibility(project);
+//                $scope.ensureCompatibility(project);
             });
         };
 
