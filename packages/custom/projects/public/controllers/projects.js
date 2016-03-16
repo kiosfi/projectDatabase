@@ -719,6 +719,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         /**
+         * Checks if the given string is non empty. Undefined or "" will be
+         * interpreted as an empty string.
+         *
+         * @param {type} string The string to check.
+         * @returns {Boolean}
+         */
+        $scope.nonEmpty = function (string) {
+            return typeof string !== "undefined" && string !== "";
+        }
+
+        /**
          * The sorting predicate used in project listing. Initial value is
          * "project_ref".
          */
