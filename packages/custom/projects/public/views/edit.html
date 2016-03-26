@@ -1,11 +1,21 @@
 <section data-ng-controller="ProjectsController" data-ng-init="initEditing()">
-    <a ng-href="/projects/{{project._id}}" class="btn btn-danger">Peruuta</a>
+    <h1>{{project.title}} ({{project.organisation.name}}) - Muokkaus</h1>
     <form name="projectEditForm" class="form-horizontal" role="form" data-ng-submit="update(projectEditForm.$valid)" novalidate>
-        <h2>{{project.title}} ({{project.organisation.name}})</h2>
-        <h2>Tietojen muokkaus</h2>
         <fieldset>
-            <a href="" ng-click="showRegDetails = ! showRegDetails">Rekisteröinti -tilan tiedot</a>
+            <legend>
+                <a href="" ng-click="showRegDetails = ! showRegDetails">Rekisteröinti -tilan tiedot</a>
+            </legend>
             <div class="fs1" ng-show="showRegDetails">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label">Turvaluokitus</label>
+                    <div class="col-md-9">
+                        <select data-ng-model="project.security_level">
+                            <option>Julkinen</option>
+                            <option>Luottamuksellinen</option>
+                            <option>Salainen</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
                         : projectEditForm.title.$invalid }">
@@ -50,7 +60,7 @@
 
                     <div class="col-md-9">
                         <textarea name="description_en" data-ng-model="project.description_en" id="description_en"
-                                  placeholder="Kuvaus englanniksi" class="form-control"></textarea>                       
+                                  placeholder="Kuvaus englanniksi" class="form-control"></textarea>
                     </div>
                 </div>
 
@@ -61,7 +71,7 @@
                     <div class="col-md-9">
                         <input name="appliedlocal" type="number" class="form-control"
                                data-ng-model="project.funding.applied_curr_local" id="appliedlocal"
-                               placeholder="Haettu avustus (paikallinen)">                        
+                               placeholder="Haettu avustus (paikallinen)">
                     </div>
                 </div>
 
@@ -71,7 +81,7 @@
                     <div class="col-md-9">
                         <input name="appliedeur" type="number" class="form-control"
                                data-ng-model="project.funding.applied_curr_eur" id="appliedeur"
-                               placeholder="Haettu avustus (EUR)">                        
+                               placeholder="Haettu avustus (EUR)">
                     </div>
                 </div>
 
@@ -80,7 +90,7 @@
 
                     <div class="col-md-9">
                         <input name="duration" type="number" class="form-control"
-                               data-ng-model="project.duration_months" id="duration" placeholder="Kesto (kk)">     
+                               data-ng-model="project.duration_months" id="duration" placeholder="Kesto (kk)">
                     </div>
                 </div>
 
@@ -190,10 +200,12 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </fieldset>
-
         <fieldset ng-show="project.in_review.date">
-            <a href="" ng-click="showInRevDetails = !showInRevDetails">Käsittelyssä -tilan tiedot</a>
+            <legend>
+                <a href="" ng-click="showInRevDetails = !showInRevDetails">Käsittelyssä -tilan tiedot</a>
+            </legend>
             <div class="form-group col-md-12" ng-show="showInRevDetails">
                 <label for="comments" class="col-md-2 control-label">Kommentit</label>
                 <div class="col-md-10">
@@ -201,9 +213,10 @@
                 </div>
             </div>
         </fieldset>
-
         <fieldset ng-show="project.approved.date">
-            <a href="" ng-click="showApprDetails = !showApprDetails">Hyväksytty -tilan tiedot</a>
+            <legend>
+                <a href="" ng-click="showApprDetails = !showApprDetails">Hyväksytty -tilan tiedot</a>
+            </legend>
             <div ng-show="showApprDetails">
                 <div class="form-group col-md-12">
                     <label for="approved_date" class="col-md-2">Hyväksytty pvm</label>
@@ -304,12 +317,13 @@
                             </tr>
                         </table>
                     </div>
-                </div>                  
+                </div>
             </div>
         </fieldset>
-
         <fieldset ng-show="project.rejected.date">
-            <a href="" ng-click="showRejDetails = !showRejDetails">Hylätty -tilan tiedot</a>
+            <legend>
+                <a href="" ng-click="showRejDetails = !showRejDetails">Hylätty -tilan tiedot</a>
+            </legend>
             <div ng-show="showRejDetails">
                 <div class="form-group col-md-12">
                     <label mean-token="'create-rejcategories'" class="col-md-3">Syyt</label>
@@ -334,9 +348,10 @@
                 </div>
             </div>
         </fieldset>
-
         <fieldset ng-show="project.signed.date">
-            <a href="" ng-click="showSignDetails = !showSignDetails">Allekirjoitettu -tilan tiedot</a>
+            <legend>
+                <a href="" ng-click="showSignDetails = !showSignDetails">Allekirjoitettu -tilan tiedot</a>
+            </legend>
             <div ng-show="showSignDetails">
                 <div class="form-group col-md-12">
                     <label for="signed_by" class="col-md-2">Allekirjoittaja</label>
@@ -441,12 +456,13 @@
                 </div>
             </div>
         </fieldset>
-
         <fieldset ng-show="project.intermediary_reports.length > 0">
-            <a href="" ng-click="showIntRepDetails = !showIntRepDetails">Väliraportti -tilan tiedot</a>
+            <legend>
+                <a href="" ng-click="showIntRepDetails = !showIntRepDetails">Väliraportti -tilan tiedot</a>
+            </legend>
             <div ng-show="showIntRepDetails">
                 <div data-ng-repeat="intreport in int_reports">
-                    <h4>{{intreport.reportNumber}}. väliraportti</h4>                    
+                    <h4>{{intreport.reportNumber}}. väliraportti</h4>
 
                     <p class="col-md-12 strong-title comment-form-div">Toimintatavat ja niiden toteutuminen</p>
                     <div class="form-group col-md-12" ng-repeat="method in project.methods">
@@ -522,10 +538,10 @@
                 </div>
             </div>
         </fieldset>
-
         <fieldset ng-show="project.end_report.date">
-            <a href="" ng-click="showEndRepDetails = !showEndRepDetails">Loppuraportti -tilan tiedot</a>
-
+            <legend>
+                <a href="" ng-click="showEndRepDetails = !showEndRepDetails">Loppuraportti -tilan tiedot</a>
+            </legend>
             <div ng-show="showEndRepDetails">
                 <div class="form-group col-md-12">
                     <label for="audit_date" class="col-md-2">Tilintarkastus pvm</label>
@@ -631,9 +647,10 @@
                 </div>
             </div>
         </fieldset>
-
         <fieldset ng-show="project.ended.date">
-            <a href="" ng-click="showEndedDetails = !showEndedDetails">Päättynyt -tilan tiedot</a>
+            <legend>
+                <a href="" ng-click="showEndedDetails = !showEndedDetails">Päättynyt -tilan tiedot</a>
+            </legend>
             <div ng-show="showEndedDetails">
                 <div class="form-group col-md-12">
                     <div>
@@ -649,7 +666,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group col-md-12">
                     <label for="approved_by" class="col-md-2"> Hyväksyjä</label>
                     <div class="col-md-10">
@@ -659,7 +675,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="form-group col-md-12">
                     <div>
                         <label for="notifiedDay" class="col-md-2">Tiedoksiannnon päivämäärä</label>
@@ -673,44 +688,22 @@
                             <input name="endNotifiedYear" type="number" class="form-control" data-ng-model="end_notified_year" id="notifiedYear" placeholder="vvvv">
                         </div>
                     </div>
-
                 </div>
-
                 <div class="form-group col-md-12">
                     <label for="comments" class="col-md-2">Muut kommentit</label>
                     <div class="col-md-10">
                         <textarea name="endComments" type="text" class="form-control" data-ng-model="project.ended.other_comments" id="comments" placeholder="Muut päättämiseen liittyvät kommentit"></textarea>
                     </div>
-
                 </div>
             </div>
         </fieldset>
-
-
-        <!--    <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.title.$invalid }">
-              <label mean-token="'edit-title'" for="title" class="col-md-2 control-label">Title</label>
-              <div class="col-md-10">
-                <input name="title" type="text" class="form-control" data-ng-model="project.title" id="title" placeholder="Title" required>
-                <div ng-show="submitted && projectForm.title.$invalid" class="help-block">
-                  <p ng-show="projectForm.title.$error.required">Title is required</p>
-                </div>
-              </div>
-        
-            </div>
-            <div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.status.$invalid }">
-              <label mean-token="'edit-status'" for="status" class="col-md-2 control-label">Status</label>
-              <div class="col-md-10">
-                <input name="status" type="text" class="form-control" data-ng-model="project.status" id="status" placeholder="Status" required>
-                <div ng-show="submitted && projectForm.status.$invalid" class="help-block">
-                  <p ng-show="projectForm.status.$error.required">Status is required</p>
-                </div>
-              </div>
-        
-            </div>
-        -->
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button mean-token="'edit-submit'" type="submit" class="btn btn-default"
+            <div class="col-md-offset-1 col-md-11">
+                <a ng-href="/projects/{{project._id}}" class="btn btn-danger">
+                    Peruuta
+                </a>
+                <button mean-token="'edit-submit'" type="submit"
+                        class="btn btn-default"
                         ng-disabled="projectEditForm.$invalid">Tallenna</button>
             </div>
         </div>

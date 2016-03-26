@@ -13,33 +13,67 @@ var ProjectSchema = new Schema({
      * for updating old entries to the newest version during runtime.
      */
     schema_version: {
-        type: Number,
-        required: true,
-        trim: true
+        type: Number, // Current version is 2.
+        required: true
     },
+    /**
+     * Security level of the project. The value should be one of the following
+     * strings: "Julkinen" (public), "Luottamuksellinen" (confidential) or
+     * "Salainen" (secret). For the time being, this is just a string and
+     * doesn't affect access control.
+     */
+    security_level: {
+        type: String,
+        required: true
+    },
+    /**
+     * Reference number of the project. It's an integer whose two first (most
+     * significant) digits specify the year in which the project applied for
+     * funding and last three (least significant) digits are a number
+     * identifying the project against projects with same year of application.
+     */
     project_ref: {
         type: String,
         required: true
     },
+    /**
+     * Title of the project.
+     */
     title: {
         type: String,
         required: true,
         trim: true
     },
+    /**
+     * Name of the coordinator of the project.
+     */
     coordinator: {
         type: String,
         required: true
     },
+    /**
+     * ID of the organisation in charge of this project.
+     */
     organisation: {
         type: Schema.ObjectId,
         ref: 'Organisation',
         required: true
     },
+    /**
+     * State of the project. Must be one of the following strings:
+     * "rekisteröity" (registered), "käsittelyssä" (processing), "hyväksytty"
+     * (approved), "hylätty" (denied), "allekirjoitettu" (signed),
+     * "väliraportti" (intermediary report), "loppuraportti" (final report),
+     * "päättynyt" (ended).
+     */
     state: {
         type: String,
         default: 'rekisteröity',
         required: true
     },
+    /**
+     * Date when the application was filed.
+     */
     reg_date: {
         type: Date,
         default: Date.now

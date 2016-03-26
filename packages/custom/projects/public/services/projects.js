@@ -24,6 +24,9 @@ angular.module('mean.projects').factory('Projects', ['$resource',
             addPayment: {
                 method: 'PUT', url: '/api/projects/payment/:projectId'
             },
+            addAppendix: {
+                method: 'POST', url: '/api/projects/upload'
+            },
             addEnded: {
                 method: 'PUT', url: 'api/projects/end/:projectId'
             },

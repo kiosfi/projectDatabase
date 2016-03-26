@@ -9,6 +9,9 @@ var mongoose = require('mongoose'),
         BankAccount = mongoose.model('BankAccount'),
         States = mongoose.model('States'),
         config = require('meanio').loadConfig(),
+        multiparty = require('multiparty'),
+        util = require('util'),
+        fs = require('fs'),
         _ = require('lodash');
 
 module.exports = function (Projects) {
@@ -22,20 +25,19 @@ module.exports = function (Projects) {
                 if (!project) {
                     if (err === null) {
                         return res.status(404).json({
-                            status:     404,
-                            message:    'Pyydettyä hanketta ei ole.'
+                            status: 404,
+                            message: 'Pyydettyä hanketta ei ole.'
                         });
                     }
                     return res.status(500).json({
-                        status:     500,
-                        message:    'Hankkeen lataus epäonnistui.'
+                        status: 500,
+                        message: 'Hankkeen lataus epäonnistui.'
                     });
                 }
                 req.project = project;
                 next();
             });
         },
-
         create: function (req, res) {
             var project = new Project(req.body);
 
@@ -75,7 +77,6 @@ module.exports = function (Projects) {
 
             });
         },
-        
         /**
          * Loads a project for display.
          */
@@ -88,7 +89,6 @@ module.exports = function (Projects) {
             });
             res.json(req.project);
         },
-
         /**
          * Update a project
          */
@@ -96,7 +96,6 @@ module.exports = function (Projects) {
             var project = req.project;
 
             project = _.extend(project, req.body);
-
 
             project.save(function (err) {
                 if (err) {
@@ -322,7 +321,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /**
          * Updates project to contain payment data
          * @param {type} req project object to be updated, sent from frontend
@@ -334,13 +332,15 @@ module.exports = function (Projects) {
             var payment = req.body.payment;
             var project = req.project;
             project.payments.push(payment);
-            project.funding.paid_eur = project.funding.paid_eur + payment.sum_eur;
-            project.funding.left_eur = project.funding.left_eur - payment.sum_eur;
+            project.funding.paid_eur = project.funding.paid_eur +
+                    payment.sum_eur;
+            project.funding.left_eur = project.funding.left_eur -
+                    payment.sum_eur;
 
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
-                        error: 'Hankkeen päivitys allekirjoitetuksi epäonnistui.'
+                        error: 'Maksatuksen lisääminen epäonnistui.'
                     });
                 }
 
@@ -350,6 +350,67 @@ module.exports = function (Projects) {
                     url: config.hostname + '/projects/' + project._id
                 });
                 res.json(project);
+            });
+        },
+
+        /**
+         * Updates project to contain a new appendix. The file will be written
+         * in a data directory under "/packages/custom/projects/data". The
+         * project document in the database will be updated to contain one extra
+         * appendix entry at the field "appendices". The format for appendices
+         * is: {"type": &lt;type of appendix as a string&gt;, "custom_type":
+         * &lt;a custom typename (only used when type is 'Muu...')&gt;, "date":
+         * &lt;date when the appendix was added&gt>, "path": &lt;path of
+         * appendix file&gt;}.
+         * @param {type} req project object to be updated, sent from frontend
+         * @param {type} res project object after update
+         * @returns updated project object in json to frontend, or error if
+         *  updating not possible
+         */
+        addAppendix: function (req, res) {
+            var tmpdir = process.cwd() + "/packages/custom/projects/data";
+            var form = new multiparty.Form({uploadDir: tmpdir});
+            form.parse(req, function(err, fields, files) {
+                var now = new Date();
+                var appendix = {type: fields.appendix_type[0],
+                    custom_type: fields.appendix_custom_type[0],
+                    date: now.toISOString()};
+                var file = files.appendix_file[0];
+                Project.findOne({_id: fields.project_id}).
+                        exec(function (err, project) {
+                    if (err) {
+                        return res.status(500).json({
+                            error: 'Hanketta ei voitu hakea tietokannasta.'
+                        });
+                    }
+                    var newDir = tmpdir + "/" + project._id;
+                    var pathParts = file.path.split("/");
+                    var newFilename = pathParts[pathParts.length - 1];
+                    fs.mkdirSync(newDir);
+                    fs.renameSync(file.path, newDir + "/" + newFilename);
+                    appendix.path = newDir + "/" + newFilename;
+                    if (project.appendices === undefined) {
+                        project.appendices = [];
+                    }
+                    appendix.number = project.appendices.length === 0 ?
+                            1 : project.appendices.length + 1;
+                    project.appendices.push(appendix);
+                    project.save(function (err) {
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Liitteen lisäys epäonnistui.'
+                            });
+                        }
+                        Projects.events.publish({
+                            action: 'updated',
+                            name: project.title,
+                            url: config.hostname + '/projects/' + project._id
+                        });
+                    });
+                });
+                res.writeHead(302, {'Location': '/projects/' + fields.project_id});
+                res.write('received upload:\n\n');
+                res.end(util.inspect({fields: fields, files: files}));
             });
         },
 
@@ -385,7 +446,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /**
          * Updates project to contain data required in end report state
          * @param {type} req project object to be updated, sent from frontend
@@ -417,7 +477,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /**
          * Updates project to contain data required in ended state
          * @param {type} req project object to be updated, sent from frontend
@@ -446,7 +505,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /**
          * Deletes requested project from projects collection.
          * object {orgCount : &lt;n&gt;}, where &lt;n&gt; is the number of
@@ -472,7 +530,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /**
          * Finds projects by organisationId and returns list of projects in json
          */

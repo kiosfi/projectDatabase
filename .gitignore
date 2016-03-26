@@ -25,3 +25,6 @@ tests/config/e2e/tests/results/*
 tests/results
 
 search/public/assets/lib
+
+# Note that this directory must be created before running the server:
+packages/custom/projects/data/

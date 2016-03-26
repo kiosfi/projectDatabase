@@ -30,7 +30,7 @@
                 </a>
                 <ul ng-show="showEditLog">
                     <li data-ng-repeat="update in project.updated">
-                        {{update.time| date: 'dd-MM-yyyy HH:mm'}};
+                        {{update.time| date: 'd.M.yyyy HH:mm'}};
                         muokkaajana {{update.user}}
                     </li>
                 </ul></span>
@@ -92,6 +92,10 @@
             <article id="summary" class="proj-article">
                 <h4>Perustiedot</h4>
                 <table class="proj-content">
+                    <tr>
+                        <th>Turvaluokitus</th>
+                        <td>{{project.security_level}}</td>
+                    </tr>
                     <tr ng-show="nonEmpty(project.region)">
                         <th>Alue</th>
                         <td>{{project.region}}</td>
@@ -106,7 +110,7 @@
                     </tr>
                     <tr>
                         <th>Kirjattu</th>
-                        <td>{{project.reg_date| date:'dd-MM-yyyy': 'UTC'}}</td>
+                        <td>{{project.reg_date| date:'d.M.yyyy': 'UTC'}}</td>
                     </tr>
                     <tr ng-show="project.approved.granted_sum_eur"
                         class="ng-hide">
@@ -234,7 +238,7 @@
                     <table class="proj-subcontent">
                         <tr ng-repeat="deadline in project.signed.intreport_deadlines">
                             <th>{{deadline.report}}</th>
-                            <td>{{deadline.date| date: 'dd-MM-yyyy': 'UTC'}}</td>
+                            <td>{{deadline.date| date: 'd.M.yyyy': 'UTC'}}</td>
                         </tr>
                     </table>
                 </section>
@@ -242,7 +246,7 @@
                     <section ng-show="project.in_review.date">
                         <p>
                             <b>Rekisteröity käsittelyyn</b>
-                            {{project.in_review.date| date:'dd-MM-yyyy':
+                            {{project.in_review.date| date:'d.M.yyyy':
                                             'UTC'}}
                             <button class="btn small-btn"
                                     onclick="toggleCollapse('reviewinfo')">
@@ -254,7 +258,7 @@
                                 <th>Tiedot lisäsi</th>
                                 <td>{{project.in_review.user}},
                                     {{project.in_review.date|
-                                                    date:'dd-MM-yyyy, HH:mm':
+                                                    date:'d.M.yyyy, HH:mm':
                                                     'UTC'}}</td>
                             </tr>
                             <tr>
@@ -266,7 +270,7 @@
                     <section ng-show="project.approved.date">
                         <p>
                             <b>Rekisteröity hyväksytyksi</b>
-                            {{project.approved.date| date:'dd-MM-yyyy':'UTC'}}
+                            {{project.approved.date| date:'d.M.yyyy':'UTC'}}
                             <button class="btn small-btn"
                                     onclick="toggleCollapse('approvedinfo')">
                                 Tiedot</button>
@@ -277,7 +281,7 @@
                                 <th>Tiedot lisäsi</th>
                                 <td>{{project.approved.user}},
                                     {{project.approved.date|
-                                                    date:'dd-MM-yyyy, HH:mm':
+                                                    date:'d.M.yyyy, HH:mm':
                                                     'UTC'}}</td>
                             </tr>
                             <tr>
@@ -287,12 +291,12 @@
                             <tr>
                                 <th>Hyväksymispäivä</th>
                                 <td>{{project.approved.approved_date| date:
-                                                'dd-MM-yyyy':'UTC'}}</td>
+                                                'd.M.yyyy':'UTC'}}</td>
                             </tr>
                             <tr>
                                 <th>Hallitukselle tiedoksi</th>
                                 <td>{{project.approved.board_notified| date:
-                                                'dd-MM-yyyy':'UTC'}}</td>
+                                                'd.M.yyyy':'UTC'}}</td>
                             </tr>
                             <tr>
                                 <th>Hyväksytty summa</th>
@@ -311,7 +315,7 @@
                     <section ng-show="project.rejected.date">
                         <p>
                             <b>Rekisteröity hylätyksi</b>
-                            {{project.rejected.date| date:'dd-MM-yyyy':
+                            {{project.rejected.date| date:'d.M.yyyy':
                                             'UTC'}}
                             <button class="btn small-btn"
                                     onclick="toggleCollapse('rejectedinfo')">
@@ -324,7 +328,7 @@
                                 <th>Tiedot lisäsi</th>
                                 <td>{{project.rejected.user}},
                                     {{project.rejected.date|
-                                                    date:'dd-MM-yyyy, HH:mm':
+                                                    date:'d.M.yyyy, HH:mm':
                                                     'UTC'}}</td>
                             </tr>
                             <tr>
@@ -347,7 +351,7 @@
                     <section ng-show="project.signed.date">
                         <p>
                             <b>Rekisteröity allekirjoitetuksi</b>
-                            {{project.signed.date| date:'dd-MM-yyyy': 'UTC'}}
+                            {{project.signed.date| date:'d.M.yyyy': 'UTC'}}
                             <button class="btn small-btn"
                                     onclick="toggleCollapse('signedinfo')">
                                 Tiedot
@@ -359,14 +363,14 @@
                                 <th>Tiedot lisäsi</th>
                                 <td>{{project.signed.user}},
                                     {{project.signed.date|
-                                                date:'dd-MM-yyyy, HH:mm': 'UTC'}}
+                                                date:'d.M.yyyy, HH:mm': 'UTC'}}
                                 </td>
                             </tr>
                             <tr>
                                 <th>Allekirjoitettu</th>
                                 <td>{{project.signed.signed_by}},
                                     {{project.signed.signed_date|
-                                                    date:'dd-MM-yyyy': 'UTC'}}</td>
+                                                    date:'d.M.yyyy': 'UTC'}}</td>
                             </tr>
                         </table>
                     </section>
@@ -377,7 +381,7 @@
                             <p>
                                 <b>{{intreport.reportNumber}}. väliraportti
                                     rekisteröity</b> {{intreport.date|
-                                                    date:'dd-MM-yyyy': 'UTC'}}
+                                                    date:'d.M.yyyy': 'UTC'}}
                                 <button class="btn small-btn"
                                         ng-click="showIntDetails =
                                                             !showIntDetails">
@@ -392,14 +396,14 @@
                                     <th>Tiedot lisäsi</th>
                                     <td>{{intreport.user}},
                                         {{intreport.date|
-                                                        date:'dd-MM-yyyy, HH:mm':
+                                                        date:'d.M.yyyy, HH:mm':
                                                         'UTC'}}</td>
                                 </tr>
                                 <tr>
                                     <th>Raportti hyväksytty</th>
                                     <td>{{intreport.approved_by}},
                                         {{intreport.date_approved|
-                                                        date : 'dd-MM-yyyy':
+                                                        date : 'd.M.yyyy':
                                                         'UTC'}}</td>
                                 </tr>
                             </table>
@@ -411,7 +415,7 @@
                     <section ng-show="project.end_report.date">
                         <p>
                             <b>Loppuraportti rekisteröity</b>
-                            {{project.end_report.date| date:'dd-MM-yyyy':
+                            {{project.end_report.date| date:'d.M.yyyy':
                                             'UTC'}}
                             <button class="btn small-btn"
                                     ng-click="showEndDetails =
@@ -426,14 +430,14 @@
                                 <th>Tiedot lisäsi</th>
                                 <td>{{project.end_report.user}},
                                     {{project.end_report.date|
-                                                    date:'dd-MM-yyyy, HH:mm':
+                                                    date:'d.M.yyyy, HH:mm':
                                                     'UTC'}}</td>
                             </tr>
                             <tr>
                                 <th>Raportti hyväksytty</th>
                                 <td>{{project.end_report.approved_by}},
                                     {{project.end_report.date_approved|
-                                                    date : 'dd-MM-yyyy': 'UTC'}}</td>
+                                                    date : 'd.M.yyyy': 'UTC'}}</td>
                             </tr>
                         </table>
                         <p ng-show="project.end_report.processed === true">
@@ -443,7 +447,7 @@
                     <section ng-show="project.ended.date">
                         <p>
                             <b>Rekisteröity päätetyksi</b>
-                            {{project.ended.end_date| date:'dd-MM-yyyy':
+                            {{project.ended.end_date| date:'d.M.yyyy':
                                             'UTC'}}
                             <button class="btn small-btn"
                                     onclick="toggleCollapse('endedinfo')">
@@ -455,7 +459,7 @@
                                 <th>Tiedot lisäsi</th>
                                 <td>{{project.ended.user}},
                                     {{project.ended.date|
-                                                date:'dd-MM-yyyy, HH:mm': 'UTC'}}
+                                                date:'d.M.yyyy, HH:mm': 'UTC'}}
                                 </td>
                             </tr>
                             <tr>
@@ -465,7 +469,7 @@
                             <tr>
                                 <th>Hallitukselle tiedotettu (pvm)</th>
                                 <td>{{project.ended.board_notified|
-                                            date: 'dd-MM-yyyy': 'UTC'}}</td>
+                                            date: 'd.M.yyyy': 'UTC'}}</td>
                             </tr>
                             <tr>
                                 <th>Muut päättämiseen liittyvät kommentit</th>
@@ -485,7 +489,7 @@
                         <td class="proj-subcontent">
                             <div>
                                 <span>{{project.approved.granted_sum_eur| currency : ""}} EUR</span>
-                                <span>{{project.approved.approved_date| date:'dd-MM-yyyy': 'UTC'}}</span>
+                                <span>{{project.approved.approved_date| date:'d.M.yyyy': 'UTC'}}</span>
                             </div>
                         </td>
                     </tr>
@@ -496,7 +500,7 @@
                                 <tr ng-repeat="planned_payment in project.signed.planned_payments">
                                     <td><em>{{project.signed.planned_payments.indexOf(planned_payment) + 1}}. erä</em></td>
                                     <td>{{planned_payment.sum_eur| currency : ""}} EUR</td>
-                                    <td>{{planned_payment.date| date:'dd-MM-yyyy': 'UTC'}}</td>
+                                    <td>{{planned_payment.date| date:'d.M.yyyy': 'UTC'}}</td>
                                 </tr>
                             </table>
                         </td>
@@ -506,7 +510,7 @@
                         <td>
                             <div ng-repeat="payment in project.payments">
                                 <em id="paid">{{payment.payment_number}}. erä</em>
-                                {{payment.sum_eur| currency : ""}} EUR, {{payment.payment_date| date:'dd-MM-yyyy': 'UTC'}}
+                                {{payment.sum_eur| currency : ""}} EUR, {{payment.payment_date| date:'d.M.yyyy': 'UTC'}}
                             </div>
                         </td>
                     </tr>
@@ -579,8 +583,7 @@
                         </div>
                     </div>
                     <div class="form-group col-xs-12" ng-class="{
-                            'has-error'
-                                    : paymentForm.paymentSumEUR.$invalid }">
+                            'has-error': paymentForm.paymentSumEUR.$invalid}">
                         <label for="paymentSumEUR" class="col-xs-2 control-label">
                             Summa (EUR)
                         </label>
@@ -614,12 +617,75 @@
                         </div>
                     </div>
                 </form>
+                &nbsp;
             </article>
-<!--            <article id="appendices" class="proj-article">
+            <article id="appendices" class="proj-article"
+                     ng-show="project.appendices.length > 0">
                 <h4>Liitteet</h4>
-
-                **LIITETOIMINNOT TULOSSA**
-            </article>-->
+                <table class="proj-content">
+                    <tr ng-repeat="appendix in project.appendices">
+                        <th>{{appendix.number}}.
+                            <a href="{{appendix.path}}" target="_blank">
+                                {{appendix.type !== 'Muu...' ?
+                                        appendix.type : appendix.custom_type}}
+                            </a>
+                        </th>
+                        <td>{{appendix.date | date: 'd.M.yyyy': 'UTC'}}</td>
+                    </tr>
+                </table>
+            </article>
+            <article id="addAppendix" class="proj-article">
+                <h4>Lisää liite</h4>
+                <form name="appendixForm" class="form-horizonal proj-content"
+                      ng-upload="uploadComplete(content)"
+                      action="/api/projects/upload"
+                      method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="project_id" value="{{project._id}}">
+                    <div class="form-group col-md-12">
+                        <label for="appendixTypeSelect"
+                               class="col-md-2 control-label">
+                            Tyyppi
+                        </label>
+                        <select id="appendixTypeSelect" name="appendix_type"
+                                class="col-md-4"
+                                ng-model="project.appendix.type" required>
+                            <option value="">[Valitse yksi]</option>
+                            <option>Hankehakemus</option>
+                            <option>Hankebudjetti</option>
+                            <option>Rekisteröintitodistus</option>
+                            <option>Suositus</option>
+                            <option>Järjestön vuosibudjetti</option>
+                            <option>Tilinpäätös</option>
+                            <option>Sopimus</option>
+                            <option>Valokuva</option>
+                            <option>Hankkeessa tuotettu materiaali</option>
+                            <option>Muu...</option>
+                        </select>
+                        <input type="text" name="appendix_custom_type"
+                               value="" class="col-md-6"
+                               ng-show="project.appendix.type === 'Muu...'"
+                               ng-model="project.appendix.customType">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="appendixFileInput" class="col-md-2">
+                            Tiedosto
+                        </label>
+                        <input type="file" id="appendixFileInput"
+                               name="appendix_file" class="col-md-10"
+                               accept="application/msword,application/pdf,application/rtf,application/vnd.oasis.opendocument.text,text/plain,text/csv,image/*"
+                               ng-model="project.appendix.file">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <button type="submit" id="btn-add-appendix"
+                                value="Submit" class="btn btn-default"
+                                ng-disabled="appendixForm.$invalid || (project.appendix.type === 'Muu...' && project.appendix.custom_type === '')">
+                            Tallenna
+                        </button>
+                    </div>
+                    &nbsp;
+                </form>
+                <div class="alert alert-info">Server Response: {{response | json}}</div>
+            </article>
         </div>
     </div>
 </article>
