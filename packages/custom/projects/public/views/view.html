@@ -625,11 +625,12 @@
                 <table class="proj-content">
                     <tr ng-repeat="appendix in project.appendices">
                         <th>{{appendix.number}}.
-                            <a href="{{appendix.path}}" target="_blank">
+                            <a href="{{appendix.url}}" target="_blank">
                                 {{appendix.type !== 'Muu...' ?
-                                        appendix.type : appendix.custom_type}}
+                                        appendix.category : appendix.custom_category}}
                             </a>
                         </th>
+                        <td><em>{{appendix.original_name}}</em></td>
                         <td>{{appendix.date | date: 'd.M.yyyy': 'UTC'}}</td>
                     </tr>
                 </table>
@@ -644,11 +645,11 @@
                     <div class="form-group col-md-12">
                         <label for="appendixTypeSelect"
                                class="col-md-2 control-label">
-                            Tyyppi
+                            Kategoria
                         </label>
-                        <select id="appendixTypeSelect" name="appendix_type"
+                        <select id="appendixTypeSelect" name="appendix_category"
                                 class="col-md-4"
-                                ng-model="project.appendix.type" required>
+                                ng-model="project.appendix.category" required>
                             <option value="">[Valitse yksi]</option>
                             <option>Hankehakemus</option>
                             <option>Hankebudjetti</option>
@@ -661,10 +662,10 @@
                             <option>Hankkeessa tuotettu materiaali</option>
                             <option>Muu...</option>
                         </select>
-                        <input type="text" name="appendix_custom_type"
+                        <input type="text" name="appendix_custom_category"
                                value="" class="col-md-6"
-                               ng-show="project.appendix.type === 'Muu...'"
-                               ng-model="project.appendix.customType">
+                               ng-show="project.appendix.category === 'Muu...'"
+                               ng-model="project.appendix.customCategory">
                     </div>
                     <div class="col-md-12">
                         <label for="appendixFileInput" class="col-md-2">
@@ -678,7 +679,7 @@
                     <div class="form-group col-md-12">
                         <button type="submit" id="btn-add-appendix"
                                 value="Submit" class="btn btn-default"
-                                ng-disabled="appendixForm.$invalid || (project.appendix.type === 'Muu...' && project.appendix.custom_type === '')">
+                                ng-disabled="appendixForm.$invalid || (project.appendix.category === 'Muu...' && project.appendix.custom_category === '')">
                             Tallenna
                         </button>
                     </div>

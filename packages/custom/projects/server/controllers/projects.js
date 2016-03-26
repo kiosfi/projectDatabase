@@ -12,6 +12,7 @@ var mongoose = require('mongoose'),
         multiparty = require('multiparty'),
         util = require('util'),
         fs = require('fs'),
+        mkdirp = require('mkdirp'),
         _ = require('lodash');
 
 module.exports = function (Projects) {
@@ -357,25 +358,28 @@ module.exports = function (Projects) {
          * Updates project to contain a new appendix. The file will be written
          * in a data directory under "/packages/custom/projects/data". The
          * project document in the database will be updated to contain one extra
-         * appendix entry at the field "appendices". The format for appendices
-         * is: {"type": &lt;type of appendix as a string&gt;, "custom_type":
-         * &lt;a custom typename (only used when type is 'Muu...')&gt;, "date":
-         * &lt;date when the appendix was added&gt>, "path": &lt;path of
-         * appendix file&gt;}.
+         * appendix entry in the field "appendices". The format for appendices
+         * is: {"category": &lt;category of appendix as a string&gt;,
+         * "custom_category": &lt;a custom category (only used when type is
+         * 'Muu...')&gt;, "mime_type": &ltMIME type of the appendix file&gt,
+         * "date": &lt;date when the appendix was added&gt;; "url": &lt;URL of
+         * appendix file&gt; "number": &lt;(ordinal) number of the appendix&gt;}.
          * @param {type} req project object to be updated, sent from frontend
          * @param {type} res project object after update
          * @returns updated project object in json to frontend, or error if
          *  updating not possible
          */
         addAppendix: function (req, res) {
-            var tmpdir = process.cwd() + "/packages/custom/projects/data";
+            var tmpdir = "packages/custom/projects/data";
             var form = new multiparty.Form({uploadDir: tmpdir});
             form.parse(req, function(err, fields, files) {
                 var now = new Date();
-                var appendix = {type: fields.appendix_type[0],
-                    custom_type: fields.appendix_custom_type[0],
-                    date: now.toISOString()};
                 var file = files.appendix_file[0];
+                var appendix = {category: fields.appendix_category[0],
+                    custom_category: fields.appendix_custom_category[0],
+                    mime_type: file.headers["content-type"],
+                    date: now.toISOString(),
+                    original_name: file.originalFilename};
                 Project.findOne({_id: fields.project_id}).
                         exec(function (err, project) {
                     if (err) {
@@ -386,9 +390,10 @@ module.exports = function (Projects) {
                     var newDir = tmpdir + "/" + project._id;
                     var pathParts = file.path.split("/");
                     var newFilename = pathParts[pathParts.length - 1];
-                    fs.mkdirSync(newDir);
+                    mkdirp.sync(newDir);
                     fs.renameSync(file.path, newDir + "/" + newFilename);
-                    appendix.path = newDir + "/" + newFilename;
+                    appendix.url = "projects/data/" + project._id + "/" +
+                            newFilename;
                     if (project.appendices === undefined) {
                         project.appendices = [];
                     }
@@ -409,8 +414,39 @@ module.exports = function (Projects) {
                     });
                 });
                 res.writeHead(302, {'Location': '/projects/' + fields.project_id});
-                res.write('received upload:\n\n');
                 res.end(util.inspect({fields: fields, files: files}));
+            });
+        },
+
+        /**
+         * Gets the requested appendix. The request URL should be in the
+         * following format: "/projecs/data/" &lt;projectId&gt; "?appendix="
+         * &lt;appendixId&gt; where &lt;projectId&gt; identifies the project and
+         * &lt;appendixId&gt; is the name of the file being requested. The
+         * response will be submitted through HTTP in the usual fashion.
+         *
+         * @param {type} req    The request object (GET request).
+         * @param {type} res    The response object.
+         * @returns {undefined}
+         */
+        getAppendix: function (req, res) {
+            var path = "packages/custom" + req.url.replace("/api", "").
+                    replace("?appendix=", "/");
+            fs.stat(path, function(error, stats) {
+                fs.open(path, "r", function(err, fd) {
+                    if (err) {
+                        return res.status(500).json({
+                            error: 'Liitteen haku epäonnistui.'
+                        });
+                    }
+                    var buffer = new Buffer(stats.size);
+                    fs.read(fd, buffer, 0, buffer.length, null, function(error,
+                            bytesRead, buffer) {
+                        res.writeHead(200, {"content-type": req.body.mime_type});
+                        res.end(buffer);
+                        fs.close(fd);
+                    });
+                });
             });
         },
 

@@ -27,6 +27,9 @@ angular.module('mean.projects').factory('Projects', ['$resource',
             addAppendix: {
                 method: 'POST', url: '/api/projects/upload'
             },
+            getAppendix: {
+                method: 'GET', url: '/api/projects/data/:projectId'
+            },
             addEnded: {
                 method: 'PUT', url: 'api/projects/end/:projectId'
             },
