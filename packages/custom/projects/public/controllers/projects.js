@@ -78,15 +78,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.payment_month = now.getMonth() + 1;
         $scope.payment_day = now.getDate();
 
-        /**
-         * These date fields are used for adding a new appendix at the project
-         * view. The default values correspond to the current date (generated
-         * during runtime).
-//         */
-//        $scope.appendix_year = now.getFullYear();
-//        $scope.appendix_month = now.getMonth() + 1;
-//        $scope.appendix_day = now.getDate();
-
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
@@ -447,10 +438,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.confirmAppendixDeletion = function (url) {
             if (confirm("Haluatko varmasti poistaa liitteen?")) {
-//                $location.path(url + "&action=delete");
-//
-//                $window.location.reload();
-
                 $window.location = url + "&action=delete";
             }
         };
@@ -608,6 +595,19 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
 
         };
+
+        // TODO: Make this stuff work instead of direct HTTP requests in order
+        // enable access control through client-side services and server-side
+        // routes:
+//        $scope.addAppendix = function (valid) {
+//            if (valid) {
+//                $scope.project.$addAppendix();
+//            }
+//        }
+//
+//        $scope.accessAppendix = function (url) {
+////            $scope.project.$accessAppendix(url + "&action=download");
+//        }
 
         $scope.uploadComplete = function (content) {
             $scope.response = JSON.parse(content); // Presumed content is a json string!

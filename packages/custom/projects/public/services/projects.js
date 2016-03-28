@@ -22,14 +22,16 @@ angular.module('mean.projects').factory('Projects', ['$resource',
                 method: 'PUT', url: 'api/projects/sign/:projectId'
             },
             addPayment: {
-                method: 'PUT', url: '/api/projects/payment/:projectId'
+                method: 'PUT', url: 'api/projects/payment/:projectId'
             },
-            addAppendix: {
-                method: 'POST', url: '/api/projects/upload'
-            },
-            accessAppendix: {
-                method: 'GET', url: '/api/projects/data/:projectId'
-            },
+            // TODO: Figure out some way to make the appendix functions use
+            // these services in order to enable proper access control:
+//            addAppendix: {
+//                method: 'POST', url: 'api/projects/upload'
+//            },
+//            accessAppendix: {
+//                method: 'GET', url: 'api/projects/data/:projectId'
+//            },
             addEnded: {
                 method: 'PUT', url: 'api/projects/end/:projectId'
             },

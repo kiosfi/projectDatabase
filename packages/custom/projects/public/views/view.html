@@ -628,7 +628,10 @@
                 <table class="proj-content">
                     <tr ng-repeat="appendix in project.appendices">
                         <th>{{appendix.number}}.
-                            <a href="{{appendix.url}}&action=download"
+                            <!-- TODO: Figure out how to hyperlink the
+                            appendices using client-side services in order to
+                            enable proper access control: -->
+                            <a ng-href="{{appendix.url}}&action=download"
                                target="_blank">
                                 {{appendix.category !== 'Muu...' ?
                                         appendix.category : appendix.custom_category}}
@@ -647,8 +650,9 @@
             </article>
             <article id="addAppendix" class="proj-article">
                 <h4>Lisää liite</h4>
+                <!-- TODO: Figure out how to make this form work through a
+                client-side service in order to enable proper acces contol: -->
                 <form name="appendixForm" class="form-horizonal proj-content"
-                      ng-upload="uploadComplete(content)"
                       action="/api/projects/upload"
                       method="post" enctype="multipart/form-data">
                     <input type="hidden" name="project_id" value="{{project._id}}">

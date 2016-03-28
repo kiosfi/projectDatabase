@@ -20,13 +20,13 @@ angular.module('mean.search').factory('Search', ['$resource',
                     },
                     searchAllProjects: {
                         method: 'GET',
-                        isArray: true,
-                        url: 'api/search/export'
+                        url: 'api/search/export',
+                        isArray: true
                     },
                     countSearchResults: {
                         method: 'POST',
-                        isarray: false,
-                        url: 'api/search/count'
+                        url: 'api/search/count',
+                        isarray: false
                     }
                 });
     }
