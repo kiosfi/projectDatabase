@@ -425,10 +425,33 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
-        $scope.confirm = function (project) {
+        /**
+         * Asks for confirmation for project removal. If the user approves the
+         * action, the project will be removed (wich cannot be undone).
+         *
+         * @param {type} project The project to be removed.
+         */
+        $scope.confirmProjectDeletion = function (project) {
             if (confirm('Haluatko varmasti poistaa hankkeen "' + project.title +
                     '"?')) {
                 $scope.remove(project);
+            }
+        };
+
+        /**
+         * Asks for confirmation for appendix removal. If the user approves the
+         * action, the appendix will be removed (wich cannot be undone).
+         *
+         * @param {type} url   The URL for appendix access page.
+         * @returns {undefined}
+         */
+        $scope.confirmAppendixDeletion = function (url) {
+            if (confirm("Haluatko varmasti poistaa liitteen?")) {
+//                $location.path(url + "&action=delete");
+//
+//                $window.location.reload();
+
+                $window.location = url + "&action=delete";
             }
         };
 
@@ -585,31 +608,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
 
         };
-
-//        /**
-//         * Adds appendix to the project.
-//         *
-//         * @param {Bool} isValid
-//         * @returns {undefined}
-//         */
-//        $scope.addAppendixInfo = function (isValid) {
-//            if (isValid) {
-//                var project = $scope.project;
-//                var appendix_date = $scope.convertDate($scope.appendix_day,
-//                        $scope.appendix_month, $scope.appendix_year);
-//                project.appendix.appendix_date = appendix_date;
-//                var index = project.appendices.length;
-//                if (index === undefined) {
-//                    project.appendix.appendix_number = 1;
-//                } else {
-//                    project.appendix.appendix_number =
-//                            project.appendices.length + 1;
-//                }
-//                project.$addAppendix(function (response) {
-//                    $window.location.reload();
-//                });
-//            }
-//        };
 
         $scope.uploadComplete = function (content) {
             $scope.response = JSON.parse(content); // Presumed content is a json string!

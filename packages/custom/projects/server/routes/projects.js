@@ -43,9 +43,14 @@ module.exports = function (Projects, app, auth) {
             .put(auth.isMongoId, auth.requiresLogin, projects.addSigned);
     app.route('/api/projects/payment/:projectId')
             .put(auth.isMongoId, auth.requiresLogin, projects.addPayment);
+//    app.route('/api/projects/upload')
+//            .post(auth.isMongoId, auth.requiresLogin, projects.addAppendix);
+//    app.route('/api/projects/data')
+//            .get(auth.isMongoId, auth.requiresLogin, projects.accessAppendix);
     app.route('/api/projects/upload')
             .post(projects.addAppendix);
-    app.route('/api/projects/data/:projectId').get(projects.getAppendix);
+    app.route('/api/projects/data/:projectId')
+            .get(projects.accessAppendix);
     app.route('/api/projects/end/:projectId')
             .put(auth.isMongoId, auth.requiresLogin, projects.addEnded);
     app.route('/api/projects/appr/:projectId')

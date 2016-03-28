@@ -13,6 +13,7 @@ var mongoose = require('mongoose'),
         util = require('util'),
         fs = require('fs'),
         mkdirp = require('mkdirp'),
+        mime = require('mime'),
         _ = require('lodash');
 
 module.exports = function (Projects) {
@@ -219,7 +220,6 @@ module.exports = function (Projects) {
         addReview: function (req, res) {
             var in_review = req.body.in_review;
             in_review.user = req.user.name;
-
             var project = req.project;
             project.in_review = in_review;
             project.state = req.body.state;
@@ -392,8 +392,8 @@ module.exports = function (Projects) {
                     var newFilename = pathParts[pathParts.length - 1];
                     mkdirp.sync(newDir);
                     fs.renameSync(file.path, newDir + "/" + newFilename);
-                    appendix.url = "projects/data/" + project._id + "/" +
-                            newFilename;
+                    appendix.url = "/api/projects/data/" + project._id +
+                            "?appendix=" + newFilename;
                     if (project.appendices === undefined) {
                         project.appendices = [];
                     }
@@ -412,42 +412,91 @@ module.exports = function (Projects) {
                             url: config.hostname + '/projects/' + project._id
                         });
                     });
+                    res.writeHead(302, {'Location': '/projects/' +
+                                fields.project_id});
+                    res.end(util.inspect({fields: fields, files: files}));
                 });
-                res.writeHead(302, {'Location': '/projects/' + fields.project_id});
-                res.end(util.inspect({fields: fields, files: files}));
             });
         },
 
         /**
-         * Gets the requested appendix. The request URL should be in the
+         * Accesses the requested appendix. The request URL should be in the
          * following format: "/projecs/data/" &lt;projectId&gt; "?appendix="
-         * &lt;appendixId&gt; where &lt;projectId&gt; identifies the project and
-         * &lt;appendixId&gt; is the name of the file being requested. The
-         * response will be submitted through HTTP in the usual fashion.
+         * &lt;appendixId&gt; "&action=" &lt;download | delete&gt, where
+         * &lt;projectId&gt; identifies the project and &lt;appendixId&gt; is
+         * the name of the file being requested. The <tt>action</tt> variable
+         * specifies the desired action. If the action is "download", the file
+         * in question will be sent to the user, and if the action is "delete"
+         * the file will be removed from the database and filesystem
+         * immediately.
          *
          * @param {type} req    The request object (GET request).
          * @param {type} res    The response object.
          * @returns {undefined}
          */
-        getAppendix: function (req, res) {
+        accessAppendix: function (req, res) {
             var path = "packages/custom" + req.url.replace("/api", "").
-                    replace("?appendix=", "/");
-            fs.stat(path, function(error, stats) {
-                fs.open(path, "r", function(err, fd) {
+                    replace("?appendix=", "/").
+                    replace("&action=download", "").
+                    replace("&action=delete", "");
+            if (req.url.match(/action=delete/)) {
+                var projectID = path.split("/")[4];
+                Project.findOne({_id: projectID}).exec(function (err, project) {
                     if (err) {
                         return res.status(500).json({
-                            error: 'Liitteen haku epäonnistui.'
+                            error: 'Liitteen poisto epäonnistui.'
                         });
                     }
-                    var buffer = new Buffer(stats.size);
-                    fs.read(fd, buffer, 0, buffer.length, null, function(error,
-                            bytesRead, buffer) {
-                        res.writeHead(200, {"content-type": req.body.mime_type});
-                        res.end(buffer);
-                        fs.close(fd);
+                    if (project.appendices.length === 1) {
+                        // This is the special case where we're deleting the
+                        // only appendix.
+                        project.appendices = undefined;
+                    } else {
+                        var newAppendices = [];
+                        var newNumber = 1;
+                        var url = req.url.replace("&action=download", "").
+                                replace("&action=delete", "");
+                        project.appendices.forEach(function (item, index) {
+                            if (item.url !== url) {
+                                item.number = newNumber++;
+                                newAppendices.push(item);
+                            }
+                        });
+                        project.appendices = newAppendices;
+                    }
+                    project.save(function (err) {
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Liitteen poisto epäonnistui.'
+                            });
+                        }
+                    });
+                    fs.unlinkSync(path);
+                    res.writeHead(302, {'Location': '/projects/' + projectID});
+                    res.end();
+                });
+            } else {
+                var mime_type = mime.lookup(path);
+                fs.stat(path, function(error, stats) {
+                    fs.open(path, "r", function(err, fd) {
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Liitteen haku epäonnistui.'
+                            });
+                        }
+                        var buffer = new Buffer(stats.size);
+                        fs.read(fd, buffer, 0, buffer.length, null, function(
+                                error, bytesRead, buffer) {
+                            res.writeHead(200, {
+                                "Content-Type": mime_type,
+                                "Content-Length": stats.size
+                            });
+                            res.end(buffer);
+                            fs.close(fd);
+                        });
                     });
                 });
-            });
+            }
         },
 
         /**

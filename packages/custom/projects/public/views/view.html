@@ -10,7 +10,7 @@
                 </span>
                 <span>
                     <a class="btn-lg" id="delete"
-                       data-ng-click="confirm(project);">
+                       data-ng-click="confirmProjectDeletion(project);">
                         <i class="glyphicon glyphicon-trash"></i>
                     </a>
                     <a ng-href="/projects/{{project._id}}/edit" class="btn-lg"
@@ -60,6 +60,9 @@
             </li>
             <li>
                 <label><a href="#appendices">Liitteet</a></label>
+                <ul>
+                    <li><a href="#addAppendix">Liitteen lisäys</a></li>
+                </ul>
             </li>
         </ul>
         <div style="margin-left: 160px">
@@ -625,13 +628,20 @@
                 <table class="proj-content">
                     <tr ng-repeat="appendix in project.appendices">
                         <th>{{appendix.number}}.
-                            <a href="{{appendix.url}}" target="_blank">
-                                {{appendix.type !== 'Muu...' ?
+                            <a href="{{appendix.url}}&action=download"
+                               target="_blank">
+                                {{appendix.category !== 'Muu...' ?
                                         appendix.category : appendix.custom_category}}
                             </a>
                         </th>
                         <td><em>{{appendix.original_name}}</em></td>
                         <td>{{appendix.date | date: 'd.M.yyyy': 'UTC'}}</td>
+                        <td>
+                            <a data-ng-click="confirmAppendixDeletion(appendix.url)"
+                               class="btn-lg">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
                     </tr>
                 </table>
             </article>
@@ -683,9 +693,8 @@
                             Tallenna
                         </button>
                     </div>
-                    &nbsp;
                 </form>
-                <div class="alert alert-info">Server Response: {{response | json}}</div>
+                &nbsp;
             </article>
         </div>
     </div>
