@@ -1,28 +1,29 @@
 <section data-ng-controller="ProjectsController">
     <h1>Hankkeen lisäys</h1>
     <hr>
-    <form name="projectForm" class="form-horizontal" role="form" data-ng-submit="create(projectForm.$valid)" novalidate>
+    <form name="projectForm" class="form-horizontal" role="form"
+          data-ng-submit="create(projectForm.$valid)" novalidate>
         <fieldset>
             <legend>
-                <a ng-click="showInfo = !showInfo">Hankkeen nimi, koordinaattori ja järjestö</a>
-
+                <a ng-click="showInfo = !showInfo">
+                    Nimi, koordinaattori ja järjestö
+                </a>
             </legend>
-            <!--<div id="fs1" style="display: none;">-->
             <div ng-show="showInfo">
                 <div class="form-group col-md-6" ng-class="{
-                        'has-error'
-                        : projectForm.title.$invalid }">
+                        'has-error': projectForm.title.$invalid }">
                     <label class="col-md-3 control-label">Nimi</label>
-
                     <div class="col-md-9">
-                        <input name="title" type="text" class="form-control" data-ng-model="project.title" id="title"
+                        <input name="title" type="text" class="form-control"
+                               data-ng-model="project.title" id="title"
                                placeholder="Hanke" required>
-
-                        <div ng-show="projectForm.title.$invalid" class="help-block">
-                            <p ng-show="projectForm.title.$error.required">Kenttä on pakollinen</p>
+                        <div ng-show="projectForm.title.$invalid"
+                             class="help-block">
+                            <p ng-show="projectForm.title.$error.required">
+                                Kenttä on pakollinen
+                            </p>
                         </div>
                     </div>
-
                 </div>
                 <div class="form-group col-md-6" ng-class="{
                         'has-error'
@@ -30,469 +31,504 @@
                     <label  class="col-md-3 control-label">Koordinaattori</label>
 
                     <div class="col-md-9">
-                        <input name="coordinator" type="text" class="form-control" data-ng-model="project.coordinator" id="coordinator"
+                        <input name="coordinator" type="text" class="form-control"
+                               data-ng-model="project.coordinator" id="coordinator"
                                placeholder="Koordinaattori" required>
-                        <div ng-show="projectForm.coordinator.$invalid" class="help-block">
-                            <p ng-show="projectForm.coordinator.$error.required">Koordinaattori on pakollinen</p>
+                        <div ng-show="projectForm.coordinator.$invalid"
+                             class="help-block">
+                            <p ng-show="projectForm.coordinator.$error.required">
+                                Koordinaattori on pakollinen
+                            </p>
                         </div>
                     </div>
                 </div>
-
-
                 <div class="form-group col-md-12">
-                <div class="form-group col-md-6">
-                    <label class="col-md-3 control-label">Rekisteröintipäivä</label>
-
-                    <div class="col-md-9">
-                        <div class="col-md-4"  ng-class="{
+                    <div class="form-group col-md-6">
+                        <label class="col-md-3 control-label">
+                            Rekisteröintipäivä
+                        </label>
+                        <div class="col-md-9">
+                            <div class="col-md-4"  ng-class="{
+                                      'has-error':registerForm.registerMonth.$invalid }">
+                                <input name="registerDay" type="number"
+                                       class="form-control"
+                                       data-ng-model="register_day"
+                                       id="registerDay" required>
+                                <div ng-show="projectForm.registerDay.$invalid"
+                                     class="help-block" >
+                                    <p ng-show="projectForm.registerDay.$error.required">
+                                        Päivä on pakollinen
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4" ng-class="{
                                       'has-error'
                                       :  registerForm.registerMonth.$invalid }">
-                            <input name="registerDay" type="number" class="form-control" data-ng-model="register_day" id="registerDay" required>
-                            <div ng-show="projectForm.registerDay.$invalid" class="help-block" >
-                                <p ng-show="projectForm.registerDay.$error.required">Päivä on pakollinen</p>
+                                <input name="registerMonth" type="number"
+                                       class="form-control"
+                                       data-ng-model="register_month"
+                                       id="registerMonth" required>
+                                <div ng-show="projectForm.registerMonth.$invalid"
+                                     class="help-block">
+                                    <p ng-show="projectForm.registerMonth.$error.required">
+                                        Kuukausi on pakollinen
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4" ng-class="{
-                                      'has-error'
-                                      :  registerForm.registerMonth.$invalid }">
-                            <input name="registerMonth" type="number" class="form-control" data-ng-model="register_month" id="registerMonth" required>
-                            <div ng-show="projectForm.registerMonth.$invalid" class="help-block">
-                                <p ng-show="projectForm.registerMonth.$error.required">Kuukausi on pakollinen</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4" ng-class="{
+                            <div class="col-md-4" ng-class="{
                                       'has-error'
                                       :  projectForm.registerYear.$invalid }">
-                            <input name="registerYear" type="number" class="form-control" data-ng-model="register_year" id="registerYear" required>
-                            <div ng-show="projectForm.registerYear.$invalid" class="help-block">
-                                <p ng-show="projectForm.registerYear.$error.required">Vuosi on pakollinen</p>
+                                <input name="registerYear" type="number"
+                                       class="form-control"
+                                       data-ng-model="register_year"
+                                       id="registerYear" required>
+                                <div ng-show="projectForm.registerYear.$invalid"
+                                     class="help-block">
+                                    <p ng-show="projectForm.registerYear.$error.required">
+                                        Vuosi on pakollinen
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div style="clear:both;">&nbsp;</div>
+                    <div class="form-group col-md-6">
+                        <label for="security_level"
+                               class="col-md-3 control-label">
+                            Turvaluokitus
+                        </label>
+                        <div class="col-md-9">
+                            <select>
+                                <option selected>Julkinen</option>
+                                <option>Luottamuksellinen</option>
+                                <option>Salainen</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                </div>
-
-
-
                 <div class="form-group col-md-6" data-ng-show="!newOrg">
                     <label  class="col-md-3 control-label">Järjestö</label>
-                    <div data-ng-if="!newOrg" class="col-md-9" id="orgSelection" data-ng-init="addOrgFromDb()">
-                        <label>
-                            <select data-ng-if="!newOrg" data-ng-model="project.listOrganisation">
-                                <option data-ng-if="!newOrg" data-ng-repeat="org in orgs" value="{{org._id}}">{{org.name}}</option>
-                            </select>
-                        </label>
+                    <div data-ng-if="!newOrg" class="col-md-9" id="orgSelection"
+                         data-ng-init="addOrgFromDb()">
+                        <select data-ng-if="!newOrg"
+                                data-ng-model="project.listOrganisation">
+                            <option data-ng-if="!newOrg"
+                                    data-ng-repeat="org in orgs"
+                                    value="{{org._id}}">
+                                {{org.name}}
+                            </option>
+                        </select>
                     </div>
-
-                    <div data-ng-show="!newOrg" class="form-group">
-                        <i>Valitse järjestö listalta tai   </i>
-                        <input type="button" id="addOrg" data-ng-click="addNewOrg()" value="Lisää uusi järjestö"/>
-                    </div>
-
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="button" id="addOrg" data-ng-click="addNewOrg()"
+                           value="Lisää uusi järjestö"/>
                 </div>
                 <div data-ng-show="newOrg" class="form-group col-md-6">
-                    <i>Täytä lomakkeeseen uuden järjestön tiedot tai </i>
-                    <input type="button" id="addOrgFromList" data-ng-click="addOrgFromDb()" value="Lisää järjestö listalta"/>
+                    <input type="button" id="addOrgFromList"
+                           data-ng-click="addOrgFromDb()"
+                           value="Lisää järjestö listalta"/>
                 </div>
+                <article class="well-lg" data-ng-show="newOrg">
+                    <fieldset>
+                        <legend>
+                            <a ng-click="showOrgInfo = !showOrgInfo">Järjestö</a>
+                        </legend>
+                        <div ng-show="showOrgInfo">
+                            <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                : projectForm.orgname.$invalid }">
+                                <label class="col-md-3 control-label">Nimi</label>
+                                <div class="col-md-9">
+                                    <input data-ng-if="newOrg" name="orgname"
+                                           type="text" class="form-control"
+                                           data-ng-model="project.organisation.name"
+                                           id="orgname" placeholder="Järjestön nimi"
+                                           required>
+                                    <div ng-show="projectForm.orgname.$invalid"
+                                         class="help-block">
+                                        <p ng-show="projectForm.orgname.$error.required">
+                                            Kenttä on pakollinen
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                : projectForm.orgrepName.$invalid }">
+                                <label class="col-md-3 control-label">Edustaja</label>
+                                <div class="col-md-9">
+                                    <input data-ng-if="newOrg" name="orgrepName"
+                                           type="text" class="form-control"
+                                           data-ng-model="project.organisation.representative.name"
+                                           id="orgrepName" placeholder="Edustajan nimi"
+                                           required>
+                                    <div ng-show="projectForm.orgrepName.$invalid"
+                                         class="help-block">
+                                        <p ng-show="projectForm.orgrepName.$error.required">
+                                            Kenttä on pakollinen
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-9" style="float:right;" ng-class="{
+                                    'has-error'
+                                    : projectForm.orgrepEmail.$invalid }">
+                                    <input data-ng-if="newOrg" name="orgrepEmail"
+                                           type="text" class="form-control"
+                                           data-ng-model="project.organisation.representative.email"
+                                           id="orgrep" placeholder="Edustajan sähköposti"
+                                           required>
 
+                                    <div ng-show="projectForm.orgrepEmail.$invalid"
+                                         class="help-block">
+                                        <p ng-show="projectForm.orgrepEmail.$error.required">
+                                            Kenttä on pakollinen
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-9" style="float:right;" ng-class="{
+                                    'has-error'
+                                    : projectForm.orgrepPhone.$invalid }">
+                                    <input data-ng-if="newOrg" name="orgrepPhone"
+                                           type="text" class="form-control"
+                                           data-ng-model="project.organisation.representative.phone"
+                                           id="orgrepPhone"
+                                           placeholder="Edustajan puhelinnumero"
+                                           required>
+
+                                    <div ng-show="projectForm.orgrepPhone.$invalid"
+                                         class="help-block">
+                                        <p ng-show="projectForm.orgrepPhone.$error.required">
+                                            Kenttä on pakollinen
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="form-group" ng-class="{
+                                'has-error'
+                                :  projectForm.orgaddr.$invalid }">
+                                    <label class="col-md-3 control-label">Osoite</label>
+
+                                    <div class="col-md-9">
+                                        <input data-ng-if="newOrg" name="orgaddr"
+                                               type="text" class="form-control"
+                                               data-ng-model="project.organisation.address.street"
+                                               id="orgaddr" placeholder="Osoite"
+                                               required>
+                                        <div ng-show=" projectForm.orgaddr.$invalid"
+                                             class="help-block">
+                                            <p ng-show="projectForm.orgaddr.$error.required">
+                                                Kenttä on pakollinen
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{
+                                'has-error'
+                                : projectForm.orgaddrcode.$invalid }">
+                                    <label class="col-md-3 control-label">Postinumero</label>
+
+                                    <div class="col-md-9">
+                                        <input data-ng-if="newOrg" name="orgaddrcode"
+                                               type="text" class="form-control"
+                                               data-ng-model="project.organisation.address.postal_code"
+                                               id="orgaddrcode"
+                                               placeholder="Postinumero" required>
+
+                                        <div ng-show=" projectForm.orgaddrcode.$invalid"
+                                             class="help-block">
+                                            <p ng-show="projectForm.orgaddrcode.$error.required">
+                                                Kenttä on pakollinen
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{
+                                'has-error'
+                                : projectForm.orgaddrcity.$invalid }">
+                                    <label  class="col-md-3 control-label">Kaupunki</label>
+
+                                    <div class="col-md-9">
+                                        <input data-ng-if="newOrg" name="orgaddrcity"
+                                               type="text" class="form-control"
+                                               data-ng-model="project.organisation.address.city"
+                                               id="orgaddrcity" placeholder="Kaupunki"
+                                               required>
+
+                                        <div ng-show=" projectForm.orgaddrcity.$invalid"
+                                             class="help-block">
+                                            <p ng-show="projectForm.orgaddrcity.$error.required">
+                                                Kenttä on pakollinen
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{
+                                'has-error'
+                                :projectForm.orgaddrcntry.$invalid }">
+                                    <label  class="col-md-3 control-label">Maa</label>
+
+                                    <div class="col-md-9">
+                                        <input data-ng-if="newOrg" name="orgaddrcntry"
+                                               type="text" class="form-control"
+                                               data-ng-model="project.organisation.address.country"
+                                               id="orgaddrcntry" placeholder="Maa"
+                                               required>
+
+                                        <div ng-show=" projectForm.orgaddrcntry.$invalid"
+                                             class="help-block">
+                                            <p ng-show="projectForm.orgaddrcntry.$error.required">
+                                                Kenttä on pakollinen
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                :  projectForm.orgtel.$invalid }">
+                                <label class="col-md-3 control-label">
+                                    Puhelinnumero
+                                </label>
+                                <div class="col-md-9">
+                                    <input data-ng-if="newOrg" name="orgtel" type="text"
+                                           class="form-control"
+                                           data-ng-model="project.organisation.tel"
+                                           id="orgtel" placeholder="Puhelinnumero"
+                                           required>
+
+                                    <div ng-show=" projectForm.orgtel.$invalid"
+                                         class="help-block">
+                                        <p ng-show="projectForm.orgtel.$error.required">
+                                            Kenttä on pakollinen
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{
+                                'has-error'
+                                :  projectForm.orgemail.$invalid }">
+                                <label  class="col-md-3 control-label">
+                                    Sähköpostiosoite
+                                </label>
+                                <div class="col-md-9">
+                                    <input data-ng-if="newOrg" name="orgemail"
+                                           type="email" class="form-control"
+                                           data-ng-model="project.organisation.email"
+                                           id="orgemail" placeholder="Sähköposti"
+                                           required>
+                                    <div ng-show=" projectForm.orgemail.$invalid"
+                                         class="help-block">
+                                        <p ng-show="projectForm.orgemail.$error.email">
+                                            Syötä oikea sähköpostiosoite
+                                        </p>
+                                    </div>
+                                    <div ng-show=" projectForm.orgemail.$invalid"
+                                         class="help-block">
+                                        <p ng-show="projectForm.orgemail.$error.required">
+                                            Kenttä on pakollinen
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label  class="col-md-3 control-label">Websivut</label>
+                                <div class="col-md-9">
+                                    <input data-ng-if="newOrg" name="orgwww" type="text"
+                                           class="form-control"
+                                           data-ng-model="project.organisation.website"
+                                           id="orgwww" placeholder="Websivut">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>
+                            <a ng-click="showOrgDetails = !showOrgDetails">Hakijajärjestön
+                                lisätiedot</a>
+                        </legend>
+                        <div ng-show="showOrgDetails">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-3 control-label">Vastuullinen johtaja</label>
+
+                                <div class="col-md-9">
+                                    <input data-ng-if="newOrg" name="orgexecMan" type="text" class="form-control"
+                                           data-ng-model="project.organisation.exec_manager" id="orgexecMan"
+                                           placeholder="Vastuullinen johtaja" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-3 control-label">Viestintävastaava</label>
+                                <div class="col-md-9">
+                                    <input data-ng-if="newOrg" name="orgCommRep" type="text" class="form-control"
+                                           data-ng-model="project.organisation.communications_rep" id="orgCommRep"
+                                           placeholder="Viestintävastaava" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="orgLegal" class="col-md-3 control-label">Hallintomalli ja henkilöstö</label>
+                                <div class="col-md-9">
+                                    <textarea data-ng-if="newOrg" name="orgLegal" data-ng-model="project.organisation.legal_status" id="orgLegal"
+                                              placeholder="Hallintomalli ja henkilöstö" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="orgDescription" class="col-md-3 control-label">Kuvaus</label>
+                                <div class="col-md-9">
+                                    <textarea data-ng-if="newOrg" name="orgDescription" data-ng-model="project.organisation.description" id="orgDescription"
+                                              placeholder="Kuvaus järjestöstä" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="orgLinks" class="col-md-3 control-label">Kansainväliset
+                                    yhteydet</label>
+                                <div class="col-md-9">
+                                    <textarea data-ng-if="newOrg" name="orgLinks" data-ng-model="project.organisation.int_links" id="orgLinks"
+                                              placeholder="Kansainväliset yhteydet" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="orgNatLocLinks" class="col-md-3 control-label">Kansalliset ja paikalliset
+                                    yhteydet</label>
+                                <div class="col-md-9">
+                                    <textarea data-ng-if="newOrg" name="orgNatLocLinks" data-ng-model="project.organisation.nat_local_links" id="orgNatLocLinks"
+                                              placeholder="Kansalliset ja paikalliset yhteydet" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="orgOthFund" class="col-md-3 control-label">Muut rahoittajat, budjetti</label>
+                                <div class="col-md-9">
+                                    <textarea data-ng-if="newOrg" name="orgOthFund" data-ng-model="project.organisation.other_funding_budget" id="orgOthFund"
+                                              placeholder="Järjestön muut rahoittajat, budjetti" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="orgAcct" class="col-md-3 control-label">Taloushallinto, Tilintarkastus</label>
+                                <div class="col-md-9">
+                                    <textarea data-ng-if="newOrg" name="orgAcct" data-ng-model="project.organisation.accounting_audit" id="orgAcct"
+                                              placeholder="Järjestön muut rahoittajat, budjetti" class="form-control" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>
+                            <a ng-click="showBankInfo = !showBankInfo">Pankkitili</a>
+                        </legend>
+                        <div ng-show="showBankInfo">
+                            <div class="form-group">
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-3 control-label">Tilinumero (IBAN)</label>
+                                    <div class="col-md-9">
+                                        <input data-ng-if="newOrg" name="bankIban" type="text" class="form-control"
+                                               data-ng-model="project.organisation.bank_account.iban" id="bankIban"
+                                               placeholder="Tilinumero (IBAN)">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-3 control-label">Pankin SWIFT</label>
+
+                                    <div class="col-md-9">
+                                        <input data-ng-if="newOrg" name="bankSwift" type="text" class="form-control"
+                                               data-ng-model="project.organisation.bank_account.swift" id="bankSwift"
+                                               placeholder="Pankin SWIFT">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-3 control-label">Tilin haltija</label>
+
+                                    <div class="col-md-9">
+                                        <input data-ng-if="newOrg" name="bankHolder" type="text" class="form-control"
+                                               data-ng-model="project.organisation.bank_account.holder_name" id="bankHolder"
+                                               placeholder="Tilinhaltija">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-3 control-label">Pankin yhteystiedot</label>
+                                    <div class="col-md-9">
+                                        <input data-ng-if="newOrg" name="bankCont" type="text" class="form-control"
+                                               data-ng-model="project.organisation.bank_account.bank_contact_details" id="bankCont"
+                                               placeholder="Pankin yhteystiedot">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </article>
             </div>
         </fieldset>
 
-        <article class="well-lg" data-ng-show="newOrg">
-            <fieldset>
-                <legend>
-                    <a ng-click="showOrgInfo = !showOrgInfo">Järjestö</a>
-                    <!--                    <a onclick="toggleCollapse2('fs2', 'btn2')">Järjestö</a>
-                                        <button id="btn2" class="btn-default btn-xs"
-                                                onclick="toggleCollapse2('fs2', 'btn2')">+
-                                        </button>-->
-                </legend>
-                <!--<div id="fs2" style="display: none;">-->
-                <div ng-show="showOrgInfo">
-                    <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                : projectForm.orgname.$invalid }">
-                        <label class="col-md-3 control-label">Nimi</label>
-
-                        <div class="col-md-9">
-                            <input data-ng-if="newOrg" name="orgname" type="text" class="form-control" data-ng-model="project.organisation.name"
-                                   id="orgname" placeholder="Järjestön nimi" required>
-
-                            <div ng-show="projectForm.orgname.$invalid" class="help-block">
-                                <p ng-show="projectForm.orgname.$error.required">Kenttä on pakollinen</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                : projectForm.orgrepName.$invalid }">
-                        <label class="col-md-3 control-label">Edustaja</label>
-
-                        <div class="col-md-9">
-                            <input data-ng-if="newOrg" name="orgrepName" type="text" class="form-control"
-                                   data-ng-model="project.organisation.representative.name" id="orgrepName" placeholder="Edustajan nimi"
-                                   required>
-
-                            <div ng-show="projectForm.orgrepName.$invalid" class="help-block">
-                                <p ng-show="projectForm.orgrepName.$error.required">Kenttä on pakollinen</p>
-                            </div>
-                        </div>
-
-                        <div class="col-md-9" style="float:right;" ng-class="{
-                                    'has-error'
-                                    : projectForm.orgrepEmail.$invalid }">
-                            <input data-ng-if="newOrg" name="orgrepEmail" type="text" class="form-control"
-                                   data-ng-model="project.organisation.representative.email" id="orgrep" placeholder="Edustajan sähköposti"
-                                   required>
-
-                            <div ng-show="projectForm.orgrepEmail.$invalid" class="help-block">
-                                <p ng-show="projectForm.orgrepEmail.$error.required">Kenttä on pakollinen</p>
-                            </div>
-                        </div>
-
-                        <div class="col-md-9" style="float:right;" ng-class="{
-                                    'has-error'
-                                    : projectForm.orgrepPhone.$invalid }">
-                            <input data-ng-if="newOrg" name="orgrepPhone" type="text" class="form-control"
-                                   data-ng-model="project.organisation.representative.phone" id="orgrepPhone" placeholder="Edustajan puhelinnumero"
-                                   required>
-
-                            <div ng-show="projectForm.orgrepPhone.$invalid" class="help-block">
-                                <p ng-show="projectForm.orgrepPhone.$error.required">Kenttä on pakollinen</p>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form-group col-md-6">
-                        <div class="form-group" ng-class="{
-                                'has-error'
-                                :  projectForm.orgaddr.$invalid }">
-                            <label class="col-md-3 control-label">Osoite</label>
-
-                            <div class="col-md-9">
-                                <input data-ng-if="newOrg" name="orgaddr" type="text" class="form-control"
-                                       data-ng-model="project.organisation.address.street" id="orgaddr" placeholder="Osoite"
-                                       required>
-
-                                <div ng-show=" projectForm.orgaddr.$invalid" class="help-block">
-                                    <p ng-show="projectForm.orgaddr.$error.required">Kenttä on pakollinen</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" ng-class="{
-                                'has-error'
-                                : projectForm.orgaddrcode.$invalid }">
-                            <label class="col-md-3 control-label">Postinumero</label>
-
-                            <div class="col-md-9">
-                                <input data-ng-if="newOrg" name="orgaddrcode" type="text" class="form-control"
-                                       data-ng-model="project.organisation.address.postal_code" id="orgaddrcode"
-                                       placeholder="Postinumero" required>
-
-                                <div ng-show=" projectForm.orgaddrcode.$invalid" class="help-block">
-                                    <p ng-show="projectForm.orgaddrcode.$error.required">Kenttä on pakollinen</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" ng-class="{
-                                'has-error'
-                                : projectForm.orgaddrcity.$invalid }">
-                            <label  class="col-md-3 control-label">Kaupunki</label>
-
-                            <div class="col-md-9">
-                                <input data-ng-if="newOrg" name="orgaddrcity" type="text" class="form-control"
-                                       data-ng-model="project.organisation.address.city" id="orgaddrcity"
-                                       placeholder="Kaupunki" required>
-
-                                <div ng-show=" projectForm.orgaddrcity.$invalid" class="help-block">
-                                    <p ng-show="projectForm.orgaddrcity.$error.required">Kenttä on pakollinen</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" ng-class="{
-                                'has-error'
-                                :projectForm.orgaddrcntry.$invalid }">
-                            <label  class="col-md-3 control-label">Maa</label>
-
-                            <div class="col-md-9">
-                                <input data-ng-if="newOrg" name="orgaddrcntry" type="text" class="form-control"
-                                       data-ng-model="project.organisation.address.country" id="orgaddrcntry"
-                                       placeholder="Maa" required>
-
-                                <div ng-show=" projectForm.orgaddrcntry.$invalid" class="help-block">
-                                    <p ng-show="projectForm.orgaddrcntry.$error.required">Kenttä on pakollinen</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                :  projectForm.orgtel.$invalid }">
-                        <label class="col-md-3 control-label">Puhelinnumero</label>
-
-                        <div class="col-md-9">
-                            <input data-ng-if="newOrg" name="orgtel" type="text" class="form-control" data-ng-model="project.organisation.tel"
-                                   id="orgtel" placeholder="Puhelinnumero" required>
-
-                            <div ng-show=" projectForm.orgtel.$invalid" class="help-block">
-                                <p ng-show="projectForm.orgtel.$error.required">Kenttä on pakollinen</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6" ng-class="{
-                                'has-error'
-                                :  projectForm.orgemail.$invalid }">
-                        <label  class="col-md-3 control-label">Sähköpostiosoite</label>
-
-                        <div class="col-md-9">
-                            <input data-ng-if="newOrg" name="orgemail" type="email" class="form-control"
-                                   data-ng-model="project.organisation.email" id="orgemail" placeholder="Sähköposti"
-                                   required>
-
-                            <div ng-show=" projectForm.orgemail.$invalid" class="help-block">
-                                <p ng-show="projectForm.orgemail.$error.email">Syötä oikea sähköpostiosoite</p>
-                            </div>
-                            <div ng-show=" projectForm.orgemail.$invalid" class="help-block">
-                                <p ng-show="projectForm.orgemail.$error.required">Kenttä on pakollinen</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label  class="col-md-3 control-label">Websivut</label>
-
-                        <div class="col-md-9">
-                            <input data-ng-if="newOrg" name="orgwww" type="text" class="form-control"
-                                   data-ng-model="project.organisation.website" id="orgwww" placeholder="Websivut">
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>
-                    <a ng-click="showOrgDetails = !showOrgDetails">Hakijajärjestön
-                        lisätiedot</a>
-                    <!--                    <a onclick="toggleCollapse2('fs5', 'btn5')">Hakijajärjestön
-                                            lisätiedot</a>
-                                        <button id="btn5" class="btn-default btn-xs"
-                                                onclick="toggleCollapse2('fs5', 'btn5')">+
-                                        </button>-->
-                </legend>
-                <!--<div id="fs5" style="display: none;">-->
-                <div ng-show="showOrgDetails">
-                    <div class="form-group col-md-6">
-                        <label class="col-md-3 control-label">Vastuullinen johtaja</label>
-
-                        <div class="col-md-9">
-                            <input data-ng-if="newOrg" name="orgexecMan" type="text" class="form-control"
-                                   data-ng-model="project.organisation.exec_manager" id="orgexecMan"
-                                   placeholder="Vastuullinen johtaja" required>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-md-3 control-label">Viestintävastaava</label>
-
-                        <div class="col-md-9">
-                            <input data-ng-if="newOrg" name="orgCommRep" type="text" class="form-control"
-                                   data-ng-model="project.organisation.communications_rep" id="orgCommRep"
-                                   placeholder="Viestintävastaava" required>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="orgLegal" class="col-md-3 control-label">Hallintomalli ja henkilöstö</label>
-
-                        <div class="col-md-9">
-                            <textarea data-ng-if="newOrg" name="orgLegal" data-ng-model="project.organisation.legal_status" id="orgLegal"
-                                      placeholder="Hallintomalli ja henkilöstö" class="form-control"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="orgDescription" class="col-md-3 control-label">Kuvaus</label>
-
-                        <div class="col-md-9">
-                            <textarea data-ng-if="newOrg" name="orgDescription" data-ng-model="project.organisation.description" id="orgDescription"
-                                      placeholder="Kuvaus järjestöstä" class="form-control"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="orgLinks" class="col-md-3 control-label">Kansainväliset
-                            yhteydet</label>
-
-                        <div class="col-md-9">
-                            <textarea data-ng-if="newOrg" name="orgLinks" data-ng-model="project.organisation.int_links" id="orgLinks"
-                                      placeholder="Kansainväliset yhteydet" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="orgNatLocLinks" class="col-md-3 control-label">Kansalliset ja paikalliset
-                            yhteydet</label>
-
-                        <div class="col-md-9">
-                            <textarea data-ng-if="newOrg" name="orgNatLocLinks" data-ng-model="project.organisation.nat_local_links" id="orgNatLocLinks"
-                                      placeholder="Kansalliset ja paikalliset yhteydet" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="orgOthFund" class="col-md-3 control-label">Muut rahoittajat, budjetti</label>
-
-                        <div class="col-md-9">
-                            <textarea data-ng-if="newOrg" name="orgOthFund" data-ng-model="project.organisation.other_funding_budget" id="orgOthFund"
-                                      placeholder="Järjestön muut rahoittajat, budjetti" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="orgAcct" class="col-md-3 control-label">Taloushallinto, Tilintarkastus</label>
-
-                        <div class="col-md-9">
-                            <textarea data-ng-if="newOrg" name="orgAcct" data-ng-model="project.organisation.accounting_audit" id="orgAcct"
-                                      placeholder="Järjestön muut rahoittajat, budjetti" class="form-control" required></textarea>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>
-                    <a ng-click="showBankInfo = !showBankInfo">Pankkitili</a>
-                    <!--                    <a onclick="toggleCollapse2('fs6', 'btn6')">Pankkitili</a>
-                                        <button id="btn6" class="btn-default btn-xs"
-                                                onclick="toggleCollapse2('fs6', 'btn6')">+
-                                        </button>-->
-                </legend>
-                <!--<div id="fs6" style="display: none;">-->
-                <div ng-show="showBankInfo">
-                    <div class="form-group">
-                        <div class="form-group col-md-6">
-                            <label class="col-md-3 control-label">Tilinumero (IBAN)</label>
-
-                            <div class="col-md-9">
-                                <input data-ng-if="newOrg" name="bankIban" type="text" class="form-control"
-                                       data-ng-model="project.organisation.bank_account.iban" id="bankIban"
-                                       placeholder="Tilinumero (IBAN)">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-3 control-label">Pankin SWIFT</label>
-
-                            <div class="col-md-9">
-                                <input data-ng-if="newOrg" name="bankSwift" type="text" class="form-control"
-                                       data-ng-model="project.organisation.bank_account.swift" id="bankSwift"
-                                       placeholder="Pankin SWIFT">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-group col-md-6">
-                            <label class="col-md-3 control-label">Tilin haltija</label>
-
-                            <div class="col-md-9">
-                                <input data-ng-if="newOrg" name="bankHolder" type="text" class="form-control"
-                                       data-ng-model="project.organisation.bank_account.holder_name" id="bankHolder"
-                                       placeholder="Tilinhaltija">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-3 control-label">Pankin yhteystiedot</label>
-
-                            <div class="col-md-9">
-                                <input data-ng-if="newOrg" name="bankCont" type="text" class="form-control"
-                                       data-ng-model="project.organisation.bank_account.bank_contact_details" id="bankCont"
-                                       placeholder="Pankin yhteystiedot">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-        </article>
-
         <fieldset>
             <legend>
-                <a ng-click="showProjInfo = !showProjInfo">Hankkeen perustiedot</a>
-                <!--                <a onclick="toggleCollapse2('fs3', 'btn3')">
-                                    Hankkeen perustiedot</a>
-                                <button id="btn3" class="btn-default btn-xs"
-                                        onclick="toggleCollapse2('fs3', 'btn3')">+
-                                </button>-->
+                <a ng-click="showProjInfo = !showProjInfo">Perustiedot</a>
             </legend>
-            <!--            <div class="fs3" style="display: none;" ng-show="showProjInfo">-->
             <div ng-show="showProjInfo">
                 <div class="form-group col-md-6">
                     <label for="description"
                            class="col-md-3 control-label">Kuvaus</label>
-
                     <div class="col-md-9">
-                        <textarea name="description" data-ng-model="project.description" id="description"
-                                  placeholder="Kuvaus" class="form-control"></textarea>
+                        <textarea name="description"
+                                  data-ng-model="project.description"
+                                  id="description"
+                                  placeholder="Kuvaus" class="form-control">
+                        </textarea>
                     </div>
                 </div>
-
                 <div class="form-group col-md-6">
-                    <label for="description_en" class="col-md-3 control-label">Kuvaus
-                        (ENG)</label>
-
+                    <label for="description_en" class="col-md-3 control-label">
+                        Kuvaus (ENG)
+                    </label>
                     <div class="col-md-9">
-                        <textarea name="description_en" data-ng-model="project.description_en" id="description_en"
-                                  placeholder="Kuvaus englanniksi" class="form-control"></textarea>
+                        <textarea name="description_en"
+                                  data-ng-model="project.description_en"
+                                  id="description_en"
+                                  placeholder="Kuvaus englanniksi" class="form-control">
+                        </textarea>
                     </div>
                 </div>
-
                 <div class="form-group col-md-6">
-                    <label class="col-md-3 control-label">Haettu avustus (paikallinen
-                        valuutta)</label>
-
+                    <label class="col-md-3 control-label">
+                        Haettu avustus (paikallinen valuutta)
+                    </label>
                     <div class="col-md-9">
-                        <input name="appliedlocal" type="number" class="form-control"
-                               data-ng-model="project.funding.applied_curr_local" id="appliedlocal"
-                               placeholder="Haettu avustus (paikallinen)" min="0">
+                        <input name="appliedlocal" type="number"
+                               class="form-control"
+                               data-ng-model="project.funding.applied_curr_local"
+                               id="appliedlocal"
+                               placeholder="Haettu avustus (paikallinen)"
+                               min="0">
                     </div>
                 </div>
-
                 <div class="form-group col-md-6">
-                    <label  class="col-md-3 control-label">Haettu avustus (EUR)</label>
-
+                    <label  class="col-md-3 control-label">
+                        Haettu avustus (EUR)
+                    </label>
                     <div class="col-md-9">
-                        <input name="appliedeur" type="number" class="form-control"
-                               data-ng-model="project.funding.applied_curr_eur" id="appliedeur"
+                        <input name="appliedeur" type="number"
+                               class="form-control"
+                               data-ng-model="project.funding.applied_curr_eur"
+                               id="appliedeur"
                                placeholder="Haettu avustus (EUR)" min="0">
                     </div>
                 </div>
-
-
-
                 <div class="form-group col-md-6">
                     <label class="col-md-3 control-label">Kesto (kk)</label>
-
                     <div class="col-md-9">
-                        <input name="duration" type="number" class="form-control"
-                               data-ng-model="project.duration_months" id="duration" placeholder="Kesto (kk)" min="0">
+                        <input name="duration" type="number"
+                               class="form-control"
+                               data-ng-model="project.duration_months"
+                               id="duration" placeholder="Kesto (kk)" min="0">
                     </div>
                 </div>
-
-
-                <!--                Päiväys-->
-
-
-
-
             </div>
         </fieldset>
         <fieldset>
             <legend>
-                <a ng-click="showProjDetails = !showProjDetails">Hankkeen lisätiedot</a>
-                <!--                <a onclick="toggleCollapse2('fs4', 'btn4')">
-                                    Hankkeen lisätiedot</a>
-                                <button id="btn4" class="btn-default btn-xs"
-                                        onclick="toggleCollapse2('fs4', 'btn4')">+
-                                </button>-->
+                <a ng-click="showProjDetails = !showProjDetails">Lisätiedot</a>
             </legend>
-            <!--            <div class="fs4" style="display: none;">-->
             <div ng-show="showProjDetails">
                 <div class="form-group col-md-12">
                     <label mean-token="'create-methods'" class="col-md-2">Toimintatavat</label>
@@ -600,7 +636,14 @@
                 </div>
             </div>
         </fieldset>
-
+        <fieldset>
+            <legend>
+                <a ng-click="showAppendices = !showAppendices">Liitteet</a>
+            </legend>
+            <div ng-show="showAppendices">
+                <em>Liitteiden lisäys onnistuu luodun hankkeen näkymäsivulla.</em>
+            </div>
+        </fieldset>
         <fieldset>
             <legend>Vahvistus</legend>
             <div class="form-group col-md-6">

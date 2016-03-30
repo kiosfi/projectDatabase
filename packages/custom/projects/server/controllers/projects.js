@@ -9,6 +9,11 @@ var mongoose = require('mongoose'),
         BankAccount = mongoose.model('BankAccount'),
         States = mongoose.model('States'),
         config = require('meanio').loadConfig(),
+        multiparty = require('multiparty'),
+        util = require('util'),
+        fs = require('fs'),
+        mkdirp = require('mkdirp'),
+        mime = require('mime'),
         _ = require('lodash');
 
 module.exports = function (Projects) {
@@ -22,20 +27,19 @@ module.exports = function (Projects) {
                 if (!project) {
                     if (err === null) {
                         return res.status(404).json({
-                            status:     404,
-                            message:    'Pyydettyä hanketta ei ole.'
+                            status: 404,
+                            message: 'Pyydettyä hanketta ei ole.'
                         });
                     }
                     return res.status(500).json({
-                        status:     500,
-                        message:    'Hankkeen lataus epäonnistui.'
+                        status: 500,
+                        message: 'Hankkeen lataus epäonnistui.'
                     });
                 }
                 req.project = project;
                 next();
             });
         },
-
         create: function (req, res) {
             var project = new Project(req.body);
 
@@ -75,7 +79,6 @@ module.exports = function (Projects) {
 
             });
         },
-        
         /**
          * Loads a project for display.
          */
@@ -88,7 +91,6 @@ module.exports = function (Projects) {
             });
             res.json(req.project);
         },
-
         /**
          * Update a project
          */
@@ -96,7 +98,6 @@ module.exports = function (Projects) {
             var project = req.project;
 
             project = _.extend(project, req.body);
-
 
             project.save(function (err) {
                 if (err) {
@@ -219,7 +220,6 @@ module.exports = function (Projects) {
         addReview: function (req, res) {
             var in_review = req.body.in_review;
             in_review.user = req.user.name;
-
             var project = req.project;
             project.in_review = in_review;
             project.state = req.body.state;
@@ -322,7 +322,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /**
          * Updates project to contain payment data
          * @param {type} req project object to be updated, sent from frontend
@@ -334,13 +333,15 @@ module.exports = function (Projects) {
             var payment = req.body.payment;
             var project = req.project;
             project.payments.push(payment);
-            project.funding.paid_eur = project.funding.paid_eur + payment.sum_eur;
-            project.funding.left_eur = project.funding.left_eur - payment.sum_eur;
+            project.funding.paid_eur = project.funding.paid_eur +
+                    payment.sum_eur;
+            project.funding.left_eur = project.funding.left_eur -
+                    payment.sum_eur;
 
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
-                        error: 'Hankkeen päivitys allekirjoitetuksi epäonnistui.'
+                        error: 'Maksatuksen lisääminen epäonnistui.'
                     });
                 }
 
@@ -351,6 +352,151 @@ module.exports = function (Projects) {
                 });
                 res.json(project);
             });
+        },
+
+        /**
+         * Updates project to contain a new appendix. The file will be written
+         * in a data directory under "/packages/custom/projects/data". The
+         * project document in the database will be updated to contain one extra
+         * appendix entry in the field "appendices". The format for appendices
+         * is: {"category": &lt;category of appendix as a string&gt;,
+         * "custom_category": &lt;a custom category (only used when type is
+         * 'Muu...')&gt;, "mime_type": &ltMIME type of the appendix file&gt,
+         * "date": &lt;date when the appendix was added&gt;; "url": &lt;URL of
+         * appendix file&gt; "number": &lt;(ordinal) number of the appendix&gt;}.
+         * @param {type} req project object to be updated, sent from frontend
+         * @param {type} res project object after update
+         * @returns updated project object in json to frontend, or error if
+         *  updating not possible
+         */
+        addAppendix: function (req, res) {
+            var tmpdir = "packages/custom/projects/data";
+            var form = new multiparty.Form({uploadDir: tmpdir});
+            form.parse(req, function(err, fields, files) {
+                var now = new Date();
+                var file = files.appendix_file[0];
+                var appendix = {category: fields.appendix_category[0],
+                    custom_category: fields.appendix_custom_category[0],
+                    mime_type: file.headers["content-type"],
+                    date: now.toISOString(),
+                    original_name: file.originalFilename};
+                Project.findOne({_id: fields.project_id}).
+                        exec(function (err, project) {
+                    if (err) {
+                        return res.status(500).json({
+                            error: 'Hanketta ei voitu hakea tietokannasta.'
+                        });
+                    }
+                    var newDir = tmpdir + "/" + project._id;
+                    var pathParts = file.path.split("/");
+                    var newFilename = pathParts[pathParts.length - 1];
+                    mkdirp.sync(newDir);
+                    fs.renameSync(file.path, newDir + "/" + newFilename);
+                    appendix.url = "/api/projects/data/" + project._id +
+                            "?appendix=" + newFilename;
+                    if (project.appendices === undefined) {
+                        project.appendices = [];
+                    }
+                    appendix.number = project.appendices.length === 0 ?
+                            1 : project.appendices.length + 1;
+                    project.appendices.push(appendix);
+                    project.save(function (err) {
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Liitteen lisäys epäonnistui.'
+                            });
+                        }
+                        Projects.events.publish({
+                            action: 'updated',
+                            name: project.title,
+                            url: config.hostname + '/projects/' + project._id
+                        });
+                    });
+                    res.writeHead(302, {'Location': '/projects/' +
+                                fields.project_id});
+                    res.end(util.inspect({fields: fields, files: files}));
+                });
+            });
+        },
+
+        /**
+         * Accesses the requested appendix. The request URL should be in the
+         * following format: "/projecs/data/" &lt;projectId&gt; "?appendix="
+         * &lt;appendixId&gt; "&action=" &lt;download | delete&gt, where
+         * &lt;projectId&gt; identifies the project and &lt;appendixId&gt; is
+         * the name of the file being requested. The <tt>action</tt> variable
+         * specifies the desired action. If the action is "download", the file
+         * in question will be sent to the user, and if the action is "delete"
+         * the file will be removed from the database and filesystem
+         * immediately.
+         *
+         * @param {type} req    The request object (GET request).
+         * @param {type} res    The response object.
+         * @returns {undefined}
+         */
+        accessAppendix: function (req, res) {
+            var path = "packages/custom" + req.url.replace("/api", "").
+                    replace("?appendix=", "/").
+                    replace("&action=download", "").
+                    replace("&action=delete", "");
+            if (req.url.match(/action=delete/)) {
+                var projectID = path.split("/")[4];
+                Project.findOne({_id: projectID}).exec(function (err, project) {
+                    if (err) {
+                        return res.status(500).json({
+                            error: 'Liitteen poisto epäonnistui.'
+                        });
+                    }
+                    if (project.appendices.length === 1) {
+                        // This is the special case where we're deleting the
+                        // only appendix.
+                        project.appendices = undefined;
+                    } else {
+                        var newAppendices = [];
+                        var newNumber = 1;
+                        var url = req.url.replace("&action=download", "").
+                                replace("&action=delete", "");
+                        project.appendices.forEach(function (item, index) {
+                            if (item.url !== url) {
+                                item.number = newNumber++;
+                                newAppendices.push(item);
+                            }
+                        });
+                        project.appendices = newAppendices;
+                    }
+                    project.save(function (err) {
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Liitteen poisto epäonnistui.'
+                            });
+                        }
+                    });
+                    fs.unlinkSync(path);
+                    res.writeHead(302, {'Location': '/projects/' + projectID});
+                    res.end();
+                });
+            } else {
+                var mime_type = mime.lookup(path);
+                fs.stat(path, function(error, stats) {
+                    fs.open(path, "r", function(err, fd) {
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Liitteen haku epäonnistui.'
+                            });
+                        }
+                        var buffer = new Buffer(stats.size);
+                        fs.read(fd, buffer, 0, buffer.length, null, function(
+                                error, bytesRead, buffer) {
+                            res.writeHead(200, {
+                                "Content-Type": mime_type,
+                                "Content-Length": stats.size
+                            });
+                            res.end(buffer);
+                            fs.close(fd);
+                        });
+                    });
+                });
+            }
         },
 
         /**
@@ -385,7 +531,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /**
          * Updates project to contain data required in end report state
          * @param {type} req project object to be updated, sent from frontend
@@ -417,7 +562,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /**
          * Updates project to contain data required in ended state
          * @param {type} req project object to be updated, sent from frontend
@@ -446,7 +590,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /**
          * Deletes requested project from projects collection.
          * object {orgCount : &lt;n&gt;}, where &lt;n&gt; is the number of
@@ -472,7 +615,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /**
          * Finds projects by organisationId and returns list of projects in json
          */

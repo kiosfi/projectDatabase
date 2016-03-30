@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * This is a test.
- *
- * @param {type} param1
- * @param {type} param2
- */
-
 angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams',
     '$location', '$window', '$q', '$http', 'Global', 'Projects', 'MeanUser', 'Circles', 'Organisations',
     function ($scope, $stateParams, $location, $window, $q, $http, Global, Projects, MeanUser, Circles, Organisations) {
@@ -67,16 +60,30 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
 
         var now = new Date();
-        $scope.register_year    = now.getFullYear();
-        $scope.register_month   = now.getMonth() + 1;
-        $scope.register_day     = now.getDate();
+
+        /**
+         * These date fields are used in the project creation form. The default
+         * values correspond to the current date (generated during runtime).
+         */
+        $scope.register_year = now.getFullYear();
+        $scope.register_month = now.getMonth() + 1;
+        $scope.register_day = now.getDate();
+
+        /**
+         * These date fields are used in the payment addition form at the
+         * project view. The default values correspond to the current date
+         * (generated during runtime).
+         */
+        $scope.payment_year = now.getFullYear();
+        $scope.payment_month = now.getMonth() + 1;
+        $scope.payment_day = now.getDate();
 
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
 
                 var reg_date = $scope.convertDate($scope.register_day,
-                $scope.register_month, $scope.register_year);
+                        $scope.register_month, $scope.register_year);
                 project.reg_date = reg_date;
 
                 if ($scope.newOrg) {
@@ -151,7 +158,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         project.signed.intreport_deadlines.push({
                             report: obj.report,
                             date: $scope.convertDate(obj.deadline_day,
-                            obj.deadline_month, obj.deadline_year)
+                                    obj.deadline_month, obj.deadline_year)
                         });
                     });
 
@@ -159,7 +166,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     angular.forEach($scope.plannedPayments, function (obj) {
                         project.signed.planned_payments.push({
                             date: $scope.convertDate(obj.planned_day,
-                            obj.planned_month, obj.planned_year),
+                                    obj.planned_month, obj.planned_year),
                             sum_eur: obj.sum_eur
                         });
                     });
@@ -170,17 +177,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
                     angular.forEach($scope.int_reports, function (obj) {
                         project.intermediary_reports.push({
-                            methods:                obj.methods,
-                            overall_rating_kios:    obj.overall_rating_kios,
-                            objectives:             obj.objectives,
-                            comments:               obj.comments,
-                            approved_by:            obj.approved_by,
+                            methods: obj.methods,
+                            overall_rating_kios: obj.overall_rating_kios,
+                            objectives: obj.objectives,
+                            comments: obj.comments,
+                            approved_by: obj.approved_by,
                             date_approved:
                                     $scope.convertDate(obj.date_day,
-                                    obj.date_month, obj.date_year),
-                            reportNumber:           obj.reportNumber,
-                            user:                   obj.user,
-                            date:                   obj.date});
+                                            obj.date_month, obj.date_year),
+                            reportNumber: obj.reportNumber,
+                            user: obj.user,
+                            date: obj.date});
                     });
                 }
 
@@ -369,7 +376,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 projectId: $stateParams.projectId
             }, function (project) {
                 $scope.project = project;
-//                $scope.ensureCompatibility(project);
+                $scope.ensureCompatibility(project);
             });
         };
 
@@ -384,7 +391,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.ensureCompatibility = function (project) {
             if (typeof project.schema_version === "undefined") {
                 project.schema_version = 2;
-                project.$update(function () {});
+                project.security_level = "Julkinen";
+                project.$update(function () {
+                });
             }
         };
 
@@ -407,10 +416,29 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
-        $scope.confirm = function (project) {
+        /**
+         * Asks for confirmation for project removal. If the user approves the
+         * action, the project will be removed (wich cannot be undone).
+         *
+         * @param {type} project The project to be removed.
+         */
+        $scope.confirmProjectDeletion = function (project) {
             if (confirm('Haluatko varmasti poistaa hankkeen "' + project.title +
                     '"?')) {
                 $scope.remove(project);
+            }
+        };
+
+        /**
+         * Asks for confirmation for appendix removal. If the user approves the
+         * action, the appendix will be removed (wich cannot be undone).
+         *
+         * @param {type} url   The URL for appendix access page.
+         * @returns {undefined}
+         */
+        $scope.confirmAppendixDeletion = function (url) {
+            if (confirm("Haluatko varmasti poistaa liitteen?")) {
+                $window.location = url + "&action=delete";
             }
         };
 
@@ -552,7 +580,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addPaymentInfo = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
-                var payment_date = $scope.convertDate($scope.payment_day, $scope.payment_month, $scope.payment_year);
+                var payment_date = $scope.convertDate($scope.payment_day,
+                        $scope.payment_month, $scope.payment_year);
                 project.payment.payment_date = payment_date;
                 var index = project.payments.length;
                 if (index === undefined) {
@@ -566,6 +595,19 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
 
         };
+
+        // TODO: Make this stuff work instead of direct HTTP requests in order
+        // enable access control through client-side services and server-side
+        // routes:
+//        $scope.addAppendix = function (valid) {
+//            if (valid) {
+//                $scope.project.$addAppendix();
+//            }
+//        }
+//
+//        $scope.accessAppendix = function (url) {
+////            $scope.project.$accessAppendix(url + "&action=download");
+//        }
 
         /**
          * Updates project with "int report" state data
@@ -583,7 +625,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         typeof $scope.intRDateAppr_year !== 'undefined') {
                     project.intermediary_report.date_approved =
                             $scope.convertDate($scope.intRDateAppr_day,
-                            $scope.intRDateAppr_month, $scope.intRDateAppr_year);
+                                    $scope.intRDateAppr_month, $scope.intRDateAppr_year);
                 }
 
                 project.state = $scope.global.newState;
@@ -717,6 +759,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.report = project.intermediary_reports[$stateParams.reportId - 1];
             });
         };
+
+        /**
+         * Checks if the given string is non empty. Undefined or "" will be
+         * interpreted as an empty string.
+         *
+         * @param {type} string The string to check.
+         * @returns {Boolean}
+         */
+        $scope.nonEmpty = function (string) {
+            return typeof string !== "undefined" && string !== "";
+        }
 
         /**
          * The sorting predicate used in project listing. Initial value is

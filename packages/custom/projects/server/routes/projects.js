@@ -21,9 +21,13 @@ var hasPermissions = function (req, res, next) {
     next();
 };
 
+//var isLoggedIn = function (req, res) {
+//
+//}
+
 module.exports = function (Projects, app, auth) {
 
-    var projects = require('../controllers/projects')(Projects)
+    var projects = require('../controllers/projects')(Projects);
 
     app.route('/api/projects')
             .get(auth.requiresLogin, projects.getProjects)
@@ -43,6 +47,16 @@ module.exports = function (Projects, app, auth) {
             .put(auth.isMongoId, auth.requiresLogin, projects.addSigned);
     app.route('/api/projects/payment/:projectId')
             .put(auth.isMongoId, auth.requiresLogin, projects.addPayment);
+    // TODO: Figure out some way to pass user credentials along with these two
+    // requests in order to enable proper access control:
+//    app.route('/api/projects/upload')
+//            .post(auth.isMongoId, auth.requiresLogin, projects.addAppendix);
+//    app.route('/api/projects/data/:projectId')
+//            .get(auth.isMongoId, auth.requiresLogin, projects.accessAppendix);
+    app.route('/api/projects/upload')
+            .post(projects.addAppendix); //     <- Fix this.
+    app.route('/api/projects/data/:projectId')
+            .get(projects.accessAppendix); //   <- ...and this.
     app.route('/api/projects/end/:projectId')
             .put(auth.isMongoId, auth.requiresLogin, projects.addEnded);
     app.route('/api/projects/appr/:projectId')
