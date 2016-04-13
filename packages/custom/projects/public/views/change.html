@@ -200,7 +200,7 @@ A form for project state change.
         <div class="form-group col-md-12">
             <label for="signed_by" class="col-md-2">Allekirjoittaja</label>
             <div class="col-md-10">
-                <input name="signed_by" type="text" class="form-control" data-ng-model="project.signed.signed_by" id="signed_by" placeholder="Sopimuksen allekirjoittajan nimi">
+                <input name="signed_by" type="text" class="form-control" data-ng-model="project.signed.signed_by" id="signed_by" placeholder="Sopimuksen allekirjoittajan nimi" required>
             </div>
 
         </div>
@@ -456,7 +456,7 @@ A form for project state change.
 
         </div>
 
-        <p class="col-md-12 strong-title comment-form-div">Kokonaistavoitteen toteutuminen</p>
+        <p class="col-md-12 strong-title comment-form-div">Hankkeen tärkeimmät tulokset</p>
         <div class="form-group col-md-12">
             <div class="col-md-4">
                 <p>{{project.project_goal}}</p>

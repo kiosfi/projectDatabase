@@ -94,438 +94,517 @@
             </article>
             <article id="summary" class="proj-article">
                 <h4>Perustiedot</h4>
-                <table class="proj-content">
-                    <tr>
-                        <th>Turvaluokitus</th>
-                        <td>{{project.security_level}}</td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.region)">
-                        <th>Alue</th>
-                        <td>{{project.region}}</td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.dac)">
-                        <th>DAC</th>
-                        <td>{{project.dac}}</td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.state)">
-                        <th>Tila</th>
-                        <td>{{project.state}}</td>
-                    </tr>
-                    <tr>
-                        <th>Kirjattu</th>
-                        <td>{{project.reg_date| date:'d.M.yyyy': 'UTC'}}</td>
-                    </tr>
-                    <tr ng-show="project.approved.granted_sum_eur"
-                        class="ng-hide">
-                        <th>Myönnetty EUR</th>
-                        <td>{{project.approved.granted_sum_eur| currency : ""}}</td>
-                    </tr>
-                    <tr ng-show="!project.approved.granted_sum.granted_curr_eur &&
-                                            project.funding.applied_curr_eur >= 0"
-                        class="ng-hide">
-                        <th>Haettu EUR</th>
-                        <td>{{project.funding.applied_curr_eur| currency : ""}}</td>
-                    </tr>
-                    <tr ng-show="!project.approved.granted_sum.granted_curr_eur &&
-                                            project.funding.applied_curr_local"
-                        class="ng-hide">
-                        <th>Haettu paik.</th>
-                        <td>{{project.funding.applied_curr_local| currency : ""}}</td>
-                    </tr>
-                    <tr ng-show="project.duration_months >= 0">
-                        <th>Kesto</th>
-                        <td>{{project.duration_months}} kk</td>
-                    </tr>
-                </table>
+                <div class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Turvaluokitus</div>
+                    <div class="col-md-9">{{project.security_level}}</div>
+                </div>
+                <div ng-show="nonEmpty(project.region)"
+                     class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Alue</div>
+                    <div class="col-md-9">{{project.region}}</div>
+                </div>
+                <div ng-show="nonEmpty(project.dac)"
+                     class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">DAC</div>
+                    <div class="col-md-9">{{project.dac}}</div>
+                </div>
+                <div ng-show="nonEmpty(project.state)"
+                     class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Tila</div>
+                    <div class="col-md-9">{{project.state}}</div>
+                </div>
+                <div class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Kirjattu</div>
+                    <div class="col-md-9">{{project.reg_date| date:'d.M.yyyy': 'UTC'}}</div>
+                </div>
+                <div ng-show="project.approved.granted_sum_eur"
+                     class="ng-hide proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Myönnetty EUR</div>
+                    <div class="col-md-9">{{project.approved.granted_sum_eur| currency : ""}}</div>
+                </div>
+                <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
+                                        project.funding.applied_curr_eur >= 0"
+                     class="ng-hide proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Haettu EUR</div>
+                    <div class="col-md-9">{{project.funding.applied_curr_eur| currency : ""}}</div>
+                </div>
+                <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
+                                        project.funding.applied_curr_local"
+                     class="ng-hide proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Haettu paik.</div>
+                    <div class="col-md-9">{{project.funding.applied_curr_local| currency : ""}}</div>
+                </div>
+                <div ng-show="project.duration_months >= 0"
+                     class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Kesto</div>
+                    <div class="col-md-9">{{project.duration_months}} kk</div>
+                </div>
+                &nbsp;
             </article>
             <article id="description" class="proj-article">
                 <h4>Kuvaus</h4>
                 <div class="proj-content">
                     {{project.description}}
                 </div>
+                &nbsp;
             </article>
             <article id="organisation" class="proj-article">
                 <h4>Järjestö</h4>
-                <table class="proj-content">
-                    <tr ng-show="nonEmpty(project.organisation.name)">
-                        <th>Nimi</th>
-                        <td><a data-ng-href="/organisations/{{project.organisation._id}}">
-                                {{project.organisation.name}}</a></td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.organisation.
-                                            representative.name)">
-                        <th>Edustaja</th>
-                        <td>{{project.organisation.representative.name}}</td>
-                    </tr>
-                    <tr>
-                        <th>Osoite</th>
-                        <td>{{project.organisation.address.street}}<br>
-                            {{project.organisation.address.postal_code}}
-                            {{project.organisation.address.city}}<br>
-                            {{project.organisation.address.country}}</td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.organisation.tel)">
-                        <th>Puhelinnumero</th>
-                        <td>{{project.organisation.tel}}</td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.organisation.email)">
-                        <th>Sähköposti</th>
-                        <td>{{project.organisation.email}}</td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.organisation.website)">
-                        <th>Websivut</th>
-                        <td>{{project.organisation.website}}</td>
-                    </tr>
-                </table>
+                <div ng-show="nonEmpty(project.organisation.name)"
+                     class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Nimi</div>
+                    <div class="col-md-9">
+                        <a data-ng-href="/organisations/{{project.organisation._id}}">
+                            {{project.organisation.name}}</a>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.organisation.
+                                        representative.name)"
+                     class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Edustaja</div>
+                    <div class="col-md-9">
+                        {{project.organisation.representative.name}}
+                    </div>
+                </div>
+                <div class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Osoite</div>
+                    <div class="col-md-9">
+                        {{project.organisation.address.street}}<br>
+                        {{project.organisation.address.postal_code}}
+                        {{project.organisation.address.city}}<br>
+                        {{project.organisation.address.country}}
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.organisation.tel)"
+                     class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Puhelinnumero</div>
+                    <div class="col-md-9">{{project.organisation.tel}}</div>
+                </div>
+                <div ng-show="nonEmpty(project.organisation.email)"
+                     class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Sähköposti</div>
+                    <div class="col-md-9">{{project.organisation.email}}</div>
+                </div>
+                <div ng-show="nonEmpty(project.organisation.website)"
+                     class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Websivut</div>
+                    <div class="col-md-9">{{project.organisation.website}}</div>
+                </div>
+                &nbsp;
             </article>
             <article id="details" class="proj-article">
                 <h4>Lisätiedot</h4>
-                <table id="appinfo" class="proj-content">
-                    <tr>
-                        <th>Suunnitellut toimintatavat</th>
-                        <td>
+                <div id="appinfo" class="proj-content">
+                    <div class="col-md-12">
+                        <div class="col-md-3 mini-header">
+                            Suunnitellut toimintatavat
+                        </div>
+                        <div class="col-md-9">
                             <div ng-repeat="method in project.methods">
                                 <em>{{method.name}}</em> ({{method.level}})
                                 <p class="proj-subcontent">{{method.comment}}</p>
                             </div>
-                        </td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.background)">
-                        <th>Hankkeen taustat</th>
-                        <td>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.background)"
+                         class="col-md-12">
+                        <div class="col-md-3 mini-header">Hankkeen taustat</div>
+                        <div class="col-md-9">
                             {{project.background}}
-                        </td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.project_goal)">
-                        <th>Hankkeen tavoite</th>
-                        <td>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.project_goal)"
+                         class="col-md-12">
+                        <div class="col-md-3 mini-header">Hankkeen tavoite</div>
+                        <div class="col-md-9">
                             {{project.project_goal}}
-                        </td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.beneficiaries)">
-                        <th>Hyödynsaajat ja vastuunkantajat</th>
-                        <td>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.beneficiaries)"
+                         class="col-md-12">
+                        <div class="col-md-3 mini-header">
+                            Hyödynsaajat ja vastuunkantajat
+                        </div>
+                        <div class="col-md-9">
                             {{project.beneficiaries}}
-                        </td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.gender_aspect)">
-                        <th>Gender analyysi</th>
-                        <td>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.gender_aspect)"
+                         class="col-md-12">
+                        <div class="col-md-3 mini-header">Gender-analyysi</div>
+                        <div class="col-md-9">
                             {{project.gender_aspect}}
-                        </td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.sustainability_risks)">
-                        <th>Riskit</th>
-                        <td>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.sustainability_risks)"
+                         class="col-md-12">
+                        <div class="col-md-3 mini-header">Riskit</div>
+                        <div class="col-md-9">
                             {{project.sustainability_risks}}
-                        </td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.reporting_evaluation)">
-                        <th>Evaluointi</th>
-                        <td>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.reporting_evaluation)"
+                         class="col-md-12">
+                        <div class="col-md-3 mini-header">Evaluointi</div>
+                        <div class="col-md-9">
                             {{project.reporting_evaluation}}
-                        </td>
-                    </tr>
-                    <tr ng-show="nonEmpty(project.other_donors_proposed)">
-                        <th>Muut haut</th>
-                        <td>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.other_donors_proposed)"
+                         class="col-md-12">
+                        <div class="col-md-3 mini-header">Muut haut</div>
+                        <div class="col-md-9">
                             {{project.other_donors_proposed}}
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
+                </div>
+                &nbsp;
             </article>
             <article id="schedule" class="proj-article">
                 <h4>Aikataulu</h4>
                 <section class="proj-content" ng-show="project.signed.intreport_deadlines.length > 0">
                     <h5>Raporttien eräpäivät</h5>
-                    <table class="proj-subcontent">
-                        <tr ng-repeat="deadline in project.signed.intreport_deadlines">
-                            <th>{{deadline.report}}</th>
-                            <td>{{deadline.date| date: 'd.M.yyyy': 'UTC'}}</td>
-                        </tr>
-                    </table>
+                    <div ng-repeat="deadline in project.signed.intreport_deadlines" class="proj-subcontent col-md-12">
+                        <div class="col-md-3 mini-header">
+                            {{deadline.report}}
+                        </div>
+                        <div class="col-md-9">
+                            {{deadline.date| date: 'd.M.yyyy': 'UTC'}}
+                        </div>
+                    </div>
                 </section>
                 <section  class="proj-content">
                     <section ng-show="project.in_review.date">
-                        <p>
-                            <b>Rekisteröity käsittelyyn</b>
-                            {{project.in_review.date| date:'d.M.yyyy':
+                        <div class="col-md-12">
+                            <div class="col-md-3 mini-header">
+                                Rekisteröity käsittelyyn
+                            </div>
+                            <div class="col-md-2">
+                                {{project.in_review.date| date:'d.M.yyyy':
                                             'UTC'}}
-                            <button class="btn small-btn"
-                                    onclick="toggleCollapse('reviewinfo')">
-                                Tiedot</button>
-                        </p>
-                        <table id="reviewinfo" class="proj-subcontent"
-                               style="display: none">
-                            <tr>
-                                <th>Tiedot lisäsi</th>
-                                <td>{{project.in_review.user}},
-                                    {{project.in_review.date|
+                            </div>
+                            <div class="col-md-7">
+                                <button class="btn small-btn"
+                                        onclick="toggleCollapse('reviewinfo')">
+                                    Tiedot</button>
+                            </div>
+                        </div>
+                        <div id="reviewinfo" class="proj-subcontent col-md-12"
+                             style="display: none">
+                            <div class="col-md-3 mini-header">
+                                Tiedot lisäsi
+                            </div>
+                            <div class="col-md-9">{{project.in_review.user}},
+                                {{project.in_review.date|
                                                     date:'d.M.yyyy, HH:mm':
-                                                    'UTC'}}</td>
-                            </tr>
-                            <tr>
-                                <th>Kommentit</th>
-                                <td>{{project.in_review.comments}}</td>
-                            </tr>
-                        </table>
+                                                    'UTC'}}</div>
+                            <div class="col-md-3 mini-header">Kommentit</div>
+                            <div class="col-md-9">
+                                {{project.in_review.comments}}
+                            </div>
+                        </div>
                     </section>
                     <section ng-show="project.approved.date">
-                        <p>
-                            <b>Rekisteröity hyväksytyksi</b>
-                            {{project.approved.date| date:'d.M.yyyy':'UTC'}}
-                            <button class="btn small-btn"
-                                    onclick="toggleCollapse('approvedinfo')">
-                                Tiedot</button>
-                        </p>
-                        <table id="approvedinfo" class="proj-subcontent"
-                               style="display: none">
-                            <tr>
-                                <th>Tiedot lisäsi</th>
-                                <td>{{project.approved.user}},
-                                    {{project.approved.date|
+                        <div class="col-md-12">
+                            <div class="col-md-3 mini-header">
+                                Rekisteröity hyväksytyksi
+                            </div>
+                            <div class="col-md-2">
+                                {{project.approved.date| date:'d.M.yyyy':'UTC'}}
+                            </div>
+                            <div class="col-md-7">
+                                <button class="btn small-btn"
+                                        onclick="toggleCollapse('approvedinfo')">
+                                    Tiedot</button>
+                            </div>
+                        </div>
+                        <div id="approvedinfo" class="proj-subcontent col-md-12"
+                             style="display: none">
+                            <div class="col-md-3 mini-header">
+                                Tiedot lisäsi
+                            </div>
+                            <div class="col-md-9">{{project.approved.user}},
+                                {{project.approved.date|
                                                     date:'d.M.yyyy, HH:mm':
-                                                    'UTC'}}</td>
-                            </tr>
-                            <tr>
-                                <th>Hyväksyjä</th>
-                                <td>{{project.approved.approved_by}}</td>
-                            </tr>
-                            <tr>
-                                <th>Hyväksymispäivä</th>
-                                <td>{{project.approved.approved_date| date:
-                                                'd.M.yyyy':'UTC'}}</td>
-                            </tr>
-                            <tr>
-                                <th>Hallitukselle tiedoksi</th>
-                                <td>{{project.approved.board_notified| date:
-                                                'd.M.yyyy':'UTC'}}</td>
-                            </tr>
-                            <tr>
-                                <th>Hyväksytty summa</th>
-                                <td>{{project.approved.granted_sum_eur|
-                                                currency : ""}} EUR</td>
-                            </tr>
-                            <tr>
-                                <th>Teemat</th>
-                                <td>
-                                    <span data-ng-repeat="theme in project.approved.
-                                                        themes">{{theme}}<br></span>
-                                </td>
-                            </tr>
-                        </table>
+                                                    'UTC'}}</div>
+                            <div class="col-md-3 mini-header">Hyväksyjä</div>
+                            <div class="col-md-9">
+                                {{project.approved.approved_by}}
+                            </div>
+                            <div class="col-md-3 mini-header">
+                                Hyväksymispäivä
+                            </div>
+                            <div class="col-md-9">
+                                {{project.approved.approved_date| date:
+                                                'd.M.yyyy':'UTC'}}
+                            </div>
+                            <div class="col-md-3 mini-header">
+                                Hallitukselle tiedoksi
+                            </div>
+                            <div class="col-md-9">
+                                {{project.approved.board_notified| date:
+                                                'd.M.yyyy':'UTC'}}
+                            </div>
+                            <div class="col-md-3 mini-header">
+                                Hyväksytty summa
+                            </div>
+                            <div class="col-md-9">
+                                {{project.approved.granted_sum_eur|
+                                                currency : ""}} EUR
+                            </div>
+                            <div class="col-md-3 mini-header">Teemat</div>
+                            <div class="col-md-9">
+                                <span data-ng-repeat="theme in project.approved.
+                                                    themes">{{theme}}<br></span>
+                            </div>
+                        </div>
                     </section>
                     <section ng-show="project.rejected.date">
-                        <p>
-                            <b>Rekisteröity hylätyksi</b>
-                            {{project.rejected.date| date:'d.M.yyyy':
-                                            'UTC'}}
-                            <button class="btn small-btn"
-                                    onclick="toggleCollapse('rejectedinfo')">
-                                Tiedot
-                            </button>
-                        </p>
-                        <table id="rejectedinfo" class="proj-subcontent"
-                               style="display: none">
-                            <tr>
-                                <th>Tiedot lisäsi</th>
-                                <td>{{project.rejected.user}},
-                                    {{project.rejected.date|
+                        <div class="col-md-12">
+                            <div class="col-md-3 mini-header">
+                                Rekisteröity hylätyksi
+                            </div>
+                            <div class="col-md-2">
+                                {{project.rejected.date| date:'d.M.yyyy': 'UTC'}}
+                            </div>
+                            <div class="col-md-7">
+                                <button class="btn small-btn"
+                                        onclick="toggleCollapse('rejectedinfo')">
+                                    Tiedot
+                                </button>
+                            </div>
+                        </div>
+                        <div id="rejectedinfo"
+                             class="proj-subcontent col-md-12"
+                             style="display: none">
+                            <div class="col-md-3 mini-header">Tiedot lisäsi</div>
+                            <div class="col-md-9">{{project.rejected.user}},
+                                {{project.rejected.date|
                                                     date:'d.M.yyyy, HH:mm':
-                                                    'UTC'}}</td>
-                            </tr>
-                            <tr>
-                                <th>Hylkäyssyyt</th>
-                                <td>
-                                    <ul>
-                                        <li ng-repeat="rej in project.
-                                                            rejected.rejection_categories">
-                                            {{rej.rejection}}
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Kommentit</th>
-                                <td>{{project.rejected.rejection_comments}}</td>
-                            </tr>
-                        </table>
+                                                    'UTC'}}</div>
+                            <div class="col-md-3 mini-header">Hylkäyssyyt</div>
+                            <div class="col-md-9">
+                                <ul>
+                                    <li ng-repeat="rej in project.
+                                                        rejected.rejection_categories">
+                                        {{rej.rejection}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 mini-header">Kommentit</div>
+                            <div class="col-md-9">
+                                {{project.rejected.rejection_comments}}
+                            </div>
+                        </div>
                     </section>
                     <section ng-show="project.signed.date">
-                        <p>
-                            <b>Rekisteröity allekirjoitetuksi</b>
-                            {{project.signed.date| date:'d.M.yyyy': 'UTC'}}
-                            <button class="btn small-btn"
-                                    onclick="toggleCollapse('signedinfo')">
-                                Tiedot
-                            </button>
-                        </p>
-                        <table id="signedinfo" class="proj-subcontent"
-                               style="display: none">
-                            <tr>
-                                <th>Tiedot lisäsi</th>
-                                <td>{{project.signed.user}},
-                                    {{project.signed.date|
+                        <div class="col-md-12">
+                            <div class="col-md-3 mini-header">
+                                Rekisteröity allekirjoitetuksi
+                            </div>
+                            <div class="col-md-2">
+                                {{project.signed.date| date:'d.M.yyyy': 'UTC'}}
+                            </div>
+                            <div class="col-md-7">
+                                <button class="btn small-btn"
+                                        onclick="toggleCollapse('signedinfo')">
+                                    Tiedot
+                                </button>
+                            </div>
+                        </div>
+                        <div id="signedinfo" class="proj-subcontent col-md-12"
+                             style="display: none">
+                            <div class="col-md-3 mini-header">Tiedot lisäsi</div>
+                            <div class="col-md-9">{{project.signed.user}},
+                                {{project.signed.date|
                                                 date:'d.M.yyyy, HH:mm': 'UTC'}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Allekirjoitettu</th>
-                                <td>{{project.signed.signed_by}},
-                                    {{project.signed.signed_date|
-                                                    date:'d.M.yyyy': 'UTC'}}</td>
-                            </tr>
-                        </table>
+                            </div>
+                            <div class="col-md-3 mini-header">Allekirjoitettu</div>
+                            <div class="col-md-9">{{project.signed.signed_by}},
+                                {{project.signed.signed_date|
+                                                    date:'d.M.yyyy': 'UTC'}}</div>
+                        </div>
                     </section>
                     <section ng-show="project.intermediary_reports.length >
                                             0">
                         <div ng-repeat="intreport in
                                                 project.intermediary_reports">
-                            <p>
-                                <b>{{intreport.reportNumber}}. väliraportti
-                                    rekisteröity</b> {{intreport.date|
-                                                    date:'d.M.yyyy': 'UTC'}}
-                                <button class="btn small-btn"
-                                        ng-click="showIntDetails =
-                                                            !showIntDetails">
-                                    Tiedot
-                                </button>
-                                <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}"
-                                   class="btn large-btn">Näytä raportti</a>
-                            </p>
-                            <table ng-show="showIntDetails"
-                                   class="proj-subcontent">
-                                <tr>
-                                    <th>Tiedot lisäsi</th>
-                                    <td>{{intreport.user}},
-                                        {{intreport.date|
+                            <div class="col-md-12">
+                                <div class="col-md-3 mini-header">
+                                    {{intreport.reportNumber}}. väliraportti
+                                    rekisteröity
+                                </div>
+                                <div class="col-md-2">
+                                    {{intreport.date| date:'d.M.yyyy': 'UTC'}}
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn small-btn"
+                                            ng-click="showIntDetails =
+                                                                !showIntDetails">
+                                        Tiedot
+                                    </button>
+                                </div>
+                                <div class="col-md-5">
+                                    <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}"
+                                       class="btn large-btn">Näytä raportti</a>
+                                </div>
+                            </div>
+                            <div ng-show="showIntDetails"
+                                 class="proj-subcontent col-md-12">
+                                <div class="col-md-3 mini-header">
+                                    Tiedot lisäsi
+                                </div>
+                                <div class="col-md-9">{{intreport.user}},
+                                    {{intreport.date|
                                                         date:'d.M.yyyy, HH:mm':
-                                                        'UTC'}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Raportti hyväksytty</th>
-                                    <td>{{intreport.approved_by}},
-                                        {{intreport.date_approved|
+                                                        'UTC'}}</div>
+                                <div class="col-md-3 mini-header">
+                                    Raportti hyväksytty
+                                </div>
+                                <div class="col-md-9">{{intreport.approved_by}},
+                                    {{intreport.date_approved|
                                                         date : 'd.M.yyyy':
-                                                        'UTC'}}</td>
-                                </tr>
-                            </table>
+                                                        'UTC'}}</div>
+                            </div>
                             <p ng-show="intreport.processed === true">
                                 Väliraportti on käsitelty.
                             </p>
                         </div>
                     </section>
                     <section ng-show="project.end_report.date">
-                        <p>
-                            <b>Loppuraportti rekisteröity</b>
-                            {{project.end_report.date| date:'d.M.yyyy':
-                                            'UTC'}}
-                            <button class="btn small-btn"
-                                    ng-click="showEndDetails =
-                                                    !showEndDetails">
-                                Tiedot
-                            </button>
-                            <a ng-href="/projects/endReport/{{project._id}}"
-                               class="btn large-btn">Näytä raportti</a>
-                        </p>
-                        <table ng-show="showEndDetails" class="proj-subcontent">
-                            <tr>
-                                <th>Tiedot lisäsi</th>
-                                <td>{{project.end_report.user}},
-                                    {{project.end_report.date|
+                        <div class="col-md-12">
+                            <div class="col-md-3 mini-header">
+                                Loppuraportti rekisteröity
+                            </div>
+                            <div class="col-md-2">
+                                {{project.end_report.date| date:'d.M.yyyy':'UTC'}}
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn small-btn"
+                                        ng-click="showEndDetails =
+                                                        !showEndDetails">
+                                    Tiedot
+                                </button>
+                            </div>
+                            <div class="col-md-5">
+                                <a ng-href="/projects/endReport/{{project._id}}"
+                                   class="btn large-btn">Näytä raportti</a>
+                            </div>
+                        </div>
+                        <div ng-show="showEndDetails"
+                             class="proj-subcontent col-md-12">
+                            <div class="col-md-3 mini-header">
+                                Tiedot lisäsi
+                            </div>
+                            <div class="col-md-9">{{project.end_report.user}},
+                                {{project.end_report.date|
                                                     date:'d.M.yyyy, HH:mm':
-                                                    'UTC'}}</td>
-                            </tr>
-                            <tr>
-                                <th>Raportti hyväksytty</th>
-                                <td>{{project.end_report.approved_by}},
-                                    {{project.end_report.date_approved|
-                                                    date : 'd.M.yyyy': 'UTC'}}</td>
-                            </tr>
-                        </table>
+                                                    'UTC'}}</div>
+                            <div class="col-md-3 mini-header">
+                                Raportti hyväksytty
+                            </div>
+                            <div class="col-md-9">{{project.end_report.approved_by}},
+                                {{project.end_report.date_approved|
+                                                    date : 'd.M.yyyy': 'UTC'}}</div>
+                        </div>
                         <p ng-show="project.end_report.processed === true">
                             Väliraportti on käsitelty.
                         </p>
                     </section>
                     <section ng-show="project.ended.date">
-                        <p>
-                            <b>Rekisteröity päätetyksi</b>
-                            {{project.ended.end_date| date:'d.M.yyyy':
-                                            'UTC'}}
-                            <button class="btn small-btn"
-                                    onclick="toggleCollapse('endedinfo')">
-                                Tiedot
-                            </button>
-                        </p>
-                        <table id="endedinfo" class="proj-subcontent">
-                            <tr>
-                                <th>Tiedot lisäsi</th>
-                                <td>{{project.ended.user}},
-                                    {{project.ended.date|
+                        <div class="col-md-12">
+                            <div class="col-md-3 mini-header">
+                                Rekisteröity päätetyksi
+                            </div>
+                            <div class="col-md-2">
+                                {{project.ended.end_date| date:'d.M.yyyy':'UTC'}}
+                            </div>
+                            <div class="col-md-7"><button class="btn small-btn"
+                                                          onclick="toggleCollapse('endedinfo')">
+                                    Tiedot
+                                </button></div>
+                        </div>
+                        <div id="endedinfo" class="proj-subcontent col-md-12">
+                            <div class="col-md-3 mini-header">
+                                Tiedot lisäsi
+                            </div>
+                            <div class="col-md-9">{{project.ended.user}},
+                                {{project.ended.date|
                                                 date:'d.M.yyyy, HH:mm': 'UTC'}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Hyväksyjä</th>
-                                <td>{{project.ended.approved_by}}</td>
-                            </tr>
-                            <tr>
-                                <th>Hallitukselle tiedotettu (pvm)</th>
-                                <td>{{project.ended.board_notified|
-                                            date: 'd.M.yyyy': 'UTC'}}</td>
-                            </tr>
-                            <tr>
-                                <th>Muut päättämiseen liittyvät kommentit</th>
-                                <td>{{project.ended.other_comments}}</td>
-                            </tr>
-                        </table>
+                            </div>
+                            <div class="col-md-3 mini-header">Hyväksyjä</div>
+                            <div class="col-md-9">
+                                {{project.ended.approved_by}}
+                            </div>
+                            <div class="col-md-3 mini-header">
+                                Tiedotettu hallitukselle
+                            </div>
+                            <div class="col-md-9">{{project.ended.board_notified|
+                                            date: 'd.M.yyyy': 'UTC'}}</div>
+                            <div class="col-md-3 mini-header">
+                                Muut päättämiseen liittyvät kommentit
+                            </div>
+                            <div class="col-md-9">
+                                {{project.ended.other_comments}}
+                            </div>
+                        </div>
                     </section>
                 </section>
+                &nbsp;
             </article>
             <article id="payments" class="proj-article">
                 <h4>Maksatus</h4>
-                <table class="proj-content">
-                    <tr>
-                        <th ng-show="project.approved.granted_sum_eur">
+                <div class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">
+                        <div ng-show="project.approved.granted_sum_eur">
                             Myönnetty avustus
-                        </th>
-                        <td class="proj-subcontent">
-                            <div>
-                                <span>{{project.approved.granted_sum_eur| currency : ""}} EUR</span>
-                                <span>{{project.approved.approved_date| date:'d.M.yyyy': 'UTC'}}</span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Maksuaikataulu</th>
-                        <td>
-                            <table>
-                                <tr ng-repeat="planned_payment in project.signed.planned_payments">
-                                    <td><em>{{project.signed.planned_payments.indexOf(planned_payment) + 1}}. erä</em></td>
-                                    <td>{{planned_payment.sum_eur| currency : ""}} EUR</td>
-                                    <td>{{planned_payment.date| date:'d.M.yyyy': 'UTC'}}</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr ng-show="project.payments.length > 0">
-                        <th>Maksetut erät</th>
-                        <td>
-                            <div ng-repeat="payment in project.payments">
-                                <em id="paid">{{payment.payment_number}}. erä</em>
-                                {{payment.sum_eur| currency : ""}} EUR, {{payment.payment_date| date:'d.M.yyyy': 'UTC'}}
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Maksettu yhteensä</th>
-                        <td>{{project.funding.paid_eur| currency : ""}} EUR</td>
-                    </tr>
-                    <tr>
-                        <th>Jäljellä</th>
-                        <td>{{project.funding.left_eur| currency : ""}} EUR</td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        {{project.approved.granted_sum_eur| currency : ""}} EUR
+                    </div>
+                    <div class="col-md-7">
+                        {{project.approved.approved_date| date:'d.M.yyyy': 'UTC'}}
+                    </div>
+                </div>
+                <div class="proj-content">
+                    <h5>Maksuaikataulu</h5>
+                    <div ng-repeat="planned_payment in project.signed.
+                                    planned_payments" class="col-md-12">
+                        <div class="col-md-1"><em>{{project.signed.
+                                            planned_payments.indexOf(planned_payment) + 1}}. erä</em></div>
+                        <div class="col-md-2">{{planned_payment.sum_eur| currency : ""}} EUR</div>
+                        <div class="col-md-9">{{planned_payment.date| date:'d.M.yyyy': 'UTC'}}</div>
+                    </div>
+                </div>
+                <div ng-show="project.payments.length > 0" class="proj-content">
+                    <h5>Maksetut erät</h5>
+                    <div ng-repeat="payment in project.payments"
+                         class="col-md-12">
+                        <div class="col-md-1">
+                            <em id="paid">{{payment.payment_number}}. erä</em>
+                        </div>
+                        <div class="col-md-2">
+                            {{payment.sum_eur| currency : ""}} EUR
+                        </div>
+                        <div class="col-md-9">
+                            {{payment.payment_date| date:'d.M.yyyy': 'UTC'}}
+                        </div>
+                    </div>
+                </div>
+                <div class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Maksettu yhteensä</div>
+                    <div class="col-md-9">
+                        {{project.funding.paid_eur| currency : ""}} EUR
+                    </div>
+                </div>
+                <div class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">Jäljellä</div>
+                    <div class="col-md-9">
+                        {{project.funding.left_eur| currency : ""}} EUR
+                    </div>
+                </div>
+                &nbsp;
             </article>
             <article id="addPayment" ng-show="project.signed.signed_by"
                      class="proj-article">
@@ -544,7 +623,7 @@
                                 <input name="paymentDay" type="number"
                                        class="form-control"
                                        data-ng-model="payment_day"
-                                       id="paymentDay" placeholder="p" required
+                                       id="paymentDay" required
                                        />
                                 <div ng-show="paymentForm.paymentDay.$invalid"
                                      class="help-block" >
@@ -559,7 +638,7 @@
                                 <input name="paymentMonth" type="number"
                                        class="form-control"
                                        data-ng-model="payment_month"
-                                       id="paymentMonth" placeholder="k"
+                                       id="paymentMonth"
                                        required />
                                 <div ng-show="paymentForm.paymentMonth.$invalid"
                                      class="help-block">
@@ -574,7 +653,7 @@
                                 <input name="paymentYear" type="number"
                                        class="form-control"
                                        data-ng-model="payment_year"
-                                       id="paymentYear" placeholder="vvvv"
+                                       id="paymentYear"
                                        required />
                                 <div ng-show="paymentForm.paymentYear.$invalid"
                                      class="help-block">
@@ -625,9 +704,9 @@
             <article id="appendices" class="proj-article"
                      ng-show="project.appendices.length > 0">
                 <h4>Liitteet</h4>
-                <table class="proj-content">
-                    <tr ng-repeat="appendix in project.appendices">
-                        <th>{{appendix.number}}.
+                    <div ng-repeat="appendix in project.appendices"
+                         class="proj-content col-md-12">
+                        <div class="col-md-2 mini-header">{{appendix.number}}.
                             <!-- TODO: Figure out how to hyperlink the
                             appendices using client-side services in order to
                             enable proper access control: -->
@@ -636,17 +715,21 @@
                                 {{appendix.category !== 'Muu...' ?
                                         appendix.category : appendix.custom_category}}
                             </a>
-                        </th>
-                        <td><em>{{appendix.original_name}}</em></td>
-                        <td>{{appendix.date | date: 'd.M.yyyy': 'UTC'}}</td>
-                        <td>
+                        </div>
+                        <div class="col-md-3">
+                            <em>{{appendix.original_name}}</em>
+                        </div>
+                        <div class="col-md-1">
+                            {{appendix.date| date: 'd.M.yyyy': 'UTC'}}
+                        </div>
+                        <div class="col-md-6">
                             <a data-ng-click="confirmAppendixDeletion(appendix.url)"
                                class="btn-lg">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
+                &nbsp;
             </article>
             <article id="addAppendix" class="proj-article">
                 <h4>Lisää liite</h4>

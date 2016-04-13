@@ -147,3 +147,8 @@ hr {
     margin:             1em;
     padding:            1em;
 }
+
+.mini-header {
+    font-weight: bold;
+    margin-left: -2em;
+}
