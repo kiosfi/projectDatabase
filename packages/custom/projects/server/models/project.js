@@ -14,7 +14,8 @@ var ProjectSchema = new Schema({
      */
     schema_version: {
         type: Number, // Current version is 2.
-        required: true
+        required: true,
+        default: 2
     },
     /**
      * Security level of the project. The value should be one of the following
@@ -24,7 +25,8 @@ var ProjectSchema = new Schema({
      */
     security_level: {
         type: String,
-        required: true
+        required: true,
+        default: "Julkinen"
     },
     /**
      * Reference number of the project. It's an integer whose two first (most
