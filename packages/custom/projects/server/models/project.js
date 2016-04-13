@@ -107,7 +107,7 @@ var ProjectSchema = new Schema({
         trim: true
     },
     methods: {
-        type: Array,
+        type: Array
     },
     background: {
         type: String,
