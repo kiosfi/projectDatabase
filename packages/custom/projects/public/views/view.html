@@ -437,14 +437,14 @@
                                 <div class="col-md-2">
                                     {{intreport.date| date:'d.M.yyyy': 'UTC'}}
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <button class="btn small-btn"
                                             ng-click="showIntDetails =
                                                                 !showIntDetails">
                                         Tiedot
                                     </button>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}"
                                        class="btn large-btn">Näytä raportti</a>
                                 </div>
@@ -479,14 +479,14 @@
                             <div class="col-md-2">
                                 {{project.end_report.date| date:'d.M.yyyy':'UTC'}}
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <button class="btn small-btn"
                                         ng-click="showEndDetails =
                                                         !showEndDetails">
                                     Tiedot
                                 </button>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <a ng-href="/projects/endReport/{{project._id}}"
                                    class="btn large-btn">Näytä raportti</a>
                             </div>

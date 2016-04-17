@@ -37,9 +37,45 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
+        /**
+         * Creates a Date object with the given parameters.
+         *
+         * @param {type} day    Day of month (1-31).
+         * @param {type} month  Month of year (1-12).
+         * @param {type} year   Year.
+         * @returns {Date}      A new Date object.
+         */
         $scope.convertDate = function (day, month, year) {
             var parsed = new Date(year, month - 1, day + 1).toISOString();
             return parsed;
+        };
+
+        /**
+         * Creates a human-readable date string in the Finnish date format from
+         * the given Date object.
+         *
+         * @param {type} date   The Date object.
+         * @returns {String}    A date string in the format "dd.mm.YYYY".
+         */
+        $scope.dateToString = function (date) {
+            date = new Date(date);
+            return date.getDate() + "." + (date.getMonth() + 1) + "." +
+                    date.getFullYear();
+        };
+
+        /**
+         * Calculates a time interval as a Date object.
+         *
+         * @param {Date} start  The start date for the interval.
+         * @param {Date} end    The end date for the interval.
+         * @returns {Date}      The interval.
+         */
+        $scope.dateInterval = function (start, end) {
+            var a = new Date(end);
+            a.setMinutes(a.getMinutes() - a.getTimezoneOffset());
+            var b = new Date(start);
+            b.setMinutes(b.getMinutes() - b.getTimezoneOffset());
+            return a - b;
         };
 
         $scope.hasAuthorization = function (project) {
@@ -47,17 +83,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 return false;
             return MeanUser.isAdmin;
         };
-        /**
-         * Creates new project by checking if organisation already exists (i.e. organisation
-         * has been selected from dropdown list) or if organisation is new.
-         * If organisation is new, first creates new organisation by calling
-         * organisation server-side controller and after that creates project.
-         * If organisation is selected from list, uses existing organisation._id and
-         * creates project.
-         *
-         * @param {type} isValid checks if project creation form is valid
-         * @returns {undefined}
-         */
 
         var now = new Date();
 
@@ -78,6 +103,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.payment_month = now.getMonth() + 1;
         $scope.payment_day = now.getDate();
 
+        /**
+         * Creates new project by checking if organisation already exists (i.e. organisation
+         * has been selected from dropdown list) or if organisation is new.
+         * If organisation is new, first creates new organisation by calling
+         * organisation server-side controller and after that creates project.
+         * If organisation is selected from list, uses existing organisation._id and
+         * creates project.
+         *
+         * @param {type} isValid checks if project creation form is valid
+         * @returns {undefined}
+         */
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
@@ -379,6 +415,37 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.ensureCompatibility(project);
             });
         };
+
+        $scope.duration;
+
+        /**
+         * Like findOne, but calculates additionally the duration of the project
+         * and writes a string indicating the duration to $scope.duration. This
+         * function is used for initializing the data for the end report view.
+         *
+         * @returns {undefined}
+         */
+        $scope.findOneForEndReport = function () {
+            Projects.get({
+                projectId: $stateParams.projectId
+            }, function (project) {
+                $scope.project = project;
+                // We don't need to call ensureCompatibility, because it should
+                // be already called because the user should have arrived to the
+                // end report view via the project view.
+                var signed = $scope.project.signed.date;
+                if (!$scope.project.ended) {
+                    $scope.duration = $scope.dateToString(signed) + " -";
+                } else {
+                    var ended = $scope.project.ended.date;
+                    var interval = $scope.dateInterval(signed, ended);
+                    $scope.duration = $scope.dateToString(signed) + " - " +
+                            $scope.dateToString(ended) + " (" +
+                            Math.floor(interval / 31536000000) + " v " +
+                            Math.round(interval / 2592000000) + " kk)";
+                }
+            });
+        }
 
         /**
          * Makes sure that the given project conforms to the latest version of

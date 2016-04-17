@@ -15,7 +15,7 @@ var ProjectSchema = new Schema({
     schema_version: {
         type: Number, // Current version is 2.
         required: true,
-        default: 2
+        default: 3
     },
     /**
      * Security level of the project. The value should be one of the following
@@ -252,6 +252,38 @@ var ProjectSchema = new Schema({
         },
         comments: {
           type: String
+        },
+        /**
+         * The estimated number of people, whom this project has directly helped.
+         */
+        direct_beneficiaries: {
+            type: Number,
+            trim: true
+        },
+        /**
+         * The estimated number of people, who have received indirect benefits
+         * from this project.
+         */
+        indirect_beneficiaries: {
+            type: Number,
+            trim: true
+        },
+        /**
+         * A numerical grade for the success of the project. The grading system
+         * is as follows: 4 (succeeded better than anticipated), 3 (succeeded
+         * as planned), 2 (did not succeed as planned due to an external cause),
+         * 1 (did not succeed as planned due to neglection by the organisation).
+         */
+        grade: {
+            type: Number,
+            trim: true
+        },
+        /**
+         * The proposed end resolution for the project.
+         */
+        proposal: {
+            type: String,
+            trim: true
         },
         processed: {
           type: Boolean,
