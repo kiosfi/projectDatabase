@@ -6,28 +6,28 @@
     <article>
         <div class="col-md-12 border-body" style="padding-left: 2em">
             <div class="col-md-3 mini-header">Järjestö</div>
-            <div class="col-md-9">{{project.organisation.name}}</div>
+            <div class="col-md-3">{{project.organisation.name}}&nbsp;</div>
             <div class="col-md-3 mini-header">Hanke</div>
-            <div class="col-md-9">{{project.title}}</div>
+            <div class="col-md-3">{{project.title}}&nbsp;</div>
             <div class="col-md-3 mini-header">Hankenumero</div>
-            <div class="col-md-9">{{project.project_ref}}</div>
+            <div class="col-md-3">{{project.project_ref}}&nbsp;</div>
             <div class="col-md-3 mini-header">Alue / Maa</div>
-            <div class="col-md-9">{{project.region}}</div>
+            <div class="col-md-3">{{project.region}}&nbsp;</div>
             <div class="col-md-3 mini-header">Myönnetty tuki ja pvm</div>
-            <div class="col-md-9">{{project.approved.granted_sum_eur| currency : ""}} euroa, {{project.approved.approved_date| date : 'dd.MM.yyyy': 'UTC'}}</div>
+            <div class="col-md-3">{{project.approved.granted_sum_eur| currency : ""}} euroa, {{project.approved.approved_date| date : 'dd.MM.yyyy': 'UTC'}}&nbsp;</div>
             <div class="col-md-3 mini-header">Hankkeen kesto</div>
-            <div class="col-md-9" data-ng-init="calculateDuration()">
-                {{duration}}
+            <div class="col-md-3" data-ng-init="calculateDuration()">
+                {{duration}}&nbsp;
             </div>
-            <div class="col-md-3 mini-header">Hankekuvaus</div>
-            <div class="col-md-9">{{project.description}}</div>
+            <div class="col-md-3 mini-header">Kuvaus</div>
+            <div class="col-md-9">{{project.description}}&nbsp;</div>
             <div class="col-md-3 mini-header">Oikeudellinen fokus</div>
             <div class="col-md-9">
                 <table>
                     <tr ng-repeat="theme in project.approved.themes">
                         <td>{{theme}}</td>
                     </tr>
-                </table>
+                </table>&nbsp;
             </div>
         </div>
     </article>
