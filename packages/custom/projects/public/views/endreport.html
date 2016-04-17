@@ -88,8 +88,12 @@
     <article class="er-body col-md-12">
         <div class="col-md-3 medium-header">Hyödynsaajien arvioitu määrä</div>
         <div class="col-md-9">
-            <p><b>Suoria: {{project.direct_beneficiaries}}</b></p>
-            <p><b>Epäsuoria: {{project.indirect_beneficiaries}}</b></p>
+            <p><b>Suoria:</b>
+                {{project.end_report.direct_beneficiaries}}
+            </p>
+            <p><b>Epäsuoria:</b>
+                {{project.end_report.indirect_beneficiaries}}
+            </p>
         </div>
     </article>
 
