@@ -250,6 +250,10 @@ var ProjectSchema = new Schema({
         objective: {
           type: String
         },
+        /**
+         * Since schema version 3, this file is used for the proposed end
+         * resolution for the project.
+         */
         comments: {
           type: String
         },
@@ -276,13 +280,6 @@ var ProjectSchema = new Schema({
          */
         grade: {
             type: Number,
-            trim: true
-        },
-        /**
-         * The proposed end resolution for the project.
-         */
-        proposal: {
-            type: String,
             trim: true
         },
         processed: {
