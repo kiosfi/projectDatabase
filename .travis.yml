@@ -7,7 +7,6 @@ services:
   - mongodb
 
 before_install:
-  - npm update -q
   - npm i -g bower
 
 notifications:
