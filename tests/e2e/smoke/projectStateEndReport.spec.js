@@ -55,7 +55,7 @@ describe('Changing project state to "end report"', function () {
 
         expect(browser.getCurrentUrl()).toContain('/change');
 
-        element(by.linkText('Peruuta')).click();
+        browser.navigate().back();
 
         expect(browser.getCurrentUrl()).toContain('/5c9ed9f94260406da7a7a41b');
         var state = element(by.className('tila')).getText();

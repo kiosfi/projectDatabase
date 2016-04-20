@@ -195,7 +195,7 @@
             <article id="details" class="proj-article">
                 <h4>Lisätiedot</h4>
                 <div id="appinfo" class="proj-content">
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-3 mini-header">
                             Suunnitellut toimintatavat
                         </div>
@@ -207,21 +207,21 @@
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.background)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-3 mini-header">Hankkeen taustat</div>
                         <div class="col-md-9">
                             {{project.background}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.project_goal)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-3 mini-header">Hankkeen tavoite</div>
                         <div class="col-md-9">
                             {{project.project_goal}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.beneficiaries)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-3 mini-header">
                             Hyödynsaajat ja vastuunkantajat
                         </div>
@@ -230,21 +230,21 @@
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.gender_aspect)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-3 mini-header">Gender-analyysi</div>
                         <div class="col-md-9">
                             {{project.gender_aspect}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.sustainability_risks)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-3 mini-header">Riskit</div>
                         <div class="col-md-9">
                             {{project.sustainability_risks}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.reporting_evaluation)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-3 mini-header">Evaluointi</div>
                         <div class="col-md-9">
                             {{project.reporting_evaluation}}
@@ -262,7 +262,8 @@
             </article>
             <article id="schedule" class="proj-article">
                 <h4>Aikataulu</h4>
-                <section class="proj-content" ng-show="project.signed.intreport_deadlines.length > 0">
+                <section class="proj-content"
+                         ng-show="project.signed.intreport_deadlines.length > 0">
                     <h5>Raporttien eräpäivät</h5>
                     <div ng-repeat="deadline in project.signed.intreport_deadlines" class="proj-subcontent col-md-12">
                         <div class="col-md-3 mini-header">
@@ -272,6 +273,7 @@
                             {{deadline.date| date: 'd.M.yyyy': 'UTC'}}
                         </div>
                     </div>
+                    &nbsp;
                 </section>
                 <section  class="proj-content">
                     <section ng-show="project.in_review.date">
@@ -303,6 +305,7 @@
                                 {{project.in_review.comments}}
                             </div>
                         </div>
+                        &nbsp;
                     </section>
                     <section ng-show="project.approved.date">
                         <div class="col-md-12">
@@ -358,6 +361,7 @@
                                                     themes">{{theme}}<br></span>
                             </div>
                         </div>
+                        &nbsp;
                     </section>
                     <section ng-show="project.rejected.date">
                         <div class="col-md-12">
@@ -396,6 +400,7 @@
                                 {{project.rejected.rejection_comments}}
                             </div>
                         </div>
+                        &nbsp;
                     </section>
                     <section ng-show="project.signed.date">
                         <div class="col-md-12">
@@ -424,11 +429,10 @@
                                 {{project.signed.signed_date|
                                                     date:'d.M.yyyy': 'UTC'}}</div>
                         </div>
+                        &nbsp;
                     </section>
-                    <section ng-show="project.intermediary_reports.length >
-                                            0">
-                        <div ng-repeat="intreport in
-                                                project.intermediary_reports">
+                    <section ng-show="project.intermediary_reports.length > 0">
+                        <div ng-repeat="intreport in project.intermediary_reports">
                             <div class="col-md-12">
                                 <div class="col-md-3 mini-header">
                                     {{intreport.reportNumber}}. väliraportti
@@ -469,6 +473,7 @@
                             <p ng-show="intreport.processed === true">
                                 Väliraportti on käsitelty.
                             </p>
+                            &nbsp;
                         </div>
                     </section>
                     <section ng-show="project.end_report.date">
@@ -510,6 +515,7 @@
                         <p ng-show="project.end_report.processed === true">
                             Väliraportti on käsitelty.
                         </p>
+                        &nbsp;
                     </section>
                     <section ng-show="project.ended.date">
                         <div class="col-md-12">
@@ -548,13 +554,14 @@
                                 {{project.ended.other_comments}}
                             </div>
                         </div>
+                        &nbsp;
                     </section>
                 </section>
                 &nbsp;
             </article>
             <article id="payments" class="proj-article">
                 <h4>Maksatus</h4>
-                <div class="proj-content col-md-12">
+                <div class="proj-content col-md-12" style="margin-bottom: 1em">
                     <div class="col-md-3 mini-header">
                         <div ng-show="project.approved.granted_sum_eur">
                             Myönnetty avustus
@@ -576,6 +583,7 @@
                         <div class="col-md-2">{{planned_payment.sum_eur| currency : ""}} EUR</div>
                         <div class="col-md-9">{{planned_payment.date| date:'d.M.yyyy': 'UTC'}}</div>
                     </div>
+                    &nbsp;
                 </div>
                 <div ng-show="project.payments.length > 0" class="proj-content">
                     <h5>Maksetut erät</h5>
@@ -591,8 +599,9 @@
                             {{payment.payment_date| date:'d.M.yyyy': 'UTC'}}
                         </div>
                     </div>
+                    &nbsp;
                 </div>
-                <div class="proj-content col-md-12">
+                <div class="proj-content col-md-12" style="margin-bottom: 1em">
                     <div class="col-md-3 mini-header">Maksettu yhteensä</div>
                     <div class="col-md-9">
                         {{project.funding.paid_eur| currency : ""}} EUR

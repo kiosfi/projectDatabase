@@ -63,7 +63,7 @@ describe('Changing project state to "signed"', function () {
 
         expect(browser.getCurrentUrl()).toContain('/change');
 
-        element(by.linkText('Peruuta')).click();
+        browser.navigate().back();
 
         expect(browser.getCurrentUrl()).toContain('/f2c7d9aeb017189911996768');
         var state = element(by.className('tila')).getText();

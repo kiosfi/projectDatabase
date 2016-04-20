@@ -51,9 +51,9 @@ describe('Changing project state to "ended"', function () {
 
         expect(browser.getCurrentUrl()).toContain('/change');
 
-        element(by.linkText('Peruuta')).click();
+        browser.navigate().back();
 
-        expect(browser.getCurrentUrl()).toContain('/a2c8c9adb020176622996766');
+        expect(browser.getCurrentUrl()).toContain('/f2e7c9aeb017189911996768');
         var state = element(by.className('tila')).getText();
         expect(state).toContain('hyväksytty');
     });

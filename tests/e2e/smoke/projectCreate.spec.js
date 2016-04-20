@@ -23,22 +23,28 @@ describe('Project create page', function () {
 
     it('should create project and new organisation with valid data filled in form', function () {
         element(by.linkText("Hankkeen lisäys")).click();
-        element(by.linkText("Hankkeen nimi, koordinaattori ja järjestö")).click();
-        element(by.linkText("Hankkeen perustiedot")).click();
+        element(by.linkText("Nimi, koordinaattori ja järjestö")).click();
+        element(by.linkText("Perustiedot")).click();
         browser.executeScript('window.scrollTo(0,100000)').then(function () {
-          element(by.linkText("Hankkeen lisätiedot")).click();
+          element(by.linkText("Lisätiedot")).click();
         });
 
         browser.executeScript('window.scrollTo(100000,0)').then(function () {
           element(by.model('project.title')).sendKeys('Test title');
         });
 
-        element(by.model('project.coordinator')).element(by.cssContainingText('option', 'Maija Maa')).click();
+        element(by.model('project.coordinator')).sendKeys('Maija Maa');
         element(by.buttonText('Lisää uusi järjestö')).click();
         element(by.linkText("Järjestö")).click();
 
         element(by.model('project.organisation.name')).sendKeys('Test organisation');
-        element(by.model('project.organisation.representative')).sendKeys('Test prep');
+        element(by.model('project.organisation.representative.name')).
+                sendKeys('Test prep');
+        element(by.model('project.organisation.representative.email')).
+                sendKeys('xyz@test.com');
+        element(by.model('project.organisation.representative.phone')).
+                sendKeys('555-555 5555');
+        // TODO: Figure out how to scroll down in order to reach the next fields:
         element(by.model('project.organisation.exec_manager')).sendKeys('Matti Manageri');
         element(by.model('project.organisation.address.street')).sendKeys('Test org address 123');
         element(by.model('project.organisation.address.postal_code')).sendKeys('90100');
@@ -103,12 +109,13 @@ describe('Project create page', function () {
 
     it('should create project with valid data filled in form and organisation selected from list', function () {
         element(by.linkText("Hankkeen lisäys")).click();
-        element(by.linkText("Hankkeen nimi, koordinaattori ja järjestö")).click();
-        element(by.linkText("Hankkeen perustiedot")).click();
-        element(by.linkText("Hankkeen lisätiedot")).click();
+        element(by.linkText("Nimi, koordinaattori ja järjestö")).click();
+        element(by.linkText("Perustiedot")).click();
+        element(by.linkText("Lisätiedot")).click();
 
+        // TODO: Figure out how to scroll to the right position:
         element(by.model('project.title')).sendKeys('Test title 2');
-        element(by.model('project.coordinator')).element(by.cssContainingText('option', 'Teppo Tenhunen')).click();
+        element(by.model('project.coordinator')).sendKeys('Teppo Tenhunen');
         element(by.model('project.listOrganisation')).element(by.cssContainingText('option', 'Human rights org')).click();
 
         element(by.model('project.funding.applied_curr_local')).sendKeys('300000');
@@ -140,9 +147,9 @@ describe('Project create page', function () {
 
     it('should not create project with empty form', function () {
         element(by.linkText("Hankkeen lisäys")).click();
-        element(by.linkText("Hankkeen nimi, koordinaattori ja järjestö")).click();
-        element(by.linkText("Hankkeen perustiedot")).click();
-        element(by.linkText("Hankkeen lisätiedot")).click();
+        element(by.linkText("Nimi, koordinaattori ja järjestö")).click();
+        element(by.linkText("Perustiedot")).click();
+        element(by.linkText("Lisätiedot")).click();
         element(by.buttonText("Lähetä")).click();
 
         expect(browser.getCurrentUrl()).toContain('/projects/create');

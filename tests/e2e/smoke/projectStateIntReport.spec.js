@@ -17,7 +17,7 @@ describe('Changing project state to "intermediary report"', function () {
 
         expect(browser.getCurrentUrl()).toContain('/change');
 
-        element(by.linkText('Peruuta')).click();
+        browser.navigate().back();
 
         expect(browser.getCurrentUrl()).toContain('/123459f94260406da7a7a41b');
         var state = element(by.className('tila')).getText();
@@ -30,7 +30,7 @@ describe('Changing project state to "intermediary report"', function () {
         helpers.login();
 
         element(by.linkText("Hankelistaus")).click();
-        element(by.id("page-2")).click();        
+        element(by.id("page-2")).click();
         element(by.linkText("Project Signed")).click();
 
         element(by.model('project.changeTo')).element(by.cssContainingText('option', 'väliraportti')).click();
@@ -42,7 +42,7 @@ describe('Changing project state to "intermediary report"', function () {
         element(by.id('objComments')).sendKeys('Kohtalaisesti onnistui');
         element(by.model('project.intermediary_report.overall_rating_kios')).sendKeys('Arvio hankkeen onnistuimisesta');
         element(by.model('project.intermediary_report.comments')).sendKeys('Muita kommentteja hankkeesta');
-        element(by.model('project.intermediary_report.approved_by')).sendKeys('Halko');        
+        element(by.model('project.intermediary_report.approved_by')).sendKeys('Halko');
         element(by.model('intRDateAppr_day')).sendKeys('31');
         element(by.model('intRDateAppr_month')).sendKeys('10');
         element(by.model('intRDateAppr_year')).sendKeys('2015');

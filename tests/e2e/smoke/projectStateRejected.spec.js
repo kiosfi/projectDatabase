@@ -83,7 +83,7 @@ describe('Changing project state to "rejected"', function () {
 
         expect(browser.getCurrentUrl()).toContain('/change');
 
-        element(by.linkText('Peruuta')).click();
+        browser.navigate().back();
 
         expect(browser.getCurrentUrl()).toContain('/5c9ed9f94250406da7a7aabc');
         var state = element(by.css('h3')).element(by.className('tila')).getText();

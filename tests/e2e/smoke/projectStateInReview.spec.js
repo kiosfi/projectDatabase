@@ -39,7 +39,7 @@ describe('Changing project state to "in review"', function () {
 
         expect(browser.getCurrentUrl()).toContain('/change');
 
-        element(by.linkText('Peruuta')).click();
+        browser.navigate().back();
         expect(browser.getCurrentUrl()).toContain('/56091ded00fdde6d66bc5cc3');
         var state = element(by.className('tila')).getText();
         expect(state).toContain('rekisteröity');
