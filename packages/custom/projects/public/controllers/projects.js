@@ -462,6 +462,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.$update(function () {
                 });
             }
+            if (project.schema_version < 4) {
+                // The name of this field was changed to prevent confusion with
+                // the similarly named fields in end report state:
+                project.target_group = project.beneficiaries;
+                project.beneficiaries = undefined;
+            }
         };
 
         /**

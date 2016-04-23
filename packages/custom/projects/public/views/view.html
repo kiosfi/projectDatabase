@@ -208,7 +208,7 @@
                     </div>
                     <div ng-show="nonEmpty(project.background)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-3 mini-header">Hankkeen taustat</div>
+                        <div class="col-md-3 mini-header">Ihmisoikeuskonteksti</div>
                         <div class="col-md-9">
                             {{project.background}}
                         </div>
@@ -220,18 +220,20 @@
                             {{project.project_goal}}
                         </div>
                     </div>
-                    <div ng-show="nonEmpty(project.beneficiaries)"
+                    <div ng-show="nonEmpty(project.target_group)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-3 mini-header">
-                            Hyödynsaajat ja vastuunkantajat
+                            Kohderyhmä
                         </div>
                         <div class="col-md-9">
-                            {{project.beneficiaries}}
+                            {{project.target_group}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.gender_aspect)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-3 mini-header">Gender-analyysi</div>
+                        <div class="col-md-3 mini-header">
+                            Tasa-arvonäkökulma ja muut läpileikkaavat teemat
+                        </div>
                         <div class="col-md-9">
                             {{project.gender_aspect}}
                         </div>
@@ -245,7 +247,9 @@
                     </div>
                     <div ng-show="nonEmpty(project.reporting_evaluation)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-3 mini-header">Evaluointi</div>
+                        <div class="col-md-3 mini-header">
+                            Evaluointi ja vaikuttavuuden arviointi
+                        </div>
                         <div class="col-md-9">
                             {{project.reporting_evaluation}}
                         </div>

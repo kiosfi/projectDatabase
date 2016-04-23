@@ -2,18 +2,25 @@
     <style>
         td {padding-left: 3em;}
     </style>
+
+
+    <!-- TODO: Replace tables with divs like in project view, because divs are
+    more flexible. -->
+
+
+
     <div>
         <div id="header">
             <h2><span class="name">{{organisation.name}}</span>
                 <span>
-                  <!--                Confirm action here-->
+                    <!--                Confirm action here-->
 
-                  <a class="btn-lg" id="delete" data-ng-click="confirm(organisation);">
-                      <i class="glyphicon glyphicon-trash"></i>
-                  </a>
-                  <a ng-href="/organisations/{{organisation._id}}/edit" class="btn-lg" id="edit">
-                            <span class="glyphicon glyphicon-edit"></span>
-                        </a>
+                    <a class="btn-lg" id="delete" data-ng-click="confirm(organisation);">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>
+                    <a ng-href="/organisations/{{organisation._id}}/edit" class="btn-lg" id="edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
                 </span>
             </h2>
             <h3>Edustaja: {{organisation.representative.name}}</h3>
@@ -46,8 +53,8 @@
                 <table class="org-content">
                     <tr>
                         <th>Edustaja</th>
-                        <td>{{organisation.representative.name}},
-                            {{organisation.representative.email}},
+                        <td>{{organisation.representative.name}}<br>
+                            {{organisation.representative.email}}<br>
                             {{organisation.representative.phone}}
                         </td>
                     </tr>
@@ -101,14 +108,21 @@
             </article>
             <article id="prevApp" class="org-article" data-ng-init="findOrgProjects()">
                 <h4>KIOS:lta rahoitusta hakeneet hankkeet</h4>
-                <section>
-                    <ul>
-                        <li data-ng-repeat="project in orgProjects">
-                            <a data-ng-href="/projects/{{project._id}}">{{project.title}}</a>
-                        </li>
-                        <li data-ng-if="!orgProjects.length">Ei rahoitusta hakeneita hankkeita</li>
-                    </ul>
-                </section>
+                <div class="org-content">
+                    <table>
+                        <tr data-ng-repeat="project in orgProjects">
+                            <th>
+                                <a data-ng-href="/projects/{{project._id}}">
+                                    {{project.title}}
+                                </a>
+                            </th>
+                            <td>{{project.approved.granted_sum_eur ?
+                                project.approved.granted_sum_eur +" EUR" : "-"}}</td>
+                        </tr>
+                    </table>
+                    <div data-ng-if="!orgProjects.length">Ei rahoitusta hakeneita hankkeita</div>
+
+                </div>
             </article>
             <article id="legalStatus" class="org-article">
                 <h4>Hallintomalli ja henkilöstö</h4>

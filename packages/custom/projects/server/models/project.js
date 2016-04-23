@@ -13,9 +13,9 @@ var ProjectSchema = new Schema({
      * for updating old entries to the newest version during runtime.
      */
     schema_version: {
-        type: Number, // Current version is 2.
+        type: Number, // Current version is 4.
         required: true,
-        default: 3
+        default: 4
     },
     /**
      * Security level of the project. The value should be one of the following
@@ -109,14 +109,31 @@ var ProjectSchema = new Schema({
     methods: {
         type: Array
     },
+    /**
+     * The Finnish version of this field was previously known as "Tausta".
+     * Currently, the name of the field is "Ihmisoikeuskonteksti" though.
+     */
     background: {
         type: String,
         trim: true
     },
-    beneficiaries: {
+    /**
+     * This field contains a textual description on the target group of the
+     * project.
+     *
+     * Before schema version 4, this field was known as "beneficiaries". It has
+     * been renamed to avoid confusion with the fields in end_report state.
+     */
+    target_group: {
         type: String,
         trim: true
     },
+    /**
+     * The Finnish translation of this field was previously known as
+     * "Gender-analyysi" (hence the naming), but is now known as
+     * "Tasa-arvonäkökulma ja muut läpileikkaavat teemat", which is a broader
+     * topic.
+     */
     gender_aspect: {
         type: String,
         trim: true
