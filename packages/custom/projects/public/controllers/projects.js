@@ -817,7 +817,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
         $scope.addOrgFromDb = function () {
             $scope.newOrg = false;
-            Organisations.getAllOrganisations(function (organisations) {
+            Organisations.getOrganisationNames(function (organisations) {
                 $scope.orgs = organisations;
             });
         };

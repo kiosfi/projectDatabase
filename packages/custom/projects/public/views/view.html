@@ -50,6 +50,9 @@
                 <label><a href="#organisation">Järjestö</a></label>
             </li>
             <li>
+                <label><a href="#assessment">KIOS:n arvio</a></label>
+            </li>
+            <li>
                 <label><a href="#schedule">Aikataulu</a></label>
             </li>
             <li>
@@ -196,10 +199,10 @@
                 <h4>Lisätiedot</h4>
                 <div id="appinfo" class="proj-content">
                     <div class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-3 mini-header">
+                        <div class="col-md-4 mini-header">
                             Suunnitellut toimintatavat
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <div ng-repeat="method in project.methods">
                                 <em>{{method.name}}</em> ({{method.level}})
                                 <p class="proj-subcontent">{{method.comment}}</p>
@@ -208,61 +211,126 @@
                     </div>
                     <div ng-show="nonEmpty(project.background)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-3 mini-header">Ihmisoikeuskonteksti</div>
-                        <div class="col-md-9">
+                        <div class="col-md-4 mini-header">Ihmisoikeuskonteksti</div>
+                        <div class="col-md-8">
                             {{project.background}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.project_goal)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-3 mini-header">Hankkeen tavoite</div>
-                        <div class="col-md-9">
+                        <div class="col-md-4 mini-header">Hankkeen tavoite</div>
+                        <div class="col-md-8">
                             {{project.project_goal}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.target_group)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-3 mini-header">
+                        <div class="col-md-4 mini-header">
                             Kohderyhmä
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             {{project.target_group}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.gender_aspect)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-3 mini-header">
+                        <div class="col-md-4 mini-header">
                             Tasa-arvonäkökulma ja muut läpileikkaavat teemat
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             {{project.gender_aspect}}
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.vulnerable_groups)"
+                         class="col-md-12" style="margin-bottom: 1em">
+                        <div class="col-md-4 mini-header">
+                            Haavoittuvimpien ryhmien huomioon ottaminen
+                        </div>
+                        <div class="col-md-8">
+                            {{project.vulnerable_groups}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.sustainability_risks)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-3 mini-header">Riskit</div>
-                        <div class="col-md-9">
+                        <div class="col-md-4 mini-header">Riskit</div>
+                        <div class="col-md-8">
                             {{project.sustainability_risks}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.reporting_evaluation)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-3 mini-header">
+                        <div class="col-md-4 mini-header">
                             Evaluointi ja vaikuttavuuden arviointi
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             {{project.reporting_evaluation}}
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.budget)"
+                         class="col-md-12">
+                        <div class="col-md-4 mini-header">Budjetti</div>
+                        <div class="col-md-8">
+                            {{project.budget}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.other_donors_proposed)"
                          class="col-md-12">
-                        <div class="col-md-3 mini-header">Muut haut</div>
-                        <div class="col-md-9">
+                        <div class="col-md-4 mini-header">Muualta haettu rahoitus</div>
+                        <div class="col-md-8">
                             {{project.other_donors_proposed}}
                         </div>
                     </div>
                 </div>
                 &nbsp;
+            </article>
+            <article id="assessment" class="proj-article">
+                <h4>KIOS:n arvio</h4>
+                <div class="proj-content">
+                    <div ng-show="nonEmpty(project.fitness)"
+                         class="col-md-12">
+                        <div class="col-md-4 mini-header">
+                            Sopivuus KIOS:n strategiaan
+                        </div>
+                        <div class="col-md-8">
+                            {{project.fitness}}
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.capacity)"
+                         class="col-md-12">
+                        <div class="col-md-4 mini-header">
+                            Järjestön kapasiteetti ja asiantuntemus
+                        </div>
+                        <div class="col-md-8">
+                            {{project.capacity}}
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.feasibility)"
+                         class="col-md-12">
+                        <div class="col-md-4 mini-header">
+                            Toteutettavuus ja riskit
+                        </div>
+                        <div class="col-md-8">
+                            {{project.feasibility}}
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.effectiveness)"
+                         class="col-md-12">
+                        <div class="col-md-4 mini-header">
+                            Tuloksellisuus, vaikutukset ja vaikuttavuus
+                        </div>
+                        <div class="col-md-8">
+                            {{project.effectiveness}}
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.proposed_funding)"
+                         class="col-md-12">
+                        <div class="col-md-4 mini-header">Ehdotus</div>
+                        <div class="col-md-8">
+                            {{project.proposed_funding}}
+                        </div>
+                    </div>
+                    &nbsp;
+                </div>
             </article>
             <article id="schedule" class="proj-article">
                 <h4>Aikataulu</h4>
@@ -289,10 +357,14 @@
                                 {{project.in_review.date| date:'d.M.yyyy':
                                             'UTC'}}
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-1">
                                 <button class="btn small-btn"
                                         onclick="toggleCollapse('reviewinfo')">
                                     Tiedot</button>
+                            </div>
+                            <div class="col-md-6">
+                                    <a ng-href="/projects/{{project._id}}/regreport/{{intreport.reportNumber}}"
+                                       class="btn large-btn">Näytä raportti</a>
                             </div>
                         </div>
                         <div id="reviewinfo" class="proj-subcontent col-md-12"

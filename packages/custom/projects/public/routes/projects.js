@@ -50,6 +50,15 @@ angular.module("mean.projects").config(["$stateProvider",
                         }
                     }
                 })
+                .state("registration report by id", {
+                    url: "/projects/:projectId/regreport/:reportId",
+                    templateUrl: "/projects/views/regreport.html",
+                    resolve: {
+                        loggedin: function (MeanUser) {
+                            return MeanUser.checkLoggedin();
+                        }
+                    }
+                })
                 .state("project report by id", {
                     url: "/projects/:projectId/intreport/:reportId",
                     templateUrl: "/projects/views/intreport.html",

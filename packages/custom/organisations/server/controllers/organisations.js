@@ -20,13 +20,13 @@ module.exports = function (Organisations) {
                 if (!organisation) {
                     if (err === null) {
                         return res.status(404).json({
-                            status:     404,
-                            message:    'Pyydettyä järjestöä ei ole.'
+                            status: 404,
+                            message: 'Pyydettyä järjestöä ei ole.'
                         });
                     }
                     return res.status(500).json({
-                        status:     500,
-                        message:    'Järjestön lataus epäonnistui.'
+                        status: 500,
+                        message: 'Järjestön lataus epäonnistui.'
                     });
                 }
 
@@ -59,7 +59,35 @@ module.exports = function (Organisations) {
             });
         },
         all: function (req, res) {
-            var query = Organisation.find();
+//            var query = Organisation.find();
+//
+//            query
+//                    .sort({name: 'asc'})
+//                    .populate({path: 'bank_account', model: 'BankAccount'})
+//                    .exec(function (err, organisations) {
+//                        if (err) {
+//                            return res.status(500).json({
+//                                error: 'Järjestöjä ei voi näyttää'
+//                            });
+//                        }
+//                        res.json(organisations)
+//                    });
+
+            return res.status(500).json({
+                error: 'Järjestöjä ei voi näyttää (väärä kysely)'
+            });
+        },
+        /**
+         * Gets the ID's and names of all organisations. This query is similar
+         * to the query "all" but is lighter, since the response object will
+         * contain documents with only two fields.
+         *
+         * @param {type} req    The request object.
+         * @param {type} res    The response object.
+         * @returns {undefined}
+         */
+        getOrganisationNames: function (req, res) {
+            var query = Organisation.find({}, {_id: 1, name: 1});
 
             query
                     .sort({name: 'asc'})
@@ -74,23 +102,6 @@ module.exports = function (Organisations) {
                     });
 
         },
-
-        getAllOrganisations: function(req, res) {
-          var query = Organisation.find();
-
-          query
-                  .sort({name: 'asc'})
-                  .populate({path: 'bank_account', model: 'BankAccount'})
-                  .exec(function (err, organisations) {
-                      if (err) {
-                          return res.status(500).json({
-                              error: 'Järjestöjä ei voi näyttää'
-                          });
-                      }
-                      res.json(organisations)
-                  });
-
-      },
         /**
          * Gets all organisations.
          *
@@ -103,7 +114,7 @@ module.exports = function (Organisations) {
          * @param {type} res
          * @returns {undefined}
          */
-        getOrganisations: function(req, res) {
+        getOrganisations: function (req, res) {
             var ordering = req.query.ordering;
             var ascending = req.query.ascending;
             var page = req.query.page;
@@ -156,7 +167,6 @@ module.exports = function (Organisations) {
                 res.json({orgCount: result});
             });
         },
-
         /**
          * Deletes requested organisation from organisations collection.
          * object {orgCount : &lt;n&gt;}, where &lt;n&gt; is the number of
@@ -182,7 +192,6 @@ module.exports = function (Organisations) {
                 res.json(organisation);
             });
         },
-
         update: function (req, res) {
             var organisation = req.organisation;
             var bank_account = req.organisation.bank_account;
@@ -192,7 +201,7 @@ module.exports = function (Organisations) {
 
             bank_account.save();
 
-            organisation.save(function(err) {
+            organisation.save(function (err) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Järjestöä ei voi päivittää'

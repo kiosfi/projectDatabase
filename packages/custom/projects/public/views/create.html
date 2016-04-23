@@ -97,7 +97,8 @@
                             Turvaluokitus
                         </label>
                         <div class="col-md-9">
-                            <select data-ng-model="project.security_level">
+                            <select id="security_level"
+                                    data-ng-model="project.security_level">
                                 <option selected>Julkinen</option>
                                 <option>Luottamuksellinen</option>
                                 <option>Salainen</option>
@@ -106,7 +107,7 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6" data-ng-show="!newOrg">
-                    <label  class="col-md-3 control-label">Järjestö</label>
+                    <label class="col-md-3 control-label">Järjestö</label>
                     <div data-ng-if="!newOrg" class="col-md-9" id="orgSelection"
                          data-ng-init="addOrgFromDb()">
                         <select data-ng-if="!newOrg"
@@ -119,11 +120,11 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
+                <div data-ng-show="!newOrg" class="form-group col-md-6">
                     <input type="button" id="addOrg" data-ng-click="addNewOrg()"
                            value="Lisää uusi järjestö"/>
                 </div>
-                <div data-ng-show="newOrg" class="form-group col-md-6">
+                <div data-ng-show="newOrg" class="form-group col-md-12">
                     <input type="button" id="addOrgFromList"
                            data-ng-click="addOrgFromDb()"
                            value="Lisää järjestö listalta"/>
@@ -460,7 +461,6 @@
                 </article>
             </div>
         </fieldset>
-
         <fieldset>
             <legend>
                 <a ng-click="showProjInfo = !showProjInfo">Perustiedot</a>
@@ -551,85 +551,169 @@
                         <input type="button" value="Poista viimeinen" ng-click="removeMethod();"/>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="background"
-                           class="col-md-3 control-label">Ihmisoikeuskonteksti</label>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-3 control-label">Vaikutusalue tai -maa</label>
 
-                    <div class="col-md-9">
-                        <textarea name="background" data-ng-model="project.background" id="background"
-                                  placeholder="Ihmisoikeuskonteksti" class="form-control"></textarea>
+                        <div class="col-md-9">
+                            <input name="region" type="text" class="form-control" data-ng-model="project.region" id="region"
+                                   placeholder="Vaikutusalue">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-md-3 control-label">DAC-koodi</label>
+
+                        <div class="col-md-9">
+                            <input name="dac" type="text" class="form-control" data-ng-model="project.dac" id="dac"
+                                   placeholder="DAC">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="beneficiaries" class="col-md-3 control-label">Kohderyhmä</label>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="project_goal" class="col-md-3 control-label">Päätavoite</label>
 
-                    <div class="col-md-9">
-                        <textarea name="beneficiaries" data-ng-model="project.beneficiaries" id="beneficiaries"
-                                  placeholder="Kohderyhmä" class="form-control"></textarea>
+                        <div class="col-md-9">
+                            <textarea name="project_goal" data-ng-model="project.project_goal" id="project_goal"
+                                      placeholder="Päätavoite" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="background"
+                               class="col-md-3 control-label">Ihmisoikeuskonteksti</label>
+
+                        <div class="col-md-9">
+                            <textarea name="background" data-ng-model="project.background" id="background"
+                                      placeholder="Ihmisoikeuskonteksti" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="target_group" class="col-md-3 control-label">Kohderyhmä</label>
 
-                <div class="form-group col-md-6">
-                    <label for="gender_aspect" class="col-md-3 control-label">Tasa-arvo ja muut läpileikkaavat teemat</label>
+                        <div class="col-md-9">
+                            <textarea name="target_group" data-ng-model="project.target_group" id="target_group"
+                                      placeholder="Kohderyhmä" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="gender_aspect" class="col-md-3 control-label">Tasa-arvo ja muut läpileikkaavat teemat</label>
 
-                    <div class="col-md-9">
-                        <textarea name="gender_aspect" data-ng-model="project.gender_aspect" id="gender_aspect"
-                                  placeholder="Tasa-arvonäkökulma ja muut läpileikkaavat teemat" class="form-control"></textarea>
+                        <div class="col-md-9">
+                            <textarea name="gender_aspect" data-ng-model="project.gender_aspect" id="gender_aspect"
+                                      placeholder="Tasa-arvonäkökulma ja muut läpileikkaavat teemat" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-12"><div class="form-group col-md-6">
+                        <label for="vulnerable_groups" class="col-md-3 control-label">Haavoittuvimpien ryhmien huomioon ottaminen</label>
 
-                <div class="form-group col-md-6">
-                    <label for="project_goal" class="col-md-3 control-label">Päätavoite</label>
+                        <div class="col-md-9">
+                            <textarea name="vulnerable_groups" data-ng-model="project.vulnerable_groups" id="vulnerable_groups"
+                                      placeholder="Haavoittuvimpien ryhmien huomioon ottaminen" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="sustainability_risks"
+                               class="col-md-3 control-label">Kestävyys ja arvio riskeistä</label>
 
-                    <div class="col-md-9">
-                        <textarea name="project_goal" data-ng-model="project.project_goal" id="project_goal"
-                                  placeholder="Päätavoite" class="form-control"></textarea>
+                        <div class="col-md-9">
+                            <textarea name="sustainability_risks" data-ng-model="project.sustainability_risks"
+                                      id="sustainability_risks" placeholder="Kestävyys ja riskit" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-12"><div class="form-group col-md-6">
+                        <label for="reporting_evaluation"
+                               class="col-md-3 control-label">Evaluointi ja vaikuttavuuden arviointi</label>
 
-                <div class="form-group col-md-6">
-                    <label for="sustainability_risks"
-                           class="col-md-3 control-label">Kestävyys ja arvio riskeistä</label>
+                        <div class="col-md-9">
+                            <textarea name="reporting_evaluation" data-ng-model="project.reporting_evaluation"
+                                      id="reporting_evaluation" placeholder="Raportointi ja evaluointi" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="budget" class="col-md-3 control-label">Hankkeen budjetti ja omarahoitusosuus</label>
 
-                    <div class="col-md-9">
-                        <textarea name="sustainability_risks" data-ng-model="project.sustainability_risks"
-                                  id="sustainability_risks" placeholder="Kestävyys ja riskit" class="form-control"></textarea>
+                        <div class="col-md-9">
+                            <textarea name="budget" data-ng-model="project.budget" id="budget"
+                                      placeholder="Hankkeen budjetti ja omarahoitusosuus" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="other_donors_proposed"
+                               class="col-md-3 control-label">Muualta haettu rahoitus</label>
 
-                <div class="form-group col-md-6">
-                    <label for="reporting_evaluation"
-                           class="col-md-3 control-label">Evaluointi ja vaikuttavuuden arviointi</label>
+                        <div class="col-md-9">
+                            <textarea name="other_donors_proposed" data-ng-model="project.other_donors_proposed"
+                                      id="other_donors_proposed" placeholder="Muu rahoitus" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="referees" class="col-md-3 control-label">Suosittelijat</label>
 
-                    <div class="col-md-9">
-                        <textarea name="reporting_evaluation" data-ng-model="project.reporting_evaluation"
-                                  id="reporting_evaluation" placeholder="Raportointi ja evaluointi" class="form-control"></textarea>
+                        <div class="col-md-9">
+                            <textarea name="referees" data-ng-model="project.referees" id="referees"
+                                      placeholder="Suosittelijat" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>
+                <a ng-click="showAssessment = !showAssessment">KIOS:n arvio</a>
+            </legend>
+            <div ng-show="showAssessment">
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="fitness"
+                               class="col-md-3 control-label">Sopivuus KIOS:n strategiaan</label>
 
-                <div class="form-group col-md-6">
-                    <label for="other_donors_proposed"
-                           class="col-md-3 control-label">Muualta haettu rahoitus</label>
+                        <div class="col-md-9">
+                            <textarea name="fitness" data-ng-model="project.fitness"
+                                      id="fitness" placeholder="Sopivuus KIOS:n strategiaan" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="capacity" class="col-md-3 control-label">Järjestön kapasiteetti ja asiantuntemus</label>
 
-                    <div class="col-md-9">
-                        <textarea name="other_donors_proposed" data-ng-model="project.other_donors_proposed"
-                                  id="other_donors_proposed" placeholder="Muu rahoitus" class="form-control"></textarea>
+                        <div class="col-md-9">
+                            <textarea name="capacity" data-ng-model="project.capacity" id="capacity"
+                                      placeholder="Järjestön kapasiteetti ja asiantuntemus" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label class="col-md-3 control-label">Vaikutusalue tai -maa</label>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="feasibility"
+                               class="col-md-3 control-label">Toteutettavuus ja riskit</label>
 
-                    <div class="col-md-9">
-                        <input name="region" type="text" class="form-control" data-ng-model="project.region" id="region"
-                               placeholder="Vaikutusalue">
+                        <div class="col-md-9">
+                            <textarea name="feasibility" data-ng-model="project.feasibility"
+                                      id="feasibility" placeholder="Toteutettavuus" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="effectiveness" class="col-md-3 control-label">Tuloksellisuus, vaikutukset ja vaikuttavuus</label>
+
+                        <div class="col-md-9">
+                            <textarea name="effectiveness" data-ng-model="project.effectiveness" id="effectiveness"
+                                      placeholder="Tuloksellisuus, vaikutukset ja vaikuttavuus" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label class="col-md-3 control-label">DAC-koodi</label>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="proposed_funding" class="col-md-3 control-label">Esitys</label>
 
-                    <div class="col-md-9">
-                        <input name="dac" type="text" class="form-control" data-ng-model="project.dac" id="dac"
-                               placeholder="DAC">
+                        <div class="col-md-9">
+                            <textarea name="proposed_funding" data-ng-model="project.proposed_funding" id="proposed_funding"
+                                      placeholder="Esitys" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -639,7 +723,9 @@
                 <a ng-click="showAppendices = !showAppendices">Liitteet</a>
             </legend>
             <div ng-show="showAppendices">
-                <em>Liitteiden lisäys onnistuu lisätyn hankkeen näkymäsivulla.</em>
+                <div class="form-group col-md-6">
+                    <em>Liitteitä voi lisätä luodun hankkeen näkymäsivulla.</em>
+                </div>
             </div>
         </fieldset>
         <fieldset>

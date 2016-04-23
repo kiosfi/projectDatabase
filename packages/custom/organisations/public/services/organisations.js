@@ -21,9 +21,9 @@ angular.module('mean.organisations').factory('Organisations', ['$resource',
                 method: 'GET',
                 url: 'api/organisations'
             },
-            getAllOrganisations: {
+            getOrganisationNames: {
                 method: 'GET',
-                url: 'api/organisations/all',
+                url: 'api/organisations/names',
                 isArray: true
             }
         });

@@ -138,6 +138,14 @@ var ProjectSchema = new Schema({
         type: String,
         trim: true
     },
+    /**
+     * A textual description on how to consider the most vulnerable target
+     * groups of the project. This field was added in schema version 4.
+     */
+    vulnerable_groups: {
+        type: String,
+        trim: true
+    },
     project_goal: {
         type: String,
         trim: true
@@ -159,6 +167,62 @@ var ProjectSchema = new Schema({
         trim: true
     },
     region: {
+        type: String,
+        trim: true
+    },
+    /**
+     * This field contains a textual description on the referees for the
+     * project. This field was added in schema version 4.
+     */
+    referees: {
+        type: String,
+        trim: true
+    },
+    /**
+     * Textual description about how the project will be funded. This field was
+     * added in schema version 4.
+     */
+    budget: {
+        type: String,
+        trim: true
+    },
+    /**
+     * This field contains a textual description for how this project fits into
+     * the strategy of KIOS. This field was added in schema version 4.
+     */
+    fitness: {
+        type: String,
+        trim: true
+    },
+    /**
+     * This field describes the capacity and expertise of the organisation to
+     * carry out this project. This field was added in schema version 4.
+     */
+    capacity: {
+        type: String,
+        trim: true
+    },
+    /**
+     * An assessment about the feasibility of this project. This field was added
+     * in schema version 4.
+     */
+    feasibility: {
+        type: String,
+        trim: true
+    },
+    /**
+     * This field describes the potential effects of the project. This field was
+     * added in schema version 4.
+     */
+    effectiveness: {
+        type: String,
+        trim: true
+    },
+    /**
+     * This field contains the information about the proposed funding for the
+     * project. This field was added in schema version 4.
+     */
+    proposed_funding: {
         type: String,
         trim: true
     },
