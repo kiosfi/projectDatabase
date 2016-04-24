@@ -62,8 +62,9 @@
                 </ul>
             </li>
             <li>
-                <label><a href="#appendices">Liitteet</a></label>
+                <label><a href="#checklist">Vaaditut liitteet</a></label>
                 <ul>
+                    <li><a href="#appendices">Tallennetut liitteet</a></li>
                     <li><a href="#addAppendix">Liitteen lisäys</a></li>
                 </ul>
             </li>
@@ -267,7 +268,7 @@
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.budget)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">Budjetti</div>
                         <div class="col-md-8">
                             {{project.budget}}
@@ -287,7 +288,7 @@
                 <h4>KIOS:n arvio</h4>
                 <div class="proj-content">
                     <div ng-show="nonEmpty(project.fitness)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
                             Sopivuus KIOS:n strategiaan
                         </div>
@@ -296,7 +297,7 @@
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.capacity)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
                             Järjestön kapasiteetti ja asiantuntemus
                         </div>
@@ -305,7 +306,7 @@
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.feasibility)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
                             Toteutettavuus ja riskit
                         </div>
@@ -314,7 +315,7 @@
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.effectiveness)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
                             Tuloksellisuus, vaikutukset ja vaikuttavuus
                         </div>
@@ -363,8 +364,8 @@
                                     Tiedot</button>
                             </div>
                             <div class="col-md-6">
-                                    <a ng-href="/projects/{{project._id}}/regreport/{{intreport.reportNumber}}"
-                                       class="btn large-btn">Näytä raportti</a>
+                                <a ng-href="/projects/{{project._id}}/regreport/{{intreport.reportNumber}}"
+                                   class="btn large-btn">Näytä raportti</a>
                             </div>
                         </div>
                         <div id="reviewinfo" class="proj-subcontent col-md-12"
@@ -520,7 +521,7 @@
                                 <div class="col-md-1">
                                     <button class="btn small-btn"
                                             ng-click="showIntDetails =
-                                                                !showIntDetails">
+                                                                    !showIntDetails">
                                         Tiedot
                                     </button>
                                 </div>
@@ -563,7 +564,7 @@
                             <div class="col-md-1">
                                 <button class="btn small-btn"
                                         ng-click="showEndDetails =
-                                                        !showEndDetails">
+                                                            !showEndDetails">
                                     Tiedot
                                 </button>
                             </div>
@@ -653,9 +654,9 @@
                 <div class="proj-content">
                     <h5>Maksuaikataulu</h5>
                     <div ng-repeat="planned_payment in project.signed.
-                                    planned_payments" class="col-md-12">
+                                        planned_payments" class="col-md-12">
                         <div class="col-md-1"><em>{{project.signed.
-                                            planned_payments.indexOf(planned_payment) + 1}}. erä</em></div>
+                                                planned_payments.indexOf(planned_payment) + 1}}. erä</em></div>
                         <div class="col-md-2">{{planned_payment.sum_eur| currency : ""}} EUR</div>
                         <div class="col-md-9">{{planned_payment.date| date:'d.M.yyyy': 'UTC'}}</div>
                     </div>
@@ -693,7 +694,7 @@
             </article>
             <article id="addPayment" ng-show="project.signed.signed_by"
                      class="proj-article">
-                <h4>Lisää maksutieto</h4>
+                <h4>Maksutiedon lisäys</h4>
                 <form name="paymentForm" class="form-horizonal proj-content"
                       role="form"
                       data-ng-submit="addPaymentInfo(paymentForm.$valid)"
@@ -704,7 +705,7 @@
                         </label>
                         <div id="paymentDate">
                             <div class="col-xs-3" ng-class="{'has-error':
-                                        paymentForm.paymentDay.$invalid }">
+                                                paymentForm.paymentDay.$invalid }">
                                 <input name="paymentDay" type="number"
                                        class="form-control"
                                        data-ng-model="payment_day"
@@ -718,8 +719,8 @@
                                 </div>
                             </div>
                             <div class="col-xs-3" ng-class="{
-                                    'has-error'
-                                            :paymentForm.paymentMonth.$invalid }">
+                                        'has-error'
+                                                :paymentForm.paymentMonth.$invalid }">
                                 <input name="paymentMonth" type="number"
                                        class="form-control"
                                        data-ng-model="payment_month"
@@ -733,8 +734,8 @@
                                 </div>
                             </div>
                             <div class="col-xs-3" ng-class="{
-                                    'has-error'
-                                            : paymentForm.paymentYear.$invalid }">
+                                        'has-error'
+                                                : paymentForm.paymentYear.$invalid }">
                                 <input name="paymentYear" type="number"
                                        class="form-control"
                                        data-ng-model="payment_year"
@@ -750,7 +751,7 @@
                         </div>
                     </div>
                     <div class="form-group col-xs-12" ng-class="{
-                            'has-error': paymentForm.paymentSumEUR.$invalid}">
+                                'has-error': paymentForm.paymentSumEUR.$invalid}">
                         <label for="paymentSumEUR" class="col-xs-2 control-label">
                             Summa (EUR)
                         </label>
@@ -786,38 +787,113 @@
                 </form>
                 &nbsp;
             </article>
+            <article id="checklist" class="proj-article">
+                <h4>Vaaditut liitteet</h4>
+                <div class="proj-article">
+                    <form>
+                        <div class="col-md-12">
+                            <span class="col-md-3">
+                                <label for="projBudget" >Hankebudjetti</label>
+                            </span>
+                            <span class="col-md-9">
+                                <input type="checkbox" id="projBudget">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="col-md-3">
+                                <label for="references">Suositukset</label>
+                            </span>
+                            <span class="col-md-9">
+                                <input type="checkbox" id="references">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="col-md-3">
+                                <label for="annualBudget">Vuosibudjetti</label>
+                            </span>
+                            <span class="col-md-9">
+                                <input type="checkbox" id="annualBudget">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="col-md-3">
+                                <label for="rules">Säännöt</label>
+                            </span>
+                            <span class="col-md-9">
+                                <input type="checkbox" id="rules">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="col-md-3">
+                                <label for="regCertificate">
+                                    Rekisteröintitodistus
+                                </label>
+                            </span>
+                            <span class="col-md-9">
+                                <input type="checkbox" id="regCertificate">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="col-md-3">
+                                <label for="annualReport">Vuosikertomus</label>
+                            </span>
+                            <span class="col-md-9">
+                                <input type="checkbox" id="annualReport">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="col-md-3">
+                                <label for="auditReports">
+                                    Tilintarkastukset
+                                </label>
+                            </span>
+                            <span class="col-md-9">
+                                <input type="checkbox" id="auditReports">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-default"
+                                    ng-disabled="true">
+                                Tallenna
+                            </button>
+                            [<em>Toiminnon toteutus on kesken.</em>]
+                        </div>
+                    </form>
+                    &nbsp;
+                </div>
+            </article>
             <article id="appendices" class="proj-article"
                      ng-show="project.appendices.length > 0">
-                <h4>Liitteet</h4>
-                    <div ng-repeat="appendix in project.appendices"
-                         class="proj-content col-md-12">
-                        <div class="col-md-2 mini-header">{{appendix.number}}.
-                            <!-- TODO: Figure out how to hyperlink the
-                            appendices using client-side services in order to
-                            enable proper access control: -->
-                            <a ng-href="{{appendix.url}}&action=download"
-                               target="_blank">
-                                {{appendix.category !== 'Muu...' ?
+                <h4>Tallennetut liitteet</h4>
+                <div ng-repeat="appendix in project.appendices"
+                     class="proj-content col-md-12">
+                    <div class="col-md-2 mini-header">{{appendix.number}}.
+                        <!-- TODO: Figure out how to hyperlink the
+                        appendices using client-side services in order to
+                        enable proper access control: -->
+                        <a ng-href="{{appendix.url}}&action=download"
+                           target="_blank">
+                            {{appendix.category !== 'Muu...' ?
                                         appendix.category : appendix.custom_category}}
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <em>{{appendix.original_name}}</em>
-                        </div>
-                        <div class="col-md-1">
-                            {{appendix.date| date: 'd.M.yyyy': 'UTC'}}
-                        </div>
-                        <div class="col-md-6">
-                            <a data-ng-click="confirmAppendixDeletion(appendix.url)"
-                               class="btn-lg">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </a>
-                        </div>
+                        </a>
                     </div>
+                    <div class="col-md-3">
+                        <em>{{appendix.original_name}}</em>
+                    </div>
+                    <div class="col-md-1">
+                        {{appendix.date| date: 'd.M.yyyy': 'UTC'}}
+                    </div>
+                    <div class="col-md-6">
+                        <a data-ng-click="confirmAppendixDeletion(appendix.url)"
+                           class="btn-lg">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </div>
+                </div>
                 &nbsp;
             </article>
             <article id="addAppendix" class="proj-article">
-                <h4>Lisää liite</h4>
+                <h4>Liitteen lisäys</h4>
                 <!-- TODO: Figure out how to make this form work through a
                 client-side service in order to enable proper acces contol: -->
                 <form name="appendixForm" class="form-horizonal proj-content"
