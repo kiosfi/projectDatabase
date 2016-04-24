@@ -1,5 +1,229 @@
-<section data-ng-controller="ProjectsController" data-ng-init="findOne()">
-    <h1>Rekisteröintiraportti</h1>
+<section data-ng-controller="ProjectsController" data-ng-init="findOne()"
+         class="report-body">
+    <!--    <h1>Rekisteröintiraportti</h1>
+        <hr>-->
+    <!-- Note that this page doesn't use bootstrap in order to ensure that the
+    text looks similar when viewed through browser and printed (to PDF).-->
+    <table>
+        <tr>
+            <td>
+                <img src="/theme/assets/img/kios_logo_public.gif" alt="KIOS"
+                     style="float: left">
+            </td>
+            <td style="font-size: 1.5em; font-weight: bold; padding-left: 1em">
+                Esitys uudesta hankkeesta
+            </td>
+        </tr>
+    </table>
     <hr>
-    <p><em>Raporttitoimintoa kehitetään...</em></p>
+    <article>
+        <div class="col-md-12 border-body" style="padding-left: 2em">
+            <table>
+                <tr>
+                    <td class="report-mini-header">Järjestö</td>
+                    <td class="report-content">{{project.organisation.name}}</td>
+                    <td class="report-mini-header">Hanke</td>
+                    <td class="report-content">{{project.title}}</td>
+                </tr>
+                <tr>
+                    <td class="report-mini-header">Hankenumero</td>
+                    <td class="report-content">{{project.project_ref}}</td>
+                    <td class="report-mini-header">Alue / Maa</td>
+                    <td class="report-content">{{project.region}}&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="report-mini-header">Haettu tuki</td>
+                    <td class="report-content">
+                        {{project.funding.applied_curr_eur}} EUR
+                    </td>
+                    <td class="report-mini-header">Kesto</td>
+                    <td class="report-content">
+                        {{project.duration_montds}} kk
+                    </td>
+                </tr>
+                <tr>
+                    <td class="report-mini-header">Vaaditut liitteet</td>
+                    <td colspan="3" class="report-content">
+                        hankebudjetti ( ), suositukset ( ), vuosibudjetti ( ),
+                        säännöt ( ), rekisteröintitodistus ( ),
+                        vuosikertomus ( ), tilintarkastukset ( )
+                    </td>
+                </tr>
+                <tr><td colspan="4">&nbsp;</td></tr>
+                <tr>
+                    <td class="report-mini-header">Kuvaus</td>
+                    <td colspan="3" class="report-content">
+                        {{project.description}}&nbsp;
+                    </td>
+                </tr>
+                <tr><td colspan="4">&nbsp;</td></tr>
+                <tr>
+                    <td class="report-mini-header">Oikeudellinen&nbsp;fokus</td>
+                    <td colspan="3" class="report-content">
+                        <table>
+                            <tr ng-repeat="tdeme in project.approved.tdemes">
+                                <td>{{tdeme}}</td>
+                            </tr>
+                        </table>&nbsp;
+                    </td>
+                </tr>
+            </table>
+        </div>
+        &nbsp;
+    </article>
+    <table>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td class="report-header">Järjestö</td>
+            <td>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Websivut</div>
+                    <div class="report-subcontent">
+                        {{project.organisation.website}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Hallintomalli ja henkilöstö
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.organisation.legal_status}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Kuvaus</div>
+                    <div class="report-subcontent">
+                        {{project.organisation.description}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Muut rahoittajat ja budjetti
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.organisation.otder_funding_budget}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Taloushallinto ja tilintarkastus
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.organisation.accounting_audit}}
+                    </div>
+                </div>
+                <!--            <div style="margin-bottom: 1em">
+                                <b>Aiemmat avustukset KIOS:lta</b>
+                                                <table>
+                                                    <tr data-ng-repeat="project in orgProjects">
+                                                        <td>
+                                                            <a data-ng-href="/projects/{{project._id}}">
+                                                                {{project.title}}
+                                                            </a>
+                                                        </td>
+                                                        <td>{{project.approved.granted_sum_eur ?
+                                                                project.approved.granted_sum_eur +" EUR" : "-"}}</td>
+                                                    </tr>
+                                                </table>
+                                                <div data-ng-if="!orgProjects.lengtd">Ei rahoitusta hakeneita hankkeita</div>
+                                [<em>Ominaisuuden toteuttaminen on kesken.</em>]
+                            </div>-->
+            </td>
+        </tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td class="report-header">Hanke</td>
+            <td>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Ihmisoikeuskonteksti</div>
+                    <div class="report-subcontent">{{project.background}}</div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Keskeinen tavoite</div>
+                    <div class="report-subcontent">
+                        {{project.project_goal}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Kohderyhmä</div>
+                    <div class="report-subcontent">
+                        {{project.target_group}}
+                    </div>
+                </div>
+                <!--            <div style="margin-bottom: 1em">
+                                <b>Aktiviteetit:</b> {{project.}}
+                            </div>-->
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Tasa-arvonäkökulma ja muut läpileikkaavat teemat
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.gender_aspect}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Haavoittuvimpien ryhmien huomioon ottaminen
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.vulnerable_groups}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Evaluointi ja vaikuttavuuden arviointi
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.reporting_evaluation}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Hankkeen budjetti ja omarahoitusosuus
+                    </div>
+                    <div class="report-subcontent">{{project.budget}}</div>
+                </div>
+            </td>
+        </tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td class="report-header">KIOS:n&nbsp;arvio</td>
+            <td>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Sopivuus KIOS:n strategiaan
+                    </div>
+                    <div class="report-subcontent">{{project.fitness}}</div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Järjestön kapasiteetti ja asiantuntijuus
+                    </div>
+                    <div class="report-subcontent">{{project.capacity}}</div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Toteutettavuus ja riskit
+                    </div>
+                    <div class="report-subcontent">{{project.feasibility}}</div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Tuloksellisuus, vaikutukset ja vaikuttavuus
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.effectiveness}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Esitys</div>
+                    <div class="report-subcontent">
+                        {{project.proposed_funding}}
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
 </section>

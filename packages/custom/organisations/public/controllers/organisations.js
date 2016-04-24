@@ -70,9 +70,9 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
          }
          );
          };*/
-        
+
         /**
-         * Updates organisation's details as per edit-form and goes to org-view 
+         * Updates organisation's details as per edit-form and goes to org-view
          * if form was valid
          * @param {type} isValid checkes if edit-form is valid
          */

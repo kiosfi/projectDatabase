@@ -74,6 +74,9 @@ var OrganisationSchema = new Schema({
         type: String,
         trim: true
     },
+    /**
+     * The Finnish name of this field is currently "Hallintomalli ja henkilöstö".
+     */
     legal_status: {
         type: String,
         trim: true

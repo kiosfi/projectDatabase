@@ -159,3 +159,46 @@ hr {
     font-weight:        bold;
     margin-left:        -1em;
 }
+
+.report-article {
+    padding-top:        1em;
+    padding-bottom:     1em;
+}
+
+.report-mini-header {
+    vertical-align:     top;
+    font-weight:        bold;
+    padding-right:      1em;
+}
+
+.report-header {
+    vertical-align:     top;
+    font-size:          1.5em;
+    font-weight:        bold;
+    padding-right:      2em;
+}
+
+.report-content {
+    text-align:         justify;
+    line-height:        1em;
+    padding-right:      2em;
+}
+
+.report-subcontent {
+    padding-left:       2em;
+    text-align:         justify;
+    line-height:        1em;
+}
+
+.report-body {
+    font-family:        "Times New Roman", Times, serif;
+    font-size:          12pt;
+}
+
+.report-body > hr {
+    display:            block;
+    margin-top:         0.5em;
+    margin-bottom:      1.0em;
+    border-style:       solid;
+    border-width:       1px;
+}

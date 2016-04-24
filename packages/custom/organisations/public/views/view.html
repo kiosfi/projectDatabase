@@ -69,7 +69,8 @@
                     <tr>
                         <th>Osoite</th>
                         <td>{{organisation.address.street}}
-                            {{organisation.address.postal_code}} {{organisation.address.city}}
+                            {{organisation.address.postal_code}}
+                            {{organisation.address.city}}
                             {{organisation.address.country}}</td>
                     </tr>
                     <tr>
@@ -77,11 +78,22 @@
                         <td>{{organisation.tel}}</td></tr>
                     <tr>
                         <th>Sähköposti</th>
-                        <td>{{organisation.email}}</td>
+                        <td>
+                            <a href="mailto:{{organisation.email}}">
+                                {{organisation.email}}
+                            </a>
+                        </td>
                     </tr>
                     <tr>
                         <th>Websivut</th>
-                        <td>{{organisation.website}}</td>
+                        <td>
+                            <a href="{{
+                                organisation.website.startsWith('http://') ?
+                                organisation.websiet :
+                                        'http://' + organisation.website}}">
+                                {{organisation.website}}
+                            </a>
+                        </td>
                     </tr>
                 </table>
             </article>
