@@ -793,10 +793,13 @@
                     <form>
                         <div class="col-md-12">
                             <span class="col-md-3">
-                                <label for="projBudget" >Hankebudjetti</label>
+                                <label for="proj_budget" >Hankebudjetti</label>
                             </span>
                             <span class="col-md-9">
-                                <input type="checkbox" id="projBudget">
+                                <input type="checkbox" id="proj_budget"
+                                       name="proj_budget"
+                                       ng-model="project.required_appendices.proj_budget"
+                                       disabled>
                             </span>
                         </div>
                         <div class="col-md-12">
@@ -804,15 +807,19 @@
                                 <label for="references">Suositukset</label>
                             </span>
                             <span class="col-md-9">
-                                <input type="checkbox" id="references">
+                                <input type="checkbox" id="references"
+                                       ng-model="project.required_appendices.references"
+                                       name="references" disabled>
                             </span>
                         </div>
                         <div class="col-md-12">
                             <span class="col-md-3">
-                                <label for="annualBudget">Vuosibudjetti</label>
+                                <label for="annual_budget">Vuosibudjetti</label>
                             </span>
                             <span class="col-md-9">
-                                <input type="checkbox" id="annualBudget">
+                                <input type="checkbox" id="annual_budget"
+                                       ng-model="project.required_appendices.annual_budget"
+                                       name="annual_budget" disabled>
                             </span>
                         </div>
                         <div class="col-md-12">
@@ -820,43 +827,44 @@
                                 <label for="rules">Säännöt</label>
                             </span>
                             <span class="col-md-9">
-                                <input type="checkbox" id="rules">
+                                <input type="checkbox" id="rules" name="rules"
+                                       ng-model="project.required_appendices.rules"
+                                       disabled>
                             </span>
                         </div>
                         <div class="col-md-12">
                             <span class="col-md-3">
-                                <label for="regCertificate">
+                                <label for="reg_cert">
                                     Rekisteröintitodistus
                                 </label>
                             </span>
                             <span class="col-md-9">
-                                <input type="checkbox" id="regCertificate">
+                                <input type="checkbox" id="reg_cert"
+                                       ng-model="project.required_appendices.reg_cert"
+                                       name="reg_cert" disabled>
                             </span>
                         </div>
                         <div class="col-md-12">
                             <span class="col-md-3">
-                                <label for="annualReport">Vuosikertomus</label>
+                                <label for="annual_report">Vuosikertomus</label>
                             </span>
                             <span class="col-md-9">
-                                <input type="checkbox" id="annualReport">
+                                <input type="checkbox" id="annual_report"
+                                       ng-model="project.required_appendices.annual_report"
+                                       name="annual_report" disabled>
                             </span>
                         </div>
                         <div class="col-md-12">
                             <span class="col-md-3">
-                                <label for="auditReports">
+                                <label for="audit_reports">
                                     Tilintarkastukset
                                 </label>
                             </span>
                             <span class="col-md-9">
-                                <input type="checkbox" id="auditReports">
+                                <input type="checkbox" id="audit_reports"
+                                       ng-model="project.required_appendices.audit_reports"
+                                       name="audit_reports" disabled>
                             </span>
-                        </div>
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-default"
-                                    ng-disabled="true">
-                                Tallenna
-                            </button>
-                            [<em>Toiminnon toteutus on kesken.</em>]
                         </div>
                     </form>
                     &nbsp;

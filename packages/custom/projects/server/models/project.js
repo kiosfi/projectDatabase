@@ -226,6 +226,33 @@ var ProjectSchema = new Schema({
         type: String,
         trim: true
     },
+    /**
+     * This fields contains a checklist of required appendices and it was added
+     * in schema version 4.
+     */
+    required_appendices: {
+        proj_budget: {
+            type: Boolean,
+        },
+        references: {
+            type: Boolean,
+        },
+        annual_budget: {
+            type: Boolean,
+        },
+        rules: {
+            type: Boolean,
+        },
+        reg_cert: {
+            type: Boolean,
+        },
+        annual_report: {
+            type: Boolean,
+        },
+        audit_reports: {
+            type: Boolean,
+        }
+    },
     in_review: {
         date: {
           type: Date

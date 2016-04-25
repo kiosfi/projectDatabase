@@ -1,9 +1,12 @@
 <section data-ng-controller="ProjectsController" data-ng-init="initEditing()">
     <h1>{{project.title}} ({{project.organisation.name}}) - Muokkaus</h1>
-    <form name="projectEditForm" class="form-horizontal" role="form" data-ng-submit="update(projectEditForm.$valid)" novalidate>
+    <form name="projectEditForm" class="form-horizontal" role="form"
+          data-ng-submit="update(projectEditForm.$valid)" novalidate>
         <fieldset>
             <legend>
-                <a href="" ng-click="showRegDetails = !showRegDetails">Rekisteröinti -tilan tiedot</a>
+                <a href="" ng-click="showRegDetails = !showRegDetails">
+                    Rekisteröinti -tilan tiedot
+                </a>
             </legend>
             <div class="fs1" ng-show="showRegDetails">
                 <article class="well-lg">
@@ -15,7 +18,9 @@
                         </legend>
                         <div ng-show="showProjInfo">
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Turvaluokitus</label>
+                                <label class="col-md-3 control-label">
+                                    Turvaluokitus
+                                </label>
                                 <div class="col-md-9">
                                     <select data-ng-model="project.security_level">
                                         <option>Julkinen</option>
@@ -30,66 +35,101 @@
                                 <label class="col-md-3 control-label">Nimi</label>
 
                                 <div class="col-md-9">
-                                    <input name="title" type="text" class="form-control" data-ng-model="project.title" id="title"
-                                           placeholder="Hanke" required>
+                                    <input name="title" type="text"
+                                           class="form-control"
+                                           data-ng-model="project.title"
+                                           id="title" placeholder="Hanke"
+                                           required>
 
-                                    <div ng-show="projectEditForm.title.$invalid" class="help-block">
-                                        <p ng-show="projectEditForm.title.$error.required">Nimi on pakollinen</p>
+                                    <div ng-show="projectEditForm.title.$invalid"
+                                         class="help-block">
+                                        <p ng-show="projectEditForm.title.$error.required">
+                                            Nimi on pakollinen
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6" ng-class="{
-                                    'has-error'
-                                            : projectEditForm.coordinator.$invalid }">
-                                <label  class="col-md-3 control-label">Koordinaattori</label>
+                            <div class="form-group col-md-6"
+                                 ng-class="{'has-error': projectEditForm.coordinator.$invalid }">
+                                <label  class="col-md-3 control-label">
+                                    Koordinaattori
+                                </label>
                                 <div class="col-md-9">
-                                    <input name="coordinator" type="text" class="form-control" data-ng-model="project.coordinator" id="coordinator"
-                                           placeholder="Koordinaattori" required>
-                                    <div ng-show="projectEditForm.coordinator.$invalid" class="help-block">
-                                        <p ng-show="projectEditForm.coordinator.$error.required">Koordinaattori on pakollinen</p>
+                                    <input name="coordinator" type="text"
+                                           class="form-control"
+                                           data-ng-model="project.coordinator"
+                                           id="coordinator"
+                                           placeholder="Koordinaattori"
+                                           required>
+                                    <div ng-show="projectEditForm.coordinator.$invalid"
+                                         class="help-block">
+                                        <p ng-show="projectEditForm.coordinator.$error.required">
+                                            Koordinaattori on pakollinen
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-6" >
                                 <label for="description"
-                                       class="col-md-3 control-label">Kuvaus</label>
+                                       class="col-md-3 control-label">
+                                    Kuvaus
+                                </label>
                                 <div class="col-md-9">
-                                    <textarea name="description" data-ng-model="project.description" id="description"
-                                              placeholder="Kuvaus" class="form-control" ></textarea>
+                                    <textarea name="description"
+                                              data-ng-model="project.description"
+                                              id="description"
+                                              placeholder="Kuvaus"
+                                              class="form-control" >
+                                    </textarea>
                                 </div>
                             </div>
                             <div class="form-group col-md-6" >
-                                <label for="description_en" class="col-md-3 control-label">Kuvaus
-                                    (ENG)</label>
+                                <label for="description_en"
+                                       class="col-md-3 control-label">
+                                    Kuvaus (ENG)
+                                </label>
                                 <div class="col-md-9">
-                                    <textarea name="description_en" data-ng-model="project.description_en" id="description_en"
-                                              placeholder="Kuvaus englanniksi" class="form-control"></textarea>
+                                    <textarea name="description_en"
+                                              data-ng-model="project.description_en"
+                                              id="description_en"
+                                              placeholder="Kuvaus englanniksi"
+                                              class="form-control">
+                                    </textarea>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Haettu avustus (paikallinen
-                                    valuutta)</label>
+                                <label class="col-md-3 control-label">
+                                    Haettu avustus (paikallinen valuutta)
+                                </label>
                                 <div class="col-md-9">
-                                    <input name="appliedlocal" type="number" class="form-control"
-                                           data-ng-model="project.funding.applied_curr_local" id="appliedlocal"
+                                    <input name="appliedlocal" type="number"
+                                           class="form-control"
+                                           data-ng-model="project.funding.applied_curr_local"
+                                           id="appliedlocal"
                                            placeholder="Haettu avustus (paikallinen)">
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label  class="col-md-3 control-label">Haettu avustus (EUR)</label>
-
+                                <label  class="col-md-3 control-label">
+                                    Haettu avustus (EUR)
+                                </label>
                                 <div class="col-md-9">
-                                    <input name="appliedeur" type="number" class="form-control"
-                                           data-ng-model="project.funding.applied_curr_eur" id="appliedeur"
+                                    <input name="appliedeur" type="number"
+                                           class="form-control"
+                                           data-ng-model="project.funding.applied_curr_eur"
+                                           id="appliedeur"
                                            placeholder="Haettu avustus (EUR)">
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Kesto (kk)</label>
-
+                                <label class="col-md-3 control-label">
+                                    Kesto (kk)
+                                </label>
                                 <div class="col-md-9">
-                                    <input name="duration" type="number" class="form-control"
-                                           data-ng-model="project.duration_months" id="duration" placeholder="Kesto (kk)">
+                                    <input name="duration" type="number"
+                                           class="form-control"
+                                           data-ng-model="project.duration_months"
+                                           id="duration" placeholder="Kesto (kk)">
                                 </div>
                             </div>
                         </div>
@@ -104,133 +144,217 @@
                         </legend>
                         <div ng-show="showProjDetails">
                             <div class="form-group col-md-12">
-                                <label mean-token="'create-methods'" class="col-md-2">Toimintatavat</label>
-                                <div class="col-md-12" id="methodsSelection" data-ng-repeat="method in addedMethods">
-                                    <select id="methodSelect" data-ng-model="method.name">
-                                        <option data-ng-repeat="methodName in methodNames" value="{{methodName}}">{{methodName}}</option>
+                                <label mean-token="'create-methods'"
+                                       class="col-md-2">
+                                    Toimintatavat
+                                </label>
+                                <div class="col-md-12" id="methodsSelection"
+                                     data-ng-repeat="method in addedMethods">
+                                    <select id="methodSelect"
+                                            data-ng-model="method.name">
+                                        <option data-ng-repeat="methodName in methodNames"
+                                                value="{{methodName}}">
+                                            {{methodName}}
+                                        </option>
                                     </select>
-
-                                    <select id="levelSelect" data-ng-model="method.level">
-                                        <option data-ng-repeat="methodLevel in methodLevels" value="{{methodLevel}}">{{methodLevel}}</option>
+                                    <select id="levelSelect"
+                                            data-ng-model="method.level">
+                                        <option data-ng-repeat="methodLevel in methodLevels"
+                                                value="{{methodLevel}}">
+                                            {{methodLevel}}
+                                        </option>
                                     </select>
                                     <div style="clear:both;">&nbsp;</div>
-                                    <textarea name="methodComment" data-ng-model="method.comment" id="methodComment"
-                                              placeholder="Toimintatavan kuvaus" class="form-control" required></textarea>
-
+                                    <textarea name="methodComment"
+                                              data-ng-model="method.comment"
+                                              id="methodComment"
+                                              placeholder="Toimintatavan kuvaus"
+                                              class="form-control" required>
+                                    </textarea>
                                 </div>
                                 <div style="clear:both;">&nbsp;</div>
                                 <div class="col-md-12">
-                                    <input type="button" value="Lisää uusi" ng-click="addMethod();"/>
-                                    <input type="button" value="Poista viimeinen" ng-click="removeMethod();"/>
+                                    <input type="button" value="Lisää uusi"
+                                           ng-click="addMethod();"/>
+                                    <input type="button"
+                                           value="Poista viimeinen"
+                                           ng-click="removeMethod();"/>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
-                                    <label class="col-md-3 control-label">Vaikutusalue tai -maa</label>
-
+                                    <label class="col-md-3 control-label">
+                                        Vaikutusalue tai -maa
+                                    </label>
                                     <div class="col-md-9">
-                                        <input name="region" type="text" class="form-control" data-ng-model="project.region" id="region"
+                                        <input name="region" type="text"
+                                               class="form-control"
+                                               data-ng-model="project.region"
+                                               id="region"
                                                placeholder="Vaikutusalue">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="col-md-3 control-label">DAC-koodi</label>
-
+                                    <label class="col-md-3 control-label">
+                                        DAC-koodi
+                                    </label>
                                     <div class="col-md-9">
-                                        <input name="dac" type="text" class="form-control" data-ng-model="project.dac" id="dac"
-                                               placeholder="DAC">
+                                        <input name="dac" type="text"
+                                               class="form-control"
+                                               data-ng-model="project.dac"
+                                               id="dac" placeholder="DAC">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
-                                    <label for="project_goal" class="col-md-3 control-label">Päätavoite</label>
-
+                                    <label for="project_goal"
+                                           class="col-md-3 control-label">
+                                        Päätavoite
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="project_goal" data-ng-model="project.project_goal" id="project_goal"
-                                                  placeholder="Päätavoite" class="form-control"></textarea>
+                                        <textarea name="project_goal"
+                                                  data-ng-model="project.project_goal"
+                                                  id="project_goal"
+                                                  placeholder="Päätavoite"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="background"
-                                           class="col-md-3 control-label">Ihmisoikeuskonteksti</label>
+                                           class="col-md-3 control-label">
+                                        Ihmisoikeuskonteksti
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="background" data-ng-model="project.background" id="background"
-                                                  placeholder="Ihmisoikeuskonteksti" class="form-control"></textarea>
+                                        <textarea name="background"
+                                                  data-ng-model="project.background"
+                                                  id="background"
+                                                  placeholder="Ihmisoikeuskonteksti"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
-                                    <label for="target_group" class="col-md-3 control-label">Kohderyhmä</label>
-
+                                    <label for="target_group"
+                                           class="col-md-3 control-label">
+                                        Kohderyhmä
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="target_group" data-ng-model="project.target_group" id="target_group"
-                                                  placeholder="Kohderyhmä" class="form-control"></textarea>
+                                        <textarea name="target_group"
+                                                  data-ng-model="project.target_group"
+                                                  id="target_group"
+                                                  placeholder="Kohderyhmä"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="gender_aspect" class="col-md-3 control-label">Tasa-arvonäkökulma ja muut läpileikkaavat teemat</label>
-
+                                    <label for="gender_aspect"
+                                           class="col-md-3 control-label">
+                                        Tasa-arvonäkökulma ja muut
+                                        läpileikkaavat teemat
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="gender_aspect" data-ng-model="project.gender_aspect" id="gender_aspect"
-                                                  placeholder="Tasa-arvonäkökulma ja muut läpileikkaavat teemat" class="form-control"></textarea>
+                                        <textarea name="gender_aspect"
+                                                  data-ng-model="project.gender_aspect"
+                                                  id="gender_aspect"
+                                                  placeholder="Tasa-arvonäkökulma ja muut läpileikkaavat teemat"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
-                                    <label for="vulnerable_groups" class="col-md-3 control-label">Haavoittuvimpien ryhhmien huomioon ottaminen</label>
-
+                                    <label for="vulnerable_groups"
+                                           class="col-md-3 control-label">
+                                        Haavoittuvimpien ryhhmien huomioon
+                                        ottaminen
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="vulnerable_groups" data-ng-model="project.vulnerable_groups" id="vulnerable_groups"
-                                                  placeholder="Haavoittuvimpien ryhmien huomioon ottaminen" class="form-control"></textarea>
+                                        <textarea name="vulnerable_groups"
+                                                  data-ng-model="project.vulnerable_groups"
+                                                  id="vulnerable_groups"
+                                                  placeholder="Haavoittuvimpien ryhmien huomioon ottaminen"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="sustainability_risks"
-                                           class="col-md-3 control-label">Kestävyys ja arvio riskeistä</label>
-
+                                           class="col-md-3 control-label">
+                                        Kestävyys ja arvio riskeistä
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="sustainability_risks" data-ng-model="project.sustainability_risks"
-                                                  id="sustainability_risks" placeholder="Kestävyys ja riskit" class="form-control"></textarea>
+                                        <textarea name="sustainability_risks"
+                                                  data-ng-model="project.sustainability_risks"
+                                                  id="sustainability_risks"
+                                                  placeholder="Kestävyys ja riskit"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
                                     <label for="reporting_evaluation"
-                                           class="col-md-3 control-label">Evaluointi ja vaikuttavuuden arviointi</label>
+                                           class="col-md-3 control-label">
+                                        Evaluointi ja vaikuttavuuden arviointi
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="reporting_evaluation" data-ng-model="project.reporting_evaluation"
-                                                  id="reporting_evaluation" placeholder="Evaluointi ja vaikuttavuuden arviointi" class="form-control"></textarea>
+                                        <textarea name="reporting_evaluation"
+                                                  data-ng-model="project.reporting_evaluation"
+                                                  id="reporting_evaluation"
+                                                  placeholder="Evaluointi ja vaikuttavuuden arviointi"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="budget"
-                                           class="col-md-3 control-label">Budjetti ja omarahoitusosuus</label>
+                                           class="col-md-3 control-label">
+                                        Budjetti ja omarahoitusosuus
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="budget" data-ng-model="project.budget" id="budget"
-                                                  placeholder="Budjetti ja omarahoitusosuus" class="form-control"></textarea>
+                                        <textarea name="budget"
+                                                  data-ng-model="project.budget"
+                                                  id="budget"
+                                                  placeholder="Budjetti ja omarahoitusosuus"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
                                     <label for="other_donors_proposed"
-                                           class="col-md-3 control-label">Muualta haettu rahoitus</label>
-
+                                           class="col-md-3 control-label">
+                                        Muualta haettu rahoitus
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="other_donors_proposed" data-ng-model="project.other_donors_proposed"
-                                                  id="other_donors_proposed" placeholder="Muu rahoitus" class="form-control"></textarea>
+                                        <textarea name="other_donors_proposed"
+                                                  data-ng-model="project.other_donors_proposed"
+                                                  id="other_donors_proposed"
+                                                  placeholder="Muu rahoitus"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="referees"
-                                           class="col-md-3 control-label">Suosittelijat</label>
+                                           class="col-md-3 control-label">
+                                        Suosittelijat
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="referees" data-ng-model="project.referees" id="referees"
-                                                  placeholder="Suosittelijat" class="form-control"></textarea>
+                                        <textarea name="referees"
+                                                  data-ng-model="project.referees"
+                                                  id="referees"
+                                                  placeholder="Suosittelijat"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -248,48 +372,77 @@
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
                                     <label for="fitness"
-                                           class="col-md-3 control-label">Sopivuus KIOS:n strategiaan</label>
-
+                                           class="col-md-3 control-label">
+                                        Sopivuus KIOS:n strategiaan
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="fitness" data-ng-model="project.fitness"
-                                                  id="fitness" placeholder="Sopivuus KIOS:n strategiaan" class="form-control"></textarea>
+                                        <textarea name="fitness"
+                                                  data-ng-model="project.fitness"
+                                                  id="fitness"
+                                                  placeholder="Sopivuus KIOS:n strategiaan"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="capacity" class="col-md-3 control-label">Järjestön kapasiteetti ja asiantuntemus</label>
-
+                                    <label for="capacity"
+                                           class="col-md-3 control-label">
+                                        Järjestön kapasiteetti ja asiantuntemus
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="capacity" data-ng-model="project.capacity" id="capacity"
-                                                  placeholder="Järjestön kapasiteetti ja asiantuntijuus" class="form-control"></textarea>
+                                        <textarea name="capacity"
+                                                  data-ng-model="project.capacity"
+                                                  id="capacity"
+                                                  placeholder="Järjestön kapasiteetti ja asiantuntijuus"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
                                     <label for="feasibility"
-                                           class="col-md-3 control-label">Toteutettavuus ja riskit</label>
-
+                                           class="col-md-3 control-label">
+                                        Toteutettavuus ja riskit
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="feasibility" data-ng-model="project.feasibility"
-                                                  id="feasibility" placeholder="Toteutettavuus" class="form-control"></textarea>
+                                        <textarea name="feasibility"
+                                                  data-ng-model="project.feasibility"
+                                                  id="feasibility"
+                                                  placeholder="Toteutettavuus"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="effectiveness" class="col-md-3 control-label">Tuloksellisuus, vaikutukset ja vaikuttavuus</label>
-
+                                    <label for="effectiveness"
+                                           class="col-md-3 control-label">
+                                        Tuloksellisuus, vaikutukset ja
+                                        vaikuttavuus
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="effectiveness" data-ng-model="project.effectiveness" id="effectiveness"
-                                                  placeholder="Tuloksellisuus, vaikutukset ja vaikuttavuus" class="form-control"></textarea>
+                                        <textarea name="effectiveness"
+                                                  data-ng-model="project.effectiveness"
+                                                  id="effectiveness"
+                                                  placeholder="Tuloksellisuus, vaikutukset ja vaikuttavuus"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
-                                    <label for="proposed_funding" class="col-md-3 control-label">Esitys</label>
-
+                                    <label for="proposed_funding"
+                                           class="col-md-3 control-label">
+                                        Esitys
+                                    </label>
                                     <div class="col-md-9">
-                                        <textarea name="proposed_funding" data-ng-model="project.proposed_funding" id="proposed_funding"
-                                                  placeholder="Esitys" class="form-control"></textarea>
+                                        <textarea name="proposed_funding"
+                                                  data-ng-model="project.proposed_funding"
+                                                  id="proposed_funding"
+                                                  placeholder="Esitys"
+                                                  class="form-control">
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -300,12 +453,96 @@
         </fieldset>
         <fieldset ng-show="project.in_review.date">
             <legend>
-                <a href="" ng-click="showInRevDetails = !showInRevDetails">Käsittelyssä -tilan tiedot</a>
+                <a href="" ng-click="showInRevDetails = !showInRevDetails">
+                    Käsittelyssä -tilan tiedot
+                </a>
             </legend>
             <div class="form-group col-md-12" ng-show="showInRevDetails">
-                <label for="comments" class="col-md-2 control-label">Kommentit</label>
+                <div class="col-md-2">
+                    <label>Vaaditut liitteet</label>
+                </div>
                 <div class="col-md-10">
-                    <textarea name="comments" type="text" class="form-control" data-ng-model="project.in_review.comments" id="comments" placeholder="Siirretty käsittelyyn"></textarea>
+                    <div class="col-md-10">
+                        <span class="col-md-3">
+                            <label for="proj_budget" >Hankebudjetti</label>
+                        </span>
+                        <span class="col-md-7">
+                            <input type="checkbox" id="proj_budget"
+                                   name="proj_budget"
+                                   ng-model="project.required_appendices.proj_budget">
+                        </span>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="col-md-3">
+                            <label for="references">Suositukset</label>
+                        </span>
+                        <span class="col-md-7">
+                            <input type="checkbox" id="references" name="references"
+                                   ng-model="project.required_appendices.references">
+                        </span>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="col-md-3">
+                            <label for="annual_budget">Vuosibudjetti</label>
+                        </span>
+                        <span class="col-md-7">
+                            <input type="checkbox" id="annual_budget"
+                                   name="annual_budget"
+                                   ng-model="project.required_appendices.annual_budget">
+                        </span>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="col-md-3">
+                            <label for="rules">Säännöt</label>
+                        </span>
+                        <span class="col-md-7">
+                            <input type="checkbox" id="rules" name="rules"
+                                   ng-model="project.required_appendices.rules">
+                        </span>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="col-md-3">
+                            <label for="reg_cert">
+                                Rekisteröintitodistus
+                            </label>
+                        </span>
+                        <span class="col-md-7">
+                            <input type="checkbox" id="reg_cert" name="reg_cert"
+                                   ng-model="project.required_appendices.reg_cert">
+                        </span>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="col-md-3">
+                            <label for="annual_report">Vuosikertomus</label>
+                        </span>
+                        <span class="col-md-7">
+                            <input type="checkbox" id="annual_report"
+                                   name="annual_report"
+                                   ng-model="project.required_appendices.annual_report">
+                        </span>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="col-md-3">
+                            <label for="audit_reports">
+                                Tilintarkastukset
+                            </label>
+                        </span>
+                        <span class="col-md-7">
+                            <input type="checkbox" id="audit_reports"
+                                   name="audit_reports"
+                                   ng-model="project.required_appendices.audit_reports">
+                        </span>
+                    </div>
+                </div>
+                <label for="comments" class="col-md-2 control-label">
+                    Kommentit
+                </label>
+                <div class="col-md-10">
+                    <textarea name="comments" type="text" class="form-control"
+                              data-ng-model="project.in_review.comments"
+                              id="comments"
+                              placeholder="Siirretty käsittelyyn">
+                    </textarea>
                 </div>
             </div>
         </fieldset>

@@ -76,8 +76,83 @@ A form for project state change.
         <form name="inReviewForm" class="form-horizontal col-md-8"
               ng-show="global.newState === 'käsittelyssä'" role="form"
               data-ng-submit="addReviewState(inReviewForm.$valid)" novalidate>
-
             <div class="form-group col-md-12">
+                <div class="col-md-2">
+                    <label>Vaaditut liitteet</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-10">
+                        <span class="col-md-5">
+                            <label for="proj_budget" >Hankebudjetti</label>
+                        </span>
+                        <span class="col-md-5">
+                            <input type="checkbox" id="proj_budget"
+                                   name="proj_budget"
+                                   ng-model="project.required_appendices.proj_budget">
+                        </span>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="col-md-5">
+                            <label for="references">Suositukset</label>
+                        </span>
+                        <span class="col-md-5">
+                            <input type="checkbox" id="references" name="references"
+                                   ng-model="project.required_appendices.references">
+                        </span>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="col-md-5">
+                            <label for="annual_budget">Vuosibudjetti</label>
+                        </span>
+                        <span class="col-md-5">
+                            <input type="checkbox" id="annual_budget"
+                                   name="annual_budget"
+                                   ng-model="project.required_appendices.annual_budget">
+                        </span>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="col-md-5">
+                            <label for="rules">Säännöt</label>
+                        </span>
+                        <span class="col-md-5">
+                            <input type="checkbox" id="rules" name="rules"
+                                   ng-model="project.required_appendices.rules">
+                        </span>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="col-md-5">
+                            <label for="reg_cert">
+                                Rekisteröintitodistus
+                            </label>
+                        </span>
+                        <span class="col-md-5">
+                            <input type="checkbox" id="reg_cert" name="reg_cert"
+                                   ng-model="project.required_appendices.reg_cert">
+                        </span>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="col-md-5">
+                            <label for="annual_report">Vuosikertomus</label>
+                        </span>
+                        <span class="col-md-5">
+                            <input type="checkbox" id="annual_report"
+                                   name="annual_report"
+                                   ng-model="project.required_appendices.annual_report">
+                        </span>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="col-md-5">
+                            <label for="audit_reports">
+                                Tilintarkastukset
+                            </label>
+                        </span>
+                        <span class="col-md-5">
+                            <input type="checkbox" id="audit_reports"
+                                   name="audit_reports"
+                                   ng-model="project.required_appendices.audit_reports">
+                        </span>
+                    </div>
+                </div>
                 <label for="comments" class="col-md-2 control-label">
                     Kommentit
                 </label>
@@ -88,7 +163,6 @@ A form for project state change.
                     </textarea>
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <button type="submit" id="review-btn" class="btn btn-default">

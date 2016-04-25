@@ -1,5 +1,6 @@
 <section data-ng-controller="OrganisationsController" data-ng-init="findOne()">
     <style>
+        th {vertical-align: top;}
         td {padding-left: 3em;}
     </style>
 
@@ -68,9 +69,9 @@
                     </tr>
                     <tr>
                         <th>Osoite</th>
-                        <td>{{organisation.address.street}}
+                        <td>{{organisation.address.street}}<br>
                             {{organisation.address.postal_code}}
-                            {{organisation.address.city}}
+                            {{organisation.address.city}}<br>
                             {{organisation.address.country}}</td>
                     </tr>
                     <tr>
