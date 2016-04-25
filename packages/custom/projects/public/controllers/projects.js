@@ -468,6 +468,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.target_group = project.beneficiaries;
                 project.beneficiaries = undefined;
             }
+            if (project.schema_version < 5) {
+                // The name of this field was changed to prevent confusion with
+                // the field "background_check":
+                project.context = project.background;
+                project.background = undefined;
+                if (project.approved && project.approved.approved_by &&
+                        project.approved.approved_by === "Halko") {
+                    project.approved.approved_by = "Hallituksen kokous";
+                }
+            }
         };
 
         /**
@@ -577,7 +587,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                             $scope.notified_day, $scope.notified_month,
                             $scope.notified_year);
                 }
-
                 project.approved.themes = $scope.themeSelection;
                 project.state = $scope.global.newState;
                 project.$addApproved(function (response) {

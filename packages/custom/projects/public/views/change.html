@@ -177,12 +177,43 @@ A form for project state change.
         <form name="approvedForm" class="form-horizontal col-md-8"
               ng-show="global.newState === 'hyväksytty'" role="form"
               data-ng-submit="addApprovedState(approvedForm.$valid)" novalidate>
-
             <div class="form-group col-md-12">
-                <label for="approved_date" class="col-md-2">Hyväksytty pvm</label>
-                <div class="col-md-2" style="float:left;" ng-class="{
-                    'has-error'
-                            :  approvedForm.approved_day.$invalid }">
+                <label class="col-md-2" for="board_meeting">
+                    Hallituksen kokous
+                </label>
+                <div class="col-md-4">
+                    <input id="board_meeting" name="board_meeting"
+                           data-ng-model="project.approved.board_meeting"
+                           class="form-control"
+                           placeholder="Hallituksen kokous">
+                </div>
+                <label class="col-md-2" for="presented_by">
+                    Esittelijä
+                </label>
+                <div class="col-md-4">
+                    <input id="presented_by" name="presented_by"
+                           data-ng-model="project.approved.presented_by"
+                           class="form-control"
+                           placeholder="Esittelijä">
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label class="col-md-2" for="decision">
+                    Päätös
+                </label>
+                <div class="col-md-10">
+                    <textarea id="decision" name="decision"
+                              data-ng-model="project.approved.decision"
+                              class="form-control" placeholder="Päätös">
+                    </textarea>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="approved_date" class="col-md-2">
+                    Hyväksymispvm
+                </label>
+                <div class="col-md-2" style="float:left;"
+                     ng-class="{'has-error': approvedForm.approved_day.$invalid}">
                     <input name="approved_day" type="number" class="form-control"
                            data-ng-model="approved_day" id="approved_day"
                            placeholder="p">
@@ -193,9 +224,8 @@ A form for project state change.
                         </p>
                     </div>
                 </div>
-                <div class="col-md-2" style="float:left;" ng-class="{
-                    'has-error'
-                            :  approvedForm.approved_month.$invalid }">
+                <div class="col-md-2" style="float:left;"
+                     ng-class="{'has-error': approvedForm.approved_month.$invalid}">
                     <input name="approved_month" type="number" class="form-control"
                            data-ng-model="approved_month" id="approved_month"
                            placeholder="k">
@@ -206,9 +236,8 @@ A form for project state change.
                         </p>
                     </div>
                 </div>
-                <div class="col-md-2" style="float:left;" ng-class="{
-                    'has-error'
-                            :  approvedForm.approved_year.$invalid }">
+                <div class="col-md-2" style="float:left;"
+                     ng-class="{'has-error': approvedForm.approved_year.$invalid }">
                     <input name="approved_year" type="number" class="form-control"
                            data-ng-model="approved_year" id="approved_year"
                            placeholder="vvvv">
@@ -221,22 +250,19 @@ A form for project state change.
                 </div>
                 <div style="clear:both;">&nbsp;</div>
             </div>
-
-            <div class="form-group col-md-12" ng-class="{
-                'has-error'
-                        :  approvedForm.approved_by.$invalid }">
+            <div class="form-group col-md-12"
+                 ng-class="{'has-error': approvedForm.approved_by.$invalid}">
                 <label for="approved_by" class="col-md-2">Hyväksyjä</label>
                 <div class="col-md-10">
                     <select id="approved_by"
                             data-ng-model="project.approved.approved_by"
                             class='form-control'>
-                        <option value="Toiminnanjohtaja">Toiminnanjohtaja</option>
-                        <option value="Halko">Halko</option>
-                        <option value="UM">UM</option>
+                        <option>Toiminnanjohtaja</option>
+                        <option>Hallituksen kokous</option>
+                        <option>UM</option>
                     </select>
                 </div>
             </div>
-
             <div class="form-group col-md-12">
                 <label for="board_notified" class="col-md-2">
                     Tiedoksiannon päivämäärä
@@ -282,7 +308,6 @@ A form for project state change.
                 </div>
                 <div style="clear:both;">&nbsp;</div>
             </div>
-
             <div class="form-group col-md-12">
                 <label for="granted_sum_eur" class="col-md-2 control-label">
                     Myönnetty summa (euro)
@@ -972,31 +997,26 @@ A form for project state change.
                     </select>
                 </div>
             </div>
-
             <div class="form-group col-md-12">
-                <div>
-                    <label for="notifiedDay" class="col-md-2">
-                        Tiedoksiannnon päivämäärä
-                    </label>
-                    <div class="col-md-2" style="float:left;">
-                        <input name="notifiedDay" type="number" class="form-control"
-                               data-ng-model="end_notified_day" id="notifiedDay"
-                               placeholder="p">
-                    </div>
-                    <div class="col-md-2" style="float:left;">
-                        <input name="notifiedMonth" type="number" class="form-control"
-                               data-ng-model="end_notified_month" id="notifiedMonth"
-                               placeholder="k">
-                    </div>
-                    <div class="col-md-2" style="float:left;">
-                        <input name="notifiedYear" type="number" class="form-control"
-                               data-ng-model="end_notified_year" id="notifiedYear"
-                               placeholder="vvvv">
-                    </div>
+                <label for="notifiedDay" class="col-md-2">
+                    Tiedoksiannnon päivämäärä
+                </label>
+                <div class="col-md-2" style="float:left;">
+                    <input name="notifiedDay" type="number" class="form-control"
+                           data-ng-model="end_notified_day" id="notifiedDay"
+                           placeholder="p">
                 </div>
-
+                <div class="col-md-2" style="float:left;">
+                    <input name="notifiedMonth" type="number" class="form-control"
+                           data-ng-model="end_notified_month" id="notifiedMonth"
+                           placeholder="k">
+                </div>
+                <div class="col-md-2" style="float:left;">
+                    <input name="notifiedYear" type="number" class="form-control"
+                           data-ng-model="end_notified_year" id="notifiedYear"
+                           placeholder="vvvv">
+                </div>
             </div>
-
             <div class="form-group col-md-12">
                 <label for="comments" class="col-md-2">Muut kommentit</label>
                 <div class="col-md-10">
@@ -1006,10 +1026,7 @@ A form for project state change.
                               placeholder="Muut päättämiseen liittyvät kommentit">
                     </textarea>
                 </div>
-
             </div>
-
-
             <div class="form-group col-md-12">
                 <div class="col-md-offset-2 col-md-10">
                     <button id="end-btn" type="submit" class="btn btn-default">

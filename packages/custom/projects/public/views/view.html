@@ -87,11 +87,14 @@
                 <form name="stateForm" class="states"
                       data-ng-submit="changeState(project.changeTo);">
                     <label for="stateSelect">Siirry tilaan</label>
-                    <select id="stateSelect" data-ng-model="project.changeTo">
+                    <select id="stateSelect" data-ng-model="project.changeTo"
+                            required>
+                        <option value="" selected>[Valitse tila]</option>
                         <option data-ng-repeat="next_state in state.next_states"
                                 value="{{next_state}}">{{next_state}}</option>
                     </select>
-                    <button type="submit" class="btn-xs" id="st">
+                    <button type="submit" class="btn-xs" id="st"
+                            ng-disalbed="stateform.$invalid">
                         <span class="glyphicon glyphicon-arrow-right"></span>
                     </button>
                 </form>
@@ -213,11 +216,11 @@
                             </div>
                         </div>
                     </div>
-                    <div ng-show="nonEmpty(project.background)"
+                    <div ng-show="nonEmpty(project.context)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">Ihmisoikeuskonteksti</div>
                         <div class="col-md-8">
-                            {{project.background}}
+                            {{project.context}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.project_goal)"
@@ -278,17 +281,24 @@
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.other_donors_proposed)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">Muualta haettu rahoitus</div>
                         <div class="col-md-8">
                             {{project.other_donors_proposed}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.referees)"
-                         class="col-md-12">
+                         class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">Suosittelijat</div>
                         <div class="col-md-8">
                             {{project.referees}}
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.background_check)"
+                         class="col-md-12">
+                        <div class="col-md-4 mini-header">Taustaselvitys</div>
+                        <div class="col-md-8">
+                            {{project.background_check}}
                         </div>
                     </div>
                 </div>

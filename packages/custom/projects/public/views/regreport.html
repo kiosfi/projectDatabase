@@ -20,13 +20,13 @@
                     <tr>
                         <td class="report-mini-header">Hallituksen kokous</td>
                         <td class="report-content">
-                            [<em>Tulossa pian...</em>]
+                            {{project.approved.board_meeting}}
                         </td>
                     </tr>
                     <tr>
                         <td class="report-mini-header">Esittelijä</td>
                         <td class="report-content">
-                            [<em>Tulossa pian...</em>]
+                            {{project.approved.presented_by}}
                         </td>
                     </tr>
                 </table>
@@ -166,14 +166,6 @@
                         [<em>Ominaisuuden toteuttaminen on kesken.</em>]
                     </div>
                 </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
-                        Taustaselvitys
-                    </div>
-                    <div class="report-subcontent">
-                        {{project.organisation.accounting_audit}}
-                    </div>
-                </div>
             </td>
         </tr>
         <tr><td colspan="2">&nbsp;</td></tr>
@@ -183,7 +175,7 @@
             <td>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">Ihmisoikeuskonteksti</div>
-                    <div class="report-subcontent">{{project.background}}</div>
+                    <div class="report-subcontent">{{project.context}}</div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">Keskeinen tavoite</div>
@@ -262,17 +254,17 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Taustaselvitys
-                    </div>
-                    <div class="report-subcontent">
-                        [<em>Tulossa pian...</em>]
-                    </div>
-                </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
                         Suosittelijat
                     </div>
                     <div class="report-subcontent">{{project.referees}}</div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Taustaselvitys
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.background_check}}
+                    </div>
                 </div>
             </td>
         </tr>
@@ -316,7 +308,7 @@
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">Päätös</div>
                     <div class="report-subcontent">
-                        [<em>Tulossa pian...</em>]
+                        {{project.approved.decision}}
                     </div>
                 </div>
             </td>

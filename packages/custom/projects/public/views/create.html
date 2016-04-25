@@ -586,11 +586,11 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="background"
+                        <label for="context"
                                class="col-md-3 control-label">Ihmisoikeuskonteksti</label>
 
                         <div class="col-md-9">
-                            <textarea name="background" data-ng-model="project.background" id="background"
+                            <textarea name="context" data-ng-model="project.context" id="context"
                                       placeholder="Ihmisoikeuskonteksti" class="form-control"></textarea>
                         </div>
                     </div>
@@ -605,6 +605,16 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
+                        <label for="human_resources" class="col-md-3 control-label">Henkilöresurssit</label>
+
+                        <div class="col-md-9">
+                            <textarea name="human_resources" data-ng-model="project.human_resources" id="human_resources"
+                                      placeholder="Henkilöresurssit" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
                         <label for="gender_aspect" class="col-md-3 control-label">Tasa-arvo ja muut läpileikkaavat teemat</label>
 
                         <div class="col-md-9">
@@ -612,8 +622,7 @@
                                       placeholder="Tasa-arvonäkökulma ja muut läpileikkaavat teemat" class="form-control"></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-12"><div class="form-group col-md-6">
+                    <div class="form-group col-md-6">
                         <label for="vulnerable_groups" class="col-md-3 control-label">Haavoittuvimpien ryhmien huomioon ottaminen</label>
 
                         <div class="col-md-9">
@@ -621,6 +630,8 @@
                                       placeholder="Haavoittuvimpien ryhmien huomioon ottaminen" class="form-control"></textarea>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-12">
                     <div class="form-group col-md-6">
                         <label for="sustainability_risks"
                                class="col-md-3 control-label">Kestävyys ja arvio riskeistä</label>
@@ -630,8 +641,7 @@
                                       id="sustainability_risks" placeholder="Kestävyys ja riskit" class="form-control"></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-12"><div class="form-group col-md-6">
+                    <div class="form-group col-md-6">
                         <label for="reporting_evaluation"
                                class="col-md-3 control-label">Evaluointi ja vaikuttavuuden arviointi</label>
 
@@ -640,6 +650,8 @@
                                       id="reporting_evaluation" placeholder="Raportointi ja evaluointi" class="form-control"></textarea>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-12">
                     <div class="form-group col-md-6">
                         <label for="budget" class="col-md-3 control-label">Hankkeen budjetti ja omarahoitusosuus</label>
 
@@ -648,8 +660,6 @@
                                       placeholder="Hankkeen budjetti ja omarahoitusosuus" class="form-control"></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-12">
                     <div class="form-group col-md-6">
                         <label for="other_donors_proposed"
                                class="col-md-3 control-label">Muualta haettu rahoitus</label>
@@ -659,12 +669,22 @@
                                       id="other_donors_proposed" placeholder="Muu rahoitus" class="form-control"></textarea>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-12">
                     <div class="form-group col-md-6">
                         <label for="referees" class="col-md-3 control-label">Suosittelijat</label>
 
                         <div class="col-md-9">
                             <textarea name="referees" data-ng-model="project.referees" id="referees"
                                       placeholder="Suosittelijat" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="background_check" class="col-md-3 control-label">Taustaselvitys</label>
+
+                        <div class="col-md-9">
+                            <textarea name="background_check" data-ng-model="project.background_check" id="background_check"
+                                      placeholder="Taustaselvitys" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>

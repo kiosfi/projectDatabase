@@ -7,13 +7,12 @@ var mongoose = require('mongoose'),
         Schema = mongoose.Schema;
 
 var ProjectSchema = new Schema({
-
     /**
      * This piece of metadata tells the version number of the scheme. It is used
      * for updating old entries to the newest version during runtime.
      */
     schema_version: {
-        type: Number, // Current version is 4.
+        type: Number, // Current version is 5.
         required: true,
         default: 5
     },
@@ -119,9 +118,11 @@ var ProjectSchema = new Schema({
     },
     /**
      * The Finnish version of this field was previously known as "Tausta".
-     * Currently, the name of the field is "Ihmisoikeuskonteksti" though.
+     * Currently, the name of the field is "Ihmisoikeuskonteksti" though. The
+     * name of this field was changed form "background" to "context" in schema
+     * version 5 to prevent confusion with the new field "background_check".
      */
-    background: {
+    context: {
         type: String,
         trim: true
     },
@@ -133,6 +134,14 @@ var ProjectSchema = new Schema({
      * been renamed to avoid confusion with the fields in end_report state.
      */
     target_group: {
+        type: String,
+        trim: true
+    },
+    /**
+     * The Finnish name of this field is "Henkilöresurssit". This field was
+     * added in schema version 5.
+     */
+    human_resources: {
         type: String,
         trim: true
     },
@@ -183,6 +192,14 @@ var ProjectSchema = new Schema({
      * project. This field was added in schema version 4.
      */
     referees: {
+        type: String,
+        trim: true
+    },
+    /**
+     * Background check for the project and its organisation. This field was
+     * added in the schema version 5.
+     */
+    background_check: {
         type: String,
         trim: true
     },
@@ -264,115 +281,139 @@ var ProjectSchema = new Schema({
     },
     in_review: {
         date: {
-          type: Date
+            type: Date
         },
         user: {
-          type: String
+            type: String
         },
         comments: {
-          type: String
+            type: String
         }
     },
     approved: {
         date: {
-          type: Date
+            type: Date
         },
         user: {
-          type: String
+            type: String
+        },
+        /**
+         * Who presented this project for approval. This field was added in the
+         * schema version 5.
+         */
+        presented_by: {
+            type: String,
+            trim: true
+        },
+        /**
+         * The board meeting where the approval was given for the project. This
+         * field was added in the schema version 5.
+         */
+        board_meeting: {
+            type: String,
+            trim: true
+        },
+        /**
+         * The decision of the board. This field was added in the schema version
+         * 5.
+         */
+        decision: {
+            type: String,
+            trim: true
         },
         approved_date: {
-          type: Date
+            type: Date
         },
         approved_by: {
-          type: String
+            type: String
         },
         board_notified: {
-          type: Date
+            type: Date
         },
         granted_sum_eur: {
-          type: Number
+            type: Number
         },
         themes: {
-          type: Array
+            type: Array
         }
     },
     rejected: {
         date: {
-          type: Date
+            type: Date
         },
         user: {
-          type: String
+            type: String
         },
         rejection_categories: {
-          type: Array
+            type: Array
         },
         rejection_comments: {
-          type: String
+            type: String
         }
     },
     signed: {
         date: {
-          type: Date
+            type: Date
         },
         user: {
-          type: String
+            type: String
         },
         signed_by: {
-          type: String
+            type: String
         },
         signed_date: {
-          type: Date
+            type: Date
         },
         planned_payments: {
-          type: Array
+            type: Array
         },
         intreport_deadlines: {
-          type: Array
-      }
+            type: Array
+        }
     },
     payments: {
-      type: Array
+        type: Array
     },
     intermediary_reports:
-    {
-      type: Array
-    },
+            {
+                type: Array
+            },
     end_report: {
         date: {
-          type: Date
+            type: Date
         },
         user: {
-          type: String
+            type: String
         },
         audit: {
             date: {
-              type: Date
+                type: Date
             },
             review: {
-              type: String
+                type: String
             }
         },
         approved_by: {
-          type: String
+            type: String
         },
         approved_date: {
-          type: Date
+            type: Date
         },
         general_review: {
-          type: String
+            type: String
         },
         methods: {
-          type: Array
+            type: Array
         },
         objective: {
-          type: String
+            type: String
         },
         /**
          * Since schema version 3, this file is used for the proposed end
          * resolution for the project.
          */
         comments: {
-          type: String
+            type: String
         },
         /**
          * The estimated number of people, whom this project has directly helped.
@@ -400,29 +441,29 @@ var ProjectSchema = new Schema({
             trim: true
         },
         processed: {
-          type: Boolean,
-          default: false
+            type: Boolean,
+            default: false
         }
     },
     ended: {
         date: {
-          type: Date
+            type: Date
         },
         user: {
-          type: String
+            type: String
         },
         end_date: {
-          type: Date
+            type: Date
         },
         board_notified: {
-          type: Date
+            type: Date
         },
         approved_by: {
-          type: String
+            type: String
         },
         other_comments: {
-          type: String
-      }
+            type: String
+        }
     },
     updated: {
         type: Array
@@ -448,7 +489,7 @@ ProjectSchema.statics.load = function (id, cb) {
         _id: id
     }).populate([
         {path: 'organisation', model: 'Organisation'}
-      ]).exec(cb);
+    ]).exec(cb);
 };
 
 mongoose.model('Project', ProjectSchema);
