@@ -135,7 +135,10 @@
                 <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
                                         project.funding.applied_curr_local"
                      class="ng-hide proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Haettu paik.</div>
+                    <div class="col-md-3 mini-header">Haettu
+                        {{project.funding.curr_local_unit ?
+                            project.funding.curr_local_unit : "paik. val."}}
+                    </div>
                     <div class="col-md-9">{{project.funding.applied_curr_local| currency : ""}}</div>
                 </div>
                 <div ng-show="project.duration_months >= 0"
@@ -281,6 +284,13 @@
                             {{project.other_donors_proposed}}
                         </div>
                     </div>
+                    <div ng-show="nonEmpty(project.referees)"
+                         class="col-md-12">
+                        <div class="col-md-4 mini-header">Suosittelijat</div>
+                        <div class="col-md-8">
+                            {{project.referees}}
+                        </div>
+                    </div>
                 </div>
                 &nbsp;
             </article>
@@ -358,14 +368,10 @@
                                 {{project.in_review.date| date:'d.M.yyyy':
                                             'UTC'}}
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-7">
                                 <button class="btn small-btn"
                                         onclick="toggleCollapse('reviewinfo')">
                                     Tiedot</button>
-                            </div>
-                            <div class="col-md-6">
-                                <a ng-href="/projects/{{project._id}}/regreport/{{intreport.reportNumber}}"
-                                   class="btn large-btn">Näytä raportti</a>
                             </div>
                         </div>
                         <div id="reviewinfo" class="proj-subcontent col-md-12"
@@ -392,10 +398,14 @@
                             <div class="col-md-2">
                                 {{project.approved.date| date:'d.M.yyyy':'UTC'}}
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-1">
                                 <button class="btn small-btn"
                                         onclick="toggleCollapse('approvedinfo')">
                                     Tiedot</button>
+                            </div>
+                            <div class="col-md-6">
+                                <a ng-href="/projects/{{project._id}}/regreport/{{intreport.reportNumber}}"
+                                   class="btn large-btn">Näytä raportti</a>
                             </div>
                         </div>
                         <div id="approvedinfo" class="proj-subcontent col-md-12"

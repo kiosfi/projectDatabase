@@ -99,27 +99,36 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="col-md-3 control-label">
-                                    Haettu avustus (paikallinen valuutta)
+                                    Haettu avustus
                                 </label>
-                                <div class="col-md-9">
+                                <div class="col-md-5">
                                     <input name="appliedlocal" type="number"
                                            class="form-control"
                                            data-ng-model="project.funding.applied_curr_local"
                                            id="appliedlocal"
                                            placeholder="Haettu avustus (paikallinen)">
                                 </div>
+                                <div class="col-md-4">
+                                    <select id="curr_local_unit"
+                                            data-ng-model="project.funding.curr_local_unit">
+                                        <option>USD</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label  class="col-md-3 control-label">
-                                    Haettu avustus (EUR)
+                                    Haettu avustus
                                 </label>
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     <input name="appliedeur" type="number"
                                            class="form-control"
                                            data-ng-model="project.funding.applied_curr_eur"
                                            id="appliedeur"
                                            placeholder="Haettu avustus (EUR)">
                                 </div>
+                                <label  class="col-md-1 control-label">
+                                    EUR
+                                </label>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="col-md-3 control-label">

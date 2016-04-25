@@ -15,7 +15,7 @@ var ProjectSchema = new Schema({
     schema_version: {
         type: Number, // Current version is 4.
         required: true,
-        default: 4
+        default: 5
     },
     /**
      * Security level of the project. The value should be one of the following
@@ -83,6 +83,14 @@ var ProjectSchema = new Schema({
     funding: {
         applied_curr_local: {
             type: Number
+        },
+        /**
+         * The currency unit (e.g. USD) used in the target country. This field
+         * was added in schema version 5.
+         */
+        curr_local_unit: {
+            type: String,
+            trim: true
         },
         applied_curr_eur: {
             type: Number
