@@ -232,25 +232,25 @@ var ProjectSchema = new Schema({
      */
     required_appendices: {
         proj_budget: {
-            type: Boolean,
+            type: Boolean
         },
         references: {
-            type: Boolean,
+            type: Boolean
         },
         annual_budget: {
-            type: Boolean,
+            type: Boolean
         },
         rules: {
-            type: Boolean,
+            type: Boolean
         },
         reg_cert: {
-            type: Boolean,
+            type: Boolean
         },
         annual_report: {
-            type: Boolean,
+            type: Boolean
         },
         audit_reports: {
-            type: Boolean,
+            type: Boolean
         }
     },
     in_review: {

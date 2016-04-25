@@ -83,6 +83,12 @@
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Kuvaus</div>
+                    <div class="report-subcontent">
+                        {{project.organisation.description}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         Hallintomalli ja henkilöstö
                     </div>
@@ -91,9 +97,12 @@
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Kuvaus</div>
+                    <div class="report-mini-header">
+                        Kansalliset ja kansainväliset yhteydet
+                    </div>
                     <div class="report-subcontent">
-                        {{project.organisation.description}}
+                        <p>{{project.organisation.int_links}}</p>
+                        <p>{{project.organisation.nat_local_links}}</p>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -112,9 +121,12 @@
                         {{project.organisation.accounting_audit}}
                     </div>
                 </div>
-                <!--            <div style="margin-bottom: 1em">
-                                <b>Aiemmat avustukset KIOS:lta</b>
-                                                <table>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Aiemmat avustukset KIOS:lta
+                    </div>
+                    <div class="report-subcontent">
+                        <!--                        <table>
                                                     <tr data-ng-repeat="project in orgProjects">
                                                         <td>
                                                             <a data-ng-href="/projects/{{project._id}}">
@@ -122,12 +134,21 @@
                                                             </a>
                                                         </td>
                                                         <td>{{project.approved.granted_sum_eur ?
-                                                                project.approved.granted_sum_eur +" EUR" : "-"}}</td>
+                                                                                        project.approved.granted_sum_eur +" EUR" : "-"}}</td>
                                                     </tr>
                                                 </table>
-                                                <div data-ng-if="!orgProjects.lengtd">Ei rahoitusta hakeneita hankkeita</div>
-                                [<em>Ominaisuuden toteuttaminen on kesken.</em>]
-                            </div>-->
+                                                <div data-ng-if="!orgProjects.lengtd">Ei rahoitusta hakeneita hankkeita</div>-->
+                        [<em>Ominaisuuden toteuttaminen on kesken.</em>]
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Taustaselvitys
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.organisation.accounting_audit}}
+                    </div>
+                </div>
             </td>
         </tr>
         <tr><td colspan="2">&nbsp;</td></tr>
@@ -146,14 +167,36 @@
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Oikeudellinen fokus</div>
+                    <div class="report-subcontent">
+                        <table>
+                            <tr ng-repeat="theme in project.approved.themes">
+                                <td>{{theme}}</td>
+                            </tr>
+                        </table>&nbsp;
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
                     <div class="report-mini-header">Kohderyhmä</div>
                     <div class="report-subcontent">
                         {{project.target_group}}
                     </div>
                 </div>
-                <!--            <div style="margin-bottom: 1em">
-                                <b>Aktiviteetit:</b> {{project.}}
-                            </div>-->
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Suunnitellut toimintatavat
+                    </div>
+                    <div class="report-subcontent">
+                        <table>
+                            <tr ng-repeat="method in project.methods">
+                                <td>
+                                    <em>{{method.name}}</em> ({{method.level}})
+                                    <p class="proj-subcontent">{{method.comment}}</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         Tasa-arvonäkökulma ja muut läpileikkaavat teemat
