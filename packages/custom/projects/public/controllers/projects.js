@@ -952,5 +952,26 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 }
             });
         };
+
+        /**
+         * Prints the names of the invalid fields of an input form to the
+         * console.
+         *
+         * @param {type} form
+         * @returns {undefined}
+         */
+        $scope.printInvalidFields = function (form) {
+            var invalids = "";
+            Object.keys(form).forEach(function(fieldName) {
+                if (!fieldName.startsWith("$") && !fieldName.startsWith("$$") &&
+                        !fieldName.startsWith("_") && form[fieldName].$invalid) {
+                    invalids += fieldName + ", ";
+                }
+            });
+            if (invalids !== "") {
+                console.log("The following fields have invalid values:\n\n"
+                        + invalids);
+            }
+        }
     }
 ]);
