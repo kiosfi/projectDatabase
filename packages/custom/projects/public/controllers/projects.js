@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams',
-    '$location', '$window', '$q', '$http', 'Global', 'Projects', 'MeanUser', 'Circles', 'Organisations',
-    function ($scope, $stateParams, $location, $window, $q, $http, Global, Projects, MeanUser, Circles, Organisations) {
+    '$location', '$window', '$q', '$http', 'Global', 'Projects', 'OrgProjects', 'MeanUser', 'Circles', 'Organisations',
+    function ($scope, $stateParams, $location, $window, $q, $http, Global, Projects, OrgProjects, MeanUser, Circles, Organisations) {
         $scope.global = Global;
         $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
         $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
@@ -445,7 +445,37 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                             Math.round(interval / 2592000000) + " kk)";
                 }
             });
-        }
+        };
+
+        $scope.other_projects;
+
+        /**
+         * Like findOne, but also gets the list of all projects of the given
+         * organisation (i.e. all projects excluding the one in $scope.project)
+         * and writes the result into $scope.other_projects.
+         *
+         * @param {type} orgID  ID of the organisation.
+         * @returns {undefined}
+         */
+        $scope.findOneForRegReport = function (orgID) {
+            Projects.get({
+                projectId: $stateParams.projectId
+            }, function (project) {
+                $scope.project = project;
+                $scope.ensureCompatibility(project);
+                OrgProjects.findProjects($scope.project.organisation._id)
+                        .success(function (projects) {
+                    var pid = $scope.project._id;
+                    var projs = [];
+                    projects.forEach(function(proj) {
+                        if (proj._id !== pid) {
+                            projs.push(proj);
+                        }
+                    });
+                    $scope.other_projects = projs;
+                });
+            });
+        };
 
         /**
          * Makes sure that the given project conforms to the latest version of
@@ -457,10 +487,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.ensureCompatibility = function (project) {
             if (typeof project.schema_version === "undefined") {
-                project.schema_version = 2;
                 project.security_level = "Julkinen";
-                project.$update(function () {
-                });
             }
             if (project.schema_version < 4) {
                 // The name of this field was changed to prevent confusion with
@@ -471,12 +498,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (project.schema_version < 5) {
                 // The name of this field was changed to prevent confusion with
                 // the field "background_check":
+                project.schema_version = 5;
                 project.context = project.background;
                 project.background = undefined;
                 if (project.approved && project.approved.approved_by &&
                         project.approved.approved_by === "Halko") {
                     project.approved.approved_by = "Hallituksen kokous";
                 }
+                project.$update(function () {
+                });
             }
         };
 

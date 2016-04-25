@@ -1,4 +1,4 @@
-<section data-ng-controller="ProjectsController" data-ng-init="findOne()"
+<section data-ng-controller="ProjectsController" data-ng-init="findOneForRegReport()"
          class="report-body">
     <!--    <h1>Rekisteröintiraportti</h1>
         <hr>-->
@@ -151,19 +151,14 @@
                         Aiemmat avustukset KIOS:lta
                     </div>
                     <div class="report-subcontent">
-                        <!--                        <table>
-                                                    <tr data-ng-repeat="project in orgProjects">
-                                                        <td>
-                                                            <a data-ng-href="/projects/{{project._id}}">
-                                                                {{project.title}}
-                                                            </a>
-                                                        </td>
-                                                        <td>{{project.approved.granted_sum_eur ?
-                                                                                        project.approved.granted_sum_eur +" EUR" : "-"}}</td>
-                                                    </tr>
-                                                </table>
-                                                <div data-ng-if="!orgProjects.lengtd">Ei rahoitusta hakeneita hankkeita</div>-->
-                        [<em>Ominaisuuden toteuttaminen on kesken.</em>]
+                        <div data-ng-repeat="proj in other_projects">
+                            <em>{{proj.title}}</em>
+                            {{proj.approved.granted_sum_eur ?
+                                    "(" + proj.approved.granted_sum_eur + " EUR)" : ""}}
+                        </div>
+                        <div data-ng-if="!other_projects.length">
+                            Aikaisemmin rahoitettuja hankkeita ei ole.
+                        </div>
                     </div>
                 </div>
             </td>

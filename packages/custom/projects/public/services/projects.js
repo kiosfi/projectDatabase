@@ -53,3 +53,11 @@ angular.module('mean.projects').factory('Projects', ['$resource',
         });
     }
 ]);
+
+angular.module('mean.projects').service('OrgProjects', ['$http',
+    function ($http) {
+        this.findProjects = function(organisationId) {
+            return $http.get('api/projects/byOrg/' + organisationId);
+        };
+    }
+]);
