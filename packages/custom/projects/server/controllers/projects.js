@@ -223,6 +223,7 @@ module.exports = function (Projects) {
             var project = req.project;
             project.in_review = in_review;
             project.state = req.body.state;
+            project.required_appendices = req.body.required_appendices;
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({

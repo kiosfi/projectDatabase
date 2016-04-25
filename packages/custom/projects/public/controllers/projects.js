@@ -46,7 +46,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          * @returns {Date}      A new Date object.
          */
         $scope.convertDate = function (day, month, year) {
-            var parsed = new Date(year, month - 1, day + 1).toISOString();
+            var parsed = new Date(year, month - 1, day).toISOString();
             return parsed;
         };
 
@@ -542,6 +542,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.addReviewState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                project.in_review = {};
                 project.in_review.date = Date.now();
                 project.state = $scope.global.newState;
                 project.$addReview(function (response) {

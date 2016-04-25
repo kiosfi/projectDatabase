@@ -1,5 +1,6 @@
 <section data-ng-controller="ProjectsController" data-ng-init="initEditing()">
     <h1>{{project.title}} ({{project.organisation.name}}) - Muokkaus</h1>
+    <hr>
     <form name="projectEditForm" class="form-horizontal" role="form"
           data-ng-submit="update(projectEditForm.$valid)" novalidate>
         <fieldset>
@@ -473,7 +474,7 @@
                 <div class="col-md-10">
                     <div class="col-md-10">
                         <span class="col-md-3">
-                            <label for="proj_budget" >Hankebudjetti</label>
+                            <label for="proj_budget">Hankebudjetti</label>
                         </span>
                         <span class="col-md-7">
                             <input type="checkbox" id="proj_budget"
@@ -956,8 +957,7 @@
                 <div class="form-group col-md-12">
                     <label for="audit_day" class="col-md-2">Hyväksymis pvm</label>
                     <div class="col-md-2" style="float:left;" ng-class="{
-                            'has-error'
-                                    :  projectEditForm.er_approved_day.$invalid }">
+                            'has-error':  projectEditForm.er_approved_day.$invalid }">
                         <input name="er_approved_day" type="number" class="form-control" data-ng-model="er_approved_day" id="er_approved_day" placeholder="p" min="1">
                         <div ng-show="projectEditForm.er_approved_day.$invalid" class="help-block">
                             <p ng-show="projectEditForm.er_approved_day.$error.number">Päivän täytyy olla numero</p>

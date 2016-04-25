@@ -236,7 +236,8 @@ var ProjectSchema = new Schema({
     },
     /**
      * This fields contains a checklist of required appendices and it was added
-     * in schema version 4.
+     * in schema version 4. Currently, the values inside this object will be
+     * supplied when changing state to "in_review".
      */
     required_appendices: {
         proj_budget: {
