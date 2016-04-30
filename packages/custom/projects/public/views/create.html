@@ -345,113 +345,212 @@
                     </fieldset>
                     <fieldset>
                         <legend>
-                            <a ng-click="showOrgDetails = !showOrgDetails">Hakijajärjestön
-                                lisätiedot</a>
+                            <a ng-click="showOrgDetails = !showOrgDetails">
+                                Hakijajärjestön lisätiedot
+                            </a>
                         </legend>
                         <div ng-show="showOrgDetails">
-                            <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Vastuullinen johtaja</label>
-
-                                <div class="col-md-9">
-                                    <input data-ng-if="newOrg" name="orgexecMan" type="text" class="form-control"
-                                           data-ng-model="project.organisation.exec_manager" id="orgexecMan"
-                                           placeholder="Vastuullinen johtaja" required>
+                            <div class="col-md-12">
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-3 control-label">
+                                        Vastuullinen johtaja
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input data-ng-if="newOrg" name="orgexecMan"
+                                               type="text" class="form-control"
+                                               data-ng-model="project.organisation.exec_manager"
+                                               id="orgexecMan"
+                                               placeholder="Vastuullinen johtaja"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-3 control-label">
+                                        Viestintävastaava
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input data-ng-if="newOrg" name="orgCommRep"
+                                               type="text" class="form-control"
+                                               data-ng-model="project.organisation.communications_rep"
+                                               id="orgCommRep"
+                                               placeholder="Viestintävastaava"
+                                               required>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Viestintävastaava</label>
-                                <div class="col-md-9">
-                                    <input data-ng-if="newOrg" name="orgCommRep" type="text" class="form-control"
-                                           data-ng-model="project.organisation.communications_rep" id="orgCommRep"
-                                           placeholder="Viestintävastaava" required>
+                            <div class="col-md-12">
+                                <div class="form-group col-md-6">
+                                    <label for="orgLegal"
+                                           class="col-md-3 control-label">
+                                        Hallintomalli ja henkilöstö
+                                    </label>
+                                    <div class="col-md-9">
+                                        <textarea data-ng-if="newOrg"
+                                                  name="orgLegal"
+                                                  data-ng-model="project.organisation.legal_status"
+                                                  id="orgLegal"
+                                                  placeholder="Hallintomalli ja henkilöstö"
+                                                  class="form-control">
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="orgDescription"
+                                           class="col-md-3 control-label">
+                                        Tavoitteet ja keskeiset toimintatavat
+                                    </label>
+                                    <div class="col-md-9">
+                                        <textarea data-ng-if="newOrg"
+                                                  name="orgDescription"
+                                                  data-ng-model="project.organisation.description"
+                                                  id="orgDescription"
+                                                  placeholder="Tavoitteet ja keskeiset toimintatavat"
+                                                  class="form-control">
+                                        </textarea>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="orgLegal" class="col-md-3 control-label">Hallintomalli ja henkilöstö</label>
-                                <div class="col-md-9">
-                                    <textarea data-ng-if="newOrg" name="orgLegal" data-ng-model="project.organisation.legal_status" id="orgLegal"
-                                              placeholder="Hallintomalli ja henkilöstö" class="form-control"></textarea>
+                            <div class="col-md-12">
+                                <div class="form-group col-md-6">
+                                    <label for="orgLinks"
+                                           class="col-md-3 control-label">
+                                        Kansainväliset yhteydet
+                                    </label>
+                                    <div class="col-md-9">
+                                        <textarea data-ng-if="newOrg"
+                                                  name="orgLinks"
+                                                  data-ng-model="project.organisation.int_links"
+                                                  id="orgLinks"
+                                                  placeholder="Kansainväliset yhteydet"
+                                                  class="form-control">
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="orgNatLocLinks"
+                                           class="col-md-3 control-label">
+                                        Kansalliset ja paikalliset yhteydet
+                                    </label>
+                                    <div class="col-md-9">
+                                        <textarea data-ng-if="newOrg"
+                                                  name="orgNatLocLinks"
+                                                  data-ng-model="project.organisation.nat_local_links"
+                                                  id="orgNatLocLinks"
+                                                  placeholder="Kansalliset ja paikalliset yhteydet"
+                                                  class="form-control">
+                                        </textarea>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="orgDescription" class="col-md-3 control-label">Kuvaus</label>
-                                <div class="col-md-9">
-                                    <textarea data-ng-if="newOrg" name="orgDescription" data-ng-model="project.organisation.description" id="orgDescription"
-                                              placeholder="Kuvaus järjestöstä" class="form-control"></textarea>
+                            <div class="col-md-12">
+                                <div class="form-group col-md-6">
+                                    <label for="orgOthFund"
+                                           class="col-md-3 control-label">
+                                        Muut rahoittajat, budjetti
+                                    </label>
+                                    <div class="col-md-9">
+                                        <textarea data-ng-if="newOrg"
+                                                  name="orgOthFund"
+                                                  data-ng-model="project.organisation.other_funding_budget"
+                                                  id="orgOthFund"
+                                                  placeholder="Järjestön muut rahoittajat, budjetti"
+                                                  class="form-control">
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="orgAcct"
+                                           class="col-md-3 control-label">
+                                        Taloushallinto, Tilintarkastus
+                                    </label>
+                                    <div class="col-md-9">
+                                        <textarea data-ng-if="newOrg" name="orgAcct"
+                                                  data-ng-model="project.organisation.accounting_audit"
+                                                  id="orgAcct"
+                                                  placeholder="Järjestön muut rahoittajat, budjetti"
+                                                  class="form-control" required>
+                                        </textarea>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="orgLinks" class="col-md-3 control-label">Kansainväliset
-                                    yhteydet</label>
-                                <div class="col-md-9">
-                                    <textarea data-ng-if="newOrg" name="orgLinks" data-ng-model="project.organisation.int_links" id="orgLinks"
-                                              placeholder="Kansainväliset yhteydet" class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="orgNatLocLinks" class="col-md-3 control-label">Kansalliset ja paikalliset
-                                    yhteydet</label>
-                                <div class="col-md-9">
-                                    <textarea data-ng-if="newOrg" name="orgNatLocLinks" data-ng-model="project.organisation.nat_local_links" id="orgNatLocLinks"
-                                              placeholder="Kansalliset ja paikalliset yhteydet" class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="orgOthFund" class="col-md-3 control-label">Muut rahoittajat, budjetti</label>
-                                <div class="col-md-9">
-                                    <textarea data-ng-if="newOrg" name="orgOthFund" data-ng-model="project.organisation.other_funding_budget" id="orgOthFund"
-                                              placeholder="Järjestön muut rahoittajat, budjetti" class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="orgAcct" class="col-md-3 control-label">Taloushallinto, Tilintarkastus</label>
-                                <div class="col-md-9">
-                                    <textarea data-ng-if="newOrg" name="orgAcct" data-ng-model="project.organisation.accounting_audit" id="orgAcct"
-                                              placeholder="Järjestön muut rahoittajat, budjetti" class="form-control" required></textarea>
+                            <div class="col-md-12">
+                                <div class="form-group col-md-6">
+                                    <label for="org_background"
+                                           class="col-md-3 control-label">
+                                        Oleelliset taustatiedot
+                                    </label>
+                                    <div class="col-md-9">
+                                        <textarea data-ng-if="newOrg"
+                                                  name="org_background"
+                                                  data-ng-model="project.organisation.background"
+                                                  id="org_background"
+                                                  placeholder="Oleelliset taustatiedot"
+                                                  class="form-control">
+                                        </textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </fieldset>
                     <fieldset>
                         <legend>
-                            <a ng-click="showBankInfo = !showBankInfo">Pankkitili</a>
+                            <a ng-click="showBankInfo = !showBankInfo">
+                                Pankkitili
+                            </a>
                         </legend>
                         <div ng-show="showBankInfo">
                             <div class="form-group">
                                 <div class="form-group col-md-6">
-                                    <label class="col-md-3 control-label">Tilinumero (IBAN)</label>
+                                    <label class="col-md-3 control-label">
+                                        Tilinumero (IBAN)
+                                    </label>
                                     <div class="col-md-9">
-                                        <input data-ng-if="newOrg" name="bankIban" type="text" class="form-control"
-                                               data-ng-model="project.organisation.bank_account.iban" id="bankIban"
+                                        <input data-ng-if="newOrg"
+                                               name="bankIban" type="text"
+                                               class="form-control"
+                                               data-ng-model="project.organisation.bank_account.iban"
+                                               id="bankIban"
                                                placeholder="Tilinumero (IBAN)">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="col-md-3 control-label">Pankin SWIFT</label>
-
+                                    <label class="col-md-3 control-label">
+                                        Pankin SWIFT
+                                    </label>
                                     <div class="col-md-9">
-                                        <input data-ng-if="newOrg" name="bankSwift" type="text" class="form-control"
-                                               data-ng-model="project.organisation.bank_account.swift" id="bankSwift"
+                                        <input data-ng-if="newOrg"
+                                               name="bankSwift" type="text"
+                                               class="form-control"
+                                               data-ng-model="project.organisation.bank_account.swift"
+                                               id="bankSwift"
                                                placeholder="Pankin SWIFT">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-group col-md-6">
-                                    <label class="col-md-3 control-label">Tilin haltija</label>
-
+                                    <label class="col-md-3 control-label">
+                                        Tilin haltija
+                                    </label>
                                     <div class="col-md-9">
-                                        <input data-ng-if="newOrg" name="bankHolder" type="text" class="form-control"
-                                               data-ng-model="project.organisation.bank_account.holder_name" id="bankHolder"
+                                        <input data-ng-if="newOrg"
+                                               name="bankHolder" type="text"
+                                               class="form-control"
+                                               data-ng-model="project.organisation.bank_account.holder_name"
+                                               id="bankHolder"
                                                placeholder="Tilinhaltija">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="col-md-3 control-label">Pankin yhteystiedot</label>
+                                    <label class="col-md-3 control-label">
+                                        Pankin yhteystiedot
+                                    </label>
                                     <div class="col-md-9">
-                                        <input data-ng-if="newOrg" name="bankCont" type="text" class="form-control"
-                                               data-ng-model="project.organisation.bank_account.bank_contact_details" id="bankCont"
+                                        <input data-ng-if="newOrg"
+                                               name="bankCont" type="text"
+                                               class="form-control"
+                                               data-ng-model="project.organisation.bank_account.bank_contact_details"
+                                               id="bankCont"
                                                placeholder="Pankin yhteystiedot">
                                     </div>
                                 </div>
@@ -503,7 +602,7 @@
                     </div>
                     <div class="col-md-4">
                         <select id="curr_local_unit"
-                                    data-ng-model="project.funding.curr_local_unit">
+                                data-ng-model="project.funding.curr_local_unit">
                             <option>USD</option>
                         </select>
                     </div>
@@ -578,11 +677,11 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group col-md-6">
-                        <label for="project_goal" class="col-md-3 control-label">Päätavoite</label>
+                        <label for="project_goal" class="col-md-3 control-label">Päätavoiteet</label>
 
                         <div class="col-md-9">
                             <textarea name="project_goal" data-ng-model="project.project_goal" id="project_goal"
-                                      placeholder="Päätavoite" class="form-control"></textarea>
+                                      placeholder="Päätavoiteet" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -634,11 +733,11 @@
                 <div class="col-md-12">
                     <div class="form-group col-md-6">
                         <label for="sustainability_risks"
-                               class="col-md-3 control-label">Kestävyys ja arvio riskeistä</label>
+                               class="col-md-3 control-label">Tavoitteiden saavuttamisen mittaaminen</label>
 
                         <div class="col-md-9">
                             <textarea name="sustainability_risks" data-ng-model="project.sustainability_risks"
-                                      id="sustainability_risks" placeholder="Kestävyys ja riskit" class="form-control"></textarea>
+                                      id="sustainability_risks" placeholder="Tavoitteiden saavuttamisen mittaaminen" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group col-md-6">

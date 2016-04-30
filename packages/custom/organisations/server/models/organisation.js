@@ -12,6 +12,14 @@ var OrganisationSchema = new Schema({
         required: true,
         trim: true
     },
+    /**
+     * The current schema version of the project.
+     */
+    schema_version: {
+        type: Number,
+        required: true,
+        default: 2
+    },
     representative: {
         name: {
             type: String,
@@ -81,6 +89,10 @@ var OrganisationSchema = new Schema({
         type: String,
         trim: true
     },
+    /**
+     * The Finnish name of this field is currently "Tavoitteet ja keskeiset
+     * toimintatavat".
+     */
     description: {
         type: String,
         trim: true
@@ -98,6 +110,10 @@ var OrganisationSchema = new Schema({
         trim: true
     },
     accounting_audit: {
+        type: String,
+        trim: true
+    },
+    background: {
         type: String,
         trim: true
     },

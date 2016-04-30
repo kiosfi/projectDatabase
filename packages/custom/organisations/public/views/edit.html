@@ -169,78 +169,99 @@
 
         <fieldset>
             <legend>Lisätiedot</legend>
-            <div class="form-group col-md-6">
-                <label class="col-md-3 control-label">Vastuullinen johtaja</label>
+            <div class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label class="col-md-3 control-label">Vastuullinen johtaja</label>
 
-                <div class="col-md-9">
-                    <input name="orgexecMan" type="text" class="form-control"
-                           data-ng-model="organisation.exec_manager" id="orgexecMan"
-                           placeholder="Vastuullinen johtaja">
+                    <div class="col-md-9">
+                        <input name="orgexecMan" type="text" class="form-control"
+                               data-ng-model="organisation.exec_manager" id="orgexecMan"
+                               placeholder="Vastuullinen johtaja">
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="col-md-3 control-label">Viestintävastaava</label>
+
+                    <div class="col-md-9">
+                        <input name="orgCommRep" type="text" class="form-control"
+                               data-ng-model="organisation.communications_rep" id="orgCommRep"
+                               placeholder="Viestintävastaava">
+                    </div>
                 </div>
             </div>
-            <div class="form-group col-md-6">
-                <label class="col-md-3 control-label">Viestintävastaava</label>
+            <div class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="orgLegal" class="col-md-3 control-label">Hallintomalli ja henkilöstö</label>
 
-                <div class="col-md-9">
-                    <input name="orgCommRep" type="text" class="form-control"
-                           data-ng-model="organisation.communications_rep" id="orgCommRep"
-                           placeholder="Viestintävastaava">
+                    <div class="col-md-9">
+                        <textarea name="orgLegal" data-ng-model="organisation.legal_status" id="orgLegal"
+                                  placeholder="Hallintomalli ja henkilöstö" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="orgDescription" class="col-md-3 control-label">Tavoitteet ja keskeiset toimintatavat</label>
+
+                    <div class="col-md-9">
+                        <textarea name="orgDescription" data-ng-model="organisation.description" id="orgDescription"
+                                  placeholder="Tavoitteet ja keskeiset toimintatavat" class="form-control"></textarea>
+                    </div>
                 </div>
             </div>
-            <div class="form-group col-md-6">
-                <label for="orgLegal" class="col-md-3 control-label">Hallintomalli ja henkilöstö</label>
+            <div class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="orgLinks" class="col-md-3 control-label">Kansainväliset
+                        yhteydet</label>
 
-                <div class="col-md-9">
-                    <textarea name="orgLegal" data-ng-model="organisation.legal_status" id="orgLegal"
-                              placeholder="Hallintomalli ja henkilöstö" class="form-control"></textarea>
+                    <div class="col-md-9">
+                        <textarea name="orgLinks" data-ng-model="organisation.int_links" id="orgLinks"
+                                  placeholder="Kansainväliset yhteydet" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="orgNatLocLinks" class="col-md-3 control-label">Kansalliset ja paikalliset
+                        yhteydet</label>
+
+                    <div class="col-md-9">
+                        <textarea name="orgNatLocLinks" data-ng-model="organisation.nat_local_links" id="orgNatLocLinks"
+                                  placeholder="Kansalliset ja paikalliset yhteydet" class="form-control"></textarea>
+                    </div>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="orgOthFund" class="col-md-3 control-label">Muut rahoittajat, budjetti</label>
 
-            <div class="form-group col-md-6">
-                <label for="orgDescription" class="col-md-3 control-label">Kuvaus</label>
+                    <div class="col-md-9">
+                        <textarea name="orgOthFund" data-ng-model="organisation.other_funding_budget" id="orgOthFund"
+                                  placeholder="Järjestön muut rahoittajat, budjetti" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="orgAcct" class="col-md-3 control-label">Taloushallinto, Tilintarkastus</label>
 
-                <div class="col-md-9">
-                    <textarea name="orgDescription" data-ng-model="organisation.description" id="orgDescription"
-                              placeholder="Kuvaus järjestöstä" class="form-control"></textarea>
+                    <div class="col-md-9">
+                        <textarea name="orgAcct" data-ng-model="organisation.accounting_audit" id="orgAcct"
+                                  placeholder="Järjestön muut rahoittajat, budjetti" class="form-control" required></textarea>
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group col-md-6">
-                <label for="orgLinks" class="col-md-3 control-label">Kansainväliset
-                    yhteydet</label>
-
-                <div class="col-md-9">
-                    <textarea name="orgLinks" data-ng-model="organisation.int_links" id="orgLinks"
-                              placeholder="Kansainväliset yhteydet" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="orgNatLocLinks" class="col-md-3 control-label">Kansalliset ja paikalliset
-                    yhteydet</label>
-
-                <div class="col-md-9">
-                    <textarea name="orgNatLocLinks" data-ng-model="organisation.nat_local_links" id="orgNatLocLinks"
-                              placeholder="Kansalliset ja paikalliset yhteydet" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="orgOthFund" class="col-md-3 control-label">Muut rahoittajat, budjetti</label>
-
-                <div class="col-md-9">
-                    <textarea name="orgOthFund" data-ng-model="organisation.other_funding_budget" id="orgOthFund"
-                              placeholder="Järjestön muut rahoittajat, budjetti" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="orgAcct" class="col-md-3 control-label">Taloushallinto, Tilintarkastus</label>
-
-                <div class="col-md-9">
-                    <textarea name="orgAcct" data-ng-model="organisation.accounting_audit" id="orgAcct"
-                              placeholder="Järjestön muut rahoittajat, budjetti" class="form-control" required></textarea>
+            <div class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="org_background"
+                           class="col-md-3 control-label">
+                        Oleelliset taustatiedot
+                    </label>
+                    <div class="col-md-9">
+                        <textarea name="org_background"
+                                  data-ng-model="organisation.background"
+                                  id="org_background"
+                                  placeholder="Oleelliset taustatiedot"
+                                  class="form-control">
+                        </textarea>
+                    </div>
                 </div>
             </div>
         </fieldset>
-
         <fieldset>
             <legend>Pankkitili</legend>
             <div class="form-group">

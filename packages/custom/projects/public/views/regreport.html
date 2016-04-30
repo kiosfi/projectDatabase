@@ -58,7 +58,7 @@
                     </td>
                     <td class="report-mini-header">Kesto</td>
                     <td class="report-content">
-                        {{project.duration_montds}} kk
+                        {{project.duration_months}} kk
                     </td>
                 </tr>
                 <tr>
@@ -108,7 +108,9 @@
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Kuvaus</div>
+                    <div class="report-mini-header">
+                        Tavoitteet ja keskeiset toimintatavat
+                    </div>
                     <div class="report-subcontent">
                         {{project.organisation.description}}
                     </div>
@@ -157,7 +159,7 @@
                                     "(" + proj.approved.granted_sum_eur + " EUR)" : ""}}
                         </div>
                         <div data-ng-if="!other_projects.length">
-                            Aikaisemmin rahoitettuja hankkeita ei ole.
+                            Aikaisempia rahoitettuja hankkeita ei ole.
                         </div>
                     </div>
                 </div>
@@ -173,7 +175,7 @@
                     <div class="report-subcontent">{{project.context}}</div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Keskeinen tavoite</div>
+                    <div class="report-mini-header">Päätavoitteet</div>
                     <div class="report-subcontent">
                         {{project.project_goal}}
                     </div>
@@ -231,6 +233,14 @@
                     </div>
                     <div class="report-subcontent">
                         {{project.vulnerable_groups}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Tavoitteiden saavuttamisen mittaaminen
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.sustainability_risks}}
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">

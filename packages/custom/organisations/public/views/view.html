@@ -16,19 +16,25 @@
                 <span>
                     <!--                Confirm action here-->
 
-                    <a class="btn-lg" id="delete" data-ng-click="confirm(organisation);">
+                    <a class="btn-lg" id="delete"
+                       data-ng-click="confirm(organisation);">
                         <i class="glyphicon glyphicon-trash"></i>
                     </a>
-                    <a ng-href="/organisations/{{organisation._id}}/edit" class="btn-lg" id="edit">
+                    <a ng-href="/organisations/{{organisation._id}}/edit"
+                       class="btn-lg" id="edit">
                         <span class="glyphicon glyphicon-edit"></span>
                     </a>
                 </span>
             </h2>
             <h3>Edustaja: {{organisation.representative.name}}</h3>
-            <span><a ng-click="orgEditLog = !orgEditLog" ng-show="organisation.updated.length > 0">Tietoja muokattu</a>
+            <span><a ng-click="orgEditLog = !orgEditLog"
+                     ng-show="organisation.updated.length > 0">
+                    Tietoja muokattu
+                </a>
                 <ul ng-show="orgEditLog">
                     <li data-ng-repeat="update in organisation.updated">
-                        {{update.time| date: 'dd-MM-yyyy HH:mm'}}, muokkaaja: {{update.user}}
+                        {{update.time| date: 'dd-MM-yyyy HH:mm'}},
+                        muokkaaja: {{update.user}}
                     </li>
                 </ul></span>
         </div>
@@ -39,11 +45,12 @@
                     <ul>
                         <li><a href="#summary">Perustiedot</a></li>
                         <li><a href="#legalStatus">Hallintomalli ja henkilöstö</a></li>
-                        <li><a href="#description">Kuvaus</a></li>
+                        <li><a href="#description">Tavoitteet ja toimintatavat</a></li>
                         <li><a href="#connections">Yhteydet</a></li>
                         <li><a href="#bankInfo">Tilitiedot</a></li>
                         <li><a href="#prevApp">Aiemmat hakemukset</a></li>
-                        <li><a href="#otherDonors">Järjestön taloustilanne</a></li>
+                        <li><a href="#otherDonors">Taloustilanne</a></li>
+                        <li><a href="#background">Taustatiedot</a></li>
                     </ul>
                 </li>
             </ul>
@@ -119,7 +126,8 @@
                     </tr>
                 </table>
             </article>
-            <article id="prevApp" class="org-article" data-ng-init="findOrgProjects()">
+            <article id="prevApp" class="org-article"
+                     data-ng-init="findOrgProjects()">
                 <h4>KIOS:lta rahoitusta hakeneet hankkeet</h4>
                 <div class="org-content">
                     <table>
@@ -133,7 +141,9 @@
                                 project.approved.granted_sum_eur +" EUR" : "-"}}</td>
                         </tr>
                     </table>
-                    <div data-ng-if="!orgProjects.length">Ei rahoitusta hakeneita hankkeita</div>
+                    <div data-ng-if="!orgProjects.length">
+                        Ei rahoitusta hakeneita hankkeita
+                    </div>
 
                 </div>
             </article>
@@ -144,7 +154,7 @@
                 </section>
             </article>
             <article id="description" class="org-article">
-                <h4>Kuvaus</h4>
+                <h4>Tavoitteet ja keskeiset toimintatavat</h4>
                 <section class="org-content">
                     <p>{{organisation.description}}</p>
                 </section>
@@ -164,6 +174,12 @@
                 <h4>Taloushallinto ja tilintarkastus</h4>
                 <section class="org-content">
                     <p>{{organisation.accounting_audit}}</p>
+                </section>
+            </article>
+            <article id="background" class="org-article">
+                <h4>Oleelliset taustatiedot</h4>
+                <section class="org-content">
+                    <p>{{organisation.background}}</p>
                 </section>
             </article>
         </div>

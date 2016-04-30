@@ -163,10 +163,17 @@ var ProjectSchema = new Schema({
         type: String,
         trim: true
     },
+    /**
+     * The current Finnish name for this field is "Päätavoitteet".
+     */
     project_goal: {
         type: String,
         trim: true
     },
+    /**
+     * The current Finnish name for this field is "Tavoitteiden saavuttamisen
+     * mittaaminen".
+     */
     sustainability_risks: {
         type: String,
         trim: true
