@@ -1,7 +1,6 @@
 <section data-ng-controller="OrganisationsController" data-ng-init="findOne()">
-    <a ng-href="/organisations/{{organisation._id}}" class="btn btn-danger">Peruuta</a>
-    <h2>{{organisation.name}}</h2>
-    <h2>Tietojen muokkaus</h2>
+    <h1>{{organisation.name}} - Muokkaus</h1>
+    <hr>
     <form name="orgEditForm" class="form-horizontal" role="form" data-ng-submit="update(orgEditForm.$valid)" novalidate>
 
         <fieldset>

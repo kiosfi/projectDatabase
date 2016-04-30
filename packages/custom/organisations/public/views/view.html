@@ -27,16 +27,6 @@
                 </span>
             </h2>
             <h3>Edustaja: {{organisation.representative.name}}</h3>
-            <span><a ng-click="orgEditLog = !orgEditLog"
-                     ng-show="organisation.updated.length > 0">
-                    Tietoja muokattu
-                </a>
-                <ul ng-show="orgEditLog">
-                    <li data-ng-repeat="update in organisation.updated">
-                        {{update.time| date: 'dd-MM-yyyy HH:mm'}},
-                        muokkaaja: {{update.user}}
-                    </li>
-                </ul></span>
         </div>
         <div>
             <ul id="menu" class="col-md-3 nav nav-list" style="position: fixed">
@@ -52,6 +42,7 @@
                         <li><a href="#otherDonors">Taloustilanne</a></li>
                         <li><a href="#background">Taustatiedot</a></li>
                     </ul>
+                    <label><a href="#log">Muokkaukset</a></label>
                 </li>
             </ul>
         </div>
@@ -96,9 +87,9 @@
                         <th>Websivut</th>
                         <td>
                             <a href="{{
-                                organisation.website.startsWith('http://') ?
-                                organisation.websiet :
-                                        'http://' + organisation.website}}">
+                                        organisation.website.startsWith('http://') ?
+                                                organisation.websiet :
+                                                'http://' + organisation.website}}">
                                 {{organisation.website}}
                             </a>
                         </td>
@@ -180,6 +171,20 @@
                 <h4>Oleelliset taustatiedot</h4>
                 <section class="org-content">
                     <p>{{organisation.background}}</p>
+                </section>
+            </article>
+            <article id="log" class="org-article">
+                <h4>Muokkaukset</h4>
+                <section class="org-content">
+                    <ul ng-show="organisation.updated.length > 0">
+                        <li data-ng-repeat="update in organisation.updated">
+                            {{update.time| date: 'dd.MM.yyyy HH:mm'}},
+                            muokkaaja: {{update.user}}
+                        </li>
+                    </ul>
+                    <div ng-show="organisation.updated.length === 0">
+                        Ei muokkauksia.
+                    </div>
                 </section>
             </article>
         </div>

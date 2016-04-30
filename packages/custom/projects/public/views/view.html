@@ -23,17 +23,6 @@
             <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
                 <span class="tila" id="state">{{project.state}}</span>
             </h3>
-
-            <span><a ng-click="showEditLog = !showEditLog"
-                     ng-show="project.updated.length > 0">
-                    Tietoja muokattu
-                </a>
-                <ul ng-show="showEditLog">
-                    <li data-ng-repeat="update in project.updated">
-                        {{update.time| date: 'd.M.yyyy HH:mm'}};
-                        muokkaajana {{update.user}}
-                    </li>
-                </ul></span>
         </article>
     </div>
     <div>
@@ -67,6 +56,9 @@
                     <li><a href="#appendices">Tallennetut liitteet</a></li>
                     <li><a href="#addAppendix">Liitteen lisäys</a></li>
                 </ul>
+            </li>
+            <li>
+                <label><a href="#log">Muokkaukset</a></label>
             </li>
         </ul>
         <div style="margin-left: 160px">
@@ -971,6 +963,20 @@
                     </div>
                 </form>
                 &nbsp;
+            </article>
+            <article id="log" class="proj-article">
+                <h4>Muokkaukset</h4>
+                <section class="proj-content">
+                    <ul ng-show="project.updated.length > 0">
+                        <li data-ng-repeat="update in project.updated">
+                            {{update.time| date: 'd.M.yyyy HH:mm'}};
+                            muokkaajana {{update.user}}
+                        </li>
+                    </ul>
+                    <div ng-show="project.updated.length === 0">
+                        Ei muokkauksia.
+                    </div>
+                </section>
             </article>
         </div>
     </div>
