@@ -47,7 +47,7 @@
             <li>
                 <label><a href="#payments">Maksatus</a></label>
                 <ul>
-                    <li><a href="#addPayment">Maksun lisäys</a></li>
+                    <li><a href="#addPayment">Maksutiedon lisäys</a></li>
                 </ul>
             </li>
             <li>
@@ -800,6 +800,9 @@
                     </div>
                 </form>
                 &nbsp;
+                <button class="btn" ng-click="printInvalidFields(paymentForm)">
+                    Debug-tuloste
+                </button>
             </article>
             <article id="checklist" class="proj-article">
                 <h4>Vaaditut liitteet</h4>

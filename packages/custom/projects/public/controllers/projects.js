@@ -971,6 +971,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (invalids !== "") {
                 console.log("The following fields have invalid values:\n\n"
                         + invalids);
+            } else {
+                console.log("All fields have valid values.");
             }
         }
     }
