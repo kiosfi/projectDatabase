@@ -1,73 +1,156 @@
-<section data-ng-controller="ProjectsController" data-ng-init="findOne()">
-    <article data-ng-init="findIntReport()">
-        <article class="er-body">
-            <h2>{{report.reportNumber}}. väliraportti </h2>
-            <h4><b>Järjestö ja hanke: </b>{{project.organisation.name}} : {{project.title}}</h4>
-            <p><b>Koordinaattori: </b>{{project.coordinator}}</p>
-            <p><b>Hankenumero: </b>{{project.project_ref}}</p>
-            <p><b>Alue: </b>{{project.region}}</p>
-        </article>
-        <article class="er-body">
-            <h4><b>Maksatukset</b></h4>
-            <p>Hankkeelle myönnettiin {{project.approved.granted_sum.granted_curr_eur| currency : ""}} EUR hallituksen kokouksessa {{project.approved.board_notified| date : 'dd-MM-yyyy': 'UTC'}}</p>
-            <p>Sopimus allekirjoitettiin {{project.signed.signed_date| date: 'dd-MM-yyyy': 'UTC'}}</p>
-            <p></p>
-            <p><b>Maksatus eriä: </b> {{project.signed.planned_payments.length}}</p>
-            <p><b>Maksusuunnitelma: </b></p>
-            <ul>
-                <li ng-repeat="planned_payment in project.signed.planned_payments">
-                    {{project.signed.planned_payments.indexOf(planned_payment) + 1}}. Erä: {{planned_payment.sum_eur| currency : ""}} EUR, suunniteltu maksupvm {{planned_payment.date| date : 'dd-MM-yyyy': 'UTC'}}
-                </li>
-            </ul>
-            <p><b>Maksetut erät: </b></p>
-            <section   ng-repeat="payment in project.payments">
-                <p>{{payment.sum_eur| currency : ""}} EUR / maksettu {{payment.payment_date| date : 'dd-MM-yyyy': 'UTC'}}</p>
-            </section>
-
-            <p><b>Jäljellä oleva summa: </b> {{project.funding.left_eur| currency : ""}} EUR</p>
-        </article>
-
-        <article class="er-body">
-            <h4><b>Raportointi ja yhteydenpito</b></h4>
-        </article>
-
-        <article class="er-body">
-            <h4><b>Hankkeen suunniteltujen tavoitteiden ja toimintojen toteutuminen</b></h4>
-            <ol>
-                <li ng-repeat="method in project.methods">
-                    <i>{{method.name}} ({{method.level}})</i><br>
-                    Kuvaus: {{method.comment}}<br>
-                </li>
-            </ol>
-        </article>
-
-        <article class="er-body">
-            <h4><b>Väliraportointiin mennessä toteutetut aktiviteetit</b></h4>
-            <ol>
-                <li ng-repeat="method in project.methods">
-                    <i>{{method.name}} ({{method.level}})</i><br>
-                    Kuvaus: {{method.comment}}<br>
-                    Kommentit: {{report.methods[project.methods.indexOf(method)]}}<br>
-                </li>
-            </ol>
-        </article>
-
-        <article class="er-body">
-            <h4><b>Budjetin toteutuminen ja raportoitu summa</b></h4>
-        </article>
-
-        <article class="er-body">
-            <h4><b>Muita huomioita</b></h4>
-            <p>{{report.comments}}</p>
-        </article>
-
-        <article class="er-body">
-            <h4><b>KIOS:in arvio</b></h4>
-            <p>{{report.overall_rating_kios}}</p>
-        </article>
-
-        <article class="er-body">
-            <h4><b>Toimiston päätös</b></h4>
-        </article>
+<section data-ng-controller="ProjectsController"
+         data-ng-init="findOneForIntReport()" class="report-body">
+    <table>
+        <tr>
+            <td style="width: 50%">
+                <img src="/theme/assets/img/kios_logo_public.gif" alt="KIOS"
+                     style="float: left">
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <!--                        <td class="report-mini-header" colspan="2">-->
+                        <td class="report-mini-header">
+                            {{report.reportNumber}}. väliraportti
+                        </td>
+                    </tr>
+                    <!--                    <tr>
+                                            <td class="report-mini-header">Hallituksen kokous</td>
+                                            <td class="report-content">
+                                                {{project.approved.board_meeting}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="report-mini-header">Esittelijä</td>
+                                            <td class="report-content">
+                                                {{project.approved.presented_by}}
+                                            </td>
+                                        </tr>-->
+                </table>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <article class="col-md-12 border-body">
+        <table>
+            <tr>
+                <td class="report-mini-header">Järjestö</td>
+                <td class="report-content">{{project.organisation.name}}</td>
+                <td class="report-mini-header">Hanke</td>
+                <td class="report-content">{{project.title}}</td>
+            </tr>
+            <tr>
+                <td class="report-mini-header">Hankenumero</td>
+                <td class="report-content">{{project.project_ref}}</td>
+                <td class="report-mini-header">Alue&nbsp;/&nbsp;Maa</td>
+                <td class="report-content">{{project.region}}&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="report-mini-header">Koordinaattori</td>
+                <td class="report-content" colspan="3">
+                    {{project.coordinator}}
+                </td>
+            </tr>
+        </table>
     </article>
+    <table>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td class="report-header">Hanke</td>
+            <td>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Maksatukset</div>
+                    <div class="report-subcontent">
+                        Hankkeelle myönnettiin
+                        {{project.approved.granted_sum_eur| currency : ""}} EUR
+                        hallituksen kokousessa
+                        {{project.approved.board_notified| date : 'dd.MM.yyyy': 'UTC'}}.</div>
+                    <div class="report-subcontent" style="margin-bottom: 1em">
+                        Sopimus allekirjoitettiin
+                        {{project.signed.signed_date| date: 'dd.MM.yyyy': 'UTC'}}.
+                    </div>
+
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Maksusuunnitelma</div>
+                    <ol>
+                        <li ng-repeat="planned_payment in project.signed.planned_payments">
+                            Erä: {{planned_payment.sum_eur| currency : ""}} EUR.
+                            Suunniteltu maksupvm
+                            {{planned_payment.date| date : 'dd.MM.yyyy': 'UTC'}}
+                        </li>
+                    </ol>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Maksetut erät</div>
+                    <ul>
+                        <li   ng-repeat="payment in project.payments">
+                            {{payment.sum_eur| currency : ""}} EUR; maksettu
+                            {{payment.payment_date| date : 'dd.MM.yyyy': 'UTC'}}
+                        </li>
+                    </ul>
+                </div>
+                <div style="margin-bottom: 2em">
+                    <div class="report-mini-header">Jäljellä oleva summa</div>
+                    <div class="report-subcontent">
+                        {{project.funding.left_eur| currency : ""}} EUR
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Evaluointi ja vaikuttavuuden arviointi
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.reporting_evaluation}}
+                    </div>
+                </div>
+                <!--                <div style="margin-bottom: 1em">
+                                    <div class="report-mini-header">
+                                        Hankkeen suunniteltujen tavoitteiden ja toimintojen
+                                        toteutuminen
+                                    </div>
+                                    <ol>
+                                        <li ng-repeat="method in project.methods">
+                                            <p><em>{{method.name}} ({{method.level}})</em></p>
+                                            <p>Kuvaus: {{method.comment}}</p>
+                                        </li>
+                                    </ol>
+                                </div>-->
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+<!--                        Väliraporttiin mennessä toteutetut aktiviteetit-->
+                        Suunniteltujen tavoitteiden ja toimintojen toteutuminen
+                    </div>
+                    <ul>
+                        <li ng-repeat="method in project.methods"
+                            style="padding-bottom: 1em">
+                            <p><em>{{method.name}} ({{method.level}})</em></p>
+                            <p class="report-subcontent"><em>Suunnitellut:</em>
+                                {{method.comment}}</p>
+                            <p class="report-subcontent"><em>Toteutuneet:</em>
+                                {{report.methods[project.methods.indexOf(method)]}}</p>
+                        </li>
+                    </ul>
+                </div>
+                <!--                <div style="margin-bottom: 1em">
+                                    <div class="report-mini-header">
+                                        Budjetin toteutuminen ja raportoitu summa
+                                    </div>
+                                </div>-->
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Muita huomioita</div>
+                    <div class="report-subcontent">{{report.comments}}</div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">KIOS:in arvio</div>
+                    <div class="report-subcontent">
+                        {{report.overall_rating_kios}}
+                    </div>
+                </div>
+                <!--                <div style="margin-bottom: 1em">
+                                    <div class="report-mini-header">Toimiston päätös</div>
+                                </div>-->
+            </td>
+        </tr>
+    </table>
 </section>

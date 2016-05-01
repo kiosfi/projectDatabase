@@ -46,7 +46,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          * @returns {Date}      A new Date object.
          */
         $scope.convertDate = function (day, month, year) {
-            var parsed = new Date(year, month - 1, day).toISOString();
+            var parsed = new Date(year, month - 1, day + 1).toISOString();
             return parsed;
         };
 
@@ -419,6 +419,47 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.duration;
 
         /**
+         * Like findOne, but also gets the list of all projects of the given
+         * organisation (i.e. all projects excluding the one in $scope.project)
+         * and writes the result into $scope.other_projects.
+         *
+         * @param {type} orgID  ID of the organisation.
+         * @returns {undefined}
+         */
+        $scope.findOneForRegReport = function (orgID) {
+            Projects.get({
+                projectId: $stateParams.projectId
+            }, function (project) {
+                $scope.project = project;
+                $scope.ensureCompatibility(project);
+                OrgProjects.findProjects($scope.project.organisation._id)
+                        .success(function (projects) {
+                    var pid = $scope.project._id;
+                    var projs = [];
+                    projects.forEach(function(proj) {
+                        if (proj._id !== pid) {
+                            projs.push(proj);
+                        }
+                    });
+                    $scope.other_projects = projs;
+                });
+            });
+        };
+
+        /**
+         * Finds project's intermediary report and puts the given report to
+         * $scope.report so that report's details can be shown on intreport.html
+         */
+        $scope.findOneForIntReport = function () {
+            Projects.get({
+                projectId: $stateParams.projectId
+            }, function (project) {
+                $scope.project = project;
+                $scope.report = project.intermediary_reports[$stateParams.reportId - 1];
+            });
+        };
+
+        /**
          * Like findOne, but calculates additionally the duration of the project
          * and writes a string indicating the duration to $scope.duration. This
          * function is used for initializing the data for the end report view.
@@ -448,34 +489,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
 
         $scope.other_projects;
-
-        /**
-         * Like findOne, but also gets the list of all projects of the given
-         * organisation (i.e. all projects excluding the one in $scope.project)
-         * and writes the result into $scope.other_projects.
-         *
-         * @param {type} orgID  ID of the organisation.
-         * @returns {undefined}
-         */
-        $scope.findOneForRegReport = function (orgID) {
-            Projects.get({
-                projectId: $stateParams.projectId
-            }, function (project) {
-                $scope.project = project;
-                $scope.ensureCompatibility(project);
-                OrgProjects.findProjects($scope.project.organisation._id)
-                        .success(function (projects) {
-                    var pid = $scope.project._id;
-                    var projs = [];
-                    projects.forEach(function(proj) {
-                        if (proj._id !== pid) {
-                            projs.push(proj);
-                        }
-                    });
-                    $scope.other_projects = projs;
-                });
-            });
-        };
 
         /**
          * Makes sure that the given project conforms to the latest version of
@@ -859,17 +872,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             $scope.newOrg = false;
             Organisations.getOrganisationNames(function (organisations) {
                 $scope.orgs = organisations;
-            });
-        };
-        /**
-         * Finds project's intermediary report and puts the given report to $scope.report
-         * so that report's details can be shown on intreport.html
-         */
-        $scope.findIntReport = function () {
-            Projects.get({
-                projectId: $stateParams.projectId
-            }, function (project) {
-                $scope.report = project.intermediary_reports[$stateParams.reportId - 1];
             });
         };
 

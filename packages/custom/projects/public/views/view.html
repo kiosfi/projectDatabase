@@ -197,7 +197,8 @@
             <article id="details" class="proj-article">
                 <h4>Lisätiedot</h4>
                 <div id="appinfo" class="proj-content">
-                    <div class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-12" style="margin-bottom: 1em"
+                         ng-show="project.methods.length > 0">
                         <div class="col-md-4 mini-header">
                             Suunnitellut toimintatavat
                         </div>
@@ -382,9 +383,7 @@
                                 Tiedot lisäsi
                             </div>
                             <div class="col-md-9">{{project.in_review.user}},
-                                {{project.in_review.date|
-                                                    date:'d.M.yyyy, HH:mm':
-                                                    'UTC'}}</div>
+                                {{project.in_review.date| date:'d.M.yyyy, HH:mm': 'UTC'}}</div>
                             <div class="col-md-3 mini-header">Kommentit</div>
                             <div class="col-md-9">
                                 {{project.in_review.comments}}
@@ -648,7 +647,8 @@
                 </section>
                 &nbsp;
             </article>
-            <article id="payments" class="proj-article">
+            <article id="payments" class="proj-article"
+                     ng-show="project.approved.date">
                 <h4>Maksatus</h4>
                 <div class="proj-content col-md-12" style="margin-bottom: 1em">
                     <div class="col-md-3 mini-header">
@@ -663,7 +663,7 @@
                         {{project.approved.approved_date| date:'d.M.yyyy': 'UTC'}}
                     </div>
                 </div>
-                <div class="proj-content">
+                <div class="proj-content" ng-show="project.signed.date">
                     <h5>Maksuaikataulu</h5>
                     <div ng-repeat="planned_payment in project.signed.
                                         planned_payments" class="col-md-12">
@@ -690,13 +690,15 @@
                     </div>
                     &nbsp;
                 </div>
-                <div class="proj-content col-md-12" style="margin-bottom: 1em">
+                <div class="proj-content col-md-12" style="margin-bottom: 1em"
+                     ng-show="project.payments.length > 0">
                     <div class="col-md-3 mini-header">Maksettu yhteensä</div>
                     <div class="col-md-9">
                         {{project.funding.paid_eur| currency : ""}} EUR
                     </div>
                 </div>
-                <div class="proj-content col-md-12">
+                <div class="proj-content col-md-12"
+                     ng-show="project.signed.date">
                     <div class="col-md-3 mini-header">Jäljellä</div>
                     <div class="col-md-9">
                         {{project.funding.left_eur| currency : ""}} EUR
@@ -704,7 +706,7 @@
                 </div>
                 &nbsp;
             </article>
-            <article id="addPayment" ng-show="project.signed.signed_by"
+            <article id="addPayment" ng-show="project.signed.date"
                      class="proj-article">
                 <h4>Maksutiedon lisäys</h4>
                 <form name="paymentForm" class="form-horizonal proj-content"
@@ -712,7 +714,7 @@
                       data-ng-submit="addPaymentInfo(paymentForm.$valid)"
                       novalidate>
                     <div class="form-group col-xs-12" id="PaymentDate">
-                        <label for="paymentDate" class="col-xs-2 control-label">
+                        <label class="col-xs-2 control-label">
                             Päiväys
                         </label>
                         <div id="paymentDate">

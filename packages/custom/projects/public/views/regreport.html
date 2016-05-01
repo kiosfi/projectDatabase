@@ -1,7 +1,5 @@
-<section data-ng-controller="ProjectsController" data-ng-init="findOneForRegReport()"
-         class="report-body">
-    <!--    <h1>Rekisteröintiraportti</h1>
-        <hr>-->
+<section data-ng-controller="ProjectsController"
+         data-ng-init="findOneForRegReport()" class="report-body">
     <!-- Note that this page doesn't use bootstrap in order to ensure that the
     text looks similar when viewed through browser and printed (to PDF).-->
     <table>
@@ -34,67 +32,64 @@
         </tr>
     </table>
     <hr>
-    <article>
-        <div class="col-md-12 border-body" style="padding-left: 2em">
-            <table>
-                <tr>
-                    <td class="report-mini-header">Järjestö</td>
-                    <td class="report-content">{{project.organisation.name}}</td>
-                    <td class="report-mini-header">Hanke</td>
-                    <td class="report-content">{{project.title}}</td>
-                </tr>
-                <tr>
-                    <td class="report-mini-header">Hankenumero</td>
-                    <td class="report-content">{{project.project_ref}}</td>
-                    <td class="report-mini-header">Alue / Maa</td>
-                    <td class="report-content">{{project.region}}&nbsp;</td>
-                </tr>
-                <tr>
-                    <td class="report-mini-header">Haettu tuki</td>
-                    <td class="report-content">
-                        {{project.funding.applied_curr_local}}
-                        {{project.funding.curr_local_unit}} /
-                        {{project.funding.applied_curr_eur}} EUR
-                    </td>
-                    <td class="report-mini-header">Kesto</td>
-                    <td class="report-content">
-                        {{project.duration_months}} kk
-                    </td>
-                </tr>
-                <tr>
-                    <td class="report-mini-header">Vaaditut liitteet</td>
-                    <td colspan="3" class="report-content">
-                        hankebudjetti
-                        ({{project.required_appendices.proj_budget ? "x" : "_"}}),
-                        suositukset ({{project.required_appendices.references ? "x" : "_"}}),
-                        vuosibudjetti ({{project.required_appendices.annual_budget ? "x" : "_"}}),
-                        säännöt ({{project.required_appendices.rules ? "x" : "_"}}),
-                        rekisteröintitodistus ({{project.required_appendices.reg_cert ? "x" : "_"}}),
-                        vuosikertomus ({{project.required_appendices.annual_report ? "x" : "_"}}),
-                        tilintarkastukset ({{project.required_appendices.audit_reports ? "x" : "_"}})
-                    </td>
-                </tr>
-                <tr><td colspan="4">&nbsp;</td></tr>
-                <tr>
-                    <td class="report-mini-header">Kuvaus</td>
-                    <td colspan="3" class="report-content">
-                        {{project.description}}&nbsp;
-                    </td>
-                </tr>
-                <tr><td colspan="4">&nbsp;</td></tr>
-                <tr>
-                    <td class="report-mini-header">Oikeudellinen&nbsp;fokus</td>
-                    <td colspan="3" class="report-content">
-                        <table>
-                            <tr ng-repeat="theme in project.approved.themes">
-                                <td>{{theme}}</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        &nbsp;
+    <article class="col-md-12 border-body">
+        <table>
+            <tr>
+                <td class="report-mini-header">Järjestö</td>
+                <td class="report-content">{{project.organisation.name}}</td>
+                <td class="report-mini-header">Hanke</td>
+                <td class="report-content">{{project.title}}</td>
+            </tr>
+            <tr>
+                <td class="report-mini-header">Hankenumero</td>
+                <td class="report-content">{{project.project_ref}}</td>
+                <td class="report-mini-header">Alue / Maa</td>
+                <td class="report-content">{{project.region}}&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="report-mini-header">Haettu tuki</td>
+                <td class="report-content">
+                    {{project.funding.applied_curr_local}}
+                    {{project.funding.curr_local_unit}} /
+                    {{project.funding.applied_curr_eur}} EUR
+                </td>
+                <td class="report-mini-header">Kesto</td>
+                <td class="report-content">
+                    {{project.duration_months}} kk
+                </td>
+            </tr>
+            <tr>
+                <td class="report-mini-header">Vaaditut liitteet</td>
+                <td colspan="3" class="report-content">
+                    hankebudjetti
+                    ({{project.required_appendices.proj_budget ? "x" : "_"}}),
+                    suositukset ({{project.required_appendices.references ? "x" : "_"}}),
+                    vuosibudjetti ({{project.required_appendices.annual_budget ? "x" : "_"}}),
+                    säännöt ({{project.required_appendices.rules ? "x" : "_"}}),
+                    rekisteröintitodistus ({{project.required_appendices.reg_cert ? "x" : "_"}}),
+                    vuosikertomus ({{project.required_appendices.annual_report ? "x" : "_"}}),
+                    tilintarkastukset ({{project.required_appendices.audit_reports ? "x" : "_"}})
+                </td>
+            </tr>
+            <tr><td colspan="4">&nbsp;</td></tr>
+            <tr>
+                <td class="report-mini-header">Kuvaus</td>
+                <td colspan="3" class="report-content">
+                    {{project.description}}&nbsp;
+                </td>
+            </tr>
+            <tr><td colspan="4">&nbsp;</td></tr>
+            <tr>
+                <td class="report-mini-header">Oikeudellinen&nbsp;fokus</td>
+                <td colspan="3" class="report-content">
+                    <table>
+                        <tr ng-repeat="theme in project.approved.themes">
+                            <td>{{theme}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </article>
     <table>
         <tr><td colspan="2">&nbsp;</td></tr>
@@ -156,7 +151,7 @@
                         <div data-ng-repeat="proj in other_projects">
                             <em>{{proj.title}}</em>
                             {{proj.approved.granted_sum_eur ?
-                                    "(" + proj.approved.granted_sum_eur + " EUR)" : ""}}
+                                                    "(" + proj.approved.granted_sum_eur + " EUR)" : ""}}
                         </div>
                         <div data-ng-if="!other_projects.length">
                             Aikaisempia rahoitettuja hankkeita ei ole.
@@ -187,7 +182,7 @@
                             <tr ng-repeat="theme in project.approved.themes">
                                 <td>{{theme}}</td>
                             </tr>
-                        </table>&nbsp;
+                        </table>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
