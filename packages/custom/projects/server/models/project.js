@@ -95,7 +95,8 @@ var ProjectSchema = new Schema({
             type: Number
         },
         paid_eur: {
-            type: Number
+            type: Number,
+            default: 0
         },
         left_eur: {
             type: Number

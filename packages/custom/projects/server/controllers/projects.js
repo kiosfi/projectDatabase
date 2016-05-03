@@ -338,7 +338,6 @@ module.exports = function (Projects) {
                     payment.sum_eur;
             project.funding.left_eur = project.funding.left_eur -
                     payment.sum_eur;
-
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
