@@ -41,7 +41,6 @@
                                            data-ng-model="project.title"
                                            id="title" placeholder="Hanke"
                                            required>
-
                                     <div ng-show="projectEditForm.title.$invalid"
                                          class="help-block">
                                         <p ng-show="projectEditForm.title.$error.required">
@@ -179,7 +178,7 @@
                                               data-ng-model="method.comment"
                                               id="methodComment"
                                               placeholder="Toimintatavan kuvaus"
-                                              class="form-control" required>
+                                              class="form-control">
                                     </textarea>
                                 </div>
                                 <div style="clear:both;">&nbsp;</div>
@@ -773,13 +772,18 @@
         </fieldset>
         <fieldset ng-show="project.signed.date">
             <legend>
-                <a href="" ng-click="showSignDetails = !showSignDetails">Allekirjoitettu -tilan tiedot</a>
+                <a href="" ng-click="showSignDetails = !showSignDetails">
+                    Allekirjoitettu -tilan tiedot
+                </a>
             </legend>
             <div ng-show="showSignDetails">
                 <div class="form-group col-md-12">
                     <label for="signed_by" class="col-md-2">Allekirjoittaja</label>
                     <div class="col-md-10">
-                        <input name="signed_by" type="text" class="form-control" data-ng-model="project.signed.signed_by" id="signed_by" placeholder="Sopimuksen allekirjoittajan nimi" required>
+                        <input name="signed_by" type="text" class="form-control"
+                               data-ng-model="project.signed.signed_by"
+                               id="signed_by"
+                               placeholder="Sopimuksen allekirjoittajan nimi">
                     </div>
 
                 </div>
