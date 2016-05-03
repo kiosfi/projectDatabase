@@ -12,9 +12,9 @@ var ProjectSchema = new Schema({
      * for updating old entries to the newest version during runtime.
      */
     schema_version: {
-        type: Number, // Current version is 5.
+        type: Number, // Current version is 6.
         required: true,
-        default: 5
+        default: 6
     },
     /**
      * Security level of the project. The value should be one of the following
@@ -94,8 +94,14 @@ var ProjectSchema = new Schema({
         applied_curr_eur: {
             type: Number
         },
+        /**
+         * The total sum of payments so far to the project, in euros. The
+         * default value for this field was defined in schema version 6 as a
+         * bugfix.
+         */
         paid_eur: {
-            type: Number
+            type: Number,
+            default: 0
         },
         left_eur: {
             type: Number

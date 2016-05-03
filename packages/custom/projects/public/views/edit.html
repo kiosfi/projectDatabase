@@ -179,7 +179,7 @@
                                               data-ng-model="method.comment"
                                               id="methodComment"
                                               placeholder="Toimintatavan kuvaus"
-                                              class="form-control" required>
+                                              class="form-control">
                                     </textarea>
                                 </div>
                                 <div style="clear:both;">&nbsp;</div>
@@ -779,11 +779,9 @@
                 <div class="form-group col-md-12">
                     <label for="signed_by" class="col-md-2">Allekirjoittaja</label>
                     <div class="col-md-10">
-                        <input name="signed_by" type="text" class="form-control" data-ng-model="project.signed.signed_by" id="signed_by" placeholder="Sopimuksen allekirjoittajan nimi" required>
+                        <input name="signed_by" type="text" class="form-control" data-ng-model="project.signed.signed_by" id="signed_by" placeholder="Sopimuksen allekirjoittajan nimi">
                     </div>
-
                 </div>
-
                 <div class="form-group col-md-12">
                     <label for="signed_date_day" class="col-md-2">Päivämäärä</label>
                     <div class="col-md-2" style="float:left;" ng-class="{
@@ -1083,7 +1081,7 @@
                     <div class="col-md-6">
                         <select name="grade" id="grade"
                                 data-ng-model="project.end_report.grade"
-                                class="form-control" required>
+                                class="form-control">
                             <option value="" selected></option>
                             <option value="4">4 (Onnistui yli odotusten)</option>
                             <option value="4">3 (Onnistui suunnitellusti)</option>
