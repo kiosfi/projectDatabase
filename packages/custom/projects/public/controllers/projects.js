@@ -4,24 +4,39 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     '$location', '$window', '$q', '$http', 'Global', 'Projects', 'OrgProjects', 'MeanUser', 'Circles', 'Organisations',
     function ($scope, $stateParams, $location, $window, $q, $http, Global, Projects, OrgProjects, MeanUser, Circles, Organisations) {
         $scope.global = Global;
-        $scope.coordinators = ['Teppo Tenhunen', 'Kaisa Koordinaattori', 'Maija Maa', 'Juha Jokinen'];
-        $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet', 'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
-            'Naisten oikeudet ja sukupuolten välinen tasa-arvo', 'Lapsen oikeudet',
-            'Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet', 'Etniset vähemmistöt ja alkuperäiskansat',
-            'LHBTIQ', 'Ihmisoikeuspuolustajat'];
-        $scope.methodNames = ['Tietoisuuden lisääminen', 'Ihmisoikeuskasvatus ja -koulutus', 'Kapasiteetin vahvistaminen',
-            'Kampanjointi ja/tai lobbaus', 'Vaikuttamistyö', 'Dokumentaatio ja monitorointi', 'Oikeusapu ja -neuvonta',
-            'Strategiset ja/tai perusoikeuskanteet ja/tai ryhmäkanteet', 'Oikeusturvan saatavuuden parantaminen', 'Palveluiden saatavuuden parantaminen',
-            'Ihmisoikeuspuolustajien suojelu', 'Verkostoituminen', 'Alueellinen yhteistyö', 'Toimintatuki', 'Muu'];
-        $scope.methodLevels = ['Kansainvälinen', 'Kansallinen', 'Paikallinen', 'Yhteisö'];
+        $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet',
+            'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
+            'Naisten oikeudet ja sukupuolten välinen tasa-arvo',
+            'Lapsen oikeudet',
+            'Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet',
+            'Etniset vähemmistöt ja alkuperäiskansat', 'LHBTIQ',
+            'Ihmisoikeuspuolustajat', 'Muu'];
+        $scope.methodNames = ['Tietoisuuden lisääminen',
+            'Ihmisoikeuskasvatus ja -koulutus', 'Kapasiteetin vahvistaminen',
+            'Kampanjointi ja/tai lobbaus', 'Vaikuttamistyö',
+            'Dokumentaatio ja monitorointi', 'Oikeusapu ja -neuvonta',
+            'Strategiset ja/tai perusoikeuskanteet ja/tai ryhmäkanteet',
+            'Oikeusturvan saatavuuden parantaminen',
+            'Palveluiden saatavuuden parantaminen',
+            'Ihmisoikeuspuolustajien suojelu', 'Verkostoituminen',
+            'Alueellinen yhteistyö', 'Toimintatuki', 'Muu'];
+        $scope.methodLevels = ['Kansainvälinen', 'Kansallinen', 'Paikallinen',
+            'Yhteisö'];
         $scope.addedMethods = [];
         $scope.plannedPayments = [];
         $scope.deadlines = [];
         $scope.themeSelection = [];
         $scope.objectiveComments = [];
-        $scope.rejcategories = ["1 Hanke ei ole ihmisoikeushanke", "2 Järjestöllä ei ole ihmisoikeushankkeen toteutuskapasiteettia",
-            "3 Järjestöllä ei ole hallintokapasiteettia", "4 Hanke on epärealistinen tai muuten heikosti suunniteltu",
-            "5 Hankkeen budjetti on epärealistinen", "6 Huonot tai puuttuvat referenssit", "7 Strategia", "8 Muu, mikä?"];
+        $scope.rejcategories = [
+            "1 Hanke ei ole ihmisoikeushanke",
+            "2 Järjestöllä ei ole ihmisoikeushankkeen toteutuskapasiteettia",
+            "3 Järjestöllä ei ole hallintokapasiteettia",
+            "4 Hanke on epärealistinen tai muuten heikosti suunniteltu",
+            "5 Hankkeen budjetti on epärealistinen",
+            "6 Huonot tai puuttuvat referenssit",
+            "7 Strategia",
+            "8 Muu, mikä?"
+        ];
         $scope.addedRejections = [];
         $scope.currentDate = new Date();
 
@@ -178,6 +193,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                                 $scope.notified_day, $scope.notified_month,
                                 $scope.notified_year);
                     }
+
+                    project.approved.themes = $scope.themeSelection;
                 }
 
                 if (typeof project.signed !== 'undefined') {
@@ -511,12 +528,18 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (project.schema_version < 5) {
                 // The name of this field was changed to prevent confusion with
                 // the field "background_check":
-                project.schema_version = 5;
                 project.context = project.background;
                 project.background = undefined;
                 if (project.approved && project.approved.approved_by &&
                         project.approved.approved_by === "Halko") {
                     project.approved.approved_by = "Hallituksen kokous";
+                }
+            }
+            if (project.schema_version < 7) {
+                project.schema_version = 7;
+                // This field was removed in schema version 7:
+                if (project.approved.presented_by) {
+                    project.approved.presented_by = undefined;
                 }
                 project.$update(function () {
                 });
