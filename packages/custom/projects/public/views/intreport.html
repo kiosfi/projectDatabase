@@ -9,23 +9,16 @@
             <td>
                 <table>
                     <tr>
-                        <!--                        <td class="report-mini-header" colspan="2">-->
                         <td class="report-mini-header">
                             {{report.reportNumber}}. väliraportti
                         </td>
                     </tr>
-                    <!--                    <tr>
-                                            <td class="report-mini-header">Hallituksen kokous</td>
-                                            <td class="report-content">
-                                                {{project.approved.board_meeting}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="report-mini-header">Esittelijä</td>
-                                            <td class="report-content">
-                                                {{project.approved.presented_by}}
-                                            </td>
-                                        </tr>-->
+                    <tr>
+                        <td class="report-mini-header">Esittelijä</td>
+                        <td class="report-content">
+                            {{project.coordinator}}
+                        </td>
+                    </tr>
                 </table>
             </td>
         </tr>
@@ -45,12 +38,6 @@
                 <td class="report-mini-header">Alue&nbsp;/&nbsp;Maa</td>
                 <td class="report-content">{{project.region}}&nbsp;</td>
             </tr>
-            <tr>
-                <td class="report-mini-header">Koordinaattori</td>
-                <td class="report-content" colspan="3">
-                    {{project.coordinator}}
-                </td>
-            </tr>
         </table>
     </article>
     <table>
@@ -58,6 +45,58 @@
         <tr>
             <td class="report-header">Hanke</td>
             <td>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Päätavoitteet
+                    </div>
+                    <div class="report-subcontent" style="margin-bottom: 1em">
+                        <em>Suunnitellut: </em>
+                        {{project.project_goal}}
+                    </div>
+                    <div class="report-subcontent">
+                        <em>Toteutuneet: </em>
+                        <!-- For some reason, the value of this field is an
+                        array. -->
+                        {{report.objectives[0]}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Toiminnot
+                    </div>
+                    <ul>
+                        <li ng-repeat="method in project.methods"
+                            style="padding-bottom: 1em">
+                            <p><em>{{method.name}} ({{method.level}})</em></p>
+                            <p class="report-subcontent"><em>Suunnitellut:</em>
+                                {{method.comment}}</p>
+                            <p class="report-subcontent"><em>Toteutuneet:</em>
+                                {{report.methods[project.methods.indexOf(method)]}}</p>
+                        </li>
+                    </ul>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Raportointi ja yhteydenpito
+                    </div>
+                    <div class="report-subcontent">
+                        {{report.communication}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Evaluointi ja vaikuttavuuden arviointi
+                    </div>
+                    <div class="report-subcontent">
+                        {{report.evaluation}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 2em">
+                    <div class="report-mini-header">
+                        Budjetin toteutuminen ja raportoitu summa
+                    </div>
+                    <div class="report-subcontent">{{report.budget}}</div>
+                </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">Maksatukset</div>
                     <div class="report-subcontent">
@@ -96,14 +135,6 @@
                         {{project.funding.left_eur| currency : ""}} EUR
                     </div>
                 </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
-                        Evaluointi ja vaikuttavuuden arviointi
-                    </div>
-                    <div class="report-subcontent">
-                        {{project.reporting_evaluation}}
-                    </div>
-                </div>
                 <!--                <div style="margin-bottom: 1em">
                                     <div class="report-mini-header">
                                         Hankkeen suunniteltujen tavoitteiden ja toimintojen
@@ -116,40 +147,21 @@
                                         </li>
                                     </ol>
                                 </div>-->
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
-<!--                        Väliraporttiin mennessä toteutetut aktiviteetit-->
-                        Suunniteltujen tavoitteiden ja toimintojen toteutuminen
-                    </div>
-                    <ul>
-                        <li ng-repeat="method in project.methods"
-                            style="padding-bottom: 1em">
-                            <p><em>{{method.name}} ({{method.level}})</em></p>
-                            <p class="report-subcontent"><em>Suunnitellut:</em>
-                                {{method.comment}}</p>
-                            <p class="report-subcontent"><em>Toteutuneet:</em>
-                                {{report.methods[project.methods.indexOf(method)]}}</p>
-                        </li>
-                    </ul>
-                </div>
                 <!--                <div style="margin-bottom: 1em">
                                     <div class="report-mini-header">
                                         Budjetin toteutuminen ja raportoitu summa
                                     </div>
                                 </div>-->
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Muita huomioita</div>
-                    <div class="report-subcontent">{{report.comments}}</div>
-                </div>
-                <div style="margin-bottom: 1em">
                     <div class="report-mini-header">KIOS:in arvio</div>
                     <div class="report-subcontent">
                         {{report.overall_rating_kios}}
                     </div>
                 </div>
-                <!--                <div style="margin-bottom: 1em">
-                                    <div class="report-mini-header">Toimiston päätös</div>
-                                </div>-->
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Päätös</div>
+                    <div class="report-subcontent">{{report.comments}}</div>
+                </div>
             </td>
         </tr>
     </table>

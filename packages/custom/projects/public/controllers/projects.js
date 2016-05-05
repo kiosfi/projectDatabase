@@ -228,19 +228,22 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 if (project.intermediary_reports.length > 0) {
                     project.intermediary_reports = [];
 
-                    angular.forEach($scope.int_reports, function (obj) {
+                    angular.forEach($scope.int_reports, function (report) {
                         project.intermediary_reports.push({
-                            methods: obj.methods,
-                            overall_rating_kios: obj.overall_rating_kios,
-                            objectives: obj.objectives,
-                            comments: obj.comments,
-                            approved_by: obj.approved_by,
+                            methods: report.methods,
+                            overall_rating_kios: report.overall_rating_kios,
+                            objectives: report.objectives,
+                            communication: report.communication,
+                            evaluation: report.evaluation,
+                            budget: report.budget,
+                            comments: report.comments,
+                            approved_by: report.approved_by,
                             date_approved:
-                                    $scope.convertDate(obj.date_day,
-                                            obj.date_month, obj.date_year),
-                            reportNumber: obj.reportNumber,
-                            user: obj.user,
-                            date: obj.date});
+                                    $scope.convertDate(report.date_day,
+                                            report.date_month, report.date_year),
+                            reportNumber: report.reportNumber,
+                            user: report.user,
+                            date: report.date});
                     });
                 }
 
@@ -536,11 +539,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 }
             }
             if (project.schema_version < 7) {
-                project.schema_version = 7;
                 // This field was removed in schema version 7:
                 if (project.approved.presented_by) {
                     project.approved.presented_by = undefined;
                 }
+                // The name of this field was changed:
+                if (project.end_report.comments) {
+                    project.end_report.proposition = project.end_report.comments;
+                    project.end.report.comments = undefined;
+                }
+                project.schema_version = 7;
                 project.$update(function () {
                 });
             }

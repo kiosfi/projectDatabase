@@ -24,7 +24,7 @@
                     <tr>
                         <td class="report-mini-header">Esittelijä</td>
                         <td class="report-content">
-                            {{project.approved.presented_by}}
+                            {{project.coordinator}}
                         </td>
                     </tr>
                 </table>
@@ -62,13 +62,19 @@
                 <td class="report-mini-header">Vaaditut liitteet</td>
                 <td colspan="3" class="report-content">
                     hankebudjetti
-                    ({{project.required_appendices.proj_budget ? "x" : "_"}}),
-                    suositukset ({{project.required_appendices.references ? "x" : "_"}}),
-                    vuosibudjetti ({{project.required_appendices.annual_budget ? "x" : "_"}}),
-                    säännöt ({{project.required_appendices.rules ? "x" : "_"}}),
-                    rekisteröintitodistus ({{project.required_appendices.reg_cert ? "x" : "_"}}),
-                    vuosikertomus ({{project.required_appendices.annual_report ? "x" : "_"}}),
-                    tilintarkastukset ({{project.required_appendices.audit_reports ? "x" : "_"}})
+                    [{{project.required_appendices.proj_budget ? "x" : "_"}}],
+                    suositukset
+                    [{{project.required_appendices.references ? "x" : "_"}}],
+                    vuosibudjetti
+                    [{{project.required_appendices.annual_budget ? "x" : "_"}}],
+                    säännöt
+                    [{{project.required_appendices.rules ? "x" : "_"}}],
+                    rekisteröintitodistus
+                    [{{project.required_appendices.reg_cert ? "x" : "_"}}],
+                    vuosikertomus
+                    [{{project.required_appendices.annual_report ? "x" : "_"}}],
+                    tilintarkastukset
+                    [{{project.required_appendices.audit_reports ? "x" : "_"}}]
                 </td>
             </tr>
             <tr><td colspan="4">&nbsp;</td></tr>
@@ -120,11 +126,18 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Kansalliset ja kansainväliset yhteydet
+                        Kansalliset yhteydet
+                    </div>
+                    <div class="report-subcontent">
+                        <p>{{project.organisation.nat_local_links}}</p>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Kansainväliset yhteydet
                     </div>
                     <div class="report-subcontent">
                         <p>{{project.organisation.int_links}}</p>
-                        <p>{{project.organisation.nat_local_links}}</p>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -151,7 +164,8 @@
                         <div data-ng-repeat="proj in other_projects">
                             <em>{{proj.title}}</em>
                             {{proj.approved.granted_sum_eur ?
-                                                    "(" + proj.approved.granted_sum_eur + " EUR)" : ""}}
+                                "(" + proj.approved.granted_sum_eur + " EUR)" :
+                                        ""}}
                         </div>
                         <div data-ng-if="!other_projects.length">
                             Aikaisempia rahoitettuja hankkeita ei ole.

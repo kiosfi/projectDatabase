@@ -12,9 +12,8 @@ var ProjectSchema = new Schema({
      * for updating old entries to the newest version during runtime.
      */
     schema_version: {
-        type: Number, // Current version is 6.
+        type: Number, // Current version is 7.
         required: true,
-        default: 6
     },
     /**
      * Security level of the project. The value should be one of the following
@@ -311,14 +310,6 @@ var ProjectSchema = new Schema({
             type: String
         },
         /**
-         * Who presented this project for approval. This field was added in the
-         * schema version 5.
-         */
-        presented_by: {
-            type: String,
-            trim: true
-        },
-        /**
          * The board meeting where the approval was given for the project. This
          * field was added in the schema version 5.
          */
@@ -398,6 +389,13 @@ var ProjectSchema = new Schema({
         user: {
             type: String
         },
+        /**
+         * This field was added in the schema version 7.
+         */
+        budget: {
+            type: String,
+            trim: true
+        },
         audit: {
             date: {
                 type: Date
@@ -422,11 +420,28 @@ var ProjectSchema = new Schema({
             type: String
         },
         /**
-         * Since schema version 3, this file is used for the proposed end
-         * resolution for the project.
+         * The board meeting where the end report was approved. This field was
+         * added in the schema version 7.
          */
-        comments: {
-            type: String
+        board_meeting: {
+            type: String,
+            trim: true
+        },
+        /**
+         * Since schema version 3, this file is used for the proposed end
+         * resolution for the project. The name of this field was changed from
+         * "comments" to "proposition".
+         */
+        proposition: {
+            type: String,
+            trim: true
+        },
+        /**
+         * This field was added in the schema version 7.
+         */
+        conclusion: {
+            type: String,
+            trim: true
         },
         /**
          * The estimated number of people, whom this project has directly helped.

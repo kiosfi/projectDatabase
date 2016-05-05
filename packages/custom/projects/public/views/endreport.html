@@ -24,7 +24,7 @@
                     <tr>
                         <td class="report-mini-header">Esittelijä</td>
                         <td class="report-content">
-                            {{project.end_report.presented_by}}
+                            {{project.coordinator}}
                         </td>
                     </tr>
                 </table>
@@ -97,6 +97,14 @@
         <tr>
             <td class="report-header">Hanke</td>
             <td>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Budjetin toteutuminen ja raportoitu summa
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.end_report.budget}}
+                    </div>
+                </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">Maksatukset</div>
                     <div class="report-subcontent">
@@ -196,9 +204,15 @@
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Päätösesitys</div>
+                    <div class="report-mini-header">Esitys</div>
                     <div class="report-subcontent">
-                        {{project.end_report.comments}}
+                        {{project.end_report.proposition}}
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">Päätös</div>
+                    <div class="report-subcontent">
+                        {{project.end_report.conclusion}}
                     </div>
                 </div>
             </td>
