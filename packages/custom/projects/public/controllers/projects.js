@@ -454,15 +454,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.ensureCompatibility(project);
                 OrgProjects.findProjects($scope.project.organisation._id)
                         .success(function (projects) {
-                    var pid = $scope.project._id;
-                    var projs = [];
-                    projects.forEach(function(proj) {
-                        if (proj._id !== pid) {
-                            projs.push(proj);
-                        }
-                    });
-                    $scope.other_projects = projs;
-                });
+                            var pid = $scope.project._id;
+                            var projs = [];
+                            projects.forEach(function (proj) {
+                                if (proj._id !== pid) {
+                                    projs.push(proj);
+                                }
+                            });
+                            $scope.other_projects = projs;
+                        });
             });
         };
 
@@ -585,6 +585,20 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 $scope.remove(project);
             }
         };
+
+        $scope.confirmPaymentDeletion = function (paymentNumber) {
+            if (confirm("Haluatko varmasti poistaa " + paymentNumber +
+                    ". maksun?")) {
+                var project = $scope.project;
+                var removed = project.payments.splice(
+                        project.payments.findIndex(function (payment) {
+                            return payment.payment_number === paymentNumber;
+                        }), 1)[0];
+                project.funding.paid_eur -= removed.sum_eur;
+                project.funding.left_eur += removed.sum_eur;
+                project.$update(function (response) {});
+            }
+        }
 
         /**
          * Asks for confirmation for appendix removal. If the user approves the
@@ -747,7 +761,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     project.payment.payment_number = project.payments.length + 1;
                 }
                 project.$addPayment(function (response) {
-                    $window.location.reload();
                 });
             }
 

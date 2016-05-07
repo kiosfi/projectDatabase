@@ -684,8 +684,14 @@
                         <div class="col-md-2">
                             {{payment.sum_eur| currency : ""}} EUR
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-2">
                             {{payment.payment_date| date:'d.M.yyyy': 'UTC'}}
+                        </div>
+                        <div class="col-md-7">
+                            <a data-ng-click="confirmPaymentDeletion(payment.payment_number)"
+                               class="btn-lg">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
                         </div>
                     </div>
                     &nbsp;
