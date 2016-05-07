@@ -681,7 +681,7 @@
                 </div>
                 <div ng-show="project.payments.length > 0" class="proj-content">
                     <h5>Maksetut erät</h5>
-                    <div ng-repeat="payment in project.payments | orderBy: 'payment_date'"
+                    <div ng-repeat="payment in project.payments| orderBy: 'payment_date'"
                          class="col-md-12">
                         <div class="col-md-1">
                             <em id="paid">{{$index + 1}}. erä</em>
@@ -689,10 +689,10 @@
                         <div class="col-md-2">
                             {{numberToString(payment.sum_eur)}} EUR
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             {{payment.payment_date| date:'d.M.yyyy': 'UTC'}}
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-8">
                             <a data-ng-click="confirmPaymentDeletion(payment.payment_number, $index + 1)"
                                class="btn-lg">
                                 <span class="glyphicon glyphicon-trash"></span>
@@ -729,10 +729,10 @@
                             Päiväys
                         </label>
                         <div id="paymentDate">
-                            <div class="col-xs-3" ng-class="{'has-error':
-                                                paymentForm.paymentDay.$invalid }">
+                            <div class="col-xs-3"
+                                 ng-class="{'has-error': paymentForm.paymentDay.$invalid }">
                                 <input name="paymentDay" type="number"
-                                       class="form-control"
+                                       ng-trim="true" class="form-control"
                                        data-ng-model="payment_day"
                                        id="paymentDay" required
                                        />
@@ -743,11 +743,10 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-xs-3" ng-class="{
-                                        'has-error'
-                                                :paymentForm.paymentMonth.$invalid }">
+                            <div class="col-xs-3"
+                                 ng-class="{'has-error': paymentForm.paymentMonth.$invalid }">
                                 <input name="paymentMonth" type="number"
-                                       class="form-control"
+                                       ng-trim="true" class="form-control"
                                        data-ng-model="payment_month"
                                        id="paymentMonth"
                                        required />
@@ -758,11 +757,10 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-xs-3" ng-class="{
-                                        'has-error'
-                                                : paymentForm.paymentYear.$invalid }">
+                            <div class="col-xs-3"
+                                 ng-class="{'has-error': paymentForm.paymentYear.$invalid }">
                                 <input name="paymentYear" type="number"
-                                       class="form-control"
+                                       ng-trim="true" class="form-control"
                                        data-ng-model="payment_year"
                                        id="paymentYear"
                                        required />
@@ -782,7 +780,7 @@
                         </label>
                         <div class="col-xs-4" >
                             <input name="paymentSumEUR" type="number"
-                                   class="form-control"
+                                   ng-trim="true" class="form-control"
                                    data-ng-model="project.payment.sum_eur"
                                    id="paymentSumEUR" placeholder="Summa (EUR)"
                                    required />
@@ -814,86 +812,86 @@
             </article>
             <article id="checklist" class="proj-article">
                 <h4>Vaaditut liitteet</h4>
-                <div class="proj-article">
-                    <form>
-                        <div class="col-md-12">
-                            <span class="col-md-3">
-                                <label for="proj_budget" >Hankebudjetti</label>
-                            </span>
-                            <span class="col-md-9">
-                                <input type="checkbox" id="proj_budget"
-                                       name="proj_budget"
-                                       ng-model="project.required_appendices.proj_budget"
-                                       disabled>
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-3">
-                                <label for="references">Suositukset</label>
-                            </span>
-                            <span class="col-md-9">
-                                <input type="checkbox" id="references"
-                                       ng-model="project.required_appendices.references"
-                                       name="references" disabled>
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-3">
-                                <label for="annual_budget">Vuosibudjetti</label>
-                            </span>
-                            <span class="col-md-9">
-                                <input type="checkbox" id="annual_budget"
-                                       ng-model="project.required_appendices.annual_budget"
-                                       name="annual_budget" disabled>
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-3">
-                                <label for="rules">Säännöt</label>
-                            </span>
-                            <span class="col-md-9">
-                                <input type="checkbox" id="rules" name="rules"
-                                       ng-model="project.required_appendices.rules"
-                                       disabled>
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-3">
-                                <label for="reg_cert">
-                                    Rekisteröintitodistus
-                                </label>
-                            </span>
-                            <span class="col-md-9">
-                                <input type="checkbox" id="reg_cert"
-                                       ng-model="project.required_appendices.reg_cert"
-                                       name="reg_cert" disabled>
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-3">
-                                <label for="annual_report">Vuosikertomus</label>
-                            </span>
-                            <span class="col-md-9">
-                                <input type="checkbox" id="annual_report"
-                                       ng-model="project.required_appendices.annual_report"
-                                       name="annual_report" disabled>
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-3">
-                                <label for="audit_reports">
-                                    Tilintarkastukset
-                                </label>
-                            </span>
-                            <span class="col-md-9">
-                                <input type="checkbox" id="audit_reports"
-                                       ng-model="project.required_appendices.audit_reports"
-                                       name="audit_reports" disabled>
-                            </span>
-                        </div>
-                    </form>
-                    &nbsp;
-                </div>
+                <ul style="padding-left: 1em">
+                    <li class="col-md-12">
+                        <span class="col-md-3">
+                            <label>Hankebudjetti</label>
+                        </span>
+                        <span class="col-md-9">
+                            <span class="glyphicon glyphicon-check"
+                                  ng-show="project.required_appendices.proj_budget"></span>
+                            <span class="glyphicon glyphicon-unchecked"
+                                  ng-show="!project.required_appendices.proj_budget"></span>
+                        </span>
+                    </li>
+                    <li class="col-md-12">
+                        <span class="col-md-3">
+                            <label>Suositukset</label>
+                        </span>
+                        <span class="col-md-9">
+                            <span class="glyphicon glyphicon-check"
+                                  ng-show="project.required_appendices.references"></span>
+                            <span class="glyphicon glyphicon-unchecked"
+                                  ng-show="!project.required_appendices.references"></span>
+                        </span>
+                    </li>
+                    <li class="col-md-12">
+                        <span class="col-md-3">
+                            <label>Vuosibudjetti</label>
+                        </span>
+                        <span class="col-md-9">
+                            <span class="glyphicon glyphicon-check"
+                                  ng-show="project.required_appendices.annual_budget"></span>
+                            <span class="glyphicon glyphicon-unchecked"
+                                  ng-show="!project.required_appendices.annual_budget"></span>
+                        </span>
+                    </li>
+                    <li class="col-md-12">
+                        <span class="col-md-3">
+                            <label>Säännöt</label>
+                        </span>
+                        <span class="col-md-9">
+                            <span class="glyphicon glyphicon-check"
+                                  ng-show="project.required_appendices.rules"></span>
+                            <span class="glyphicon glyphicon-unchecked"
+                                  ng-show="!project.required_appendices.rules"></span>
+                        </span>
+                    </li>
+                    <li class="col-md-12">
+                        <span class="col-md-3">
+                            <label>Rekisteröintitodistus</label>
+                        </span>
+                        <span class="col-md-9">
+                            <span class="glyphicon glyphicon-check"
+                                  ng-show="project.required_appendices.reg_cert"></span>
+                            <span class="glyphicon glyphicon-unchecked"
+                                  ng-show="!project.required_appendices.reg_cert"></span>
+                        </span>
+                    </li>
+                    <li class="col-md-12">
+                        <span class="col-md-3">
+                            <label>Vuosikertomus</label>
+                        </span>
+                        <span class="col-md-9">
+                            <span class="glyphicon glyphicon-check"
+                                  ng-show="project.required_appendices.annual_report"></span>
+                            <span class="glyphicon glyphicon-unchecked"
+                                  ng-show="!project.required_appendices.annual_report"></span>
+                        </span>
+                    </li>
+                    <li class="col-md-12">
+                        <span class="col-md-3">
+                            <label>Tilintarkastukset</label>
+                        </span>
+                        <span class="col-md-9">
+                            <span class="glyphicon glyphicon-check"
+                                  ng-show="project.required_appendices.audit_reports"></span>
+                            <span class="glyphicon glyphicon-unchecked"
+                                  ng-show="!project.required_appendices.audit_reports"></span>
+                        </span>
+                    </li>
+                </ul>
+                &nbsp;
             </article>
             <article id="appendices" class="proj-article"
                      ng-show="project.appendices.length > 0">

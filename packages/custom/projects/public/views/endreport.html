@@ -119,7 +119,7 @@
 
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Suunnitellut maksuerät</div>
+                    <div class="report-mini-header">Suunnitellut maksut</div>
                     <table>
                         <tr ng-repeat="planned_payment in project.signed.planned_payments">
                             <td style="padding-left: 2em">
@@ -164,7 +164,7 @@
                     <ul>
                         <li ng-repeat="method in project.methods"
                             style="padding-bottom: 1em">
-                            <p><em>{{method.name}} ({{method.level}})</em></p>
+                            <p><em>{{method.name}}</em> ({{method.level}})</p>
                             <p class="report-subcontent"><em>Suunnitellut:</em>
                                 {{method.comment}}</p>
                             <p class="report-subcontent"><em>Toteutuneet:</em>
