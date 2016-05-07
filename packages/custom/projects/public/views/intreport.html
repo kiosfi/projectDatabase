@@ -101,7 +101,7 @@
                     <div class="report-mini-header">Maksatukset</div>
                     <div class="report-subcontent">
                         Hankkeelle myönnettiin
-                        {{project.approved.granted_sum_eur| currency : ""}} EUR
+                        {{numberToString(project.approved.granted_sum_eur)}} EUR
                         hallituksen kokousessa
                         {{project.approved.board_notified| date : 'dd.MM.yyyy': 'UTC'}}.</div>
                     <div class="report-subcontent" style="margin-bottom: 1em">
@@ -111,28 +111,42 @@
 
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Maksusuunnitelma</div>
-                    <ol>
-                        <li ng-repeat="planned_payment in project.signed.planned_payments">
-                            Erä: {{planned_payment.sum_eur| currency : ""}} EUR.
-                            Suunniteltu maksupvm
-                            {{planned_payment.date| date : 'dd.MM.yyyy': 'UTC'}}
-                        </li>
-                    </ol>
+                    <div class="report-mini-header">Suunnitellut maksuerät</div>
+                    <table>
+                        <tr ng-repeat="planned_payment in project.signed.planned_payments">
+                            <td style="padding-left: 2em">
+                                <em>{{$index + 1}}. erä</em>
+                            </td>
+                            <td style="padding-left: 2em">
+                                {{numberToString(planned_payment.sum_eur)}} EUR
+                            </td>
+                            <td style="padding-left: 2em">
+                                {{planned_payment.date| date : 'dd.MM.yyyy': 'UTC'}}
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Maksetut erät</div>
-                    <ul>
-                        <li   ng-repeat="payment in project.payments">
-                            {{payment.sum_eur| currency : ""}} EUR; maksettu
-                            {{payment.payment_date| date : 'dd.MM.yyyy': 'UTC'}}
-                        </li>
-                    </ul>
+                    <div class="report-mini-header">Toteutuneet maksut</div>
+                    <table>
+                        <tr ng-repeat="payment in project.payments|
+                                    orderBy: 'payment_date'">
+                            <td style="padding-left: 2em">
+                                <em>{{$index + 1}}. erä</em>
+                            </td>
+                            <td style="padding-left: 2em">
+                                {{numberToString(payment.sum_eur)}} EUR
+                            </td>
+                            <td style="padding-left: 2em">
+                                {{payment.payment_date| date : 'dd.MM.yyyy': 'UTC'}}
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div style="margin-bottom: 2em">
                     <div class="report-mini-header">Jäljellä oleva summa</div>
                     <div class="report-subcontent">
-                        {{project.funding.left_eur| currency : ""}} EUR
+                        {{numberToString(project.funding.left_eur)}} EUR
                     </div>
                 </div>
                 <!--                <div style="margin-bottom: 1em">

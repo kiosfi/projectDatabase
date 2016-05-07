@@ -6,12 +6,31 @@
  * @param {type} param1
  * @param {type} param2
  */
-angular.module('mean.organisations').controller('OrganisationsController', ['$scope', '$stateParams', '$location', '$window', '$http', 'Global', 'Organisations', 'MeanUser', 'Circles', 'Projects', 'OrgProjects',
-    function ($scope, $stateParams, $location, $window, $http, Global, Organisations, MeanUser, Circles, Projects, OrgProjects) {
+angular.module('mean.organisations').controller('OrganisationsController', ['$scope', '$stateParams', '$location', '$window', '$http', '$filter', 'Global', 'Organisations', 'MeanUser', 'Circles', 'Projects', 'OrgProjects',
+    function ($scope, $stateParams, $location, $window, $http, $filter, Global, Organisations, MeanUser, Circles, Projects, OrgProjects) {
         $scope.global = Global;
 
         $scope.organisation = undefined;
         $scope.organisations = [];
+
+        /**
+         * This function converts a number to a Finnish string representation
+         * (i.e. ',' for decimal separator and '.' for grouping. If the number
+         * is undefined, the string "-" will be returned. Note that this piece
+         * of code was copy-pasted from projects controller.
+         *
+         * @param {Number} number   The number to be converted.
+         * @returns {String}        The string representation of that number.
+         */
+        $scope.numberToString = function (number) {
+            if (typeof number === "undefined") {
+                return "-";
+            }
+            var string = $filter('currency')(number, '', 2);
+            string = string.replace(/,/g, ";");
+            string = string.replace(".", ",");
+            return string.replace(/;/g, ".");
+        };
 
         $scope.hasAuthorization = function (organisation) {
             if (!organisation)

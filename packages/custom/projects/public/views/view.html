@@ -119,13 +119,17 @@
                 <div ng-show="project.approved.granted_sum_eur"
                      class="ng-hide proj-content col-md-12">
                     <div class="col-md-3 mini-header">Myönnetty EUR</div>
-                    <div class="col-md-9">{{project.approved.granted_sum_eur| currency : ""}}</div>
+                    <div class="col-md-9">
+                        {{numberToString(project.approved.granted_sum_eur)}}
+                    </div>
                 </div>
                 <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
                                         project.funding.applied_curr_eur >= 0"
                      class="ng-hide proj-content col-md-12">
                     <div class="col-md-3 mini-header">Haettu EUR</div>
-                    <div class="col-md-9">{{project.funding.applied_curr_eur| currency : ""}}</div>
+                    <div class="col-md-9">
+                        {{numberToString(project.funding.applied_curr_eur)}}
+                    </div>
                 </div>
                 <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
                                         project.funding.applied_curr_local"
@@ -134,7 +138,9 @@
                         {{project.funding.curr_local_unit ?
                             project.funding.curr_local_unit : "paik. val."}}
                     </div>
-                    <div class="col-md-9">{{project.funding.applied_curr_local| currency : ""}}</div>
+                    <div class="col-md-9">
+                        {{numberToString(project.funding.applied_curr_local)}}
+                    </div>
                 </div>
                 <div ng-show="project.duration_months >= 0"
                      class="proj-content col-md-12">
@@ -440,8 +446,7 @@
                                 Hyväksytty summa
                             </div>
                             <div class="col-md-9">
-                                {{project.approved.granted_sum_eur|
-                                                currency : ""}} EUR
+                                {{numberToString(project.approved.granted_sum_eur)}} EUR
                             </div>
                             <div class="col-md-3 mini-header">Teemat</div>
                             <div class="col-md-9">
@@ -657,7 +662,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        {{project.approved.granted_sum_eur| currency : ""}} EUR
+                        {{numberToString(project.approved.granted_sum_eur)}} EUR
                     </div>
                     <div class="col-md-7">
                         {{project.approved.approved_date| date:'d.M.yyyy': 'UTC'}}
@@ -669,26 +674,26 @@
                                         planned_payments" class="col-md-12">
                         <div class="col-md-1"><em>{{project.signed.
                                                 planned_payments.indexOf(planned_payment) + 1}}. erä</em></div>
-                        <div class="col-md-2">{{planned_payment.sum_eur| currency : ""}} EUR</div>
+                        <div class="col-md-2">{{numberToString(planned_payment.sum_eur)}} EUR</div>
                         <div class="col-md-9">{{planned_payment.date| date:'d.M.yyyy': 'UTC'}}</div>
                     </div>
                     &nbsp;
                 </div>
                 <div ng-show="project.payments.length > 0" class="proj-content">
                     <h5>Maksetut erät</h5>
-                    <div ng-repeat="payment in project.payments"
+                    <div ng-repeat="payment in project.payments | orderBy: 'payment_date'"
                          class="col-md-12">
                         <div class="col-md-1">
-                            <em id="paid">{{payment.payment_number}}. erä</em>
+                            <em id="paid">{{$index + 1}}. erä</em>
                         </div>
                         <div class="col-md-2">
-                            {{payment.sum_eur| currency : ""}} EUR
+                            {{numberToString(payment.sum_eur)}} EUR
                         </div>
                         <div class="col-md-2">
                             {{payment.payment_date| date:'d.M.yyyy': 'UTC'}}
                         </div>
                         <div class="col-md-7">
-                            <a data-ng-click="confirmPaymentDeletion(payment.payment_number)"
+                            <a data-ng-click="confirmPaymentDeletion(payment.payment_number, $index + 1)"
                                class="btn-lg">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
@@ -700,14 +705,14 @@
                      ng-show="project.payments.length > 0">
                     <div class="col-md-3 mini-header">Maksettu yhteensä</div>
                     <div class="col-md-9">
-                        {{project.funding.paid_eur| currency : ""}} EUR
+                        {{numberToString(project.funding.paid_eur)}} EUR
                     </div>
                 </div>
                 <div class="proj-content col-md-12"
                      ng-show="project.signed.date">
                     <div class="col-md-3 mini-header">Jäljellä</div>
                     <div class="col-md-9">
-                        {{project.funding.left_eur| currency : ""}} EUR
+                        {{numberToString(project.funding.left_eur)}} EUR
                     </div>
                 </div>
                 &nbsp;

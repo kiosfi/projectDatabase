@@ -49,9 +49,9 @@
             <tr>
                 <td class="report-mini-header">Haettu tuki</td>
                 <td class="report-content">
-                    {{project.funding.applied_curr_local}}
+                    {{numberToString(project.funding.applied_curr_local)}}
                     {{project.funding.curr_local_unit}} /
-                    {{project.funding.applied_curr_eur}} EUR
+                    {{numberToString(project.funding.applied_curr_eur)}} EUR
                 </td>
                 <td class="report-mini-header">Kesto</td>
                 <td class="report-content">
@@ -164,7 +164,8 @@
                         <div data-ng-repeat="proj in other_projects">
                             <em>{{proj.title}}</em>
                             {{proj.approved.granted_sum_eur ?
-                                "(" + proj.approved.granted_sum_eur + " EUR)" :
+                                "(" + numberToString(proj.approved.granted_sum_eur) +
+                                        " EUR)" :
                                         ""}}
                         </div>
                         <div data-ng-if="!other_projects.length">

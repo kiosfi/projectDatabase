@@ -129,7 +129,8 @@
                                 </a>
                             </th>
                             <td>{{project.approved.granted_sum_eur ?
-                                project.approved.granted_sum_eur +" EUR" : "-"}}</td>
+                                numberToString(project.approved.granted_sum_eur)
+                                        + " EUR" : "-"}}</td>
                         </tr>
                     </table>
                     <div data-ng-if="!orgProjects.length">

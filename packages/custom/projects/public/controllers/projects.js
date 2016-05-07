@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.projects').controller('ProjectsController', ['$scope', '$stateParams',
-    '$location', '$window', '$q', '$http', 'Global', 'Projects', 'OrgProjects', 'MeanUser', 'Circles', 'Organisations',
-    function ($scope, $stateParams, $location, $window, $q, $http, Global, Projects, OrgProjects, MeanUser, Circles, Organisations) {
+    '$location', '$window', '$q', '$http', '$filter', 'Global', 'Projects', 'OrgProjects', 'MeanUser', 'Circles', 'Organisations',
+    function ($scope, $stateParams, $location, $window, $q, $http, $filter, Global, Projects, OrgProjects, MeanUser, Circles, Organisations) {
         $scope.global = Global;
         $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet',
             'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
@@ -39,6 +39,24 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         ];
         $scope.addedRejections = [];
         $scope.currentDate = new Date();
+
+        /**
+         * This function converts a number to a Finnish string representation
+         * (i.e. ',' for decimal separator and '.' for grouping. If the number
+         * is undefined, the string "-" will be returned.
+         *
+         * @param {Number} number   The number to be converted.
+         * @returns {String}        The string representation of that number.
+         */
+        $scope.numberToString = function (number) {
+            if (typeof number === "undefined") {
+                return "-";
+            }
+            var string = $filter('currency')(number, '', 2);
+            string = string.replace(/,/g, ";");
+            string = string.replace(".", ",");
+            return string.replace(/;/g, ".");
+        };
 
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
             var idx = $scope.themeSelection.indexOf(theme);
@@ -586,17 +604,27 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }
         };
 
-        $scope.confirmPaymentDeletion = function (paymentNumber) {
-            if (confirm("Haluatko varmasti poistaa " + paymentNumber +
+        /**
+         *
+         * @param {type} paymentNumber
+         * @param {type} ordinal
+         * @returns {undefined}
+         */
+        $scope.confirmPaymentDeletion = function (paymentNumber, ordinal) {
+            if (confirm("Haluatko varmasti poistaa " + ordinal +
                     ". maksun?")) {
                 var project = $scope.project;
-                var removed = project.payments.splice(
-                        project.payments.findIndex(function (payment) {
-                            return payment.payment_number === paymentNumber;
-                        }), 1)[0];
+                var index = project.payments.findIndex(function (payment) {
+                    return payment.payment_number === paymentNumber;
+                });
+                var removed = project.payments.splice(index, 1)[0];
                 project.funding.paid_eur -= removed.sum_eur;
                 project.funding.left_eur += removed.sum_eur;
-                project.$update(function (response) {});
+                for (; index < project.payments.length; ++index) {
+                    project.payments[index].payment_number--;
+                }
+                project.$update(function (response) {
+                });
             }
         }
 
