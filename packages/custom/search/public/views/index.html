@@ -13,10 +13,9 @@
                        class="panel-button">Kriteerit</a></h4>
             </div>
             <div class="panel-body" ng-show="showCriteria">
-                <form name="searchForm" class="form-horizontal col-md-8" role="form"
-                      data-ng-init="getProjectFields()" data-ng-submit="update()"
-                      novalidate>
-
+                <form name="searchForm" class="form-horizontal col-md-8"
+                      role="form" data-ng-init="getProjectFields()"
+                      data-ng-submit="update()" novalidate>
                     <div class="form-group col-md-12">
                         <div class="col-md-12"
                              data-ng-repeat="query in searchBy">
@@ -25,7 +24,7 @@
                                     class="col-md-6" style="float:left;">
                                 <option data-ng-repeat="field in projectFields"
                                         value="{{field.name}}">
-                                    {{projectFields.indexOf(field) + 1}}. {{field.fi}}
+                                    {{field.fi}}
                                 </option>
                             </select>
                             <label ng-show="query.field" class="col-md-6">
@@ -35,7 +34,7 @@
                                     class="col-md-6" style="float:left;">
                                 <option data-ng-repeat="orgField in orgFields"
                                         value="{{orgField.name}}">
-                                    {{orgFields.indexOf(orgField) + 1}}. {{orgField.fi}}
+                                    {{orgField.fi}}
                                 </option>
                             </select>
                             <div ng-show="query.field === 'org_fields'"
@@ -49,7 +48,7 @@
                                     style="float:left;">
                                 <option data-ng-repeat="state in states"
                                         value="{{state}}">
-                                    {{states.indexOf(state) + 1}}. {{state}}
+                                    {{state}}
                                 </option>
                             </select>
                             <select ng-show="query.field === 'approved.themes'"
@@ -57,7 +56,7 @@
                                     style="float:left;">
                                 <option data-ng-repeat="theme in themes"
                                         value="{{theme}}">
-                                    {{themes.indexOf(theme) + 1}}. {{theme}}
+                                    {{theme}}
                                 </option>
                             </select>
                             <div ng-show="stringParams.indexOf(query.field) > -1" class="col-md-6"
@@ -71,7 +70,7 @@
                                     style="float:left;">
                                 <option data-ng-repeat="level in levels"
                                         value="{{level}}">
-                                    {{levels.indexOf(level) + 1}}. {{level}}
+                                    {{level}}
                                 </option>
                             </select>
                             <select ng-show="query.field === 'dates'"
@@ -79,7 +78,7 @@
                                     style="float:left;">
                                 <option data-ng-repeat="dateField in dateFields"
                                         value="{{dateField.name}}">
-                                    {{dateFields.indexOf(dateField) + 1}}. {{dateField.fi}}
+                                    {{dateField.fi}}
                                 </option>
                             </select>
                             <div ng-show="query.dateField" class="col-md-12" style="float:left;">
@@ -124,7 +123,7 @@
                                     data-ng-model="query.value" class="col-md-6" style="float:right">
                                 <option data-ng-repeat="funds in funding"
                                         value="{{funds.name}}">
-                                    {{funding.indexOf(funds) + 1}}. {{funds.fi}}
+                                    {{funds.fi}}
                                 </option>
                             </select>
                         </div>
@@ -150,7 +149,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4><a ng-click="showResults = !showResults"
-                       class="panel-button">Tulokset</a></h4>
+                       class="panel-button">Tulokset</a>
+                    ({{numberOfResults}} kpl)</h4>
             </div>
             <div class="panel-body" ng-show="showResults">
                 <style type="text/css">
@@ -227,16 +227,203 @@
 
             </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-show="numberOfResults > 0">
             <div class="panel-heading">
                 <h4><a ng-click="showExport = !showExport"
                        class="panel-button">Vienti</a></h4>
             </div>
             <div class="panel-body" ng-show="showExport">
-                <p>Hankkeita löydettiin {{numberOfResults}}.</p>
-                <button ng-click="getResultsForCsv()">
-                    Vie CSV-tiedostoon
-                </button>
+                <div class="col-md-12">
+                    <form>
+                        <h5>Kentät</h5>
+                        <span class="col-md-3">
+                            <input id="basics" type="checkbox"
+                                   onclick="setStates(['ref', 'title', 'state', 'security_level', 'coordinator', 'area', 'dac', 'reg_date', 'applied_local', 'applied_eur', 'duration', 'granted_eur'], 'basics');">
+                            <label for="basics">Perustiedot</label>
+                        </span>
+                        <div class="col-md-12">
+                            <span class="col-md-3">
+                                <input type="checkbox" id="ref" checked>
+                                <label for="ref">Hankenro</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="title" checked>
+                                <label for="title">Nimi</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="state" checked>
+                                <label for="state">Tila</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="security_level">
+                                <label for="security_level">Turvaluokitus</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="coordinator">
+                                <label for="coordinator">Koordinaattori</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="area" checked>
+                                <label for="area">Alue</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="dac" checked>
+                                <label for="dac">DAC</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="reg_date" checked>
+                                <label for="reg_date">Rekisteröimispvm</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="applied_local" checked>
+                                <label for="applied_local">Haettu paik. val.</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="applied_eur" checked>
+                                <label for="applied_eur">Haettu EUR</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="granted_eur" checked>
+                                <label for="granted_eur">Myönnetty EUR</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="duration" checked>
+                                <label for="duration">Kesto</label>
+                            </span>
+                        </div>
+                        <span class="col-md-3">
+                            <input id="organisation" type="checkbox"
+                                   onclick="setStates(['org_name', 'org_rep', 'org_addr', 'org_tel', 'org_email', 'org_www'], 'organisation');">
+                            <label for="organisation">Järjestön tiedot</label>
+                        </span>
+                        <div class="col-md-12">
+                            <span class="col-md-3">
+                                <input type="checkbox" id="org_name" checked>
+                                <label for="org_name">
+                                    Järjestön nimi
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="org_rep">
+                                <label for="org_rep">
+                                    Järjestön edustaja
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="org_addr">
+                                <label for="org_addr">
+                                    Järjestön osoite
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="org_tel">
+                                <label for="org_tel">
+                                    Järjestön puh. nro.
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="org_email">
+                                <label for="org_email">
+                                    Järjestön sähköpostios.
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="org_www">
+                                <label for="org_www">
+                                    Järjestön websivut
+                                </label>
+                            </span>
+                        </div>
+                        <span class="col-md-3">
+                            <input id="extra_info" type="checkbox"
+                                   onclick="setStates(['description', 'activities', 'context', 'goal', 'target_group', 'human_resources', 'equality', 'vulnerable_groups', 'sustainability_risks', 'reporting_evaluation', 'budget', 'other_funding', 'referees', 'background_check'], 'extra_info');">
+                            <label for="extra_info">Lisätiedot</label>
+                        </span>
+                        <div class="col-md-12">
+                            <span class="col-md-3">
+                                <input type="checkbox" id="themes">
+                                <label for="themes">Oikeudellinen fokus</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="description">
+                                <label for="description">Kuvaus</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="activities">
+                                <label for="activities">Toimintatavat</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="context">
+                                <label for="context">
+                                    Ihmisoikeuskonteksti
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="goal">
+                                <label for="goal">Päätavoitteet</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="target_group">
+                                <label for="target_group">Kohderyhmä</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="human_resources">
+                                <label for="human_resources">
+                                    Henkilöresurssit
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="equality">
+                                <label for="equality">
+                                    T-A. ja muut teemat
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="vulnerable_groups">
+                                <label for="vulnerable_groups">
+                                    Haavoitt. ryhmien huomiointi
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox"
+                                       id="sustainability_risks">
+                                <label for="sustainability_risks">Riskit</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox"
+                                       id="reporting_evaluation">
+                                <label for="reporting_evaluation">
+                                    Eval. ja vaikutt. arviointi
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="budget">
+                                <label for="budget">Budjetti</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="other_funding">
+                                <label for="other_funding">
+                                    Muualta haettu rahoitus
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="referees">
+                                <label for="referees">Suosittelijat</label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="background_check">
+                                <label for="background_check">
+                                    Taustaselvitys
+                                </label>
+                            </span>
+                        </div>
+                        <span class="col-md-12">
+                            <button ng-click="getResultsForCsv()">
+                                Vie CSV-tiedostoon
+                            </button>
+                        </span>
+                    </form>
+                </div>
             </div>
         </div>
     </article>

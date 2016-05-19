@@ -11,9 +11,9 @@ var ProjectSchema = new Schema({
      * This piece of metadata tells the version number of the scheme. It is used
      * for updating old entries to the newest version during runtime.
      */
-    schema_version: {
-        type: Number, // Current version is 7.
-        required: true,
+    schema_version: {           // Current version is 7.
+        type: Number,
+        required: true
     },
     /**
      * Security level of the project. The value should be one of the following
@@ -21,7 +21,7 @@ var ProjectSchema = new Schema({
      * "Salainen" (secret). For the time being, this is just a string and
      * doesn't affect access control.
      */
-    security_level: {
+    security_level: {           // "Turvaluokitus"
         type: String,
         required: true,
         default: "Julkinen"
@@ -32,14 +32,14 @@ var ProjectSchema = new Schema({
      * funding and last three (least significant) digits are a number
      * identifying the project against projects with same year of application.
      */
-    project_ref: {
+    project_ref: {              // "Tunnus"
         type: String,
         required: true
     },
     /**
      * Title of the project.
      */
-    title: {
+    title: {// "Nimi"
         type: String,
         required: true,
         trim: true
@@ -47,14 +47,14 @@ var ProjectSchema = new Schema({
     /**
      * Name of the coordinator of the project.
      */
-    coordinator: {
+    coordinator: {          // "Koordinaattori" (or "esittelijä" in reports)
         type: String,
         required: true
     },
     /**
      * ID of the organisation in charge of this project.
      */
-    organisation: {
+    organisation: {             // "Järjestö"
         type: Schema.ObjectId,
         ref: 'Organisation',
         required: true
@@ -66,7 +66,7 @@ var ProjectSchema = new Schema({
      * "väliraportti" (intermediary report), "loppuraportti" (final report),
      * "päättynyt" (ended).
      */
-    state: {
+    state: {                    // "Tila"
         type: String,
         default: 'rekisteröity',
         required: true
@@ -74,23 +74,34 @@ var ProjectSchema = new Schema({
     /**
      * Date when the application was filed.
      */
-    reg_date: {
+    reg_date: {                 // "Rekisteröimispvm"
         type: Date,
         default: Date.now
     },
+    /**
+     * Funding of the project. Note that the granted sum is stored in
+     * <tt>project.approved.granted_sum_eur</tt>.
+     *
+     */
     funding: {
-        applied_curr_local: {
+        /**
+         * The applied funding in local currency.
+         */
+        applied_curr_local: {   // "Haettu avustus (paikallinen valuutta)"
             type: Number
         },
         /**
          * The currency unit (e.g. USD) used in the target country. This field
          * was added in schema version 5.
          */
-        curr_local_unit: {
+        curr_local_unit: {      // "Paikallinen rahayksikkö"
             type: String,
             trim: true
         },
-        applied_curr_eur: {
+        /**
+         * The applied funding in euros.
+         */
+        applied_curr_eur: {     // "Haettu avustus (EUR)"
             type: Number
         },
         /**
@@ -98,27 +109,44 @@ var ProjectSchema = new Schema({
          * default value for this field was defined in schema version 6 as a
          * bugfix.
          */
-        paid_eur: {
+        paid_eur: {             // "Maksettu (EUR)"
             type: Number,
             default: 0
         },
-        left_eur: {
+        /**
+         * The amount left (i.e. <tt>project.approved.granted_sum_eur</tt> minus
+         * <tt>project.funding.paid_eur</tt>) to pay. This field is redundant.
+         *
+         */
+        left_eur: {             // "Jäljellä (EUR)"
             type: Number
         }
     },
-    duration_months: {
+    /**
+     * Duration of the project in months.
+     */
+    duration_months: {          // "Kesto (kk)"
         type: Number,
         trim: true
     },
-    description: {
+    /**
+     * Additional project description in Finnish.
+     */
+    description: {              // "Kuvaus"
         type: String,
         trim: true
     },
-    description_en: {
+    /**
+     * Additional project description in English.
+     */
+    description_en: {           // "Kuvaus (englanniksi)"
         type: String,
         trim: true
     },
-    methods: {
+    /**
+     * The Finnish name of this field is currently "Toiminnot".
+     */
+    methods: {                  // "Toiminnot"
         type: Array
     },
     /**
@@ -127,7 +155,7 @@ var ProjectSchema = new Schema({
      * name of this field was changed form "background" to "context" in schema
      * version 5 to prevent confusion with the new field "background_check".
      */
-    context: {
+    context: {                  // "Ihmisoikeuskonteksti"
         type: String,
         trim: true
     },
@@ -138,7 +166,7 @@ var ProjectSchema = new Schema({
      * Before schema version 4, this field was known as "beneficiaries". It has
      * been renamed to avoid confusion with the fields in end_report state.
      */
-    target_group: {
+    target_group: {             // "Kohderyhmä"
         type: String,
         trim: true
     },
@@ -146,7 +174,7 @@ var ProjectSchema = new Schema({
      * The Finnish name of this field is "Henkilöresurssit". This field was
      * added in schema version 5.
      */
-    human_resources: {
+    human_resources: {          // "Henkilöresurssit"
         type: String,
         trim: true
     },
@@ -156,7 +184,7 @@ var ProjectSchema = new Schema({
      * "Tasa-arvonäkökulma ja muut läpileikkaavat teemat", which is a broader
      * topic.
      */
-    gender_aspect: {
+    gender_aspect: {    // "Tasa-arvonäkökulma ja muut läpileikkaavat teemat"
         type: String,
         trim: true
     },
@@ -164,14 +192,14 @@ var ProjectSchema = new Schema({
      * A textual description on how to consider the most vulnerable target
      * groups of the project. This field was added in schema version 4.
      */
-    vulnerable_groups: {
+    vulnerable_groups: {        // "Haavoittuvimpien ryhmien huomioon ottaminen"
         type: String,
         trim: true
     },
     /**
      * The current Finnish name for this field is "Päätavoitteet".
      */
-    project_goal: {
+    project_goal: {             // "Hankkeen päätavoitteet"
         type: String,
         trim: true
     },
@@ -179,23 +207,37 @@ var ProjectSchema = new Schema({
      * The current Finnish name for this field is "Tavoitteiden saavuttamisen
      * mittaaminen".
      */
-    sustainability_risks: {
+    sustainability_risks: {     // "Tavoitteiden saavuttamisen mittaaminen"
         type: String,
         trim: true
     },
-    reporting_evaluation: {
+    /**
+     * The current Finnish name for this field is "Evaluointi ja vaikuttavuuden
+     * arviointi".
+     */
+    reporting_evaluation: {     // "Evaluointi ja vaikuttavuuden arviointi"
         type: String,
         trim: true
     },
-    other_donors_proposed: {
+    /**
+     * The current Finnish name for this field is "Muualta haettu rahoitus".
+     */
+    other_donors_proposed: {    // "Muualta haettu rahoitus"
         type: String,
         trim: true
     },
-    dac: {
+    /**
+     * The current Finnish name for this field is "DAC". It is a code used by
+     * Finnish Foreign Ministry to denote countries.
+     */
+    dac: {                      // "DAC"
         type: String,
         trim: true
     },
-    region: {
+    /**
+     * The current Finnish name for this field is "Alue / Maa".
+     */
+    region: {                   // "Alue / Maa"
         type: String,
         trim: true
     },
@@ -203,7 +245,7 @@ var ProjectSchema = new Schema({
      * This field contains a textual description on the referees for the
      * project. This field was added in schema version 4.
      */
-    referees: {
+    referees: {                 // "Suosittelijat"
         type: String,
         trim: true
     },
@@ -211,7 +253,7 @@ var ProjectSchema = new Schema({
      * Background check for the project and its organisation. This field was
      * added in the schema version 5.
      */
-    background_check: {
+    background_check: {         // "Taustaselvitys"
         type: String,
         trim: true
     },
@@ -219,7 +261,7 @@ var ProjectSchema = new Schema({
      * Textual description about how the project will be funded. This field was
      * added in schema version 4.
      */
-    budget: {
+    budget: {                   // "Hankkeen budjetti ja omarahoitusosuus"
         type: String,
         trim: true
     },
@@ -227,7 +269,7 @@ var ProjectSchema = new Schema({
      * This field contains a textual description for how this project fits into
      * the strategy of KIOS. This field was added in schema version 4.
      */
-    fitness: {
+    fitness: {                  // "Sopivuus KIOS:n strategiaan"
         type: String,
         trim: true
     },
@@ -235,7 +277,7 @@ var ProjectSchema = new Schema({
      * This field describes the capacity and expertise of the organisation to
      * carry out this project. This field was added in schema version 4.
      */
-    capacity: {
+    capacity: {                 // "Järjestön kapasiteetti ja asiantuntijuus"
         type: String,
         trim: true
     },
@@ -243,7 +285,7 @@ var ProjectSchema = new Schema({
      * An assessment about the feasibility of this project. This field was added
      * in schema version 4.
      */
-    feasibility: {
+    feasibility: {              // "Toteutettavuus ja riskit"
         type: String,
         trim: true
     },
@@ -251,69 +293,80 @@ var ProjectSchema = new Schema({
      * This field describes the potential effects of the project. This field was
      * added in schema version 4.
      */
-    effectiveness: {
+    effectiveness: {            // "Tuloksellisuus, vaikutukset ja vaikuttavuus"
         type: String,
         trim: true
     },
     /**
      * This field contains the information about the proposed funding for the
-     * project. This field was added in schema version 4.
+     * project. It is displayed in the registration report.
+     *
+     * This field was added in schema version 4.
      */
-    proposed_funding: {
+    proposed_funding: {         // "Esitys"
         type: String,
         trim: true
     },
     /**
      * This fields contains a checklist of required appendices and it was added
      * in schema version 4. Currently, the values inside this object will be
-     * supplied when changing state to "in_review".
+     * supplied when changing state to <tt>in_review</tt>. They all need to be
+     * supplied before changing state to <tt>approved</tt>. This is currently
+     * not enforced by the system though.
      */
-    required_appendices: {
-        proj_budget: {
+    required_appendices: {      // "Vaaditut liitteet"
+        proj_budget: {          // "Hankebudjetti"
             type: Boolean
         },
-        references: {
+        references: {           // "Suositukset"
             type: Boolean
         },
-        annual_budget: {
+        annual_budget: {        // "Vuosibudjetti"
             type: Boolean
         },
-        rules: {
+        rules: {                // "Säännöt"
             type: Boolean
         },
-        reg_cert: {
+        reg_cert: {             // "Rekisteröintitodistus"
             type: Boolean
         },
-        annual_report: {
+        annual_report: {        // "Vuosikertomus"
             type: Boolean
         },
-        audit_reports: {
+        audit_reports: {        // "Tilintarkastukset"
             type: Boolean
         }
     },
-    in_review: {
-        date: {
+    /**
+     * This is the second state of a project that comes right after the state
+     * "registered".
+     */
+    in_review: {                // "Käsittelyssä"
+        date: {                 // "Rekisteröity käsittelyyn"
             type: Date
         },
-        user: {
+        user: {                 // "Tiedot lisäsi"
             type: String
         },
-        comments: {
+        comments: {             // "Kommentit"
             type: String
         }
     },
-    approved: {
-        date: {
+    /**
+     * This state begins after review.
+     */
+    approved: {                 // "Hyväksytty"
+        date: {                 // "Rekisteröity hyväksytyksi"
             type: Date
         },
-        user: {
+        user: {                 // "Tiedot lisäsi"
             type: String
         },
         /**
          * The board meeting where the approval was given for the project. This
          * field was added in the schema version 5.
          */
-        board_meeting: {
+        board_meeting: {        // "Hallituksen kokous"
             type: String,
             trim: true
         },
@@ -321,83 +374,110 @@ var ProjectSchema = new Schema({
          * The decision of the board. This field was added in the schema version
          * 5.
          */
-        decision: {
+        decision: {             // "Päätös"
             type: String,
             trim: true
         },
-        approved_date: {
+        approved_date: {        // "Hyväksymispäivämäärä"
             type: Date
         },
-        approved_by: {
+        /**
+         * The entity that approved the project. The options are
+         * "UM" (Ulkoministeriö), "Hallituksen kokous", or "Toiminnanjohtaja".
+         */
+        approved_by: {          // "Hyväksyjä"
             type: String
         },
-        board_notified: {
+        board_notified: {       // "Hallitukselle tiedoksi"
             type: Date
         },
-        granted_sum_eur: {
+        granted_sum_eur: {      // "Myönnetty avustus (EUR)"
             type: Number
         },
-        themes: {
+        /**
+         * The Finnish name of this field is currently "Oikeudellinen fokus".
+         */
+        themes: {               // "Oikeudellinen fokus"
             type: Array
         }
     },
-    rejected: {
-        date: {
+    rejected: {                 // "Hylätty"
+        date: {                 // "Hylkäyspäivämäärä"
             type: Date
         },
-        user: {
+        user: {                 // "Tiedot lisäsi"
             type: String
         },
-        rejection_categories: {
+        rejection_categories: { // "Hylkäyssyyt"
             type: Array
         },
-        rejection_comments: {
+        rejection_comments: {   // "Kommentit"
             type: String
         }
     },
-    signed: {
-        date: {
+    signed: {                   // "Allekirjoitettu"
+        date: {                 // "Allekirjoittamispäivämäärä"
             type: Date
         },
-        user: {
+        user: {                 // "Tiedot lisäsi"
             type: String
         },
-        signed_by: {
+        /**
+         * The person signing the project (from the applicant organisation).
+         */
+        signed_by: {            // "Allekirjoittaja"
             type: String
         },
-        signed_date: {
+        signed_date: {          // "Allekirjoituspäivämäärä"
             type: Date
         },
-        planned_payments: {
+        /**
+         * Contains the dates and sums of planned payments. Each object in this
+         * array contains the fields <tt>date</tt> and <tt>sum_eur</tt> with
+         * corresponding meanings. For the array of completed payments, see
+         * <tt>project.payments</tt>
+         */
+        planned_payments: {     // "Suunnitellut maksut"
             type: Array
         },
-        intreport_deadlines: {
+        /**
+         * Contains the dates and deadlines for intermediary reports. The
+         * objects in this array have the titles of the expected reports
+         * contained in the field <tt>report</tt> and the date in the
+         * <tt>date</tt> field.
+         */
+        intreport_deadlines: {  // "Raporttien eräpäivät"
             type: Array
         }
     },
-    payments: {
+    /**
+     * Contains the dates and sums of completed payments. Each object in this
+     * array contains the fields <tt>date</tt> and <tt>sum_eur</tt> with
+     * corresponding meanings. For the array of planned payments, see
+     * <tt>project.payments</tt>
+     */
+    payments: {                 // "Toteutuneet maksut"
         type: Array
     },
-    intermediary_reports:
-            {
-                type: Array
-            },
-    end_report: {
-        date: {
+    intermediary_reports: {
+        type: Array
+    },
+    end_report: {               // "Loppuraportti"
+        date: {                 //
             type: Date
         },
-        user: {
+        user: {                 // "Tiedot lisäsi"
             type: String
         },
         /**
          * This field was added in the schema version 7.
          */
-        budget: {
+        budget: {               // "Budjetin toteutuminen ja raportoitu summa"
             type: String,
             trim: true
         },
-        audit: {
-            date: {
+        audit: {                // "Tilintarkastukset"
+            date: {             // "Päivämäärä"
                 type: Date
             },
             review: {
@@ -413,17 +493,17 @@ var ProjectSchema = new Schema({
         general_review: {
             type: String
         },
-        methods: {
+        methods: {              // "Toiminnot"
             type: Array
         },
-        objective: {
+        objective: {            // "Tärkeimmät tulokset"
             type: String
         },
         /**
          * The board meeting where the end report was approved. This field was
          * added in the schema version 7.
          */
-        board_meeting: {
+        board_meeting: {        // "Hallituksen kokous"
             type: String,
             trim: true
         },
@@ -432,21 +512,21 @@ var ProjectSchema = new Schema({
          * resolution for the project. The name of this field was changed from
          * "comments" to "proposition".
          */
-        proposition: {
+        proposition: {          // "Ehdotus"
             type: String,
             trim: true
         },
         /**
          * This field was added in the schema version 7.
          */
-        conclusion: {
+        conclusion: {           // "Päätös"
             type: String,
             trim: true
         },
         /**
          * The estimated number of people, whom this project has directly helped.
          */
-        direct_beneficiaries: {
+        direct_beneficiaries: { // "Suoria hyödynsaajia"
             type: Number,
             trim: true
         },
@@ -454,7 +534,7 @@ var ProjectSchema = new Schema({
          * The estimated number of people, who have received indirect benefits
          * from this project.
          */
-        indirect_beneficiaries: {
+        indirect_beneficiaries: {   // "Epäsuoria hyödynsaajia"
             type: Number,
             trim: true
         },
@@ -464,7 +544,7 @@ var ProjectSchema = new Schema({
          * as planned), 2 (did not succeed as planned due to an external cause),
          * 1 (did not succeed as planned due to neglection by the organisation).
          */
-        grade: {
+        grade: {                // "Numeerinen arvio"
             type: Number,
             trim: true
         },
@@ -473,7 +553,7 @@ var ProjectSchema = new Schema({
             default: false
         }
     },
-    ended: {
+    ended: {                    // "Päättynyt"
         date: {
             type: Date
         },

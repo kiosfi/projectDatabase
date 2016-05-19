@@ -40,30 +40,9 @@ Search.register(function (app, auth, database, organisations, projects) {
         subtype: 'search'
     });
 
-    /**
-     //Uncomment to use. Requires meanio@0.3.7 or above
-     // Save settings with callback
-     // Use this for saving data from administration pages
-     Search.settings({
-     'someSetting': 'some value'
-     }, function(err, settings) {
-     //you now have the settings object
-     });
-     
-     // Another save settings example this time with no callback
-     // This writes over the last settings.
-     Search.settings({
-     'anotherSettings': 'some value'
-     });
-     
-     // Get settings. Retrieves latest saved settigns
-     Search.settings(function(err, settings) {
-     //you now have the settings object
-     });
-     */
-
     Search.aggregateAsset('js', '../lib/angular-sanitize/angular-sanitize.min.js', {global: true});
     Search.aggregateAsset('js', '../lib/ng-csv/build/ng-csv.min.js', {global: true});
+    Search.aggregateAsset('js', 'projectSearch.js', {global: true, absolute: false});
 
     Search.angularDependencies(['ngSanitize', 'ngCsv']);
 

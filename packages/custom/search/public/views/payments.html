@@ -18,8 +18,12 @@
                         <div class="col-md-12">
                             <select data-ng-model="searchChoice"
                                     class="col-md-6" style="float:left;">
-                                <option value="payments">1. Suoritetut maksut</option>
-                                <option value="approved.granted_sum_eur">2. Myönnetyt avustukset</option>
+                                <option value="payments">
+                                    Suoritetut maksut
+                                </option>
+                                <option value="approved.granted_sum_eur">
+                                    Myönnetyt avustukset
+                                </option>
                             </select>
                         </div>
                     </form>
@@ -55,7 +59,7 @@
                                     <select data-ng-model="query.dateField" >
                                         <option data-ng-repeat="paymentDate in paymentDates"
                                                 value="{{paymentDate.name}}">
-                                            {{paymentDates.indexOf(paymentDate) + 1}}. {{paymentDate.fi}}
+                                            {{paymentDate.fi}}
                                         </option>
                                     </select>
                                 </div>

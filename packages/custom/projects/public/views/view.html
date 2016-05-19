@@ -206,7 +206,7 @@
                     <div class="col-md-12" style="margin-bottom: 1em"
                          ng-show="project.methods.length > 0">
                         <div class="col-md-4 mini-header">
-                            Toimintatavat
+                            Toiminnot
                         </div>
                         <div class="col-md-8">
                             <div ng-repeat="method in project.methods">
@@ -374,8 +374,7 @@
                                 Rekisteröity käsittelyyn
                             </div>
                             <div class="col-md-2">
-                                {{project.in_review.date| date:'d.M.yyyy':
-                                            'UTC'}}
+                                {{project.in_review.date| date:'d.M.yyyy': 'UTC'}}
                             </div>
                             <div class="col-md-7">
                                 <button class="btn small-btn"
@@ -443,7 +442,7 @@
                                                 'd.M.yyyy':'UTC'}}
                             </div>
                             <div class="col-md-3 mini-header">
-                                Hyväksytty summa
+                                Myönnetty avustus
                             </div>
                             <div class="col-md-9">
                                 {{numberToString(project.approved.granted_sum_eur)}} EUR
@@ -773,8 +772,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group col-xs-12" ng-class="{
-                                'has-error': paymentForm.paymentSumEUR.$invalid}">
+                    <div class="form-group col-xs-12"
+                         ng-class="{'has-error': paymentForm.paymentSumEUR.$invalid}">
                         <label for="paymentSumEUR" class="col-xs-2 control-label">
                             Summa (EUR)
                         </label>

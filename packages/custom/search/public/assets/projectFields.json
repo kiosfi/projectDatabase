@@ -1,101 +1,380 @@
-{"main_menu":
-  [{"name": "title", "fi": "Hankkeen nimi"},
-    {"name": "coordinator", "fi": "Koordinaattori"},
-    {"name": "region", "fi": "Alue"},
-    {"name": "dac", "fi": "DAC-koodi"},
-    {"name": "state", "fi": "Tila"},
-    {"name": "dates", "fi": "Päivämäärät"},
-    {"name": "funds", "fi": "Rahoitustiedot"},
-    {"name": "org_fields", "fi": "Järjestötiedot"},
-    {"name": "approved.themes", "fi": "Teemat"},
-    {"name": "methods.level", "fi": "Tasot"},
-    {"name": "signed.signed_by", "fi": "Sopimuksen allekirjoittaja"},
-    {"name": "intermediary_reports.approved_by", "fi": "Väliraporttien hyväksyjä"},
-    {"name": "end_report.approved_by", "fi": "Loppuraportin hyväksyjä"},
-    {"name": "ended.approved_by", "fi": "Päättämisen hyväksyjä"},
-    {"name": "description", "fi": "Hankkeen kuvaus"},
-    {"name": "description_en", "fi": "Hankkeen kuvaus (EN)"},
-    {"name": "background", "fi": "Hankkeen tausta"},
-    {"name": "beneficiaries", "fi": "Hyödynsaajat"},
-    {"name": "gender_aspect", "fi": "Gender-analyysi"},
-    {"name": "project_goal", "fi": "Päätavoite"},
-    {"name": "sustainability_risks", "fi": "Kestävyys ja riskit"},
-    {"name": "reporting_evaluation", "fi": "Raportointi ja evaluointi"},
-    {"name": "other_donors_proposed", "fi": "Muut rahoittajat"},
-    {"name": "methods.comment", "fi": "Toimintatapojen kuvaukset"},
-    {"name": "in_review.comments", "fi": "Käsittelyvaiheen kommentit"},
-    {"name": "rejected.rejection_comments", "fi": "Hylkäyskommentit"},
-    {"name": "intermediary_reports.objectives", "fi": "Väliraporttien arviot tavoitteista"},
-    {"name": "intermediary_reports.methods", "fi": "Väliraporttien arviot toimintatavoista"},
-    {"name": "intermediary_reports.overall_rating_kios", "fi": "Väliraporttien KIOSin yleisarvio"},
-    {"name": "intermediary_reports.comments", "fi": "Väliraporttien kommentit"},
-    {"name": "end_report.audit.review", "fi": "Tilintarkastuksen arvio"},
-    {"name": "end_report.general_review", "fi": "Loppuraportin KIOSin yleisarvio"},
-    {"name": "end_report.objective", "fi": "Loppuraportin arvio tavoitteen toteutumisesta"},
-    {"name": "end_report.comments", "fi": "Loppuraportin muut kommentit"},
-    {"name": "ended.other_comments", "fi": "Päättämisen kommentit"}],
-  "date_fields":
-    [{"name": "reg_date", "fi": "Hankkeen rekisteröintipäivä"},
-      {"name": "approved.approved_date", "fi": "Hyväksymispäivämäärä"},
-      {"name": "signed.signed_date", "fi": "Allekirjoituspäivämäärä"},
-      {"name": "payments.payment_date", "fi": "Maksujen päivämäärät"},
-      {"name": "ended.end_date", "fi": "Päättämispäivämäärä"},
-      {"name": "in_review.date", "fi": "Käsittelyyn siirto pvm"},
-      {"name": "approved.board_notified", "fi": "Hyväksymisestä hallitukselle tiedottaminen pvm"},
-      {"name": "rejected.rejected_date", "fi": "Hylkäyspäivämäärä"},
-      {"name": "signed.intreport_deadlines.date", "fi": "Raporttien eräpäivät"},
-      {"name": "signed.planned_payments.date", "fi": "Maksusuunnitelmien päiväykset"},
-      {"name": "intermediary_reports.approved_date", "fi": "Väliraporttien hyväksymispäivämäärät"},
-      {"name": "end_report.approved_date", "fi": "Loppuraportin hyväksymispäivämäärä"},
-      {"name": "end_report.audit.date", "fi": "Tilintarkastuksen päivämäärä"}],
-  "string_params":
-    ["title", "coordinator", "description", "description_en",
-        "background", "beneficiaries", "gender_aspect", "project_goal", "sustainability_risk",
-        "reporting_evaluation", "other_donors_proposed", "dac", "region", "methods.comment",
-        "in_review.comments", "rejected.rejection_comments", "signed.signed_by",
-        "intermediary_reports.objectives", "intermediary_reports.methods",
-        "intermediary_reports.overall_rating_kios", "end_report.audit.review",
-        "intermediary_reports.comments", "intermediary_reports.approved_by",
-        "end_report.approved_by", "end_report.general_review", "end_report.objective",
-        "end_report.comments", "ended.approved_by", "ended.other_comments"],
-  "themes":
-    ["Oikeusvaltio ja demokratia", "TSS-oikeudet", "Oikeus koskemattomuuteen ja inhimilliseen kohteluun",
-        "Naisten oikeudet ja sukupuolten välinen tasa-arvo", "Lapsen oikeudet",
-        "Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet", "Etniset vähemmistöt ja alkuperäiskansat",
-        "LHBTIQ", "Ihmisoikeuspuolustajat"],
-  "levels": ["Kansainvälinen", "Kansallinen", "Paikallinen", "Yhteisö"],
-  "states":
-    ["Käynnissä olevat hankkeet", "rekisteröity", "käsittelyssä", "hyväksytty",
-        "hylätty", "allekirjoitettu", "väliraportti", "loppuraportti", "päättynyt"],
-  "funding":
-    [{"name": "approved.granted_sum_eur", "fi": "Myönnetyt summat"},
-     {"name": "payments", "fi": "Suoritetut maksut"}],
-  "main_menu_org":
-    [{"name": "name", "fi": "Järjestön nimi"},
-     {"name": "representative", "fi": "Edustaja"},
-     {"name": "exec_manager", "fi": "Vastuullinen johtaja"},
-     {"name": "communications_rep", "fi": "Viestintävastaava"},
-     {"name": "address.city", "fi": "Kaupunki"},
-     {"name": "address.country", "fi": "Maa"},
-     {"name": "legal_status", "fi": "Hallintomalli, henkilöstö"},
-     {"name": "int_links", "fi": "Kansainväliset yhteydet"},
-     {"name": "nat_local_links", "fi": "Kansalliset ja paikalliset yhteydet"},
-     {"name": "description", "fi": "Kuvaus"},
-     {"name": "other_funding_budget", "fi": "Muut rahoittajat, budjetti"},
-     {"name": "accounting_audit", "fi": "Taloushallinto, tilintarkastus"}],
-  "payment_search":
-    [{"name": "title", "fi": "Hankkeen nimi"},
-      {"name": "coordinator", "fi": "Koordinaattori"},
-      {"name": "region", "fi": "Alue"},
-      {"name": "dac", "fi": "DAC-koodi"},
-      {"name": "state", "fi": "Tila"},
-      {"name": "dates", "fi": "Päivämäärät"}],
-  "payment_search_dates":
-    [{"name": "payments.payment_date", "fi": "Maksujen päivämäärät"},
-      {"name": "approved.approved_date", "fi": "Hyväksymispäivämäärä"},
-      {"name": "signed.signed_date", "fi": "Allekirjoituspäivämäärä"},
-      {"name": "intermediary_reports.approved_date", "fi": "Väliraporttien hyväksymispäivämäärät"},
-      {"name": "end_report.approved_date", "fi": "Loppuraportin hyväksymispäivämäärä"},
-      {"name": "end_report.audit.date", "fi": "Tilintarkastuksen päivämäärä"},
-      {"name": "ended.end_date", "fi": "Päättämispäivämäärä"}]
-  }
+{
+    "main_menu": [
+        {
+            "name": "project_ref",
+            "fi": "Tunnus"
+        },
+        {
+            "name": "security_level",
+            "fi": "Turvaluokitus"
+        },
+        {
+            "name": "title",
+            "fi": "Nimi"
+        },
+        {
+            "name": "coordinator",
+            "fi": "Koordinaattori"
+        },
+        {
+            "name": "region",
+            "fi": "Alue"
+        },
+        {
+            "name": "dac",
+            "fi": "DAC-koodi"
+        },
+        {
+            "name": "state",
+            "fi": "Tila"
+        },
+        {
+            "name": "dates",
+            "fi": "Päivämäärät"
+        },
+        {
+            "name": "funds",
+            "fi": "Rahoitus"
+        },
+        {
+            "name": "org_fields",
+            "fi": "Järjestö"
+        },
+        {
+            "name": "approved.themes",
+            "fi": "Oikeudellinen fokus"
+        },
+        {
+            "name": "methods.level",
+            "fi": "Tasot"
+        },
+        {
+            "name": "signed.signed_by",
+            "fi": "Sopimuksen allekirjoittaja"
+        },
+        {
+            "name": "end_report.approved_by",
+            "fi": "Loppuraportin hyväksyjä"
+        },
+        {
+            "name": "ended.approved_by",
+            "fi": "Päättämisen hyväksyjä"
+        },
+        {
+            "name": "description",
+            "fi": "Kuvaus"
+        },
+        {
+            "name": "description_en",
+            "fi": "Kuvaus (EN)"
+        },
+        {
+            "name": "context",
+            "fi": "Ihmisoikeuskonteksti"
+        },
+        {
+            "name": "target_group",
+            "fi": "Kohderyhmä"
+        },
+        {
+            "name": "gender_aspect",
+            "fi": "T-A. ja muut teemat"
+        },
+        {
+            "name": "project_goal",
+            "fi": "Päätavoitteet"
+        },
+        {
+            "name": "sustainability_risks",
+            "fi": "Tavoitteiden saavuttamisen mittaaminen"
+        },
+        {
+            "name": "reporting_evaluation",
+            "fi": "Evaluointi ja vaikuttavuuden arviointi"
+        },
+        {
+            "name": "other_donors_proposed",
+            "fi": "Muualta haettu rahoitus"
+        },
+        {
+            "name": "methods.comment",
+            "fi": "Toteutuneet toiminnot"
+        },
+        {
+            "name": "in_review.comments",
+            "fi": "Käsittelyvaiheen kommentit"
+        },
+        {
+            "name": "rejected.rejection_comments",
+            "fi": "Hylkäyskommentit"
+        },
+        {
+            "name": "intermediary_reports.objectives",
+            "fi": "Väliraporttien arviot tavoitteista"
+        },
+        {
+            "name": "intermediary_reports.methods",
+            "fi": "Väliraporttien arviot toimintatavoista"
+        },
+        {
+            "name": "intermediary_reports.overall_rating_kios",
+            "fi": "Väliraporttien KIOSin yleisarvio"
+        },
+        {
+            "name": "intermediary_reports.comments",
+            "fi": "Väliraporttien kommentit"
+        },
+        {
+            "name": "end_report.audit.review",
+            "fi": "Tilintarkastuksen arvio"
+        },
+        {
+            "name": "end_report.general_review",
+            "fi": "Loppuraportin KIOSin yleisarvio"
+        },
+        {
+            "name": "end_report.objective",
+            "fi": "Loppuraportin arvio tavoitteen toteutumisesta"
+        },
+        {
+            "name": "end_report.comments",
+            "fi": "Loppuraportin muut kommentit"
+        },
+        {
+            "name": "ended.other_comments",
+            "fi": "Päättämisen kommentit"
+        }
+    ],
+    "date_fields": [
+        {
+            "name": "reg_date",
+            "fi": "Hankkeen rekisteröintipäivä"
+        },
+        {
+            "name": "approved.approved_date",
+            "fi": "Hyväksymispäivämäärä"
+        },
+        {
+            "name": "signed.signed_date",
+            "fi": "Allekirjoituspäivämäärä"
+        },
+        {
+            "name": "payments.payment_date",
+            "fi": "Maksujen päivämäärät"
+        },
+        {
+            "name": "ended.end_date",
+            "fi": "Päättämispäivämäärä"
+        },
+        {
+            "name": "in_review.date",
+            "fi": "Käsittelyyn siirto pvm"
+        },
+        {
+            "name": "approved.board_notified",
+            "fi": "Hyväksymisestä hallitukselle tiedottaminen pvm"
+        },
+        {
+            "name": "rejected.rejected_date",
+            "fi": "Hylkäyspäivämäärä"
+        },
+        {
+            "name": "signed.intreport_deadlines.date",
+            "fi": "Raporttien eräpäivät"
+        },
+        {
+            "name": "signed.planned_payments.date",
+            "fi": "Maksusuunnitelmien päiväykset"
+        },
+        {
+            "name": "intermediary_reports.approved_date",
+            "fi": "Väliraporttien hyväksymispäivämäärät"
+        },
+        {
+            "name": "end_report.approved_date",
+            "fi": "Loppuraportin hyväksymispäivämäärä"
+        },
+        {
+            "name": "end_report.audit.date",
+            "fi": "Tilintarkastuksen päivämäärä"
+        }
+    ],
+    "string_params": [
+        "project_ref",
+        "security_level",
+        "title",
+        "coordinator",
+        "description",
+        "description_en",
+        "background",
+        "beneficiaries",
+        "gender_aspect",
+        "project_goal",
+        "sustainability_risk",
+        "reporting_evaluation",
+        "other_donors_proposed",
+        "dac",
+        "region",
+        "methods.comment",
+        "in_review.comments",
+        "rejected.rejection_comments",
+        "signed.signed_by",
+        "intermediary_reports.objectives",
+        "intermediary_reports.methods",
+        "intermediary_reports.overall_rating_kios",
+        "end_report.audit.review",
+        "intermediary_reports.comments",
+        "intermediary_reports.approved_by",
+        "end_report.approved_by",
+        "end_report.general_review",
+        "end_report.objective",
+        "end_report.comments",
+        "ended.approved_by",
+        "ended.other_comments"
+    ],
+    "themes": [
+        "Oikeusvaltio ja demokratia",
+        "TSS-oikeudet",
+        "Oikeus koskemattomuuteen ja inhimilliseen kohteluun",
+        "Naisten oikeudet ja sukupuolten välinen tasa-arvo",
+        "Lapsen oikeudet",
+        "Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet",
+        "Etniset vähemmistöt ja alkuperäiskansat",
+        "LHBTIQ",
+        "Ihmisoikeuspuolustajat",
+        "Muu"
+    ],
+    "levels": [
+        "Kansainvälinen",
+        "Kansallinen",
+        "Paikallinen",
+        "Yhteisö"
+    ],
+    "states": [
+        "Käynnissä olevat hankkeet",
+        "rekisteröity",
+        "käsittelyssä",
+        "hyväksytty",
+        "hylätty",
+        "allekirjoitettu",
+        "väliraportti",
+        "loppuraportti",
+        "päättynyt"
+    ],
+    "funding": [
+        {
+            "name": "approved.granted_sum_eur",
+            "fi": "Myönnetyt summat"
+        },
+        {
+            "name": "payments",
+            "fi": "Suoritetut maksut"
+        }
+    ],
+    "main_menu_org": [
+        {
+            "name": "name",
+            "fi": "Järjestön nimi"
+        },
+        {
+            "name": "representative",
+            "fi": "Edustaja"
+        },
+        {
+            "name": "exec_manager",
+            "fi": "Vastuullinen johtaja"
+        },
+        {
+            "name": "communications_rep",
+            "fi": "Viestintävastaava"
+        },
+        {
+            "name": "address.city",
+            "fi": "Kaupunki"
+        },
+        {
+            "name": "address.country",
+            "fi": "Maa"
+        },
+        {
+            "name": "legal_status",
+            "fi": "Hallintomalli, henkilöstö"
+        },
+        {
+            "name": "int_links",
+            "fi": "Kansainväliset yhteydet"
+        },
+        {
+            "name": "nat_local_links",
+            "fi": "Kansalliset ja paikalliset yhteydet"
+        },
+        {
+            "name": "description",
+            "fi": "Tavoitteet ja keskeiset toimintatavat"
+        },
+        {
+            "name": "other_funding_budget",
+            "fi": "Muut rahoittajat ja budjetti"
+        },
+        {
+            "name": "accounting_audit",
+            "fi": "Taloushallinto ja tilintarkastus"
+        }
+    ],
+    "payment_search": [
+        {
+            "name": "title",
+            "fi": "Hankkeen nimi"
+        },
+        {
+            "name": "coordinator",
+            "fi": "Koordinaattori"
+        },
+        {
+            "name": "region",
+            "fi": "Alue"
+        },
+        {
+            "name": "dac",
+            "fi": "DAC-koodi"
+        },
+        {
+            "name": "state",
+            "fi": "Tila"
+        },
+        {
+            "name": "dates",
+            "fi": "Päivämäärät"
+        }
+    ],
+    "payment_search_dates": [
+        {
+            "name": "payments.payment_date",
+            "fi": "Maksujen päivämäärät"
+        },
+        {
+            "name": "approved.approved_date",
+            "fi": "Hyväksymispäivämäärä"
+        },
+        {
+            "name": "signed.signed_date",
+            "fi": "Allekirjoituspäivämäärä"
+        },
+        {
+            "name": "intermediary_reports.approved_date",
+            "fi": "Väliraporttien hyväksymispäivämäärät"
+        },
+        {
+            "name": "end_report.approved_date",
+            "fi": "Loppuraportin hyväksymispäivämäärä"
+        },
+        {
+            "name": "end_report.audit.date",
+            "fi": "Tilintarkastuksen päivämäärä"
+        },
+        {
+            "name": "ended.end_date",
+            "fi": "Päättämispäivämäärä"
+        }
+    ]
+}

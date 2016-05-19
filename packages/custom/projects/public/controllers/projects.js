@@ -4,13 +4,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
     '$location', '$window', '$q', '$http', '$filter', 'Global', 'Projects', 'OrgProjects', 'MeanUser', 'Circles', 'Organisations',
     function ($scope, $stateParams, $location, $window, $q, $http, $filter, Global, Projects, OrgProjects, MeanUser, Circles, Organisations) {
         $scope.global = Global;
-        $scope.themes = ['Oikeusvaltio ja demokratia', 'TSS-oikeudet',
+        $scope.themes = [
+            'Oikeusvaltio ja demokratia',
+            'TSS-oikeudet',
             'Oikeus koskemattomuuteen ja inhimilliseen kohteluun',
             'Naisten oikeudet ja sukupuolten välinen tasa-arvo',
             'Lapsen oikeudet',
             'Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet',
-            'Etniset vähemmistöt ja alkuperäiskansat', 'LHBTIQ',
-            'Ihmisoikeuspuolustajat', 'Muu'];
+            'Etniset vähemmistöt ja alkuperäiskansat',
+            'LHBTIQ',
+            'Ihmisoikeuspuolustajat',
+            'Muu'];
         $scope.methodNames = ['Tietoisuuden lisääminen',
             'Ihmisoikeuskasvatus ja -koulutus', 'Kapasiteetin vahvistaminen',
             'Kampanjointi ja/tai lobbaus', 'Vaikuttamistyö',

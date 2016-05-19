@@ -43,7 +43,7 @@
     <table>
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
-            <td class="report-header">Hanke</td>
+            <td class="report-header">Yleistä</td>
             <td>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
@@ -61,9 +61,7 @@
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
-                        Toiminnot
-                    </div>
+                    <div class="report-mini-header">Toiminnot</div>
                     <ul>
                         <li ng-repeat="method in project.methods"
                             style="padding-bottom: 1em">
@@ -91,7 +89,13 @@
                         {{report.evaluation}}
                     </div>
                 </div>
-                <div style="margin-bottom: 2em">
+            </td>
+        </tr>
+        <tr><td colspan="4">&nbsp;</td></tr>
+        <tr>
+            <td class="report-header">Rahoitus</td>
+            <td>
+                <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         Budjetin toteutuminen ja raportoitu summa
                     </div>
@@ -143,29 +147,18 @@
                         </tr>
                     </table>
                 </div>
-                <div style="margin-bottom: 2em">
+                <div style="margin-bottom: 1em">
                     <div class="report-mini-header">Jäljellä oleva summa</div>
                     <div class="report-subcontent">
                         {{numberToString(project.funding.left_eur)}} EUR
                     </div>
                 </div>
-                <!--                <div style="margin-bottom: 1em">
-                                    <div class="report-mini-header">
-                                        Hankkeen suunniteltujen tavoitteiden ja toimintojen
-                                        toteutuminen
-                                    </div>
-                                    <ol>
-                                        <li ng-repeat="method in project.methods">
-                                            <p><em>{{method.name}} ({{method.level}})</em></p>
-                                            <p>Kuvaus: {{method.comment}}</p>
-                                        </li>
-                                    </ol>
-                                </div>-->
-                <!--                <div style="margin-bottom: 1em">
-                                    <div class="report-mini-header">
-                                        Budjetin toteutuminen ja raportoitu summa
-                                    </div>
-                                </div>-->
+            </td>
+        </tr>
+        <tr><td colspan="4">&nbsp;</td></tr>
+        <tr>
+            <td class="report-header">Arvio</td>
+            <td>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">KIOS:in arvio</div>
                     <div class="report-subcontent">
