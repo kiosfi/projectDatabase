@@ -9,7 +9,7 @@
             <td>
                 <table>
                     <tr>
-                        <td class="report-mini-header">
+                        <td class="report-mini-header" colspan="2">
                             {{report.reportNumber}}. väliraportti
                         </td>
                     </tr>
@@ -27,15 +27,22 @@
     <article class="col-md-12 border-body">
         <table>
             <tr>
-                <td class="report-mini-header">Järjestö</td>
+                <td class="report-mini-header">
+                    {{fieldNames["organisation"]}}
+                </td>
                 <td class="report-content">{{project.organisation.name}}</td>
                 <td class="report-mini-header">Hanke</td>
+                <!--<td class="report-mini-header">{{fieldNames["title"]}}</td>-->
                 <td class="report-content">{{project.title}}</td>
             </tr>
             <tr>
-                <td class="report-mini-header">Hankenumero</td>
+                <td class="report-mini-header">
+                    {{fieldNames["project_ref"]}}
+                </td>
                 <td class="report-content">{{project.project_ref}}</td>
-                <td class="report-mini-header">Alue&nbsp;/&nbsp;Maa</td>
+                <td class="report-mini-header">Alue&nbsp;/&nbsp;Maa
+                    <!--{{fieldNames["region"]}}-->
+                </td>
                 <td class="report-content">{{project.region}}&nbsp;</td>
             </tr>
         </table>
@@ -47,7 +54,7 @@
             <td>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Päätavoitteet
+                        {{fieldNames["project_goal"]}}
                     </div>
                     <div class="report-subcontent" style="margin-bottom: 1em">
                         <em>Suunnitellut: </em>
@@ -61,7 +68,9 @@
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Toiminnot</div>
+                    <div class="report-mini-header">
+                        {{fieldNames["intreport_methods"]}}
+                    </div>
                     <ul>
                         <li ng-repeat="method in project.methods"
                             style="padding-bottom: 1em">
@@ -75,7 +84,7 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Raportointi ja yhteydenpito
+                        {{fieldNames["intreport_communication"]}}
                     </div>
                     <div class="report-subcontent">
                         {{report.communication}}
@@ -83,7 +92,7 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Evaluointi ja vaikuttavuuden arviointi
+                        {{fieldNames["intreport_evaluation"]}}
                     </div>
                     <div class="report-subcontent">
                         {{report.evaluation}}
@@ -91,13 +100,13 @@
                 </div>
             </td>
         </tr>
-        <tr><td colspan="4">&nbsp;</td></tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
             <td class="report-header">Rahoitus</td>
             <td>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Budjetin toteutuminen ja raportoitu summa
+                        {{fieldNames["intreport_budget"]}}
                     </div>
                     <div class="report-subcontent">{{report.budget}}</div>
                 </div>
@@ -115,7 +124,9 @@
 
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Suunnitellut maksut</div>
+                    <div class="report-mini-header">
+                        {{fieldNames["intreport_planned_payments"]}}
+                    </div>
                     <table>
                         <tr ng-repeat="planned_payment in project.signed.planned_payments">
                             <td style="padding-left: 2em">
@@ -131,7 +142,9 @@
                     </table>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Toteutuneet maksut</div>
+                    <div class="report-mini-header">
+                        {{fieldNames["payments"]}}
+                    </div>
                     <table>
                         <tr ng-repeat="payment in project.payments|
                                     orderBy: 'payment_date'">
@@ -155,18 +168,22 @@
                 </div>
             </td>
         </tr>
-        <tr><td colspan="4">&nbsp;</td></tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
             <td class="report-header">Arvio</td>
             <td>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">KIOS:in arvio</div>
+                    <div class="report-mini-header">
+                        {{fieldNames["overall_rating_kios"]}}
+                    </div>
                     <div class="report-subcontent">
                         {{report.overall_rating_kios}}
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Päätös</div>
+                    <div class="report-mini-header">
+                        {{fieldNames["comments"]}}
+                    </div>
                     <div class="report-subcontent">{{report.comments}}</div>
                 </div>
             </td>

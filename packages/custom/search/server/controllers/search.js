@@ -175,6 +175,8 @@ module.exports = function (Search) {
                 return search;
             });
 
+            var fields = req.query.fields;
+
             Organisation.find({$and: params}, function (err, orgs) {
 
                 orgs = orgs.map(function (org) {
@@ -183,11 +185,11 @@ module.exports = function (Search) {
 
                 queries = _.filter(queries, function (query) {
                     return typeof query.orgField === 'undefined';
-                })
+                });
 
                 queries.push({organisation: {$in: orgs}});
 
-                Project.find({$and: queries})
+                Project.find({$and: queries}, fields)
                         .populate('organisation', {name: 1})
                         .exec(function (err, results) {
                             if (err) {

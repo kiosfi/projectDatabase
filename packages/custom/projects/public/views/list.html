@@ -14,9 +14,8 @@
             <thead>
                 <tr>
                     <th class="col-md-1">
-                        <a id="byRef"
-                           href="" ng-click="updateOrdering('project_ref')">
-                            Tunnus
+                        <a id="byRef" ng-click="updateOrdering('project_ref')">
+                            {{fieldNames["project_ref"]}}
                         </a>
                         <span class="sortorder"
                               ng-show="ordering === 'project_ref'"
@@ -25,7 +24,7 @@
                     <th class="col-md-4">
                         <a id="byTitle"
                            href="" ng-click="updateOrdering('title')">
-                            Nimi
+                            {{fieldNames["title"]}}
                         </a>
                         <span class="sortorder"
                               ng-show="ordering === 'title'"
@@ -34,7 +33,7 @@
                     <th class="col-md-1">
                         <a id="byState"
                            href="" ng-click="updateOrdering('state')">
-                            Tila
+                            {{fieldNames["state"]}}
                         </a>
                         <span class="sortorder"
                               ng-show="ordering === 'state'"
@@ -44,7 +43,7 @@
                     <th class="col-md-3">
                         <a id="byOrg"
                            href="" ng-click="updateOrdering('organisation')">
-                            Järjestö
+                            {{fieldNames["organisation"]}}
                         </a>
                         <span class="sortorder"
                               ng-show="ordering === 'organisation'"

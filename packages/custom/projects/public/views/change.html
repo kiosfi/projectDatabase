@@ -6,7 +6,8 @@ A form for project state change.
     <article class="col-md-12">
         <h2><span>{{project.project_ref}}: {{project.title}}</span></h2>
 
-        <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
+        <h3>{{fieldNames["coordinator"]}}:
+            <a href="">{{project.coordinator}}</a>
             <span class="tila">{{project.state}}</span>
         </h3>
     </article>
@@ -19,16 +20,19 @@ A form for project state change.
         <div class="col-md-5 proj-article" style="margin: 0.5em">
             <h4>Hanke</h4>
             <div class="col-md-12">
-                <div class="col-md-3 mini-header">DAC</div>
+                <div class="col-md-3 mini-header">{{fieldNames["dac"]}}</div>
                 <div class="col-md-9">{{project.dac}}&nbsp;</div>
-                <div class="col-md-3 mini-header">Kirjattu</div>
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["reg_date"]}}
+                </div>
                 <div class="col-md-9">
                     {{project.reg_date| date:'dd.MM.yyyy'}}
                 </div>
                 <div ng-show="project.approved.granted_sum_eur" class="ng-hide">
                     <div
                         class="col-md-3 mini-header">
-                        Myönnetty
+                        Myönnetty avustus
+                        <!--{{fieldNames["approved_granted_sum_eur"]}}-->
                     </div>
                     <div class="col-md-9">
                         {{project.approved.granted_sum_eur| currency : ""}} EUR
@@ -36,7 +40,7 @@ A form for project state change.
                 </div>
                 <div ng-show="!project.approved.granted_sum_eur" class="ng-hide">
                     <div class="col-md-3 mini-header">
-                        Haettu
+                        Haettu avustus
                     </div>
                     <div class="col-md-9">
                         {{project.funding.applied_curr_eur| currency : ""}} EUR
@@ -48,7 +52,6 @@ A form for project state change.
                 <div class="col-md-9">{{project.duration_months}} kk</div>
             </div>
         </div>
-
         <div class="col-md-5 proj-article" style="margin: 0.5em">
             <h4>Järjestö</h4>
             <div class="col-md-12">

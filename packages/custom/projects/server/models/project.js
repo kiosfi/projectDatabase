@@ -6,6 +6,9 @@
 var mongoose = require('mongoose'),
         Schema = mongoose.Schema;
 
+// Note that the Finnish translations for the field names are listed in
+// packages/custom/projects/public/assets/json/finnishFieldNames.json
+
 var ProjectSchema = new Schema({
     /**
      * This piece of metadata tells the version number of the scheme. It is used
@@ -39,7 +42,7 @@ var ProjectSchema = new Schema({
     /**
      * Title of the project.
      */
-    title: {// "Nimi"
+    title: {                    // "Nimi"
         type: String,
         required: true,
         trim: true
@@ -87,7 +90,7 @@ var ProjectSchema = new Schema({
         /**
          * The applied funding in local currency.
          */
-        applied_curr_local: {   // "Haettu avustus (paikallinen valuutta)"
+        applied_curr_local: {   // "Haettu avustus" (paikallinen valuutta)
             type: Number
         },
         /**
@@ -261,7 +264,7 @@ var ProjectSchema = new Schema({
      * Textual description about how the project will be funded. This field was
      * added in schema version 4.
      */
-    budget: {                   // "Hankkeen budjetti ja omarahoitusosuus"
+    budget: {                   // "Budjetti ja omarahoitusosuus"
         type: String,
         trim: true
     },
@@ -416,7 +419,7 @@ var ProjectSchema = new Schema({
         }
     },
     signed: {                   // "Allekirjoitettu"
-        date: {                 // "Allekirjoittamispäivämäärä"
+        date: {                 // "Rekisteröity allekirjoitetuksi"
             type: Date
         },
         user: {                 // "Tiedot lisäsi"
@@ -459,11 +462,18 @@ var ProjectSchema = new Schema({
     payments: {                 // "Toteutuneet maksut"
         type: Array
     },
+    /**
+     * An array of objects containing the following fields:<tt>reportNumber</tt>,
+     * <tt>date</tt>, <tt>user</tt>, <tt>budget</tt>, <tt>communication</tt>,
+     * <tt>evaluation</tt>, <tt>methods</tt>, <tt>objectives</tt>,
+     * <tt>planned_payments</tt>, <tt>overal_rating_kios</tt>, and
+     * <tt>comments</tt>.
+     */
     intermediary_reports: {
         type: Array
     },
     end_report: {               // "Loppuraportti"
-        date: {                 //
+        date: {                 // "Loppurapotti rekisteröity"
             type: Date
         },
         user: {                 // "Tiedot lisäsi"
@@ -480,17 +490,17 @@ var ProjectSchema = new Schema({
             date: {             // "Päivämäärä"
                 type: Date
             },
-            review: {
+            review: {           // "Arvio"
                 type: String
             }
         },
-        approved_by: {
+        approved_by: {          // "Hyväksyjä"
             type: String
         },
-        approved_date: {
+        approved_date: {        // "Hyväksymispäivämäärä"
             type: Date
         },
-        general_review: {
+        general_review: {       // "Yleisarvio"
             type: String
         },
         methods: {              // "Toiminnot"
@@ -548,38 +558,38 @@ var ProjectSchema = new Schema({
             type: Number,
             trim: true
         },
-        processed: {
+        processed: {            // "Käsitelty"
             type: Boolean,
             default: false
         }
     },
     ended: {                    // "Päättynyt"
-        date: {
+        date: {                 // "Rekisteröitynyt päättyneeksi"
             type: Date
         },
-        user: {
+        user: {                 // "Tiedot lisäsi"
             type: String
         },
-        end_date: {
+        end_date: {             // "Päättymispäivämäärä"
             type: Date
         },
-        board_notified: {
+        board_notified: {       // "Hallitukselle tiedoksi"
             type: Date
         },
-        approved_by: {
+        approved_by: {          // "Hyväksyjä"
             type: String
         },
-        other_comments: {
+        other_comments: {       // "Kommentit"
             type: String
         }
     },
-    updated: {
+    updated: {                  // "Päivitetty"
         type: Array
     },
     /**
      * An array containing paths of the appendix files of a project.
      */
-    appendices: {
+    appendices: {               // "Liitteet"
         type: Array
     }
 });

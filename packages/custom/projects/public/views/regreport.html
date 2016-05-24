@@ -16,7 +16,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="report-mini-header">Hallituksen kokous</td>
+                        <td class="report-mini-header">
+                            {{fieldNames["approved_board_meeting"]}}
+                        </td>
                         <td class="report-content">
                             {{project.approved.board_meeting}}
                         </td>
@@ -35,58 +37,80 @@
     <article class="col-md-12 border-body">
         <table>
             <tr>
-                <td class="report-mini-header">Järjestö</td>
+                <td class="report-mini-header">
+                    {{fieldNames["organisation"]}}
+                </td>
                 <td class="report-content">{{project.organisation.name}}</td>
-                <td class="report-mini-header">Hanke</td>
+                <td class="report-mini-header">
+                    Hanke
+                    <!--{{fieldNames["title"]}}-->
+                </td>
                 <td class="report-content">{{project.title}}</td>
             </tr>
             <tr>
-                <td class="report-mini-header">Hankenumero</td>
+                <td class="report-mini-header">
+                    {{fieldNames["project_ref"]}}
+                </td>
                 <td class="report-content">{{project.project_ref}}</td>
-                <td class="report-mini-header">Alue / Maa</td>
+                <td class="report-mini-header">
+                    {{fieldNames["region"]}}
+                </td>
                 <td class="report-content">{{project.region}}&nbsp;</td>
             </tr>
             <tr>
-                <td class="report-mini-header">Haettu tuki</td>
+                <td class="report-mini-header">Haettu tuki
+                    <!--{{fieldNames["funding_applied_curr_eur"]}}-->
+                </td>
                 <td class="report-content">
                     {{numberToString(project.funding.applied_curr_local)}}
                     {{project.funding.curr_local_unit}} /
                     {{numberToString(project.funding.applied_curr_eur)}} EUR
                 </td>
-                <td class="report-mini-header">Kesto</td>
+                <td class="report-mini-header">Kesto
+                    <!--{{fieldNames["duration_months"]}}-->
+                </td>
                 <td class="report-content">
                     {{project.duration_months}} kk
                 </td>
             </tr>
             <tr>
-                <td class="report-mini-header">Vaaditut liitteet</td>
+                <td class="report-mini-header">
+                    {{fieldNames["required_appendices"]}}
+                </td>
                 <td colspan="3" class="report-content">
-                    hankebudjetti
+                    {{fieldNames["required_appendices_proj_budget"]
+                                .toLowerCase()}}
                     [{{project.required_appendices.proj_budget ? "x" : "_"}}],
-                    suositukset
+                    {{fieldNames["required_appendices_proj_references"]
+                                .toLowerCase()}}
                     [{{project.required_appendices.references ? "x" : "_"}}],
-                    vuosibudjetti
+                    {{fieldNames["required_appendices_annual_budget"]
+                                .toLowerCase()}}
                     [{{project.required_appendices.annual_budget ? "x" : "_"}}],
-                    säännöt
+                    {{fieldNames["required_appendices_rules"].toLowerCase()}}
                     [{{project.required_appendices.rules ? "x" : "_"}}],
-                    rekisteröintitodistus
+                    {{fieldNames["required_appendices_reg_cert"].toLowerCase()}}
                     [{{project.required_appendices.reg_cert ? "x" : "_"}}],
-                    vuosikertomus
+                    {{fieldNames["required_appendices_annual_report"]
+                                .toLowerCase()}}
                     [{{project.required_appendices.annual_report ? "x" : "_"}}],
-                    tilintarkastukset
+                    {{fieldNames["required_appendices_audit_reports"]
+                                .toLowerCase()}}
                     [{{project.required_appendices.audit_reports ? "x" : "_"}}]
                 </td>
             </tr>
             <tr><td colspan="4">&nbsp;</td></tr>
             <tr>
-                <td class="report-mini-header">Kuvaus</td>
+                <td class="report-mini-header">{{fieldNames["description"]}}</td>
                 <td colspan="3" class="report-content">
                     {{project.description}}&nbsp;
                 </td>
             </tr>
             <tr><td colspan="4">&nbsp;</td></tr>
             <tr>
-                <td class="report-mini-header">Oikeudellinen&nbsp;fokus</td>
+                <td class="report-mini-header">Oikeudellinen&nbsp;fokus
+                    <!--{{fieldNames["approved_themes"]}}-->
+                </td>
                 <td colspan="3" class="report-content">
                     <table>
                         <tr ng-repeat="theme in project.approved.themes">
@@ -100,10 +124,13 @@
     <table>
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
+            <!-- TODO: Translate organisation fields into a json also. -->
             <td class="report-header">Järjestö</td>
             <td>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Websivut</div>
+                    <div class="report-mini-header">
+                        {{fieldNames["organisation_www"]}}
+                    </div>
                     <div class="report-subcontent">
                         {{project.organisation.website}}
                     </div>
@@ -164,9 +191,9 @@
                         <div data-ng-repeat="proj in other_projects">
                             <em>{{proj.title}}</em>
                             {{proj.approved.granted_sum_eur ?
-                                "(" + numberToString(proj.approved.granted_sum_eur) +
-                                        " EUR)" :
-                                        ""}}
+                                                    "(" + numberToString(proj.approved.granted_sum_eur) +
+                                                    " EUR)" :
+                                                    ""}}
                         </div>
                         <div data-ng-if="!other_projects.length">
                             Aikaisempia rahoitettuja hankkeita ei ole.
@@ -181,17 +208,23 @@
             <td class="report-header">Hanke</td>
             <td>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Ihmisoikeuskonteksti</div>
+                    <div class="report-mini-header">
+                        {{fieldNames["context"]}}
+                    </div>
                     <div class="report-subcontent">{{project.context}}</div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Päätavoitteet</div>
+                    <div class="report-mini-header">
+                        {{fieldNames["project_goal"]}}
+                    </div>
                     <div class="report-subcontent">
                         {{project.project_goal}}
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Oikeudellinen fokus</div>
+                    <div class="report-mini-header">
+                        {{fieldNames["approved_themes"]}}
+                    </div>
                     <div class="report-subcontent">
                         <table>
                             <tr ng-repeat="theme in project.approved.themes">
@@ -201,14 +234,16 @@
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Kohderyhmä</div>
+                    <div class="report-mini-header">
+                        {{fieldNames["target_group"]}}
+                    </div>
                     <div class="report-subcontent">
                         {{project.target_group}}
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Suunnitellut toiminnot
+                        Suunnitellut {{fieldNames["methods"].toLowerCase()}}
                     </div>
                     <div class="report-subcontent">
                         <table>
@@ -223,7 +258,7 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Henkilöresurssit
+                        {{fieldNames["human_resources"]}}
                     </div>
                     <div class="report-subcontent">
                         {{project.human_resources}}
@@ -231,7 +266,7 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Tasa-arvonäkökulma ja muut läpileikkaavat teemat
+                        {{fieldNames["gender_aspect"]}}
                     </div>
                     <div class="report-subcontent">
                         {{project.gender_aspect}}
@@ -239,7 +274,7 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Haavoittuvimpien ryhmien huomioon ottaminen
+                        {{fieldNames["vulnerable_groups"]}}
                     </div>
                     <div class="report-subcontent">
                         {{project.vulnerable_groups}}
@@ -247,7 +282,7 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Tavoitteiden saavuttamisen mittaaminen
+                        {{fieldNames["sustainability_risks"]}}
                     </div>
                     <div class="report-subcontent">
                         {{project.sustainability_risks}}
@@ -255,7 +290,7 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Evaluointi ja vaikuttavuuden arviointi
+                        {{fieldNames["reporting_evaluation"]}}
                     </div>
                     <div class="report-subcontent">
                         {{project.reporting_evaluation}}
@@ -263,19 +298,19 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Hankkeen budjetti ja omarahoitusosuus
+                        {{fieldNames["budget"]}}
                     </div>
                     <div class="report-subcontent">{{project.budget}}</div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Suosittelijat
+                        {{fieldNames["referees"]}}
                     </div>
                     <div class="report-subcontent">{{project.referees}}</div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Taustaselvitys
+                        {{fieldNames["background_check"]}}
                     </div>
                     <div class="report-subcontent">
                         {{project.background_check}}
@@ -290,38 +325,42 @@
             <td>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Sopivuus KIOS:n strategiaan
+                        {{fieldNames["fitness"]}}
                     </div>
                     <div class="report-subcontent">{{project.fitness}}</div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Järjestön kapasiteetti ja asiantuntijuus
+                        {{fieldNames["capacity"]}}
                     </div>
                     <div class="report-subcontent">{{project.capacity}}</div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Toteutettavuus ja riskit
+                        {{fieldNames["feasibility"]}}
                     </div>
                     <div class="report-subcontent">{{project.feasibility}}</div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Tuloksellisuus, vaikutukset ja vaikuttavuus
+                        {{fieldNames["effectiveness"]}}
                     </div>
                     <div class="report-subcontent">
                         {{project.effectiveness}}
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Esitys</div>
+                    <div class="report-mini-header">
+                        {{fieldNames["proposed_funding"]}}
+                    </div>
                     <div class="report-subcontent">
                         {{project.proposed_funding}}
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Päätös</div>
+                    <div class="report-mini-header">
+                        {{fieldNames["approved_decision"]}}
+                    </div>
                     <div class="report-subcontent">
                         {{project.approved.decision}}
                     </div>

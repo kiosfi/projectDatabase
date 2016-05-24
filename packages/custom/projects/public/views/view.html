@@ -20,7 +20,8 @@
 
                 </span>
             </h2>
-            <h3>Koordinaattori: <a href="">{{project.coordinator}}</a>
+            <h3>{{fieldNames["coordinator"]}}:
+                <a href="">{{project.coordinator}}</a>
                 <span class="tila" id="state">{{project.state}}</span>
             </h3>
         </article>
@@ -63,7 +64,7 @@
         </ul>
         <div style="margin-left: 160px">
             <article ng-show="project.approved" class="proj-article">
-                <h4>Teemat</h4>
+                <h4>{{fieldNames["approved_themes"]}}</h4>
                 <button type="button" class="proj-content"
                         data-ng-model="project.approved.themes"
                         data-ng-repeat="theme in project.approved.themes"
@@ -94,31 +95,43 @@
             <article id="summary" class="proj-article">
                 <h4>Perustiedot</h4>
                 <div class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Turvaluokitus</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["security_level"]}}
+                    </div>
                     <div class="col-md-9">{{project.security_level}}</div>
                 </div>
                 <div ng-show="nonEmpty(project.region)"
                      class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Alue</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["region"]}}
+                    </div>
                     <div class="col-md-9">{{project.region}}</div>
                 </div>
                 <div ng-show="nonEmpty(project.dac)"
                      class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">DAC</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["dac"]}}
+                    </div>
                     <div class="col-md-9">{{project.dac}}</div>
                 </div>
                 <div ng-show="nonEmpty(project.state)"
                      class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Tila</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["state"]}}
+                    </div>
                     <div class="col-md-9">{{project.state}}</div>
                 </div>
                 <div class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Kirjattu</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["reg_date"]}}
+                    </div>
                     <div class="col-md-9">{{project.reg_date| date:'d.M.yyyy': 'UTC'}}</div>
                 </div>
                 <div ng-show="project.approved.granted_sum_eur"
                      class="ng-hide proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Myönnetty EUR</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["approved_granted_sum_eur"]}}
+                    </div>
                     <div class="col-md-9">
                         {{numberToString(project.approved.granted_sum_eur)}}
                     </div>
@@ -126,7 +139,9 @@
                 <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
                                         project.funding.applied_curr_eur >= 0"
                      class="ng-hide proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Haettu EUR</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["funding_applied_curr_eur"]}}
+                    </div>
                     <div class="col-md-9">
                         {{numberToString(project.funding.applied_curr_eur)}}
                     </div>
@@ -134,7 +149,8 @@
                 <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
                                         project.funding.applied_curr_local"
                      class="ng-hide proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Haettu
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["funding_applied_curr_local"]}}
                         {{project.funding.curr_local_unit ?
                             project.funding.curr_local_unit : "paik. val."}}
                     </div>
@@ -144,23 +160,27 @@
                 </div>
                 <div ng-show="project.duration_months >= 0"
                      class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Kesto</div>
-                    <div class="col-md-9">{{project.duration_months}} kk</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["duration_months"]}}
+                    </div>
+                    <div class="col-md-9">{{project.duration_months}}</div>
                 </div>
                 &nbsp;
             </article>
             <article id="description" class="proj-article">
-                <h4>Kuvaus</h4>
+                <h4>{{fieldNames["description"]}}</h4>
                 <div class="proj-content">
                     {{project.description}}
                 </div>
                 &nbsp;
             </article>
             <article id="organisation" class="proj-article">
-                <h4>Järjestö</h4>
+                <h4>{{fieldNames["organisation"]}}</h4>
                 <div ng-show="nonEmpty(project.organisation.name)"
                      class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Nimi</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["organisation_name"]}}
+                    </div>
                     <div class="col-md-9">
                         <a data-ng-href="/organisations/{{project.organisation._id}}">
                             {{project.organisation.name}}</a>
@@ -169,13 +189,17 @@
                 <div ng-show="nonEmpty(project.organisation.
                                         representative.name)"
                      class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Edustaja</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["organisation_representative"]}}
+                    </div>
                     <div class="col-md-9">
                         {{project.organisation.representative.name}}
                     </div>
                 </div>
                 <div class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Osoite</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["organisation_address"]}}
+                    </div>
                     <div class="col-md-9">
                         {{project.organisation.address.street}}<br>
                         {{project.organisation.address.postal_code}}
@@ -185,17 +209,23 @@
                 </div>
                 <div ng-show="nonEmpty(project.organisation.tel)"
                      class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Puhelinnumero</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["organisation_tel"]}}
+                    </div>
                     <div class="col-md-9">{{project.organisation.tel}}</div>
                 </div>
                 <div ng-show="nonEmpty(project.organisation.email)"
                      class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Sähköposti</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["organisation_email"]}}
+                    </div>
                     <div class="col-md-9">{{project.organisation.email}}</div>
                 </div>
                 <div ng-show="nonEmpty(project.organisation.website)"
                      class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">Websivut</div>
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["organisation_www"]}}
+                    </div>
                     <div class="col-md-9">{{project.organisation.website}}</div>
                 </div>
                 &nbsp;
@@ -206,7 +236,7 @@
                     <div class="col-md-12" style="margin-bottom: 1em"
                          ng-show="project.methods.length > 0">
                         <div class="col-md-4 mini-header">
-                            Toiminnot
+                            {{fieldNames["methods"]}}
                         </div>
                         <div class="col-md-8">
                             <div ng-repeat="method in project.methods">
@@ -217,14 +247,18 @@
                     </div>
                     <div ng-show="nonEmpty(project.context)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">Ihmisoikeuskonteksti</div>
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["context"]}}
+                        </div>
                         <div class="col-md-8">
                             {{project.context}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.project_goal)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">Päätavoitteet</div>
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["project_goal"]}}
+                        </div>
                         <div class="col-md-8">
                             {{project.project_goal}}
                         </div>
@@ -232,7 +266,7 @@
                     <div ng-show="nonEmpty(project.target_group)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
-                            Kohderyhmä
+                            {{fieldNames["target_group"]}}
                         </div>
                         <div class="col-md-8">
                             {{project.target_group}}
@@ -241,7 +275,7 @@
                     <div ng-show="nonEmpty(project.gender_aspect)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
-                            Tasa-arvonäkökulma ja muut läpileikkaavat teemat
+                            {{fieldNames["gender_aspect"]}}
                         </div>
                         <div class="col-md-8">
                             {{project.gender_aspect}}
@@ -250,7 +284,7 @@
                     <div ng-show="nonEmpty(project.vulnerable_groups)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
-                            Haavoittuvimpien ryhmien huomioon ottaminen
+                            {{fieldNames["vulnerable_groups"]}}
                         </div>
                         <div class="col-md-8">
                             {{project.vulnerable_groups}}
@@ -258,7 +292,9 @@
                     </div>
                     <div ng-show="nonEmpty(project.sustainability_risks)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">Riskit</div>
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["sustainability_risks"]}}
+                        </div>
                         <div class="col-md-8">
                             {{project.sustainability_risks}}
                         </div>
@@ -266,7 +302,7 @@
                     <div ng-show="nonEmpty(project.reporting_evaluation)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
-                            Evaluointi ja vaikuttavuuden arviointi
+                            {{fieldNames["reporting_evaluation"]}}
                         </div>
                         <div class="col-md-8">
                             {{project.reporting_evaluation}}
@@ -274,28 +310,36 @@
                     </div>
                     <div ng-show="nonEmpty(project.budget)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">Budjetti</div>
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["budget"]}}
+                        </div>
                         <div class="col-md-8">
                             {{project.budget}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.other_donors_proposed)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">Muualta haettu rahoitus</div>
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["other_donors_proposed"]}}
+                        </div>
                         <div class="col-md-8">
                             {{project.other_donors_proposed}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.referees)"
                          class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">Suosittelijat</div>
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["referees"]}}
+                        </div>
                         <div class="col-md-8">
                             {{project.referees}}
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.background_check)"
                          class="col-md-12">
-                        <div class="col-md-4 mini-header">Taustaselvitys</div>
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["background_check"]}}
+                        </div>
                         <div class="col-md-8">
                             {{project.background_check}}
                         </div>
@@ -309,7 +353,7 @@
                     <div ng-show="nonEmpty(project.fitness)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
-                            Sopivuus KIOS:n strategiaan
+                            {{fieldNames["fitness"]}}
                         </div>
                         <div class="col-md-8">
                             {{project.fitness}}
@@ -318,7 +362,7 @@
                     <div ng-show="nonEmpty(project.capacity)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
-                            Järjestön kapasiteetti ja asiantuntemus
+                            {{fieldNames["capacity"]}}
                         </div>
                         <div class="col-md-8">
                             {{project.capacity}}
@@ -327,7 +371,7 @@
                     <div ng-show="nonEmpty(project.feasibility)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
-                            Toteutettavuus ja riskit
+                            {{fieldNames["feasibility"]}}
                         </div>
                         <div class="col-md-8">
                             {{project.feasibility}}
@@ -336,7 +380,7 @@
                     <div ng-show="nonEmpty(project.effectiveness)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
-                            Tuloksellisuus, vaikutukset ja vaikuttavuus
+                            {{fieldNames["effectiveness"]}}
                         </div>
                         <div class="col-md-8">
                             {{project.effectiveness}}
@@ -344,7 +388,9 @@
                     </div>
                     <div ng-show="nonEmpty(project.proposed_funding)"
                          class="col-md-12">
-                        <div class="col-md-4 mini-header">Ehdotus</div>
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["proposed_funding"]}}
+                        </div>
                         <div class="col-md-8">
                             {{project.proposed_funding}}
                         </div>
@@ -356,7 +402,7 @@
                 <h4>Aikataulu</h4>
                 <section class="proj-content"
                          ng-show="project.signed.intreport_deadlines.length > 0">
-                    <h5>Raporttien eräpäivät</h5>
+                    <h5>{{fieldNames["signed_intreport_deadlines"]}}</h5>
                     <div ng-repeat="deadline in project.signed.intreport_deadlines" class="proj-subcontent col-md-12">
                         <div class="col-md-3 mini-header">
                             {{deadline.report}}
@@ -371,7 +417,7 @@
                     <section ng-show="project.in_review.date">
                         <div class="col-md-12">
                             <div class="col-md-3 mini-header">
-                                Rekisteröity käsittelyyn
+                                {{fieldNames["in_review_date"]}}
                             </div>
                             <div class="col-md-2">
                                 {{project.in_review.date| date:'d.M.yyyy': 'UTC'}}
@@ -385,11 +431,13 @@
                         <div id="reviewinfo" class="proj-subcontent col-md-12"
                              style="display: none">
                             <div class="col-md-3 mini-header">
-                                Tiedot lisäsi
+                                {{fieldNames["in_review_user"]}}
                             </div>
                             <div class="col-md-9">{{project.in_review.user}},
                                 {{project.in_review.date| date:'d.M.yyyy, HH:mm': 'UTC'}}</div>
-                            <div class="col-md-3 mini-header">Kommentit</div>
+                            <div class="col-md-3 mini-header">
+                                {{fieldNames["in_review_comments"]}}
+                            </div>
                             <div class="col-md-9">
                                 {{project.in_review.comments}}
                             </div>
@@ -399,7 +447,7 @@
                     <section ng-show="project.approved.date">
                         <div class="col-md-12">
                             <div class="col-md-3 mini-header">
-                                Rekisteröity hyväksytyksi
+                                {{fieldNames["approved_date"]}}
                             </div>
                             <div class="col-md-2">
                                 {{project.approved.date| date:'d.M.yyyy':'UTC'}}
@@ -417,37 +465,41 @@
                         <div id="approvedinfo" class="proj-subcontent col-md-12"
                              style="display: none">
                             <div class="col-md-3 mini-header">
-                                Tiedot lisäsi
+                                {{fieldNames["approved_user"]}}
                             </div>
                             <div class="col-md-9">{{project.approved.user}},
                                 {{project.approved.date|
                                                     date:'d.M.yyyy, HH:mm':
                                                     'UTC'}}</div>
-                            <div class="col-md-3 mini-header">Hyväksyjä</div>
+                            <div class="col-md-3 mini-header">
+                                {{fieldNames["approved_approved_by"]}}
+                            </div>
                             <div class="col-md-9">
                                 {{project.approved.approved_by}}
                             </div>
                             <div class="col-md-3 mini-header">
-                                Hyväksymispäivä
+                                {{fieldNames["approved_approved_date"]}}
                             </div>
                             <div class="col-md-9">
                                 {{project.approved.approved_date| date:
                                                 'd.M.yyyy':'UTC'}}
                             </div>
                             <div class="col-md-3 mini-header">
-                                Hallitukselle tiedoksi
+                                {{fieldNames["board_notified"]}}
                             </div>
                             <div class="col-md-9">
                                 {{project.approved.board_notified| date:
                                                 'd.M.yyyy':'UTC'}}
                             </div>
                             <div class="col-md-3 mini-header">
-                                Myönnetty avustus
+                                {{fieldNames["granted_sum_eur"]}}
                             </div>
                             <div class="col-md-9">
                                 {{numberToString(project.approved.granted_sum_eur)}} EUR
                             </div>
-                            <div class="col-md-3 mini-header">Teemat</div>
+                            <div class="col-md-3 mini-header">
+                                {{fieldNames["approved_themes"]}}
+                            </div>
                             <div class="col-md-9">
                                 <span data-ng-repeat="theme in project.approved.
                                                     themes">{{theme}}<br></span>
@@ -458,7 +510,7 @@
                     <section ng-show="project.rejected.date">
                         <div class="col-md-12">
                             <div class="col-md-3 mini-header">
-                                Rekisteröity hylätyksi
+                                {{fieldNames["rejected_date"]}}
                             </div>
                             <div class="col-md-2">
                                 {{project.rejected.date| date:'d.M.yyyy': 'UTC'}}
@@ -473,12 +525,16 @@
                         <div id="rejectedinfo"
                              class="proj-subcontent col-md-12"
                              style="display: none">
-                            <div class="col-md-3 mini-header">Tiedot lisäsi</div>
+                            <div class="col-md-3 mini-header">
+                                {{fieldNames["rejected_user"]}}
+                            </div>
                             <div class="col-md-9">{{project.rejected.user}},
                                 {{project.rejected.date|
                                                     date:'d.M.yyyy, HH:mm':
                                                     'UTC'}}</div>
-                            <div class="col-md-3 mini-header">Hylkäyssyyt</div>
+                            <div class="col-md-3 mini-header">
+                                {{fieldNames["rejected_rejection_categories"]}}
+                            </div>
                             <div class="col-md-9">
                                 <ul>
                                     <li ng-repeat="rej in project.
@@ -487,7 +543,9 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-md-3 mini-header">Kommentit</div>
+                            <div class="col-md-3 mini-header">
+                                {{fieldNames["rejected_rejection_comments"]}}
+                            </div>
                             <div class="col-md-9">
                                 {{project.rejected.rejection_comments}}
                             </div>
@@ -497,7 +555,7 @@
                     <section ng-show="project.signed.date">
                         <div class="col-md-12">
                             <div class="col-md-3 mini-header">
-                                Rekisteröity allekirjoitetuksi
+                                {{fieldNames["signed_date"]}}
                             </div>
                             <div class="col-md-2">
                                 {{project.signed.date| date:'d.M.yyyy': 'UTC'}}
@@ -511,12 +569,16 @@
                         </div>
                         <div id="signedinfo" class="proj-subcontent col-md-12"
                              style="display: none">
-                            <div class="col-md-3 mini-header">Tiedot lisäsi</div>
+                            <div class="col-md-3 mini-header">
+                                {{fieldNames["signed_user"]}}
+                            </div>
                             <div class="col-md-9">{{project.signed.user}},
                                 {{project.signed.date|
                                                 date:'d.M.yyyy, HH:mm': 'UTC'}}
                             </div>
-                            <div class="col-md-3 mini-header">Allekirjoitettu</div>
+                            <div class="col-md-3 mini-header">
+                                {{fieldNames["signed_signed_by"]}}
+                            </div>
                             <div class="col-md-9">{{project.signed.signed_by}},
                                 {{project.signed.signed_date|
                                                     date:'d.M.yyyy': 'UTC'}}</div>
@@ -527,8 +589,8 @@
                         <div ng-repeat="intreport in project.intermediary_reports">
                             <div class="col-md-12">
                                 <div class="col-md-3 mini-header">
-                                    {{intreport.reportNumber}}. väliraportti
-                                    rekisteröity
+                                    {{intreport.reportNumber}}.
+                                    {{fieldNames["intreport_date"]}}
                                 </div>
                                 <div class="col-md-2">
                                     {{intreport.date| date:'d.M.yyyy': 'UTC'}}
@@ -548,7 +610,7 @@
                             <div ng-show="showIntDetails"
                                  class="proj-subcontent col-md-12">
                                 <div class="col-md-3 mini-header">
-                                    Tiedot lisäsi
+                                    {{fieldNames["intreport_user"]}}
                                 </div>
                                 <div class="col-md-9">{{intreport.user}},
                                     {{intreport.date|
@@ -571,7 +633,7 @@
                     <section ng-show="project.end_report.date">
                         <div class="col-md-12">
                             <div class="col-md-3 mini-header">
-                                Loppuraportti rekisteröity
+                                {{fieldNames["end_report_date"]}}
                             </div>
                             <div class="col-md-2">
                                 {{project.end_report.date| date:'d.M.yyyy':'UTC'}}
@@ -591,7 +653,7 @@
                         <div ng-show="showEndDetails"
                              class="proj-subcontent col-md-12">
                             <div class="col-md-3 mini-header">
-                                Tiedot lisäsi
+                                {{fieldNames["end_report_user"]}}
                             </div>
                             <div class="col-md-9">{{project.end_report.user}},
                                 {{project.end_report.date|
@@ -612,7 +674,7 @@
                     <section ng-show="project.ended.date">
                         <div class="col-md-12">
                             <div class="col-md-3 mini-header">
-                                Rekisteröity päätetyksi
+                                {{fieldNames["ended_date"]}}
                             </div>
                             <div class="col-md-2">
                                 {{project.ended.end_date| date:'d.M.yyyy':'UTC'}}
@@ -624,7 +686,7 @@
                         </div>
                         <div id="endedinfo" class="proj-subcontent col-md-12">
                             <div class="col-md-3 mini-header">
-                                Tiedot lisäsi
+                                {{fieldNames["ended_user"]}}
                             </div>
                             <div class="col-md-9">{{project.ended.user}},
                                 {{project.ended.date|
@@ -635,7 +697,7 @@
                                 {{project.ended.approved_by}}
                             </div>
                             <div class="col-md-3 mini-header">
-                                Tiedotettu hallitukselle
+                                {{fieldNames["ended_board_notified"]}}
                             </div>
                             <div class="col-md-9">{{project.ended.board_notified|
                                             date: 'd.M.yyyy': 'UTC'}}</div>
@@ -657,7 +719,7 @@
                 <div class="proj-content col-md-12" style="margin-bottom: 1em">
                     <div class="col-md-3 mini-header">
                         <div ng-show="project.approved.granted_sum_eur">
-                            Myönnetty avustus
+                            {{fieldNames["approved_granted_sum"]}}
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -810,11 +872,11 @@
                 &nbsp;
             </article>
             <article id="checklist" class="proj-article">
-                <h4>Vaaditut liitteet</h4>
+                <h4>{{fieldNames["required_appendices"]}}</h4>
                 <ul style="padding-left: 1em">
                     <li class="col-md-12">
                         <span class="col-md-3">
-                            <label>Hankebudjetti</label>
+                            <label>{{fieldNames["required_appendices_proj_budget"]}}</label>
                         </span>
                         <span class="col-md-9">
                             <span class="glyphicon glyphicon-check"
@@ -825,7 +887,7 @@
                     </li>
                     <li class="col-md-12">
                         <span class="col-md-3">
-                            <label>Suositukset</label>
+                            <label>{{fieldNames["required_appendices_references"]}}</label>
                         </span>
                         <span class="col-md-9">
                             <span class="glyphicon glyphicon-check"
@@ -836,7 +898,7 @@
                     </li>
                     <li class="col-md-12">
                         <span class="col-md-3">
-                            <label>Vuosibudjetti</label>
+                            <label>{{fieldNames["required_appendices_annual_budget"]}}</label>
                         </span>
                         <span class="col-md-9">
                             <span class="glyphicon glyphicon-check"
@@ -847,7 +909,7 @@
                     </li>
                     <li class="col-md-12">
                         <span class="col-md-3">
-                            <label>Säännöt</label>
+                            <label>{{fieldNames["required_appendices_rules"]}}</label>
                         </span>
                         <span class="col-md-9">
                             <span class="glyphicon glyphicon-check"
@@ -858,7 +920,7 @@
                     </li>
                     <li class="col-md-12">
                         <span class="col-md-3">
-                            <label>Rekisteröintitodistus</label>
+                            <label>{{fieldNames["required_appendices_reg_cert"]}}</label>
                         </span>
                         <span class="col-md-9">
                             <span class="glyphicon glyphicon-check"
@@ -869,7 +931,7 @@
                     </li>
                     <li class="col-md-12">
                         <span class="col-md-3">
-                            <label>Vuosikertomus</label>
+                            <label>{{fieldNames["required_appendices_annual_report"]}}</label>
                         </span>
                         <span class="col-md-9">
                             <span class="glyphicon glyphicon-check"
@@ -880,7 +942,7 @@
                     </li>
                     <li class="col-md-12">
                         <span class="col-md-3">
-                            <label>Tilintarkastukset</label>
+                            <label>{{fieldNames["required_appendices_audit_reports"]}}</label>
                         </span>
                         <span class="col-md-9">
                             <span class="glyphicon glyphicon-check"
