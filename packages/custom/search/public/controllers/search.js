@@ -244,66 +244,85 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             fields.forEach(function (x) {$scope.exportFields[x] = state;});
         };
 
-        $scope.prepareFieldSelection = function() {
+        $scope.projFieldSel = function() {
             var fields = $scope.exportFields;
-            var resolvedFields = {_id: false};
+            var selection = "organisation ";
             Object.keys(fields).forEach(function (field) {
                 if (fields[field]) {
                     switch (field) {
                         case "ref":
-                            resolvedFields["project_ref"] = true;
+                            selection += "project_ref ";
                             break;
                         case "applied_local":
-                            resolvedFields["funding.applied_curr_local"] = true;
-                            resolvedFields["funding.curr_local_unit"] = true;
+                            selection += "funding.applied_curr_local ";
+                            selection += "funding.curr_local_unit ";
                             break;
                         case "applied_eur":
-                            resolvedFields["funding.applied_curr_eur"] = true;
+                            selection += "funding.applied_curr_eur ";
                             break;
                         case "granted_eur":
-                            resolvedFields["approved.granted_sum_eur"] = true;
+                            selection += "approved.granted_sum_eur ";
                             break;
                         case "duration":
-                            resolvedFields["duration_months"] = true;
+                            selection += "duration_months ";
                             break;
                         case "org_name":
-                            resolvedFields["organisation.name"] = true;
-                            break;
                         case "org_rep":
-                            resolvedFields["organisation.representative"] = true;
-                            break;
                         case "org_addr":
-                            resolvedFields["organisation.address"] = true;
-                            break;
                         case "org_tel":
-                            resolvedFields["organisation.tel"] = true;
-                            break;
                         case "org_email":
-                            resolvedFields["organisation.email"] = true;
-                            break;
                         case "org_www":
-                            resolvedFields["organisation.website"] = true;
                             break;
                         case "themes":
-                            resolvedFields["approved.themes"] = true;
+                            selection += "approved.themes ";
                             break;
                         case "activities":
-                            resolvedFields["methods"] = true;
+                            selection += "methods ";
                             break;
                         case "goal":
-                            resolvedFields["project_goal"] = true;
+                            selection += "project_goal ";
                             break;
                         case "equality":
-                            resolvedFields["gender_aspect"] = true;
+                            selection += "gender_aspect ";
                             break;
                         default:
-                            resolvedFields[field] = true;
+                            selection += field + " ";
                             break;
                     }
                 }
             });
-            return resolvedFields;
+            return selection;
         };
+
+        $scope.orgFieldSel = function () {
+            var fields = $scope.exportFields;
+            var selection = "";
+            Object.keys(fields).forEach(function (field) {
+                if (fields[field]) {
+                    switch (field) {
+                        case "org_name":
+                            selection += "name ";
+                            break;
+                        case "org_rep":
+                            selection += "representative ";
+                            break;
+                        case "org_addr":
+                            selection += "address ";
+                            break;
+                        case "org_tel":
+                            selection += "tel ";
+                            break;
+                        case "org_email":
+                            selection += "email ";
+                            break;
+                        case "org_www":
+                            selection += "website ";
+                            break;
+                    }
+                }
+            });
+            return selection;
+        }
 
         /**
          * Fetches search parameters from URL when clicking button to export
@@ -320,8 +339,9 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             }
             $scope.searchBy = JSON.parse(searchBy);
 
-            Search.searchAllProjects({"searchBy": searchBy,
-                "fields": $scope.prepareFieldSelection()},
+            Search.searchAllProjects({"searchBy": searchBy, "projFields":
+                        $scope.projFieldSel(), "orgFields": $scope.orgFieldSel()
+            },
             function (results) {
                 $scope.global.exportResults = results;
                 $scope.global.fields = $scope.exportFields;

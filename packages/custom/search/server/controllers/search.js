@@ -159,7 +159,10 @@ module.exports = function (Search) {
         },
         /**
          * Returns all projects matching the given search query in the HTTP POST
-         * parameter <tt>searchBy</tt>.
+         * parameter <tt>searchBy</tt>. The fields in the documents will be
+         * restricted to only the ones specified in parameters
+         * <tt>projFields</tt> and <tt>orgFields</tt>, which are strings of
+         * field names separated with spaces.
          *
          * @param {type} req Request object.
          * @param {type} res Response object.
@@ -175,15 +178,10 @@ module.exports = function (Search) {
                 return search;
             });
 
-            var fields = req.query.fields;
-            console.log("\n\n\n");
-            console.log(queries);
-            console.log("\n\n\n");
-            console.log(fields);
-            console.log("\n\n\n");
+            var projFields = req.query.projFields;
+            var orgFields = req.query.orgFields;
 
             Organisation.find({$and: params}, function (err, orgs) {
-
                 orgs = orgs.map(function (org) {
                     return org._id;
                 });
@@ -194,16 +192,30 @@ module.exports = function (Search) {
 
                 queries.push({organisation: {$in: orgs}});
 
-                Project.find({$and: queries}, fields)
-                        .populate('organisation', {name: 1})
+                Project.find({$and: queries})
+                        .populate('organisation', orgFields)
+                        .select(projFields)
                         .exec(function (err, results) {
                             if (err) {
+                                console.log(err);
                                 return res.status(500).json({
                                     error: 'Virhe hankkeiden hakutoiminnossa'
                                 });
                             } else {
-                                console.log(results);
-                                console.log("\n\n\n");
+                                results.forEach(function (result) {
+                                    result.in_review            = undefined;
+                                    result.approved             = undefined;
+                                    result.rejected             = undefined;
+                                    result.required_appendices  = undefined;
+                                    result.signed               = undefined;
+                                    result.intermediary_reports = undefined;
+                                    result.payments             = undefined;
+                                    result.end_report           = undefined;
+                                    result.ended                = undefined;
+                                    result.updated              = undefined;
+                                    result.appendices           = undefined;
+                                    result.funding              = undefined;
+                                });
                                 res.json(results);
                             }
                         });
