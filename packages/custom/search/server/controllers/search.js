@@ -203,8 +203,11 @@ module.exports = function (Search) {
                                 });
                             } else {
                                 results.forEach(function (result) {
+                                    result._id                  = undefined;
                                     result.in_review            = undefined;
-                                    result.approved             = undefined;
+                                    if (Object.keys(result.approved).length === 0) {
+                                        result.approved = undefined;
+                                    }
                                     result.rejected             = undefined;
                                     result.required_appendices  = undefined;
                                     result.signed               = undefined;
@@ -214,7 +217,12 @@ module.exports = function (Search) {
                                     result.ended                = undefined;
                                     result.updated              = undefined;
                                     result.appendices           = undefined;
-                                    result.funding              = undefined;
+                                    if (Object.keys(result.funding).length === 0) {
+                                        result.funding = undefined;
+                                    }
+                                    if (Object.keys(result.organisation).length === 0) {
+                                        result.organisation = undefined;
+                                    }
                                 });
                                 res.json(results);
                             }

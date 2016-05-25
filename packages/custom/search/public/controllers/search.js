@@ -2,16 +2,9 @@
 
 /* jshint -W098 */
 angular.module('mean.search').controller('SearchController', ['$scope', '$stateParams',
-    '$http', '$window', '$location', '$q', 'Global', 'Search', 'OrgSearch', 'ThemeSearch', 'MeanUser',
-    function ($scope, $stateParams, $http, $window, $location, $q, Global, Search, OrgSearch, ThemeSearch, MeanUser) {
+    '$http', '$window', '$location', '$q', '$filter', 'Global', 'Search', 'OrgSearch', 'ThemeSearch', 'MeanUser',
+    function ($scope, $stateParams, $http, $window, $location, $q, $filter, Global, Search, OrgSearch, ThemeSearch, MeanUser) {
         $scope.global = Global;
-
-//        $scope.fieldNames;
-//        $http.get("projects/assets/json/projectConstants.json").success(
-//                function (response) {
-//                    $scope.fieldNames = response.field_names;
-//                }
-//        );
 
         /**
          * Fetches project schema attributes to populate search view
@@ -241,10 +234,12 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             'budget', 'other_funding', 'referees', 'background_check'];
 
         $scope.setStates = function (fields, state) {
-            fields.forEach(function (x) {$scope.exportFields[x] = state;});
+            fields.forEach(function (x) {
+                $scope.exportFields[x] = state;
+            });
         };
 
-        $scope.projFieldSel = function() {
+        $scope.projFieldSel = function () {
             var fields = $scope.exportFields;
             var selection = "organisation ";
             Object.keys(fields).forEach(function (field) {
@@ -339,14 +334,15 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             }
             $scope.searchBy = JSON.parse(searchBy);
 
-            Search.searchAllProjects({"searchBy": searchBy, "projFields":
-                        $scope.projFieldSel(), "orgFields": $scope.orgFieldSel()
-            },
-            function (results) {
-                $scope.global.exportResults = results;
-                $scope.global.fields = $scope.exportFields;
-                $location.path('search/export');
-            });
+            var projFields =
+                    Search.searchAllProjects({"searchBy": searchBy, "projFields":
+                                $scope.projFieldSel(), "orgFields": $scope.orgFieldSel()
+                    },
+                    function (results) {
+                        $scope.global.exportResults = results;
+                        $scope.global.exportFields = $scope.exportFields;
+                        $location.path('search/export');
+                    });
         };
 
 
@@ -456,302 +452,107 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             }
         };
 
+        $scope.csvHeader = [];
+        $scope.csvColOrder = [];
+
         /**
          * Parses search results to exportable format. Puts parsed data to
          * $scope.parsedData -array.
          */
         $scope.getCsvData = function () {
-            var fields = $scope.global.fields;
-            $scope.parsedData = [];
-            angular.forEach($scope.global.exportResults, function (result) {
-                console.log(result);
-
-                var methods = [];
-                var dls = [];
-                var plpayments = [];
-                var payments = [];
-
-                var in_review_date;
-                var in_review_comments;
-
-                var approved_date;
-                var approved_by;
-                var granted_sum_eur;
-                var themes;
-
-                var signed_date;
-                var signed_by;
-
-                var rejected_date;
-                var rejection_categories;
-                var rejection_comments;
-
-                var end_report_approved_date;
-                var end_report_approved_by;
-                var audit_date;
-                var audit_review;
-                var end_report_general_review;
-                var end_report_methods;
-                var end_report_objective;
-                var end_report_comments;
-
-                var ended_end_date;
-                var ended_board_notified;
-                var ended_approved_by;
-                var ended_other_comments;
-
-// Check if project has in_review -details and add them, if not use empty string
-                if (typeof result.in_review === 'undefined') {
-                    in_review_date = ' ';
-                    in_review_comments = ' ';
+            var results = $scope.global.exportResults;
+            Object.keys(results).forEach(function (field) {
+                var result = results[field];
+                if (!result) {
+                    results[field] = " ";
                 } else {
-                    if (typeof result.in_review.date === 'undefined') {
-                        in_review_date = ' ';
-                    } else {
-                        in_review_date = result.in_review.date;
-                    }
-                    if (typeof result.in_review.comments === 'undefined') {
-                        in_review_comments = ' ';
-                    } else {
-                        in_review_comments = result.in_review.comments;
+                    console.log(typeof result)
+                    if (typeof result === "Date") {
+                        $scope.global.exportResults[field] =
+                                $filter('date')(result, "dd.MM.yyyy", "+0200");
                     }
                 }
-
-// Check if project has approved -details and add them, if not use empty string
-                if (typeof result.approved === 'undefined') {
-                    approved_date = ' ';
-                    approved_by = ' ';
-                    granted_sum_eur = ' ';
-                    themes = ' ';
-                } else {
-                    if (typeof result.approved.approved_date === 'undefined') {
-                        approved_date = ' ';
-                    } else {
-                        approved_date = result.approved.approved_date;
-                    }
-                    if (typeof result.approved.approved_by === 'undefined') {
-                        approved_by = ' ';
-                    } else {
-                        approved_by = result.approved.approved_by;
-                    }
-                    if (typeof result.approved.granted_sum_eur === 'undefined') {
-                        granted_sum_eur = ' ';
-                    } else {
-                        granted_sum_eur = result.approved.granted_sum_eur;
-                    }
-                    if (typeof result.approved.themes === 'undefined') {
-                        themes = ' ';
-                    } else {
-                        themes = result.approved.themes;
-                    }
-                }
-
-// Check if project has signed -details and add them, if not use empty string
-                if (typeof result.signed === 'undefined') {
-                    signed_date = ' ';
-                    signed_by = ' ';
-                } else {
-                    if (typeof result.signed.date === 'undefined') {
-                        signed_date = ' ';
-                    } else {
-                        signed_date = result.signed.signed_date;
-                    }
-                    if (typeof result.signed.signed_by === 'undefined') {
-                        signed_by = ' ';
-                    } else {
-                        signed_by = result.signed.signed_by;
-                    }
-                }
-
-// Check if project has rejected -details and add them, if not use empty string
-                if (typeof result.rejected === 'undefined') {
-                    rejected_date = ' ';
-                    rejection_categories = ' ';
-                    rejection_comments = ' ';
-                } else {
-                    if (typeof result.rejected.date === 'undefined') {
-                        rejected_date = ' ';
-                    } else {
-                        rejected_date = result.rejected.date;
-                    }
-                    if (typeof result.rejected.rejection_categories === 'undefined') {
-                        rejection_categories = ' ';
-                    } else {
-                        rejection_categories = result.rejected.rejection_categories;
-                    }
-                    if (typeof result.rejected.rejection_comments === 'undefined') {
-                        rejection_comments = ' ';
-                    } else {
-                        rejection_comments = result.rejected.rejection_comments;
-                    }
-                }
-
-// Check if project has end_report -details, if not use empty string
-                if (typeof result.end_report === 'undefined') {
-                    end_report_approved_date = ' ';
-                    end_report_approved_by = ' ';
-                    audit_date = ' ';
-                    audit_review = ' ';
-                    end_report_general_review = ' ';
-                    end_report_methods = ' ';
-                    end_report_objective = ' ';
-                    end_report_comments = ' ';
-                } else {
-                    if (typeof result.end_report.approved_date === 'undefined') {
-                        end_report_approved_date = ' ';
-                    } else {
-                        end_report_approved_date = result.end_report.approved_date;
-                    }
-                    if (typeof result.end_report.approved_by === 'undefined') {
-                        end_report_approved_by = ' ';
-                    } else {
-                        end_report_approved_by = result.end_report.approved_by;
-                    }
-                    if (typeof result.end_report.audit === 'undefined') {
-                        audit_date = ' ';
-                        audit_review = ' ';
-                    } else {
-                        if (typeof result.end_report.audit.date === 'undefined') {
-                            audit_date = ' ';
-                        } else {
-                            audit_date = result.end_report.audit.date;
-                        }
-                        if (typeof result.end_report.audit.review === 'undefined') {
-                            audit_review = ' ';
-                        } else {
-                            audit_review = result.end_report.audit.review;
-                        }
-                    }
-                    if (typeof result.end_report.general_review === 'undefined') {
-                        end_report_general_review = ' ';
-                    } else {
-                        end_report_general_review = result.end_report.general_review;
-                    }
-                    if (typeof result.end_report.methods === 'undefined') {
-                        end_report_methods = ' ';
-                    } else {
-                        end_report_methods = result.end_report.methods;
-                    }
-                    if (typeof result.end_report.objective === 'undefined') {
-                        end_report_objective = ' ';
-                    } else {
-                        end_report_objective = result.end_report.objective;
-                    }
-                    if (typeof result.end_report.comments === 'undefined') {
-                        end_report_comments = ' ';
-                    } else {
-                        end_report_comments = result.end_report.comments;
-                    }
-                }
-
-                // Check if project has ended -details and add them, if not use empty string
-                if (typeof result.ended === 'undefined') {
-                    ended_end_date = ' ';
-                    ended_board_notified = ' ';
-                    ended_approved_by = ' ';
-                    ended_other_comments = '  ';
-                } else {
-                    if (typeof result.ended.end_date === 'undefined') {
-                        ended_end_date = ' ';
-                    } else {
-                        ended_end_date = result.ended.end_date;
-                    }
-                    if (typeof result.ended.board_notified === 'undefined') {
-                        ended_board_notified = ' ';
-                    } else {
-                        ended_board_notified = result.ended.board_notified;
-                    }
-                    if (typeof result.ended.approved_by === 'undefined') {
-                        ended_approved_by = ' ';
-                    } else {
-                        ended_approved_by = result.ended.approved_by;
-                    }
-                    if (typeof result.ended.other_comments === 'undefined') {
-                        ended_other_comments = ' ';
-                    } else {
-                        ended_other_comments = result.ended.other_comments;
-                    }
-                }
-
-                angular.forEach(result.methods, function (method) {
-                    if (typeof method.comment === 'undefined') {
-                        method.comment = ' ';
-                    }
-                    var parsedMethod = method.name + ' (' + method.level + '): ' +
-                            method.comment;
-                    methods.push(parsedMethod);
-                });
-
-                angular.forEach(result.signed.intreport_deadlines, function (dl) {
-                    var parsedDl = dl.report + ' / ' + dl.date;
-                    dls.push(parsedDl);
-                });
-
-                angular.forEach(result.signed.planned_payments, function (payment) {
-                    var parsedPmnt = payment.sum_eur + ' (' + payment.date + ')';
-                    plpayments.push(parsedPmnt);
-                });
-
-                angular.forEach(result.payments, function (payment) {
-                    var parsedPayment = payment.sum_eur + ' (' + payment.payment_date + ')';
-                    payments.push(parsedPayment);
-                });
-
-                $q.all(methods, dls, plpayments, payments, in_review_date,
-                        in_review_comments, approved_date, approved_by, granted_sum_eur,
-                        themes, signed_date, signed_by, rejected_date,
-                        rejection_categories, rejection_comments,
-                        end_report_approved_date, end_report_approved_by,
-                        audit_date, audit_review, end_report_general_review,
-                        end_report_methods, end_report_objective,
-                        end_report_comments, ended_end_date,
-                        ended_board_notified, ended_approved_by,
-                        ended_other_comments).then(function () {
-                    $scope.parsedData.push(
-                            {project_ref: result.project_ref, state: result.state,
-                                title: result.title, coordinator: result.coordinator,
-                                organisation: result.organisation.name,
-                                description: result.description,
-                                description_en: result.description_en,
-                                duration_months: result.duration_months,
-                                applied_sum_eur: result.funding.applied_curr_eur,
-                                granted_sum: result.approved.granted_sum_eur,
-                                left_eur: result.funding.left_eur,
-                                methods: methods,
-                                background: result.background,
-                                gender_aspect: result.gender_aspect,
-                                beneficiaries: result.beneficiaries,
-                                project_goal: result.project_goal,
-                                reporting_evalation: result.reporting_evaluation,
-                                sustainability_risks: result.sustainability_risks,
-                                other_donors_proposed: result.other_donors_proposed,
-                                region: result.region, dac: result.dac,
-                                in_review_date: in_review_date,
-                                in_review_comments: in_review_comments,
-                                approved_date: approved_date,
-                                approved_by: approved_by,
-                                approved_themes: themes,
-                                signed_date: signed_date, signed_by: signed_by,
-                                intrep_dls: dls, planned_payments: plpayments,
-                                rejected_date: rejected_date,
-                                rejected_categories: rejection_categories,
-                                rejected_comments: rejection_comments,
-                                payments: payments,
-                                end_report_approved_date: end_report_approved_date,
-                                end_report_approved_by: end_report_approved_by,
-                                audit_date: audit_date,
-                                audit_review: audit_review,
-                                kios_review: end_report_general_review,
-                                end_report_comments: end_report_comments,
-                                end_report_methods: end_report_methods,
-                                end_report_objective: end_report_objective,
-                                ended_end_date: ended_end_date,
-                                ended_board_notified: ended_board_notified,
-                                ended_approved_by: ended_approved_by,
-                                ended_other_comments: ended_other_comments
-                            });
-                });
             });
+            var fields = $scope.global.exportFields;
+            var header = $scope.csvHeader;
+            var colOrder = $scope.csvColOrder;
+            $http.get("projects/assets/json/projectConstants.json").success(
+                    function (response) {
+                        var fieldNames = response.field_names;
+                        Object.keys(fields).forEach(function (field) {
+                            if (fields[field]) {
+                                switch (field) {
+                                    case "ref":
+                                        header.push(fieldNames["project_ref"]);
+                                        colOrder.push("project_ref");
+                                        break;
+                                    case "applied_local":
+                                        header.push(fieldNames["funding_applied_curr_local"]);
+                                        header.push(fieldNames["funding_curr_local_unit"]);
+                                        colOrder.push("funding.applied_curr_local");
+                                        colOrder.push("funding.curr_local_unit");
+                                        break;
+                                    case "applied_eur":
+                                        header.push(fieldNames["funding_applied_curr_eur"]);
+                                        colOrder.push("funding.applied_curr_eur");
+                                        break;
+                                    case "granted_eur":
+                                        header.push(fieldNames["approved_granted_sum_eur"]);
+                                        colOrder.push("approved.granted_sum_eur");
+                                        break;
+                                    case "duration":
+                                        header.push(fieldNames["duration_months"]);
+                                        colOrder.push("duration_months");
+                                        break;
+                                    case "org_name":
+                                        header.push(fieldNames["organisation_name"]);
+                                        colOrder.push("organisation.name");
+                                        break;
+                                    case "org_rep":
+                                        header.push(fieldNames["organisation_representative"]);
+                                        colOrder.push("organisation.representative");
+                                        break;
+                                    case "org_addr":
+                                        header.push(fieldNames["organisation_address"]);
+                                        colOrder.push("organisation.address");
+                                        break;
+                                    case "org_tel":
+                                        header.push(fieldNames["organisation_tel"]);
+                                        colOrder.push("organisation.tel");
+                                        break;
+                                    case "org_email":
+                                        header.push(fieldNames["organisation_email"]);
+                                        colOrder.push("organisation.email");
+                                        break;
+                                    case "org_www":
+                                        header.push(fieldNames["organisation_www"]);
+                                        colOrder.push("organisation.website");
+                                        break;
+                                    case "themes":
+                                        header.push(fieldNames["approved_themes"]);
+                                        colOrder.push("approved.themes");
+                                        break;
+                                    case "activities":
+                                        header.push(fieldNames["methods"]);
+                                        colOrder.push("methods");
+                                        break;
+                                    case "goal":
+                                        header.push(fieldNames["project_goal"]);
+                                        colOrder.push("project_goal");
+                                        break;
+                                    case "equality":
+                                        header.push(fieldNames["gender_aspect"]);
+                                        colOrder.push("gender_aspect");
+                                        break;
+                                    default:
+                                        header.push(fieldNames[field]);
+                                        colOrder.push(field);
+                                        break;
+                                }
+                            }
+                        });
+                    }
+            );
         };
     }
 ]);
