@@ -238,7 +238,8 @@
                         <h5>Kentät</h5>
                         <span class="col-md-3">
                             <input id="basics" type="checkbox"
-                                   onclick="setStates(['ref', 'title', 'state', 'security_level', 'coordinator', 'area', 'dac', 'reg_date', 'applied_local', 'applied_eur', 'duration', 'granted_eur'], 'basics');">
+                                   data-ng-model="basicFieldsToggle"
+                                   ng-click="setStates(basicFieldsArray, basicFieldsToggle);">
                             <label for="basics">Perustiedot</label>
                         </span>
                         <div class="col-md-12">
@@ -260,7 +261,9 @@
                             <span class="col-md-3">
                                 <input type="checkbox" id="security_level"
                                        data-ng-model="exportFields.security_level">
-                                <label for="security_level">Turvaluokitus</label>
+                                <label for="security_level">
+                                    Turvaluokitus
+                                </label>
                             </span>
                             <span class="col-md-3">
                                 <input type="checkbox" id="coordinator"
@@ -268,9 +271,9 @@
                                 <label for="coordinator">Koordinaattori</label>
                             </span>
                             <span class="col-md-3">
-                                <input type="checkbox" id="area"
-                                       data-ng-model="exportFields.area">
-                                <label for="area">Alue</label>
+                                <input type="checkbox" id="region"
+                                       data-ng-model="exportFields.region">
+                                <label for="region">Alue / Maa</label>
                             </span>
                             <span class="col-md-3">
                                 <input type="checkbox" id="dac"
@@ -279,13 +282,15 @@
                             </span>
                             <span class="col-md-3">
                                 <input type="checkbox" id="reg_date"
-                                       data-ng-model="exportFields.ref">
+                                       data-ng-model="exportFields.reg_date">
                                 <label for="reg_date">Rekisteröimispvm</label>
                             </span>
                             <span class="col-md-3">
                                 <input type="checkbox" id="applied_local"
                                        data-ng-model="exportFields.applied_local">
-                                <label for="applied_local">Haettu paik. val.</label>
+                                <label for="applied_local">
+                                    Haettu paik. val.
+                                </label>
                             </span>
                             <span class="col-md-3">
                                 <input type="checkbox" id="applied_eur"
@@ -305,7 +310,8 @@
                         </div>
                         <span class="col-md-3">
                             <input id="organisation" type="checkbox"
-                                   onclick="setStates(['org_name', 'org_rep', 'org_addr', 'org_tel', 'org_email', 'org_www'], 'organisation');">
+                                   data-ng-model="orgFieldsToggle"
+                                   ng-click="setStates(orgFieldsArray, orgFieldsToggle);">
                             <label for="organisation">Järjestön tiedot</label>
                         </span>
                         <div class="col-md-12">
@@ -354,7 +360,8 @@
                         </div>
                         <span class="col-md-3">
                             <input id="extra_info" type="checkbox"
-                                   onclick="setStates(['description', 'activities', 'context', 'goal', 'target_group', 'human_resources', 'equality', 'vulnerable_groups', 'sustainability_risks', 'reporting_evaluation', 'budget', 'other_funding', 'referees', 'background_check'], 'extra_info');">
+                                   data-ng-model="extraFieldsToggle"
+                                   ng-click="setStates(extraFieldsArray, extraFieldsToggle);">
                             <label for="extra_info">Lisätiedot</label>
                         </span>
                         <div class="col-md-12">
@@ -415,7 +422,9 @@
                                 <input type="checkbox"
                                        id="sustainability_risks"
                                        data-ng-model="exportFields.sustainability_risks">
-                                <label for="sustainability_risks">Tavoitt. saavutt. mitt.</label>
+                                <label for="sustainability_risks">
+                                    Tavoitt. saavutt. mitt.
+                                </label>
                             </span>
                             <span class="col-md-3">
                                 <input type="checkbox"

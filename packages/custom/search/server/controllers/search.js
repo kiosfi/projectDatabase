@@ -1,6 +1,5 @@
 'use strict';
 
-
 var mongoose = require('mongoose'),
         Project = mongoose.model('Project'),
         Organisation = mongoose.model('Organisation'),
@@ -75,7 +74,8 @@ module.exports = function (Search) {
             search[query.field] = query.value;
             return search;
         });
-    }
+    };
+
     return {
         /**
          * Searches for projects. The results are ordered and paginated
@@ -176,6 +176,11 @@ module.exports = function (Search) {
             });
 
             var fields = req.query.fields;
+            console.log("\n\n\n");
+            console.log(queries);
+            console.log("\n\n\n");
+            console.log(fields);
+            console.log("\n\n\n");
 
             Organisation.find({$and: params}, function (err, orgs) {
 
@@ -197,6 +202,8 @@ module.exports = function (Search) {
                                     error: 'Virhe hankkeiden hakutoiminnossa'
                                 });
                             } else {
+                                console.log(results);
+                                console.log("\n\n\n");
                                 res.json(results);
                             }
                         });
@@ -271,7 +278,6 @@ module.exports = function (Search) {
             }
 
         },
-
         /**
          * Returns all organisations matching the given search query in the HTTP
          * POST parameter <tt>searchOrg</tt>.
@@ -290,26 +296,26 @@ module.exports = function (Search) {
                 } else {
                     orgs = _.map(orgs, function (org) {
                         return {
-                            "_id":                  org._id,
-                            "name":                 org.name,
-                            "representative":       org.representative.name +
+                            "_id": org._id,
+                            "name": org.name,
+                            "representative": org.representative.name +
                                     ", " + org.representative.email + ", " +
                                     org.representative.phone,
-                            "exec_manager":         org.exec_manager,
-                            "communications_rep":   org.communications_rep,
-                            "address":              org.address.street + ", " +
+                            "exec_manager": org.exec_manager,
+                            "communications_rep": org.communications_rep,
+                            "address": org.address.street + ", " +
                                     org.address.postal_code + " " +
                                     org.address.city + ", " +
                                     org.address.country,
-                            "tel":                  org.tel,
-                            "email":                org.email,
-                            "website":              org.website,
-                            "legal_status":         org.legal_status,
-                            "description":          org.description,
-                            "int_links":            org.int_links,
-                            "nat_local_links":      org.nat_local_links,
+                            "tel": org.tel,
+                            "email": org.email,
+                            "website": org.website,
+                            "legal_status": org.legal_status,
+                            "description": org.description,
+                            "int_links": org.int_links,
+                            "nat_local_links": org.nat_local_links,
                             "other_funding_budget": org.other_funding_budget,
-                            "accounting_audit":     org.accounting_audit
+                            "accounting_audit": org.accounting_audit
                         }
                     })
                     res.json(orgs);
@@ -362,6 +368,5 @@ module.exports = function (Search) {
                         });
             });
         }
-
     };
-}
+};

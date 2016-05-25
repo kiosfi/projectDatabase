@@ -6,6 +6,13 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
     function ($scope, $stateParams, $http, $window, $location, $q, Global, Search, OrgSearch, ThemeSearch, MeanUser) {
         $scope.global = Global;
 
+//        $scope.fieldNames;
+//        $http.get("projects/assets/json/projectConstants.json").success(
+//                function (response) {
+//                    $scope.fieldNames = response.field_names;
+//                }
+//        );
+
         /**
          * Fetches project schema attributes to populate search view
          * fields dropdown.
@@ -206,7 +213,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         };
 
         $scope.exportFields = {ref: true, title: true, state: true,
-            security_level: false, coordinator: false, area: true, dac: true,
+            security_level: false, coordinator: false, region: true, dac: true,
             reg_date: true, applied_local: false, applied_eur: true,
             granted_eur: true, duration: true, org_name: true, org_rep: false,
             org_addr: false, org_tel: false, org_email: false, org_www: false,
@@ -216,6 +223,86 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             sustainability_risks: false, reporting_evaluation: false,
             budget: false, other_funding: false, referees: false,
             background_check: false
+        };
+
+        $scope.basicFieldsToggle = false;
+        $scope.basicFieldsArray = ['ref', 'title', 'state', 'security_level',
+            'coordinator', 'region', 'dac', 'reg_date', 'applied_local',
+            'applied_eur', 'duration', 'granted_eur'];
+
+        $scope.orgFieldsToggle = false;
+        $scope.orgFieldsArray = ['org_name', 'org_rep', 'org_addr', 'org_tel',
+            'org_email', 'org_www'];
+
+        $scope.extraFieldsToggle = false;
+        $scope.extraFieldsArray = ['themes', 'description', 'activities',
+            'context', 'goal', 'target_group', 'human_resources', 'equality',
+            'vulnerable_groups', 'sustainability_risks', 'reporting_evaluation',
+            'budget', 'other_funding', 'referees', 'background_check'];
+
+        $scope.setStates = function (fields, state) {
+            fields.forEach(function (x) {$scope.exportFields[x] = state;});
+        };
+
+        $scope.prepareFieldSelection = function() {
+            var fields = $scope.exportFields;
+            var resolvedFields = {_id: false};
+            Object.keys(fields).forEach(function (field) {
+                if (fields[field]) {
+                    switch (field) {
+                        case "ref":
+                            resolvedFields["project_ref"] = true;
+                            break;
+                        case "applied_local":
+                            resolvedFields["funding.applied_curr_local"] = true;
+                            resolvedFields["funding.curr_local_unit"] = true;
+                            break;
+                        case "applied_eur":
+                            resolvedFields["funding.applied_curr_eur"] = true;
+                            break;
+                        case "granted_eur":
+                            resolvedFields["approved.granted_sum_eur"] = true;
+                            break;
+                        case "duration":
+                            resolvedFields["duration_months"] = true;
+                            break;
+                        case "org_name":
+                            resolvedFields["organisation.name"] = true;
+                            break;
+                        case "org_rep":
+                            resolvedFields["organisation.representative"] = true;
+                            break;
+                        case "org_addr":
+                            resolvedFields["organisation.address"] = true;
+                            break;
+                        case "org_tel":
+                            resolvedFields["organisation.tel"] = true;
+                            break;
+                        case "org_email":
+                            resolvedFields["organisation.email"] = true;
+                            break;
+                        case "org_www":
+                            resolvedFields["organisation.website"] = true;
+                            break;
+                        case "themes":
+                            resolvedFields["approved.themes"] = true;
+                            break;
+                        case "activities":
+                            resolvedFields["methods"] = true;
+                            break;
+                        case "goal":
+                            resolvedFields["project_goal"] = true;
+                            break;
+                        case "equality":
+                            resolvedFields["gender_aspect"] = true;
+                            break;
+                        default:
+                            resolvedFields[field] = true;
+                            break;
+                    }
+                }
+            });
+            return resolvedFields;
         };
 
         /**
@@ -233,18 +320,11 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             }
             $scope.searchBy = JSON.parse(searchBy);
 
-            var fields = {};
-            Object.keys($scope.exportFields).forEach(function (name) {
-                if ($scope.exportFields[name]) {
-                    fields[name] = 1;
-                }
-            })
-            fields["_id"] = 0;
-
-            Search.searchAllProjects({"searchBy": searchBy, "fields": fields,
-                "fieldNames": fieldNames},
+            Search.searchAllProjects({"searchBy": searchBy,
+                "fields": $scope.prepareFieldSelection()},
             function (results) {
                 $scope.global.exportResults = results;
+                $scope.global.fields = $scope.exportFields;
                 $location.path('search/export');
             });
         };
@@ -356,16 +436,16 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             }
         };
 
-
-
         /**
          * Parses search results to exportable format. Puts parsed data to
          * $scope.parsedData -array.
          */
         $scope.getCsvData = function () {
-
+            var fields = $scope.global.fields;
             $scope.parsedData = [];
-            angular.forEach($scope.global.exportResults, function (obj) {
+            angular.forEach($scope.global.exportResults, function (result) {
+                console.log(result);
+
                 var methods = [];
                 var dls = [];
                 var plpayments = [];
@@ -401,93 +481,93 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 var ended_other_comments;
 
 // Check if project has in_review -details and add them, if not use empty string
-                if (typeof obj.in_review === 'undefined') {
+                if (typeof result.in_review === 'undefined') {
                     in_review_date = ' ';
                     in_review_comments = ' ';
                 } else {
-                    if (typeof obj.in_review.date === 'undefined') {
+                    if (typeof result.in_review.date === 'undefined') {
                         in_review_date = ' ';
                     } else {
-                        in_review_date = obj.in_review.date;
+                        in_review_date = result.in_review.date;
                     }
-                    if (typeof obj.in_review.comments === 'undefined') {
+                    if (typeof result.in_review.comments === 'undefined') {
                         in_review_comments = ' ';
                     } else {
-                        in_review_comments = obj.in_review.comments;
+                        in_review_comments = result.in_review.comments;
                     }
                 }
 
 // Check if project has approved -details and add them, if not use empty string
-                if (typeof obj.approved === 'undefined') {
+                if (typeof result.approved === 'undefined') {
                     approved_date = ' ';
                     approved_by = ' ';
                     granted_sum_eur = ' ';
                     themes = ' ';
                 } else {
-                    if (typeof obj.approved.approved_date === 'undefined') {
+                    if (typeof result.approved.approved_date === 'undefined') {
                         approved_date = ' ';
                     } else {
-                        approved_date = obj.approved.approved_date;
+                        approved_date = result.approved.approved_date;
                     }
-                    if (typeof obj.approved.approved_by === 'undefined') {
+                    if (typeof result.approved.approved_by === 'undefined') {
                         approved_by = ' ';
                     } else {
-                        approved_by = obj.approved.approved_by;
+                        approved_by = result.approved.approved_by;
                     }
-                    if (typeof obj.approved.granted_sum_eur === 'undefined') {
+                    if (typeof result.approved.granted_sum_eur === 'undefined') {
                         granted_sum_eur = ' ';
                     } else {
-                        granted_sum_eur = obj.approved.granted_sum_eur;
+                        granted_sum_eur = result.approved.granted_sum_eur;
                     }
-                    if (typeof obj.approved.themes === 'undefined') {
+                    if (typeof result.approved.themes === 'undefined') {
                         themes = ' ';
                     } else {
-                        themes = obj.approved.themes;
+                        themes = result.approved.themes;
                     }
                 }
 
 // Check if project has signed -details and add them, if not use empty string
-                if (typeof obj.signed === 'undefined') {
+                if (typeof result.signed === 'undefined') {
                     signed_date = ' ';
                     signed_by = ' ';
                 } else {
-                    if (typeof obj.signed.date === 'undefined') {
+                    if (typeof result.signed.date === 'undefined') {
                         signed_date = ' ';
                     } else {
-                        signed_date = obj.signed.signed_date;
+                        signed_date = result.signed.signed_date;
                     }
-                    if (typeof obj.signed.signed_by === 'undefined') {
+                    if (typeof result.signed.signed_by === 'undefined') {
                         signed_by = ' ';
                     } else {
-                        signed_by = obj.signed.signed_by;
+                        signed_by = result.signed.signed_by;
                     }
                 }
 
 // Check if project has rejected -details and add them, if not use empty string
-                if (typeof obj.rejected === 'undefined') {
+                if (typeof result.rejected === 'undefined') {
                     rejected_date = ' ';
                     rejection_categories = ' ';
                     rejection_comments = ' ';
                 } else {
-                    if (typeof obj.rejected.date === 'undefined') {
+                    if (typeof result.rejected.date === 'undefined') {
                         rejected_date = ' ';
                     } else {
-                        rejected_date = obj.rejected.date;
+                        rejected_date = result.rejected.date;
                     }
-                    if (typeof obj.rejected.rejection_categories === 'undefined') {
+                    if (typeof result.rejected.rejection_categories === 'undefined') {
                         rejection_categories = ' ';
                     } else {
-                        rejection_categories = obj.rejected.rejection_categories;
+                        rejection_categories = result.rejected.rejection_categories;
                     }
-                    if (typeof obj.rejected.rejection_comments === 'undefined') {
+                    if (typeof result.rejected.rejection_comments === 'undefined') {
                         rejection_comments = ' ';
                     } else {
-                        rejection_comments = obj.rejected.rejection_comments;
+                        rejection_comments = result.rejected.rejection_comments;
                     }
                 }
 
 // Check if project has end_report -details, if not use empty string
-                if (typeof obj.end_report === 'undefined') {
+                if (typeof result.end_report === 'undefined') {
                     end_report_approved_date = ' ';
                     end_report_approved_by = ' ';
                     audit_date = ' ';
@@ -497,83 +577,83 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                     end_report_objective = ' ';
                     end_report_comments = ' ';
                 } else {
-                    if (typeof obj.end_report.approved_date === 'undefined') {
+                    if (typeof result.end_report.approved_date === 'undefined') {
                         end_report_approved_date = ' ';
                     } else {
-                        end_report_approved_date = obj.end_report.approved_date;
+                        end_report_approved_date = result.end_report.approved_date;
                     }
-                    if (typeof obj.end_report.approved_by === 'undefined') {
+                    if (typeof result.end_report.approved_by === 'undefined') {
                         end_report_approved_by = ' ';
                     } else {
-                        end_report_approved_by = obj.end_report.approved_by;
+                        end_report_approved_by = result.end_report.approved_by;
                     }
-                    if (typeof obj.end_report.audit === 'undefined') {
+                    if (typeof result.end_report.audit === 'undefined') {
                         audit_date = ' ';
                         audit_review = ' ';
                     } else {
-                        if (typeof obj.end_report.audit.date === 'undefined') {
+                        if (typeof result.end_report.audit.date === 'undefined') {
                             audit_date = ' ';
                         } else {
-                            audit_date = obj.end_report.audit.date;
+                            audit_date = result.end_report.audit.date;
                         }
-                        if (typeof obj.end_report.audit.review === 'undefined') {
+                        if (typeof result.end_report.audit.review === 'undefined') {
                             audit_review = ' ';
                         } else {
-                            audit_review = obj.end_report.audit.review;
+                            audit_review = result.end_report.audit.review;
                         }
                     }
-                    if (typeof obj.end_report.general_review === 'undefined') {
+                    if (typeof result.end_report.general_review === 'undefined') {
                         end_report_general_review = ' ';
                     } else {
-                        end_report_general_review = obj.end_report.general_review;
+                        end_report_general_review = result.end_report.general_review;
                     }
-                    if (typeof obj.end_report.methods === 'undefined') {
+                    if (typeof result.end_report.methods === 'undefined') {
                         end_report_methods = ' ';
                     } else {
-                        end_report_methods = obj.end_report.methods;
+                        end_report_methods = result.end_report.methods;
                     }
-                    if (typeof obj.end_report.objective === 'undefined') {
+                    if (typeof result.end_report.objective === 'undefined') {
                         end_report_objective = ' ';
                     } else {
-                        end_report_objective = obj.end_report.objective;
+                        end_report_objective = result.end_report.objective;
                     }
-                    if (typeof obj.end_report.comments === 'undefined') {
+                    if (typeof result.end_report.comments === 'undefined') {
                         end_report_comments = ' ';
                     } else {
-                        end_report_comments = obj.end_report.comments;
+                        end_report_comments = result.end_report.comments;
                     }
                 }
 
                 // Check if project has ended -details and add them, if not use empty string
-                if (typeof obj.ended === 'undefined') {
+                if (typeof result.ended === 'undefined') {
                     ended_end_date = ' ';
                     ended_board_notified = ' ';
                     ended_approved_by = ' ';
                     ended_other_comments = '  ';
                 } else {
-                    if (typeof obj.ended.end_date === 'undefined') {
+                    if (typeof result.ended.end_date === 'undefined') {
                         ended_end_date = ' ';
                     } else {
-                        ended_end_date = obj.ended.end_date;
+                        ended_end_date = result.ended.end_date;
                     }
-                    if (typeof obj.ended.board_notified === 'undefined') {
+                    if (typeof result.ended.board_notified === 'undefined') {
                         ended_board_notified = ' ';
                     } else {
-                        ended_board_notified = obj.ended.board_notified;
+                        ended_board_notified = result.ended.board_notified;
                     }
-                    if (typeof obj.ended.approved_by === 'undefined') {
+                    if (typeof result.ended.approved_by === 'undefined') {
                         ended_approved_by = ' ';
                     } else {
-                        ended_approved_by = obj.ended.approved_by;
+                        ended_approved_by = result.ended.approved_by;
                     }
-                    if (typeof obj.ended.other_comments === 'undefined') {
+                    if (typeof result.ended.other_comments === 'undefined') {
                         ended_other_comments = ' ';
                     } else {
-                        ended_other_comments = obj.ended.other_comments;
+                        ended_other_comments = result.ended.other_comments;
                     }
                 }
 
-                angular.forEach(obj.methods, function (method) {
+                angular.forEach(result.methods, function (method) {
                     if (typeof method.comment === 'undefined') {
                         method.comment = ' ';
                     }
@@ -582,17 +662,17 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                     methods.push(parsedMethod);
                 });
 
-                angular.forEach(obj.signed.intreport_deadlines, function (dl) {
+                angular.forEach(result.signed.intreport_deadlines, function (dl) {
                     var parsedDl = dl.report + ' / ' + dl.date;
                     dls.push(parsedDl);
                 });
 
-                angular.forEach(obj.signed.planned_payments, function (payment) {
+                angular.forEach(result.signed.planned_payments, function (payment) {
                     var parsedPmnt = payment.sum_eur + ' (' + payment.date + ')';
                     plpayments.push(parsedPmnt);
                 });
 
-                angular.forEach(obj.payments, function (payment) {
+                angular.forEach(result.payments, function (payment) {
                     var parsedPayment = payment.sum_eur + ' (' + payment.payment_date + ')';
                     payments.push(parsedPayment);
                 });
@@ -608,24 +688,24 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                         ended_board_notified, ended_approved_by,
                         ended_other_comments).then(function () {
                     $scope.parsedData.push(
-                            {project_ref: obj.project_ref, state: obj.state,
-                                title: obj.title, coordinator: obj.coordinator,
-                                organisation: obj.organisation.name,
-                                description: obj.description,
-                                description_en: obj.description_en,
-                                duration_months: obj.duration_months,
-                                applied_sum_eur: obj.funding.applied_curr_eur,
-                                granted_sum: obj.approved.granted_sum_eur,
-                                left_eur: obj.funding.left_eur,
+                            {project_ref: result.project_ref, state: result.state,
+                                title: result.title, coordinator: result.coordinator,
+                                organisation: result.organisation.name,
+                                description: result.description,
+                                description_en: result.description_en,
+                                duration_months: result.duration_months,
+                                applied_sum_eur: result.funding.applied_curr_eur,
+                                granted_sum: result.approved.granted_sum_eur,
+                                left_eur: result.funding.left_eur,
                                 methods: methods,
-                                background: obj.background,
-                                gender_aspect: obj.gender_aspect,
-                                beneficiaries: obj.beneficiaries,
-                                project_goal: obj.project_goal,
-                                reporting_evalation: obj.reporting_evaluation,
-                                sustainability_risks: obj.sustainability_risks,
-                                other_donors_proposed: obj.other_donors_proposed,
-                                region: obj.region, dac: obj.dac,
+                                background: result.background,
+                                gender_aspect: result.gender_aspect,
+                                beneficiaries: result.beneficiaries,
+                                project_goal: result.project_goal,
+                                reporting_evalation: result.reporting_evaluation,
+                                sustainability_risks: result.sustainability_risks,
+                                other_donors_proposed: result.other_donors_proposed,
+                                region: result.region, dac: result.dac,
                                 in_review_date: in_review_date,
                                 in_review_comments: in_review_comments,
                                 approved_date: approved_date,
