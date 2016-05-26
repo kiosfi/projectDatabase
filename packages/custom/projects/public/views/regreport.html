@@ -103,11 +103,12 @@
             <tr>
                 <td class="report-mini-header">{{fieldNames["description"]}}</td>
                 <td colspan="3" class="report-content">
-                    {{project.description}}&nbsp;
+                    <span ng-bind-html="handleEmphasis(project.description)"></span>&nbsp;
                 </td>
             </tr>
             <tr><td colspan="4">&nbsp;</td></tr>
             <tr>
+                <!-- The &nbsp; is necessary for correct printing. -->
                 <td class="report-mini-header">Oikeudellinen&nbsp;fokus
                     <!--{{fieldNames["approved_themes"]}}-->
                 </td>
@@ -211,26 +212,16 @@
                     <div class="report-mini-header">
                         {{fieldNames["context"]}}
                     </div>
-                    <div class="report-subcontent">{{project.context}}</div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.context)"></span>
+                    </div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         {{fieldNames["project_goal"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{project.project_goal}}
-                    </div>
-                </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
-                        {{fieldNames["approved_themes"]}}
-                    </div>
-                    <div class="report-subcontent">
-                        <table>
-                            <tr ng-repeat="theme in project.approved.themes">
-                                <td>{{theme}}</td>
-                            </tr>
-                        </table>
+                        <span ng-bind-html="handleEmphasis(project.project_goal)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -250,7 +241,9 @@
                             <tr ng-repeat="method in project.methods">
                                 <td>
                                     <em>{{method.name}}</em> ({{method.level}})
-                                    <p class="proj-subcontent">{{method.comment}}</p>
+                                    <p class="proj-subcontent">
+                                        <span ng-bind-html="handleEmphasis(method.comment)"></span>
+                                    </p>
                                 </td>
                             </tr>
                         </table>
@@ -261,7 +254,7 @@
                         {{fieldNames["human_resources"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{project.human_resources}}
+                        <span ng-bind-html="handleEmphasis(project.human_resources)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -269,7 +262,7 @@
                         {{fieldNames["gender_aspect"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{project.gender_aspect}}
+                        <span ng-bind-html="handleEmphasis(project.gender_aspect)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -277,7 +270,7 @@
                         {{fieldNames["vulnerable_groups"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{project.vulnerable_groups}}
+                        <span ng-bind-html="handleEmphasis(project.vulnerable_groups)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -285,7 +278,7 @@
                         {{fieldNames["sustainability_risks"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{project.sustainability_risks}}
+                        <span ng-bind-html="handleEmphasis(project.sustainability_risks)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -293,14 +286,16 @@
                         {{fieldNames["reporting_evaluation"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{project.reporting_evaluation}}
+                        <span ng-bind-html="handleEmphasis(project.reporting_evaluation)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         {{fieldNames["budget"]}}
                     </div>
-                    <div class="report-subcontent">{{project.budget}}</div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.budget)"></span>
+                    </div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
@@ -313,7 +308,7 @@
                         {{fieldNames["background_check"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{project.background_check}}
+                        <span ng-bind-html="handleEmphasis(project.background_check)"></span>
                     </div>
                 </div>
             </td>
@@ -327,26 +322,32 @@
                     <div class="report-mini-header">
                         {{fieldNames["fitness"]}}
                     </div>
-                    <div class="report-subcontent">{{project.fitness}}</div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.fitness)"></span>
+                    </div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         {{fieldNames["capacity"]}}
                     </div>
-                    <div class="report-subcontent">{{project.capacity}}</div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.capacity)"></span>
+                    </div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         {{fieldNames["feasibility"]}}
                     </div>
-                    <div class="report-subcontent">{{project.feasibility}}</div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.feasibility)"></span>
+                    </div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         {{fieldNames["effectiveness"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{project.effectiveness}}
+                        <span ng-bind-html="handleEmphasis(project.effectiveness)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -354,7 +355,7 @@
                         {{fieldNames["proposed_funding"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{project.proposed_funding}}
+                        <span ng-bind-html="handleEmphasis(project.proposed_funding)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -362,7 +363,7 @@
                         {{fieldNames["approved_decision"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{project.approved.decision}}
+                        <span ng-bind-html="handleEmphasis(project.approved.decision)"></span>
                     </div>
                 </div>
             </td>

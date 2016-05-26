@@ -58,13 +58,13 @@
                     </div>
                     <div class="report-subcontent" style="margin-bottom: 1em">
                         <em>Suunnitellut: </em>
-                        {{project.project_goal}}
+                        <span ng-bind-html="handleEmphasis(project.project_goal)"></span>
                     </div>
                     <div class="report-subcontent">
                         <em>Toteutuneet: </em>
                         <!-- For some reason, the value of this field is an
                         array. -->
-                        {{report.objectives[0]}}
+                        <span ng-bind-html="handleEmphasis(report.objectives[0])"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -76,9 +76,9 @@
                             style="padding-bottom: 1em">
                             <p><em>{{method.name}}</em> ({{method.level}})</p>
                             <p class="report-subcontent"><em>Suunnitellut:</em>
-                                {{method.comment}}</p>
+                                <span ng-bind-html="handleEmphasis(method.comment)"></span></p>
                             <p class="report-subcontent"><em>Toteutuneet:</em>
-                                {{report.methods[project.methods.indexOf(method)]}}</p>
+                                <span ng-bind-html="handleEmphasis(report.methods[project.methods.indexOf(method)])"></span></p>
                         </li>
                     </ul>
                 </div>
@@ -87,7 +87,7 @@
                         {{fieldNames["intreport_communication"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{report.communication}}
+                        <span ng-bind-html="handleEmphasis(report.communication)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -95,7 +95,7 @@
                         {{fieldNames["intreport_evaluation"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{report.evaluation}}
+                        <span ng-bind-html="handleEmphasis(report.evaluation)"></span>
                     </div>
                 </div>
             </td>
@@ -108,7 +108,9 @@
                     <div class="report-mini-header">
                         {{fieldNames["intreport_budget"]}}
                     </div>
-                    <div class="report-subcontent">{{report.budget}}</div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(report.budget)"></span>
+                    </div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">Maksatukset</div>
@@ -177,14 +179,16 @@
                         {{fieldNames["overall_rating_kios"]}}
                     </div>
                     <div class="report-subcontent">
-                        {{report.overall_rating_kios}}
+                        <span ng-bind-html="handleEmphasis(report.overall_rating_kios)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         {{fieldNames["comments"]}}
                     </div>
-                    <div class="report-subcontent">{{report.comments}}</div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(report.comments)"></span>
+                    </div>
                 </div>
             </td>
         </tr>

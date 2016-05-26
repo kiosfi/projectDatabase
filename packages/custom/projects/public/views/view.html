@@ -39,11 +39,15 @@
             <li>
                 <label><a href="#organisation">Järjestö</a></label>
             </li>
-            <li>
+<!--            <li>
                 <label><a href="#assessment">KIOS:n arvio</a></label>
-            </li>
+            </li>-->
             <li>
                 <label><a href="#schedule">Aikataulu</a></label>
+                <ul>
+                    <li><a href="#schedule">Suunniteltu</a></li>
+                    <li><a href="#reports">Toteutunut</a></li>
+                </ul>
             </li>
             <li>
                 <label><a href="#payments">Maksatus</a></label>
@@ -170,7 +174,8 @@
             <article id="description" class="proj-article">
                 <h4>{{fieldNames["description"]}}</h4>
                 <div class="proj-content">
-                    {{project.description}}
+                    <span ng-bind-html="handleEmphasis(project.description)">
+                    </span>
                 </div>
                 &nbsp;
             </article>
@@ -241,7 +246,9 @@
                         <div class="col-md-8">
                             <div ng-repeat="method in project.methods">
                                 <em>{{method.name}}</em> ({{method.level}})
-                                <p class="proj-subcontent">{{method.comment}}</p>
+                                <p class="proj-subcontent">
+                                    <span ng-bind-html="handleEmphasis(method.comment)"></span>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -251,7 +258,7 @@
                             {{fieldNames["context"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.context}}
+                            <span ng-bind-html="handleEmphasis(project.context)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.project_goal)"
@@ -260,7 +267,7 @@
                             {{fieldNames["project_goal"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.project_goal}}
+                            <span ng-bind-html="handleEmphasis(project.project_goal)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.target_group)"
@@ -269,7 +276,7 @@
                             {{fieldNames["target_group"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.target_group}}
+                            <span ng-bind-html="handleEmphasis(project.target_group)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.gender_aspect)"
@@ -278,7 +285,7 @@
                             {{fieldNames["gender_aspect"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.gender_aspect}}
+                            <span ng-bind-html="handleEmphasis(project.gender_aspect)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.vulnerable_groups)"
@@ -287,7 +294,7 @@
                             {{fieldNames["vulnerable_groups"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.vulnerable_groups}}
+                            <span ng-bind-html="handleEmphasis(project.vulnerable_groups)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.sustainability_risks)"
@@ -296,7 +303,7 @@
                             {{fieldNames["sustainability_risks"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.sustainability_risks}}
+                            <span ng-bind-html="handleEmphasis(project.sustainability_risks)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.reporting_evaluation)"
@@ -305,7 +312,7 @@
                             {{fieldNames["reporting_evaluation"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.reporting_evaluation}}
+                            <span ng-bind-html="handleEmphasis(project.reporting_evaluation)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.budget)"
@@ -314,7 +321,7 @@
                             {{fieldNames["budget"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.budget}}
+                            <span ng-bind-html="handleEmphasis(project.budget)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.other_donors_proposed)"
@@ -323,7 +330,7 @@
                             {{fieldNames["other_donors_proposed"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.other_donors_proposed}}
+                            <span ng-bind-html="handleEmphasis(project.other_donors_proposed)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.referees)"
@@ -332,7 +339,7 @@
                             {{fieldNames["referees"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.referees}}
+                            <span ng-bind-html="handleEmphasis(project.referees)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.background_check)"
@@ -341,13 +348,13 @@
                             {{fieldNames["background_check"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.background_check}}
+                            <span ng-bind-html="handleEmphasis(project.background_check)"></span>
                         </div>
                     </div>
                 </div>
                 &nbsp;
             </article>
-            <article id="assessment" class="proj-article">
+<!--            <article id="assessment" class="proj-article">
                 <h4>KIOS:n arvio</h4>
                 <div class="proj-content">
                     <div ng-show="nonEmpty(project.fitness)"
@@ -356,7 +363,7 @@
                             {{fieldNames["fitness"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.fitness}}
+                            <span ng-bind-html="handleEmphasis(project.fitness)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.capacity)"
@@ -365,7 +372,7 @@
                             {{fieldNames["capacity"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.capacity}}
+                            <span ng-bind-html="handleEmphasis(project.capacity)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.feasibility)"
@@ -374,7 +381,7 @@
                             {{fieldNames["feasibility"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.feasibility}}
+                            <span ng-bind-html="handleEmphasis(project.feasibility)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.effectiveness)"
@@ -383,7 +390,7 @@
                             {{fieldNames["effectiveness"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.effectiveness}}
+                            <span ng-bind-html="handleEmphasis(project.effectiveness)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.proposed_funding)"
@@ -392,14 +399,14 @@
                             {{fieldNames["proposed_funding"]}}
                         </div>
                         <div class="col-md-8">
-                            {{project.proposed_funding}}
+                            <span ng-bind-html="handleEmphasis(project.proposed_funding)"></span>
                         </div>
                     </div>
                     &nbsp;
                 </div>
-            </article>
+            </article>-->
             <article id="schedule" class="proj-article">
-                <h4>Aikataulu</h4>
+                <h4>Suunniteltu aikataulu</h4>
                 <section class="proj-content"
                          ng-show="project.signed.intreport_deadlines.length > 0">
                     <h5>{{fieldNames["signed_intreport_deadlines"]}}</h5>
@@ -413,6 +420,9 @@
                     </div>
                     &nbsp;
                 </section>
+            </article>
+            <article id="reports" class="proj-article">
+                <h4>Toteutunut aikataulu</h4>
                 <section  class="proj-content">
                     <section ng-show="project.in_review.date">
                         <div class="col-md-12">

@@ -7,11 +7,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $http.get("projects/assets/json/projectConstants.json").success(
                 function (response) {
-                    $scope.themes           = response.themes;
-                    $scope.methodNames      = response.method_names;
-                    $scope.methodLevels     = response.method_levels;
-                    $scope.rejCategories    = response.rej_categories;
-                    $scope.fieldNames       = response.field_names;
+                    $scope.themes = response.themes;
+                    $scope.methodNames = response.method_names;
+                    $scope.methodLevels = response.method_levels;
+                    $scope.rejCategories = response.rej_categories;
+                    $scope.fieldNames = response.field_names;
                 });
 
         $scope.addedMethods = [];
@@ -38,6 +38,30 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             string = string.replace(/,/g, ";");
             string = string.replace(".", ",");
             return string.replace(/;/g, ".");
+        };
+
+        /**
+         * Returns a string where enclosing asterisks have been replaced with
+         * span tags for highlighting text. For example
+         * $scope.handleEmphasis('foo *bar*') yields
+         * 'foo <span class="bg-danger">bar</span>'.
+         *
+         * @param {String} text The text to be transformed.
+         * @returns {String}    The transformed text.
+         */
+        $scope.handleEmphasis = function (text) {
+            if (!text) {
+                return "";
+            }
+            var pieces = text.split("*");
+            var transformed = "";
+            for (var i = 1, max = pieces.length; i < max; i += 2) {
+                pieces[i] = '<span class="bg-danger">' + pieces[i] + '</span>';
+            }
+            pieces.forEach(function (x) {
+                transformed += x;
+            });
+            return transformed;
         };
 
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
