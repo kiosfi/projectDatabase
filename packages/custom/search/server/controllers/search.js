@@ -222,6 +222,8 @@ module.exports = function (Search) {
                                     }
                                     if (Object.keys(result.organisation).length === 0) {
                                         result.organisation = undefined;
+                                    } else {
+                                        result.organisation._id = undefined;
                                     }
                                 });
                                 res.json(results);

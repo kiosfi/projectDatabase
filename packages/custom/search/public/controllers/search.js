@@ -456,23 +456,84 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         $scope.csvColOrder = [];
 
         /**
+         * Flattens the given project. In other words, returns an object of
+         * depth one. Every subobject will be replaced with a flattened version
+         * having a delimiting underscore ('_') in their keys. For example,
+         * consider object {"foo": {"bar": "baz"}}. The flattened version of
+         * this object will be {"foo_bar": "baz"}. This function is a slightly
+         * modified version of the original that was copied from github at
+         * <a href="https://gist.github.com/penguinboy/762197">https://gist.github.com/penguinboy/762197</a> in 26th of May 2016. Thank you very much,
+         * penguinboy!
+         *
+         * @param {Object} project  The project object to be flattened.
+         * @returns {Object}        The flattened version of the given object.
+         */
+        $scope.flattenObject = function (project) {
+            // Some pre-flattening for certain fields is needed:
+            if (typeof project.organisation !== "undefined") {
+                if (typeof project.organisation.representative !== "undefined") {
+                    project.organisation.representative =
+                            project.organisation.representative.name + ", " +
+                            project.organisation.representative.email + ", " +
+                            project.organisation.representative.phone;
+                }
+                if (typeof project.organisation.address !== "undefined") {
+                    project.organisation.address =
+                            project.organisation.address.street + ", " +
+                            project.organisation.address.postal_code + ", " +
+                            project.organisation.address.city + ", " +
+                            project.organisation.address.country;
+                }
+            }
+            if (typeof project.approved !== "undefined") {
+                if (typeof project.approved.themes !== "undefined" &&
+                        project.approved.themes.length > 0) {
+                    var str = "";
+                    project.approved.themes.forEach(function (theme) {
+                        str += theme + ", ";
+                    });
+                    project.approved.themes = str.substring(0, str.length - 2);
+                }
+            }
+
+            var toReturn = {};
+            for (var i in project) {
+                if (!project.hasOwnProperty(i))
+                    continue;
+
+                if ((typeof project[i]) === "object") {
+                    var flatObject = $scope.flattenObject(project[i]);
+                    for (var x in flatObject) {
+                        if (!flatObject.hasOwnProperty(x))
+                            continue;
+
+                        toReturn[i + '_' + x] = flatObject[x];
+                    }
+                } else {
+                    toReturn[i] = project[i];
+                }
+            }
+            return toReturn;
+        };
+
+        /**
          * Parses search results to exportable format. Puts parsed data to
          * $scope.parsedData -array.
          */
         $scope.getCsvData = function () {
             var results = $scope.global.exportResults;
-            Object.keys(results).forEach(function (field) {
-                var result = results[field];
-                if (!result) {
-                    results[field] = " ";
-                } else {
-                    console.log(typeof result)
-                    if (typeof result === "Date") {
-                        $scope.global.exportResults[field] =
-                                $filter('date')(result, "dd.MM.yyyy", "+0200");
+            $scope.global.exportResults = [];
+            results.forEach(function (result) {
+                var flat = $scope.flattenObject(result);
+                Object.keys(flat).forEach(function (field) {
+                    if (typeof flat[field] === "undefined") {
+                        flat[field] = " ";
                     }
-                }
+                });
+                $scope.global.exportResults.push(flat);
             });
+            results = $scope.global.exportResults;
+            console.log(results);
             var fields = $scope.global.exportFields;
             var header = $scope.csvHeader;
             var colOrder = $scope.csvColOrder;
@@ -489,48 +550,54 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                                     case "applied_local":
                                         header.push(fieldNames["funding_applied_curr_local"]);
                                         header.push(fieldNames["funding_curr_local_unit"]);
-                                        colOrder.push("funding.applied_curr_local");
-                                        colOrder.push("funding.curr_local_unit");
+                                        colOrder.push("funding_applied_curr_local");
+                                        colOrder.push("funding_curr_local_unit");
                                         break;
                                     case "applied_eur":
                                         header.push(fieldNames["funding_applied_curr_eur"]);
-                                        colOrder.push("funding.applied_curr_eur");
+                                        colOrder.push("funding_applied_curr_eur");
                                         break;
                                     case "granted_eur":
                                         header.push(fieldNames["approved_granted_sum_eur"]);
-                                        colOrder.push("approved.granted_sum_eur");
+                                        colOrder.push("approved_granted_sum_eur");
                                         break;
                                     case "duration":
                                         header.push(fieldNames["duration_months"]);
                                         colOrder.push("duration_months");
                                         break;
                                     case "org_name":
-                                        header.push(fieldNames["organisation_name"]);
-                                        colOrder.push("organisation.name");
+//                                        header.push(fieldNames["organisation_name"]);
+                                        header.push("Järjestön nimi");
+                                        colOrder.push("organisation_name");
                                         break;
                                     case "org_rep":
-                                        header.push(fieldNames["organisation_representative"]);
-                                        colOrder.push("organisation.representative");
+//                                        header.push(fieldNames["organisation_representative"]);
+                                        header.push("Järjestön edustaja");
+                                        colOrder.push("organisation_representative");
                                         break;
                                     case "org_addr":
-                                        header.push(fieldNames["organisation_address"]);
-                                        colOrder.push("organisation.address");
+//                                        header.push(fieldNames["organisation_address"]);
+                                        header.push("Järjestön osoite");
+                                        colOrder.push("organisation_address");
                                         break;
                                     case "org_tel":
-                                        header.push(fieldNames["organisation_tel"]);
-                                        colOrder.push("organisation.tel");
+//                                        header.push(fieldNames["organisation_tel"]);
+                                        header.push("Järjestön puh.");
+                                        colOrder.push("organisation_tel");
                                         break;
                                     case "org_email":
-                                        header.push(fieldNames["organisation_email"]);
-                                        colOrder.push("organisation.email");
+//                                        header.push(fieldNames["organisation_email"]);
+                                        header.push("Järjestön spostios.");
+                                        colOrder.push("organisation_email");
                                         break;
                                     case "org_www":
-                                        header.push(fieldNames["organisation_www"]);
-                                        colOrder.push("organisation.website");
+//                                        header.push(fieldNames["organisation_www"]);
+                                        header.push("Järjestön www-sivut");
+                                        colOrder.push("organisation_website");
                                         break;
                                     case "themes":
                                         header.push(fieldNames["approved_themes"]);
-                                        colOrder.push("approved.themes");
+                                        colOrder.push("approved_themes");
                                         break;
                                     case "activities":
                                         header.push(fieldNames["methods"]);
