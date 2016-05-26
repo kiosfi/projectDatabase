@@ -62,7 +62,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * fields: <tt>key</tt> for the name of the key to be searched by and
          * </tt>value</tt> for the value to be matched against.
          */
-        $scope.searchBy = [];
+        $scope.searchProj = [];
         $scope.searchPay = [];
         $scope.searchOrg = [];
 
@@ -93,10 +93,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         $scope.pages;
 
         /**
-         * Performs project search operation. The parameters are fetched from the
-         * URL.
-         *
-         * @returns {JSON} response from server.
+         * Performs project search operation for projects. The parameters are
+         * fetched from the URL.
          */
         $scope.search = function () {
             var searchBy = $location.search().searchBy;
@@ -116,7 +114,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             if (typeof page === 'undefined') {
                 page = 1;
             }
-            $scope.searchBy = JSON.parse(searchBy);
+            $scope.searchProj = JSON.parse(searchBy);
             $scope.ordering = ordering;
             $scope.ascending = ascending;
             $scope.page = page;
@@ -137,26 +135,24 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         };
 
         /**
-         * Performs payment search operation. The parameters are fetched from the
-         * URL.
-         *
-         * @returns {JSON} response from server.
+         * Performs payment search operation for payments. The parameters are
+         * fetched from the URL.
          */
         $scope.searchPayments = function () {
 
             var search = $location.search();
 
-            if (typeof search.searchPay === 'undefined' ||
+            if (typeof search.searchBy === 'undefined' ||
                     typeof search.choice === 'undefined') {
                 $scope.payments = [];
                 return;
             }
 
-            $scope.searchPay = JSON.parse(search.searchPay);
+            $scope.searchPay = JSON.parse(search.searchBy);
             $scope.choice = JSON.parse(search.choice);
 
             Search.searchPayments({
-                "searchPay": search.searchPay,
+                "searchBy": search.searchBy,
                 "choice": search.choice
             }, function (results) {
                 $scope.payments = results;
@@ -164,24 +160,22 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         };
 
         /**
-         * Performs organisation search operation. The parameters are fetched from the
-         * URL.
-         *
-         * @returns {JSON} response from server.
+         * Performs organisation search operation. The parameters are fetched
+         * from the URL.
          */
         $scope.searchOrgs = function () {
 
-            var searchOrg = $location.search().searchOrg;
+            var searchBy = $location.search().searchBy;
 
-            if (typeof searchOrg === 'undefined') {
+            if (typeof searchBy === 'undefined') {
                 $scope.organisations = [];
                 return;
             }
 
-            $scope.searchOrg = JSON.parse(searchOrg);
+            $scope.searchOrg = JSON.parse(searchBy);
 
             Search.searchOrgs({
-                "searchOrg": searchOrg
+                "searchBy": searchBy
             }, function (results) {
                 $scope.organisations = results;
 
@@ -189,13 +183,13 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                  * Column order and headers for csv
                  *
                  */
-                $scope.csvColOrder = ['_id', 'name', 'representative',
+                $scope.csvColOrder = ['name', 'representative',
                     'exec_manager', 'communications_rep', 'address', 'tel',
                     'email', 'website', 'legal_status', 'description',
                     'int_links', 'nat_local_links', 'other_funding_budget',
                     'accounting_audit'];
 
-                $scope.orgHeaders = ['Tunnus', 'Nimi', 'Edustaja',
+                $scope.orgHeaders = ['Nimi', 'Edustaja',
                     'Vastuullinen johtaja', 'Viestintävastaava', 'Osoite',
                     'Puh', 'Email', 'WWW', 'Hallintomalli ja henkilöstö',
                     'Kuvaus', 'Kansainväliset linkit',
@@ -205,6 +199,10 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             });
         };
 
+        /**
+         * The project document fields selected for CSV export at the project
+         * search page.
+         */
         $scope.exportFields = {ref: true, title: true, state: true,
             security_level: false, coordinator: false, region: true, dac: true,
             reg_date: true, applied_local: false, applied_eur: true,
@@ -218,27 +216,69 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             background_check: false
         };
 
+        /**
+         * The state of a master checkbox contolling all the basic field
+         * checkboxes in the project search result export form.
+         */
         $scope.basicFieldsToggle = false;
+
+        /**
+         * List of the basic fields in the project search result export form.
+         */
         $scope.basicFieldsArray = ['ref', 'title', 'state', 'security_level',
             'coordinator', 'region', 'dac', 'reg_date', 'applied_local',
             'applied_eur', 'duration', 'granted_eur'];
 
+        /**
+         * The state of a master checkbox contolling all the organisation field
+         * checkboxes in the project search result export form.
+         */
         $scope.orgFieldsToggle = false;
+
+        /**
+         * List of the organisation fields in the project search result export
+         * form.
+         */
         $scope.orgFieldsArray = ['org_name', 'org_rep', 'org_addr', 'org_tel',
             'org_email', 'org_www'];
 
+        /**
+         * The state of a master checkbox contolling all the extra field
+         * checkboxes in the project search result export form.
+         */
         $scope.extraFieldsToggle = false;
+
+        /**
+         * List of the extra fields in the project search result export form.
+         */
         $scope.extraFieldsArray = ['themes', 'description', 'activities',
             'context', 'goal', 'target_group', 'human_resources', 'equality',
             'vulnerable_groups', 'sustainability_risks', 'reporting_evaluation',
             'budget', 'other_funding', 'referees', 'background_check'];
 
+        /**
+         * Sets the states of the given field selections to match the given
+         * state (<tt>true</tt> or <tt>false</tt>). This function is used by the
+         * master checkboxes of the project search result export form.
+         *
+         * @param {type} fields The fields whose state is to be changed.
+         * @param {type} state  The state which will be applied to all given
+         * fields.
+         * @returns {undefined}
+         */
         $scope.setStates = function (fields, state) {
             fields.forEach(function (x) {
                 $scope.exportFields[x] = state;
             });
         };
 
+        /**
+         * Formats the project field selection string used by mongoose at server
+         * side controller. This function is used in the project search result
+         * csv export feature.
+         *
+         * @returns {String} Mongoose-compatible selection string.
+         */
         $scope.projFieldSel = function () {
             var fields = $scope.exportFields;
             var selection = "organisation ";
@@ -286,9 +326,13 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                     }
                 }
             });
-            return selection;
         };
 
+        /**
+         * Formats the organisation field selection string used by Mongoose for
+         * populating organisation fields at the server side controller. This
+         * function is used in the project search result csv export feature.
+         */
         $scope.orgFieldSel = function () {
             var fields = $scope.exportFields;
             var selection = "";
@@ -317,7 +361,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 }
             });
             return selection;
-        }
+        };
 
         /**
          * Fetches search parameters from URL when clicking button to export
@@ -332,7 +376,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 $scope.global.exportResults = [];
                 return;
             }
-            $scope.searchBy = JSON.parse(searchBy);
+            $scope.searchProj = JSON.parse(searchBy);
 
             var projFields =
                     Search.searchAllProjects({"searchBy": searchBy, "projFields":
@@ -351,11 +395,11 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * $scope.value pair
          */
         $scope.addQuery = function () {
-            $scope.searchBy.push({});
+            $scope.searchProj.push({});
         };
 
         $scope.removeQuery = function () {
-            $scope.searchBy.splice(-1, 1);
+            $scope.searchProj.splice(-1, 1);
         };
 
         /**
@@ -387,7 +431,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          *
          */
         $scope.update = function () {
-            $window.location = '/search?searchBy=' + JSON.stringify($scope.searchBy)
+            $window.location = '/search?searchBy=' + JSON.stringify($scope.searchProj)
                     + '&ordering=' + $scope.ordering
                     + '&ascending=' + $scope.ascending
                     + '&page=' + $scope.page;
@@ -399,7 +443,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.updateSearch = function () {
             var search = {"choice": $scope.searchChoice}
-            $window.location = '/search/payments?searchPay=' + JSON.stringify($scope.searchPay)
+            $window.location = '/search/payments?searchBy=' + JSON.stringify($scope.searchPay)
                     + '&choice=' + JSON.stringify(search);
         };
 
@@ -408,7 +452,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          *
          */
         $scope.updateOrgSearch = function () {
-            $window.location = '/search/orgs?searchOrg=' + JSON.stringify($scope.searchOrg);
+            $window.location = '/search/orgs?searchBy=' + JSON.stringify($scope.searchOrg);
         };
 
         /**
@@ -417,7 +461,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * @param {String} page New page number.
          */
         $scope.updatePage = function (page) {
-            $window.location = '/search?searchBy=' + JSON.stringify($scope.searchBy)
+            $window.location = '/search?searchBy=' + JSON.stringify($scope.searchProj)
                     + '&ordering=' + $scope.ordering
                     + '&ascending=' + $scope.ascending
                     + '&page=' + page;
@@ -429,7 +473,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * @param {String} ordering The ordering predicate.
          */
         $scope.updateOrdering = function (ordering) {
-            $window.location = '/search?searchBy=' + JSON.stringify($scope.searchBy)
+            $window.location = '/search?searchBy=' + JSON.stringify($scope.searchProj)
                     + '&ordering=' + ordering
                     + '&ascending=' + (ordering === $scope.ordering
                             ? !$scope.ascending : true)
@@ -452,7 +496,16 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             }
         };
 
+        /**
+         * Specifies the header row for project search result csv export
+         * feature.
+         */
         $scope.csvHeader = [];
+
+        /**
+         * Specifies the column order for project search result csv export
+         * feature.
+         */
         $scope.csvColOrder = [];
 
         /**

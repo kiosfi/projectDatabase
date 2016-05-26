@@ -28,7 +28,6 @@ module.exports = function (Search) {
         /**
          * Formats queries to correct form
          */
-
         return _.map(JSON.parse(searchBy), function (query) {
             var search = {};
 
@@ -197,7 +196,6 @@ module.exports = function (Search) {
                         .select(projFields)
                         .exec(function (err, results) {
                             if (err) {
-                                console.log(err);
                                 return res.status(500).json({
                                     error: 'Virhe hankkeiden hakutoiminnossa'
                                 });
@@ -240,14 +238,13 @@ module.exports = function (Search) {
          */
         searchPayments: function (req, res) {
 
-            var choice = _.values(JSON.parse(req.query.choice))
+            var choice = _.values(JSON.parse(req.query.choice));
 
-            var queries = prepareQueries(req.query.searchPay);
+            var queries = prepareQueries(req.query.searchBy);
 
             /**
              * Query paid sums
              */
-
             if (choice.indexOf('payments') > -1) {
                 queries.push({"payments": {$exists: true, $gt: {$size: 0}}});
 
@@ -264,8 +261,7 @@ module.exports = function (Search) {
                                     "ref": project.project_ref,
                                     "title": project.title,
                                     "coordinator": project.coordinator,
-                                    "region": project.region,
-                                    "id": project._id};
+                                    "region": project.region};
                             });
                             return payments;
                         }));
@@ -318,7 +314,6 @@ module.exports = function (Search) {
                 } else {
                     orgs = _.map(orgs, function (org) {
                         return {
-                            "_id": org._id,
                             "name": org.name,
                             "representative": org.representative.name +
                                     ", " + org.representative.email + ", " +

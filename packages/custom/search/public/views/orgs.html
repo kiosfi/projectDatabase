@@ -13,15 +13,18 @@
                        class="panel-button">Kriteerit</a></h4>
             </div>
             <div class="panel-body" ng-show="showCriteria">
-                <form name="orgForm" class="form-horizontal col-md-8" role="form"
-                      data-ng-init="getProjectFields()" data-ng-submit="updateOrgSearch()" novalidate>
-
+                <form name="orgForm" class="form-horizontal col-md-8"
+                      role="form" data-ng-init="getProjectFields()"
+                      data-ng-submit="updateOrgSearch()" novalidate>
                     <div class="form-group col-md-12">
-                        <div class="col-md-12" data-ng-repeat="query in searchOrg">
-                            <div id="search" style="float:left;" class="col-md-5">
+                        <div class="col-md-12"
+                             data-ng-repeat="query in searchOrg">
+                            <div id="search" style="float:left;"
+                                 class="col-md-5">
                                 <select data-ng-model="query.field">
                                     <option ng-repeat="orgField in orgFields"
-                                            value="{{orgField.name}}">{{orgField.fi}}
+                                            value="{{orgField.name}}">
+                                        {{orgField.fi}}
                                     </option>
                                 </select>
                             </div>
@@ -36,13 +39,15 @@
                             <input type="button" value="Lisää"
                                    ng-click="addOrgQuery();"/>
                             <input type="button" ng-show="searchOrg.length > 0"
-                                   value="Poista viimeinen" ng-click="removeOrgQuery();"/>
+                                   value="Poista viimeinen"
+                                   ng-click="removeOrgQuery();"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-10">
-                            <button id="appr-btn" type="submit" class="btn btn-default">
+                            <button id="appr-btn" type="submit"
+                                    class="btn btn-default">
                                 Hae</button>
                         </div>
                     </div>
@@ -54,7 +59,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4><a ng-click="showResults = !showResults"
-                       class="panel-button">Tulokset</a></h4>
+                       class="panel-button">Tulokset</a>
+                    ({{organisations.length}} kpl)</h4>
             </div>
             <div class="panel-body" ng-show="showResults">
                 <table class="col-md-12 table table-striped">
@@ -78,7 +84,7 @@
                 </table>
             </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-show="organisations.length > 0">
             <div class="panel-heading">
                 <h4><a ng-click="showExport = !showExport"
                        class="panel-button">Vienti</a></h4>
@@ -87,7 +93,7 @@
                 <p>Järjestöjä löydettiin {{organisations.length}}.</p>
                 <button type="button" ng-csv="organisations" lazy-load="true"
                         csv-header="orgHeaders" csv-column-order="csvColOrder"
-                        filename="tiedot.csv" field-separator=";"
+                        filename="järjestöt.csv" field-separator=";"
                         add-bom="true">Vie CSV-tiedostoon</button>
             </div>
         </div>
