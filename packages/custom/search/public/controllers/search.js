@@ -431,7 +431,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          *
          */
         $scope.update = function () {
-            $window.location = '/search?searchBy=' + JSON.stringify($scope.searchProj)
+            $window.location = '/search?searchBy='
+                    + JSON.stringify($scope.searchProj)
                     + '&ordering=' + $scope.ordering
                     + '&ascending=' + $scope.ascending
                     + '&page=' + $scope.page;
@@ -443,7 +444,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.updateSearch = function () {
             var search = {"choice": $scope.searchChoice}
-            $window.location = '/search/payments?searchBy=' + JSON.stringify($scope.searchPay)
+            $window.location = '/search/payments?searchBy='
+                    + JSON.stringify($scope.searchPay)
                     + '&choice=' + JSON.stringify(search);
         };
 
@@ -452,7 +454,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          *
          */
         $scope.updateOrgSearch = function () {
-            $window.location = '/search/orgs?searchBy=' + JSON.stringify($scope.searchOrg);
+            $window.location = '/search/orgs?searchBy='
+                    + JSON.stringify($scope.searchOrg);
         };
 
         /**
@@ -461,7 +464,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * @param {String} page New page number.
          */
         $scope.updatePage = function (page) {
-            $window.location = '/search?searchBy=' + JSON.stringify($scope.searchProj)
+            $window.location = '/search?searchBy='
+                    + JSON.stringify($scope.searchProj)
                     + '&ordering=' + $scope.ordering
                     + '&ascending=' + $scope.ascending
                     + '&page=' + page;
@@ -473,7 +477,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * @param {String} ordering The ordering predicate.
          */
         $scope.updateOrdering = function (ordering) {
-            $window.location = '/search?searchBy=' + JSON.stringify($scope.searchProj)
+            $window.location = '/search?searchBy='
+                    + JSON.stringify($scope.searchProj)
                     + '&ordering=' + ordering
                     + '&ascending=' + (ordering === $scope.ordering
                             ? !$scope.ascending : true)
@@ -586,7 +591,6 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 $scope.global.exportResults.push(flat);
             });
             results = $scope.global.exportResults;
-            console.log(results);
             var fields = $scope.global.exportFields;
             var header = $scope.csvHeader;
             var colOrder = $scope.csvColOrder;

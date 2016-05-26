@@ -13,14 +13,17 @@
                        class="panel-button">Kriteerit</a></h4>
             </div>
             <div class="panel-body" ng-show="showCriteria">
-                <form name="orgForm" class="form-horizontal col-md-8"
+                <form name="orgForm" class="form-horizontal col-md-12"
                       role="form" data-ng-init="getProjectFields()"
                       data-ng-submit="updateOrgSearch()" novalidate>
                     <div class="form-group col-md-12">
                         <div class="col-md-12"
-                             data-ng-repeat="query in searchOrg">
-                            <div id="search" style="float:left;"
-                                 class="col-md-5">
+                             data-ng-repeat="query in searchOrg"
+                             style="padding-top: 0.5em; padding-bottom: 0.5em">
+                            <label class="col-md-2">
+                                {{$index + 1}}. Kriteeri
+                            </label>
+                            <div id="search" class="col-md-4">
                                 <select data-ng-model="query.field">
                                     <option ng-repeat="orgField in orgFields"
                                             value="{{orgField.name}}">
@@ -28,11 +31,13 @@
                                     </option>
                                 </select>
                             </div>
-                            <div ng-show="query.field" class="col-md-6"
-                                 style="float:left">
+                            <label class="col-md-2">
+                                Arvo
+                            </label>
+                            <div ng-show="query.field" class="col-md-4">
                                 <input type="text" class="form-control"
                                        data-ng-model="query.value"
-                                       placeholder="Kirjoita hakusana(t)">
+                                       placeholder="Säännöllinen lauseke">
                             </div>
                         </div>
                         <div class="col-md-12">

@@ -298,7 +298,7 @@
         },
         {
             "name": "legal_status",
-            "fi": "Hallintomalli, henkilöstö"
+            "fi": "Hallintomalli ja henkilöstö"
         },
         {
             "name": "int_links",
@@ -319,6 +319,10 @@
         {
             "name": "accounting_audit",
             "fi": "Taloushallinto ja tilintarkastus"
+        },
+        {
+            "name": "background",
+            "fi": "Oleelliset taustatiedot"
         }
     ],
     "payment_search": [
