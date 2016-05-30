@@ -1,5 +1,5 @@
 <section data-ng-controller="ProjectsController"
-         data-ng-init="findOneForRegReport()" class="report-body">
+         data-ng-init="findOne()" class="report-body">
     <!-- Note that this page doesn't use bootstrap in order to ensure that the
     text looks similar when viewed through browser and printed (to PDF).-->
     <table>
@@ -81,7 +81,7 @@
                     {{fieldNames["required_appendices_proj_budget"]
                                 .toLowerCase()}}
                     [{{project.required_appendices.proj_budget ? "x" : "_"}}],
-                    {{fieldNames["required_appendices_proj_references"]
+                    {{fieldNames["required_appendices_references"]
                                 .toLowerCase()}}
                     [{{project.required_appendices.references ? "x" : "_"}}],
                     {{fieldNames["required_appendices_annual_budget"]

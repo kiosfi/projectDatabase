@@ -1590,7 +1590,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.initEditing = <span class="fstat-no" title="function not covered" >function () {</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            Projects.get({</span>
-                projectId: $stateParams.projectId
+                projectID: $stateParams.projectID
             }, <span class="fstat-no" title="function not covered" >function (project) {</span>
 <span class="cstat-no" title="statement not covered" >                $scope.project = project;</span>
 <span class="cstat-no" title="statement not covered" >                $scope.addedMethods = [];</span>
@@ -1714,7 +1714,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.findOne = function () {
             Projects.get({
-                projectId: $stateParams.projectId
+                projectID: $stateParams.projectID
             }, function (project) {
                 $scope.project = project;
             });
@@ -1727,7 +1727,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.findState = <span class="fstat-no" title="function not covered" >function () {</span>
 <span class="cstat-no" title="statement not covered" >            Projects.get({</span>
-                projectId: $stateParams.projectId}, <span class="fstat-no" title="function not covered" >function (project) {</span>
+                projectID: $stateParams.projectID}, <span class="fstat-no" title="function not covered" >function (project) {</span>
 <span class="cstat-no" title="statement not covered" >                $http.get('/api/states').success(<span class="fstat-no" title="function not covered" >function (data) {</span></span>
 <span class="cstat-no" title="statement not covered" >                    data.forEach(<span class="fstat-no" title="function not covered" >function (state) {</span></span>
 <span class="cstat-no" title="statement not covered" >                        if (state.current_state === project.state) {</span>
@@ -1976,7 +1976,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
         $scope.changeState = <span class="fstat-no" title="function not covered" >function (changeTo) {</span>
 <span class="cstat-no" title="statement not covered" >            Projects.get({</span>
-                projectId: $stateParams.projectId
+                projectID: $stateParams.projectID
             }, <span class="fstat-no" title="function not covered" >function (project) {</span>
 <span class="cstat-no" title="statement not covered" >                $scope.project = project;</span>
 <span class="cstat-no" title="statement not covered" >                $scope.global.newState = changeTo;</span>
@@ -2023,7 +2023,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.findIntReport = <span class="fstat-no" title="function not covered" >function () {</span>
 <span class="cstat-no" title="statement not covered" >            Projects.get({</span>
-                projectId: $stateParams.projectId
+                projectID: $stateParams.projectID
             }, <span class="fstat-no" title="function not covered" >function (project) {</span>
 <span class="cstat-no" title="statement not covered" >                $scope.report = project.intermediary_reports[$stateParams.reportId - 1];</span>
             });

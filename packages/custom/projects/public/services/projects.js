@@ -6,23 +6,23 @@
  */
 angular.module('mean.projects').factory('Projects', ['$resource',
     function ($resource) {
-        return $resource('api/projects/:projectId', {
-            projectId: '@_id'
+        return $resource('api/projects/:projectID', {
+            projectID: '@_id'
         }, {
             update: {
                 method: 'PUT'
             },
             addReview: {
-                method: 'PUT', url: 'api/projects/rev/:projectId'
+                method: 'PUT', url: 'api/projects/rev/:projectID'
             },
             addRejected: {
-                method: 'PUT', url: 'api/projects/rej/:projectId'
+                method: 'PUT', url: 'api/projects/rej/:projectID'
             },
             addSigned: {
-                method: 'PUT', url: 'api/projects/sign/:projectId'
+                method: 'PUT', url: 'api/projects/sign/:projectID'
             },
             addPayment: {
-                method: 'PUT', url: 'api/projects/payment/:projectId'
+                method: 'PUT', url: 'api/projects/payment/:projectID'
             },
             // TODO: Figure out some way to make the appendix functions use
             // these services in order to enable proper access control:
@@ -30,19 +30,22 @@ angular.module('mean.projects').factory('Projects', ['$resource',
 //                method: 'POST', url: 'api/projects/upload'
 //            },
 //            accessAppendix: {
-//                method: 'GET', url: 'api/projects/data/:projectId'
+//                method: 'GET', url: 'api/projects/data/:projectID'
 //            },
             addEnded: {
-                method: 'PUT', url: 'api/projects/end/:projectId'
+                method: 'PUT', url: 'api/projects/end/:projectID'
             },
             addApproved: {
-                method: 'PUT', url: 'api/projects/appr/:projectId'
+                method: 'PUT', url: 'api/projects/appr/:projectID'
             },
             addEndReport: {
-                method: 'PUT', url: 'api/projects/endReport/:projectId'
+                method: 'PUT', url: 'api/projects/endReport/:projectID'
             },
             addIntReport: {
-                method: 'PUT', url: 'api/projects/intReport/:projectId'
+                method: 'PUT', url: 'api/projects/intReport/:projectID'
+            },
+            createPDF: {
+                method: 'GET', url: 'api/projects/pdf/:projectID'
             },
             countProjects: {
                 method: 'PUT', url: 'api/projects'

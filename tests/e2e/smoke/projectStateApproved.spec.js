@@ -63,7 +63,7 @@ describe('Changing project state to "approved"', function () {
         expect(state).toContain('käsittelyssä');
     });
 
-    it('should show login page if trying to load "/projectId/change -view', function() {
+    it('should show login page if trying to load "/projectID/change -view', function() {
         helpers.logout();
         browser.get('/projects/5c9ed9f94250406da7a7a111/change');
 

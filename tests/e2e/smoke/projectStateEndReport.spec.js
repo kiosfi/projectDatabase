@@ -62,7 +62,7 @@ describe('Changing project state to "end report"', function () {
         expect(state).toContain('allekirjoitettu');
     });
 
-    it('should show login page if trying to load "/projectId/change -view', function() {
+    it('should show login page if trying to load "/projectID/change -view', function() {
         helpers.logout();
         browser.get('/projects/5c9ed9f94260406da7a7a41b/change');
 

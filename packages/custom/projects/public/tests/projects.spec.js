@@ -62,9 +62,9 @@
                     });
 
             it('$scope.findOne() should create an array with one project object fetched ' +
-                    'from XHR using a projectId URL parameter', function () {
+                    'from XHR using a projectID URL parameter', function () {
                         // fixture URL parament
-                        $stateParams.projectId = '525a8422f6d0f87f0e407a33';
+                        $stateParams.projectID = '525a8422f6d0f87f0e407a33';
                         // fixture response object
                         var testProjectData = function () {
                             return {
@@ -119,7 +119,7 @@
                 expect($location.path()).toEqual('/projects/' + responseProjectData()._id);
             });
 
-            it('$scope.remove() should send a DELETE request with a valid projectId ' +
+            it('$scope.remove() should send a DELETE request with a valid projectID ' +
                     'and remove the project from the scope', inject(function (Projects) {
 
                         // fixture rideshare

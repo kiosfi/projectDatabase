@@ -58,7 +58,7 @@ describe('Changing project state to "ended"', function () {
         expect(state).toContain('hyväksytty');
     });
 
-    it('should show login page if trying to load "/projectId/change -view', function() {
+    it('should show login page if trying to load "/projectID/change -view', function() {
         helpers.logout();
         browser.get('/projects/a2c8c9adb020176622996766/change');
 

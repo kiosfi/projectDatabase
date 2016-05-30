@@ -35,39 +35,41 @@ module.exports = function (Projects, app, auth) {
             .post(auth.requiresLogin, hasPermissions, projects.create);
     app.route('/api/states')
             .get(projects.allStates);
-    app.route('/api/projects/:projectId')
+    app.route('/api/projects/:projectID')
             .get(auth.isMongoId, auth.requiresLogin, projects.show)
             .put(auth.isMongoId, auth.requiresLogin, projects.update)
             .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, projects.destroy);
-    app.route('/api/projects/rev/:projectId')
+    app.route('/api/projects/rev/:projectID')
             .put(auth.isMongoId, auth.requiresLogin, projects.addReview);
-    app.route('/api/projects/rej/:projectId')
+    app.route('/api/projects/rej/:projectID')
             .put(auth.isMongoId, auth.requiresLogin, projects.addRejected);
-    app.route('/api/projects/sign/:projectId')
+    app.route('/api/projects/sign/:projectID')
             .put(auth.isMongoId, auth.requiresLogin, projects.addSigned);
-    app.route('/api/projects/payment/:projectId')
+    app.route('/api/projects/payment/:projectID')
             .put(auth.isMongoId, auth.requiresLogin, projects.addPayment);
     // TODO: Figure out some way to pass user credentials along with these two
     // requests in order to enable proper access control:
 //    app.route('/api/projects/upload')
 //            .post(auth.isMongoId, auth.requiresLogin, projects.addAppendix);
-//    app.route('/api/projects/data/:projectId')
+//    app.route('/api/projects/data/:projectID')
 //            .get(auth.isMongoId, auth.requiresLogin, projects.accessAppendix);
     app.route('/api/projects/upload')
             .post(projects.addAppendix); //     <- Fix this.
-    app.route('/api/projects/data/:projectId')
+    app.route('/api/projects/data/:projectID')
             .get(projects.accessAppendix); //   <- ...and this.
-    app.route('/api/projects/end/:projectId')
+    app.route('/api/projects/end/:projectID')
             .put(auth.isMongoId, auth.requiresLogin, projects.addEnded);
-    app.route('/api/projects/appr/:projectId')
+    app.route('/api/projects/appr/:projectID')
             .put(auth.isMongoId, auth.requiresLogin, projects.addApproved);
-    app.route('/api/projects/endReport/:projectId')
+    app.route('/api/projects/endReport/:projectID')
             .put(auth.isMongoId, auth.requiresLogin, projects.addEndReport);
-    app.route('/api/projects/intReport/:projectId')
+    app.route('/api/projects/intReport/:projectID')
             .put(auth.isMongoId, auth.requiresLogin, projects.addIntReport);
     app.route('/api/projects/byOrg/:organisationId')
             .get(auth.requiresLogin, projects.byOrg);
+    app.route('/api/projects/pdf/:projectID')
+            .get(auth.requiresLogin, projects.createPDF);
 
     app.param('params', projects.getProjects);
-    app.param('projectId', projects.project);
+    app.param('projectID', projects.project);
 };

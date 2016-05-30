@@ -330,7 +330,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.initEditing = function () {
 
             Projects.get({
-                projectId: $stateParams.projectId
+                projectID: $stateParams.projectID
             }, function (project) {
                 $scope.project = project;
                 $scope.addedMethods = [];
@@ -453,26 +453,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.findOne = function () {
             Projects.get({
-                projectId: $stateParams.projectId
-            }, function (project) {
-                $scope.project = project;
-                $scope.ensureCompatibility(project);
-            });
-        };
-
-        $scope.duration;
-
-        /**
-         * Like findOne, but also gets the list of all projects of the given
-         * organisation (i.e. all projects excluding the one in $scope.project)
-         * and writes the result into $scope.other_projects.
-         *
-         * @param {type} orgID  ID of the organisation.
-         * @returns {undefined}
-         */
-        $scope.findOneForRegReport = function (orgID) {
-            Projects.get({
-                projectId: $stateParams.projectId
+                projectID: $stateParams.projectID
             }, function (project) {
                 $scope.project = project;
                 $scope.ensureCompatibility(project);
@@ -490,13 +471,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             });
         };
 
+        $scope.duration;
+
         /**
          * Finds project's intermediary report and puts the given report to
          * $scope.report so that report's details can be shown on intreport.html
          */
         $scope.findOneForIntReport = function () {
             Projects.get({
-                projectId: $stateParams.projectId
+                projectID: $stateParams.projectID
             }, function (project) {
                 $scope.project = project;
                 $scope.report = project.intermediary_reports[$stateParams.reportId - 1];
@@ -512,7 +495,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.findOneForEndReport = function () {
             Projects.get({
-                projectId: $stateParams.projectId
+                projectID: $stateParams.projectID
             }, function (project) {
                 $scope.project = project;
                 // We don't need to call ensureCompatibility, because it should
@@ -586,7 +569,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.findState = function () {
             Projects.get({
-                projectId: $stateParams.projectId}, function (project) {
+                projectID: $stateParams.projectID}, function (project) {
                 $http.get('/api/states').success(function (data) {
                     data.forEach(function (state) {
                         if (state.current_state === project.state) {
@@ -911,7 +894,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         };
         $scope.changeState = function (changeTo) {
             Projects.get({
-                projectId: $stateParams.projectId
+                projectID: $stateParams.projectID
             }, function (project) {
                 $scope.project = project;
                 $scope.global.newState = changeTo;
@@ -962,7 +945,24 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          */
         $scope.nonEmpty = function (string) {
             return typeof string !== "undefined" && string !== "";
-        }
+        };
+
+        $scope.createPDF = function (report) {
+//            $http.get("/projects/" + $scope.project._id + "/regreport").success(
+//                    function (response) {
+////                        var blob = new Blob([response], {type: "text/plain"});
+////                        window.saveAs(blob, "reg-report.pdf");
+////                        var w = $window.open("", "", "width=800, height=600");
+////                        w.document.write(blob);
+////                        $window.document.getElementById("my_iframe").innerHTML =
+//////                                blob;
+////                                response;
+//                          $window.alert(response);
+//                    });
+            $scope.project.$createPDF(function (response) {
+                $window.location.reload();
+            });
+        };
 
         /**
          * The sorting predicate used in project listing. Initial value is

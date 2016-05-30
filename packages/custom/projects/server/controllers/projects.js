@@ -11,6 +11,8 @@ var mongoose = require('mongoose'),
         config = require('meanio').loadConfig(),
         multiparty = require('multiparty'),
         util = require('util'),
+        sys = require('sys'),
+        spawn = require("child_process").spawn,
         fs = require('fs'),
         mkdirp = require('mkdirp'),
         mime = require('mime'),
@@ -354,7 +356,6 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-
         /**
          * Updates project to contain a new appendix. The file will be written
          * in a data directory under "/packages/custom/projects/data". The
@@ -373,7 +374,7 @@ module.exports = function (Projects) {
         addAppendix: function (req, res) {
             var tmpdir = "packages/custom/projects/data";
             var form = new multiparty.Form({uploadDir: tmpdir});
-            form.parse(req, function(err, fields, files) {
+            form.parse(req, function (err, fields, files) {
                 var now = new Date();
                 var file = files.appendix_file[0];
                 var appendix = {category: fields.appendix_category[0],
@@ -383,48 +384,47 @@ module.exports = function (Projects) {
                     original_name: file.originalFilename};
                 Project.findOne({_id: fields.project_id}).
                         exec(function (err, project) {
-                    if (err) {
-                        return res.status(500).json({
-                            error: 'Hanketta ei voitu hakea tietokannasta.'
-                        });
-                    }
-                    var newDir = tmpdir + "/" + project._id;
-                    var pathParts = file.path.split("/");
-                    var newFilename = pathParts[pathParts.length - 1];
-                    mkdirp.sync(newDir);
-                    fs.renameSync(file.path, newDir + "/" + newFilename);
-                    appendix.url = "/api/projects/data/" + project._id +
-                            "?appendix=" + newFilename;
-                    if (project.appendices === undefined) {
-                        project.appendices = [];
-                    }
-                    appendix.number = project.appendices.length === 0 ?
-                            1 : project.appendices.length + 1;
-                    project.appendices.push(appendix);
-                    project.save(function (err) {
-                        if (err) {
-                            return res.status(500).json({
-                                error: 'Liitteen lisäys epäonnistui.'
+                            if (err) {
+                                return res.status(500).json({
+                                    error: 'Hanketta ei voitu hakea tietokannasta.'
+                                });
+                            }
+                            var newDir = tmpdir + "/" + project._id;
+                            var pathParts = file.path.split("/");
+                            var newFilename = pathParts[pathParts.length - 1];
+                            mkdirp.sync(newDir);
+                            fs.renameSync(file.path, newDir + "/" + newFilename);
+                            appendix.url = "/api/projects/data/" + project._id +
+                                    "?appendix=" + newFilename;
+                            if (project.appendices === undefined) {
+                                project.appendices = [];
+                            }
+                            appendix.number = project.appendices.length === 0 ?
+                                    1 : project.appendices.length + 1;
+                            project.appendices.push(appendix);
+                            project.save(function (err) {
+                                if (err) {
+                                    return res.status(500).json({
+                                        error: 'Liitteen lisäys epäonnistui.'
+                                    });
+                                }
+                                Projects.events.publish({
+                                    action: 'updated',
+                                    name: project.title,
+                                    url: config.hostname + '/projects/' + project._id
+                                });
                             });
-                        }
-                        Projects.events.publish({
-                            action: 'updated',
-                            name: project.title,
-                            url: config.hostname + '/projects/' + project._id
+                            res.writeHead(302, {'Location': '/projects/' +
+                                        fields.project_id});
+                            res.end(util.inspect({fields: fields, files: files}));
                         });
-                    });
-                    res.writeHead(302, {'Location': '/projects/' +
-                                fields.project_id});
-                    res.end(util.inspect({fields: fields, files: files}));
-                });
             });
         },
-
         /**
          * Accesses the requested appendix. The request URL should be in the
-         * following format: "/projecs/data/" &lt;projectId&gt; "?appendix="
+         * following format: "/projecs/data/" &lt;projectID&gt; "?appendix="
          * &lt;appendixId&gt; "&action=" &lt;download | delete&gt, where
-         * &lt;projectId&gt; identifies the project and &lt;appendixId&gt; is
+         * &lt;projectID&gt; identifies the project and &lt;appendixId&gt; is
          * the name of the file being requested. The <tt>action</tt> variable
          * specifies the desired action. If the action is "download", the file
          * in question will be sent to the user, and if the action is "delete"
@@ -478,15 +478,15 @@ module.exports = function (Projects) {
                 });
             } else {
                 var mime_type = mime.lookup(path);
-                fs.stat(path, function(error, stats) {
-                    fs.open(path, "r", function(err, fd) {
+                fs.stat(path, function (error, stats) {
+                    fs.open(path, "r", function (err, fd) {
                         if (err) {
                             return res.status(500).json({
                                 error: 'Liitteen haku epäonnistui.'
                             });
                         }
                         var buffer = new Buffer(stats.size);
-                        fs.read(fd, buffer, 0, buffer.length, null, function(
+                        fs.read(fd, buffer, 0, buffer.length, null, function (
                                 error, bytesRead, buffer) {
                             res.writeHead(200, {
                                 "Content-Type": mime_type,
@@ -499,7 +499,6 @@ module.exports = function (Projects) {
                 });
             }
         },
-
         /**
          * Updates project to contain data required in intermediary report state
          * @param {type} req project object to be updated, sent from frontend
@@ -589,6 +588,214 @@ module.exports = function (Projects) {
                     url: config.hostname + '/projects/' + project._id
                 });
                 res.json(project);
+            });
+        },
+        createPDF: function (req, res) {
+            var fileName = "reg-report";
+            var rootDir = "packages/custom/projects/";
+            var project = req.project;
+            var outDir = rootDir + "data/" + project._id;
+
+            var filter = function (object) {
+                if (object === undefined) {
+                    return " ";
+                }
+                var string = JSON.stringify(object);
+                string = string
+                        .replace(/\&/g, "\\&")
+                        .replace(/\$/g, "\\$")
+                        .replace(/\\/g, "\\")
+                        .replace(/\_/g, "\\_")
+                        .replace(/\{/g, "\\{")
+                        .replace(/\}/g, "\\}")
+                        .replace(/undefined/g, " ");
+                var pieces = string.split("*");
+                var transformed = "";
+                for (var i = 1, max = pieces.length; i < max; i += 2) {
+                    pieces[i] = "\\emph{" + pieces[i] + "}";
+                }
+                pieces.forEach(function (x) {
+                    transformed += x;
+                });
+                return typeof object === "string"
+                        ? transformed.substring(1, transformed.length - 1)
+                        : transformed;
+            };
+
+            var methods = "\\begin{itemize}";
+            project.methods.forEach(function (method) {
+                methods += "\\item \\textbf{" + method.name +
+                        "(" + method.level + ")}\\\\ " + filter(method.comment);
+            });
+            methods += "\\end{itemize}";
+
+            var template = fs.readFileSync(
+                    rootDir + "latex/" + fileName + "-template.tex", "utf8")
+                    .replace("logo.pdf", rootDir + "latex/logo.pdf")
+                    .replace("<approved.board-meeting>",
+                            filter(project.approved.board_meeting))
+                    .replace("<coordinator>", filter(project.coordinator))
+                    .replace("<titles.organisation.name>", "Järjestö")
+                    .replace("<organisation.name>",
+                            filter(project.organisation.name))
+                    .replace("<titles.title>", "Hanke")
+                    .replace("<title>", filter(project.title))
+                    .replace("<titles.project-ref>", "Tunnus")
+                    .replace("<project-ref>", filter(project.project_ref))
+                    .replace("<titles.region>", "Alue / Maa")
+                    .replace("<region>", filter(project.region))
+                    .replace("<titles.funding.applied>", "Haettu avustus")
+                    .replace("<funding.applied-curr-local>",
+                            filter(project.funding.applied_curr_local))
+                    .replace("<funding.curr-local-unit>",
+                            filter(project.funding.curr_local_unit))
+                    .replace("<funding.applied-curr-eur>",
+                            filter(project.funding.applied_curr_eur))
+                    .replace("<titles.duration-months>", "Kesto")
+                    .replace("<duration-months>",
+                            filter(project.duration_months))
+                    .replace("<titles.required-appendices>",
+                            "Vaaditut liitteet")
+                    .replace("<titles.required-appendices.proj-budget>",
+                            "hankebudjetti")
+                    .replace("<required-appendices.proj-budget>",
+                            project.required_appendices.proj_budget ? "x" : "_")
+                    .replace("<titles.required-appendices.references>",
+                            "suositukset")
+                    .replace("<required-appendices.references>",
+                            project.required_appendices.references ? "x" : "_")
+                    .replace("<titles.required-appendices.annual-budget>",
+                            "vuosibudjetti")
+                    .replace("<required-appendices.annual-budget>",
+                            project.required_appendices.annual_budget
+                            ? "x" : "_")
+                    .replace("<titles.required-appendices.rules>", "säännöt")
+                    .replace("<required-appendices.rules>",
+                            project.required_appendices.rules ? "x" : "_")
+                    .replace("<titles.required-appendices.reg-cert>",
+                            "rekisteröintitodistus")
+                    .replace("<required-appendices.reg-cert>",
+                            project.required_appendices.reg_cert ? "x" : "_")
+                    .replace("<titles.required-appendices.annual-report>",
+                            "vuosikertomus")
+                    .replace("<required-appendices.annual-report>",
+                            project.required_appendices.annual_report
+                            ? "x" : "_")
+                    .replace("<titles.required-appendices.audit-reports>",
+                            "Tilintarkastukset")
+                    .replace("<required-appendices.audit-reports>",
+                            project.required_appendices.audit_reports
+                            ? "x" : "_")
+                    .replace("<titles.description>", "Kuvaus")
+                    .replace("<description>", filter(project.description))
+                    .replace("<titles.approved.themes>", "Oikeudellinen fokus")
+                    .replace("<approved.themes>",
+                            project.approved.themes === undefined
+                            ? " " : JSON.stringify(project.approved.themes)
+                            .replace("[", "").replace("]", "").replace(/\"/g, ""))
+                    .replace("<titles.organisation.www>", "Websivut")
+                    .replace("<organisation.www>",
+                            filter(project.organisation.website))
+                    .replace("<titles.organisation.description>",
+                            "Tavoitteet ja keskeiset toimintatavat")
+                    .replace("<organisation.description>",
+                            filter(project.organisation.description))
+                    .replace("<titles.organisation.legal-status>",
+                            "Hallintomalli ja henkilöstö")
+                    .replace("<organisation.legal-status>",
+                            filter(project.organisation.legal_status))
+                    .replace("<titles.organisation.nat-local-links>",
+                            "Kansalliset yhteydet")
+                    .replace("<organisation.nat-local-links>",
+                            filter(project.organisation.nat_local_links))
+                    .replace("<titles.organisation.int-links>",
+                            "Kansainväliset yhteydet")
+                    .replace("<organisation.int-links>",
+                            filter(project.organisation.int_links))
+                    .replace("<titles.organisation.other-funding-budget>",
+                            "Muut rahoittajat ja budjetti")
+                    .replace("<organisation.other-funding-budget>",
+                            filter(project.organisation.other_funding_budget))
+                    .replace("<titles.organisation.accounting-audit>",
+                            "Taloushallinto ja tilintarkastus")
+                    .replace("<organisation.accounting-audit>",
+                            filter(project.organisation.accounting_audit))
+                    .replace("<titles.previous-projects>",
+                            "Aiemmat avustukset KIOS:lta")
+                    .replace("<previous-projects>",
+                            req.other_projects === undefined
+                            ? "Ei aiempia avustuksia"
+                            : JSON.stringify(req.other_projects)
+                            .replace("[", "").replace("]", "").replace(/\"/g, ""))
+                    .replace("<titles.context>", "Ihmisoikeuskonteksti")
+                    .replace("<context>", filter(project.context))
+                    .replace("<titles.project-goal>", "Päätavoitteet")
+                    .replace("<project-goal>", filter(project.project_goal))
+                    .replace("<titles.target-group>", "Kohderyhmä")
+                    .replace("<target-group>", filter(project.target_group))
+                    .replace("<titles.methods>", "Suunnitellut toiminnot")
+                    .replace("<methods>", methods)
+                    .replace("<titles.human-resources>", "Henkilöresurssit")
+                    .replace("<human-resources>",
+                            filter(project.human_resources))
+                    .replace("<titles.gender-aspect>",
+                            "Tasa-arvonäkökulma ja muut läpileikkaavat teemat")
+                    .replace("<gender-aspect>", filter(project.gender_aspect))
+                    .replace("<titles.vulnerable-groups>",
+                            "Haavoittuvimpien ryhmien huomioon ottaminen")
+                    .replace("<vulnerable-groups>",
+                        filter(project.vulnerable_groups))
+                    .replace("<titles.sustainability-risks>",
+                            "Tavoitteiden saavuttamisen mittaaminen")
+                    .replace("<sustainability-risks>",
+                            filter(project.sustainability_risks))
+                    .replace("<titles.reporting-evaluation>",
+                            "Evaluointi ja vaikuttavuuden arviointi")
+                    .replace("<reporting-evaluation>",
+                            filter(project.reporting_evaluation))
+                    .replace("<titles.budget>", "Budjetti ja omarahoitusosuus")
+                    .replace("<budget>", filter(project.budget))
+                    .replace("<titles.referees>", "Suosittelijat")
+                    .replace("<referees>", filter(project.referees))
+                    .replace("<titles.background-check>", "Taustaselvitys")
+                    .replace("<background-check>",
+                            filter(project.background_check))
+                    .replace("<titles.fitness>", "Sopivuus KIOS:n strategiaan")
+                    .replace("<fitness>", filter(project.fitness))
+                    .replace("<titles.capacity>",
+                            "Järjestön kapasiteetti ja asiantuntijuus")
+                    .replace("<capacity>", filter(project.capacity))
+                    .replace("<titles.feasibility>", "Toteutettavuus ja riskit")
+                    .replace("<feasibility>", filter(project.feasibility))
+                    .replace("<titles.effectiveness>",
+                            "Tuloksellisuus, vaikutukset ja vaikuttavuus")
+                    .replace("<effectiveness>", filter(project.effectiveness))
+                    .replace("<titles.proposed-funding>", "Esitys")
+                    .replace("<proposed-funding>",
+                            filter(project.proposed_funding))
+                    .replace("<titles.approved.decision>", "Päätös")
+                    .replace("<approved.decision>",
+                            filter(project.approved.decision));
+
+            mkdirp.sync(outDir);
+            fs.writeFileSync(outDir + "/" + fileName + ".tex", template, "utf8");
+            var pdflatex = spawn('pdflatex',
+                    ["-interaction=batchmode", "-halt-on-error",
+                        "-output-directory=" + outDir,
+                        outDir + "/" + fileName + ".tex"]
+            );
+            pdflatex.on("exit", function (code) {
+                fs.unlinkSync(outDir + "/" + fileName + ".tex");
+                fs.unlinkSync(outDir + "/" + fileName + ".aux");
+//                fs.unlinkSync(outDir + "/" + fileName + ".toc");
+                fs.unlinkSync(outDir + "/" + fileName + ".log");
+                if (code === 0) {
+                    res.status(201).json({});
+                } else {
+                    return res.status(500).json({
+                        error: 'PDF:n luominen ei onnistu.'
+                    });
+                }
             });
         },
         /**

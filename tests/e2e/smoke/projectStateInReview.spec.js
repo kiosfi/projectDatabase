@@ -45,7 +45,7 @@ describe('Changing project state to "in review"', function () {
         expect(state).toContain('rekisteröity');
     });
 
-    it('should show login page if trying to load "/projectId/change -view', function() {
+    it('should show login page if trying to load "/projectID/change -view', function() {
         helpers.logout();
         browser.get('/projects/56091ded00fccd6d66bc5cc3/change');
 

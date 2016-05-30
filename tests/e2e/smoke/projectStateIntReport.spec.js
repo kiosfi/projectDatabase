@@ -56,7 +56,7 @@ describe('Changing project state to "intermediary report"', function () {
         helpers.logout();
     });
 
-    it('should show login page if trying to load "/projectId/change -view', function() {
+    it('should show login page if trying to load "/projectID/change -view', function() {
         helpers.logout();
         browser.get('/projects/123459f94260406da7a7a41b/change');
 

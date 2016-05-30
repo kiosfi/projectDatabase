@@ -1,0 +1,149 @@
+\documentclass[twoside,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[finnish]{babel}
+\usepackage{graphicx}
+\usepackage{sidecap}
+\usepackage{wrapfig}
+\usepackage[a4paper]{geometry}
+\usepackage{tabularx}
+\inputencoding{utf8}
+\begin{document}
+
+    \setcounter{page}{0}
+	\newgeometry{left=2cm, right=1cm, bottom=0.1cm}
+	\begin{wrapfigure}{l}{0.5\textwidth}
+		\includegraphics[trim = 10mm 0mm 0mm 70mm,scale=0.25]{logo.pdf}
+	\end{wrapfigure}
+	
+	\hfill
+	\begin{tabular}{l r}
+		\multicolumn{2}{c}{
+		    \textbf{Toiminnanjohtajan päätös uudesta hankkeesta}
+		}\\ 
+		\textbf{Hallituksen kokous} & <approved.board-meeting>\\  
+		\textbf{Esittelijä} & <coordinator>\\ 
+	\end{tabular}
+	
+%	\vspace{5mm}
+%	\hrule
+	\vspace{5mm}
+	\begin{tabularx}{\textwidth}{| l X l X |}
+		\hline & & & \\ 
+		\textbf{<titles.organisation.name>} & <organisation.name> 
+		& \textbf{<titles.title>} & <title>\\ 
+		\textbf{<titles.project-ref>} & <project-ref> 
+		& \textbf{<titles.region>} & <region>\\ 
+		\textbf{<titles.funding.applied>} 
+		    & <funding.applied-curr-local> <funding.curr-local-unit> /
+		    <funding.applied-curr-eur> EUR 
+		    & \textbf{<titles.duration-months>} & <duration-months> kk\\ 		    
+%		\textbf{<titles.funding.applied> (<funding.curr-local-unit>})
+%		    & <funding.applied-curr-local>
+%		& \textbf{<titles.funding.applied> (EUR)} 
+%		    & <funding.applied-curr-eur>\\ 
+%		\textbf{<titles.duration-months>} & <duration-months> &d &ds \\ 
+		\textbf{<titles.required-appendices>} & \multicolumn{3}{>{\hsize=\dimexpr3\hsize+4\tabcolsep+2\arrayrulewidth\relax}X|}{
+		    <titles.required-appendices.proj-budget> [<required-appendices.proj-budget>], 
+		    <titles.required-appendices.references> [<required-appendices.references>], 
+		    <titles.required-appendices.annual-budget> [<required-appendices.annual-budget>], 
+		    <titles.required-appendices.rules> [<required-appendices.rules>], 
+		    <titles.required-appendices.reg-cert> [<required-appendices.reg-cert>],
+		    <titles.required-appendices.annual-report> [<required-appendices.annual-report>],
+		    <titles.required-appendices.audit-reports> [<required-appendices.audit-reports>]
+		}\\ 
+		& & & \\ 
+		\textbf{<titles.description>} & \multicolumn{3}{>{\hsize=\dimexpr3\hsize+4\tabcolsep+2\arrayrulewidth\relax}X|}{<description>}  \\ 
+		& & & \\ 
+		\textbf{<titles.approved.themes>} & \multicolumn{3}{>{\hsize=\dimexpr3\hsize+4\tabcolsep+2\arrayrulewidth\relax}X|}{<approved.themes>} \\ 
+	 	& & & \\ \hline
+	\end{tabularx}
+	
+	\restoregeometry
+	
+	\newpage
+	\section{JÄRJESTÖ}
+		\subsection*{<titles.organisation.www>}
+		    <organisation.www>
+		
+		\subsection*{<titles.organisation.description>}
+		    <organisation.description>
+		
+		\subsection*{<titles.organisation.legal-status>}
+		    <organisation.legal-status>
+		
+		\subsection*{<titles.organisation.nat-local-links>}
+		    <organisation.nat-local-links>
+		
+		\subsection*{<titles.organisation.int-links>}
+		    <organisation.int-links>
+		
+		\subsection*{<titles.organisation.other-funding-budget>}
+		    <organisation.other-funding-budget>
+		
+		\subsection*{<titles.organisation.accounting-audit>}
+		    <organisation.accounting-audit>
+		
+		\subsection*{<titles.previous-projects>}
+		    <previous-projects>
+		
+		\newpage		
+		\section{HANKE}
+		\subsection*{<titles.context>}
+		    <context>
+
+		\subsection*{<titles.project-goal>}
+		    <project-goal>
+		
+		\subsection*{<titles.target-group>}
+		    <target-group>
+		
+		\subsection*{<titles.methods>}
+		    <methods>
+
+		\subsection*{<titles.human-resources>}
+		    <human-resources>
+		
+		\subsection*{<titles.gender-aspect>}
+		    <gender-aspect>
+		
+		\subsection*{<titles.vulnerable-groups>}
+		    <vulnerable-groups>
+		
+		\subsection*{<titles.sustainability-risks>}
+		    <sustainability-risks>
+		
+		\subsection*{<titles.reporting-evaluation>}
+		    <reporting-evaluation>
+		
+		\subsection*{<titles.budget>}
+		    <budget>
+		
+		\subsection*{<titles.referees>}
+		    <referees>
+		
+		\subsection*{<titles.background-check>}
+		    <background-check>
+		
+		\newpage	
+		\section{KIOS:N ARVIO}
+		\subsection*{<titles.fitness>}
+		    <fitness>
+		
+		\subsection*{<titles.capacity>}
+		    <capacity>
+		
+		\subsection*{<titles.feasibility>}		
+		    <feasibility>
+		
+		\subsection*{<titles.effectiveness>}	
+		    <effectiveness>
+		
+		\subsection*{<titles.proposed-funding>}
+		    <proposed-funding>
+		
+		\newpage
+	\section{<titles.approved.decision>}		
+		<approved.decision>
+	
+\end{document}

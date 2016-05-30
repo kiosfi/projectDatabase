@@ -62,7 +62,7 @@
                     });
 
             it('$scope.findOne() should create an array with one organisation object fetched ' +
-                    'from XHR using a projectId URL parameter', function () {
+                    'from XHR using a projectID URL parameter', function () {
                         // fixture URL parament
                         $stateParams.organisationId = '525a8422f6d0f87f0e407a33';
                         // fixture response object

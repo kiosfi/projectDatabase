@@ -70,7 +70,7 @@ describe('Changing project state to "signed"', function () {
         expect(state).toContain('hyväksytty');
     });
 
-    it('should show login page if trying to load "/projectId/change -view', function() {
+    it('should show login page if trying to load "/projectID/change -view', function() {
         helpers.logout();
         browser.get('/projects/f2c7d9aeb017189911996768/change');
 

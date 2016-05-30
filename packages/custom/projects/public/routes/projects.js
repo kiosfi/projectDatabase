@@ -24,7 +24,7 @@ angular.module("mean.projects").config(["$stateProvider",
                     }
                 })
                 .state("edit project", {
-                    url: "/projects/:projectId/edit",
+                    url: "/projects/:projectID/edit",
                     templateUrl: "/projects/views/edit.html",
                     resolve: {
                         loggedin: function (MeanUser) {
@@ -33,7 +33,7 @@ angular.module("mean.projects").config(["$stateProvider",
                     }
                 })
                 .state("project by id", {
-                    url: "/projects/:projectId",
+                    url: "/projects/:projectID",
                     templateUrl: "/projects/views/view.html",
                     resolve: {
                         loggedin: function (MeanUser) {
@@ -42,7 +42,7 @@ angular.module("mean.projects").config(["$stateProvider",
                     }
                 })
                 .state("change project state", {
-                    url: "/projects/:projectId/change",
+                    url: "/projects/:projectID/change",
                     templateUrl: "/projects/views/change.html",
                     resolve: {
                         loggedin: function (MeanUser) {
@@ -51,7 +51,7 @@ angular.module("mean.projects").config(["$stateProvider",
                     }
                 })
                 .state("registration report by id", {
-                    url: "/projects/:projectId/regreport/:reportId",
+                    url: "/projects/:projectID/regreport/:reportId",
                     templateUrl: "/projects/views/regreport.html",
                     resolve: {
                         loggedin: function (MeanUser) {
@@ -60,7 +60,7 @@ angular.module("mean.projects").config(["$stateProvider",
                     }
                 })
                 .state("project report by id", {
-                    url: "/projects/:projectId/intreport/:reportId",
+                    url: "/projects/:projectID/intreport/:reportId",
                     templateUrl: "/projects/views/intreport.html",
                     resolve: {
                         loggedin: function (MeanUser) {
@@ -69,7 +69,7 @@ angular.module("mean.projects").config(["$stateProvider",
                     }
                 })
                 .state("end report by project id", {
-                    url: "/projects/endReport/:projectId",
+                    url: "/projects/endReport/:projectID",
                     templateUrl: "/projects/views/endreport.html",
                     resolve: {
                         loggedin: function (MeanUser) {
