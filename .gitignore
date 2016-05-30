@@ -22,6 +22,9 @@ docs/api/
 **/doxygen_sqlite3.db
 tests/config/e2e/tests/results/*
 *.log
+*.aux
+*.toc
+*.pdf
 tests/results
 
 search/public/assets/lib
