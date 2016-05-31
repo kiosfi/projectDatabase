@@ -24,7 +24,6 @@ tests/config/e2e/tests/results/*
 *.log
 *.aux
 *.toc
-*.pdf
 tests/results
 
 search/public/assets/lib

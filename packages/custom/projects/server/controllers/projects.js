@@ -622,7 +622,7 @@ module.exports = function (Projects) {
                                                     ? "Myönnetty "
                                                             + p.approved.granted_sum_eur
                                                             + " EUR"
-                                                    : "Ei myönnettyä avustusta.")
+                                                    : "Ei myönnettyä avustusta")
                                             + ")\\\\ ";
                                 }
                             });
