@@ -585,10 +585,10 @@ module.exports = function (Projects) {
                         .replace(/\&/g, "\\&")
                         .replace(/\$/g, "\\$")
 //                        .replace(/\\/g, "\\")
+                        .replace(/\_\_/g, "\n\n")
                         .replace(/\_/g, "\\_")
                         .replace(/\{/g, "\\{")
                         .replace(/\}/g, "\\}")
-                        .replace(/\_\_/g, "\n\n")
                         .replace(/undefined/g, " ");
                 var pieces = string.split("*");
                 var transformed = "";
