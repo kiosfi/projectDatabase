@@ -457,6 +457,28 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             }, function (project) {
                 $scope.project = project;
                 $scope.ensureCompatibility(project);
+                var appendices = $scope.project.appendices;
+                if (appendices !== undefined && appendices.length > 0) {
+                    appendices.forEach(function (appendix) {
+                        if (appendix.custom_category ===
+                                "TJ:n päätös uudesta hankkeesta") {
+                            $scope.regRepExists = true;
+                        }
+                    });
+                }
+            });
+        };
+
+        /**
+         * Like <tt>findOne</tt>, but intended for regreport view only.
+         *
+         * @returns {undefined}
+         */
+        $scope.findOneForRegReport = function () {
+            Projects.get({
+                projectID: $stateParams.projectID
+            }, function (project) {
+                $scope.project = project;
                 OrgProjects.findProjects($scope.project.organisation._id)
                         .success(function (projects) {
                             var pid = $scope.project._id;
@@ -615,7 +637,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.$update(function (response) {
                 });
             }
-        }
+        };
 
         /**
          * Asks for confirmation for appendix removal. If the user approves the
@@ -947,21 +969,33 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             return typeof string !== "undefined" && string !== "";
         };
 
+        /**
+         * <tt>true</tt> if and only if the regreport has already been added as
+         * an appendix for the current project. In that case, creating a new
+         * regreport is not allowed (unless the current one is deleted first).
+         * The default value for this variable is <tt>false</tt> and the value
+         * is updated in the function <tt>findOne</tt>.
+         */
+        $scope.regRepExists = false;
+
+        /**
+         * Creates a new PDF report it there isn't already a corresponding
+         * report saved as an appendix.
+         */
         $scope.createPDF = function (report) {
-//            $http.get("/projects/" + $scope.project._id + "/regreport").success(
-//                    function (response) {
-////                        var blob = new Blob([response], {type: "text/plain"});
-////                        window.saveAs(blob, "reg-report.pdf");
-////                        var w = $window.open("", "", "width=800, height=600");
-////                        w.document.write(blob);
-////                        $window.document.getElementById("my_iframe").innerHTML =
-//////                                blob;
-////                                response;
-//                          $window.alert(response);
-//                    });
-            $scope.project.$createPDF(function (response) {
-                $window.location.reload();
-            });
+            switch (report) {
+                case "reg":
+                    if ($scope.regRepExists) {
+                        $window.alert("Raportti on jo tallennettu. (Katso liitteet.)");
+                        break;
+                    }
+                    $scope.project.$createPDF(function (response) {
+                        $window.location.reload();
+                    });
+                    break;
+                default:
+                    break;
+            }
         };
 
         /**
