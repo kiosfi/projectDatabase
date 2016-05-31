@@ -18,7 +18,6 @@ var OrganisationSchema = new Schema({
     schema_version: {
         type: Number,
         required: true,
-        default: 2
     },
     representative: {
         name: {
@@ -120,6 +119,14 @@ var OrganisationSchema = new Schema({
     bank_account: {
         type: Schema.ObjectId,
         ref: 'BankAccount'
+    },
+    /**
+     * This field contains extra notes about the project.
+     *
+     * This field was added in schema version 3.
+     */
+    special_notes: {
+
     },
     updated: {
         type: Array

@@ -61,7 +61,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             pieces.forEach(function (x) {
                 transformed += x;
             });
-            return transformed;
+            return transformed.replace(/\_\_/g, "<br/>&nbsp;&nbsp;&nbsp;&nbsp;");
         };
 
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
@@ -156,6 +156,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
+                project.schema_version = 8;
 
                 var reg_date = $scope.convertDate($scope.register_day,
                         $scope.register_month, $scope.register_year);
@@ -163,6 +164,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
                 if ($scope.newOrg) {
                     var org = new Organisations($scope.project.organisation);
+                    org.schema_version = 3;
                     org.$save(function (response) {
                         var orgId = response._id;
                         project.organisation = orgId;
@@ -577,7 +579,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     project.end_report.proposition = project.end_report.comments;
                     project.end.report.comments = undefined;
                 }
-                project.schema_version = 7;
+            }
+            if (project.schema_version < 8) {
+                // An extra field was added in this version, but it requires no
+                // conversion.
+                project.schema_version = 8;
                 project.$update(function () {
                 });
             }

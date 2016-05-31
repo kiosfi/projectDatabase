@@ -6,7 +6,7 @@
         <fieldset>
             <legend>
                 <a href="" ng-click="showRegDetails = !showRegDetails">
-                    Rekisteröinti -tilan tiedot
+                    Rekisteröity-tilan tiedot
                 </a>
             </legend>
             <div class="fs1" ng-show="showRegDetails">
@@ -468,7 +468,7 @@
         <fieldset ng-show="project.in_review.date">
             <legend>
                 <a href="" ng-click="showInRevDetails = !showInRevDetails">
-                    Käsittelyssä -tilan tiedot
+                    Käsittelyssä-tilan tiedot
                 </a>
             </legend>
             <div class="form-group col-md-12" ng-show="showInRevDetails">
@@ -572,7 +572,7 @@
         <fieldset ng-show="project.approved.date">
             <legend>
                 <a href="" ng-click="showApprDetails = !showApprDetails">
-                    Hyväksytty -tilan tiedot
+                    Hyväksytty-tilan tiedot
                 </a>
             </legend>
             <div ng-show="showApprDetails">
@@ -732,7 +732,7 @@
                                         type="checkbox"
                                         name="selectedThemes[]"
                                         value="{{theme}}"
-                                        ng-checked="themeSelection.indexOf(theme) > - 1"
+                                        ng-checked="themeSelection.indexOf(theme) > -1"
                                         ng-click="toggleThemeSelection(theme)">
                                     {{theme}}
                                 </td>
@@ -745,7 +745,7 @@
         <fieldset ng-show="project.rejected.date">
             <legend>
                 <a href="" ng-click="showRejDetails = !showRejDetails">
-                    Hylätty -tilan tiedot
+                    Hylätty-tilan tiedot
                 </a>
             </legend>
             <div ng-show="showRejDetails">
@@ -786,7 +786,7 @@
         <fieldset ng-show="project.signed.date">
             <legend>
                 <a href="" ng-click="showSignDetails = !showSignDetails">
-                    Allekirjoitettu -tilan tiedot
+                    Allekirjoitettu-tilan tiedot
                 </a>
             </legend>
             <div ng-show="showSignDetails">
@@ -848,8 +848,8 @@
                 <label for="plannedPaymentSelection">
                     {{fieldNames["signed_planned_payments"]}}
                 </label>
-                        myönnetylle avustukselle
-                        {{project.approved.granted_sum_eur| currency : ""}} €
+                myönnetylle avustukselle
+                {{project.approved.granted_sum_eur| currency : ""}} €
                 <div class="form-group col-md-12" id="plPayments">
                     <div class="col-md-12" name="plannedPaymentSelection"
                          id="plannedPaymentSelection"
@@ -955,7 +955,7 @@
         <fieldset ng-show="project.intermediary_reports.length > 0">
             <legend>
                 <a href="" ng-click="showIntRepDetails = !showIntRepDetails">
-                    Väliraportti -tilan tiedot
+                    Väliraportti-tilan tiedot
                 </a>
             </legend>
             <div ng-show="showIntRepDetails">
@@ -966,11 +966,11 @@
                     </p>
                     <div class="form-group col-md-12"
                          ng-repeat="method in project.methods">
-                        <div class="col-md-4" style="text-align: justify">
+                        <div class="col-md-6" style="text-align: justify">
                             <p><em>{{method.name}} ({{method.level}})</em></p>
-                            <p>{{method.comment}}</p>
+                            <span ng-bind-html="handleEmphasis(method.comment)"></span>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <p>&nbsp;</p>
                             <textarea name="intRMethods" type="text"
                                       class="form-control"
@@ -985,10 +985,10 @@
                         Tavoitteet ja niiden toteutuminen
                     </p>
                     <div class="form-group col-md-12">
-                        <div class="col-md-4" style="text-align: justify">
-                            <p>{{project.project_goal}}</p>
+                        <div class="col-md-6" style="text-align: justify">
+                            <span ng-bind-html="handleEmphasis(project.project_goal)"></span>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <textarea name="objComments" type="text"
                                       class="form-control"
                                       data-ng-model="intreport.objectives"
@@ -1107,7 +1107,7 @@
         <fieldset ng-show="project.end_report.date">
             <legend>
                 <a href="" ng-click="showEndRepDetails = !showEndRepDetails">
-                    Loppuraportti -tilan tiedot
+                    Loppuraportti-tilan tiedot
                 </a>
             </legend>
             <div ng-show="showEndRepDetails">
@@ -1354,7 +1354,7 @@
         <fieldset ng-show="project.ended.date">
             <legend>
                 <a href="" ng-click="showEndedDetails = !showEndedDetails">
-                    Päättynyt -tilan tiedot
+                    Päättynyt-tilan tiedot
                 </a>
             </legend>
             <div ng-show="showEndedDetails">
@@ -1429,22 +1429,36 @@
                         <textarea name="endComments" type="text"
                                   class="form-control"
                                   data-ng-model="project.ended.other_comments"
-                                  id="comments"
-                                  placeholder="Muut päättämiseen liittyvät kommentit">
+                                  id="comments">
                         </textarea>
                     </div>
                 </div>
             </div>
         </fieldset>
-        <div class="form-group">
-            <div class="col-md-offset-1 col-md-11">
-                <a ng-href="/projects/{{project._id}}" class="btn btn-danger">
-                    Peruuta
-                </a>
-                <button mean-token="'edit-submit'" type="submit"
-                        class="btn btn-default"
-                        ng-disabled="projectEditForm.$invalid">Tallenna</button>
+        <fieldset>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-6"><label for="special_notes" class="col-md-2">
+                            {{fieldNames["special_notes"]}}
+                        </label>
+                        <div class="col-md-10">
+                            <textarea name="special_notes" type="text"
+                                      class="form-control"
+                                      data-ng-model="project.special_notes"
+                                      id="special_notes">
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <a ng-href="/projects/{{project._id}}" class="btn btn-danger">
+                            Peruuta
+                        </a>
+                        <button mean-token="'edit-submit'" type="submit"
+                                class="btn btn-default"
+                                ng-disabled="projectEditForm.$invalid">Tallenna</button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </fieldset>
     </form>
 </section>
