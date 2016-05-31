@@ -814,8 +814,8 @@ module.exports = function (Projects) {
                         pdflatex.on("exit", function (code) {
                             fs.unlinkSync(outDir + "/" + fileName + ".tex");
                             fs.unlinkSync(outDir + "/" + fileName + ".aux");
-                            fs.unlinkSync(outDir + "/" + fileName + ".log");
                             if (code === 0) {
+                                fs.unlinkSync(outDir + "/" + fileName + ".log");
                                 if (project.appendices === undefined) {
                                     project.appendices = [];
                                 }
