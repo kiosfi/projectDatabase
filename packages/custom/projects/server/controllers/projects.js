@@ -586,22 +586,15 @@ module.exports = function (Projects) {
                                                 // quotations are supposed to be
                                                 // delimited the way it's
                                                 // replaced here.
-//                        .replace(/\\/g, "\\")
-//                        .replace(/�/g, "Å")
-//                        .replace(/�/g, "å")
-//                        .replace(/�/g, "Ä")
-//                        .replace(/�/g, "ä")
-//                        .replace(/�/g, "Ö")
-//                        .replace(/�/g, "ö")
-                        .replace(/�/g, "Å")
-                        .replace(/�/g, "å")
-                        .replace(/�/g, "Ä")
-                        .replace(/�/g, "ä")
-                        .replace(/և/g, "Ö")
-                        .replace(/�/g, "ö")
-                        .replace(/\\/g, "")
-                        .replace(/\&/g, "\\&")
-                        .replace(/\%/g, "\\%")
+                        .replace(/Å/g, "\\AA")  // This workaround is needed
+                        .replace(/å/g, "\\aa")  // because the production server
+                        .replace(/Ä/g, "\\\"A") // has insufficient/obsolete
+                        .replace(/ä/g, "\\\"a") // latex packages installed
+                        .replace(/Ö/g, "\\\"O") // (in this case the inputenc
+                        .replace(/ö/g, "\\\"o") // package, but also the babel
+                        .replace(/\\/g, "")     // package, which means that
+                        .replace(/\&/g, "\\&")  // currently Finnish hyphenation
+                        .replace(/\%/g, "\\%")  // is unavailable/broken.
                         .replace(/\$/g, "\\$")
 //                        .replace(/\–/g, "--") // En-dash
 //                        .replace(/\—/g, "---") // Em-dash
