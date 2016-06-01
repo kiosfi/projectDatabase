@@ -582,10 +582,13 @@ module.exports = function (Projects) {
                 }
                 var string = JSON.stringify(object);
                 string = string
+                        .replace(/\\"/g, "''")
+                        .replace(/\\/g, "\\")
                         .replace(/\&/g, "\\&")
                         .replace(/\$/g, "\\$")
-//                        .replace(/\\/g, "\\")
-                        .replace(/\n/g, "\\\\ ")
+//                        .replace(/\–/g, "--") // En-dash
+//                        .replace(/\—/g, "---") // Em-dash
+                        .replace(/\\n/g, "\\\\ ")
                         .replace(/\_\_/g, "\n\n")
                         .replace(/\_/g, "\\_")
                         .replace(/\{/g, "\\{")
@@ -602,6 +605,9 @@ module.exports = function (Projects) {
                 return typeof object === "string"
                         ? transformed.substring(1, transformed.length - 1)
                         : transformed;
+            };
+            var checkbox = function (checked) {
+                return checked ? " \\makebox[0pt][l]{$\\square$}\\raisebox{.15ex}{\\hspace{0.1em}$\\checkmark$}" : " \\makebox[0pt][l]{$\\square$}\\hspace{0.3cm}";
             };
             var methods = "\\begin{itemize}";
             project.methods.forEach(function (method) {
@@ -669,38 +675,31 @@ module.exports = function (Projects) {
                                 .replace("<titles.required-appendices.proj-budget>",
                                         "hankebudjetti")
                                 .replace("<required-appendices.proj-budget>",
-                                        project.required_appendices.proj_budget
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.proj_budget))
                                 .replace("<titles.required-appendices.references>",
                                         "suositukset")
                                 .replace("<required-appendices.references>",
-                                        project.required_appendices.references
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.references))
                                 .replace("<titles.required-appendices.annual-budget>",
                                         "vuosibudjetti")
                                 .replace("<required-appendices.annual-budget>",
-                                        project.required_appendices.annual_budget
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.annual_budget))
                                 .replace("<titles.required-appendices.rules>",
                                         "säännöt")
                                 .replace("<required-appendices.rules>",
-                                        project.required_appendices.rules
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.rules))
                                 .replace("<titles.required-appendices.reg-cert>",
                                         "rekisteröintitodistus")
                                 .replace("<required-appendices.reg-cert>",
-                                        project.required_appendices.reg_cert
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.reg_cert))
                                 .replace("<titles.required-appendices.annual-report>",
                                         "vuosikertomus")
                                 .replace("<required-appendices.annual-report>",
-                                        project.required_appendices.annual_report
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.annual_report))
                                 .replace("<titles.required-appendices.audit-reports>",
                                         "tilintarkastukset")
                                 .replace("<required-appendices.audit-reports>",
-                                        project.required_appendices.audit_reports
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.audit_reports))
                                 .replace("<titles.description>", "Kuvaus")
                                 .replace("<description>",
                                         filter(project.description))
@@ -808,14 +807,14 @@ module.exports = function (Projects) {
                         fs.writeFileSync(outDir + "/" + fileName + ".tex",
                                 template, "utf8");
                         var pdflatex = spawn('pdflatex',
-                                ["-interaction=batchmode", "-halt-on-error",
+                                ["-interaction=batchmode",
                                     "-output-directory=" + outDir,
                                     outDir + "/" + fileName + ".tex"]
                                 );
                         pdflatex.on("exit", function (code) {
-                            fs.unlinkSync(outDir + "/" + fileName + ".tex");
                             fs.unlinkSync(outDir + "/" + fileName + ".aux");
                             if (code === 0) {
+                                fs.unlinkSync(outDir + "/" + fileName + ".tex");
                                 fs.unlinkSync(outDir + "/" + fileName + ".log");
                                 if (project.appendices === undefined) {
                                     project.appendices = [];
