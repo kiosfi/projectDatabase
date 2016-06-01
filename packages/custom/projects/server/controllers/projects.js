@@ -582,14 +582,26 @@ module.exports = function (Projects) {
                 }
                 var string = JSON.stringify(object);
                 string = string
-                        .replace(/\\"/g, "''")
-                        .replace(/\\/g, "\\")
+                        .replace(/\\"/g, "''")  // This doesn't break LaTeX, but
+                                                // quotations are supposed to be
+                                                // delimited the way it's
+                                                // replaced here.
+//                        .replace(/\\/g, "\\")
+                        .replace(/\\/g, "")
                         .replace(/\&/g, "\\&")
                         .replace(/\$/g, "\\$")
 //                        .replace(/\–/g, "--") // En-dash
 //                        .replace(/\—/g, "---") // Em-dash
-                        .replace(/\\n/g, "\\\\ ")
-                        .replace(/\_\_/g, "\n\n")
+//                        .replace(/\\n/g, "\\\\ ")
+                        .replace(/\\0/g, "")    // null character
+                        .replace(/\\n/g, " ")   // line feed
+                        .replace(/\\r/g, "")    // carriage return
+                        .replace(/\\b/g, "")    // backspace
+                        .replace(/\\t/g, " ")   // tabulator
+                        .replace(/\xa0/g, " ")  // The famous non-breaking space
+                        .replace(/\_\_/g, "\n\n")   // This is a special code
+                                                    // for this application that
+                                                    // denotes paragraph change.
                         .replace(/\_/g, "\\_")
                         .replace(/\{/g, "\\{")
                         .replace(/\}/g, "\\}")
