@@ -589,6 +589,7 @@ module.exports = function (Projects) {
 //                        .replace(/\\/g, "\\")
                         .replace(/\\/g, "")
                         .replace(/\&/g, "\\&")
+                        .replace(/\%/g, "\\%")
                         .replace(/\$/g, "\\$")
 //                        .replace(/\–/g, "--") // En-dash
 //                        .replace(/\—/g, "---") // Em-dash
@@ -598,7 +599,10 @@ module.exports = function (Projects) {
                         .replace(/\\r/g, "")    // carriage return
                         .replace(/\\b/g, "")    // backspace
                         .replace(/\\t/g, " ")   // tabulator
+                        .replace(/\u00AD/g, "") // "discretionary hyphen"
                         .replace(/\xa0/g, " ")  // The famous non-breaking space
+                        .replace(/[^\x20-\x7E]+/g, "")  // ...And the rest of
+                                                        // the weird stuff...
                         .replace(/\_\_/g, "\n\n")   // This is a special code
                                                     // for this application that
                                                     // denotes paragraph change.
