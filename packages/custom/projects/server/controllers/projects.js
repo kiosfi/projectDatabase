@@ -586,12 +586,14 @@ module.exports = function (Projects) {
                                                 // quotations are supposed to be
                                                 // delimited the way it's
                                                 // replaced here.
+                        .replace(/\{/g, "\\{")
+                        .replace(/\}/g, "\\}")
                         .replace(/Å/g, "\\AA")  // This workaround is needed
                         .replace(/å/g, "\\aa")  // because the production server
-                        .replace(/Ä/g, "\\\"A") // has insufficient/obsolete
-                        .replace(/ä/g, "\\\"a") // latex packages installed
-                        .replace(/Ö/g, "\\\"O") // (in this case the inputenc
-                        .replace(/ö/g, "\\\"o") // package, but also the babel
+                        .replace(/Ä/g, "\\\"\{A\}") // has insufficient/obsolete
+                        .replace(/ä/g, "\\\"\{a\}") // latex packages installed
+                        .replace(/Ö/g, "\\\"\{O\}") // (in this case the inputenc
+                        .replace(/ö/g, "\\\"\{o\}") // package, but also the babel
                         .replace(/\\/g, "")     // package, which means that
                         .replace(/\&/g, "\\&")  // currently Finnish hyphenation
                         .replace(/\%/g, "\\%")  // is unavailable/broken.
@@ -612,8 +614,6 @@ module.exports = function (Projects) {
                                                     // for this application that
                                                     // denotes paragraph change.
                         .replace(/\_/g, "\\_")
-                        .replace(/\{/g, "\\{")
-                        .replace(/\}/g, "\\}")
                         .replace(/undefined/g, " ");
                 var pieces = string.split("*");
                 var transformed = "";
