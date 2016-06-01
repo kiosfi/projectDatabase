@@ -594,7 +594,7 @@ module.exports = function (Projects) {
                         .replace(/ä/g, "\\\"\{a\}") // latex packages installed
                         .replace(/Ö/g, "\\\"\{O\}") // (in this case the inputenc
                         .replace(/ö/g, "\\\"\{o\}") // package, but also the babel
-                        .replace(/\\/g, "")     // package, which means that
+//                        .replace(/\\/g, "")     // package, which means that
                         .replace(/\&/g, "\\&")  // currently Finnish hyphenation
                         .replace(/\%/g, "\\%")  // is unavailable/broken.
                         .replace(/\$/g, "\\$")
