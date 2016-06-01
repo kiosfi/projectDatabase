@@ -587,11 +587,17 @@ module.exports = function (Projects) {
                                                 // delimited the way it's
                                                 // replaced here.
 //                        .replace(/\\/g, "\\")
+//                        .replace(/�/g, "Å")
+//                        .replace(/�/g, "å")
+//                        .replace(/�/g, "Ä")
+//                        .replace(/�/g, "ä")
+//                        .replace(/�/g, "Ö")
+//                        .replace(/�/g, "ö")
                         .replace(/�/g, "Å")
                         .replace(/�/g, "å")
                         .replace(/�/g, "Ä")
                         .replace(/�/g, "ä")
-                        .replace(/�/g, "Ö")
+                        .replace(/և/g, "Ö")
                         .replace(/�/g, "ö")
                         .replace(/\\/g, "")
                         .replace(/\&/g, "\\&")
