@@ -129,7 +129,7 @@
                     <div class="col-md-3 mini-header">
                         {{fieldNames["reg_date"]}}
                     </div>
-                    <div class="col-md-9">{{project.reg_date| date:'d.M.yyyy': 'UTC'}}</div>
+                    <div class="col-md-9">{{project.reg_date| date:'d.M.yyyy': '+0200'}}</div>
                 </div>
                 <div ng-show="project.approved.granted_sum_eur"
                      class="ng-hide proj-content col-md-12">
@@ -415,7 +415,7 @@
                             {{deadline.report}}
                         </div>
                         <div class="col-md-9">
-                            {{deadline.date| date: 'd.M.yyyy': 'UTC'}}
+                            {{deadline.date| date: 'd.M.yyyy': '+0200'}}
                         </div>
                     </div>
                     &nbsp;
@@ -430,7 +430,7 @@
                                 {{fieldNames["in_review_date"]}}
                             </div>
                             <div class="col-md-2">
-                                {{project.in_review.date| date:'d.M.yyyy': 'UTC'}}
+                                {{project.in_review.date| date:'d.M.yyyy': '+0200'}}
                             </div>
                             <div class="col-md-7">
                                 <button class="btn small-btn"
@@ -444,7 +444,7 @@
                                 {{fieldNames["in_review_user"]}}
                             </div>
                             <div class="col-md-9">{{project.in_review.user}},
-                                {{project.in_review.date| date:'d.M.yyyy, HH:mm': 'UTC'}}</div>
+                                {{project.in_review.date| date:'d.M.yyyy, HH:mm': '+0200'}}</div>
                             <div class="col-md-3 mini-header">
                                 {{fieldNames["in_review_comments"]}}
                             </div>
@@ -460,7 +460,7 @@
                                 {{fieldNames["approved_date"]}}
                             </div>
                             <div class="col-md-2">
-                                {{project.approved.date| date:'d.M.yyyy':'UTC'}}
+                                {{project.approved.date| date:'d.M.yyyy':'+0200'}}
                             </div>
                             <div class="col-md-1">
                                 <button class="btn small-btn"
@@ -487,7 +487,7 @@
                             <div class="col-md-9">{{project.approved.user}},
                                 {{project.approved.date|
                                                     date:'d.M.yyyy, HH:mm':
-                                                    'UTC'}}</div>
+                                                    '+0200'}}</div>
                             <div class="col-md-3 mini-header">
                                 {{fieldNames["approved_approved_by"]}}
                             </div>
@@ -499,14 +499,14 @@
                             </div>
                             <div class="col-md-9">
                                 {{project.approved.approved_date| date:
-                                                'd.M.yyyy':'UTC'}}
+                                                'd.M.yyyy':'+0200'}}
                             </div>
                             <div class="col-md-3 mini-header">
                                 {{fieldNames["board_notified"]}}
                             </div>
                             <div class="col-md-9">
                                 {{project.approved.board_notified| date:
-                                                'd.M.yyyy':'UTC'}}
+                                                'd.M.yyyy':'+0200'}}
                             </div>
                             <div class="col-md-3 mini-header">
                                 {{fieldNames["granted_sum_eur"]}}
@@ -530,7 +530,7 @@
                                 {{fieldNames["rejected_date"]}}
                             </div>
                             <div class="col-md-2">
-                                {{project.rejected.date| date:'d.M.yyyy': 'UTC'}}
+                                {{project.rejected.date| date:'d.M.yyyy': '+0200'}}
                             </div>
                             <div class="col-md-7">
                                 <button class="btn small-btn"
@@ -548,7 +548,7 @@
                             <div class="col-md-9">{{project.rejected.user}},
                                 {{project.rejected.date|
                                                     date:'d.M.yyyy, HH:mm':
-                                                    'UTC'}}</div>
+                                                    '+0200'}}</div>
                             <div class="col-md-3 mini-header">
                                 {{fieldNames["rejected_rejection_categories"]}}
                             </div>
@@ -575,7 +575,7 @@
                                 {{fieldNames["signed_date"]}}
                             </div>
                             <div class="col-md-2">
-                                {{project.signed.date| date:'d.M.yyyy': 'UTC'}}
+                                {{project.signed.date| date:'d.M.yyyy': '+0200'}}
                             </div>
                             <div class="col-md-7">
                                 <button class="btn small-btn"
@@ -591,14 +591,14 @@
                             </div>
                             <div class="col-md-9">{{project.signed.user}},
                                 {{project.signed.date|
-                                                date:'d.M.yyyy, HH:mm': 'UTC'}}
+                                                date:'d.M.yyyy, HH:mm': '+0200'}}
                             </div>
                             <div class="col-md-3 mini-header">
                                 {{fieldNames["signed_signed_by"]}}
                             </div>
                             <div class="col-md-9">{{project.signed.signed_by}},
                                 {{project.signed.signed_date|
-                                                    date:'d.M.yyyy': 'UTC'}}</div>
+                                                    date:'d.M.yyyy': '+0200'}}</div>
                         </div>
                         &nbsp;
                     </section>
@@ -610,7 +610,7 @@
                                     {{fieldNames["intreport_date"]}}
                                 </div>
                                 <div class="col-md-2">
-                                    {{intreport.date| date:'d.M.yyyy': 'UTC'}}
+                                    {{intreport.date| date:'d.M.yyyy': '+0200'}}
                                 </div>
                                 <div class="col-md-1">
                                     <button class="btn small-btn"
@@ -632,14 +632,14 @@
                                 <div class="col-md-9">{{intreport.user}},
                                     {{intreport.date|
                                                         date:'d.M.yyyy, HH:mm':
-                                                        'UTC'}}</div>
+                                                        '+0200'}}</div>
                                 <div class="col-md-3 mini-header">
                                     Raportin esitti
                                 </div>
                                 <div class="col-md-9">{{intreport.approved_by}},
                                     {{intreport.date_approved|
                                                         date : 'd.M.yyyy':
-                                                        'UTC'}}</div>
+                                                        '+0200'}}</div>
                             </div>
                             <p ng-show="intreport.processed === true">
                                 Väliraportti on käsitelty.
@@ -653,7 +653,7 @@
                                 {{fieldNames["end_report_date"]}}
                             </div>
                             <div class="col-md-2">
-                                {{project.end_report.date| date:'d.M.yyyy':'UTC'}}
+                                {{project.end_report.date| date:'d.M.yyyy':'+0200'}}
                             </div>
                             <div class="col-md-1">
                                 <button class="btn small-btn"
@@ -675,13 +675,13 @@
                             <div class="col-md-9">{{project.end_report.user}},
                                 {{project.end_report.date|
                                                     date:'d.M.yyyy, HH:mm':
-                                                    'UTC'}}</div>
+                                                    '+0200'}}</div>
                             <div class="col-md-3 mini-header">
                                 Raportti hyväksytty
                             </div>
                             <div class="col-md-9">{{project.end_report.approved_by}},
                                 {{project.end_report.date_approved|
-                                                    date : 'd.M.yyyy': 'UTC'}}</div>
+                                                    date : 'd.M.yyyy': '+0200'}}</div>
                         </div>
                         <p ng-show="project.end_report.processed === true">
                             Väliraportti on käsitelty.
@@ -694,7 +694,7 @@
                                 {{fieldNames["ended_date"]}}
                             </div>
                             <div class="col-md-2">
-                                {{project.ended.end_date| date:'d.M.yyyy':'UTC'}}
+                                {{project.ended.end_date| date:'d.M.yyyy':'+0200'}}
                             </div>
                             <div class="col-md-7"><button class="btn small-btn"
                                                           onclick="toggleCollapse('endedinfo')">
@@ -707,7 +707,7 @@
                             </div>
                             <div class="col-md-9">{{project.ended.user}},
                                 {{project.ended.date|
-                                                date:'d.M.yyyy, HH:mm': 'UTC'}}
+                                                date:'d.M.yyyy, HH:mm': '+0200'}}
                             </div>
                             <div class="col-md-3 mini-header">Hyväksyjä</div>
                             <div class="col-md-9">
@@ -717,7 +717,7 @@
                                 {{fieldNames["ended_board_notified"]}}
                             </div>
                             <div class="col-md-9">{{project.ended.board_notified|
-                                            date: 'd.M.yyyy': 'UTC'}}</div>
+                                            date: 'd.M.yyyy': '+0200'}}</div>
                             <div class="col-md-3 mini-header">
                                 Muut päättämiseen liittyvät kommentit
                             </div>
@@ -743,7 +743,7 @@
                         {{numberToString(project.approved.granted_sum_eur)}} EUR
                     </div>
                     <div class="col-md-7">
-                        {{project.approved.approved_date| date:'d.M.yyyy': 'UTC'}}
+                        {{project.approved.approved_date| date:'d.M.yyyy': '+0200'}}
                     </div>
                 </div>
                 <div class="proj-content" ng-show="project.signed.date">
@@ -753,7 +753,7 @@
                         <div class="col-md-1"><em>{{project.signed.
                                                 planned_payments.indexOf(planned_payment) + 1}}. erä</em></div>
                         <div class="col-md-2">{{numberToString(planned_payment.sum_eur)}} EUR</div>
-                        <div class="col-md-9">{{planned_payment.date| date:'d.M.yyyy': 'UTC'}}</div>
+                        <div class="col-md-9">{{planned_payment.date| date:'d.M.yyyy': '+0200'}}</div>
                     </div>
                     &nbsp;
                 </div>
@@ -768,7 +768,7 @@
                             {{numberToString(payment.sum_eur)}} EUR
                         </div>
                         <div class="col-md-1">
-                            {{payment.payment_date| date:'d.M.yyyy': 'UTC'}}
+                            {{payment.payment_date| date:'d.M.yyyy': '+0200'}}
                         </div>
                         <div class="col-md-8">
                             <a data-ng-click="confirmPaymentDeletion(payment.payment_number, $index + 1)"
@@ -990,7 +990,7 @@
                         <em>{{appendix.original_name}}</em>
                     </div>
                     <div class="col-md-1">
-                        {{appendix.date| date: 'd.M.yyyy': 'UTC'}}
+                        {{appendix.date| date: 'd.M.yyyy': '+0200'}}
                     </div>
                     <div class="col-md-3">
                         <a data-ng-click="confirmAppendixDeletion(appendix.url)"
