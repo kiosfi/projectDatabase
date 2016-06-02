@@ -45,6 +45,14 @@
                 </td>
                 <td class="report-content">{{project.region}}&nbsp;</td>
             </tr>
+            <tr>
+                <td class="report-mini-header">
+                    {{fieldNames["signed_signed_date"]}}
+                </td>
+                <td class="report-content" colspan="3">
+                    {{project.signed.signed_date |date : 'dd.MM.yyyy': '+0200'}}
+                </td>
+            </tr>
         </table>
     </article>
     <table>
@@ -113,15 +121,12 @@
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Maksatukset</div>
+                    <div class="report-mini-header">Myönnetty avustus</div>
                     <div class="report-subcontent">
                         Hankkeelle myönnettiin
                         {{numberToString(project.approved.granted_sum_eur)}}
                         EUR, mikä käsiteltiin hallituksen kokousessa
-                        {{project.approved.board_notified| date : 'dd.MM.yyyy': 'UTC'}}.</div>
-                    <div class="report-subcontent" style="margin-bottom: 1em">
-                        Sopimus allekirjoitettiin
-                        {{project.signed.signed_date| date: 'dd.MM.yyyy': 'UTC'}}.
+                        {{project.approved.board_notified| date : 'dd.MM.yyyy': '+0200'}}.</div>
                     </div>
 
                 </div>
@@ -138,7 +143,7 @@
                                 {{numberToString(planned_payment.sum_eur)}} EUR
                             </td>
                             <td style="padding-left: 2em">
-                                {{planned_payment.date| date : 'dd.MM.yyyy': 'UTC'}}
+                                {{planned_payment.date| date : 'dd.MM.yyyy': '+0200'}}
                             </td>
                         </tr>
                     </table>
@@ -157,7 +162,7 @@
                                 {{numberToString(payment.sum_eur)}} EUR
                             </td>
                             <td style="padding-left: 2em">
-                                {{payment.payment_date| date : 'dd.MM.yyyy': 'UTC'}}
+                                {{payment.payment_date| date : 'dd.MM.yyyy': '+0200'}}
                             </td>
                         </tr>
                     </table>

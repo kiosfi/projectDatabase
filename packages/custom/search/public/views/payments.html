@@ -154,7 +154,7 @@
                     <tbody>
                         <tr ng-repeat="payment in payments">
                             <td>{{payment.sum| currency: ""}}</td>
-                            <td>{{payment.date| date: 'dd.MM.yyyy': 'UTC'}}</td>
+                            <td>{{payment.date| date: 'dd.MM.yyyy': '+0200'}}</td>
                             <td>{{payment.ref}}</td>
                             <td><a ng-href="/projects/{{payment.id}}"
                                    target="_blank">{{payment.title}}</a></td>
