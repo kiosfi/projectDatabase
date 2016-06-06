@@ -427,7 +427,7 @@
                             </div>
                             <div class="col-md-2">
                                 <a ng-href="/projects/{{project._id}}/regreport/{{intreport.reportNumber}}"
-                                   class="btn large-btn">Näytä raportti</a>
+                                   class="btn large-btn">HTML-raportti</a>
                             </div>
                             <div class="col-md-4">
                                 <a ng-click="createPDF('reg')"
@@ -579,7 +579,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}"
-                                       class="btn large-btn">Näytä raportti</a>
+                                       class="btn large-btn">HTML-raportti</a>
                                 </div>
                             </div>
                             <div ng-show="showIntDetails"
@@ -620,9 +620,16 @@
                                     Tiedot
                                 </button>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <a ng-href="/projects/endReport/{{project._id}}"
-                                   class="btn large-btn">Näytä raportti</a>
+                                   class="btn large-btn">HTML-raportti</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a ng-click="createPDF('end')"
+                                   ng-disabled="endRepExists"
+                                   class="btn large-btn">
+                                    Luo PDF
+                                </a>
                             </div>
                         </div>
                         <div ng-show="showEndDetails"

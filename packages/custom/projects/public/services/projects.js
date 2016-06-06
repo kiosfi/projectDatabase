@@ -44,8 +44,11 @@ angular.module('mean.projects').factory('Projects', ['$resource',
             addIntReport: {
                 method: 'PUT', url: 'api/projects/intReport/:projectID'
             },
-            createPDF: {
-                method: 'GET', url: 'api/projects/pdf/:projectID'
+            regRepPDF: {
+                method: 'PUT', url: 'api/projects/regRepPDF/:projectID'
+            },
+            endRepPDF: {
+                method: 'PUT', url: 'api/projects/endRepPDF/:projectID'
             },
             countProjects: {
                 method: 'PUT', url: 'api/projects'

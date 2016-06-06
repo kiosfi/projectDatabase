@@ -465,6 +465,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         if (appendix.custom_category ===
                                 "TJ:n päätös uudesta hankkeesta") {
                             $scope.regRepExists = true;
+                        } else if (appendix.custom_category == "Loppuraportti") {
+                            $scope.endRepExists = true;
                         }
                     });
                 }
@@ -985,6 +987,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.regRepExists = false;
 
         /**
+         * <tt>true</tt> if and only if there exists an end report for the
+         * current project as an appendix.
+         */
+        $scope.endRepExists = false;
+
+        /**
          * Creates a new PDF report it there isn't already a corresponding
          * report saved as an appendix.
          */
@@ -995,7 +1003,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         $window.alert("Raportti on jo tallennettu. (Katso liitteet.)");
                         break;
                     }
-                    $scope.project.$createPDF(function (response) {
+                    $scope.project.$regRepPDF(function (response) {
+                        $window.location.reload();
+                    });
+                    break;
+                case "end":
+                    if ($scope.endRepExists) {
+                        $window.alert("Raportti on jo tallennettu. (Katso liitteet.)");
+                        break;
+                    }
+                    $scope.project.$endRepPDF(function (response) {
                         $window.location.reload();
                     });
                     break;

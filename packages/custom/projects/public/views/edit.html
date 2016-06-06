@@ -1182,11 +1182,11 @@
                 </p>
                 <div class="form-group col-md-12"
                      ng-repeat="method in project.methods">
-                    <div class="col-md-4" style="text-align: justify">
+                    <div class="col-md-6" style="text-align: justify">
                         <p><em>{{method.name}}</em> ({{method.level}})</p>
-                        <p>{{method.comment}}</p>
+                        <p ng-bind-html="handleEmphasis(method.comment)"></p>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <p>&nbsp;</p>
                         <textarea name="er_methods" type="text"
                                   class="form-control"
@@ -1200,10 +1200,11 @@
                     Kokonaistavoitteen toteutuminen
                 </p>
                 <div class="form-group col-md-12">
-                    <div class="col-md-4" style="text-align: justify">
-                        <p>{{project.project_goal}}</p>
+                    <div class="col-md-6" style="text-align: justify">
+                        <p ng-bind-html="handleEmphasis(project.project_goal)">
+                        </p>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <textarea name="objectivesComments" type="text"
                                   class="form-control"
                                   data-ng-model="project.end_report.objective"
