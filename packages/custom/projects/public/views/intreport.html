@@ -65,11 +65,11 @@
                         {{fieldNames["project_goal"]}}
                     </div>
                     <div class="report-subcontent" style="margin-bottom: 1em">
-                        <em>Suunnitellut: </em>
+                        <em>Suunnitelma: </em>
                         <span ng-bind-html="handleEmphasis(project.project_goal)"></span>
                     </div>
                     <div class="report-subcontent">
-                        <em>Toteutuneet: </em>
+                        <em>Toteutuminen: </em>
                         <!-- For some reason, the value of this field is an
                         array. -->
                         <span ng-bind-html="handleEmphasis(report.objectives[0])"></span>
@@ -126,9 +126,8 @@
                         Hankkeelle myönnettiin
                         {{numberToString(project.approved.granted_sum_eur)}}
                         EUR, mikä käsiteltiin hallituksen kokousessa
-                        {{project.approved.board_notified| date : 'dd.MM.yyyy': '+0200'}}.</div>
+                        {{project.approved.board_notified| date : 'dd.MM.yyyy': '+0200'}}.
                     </div>
-
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">

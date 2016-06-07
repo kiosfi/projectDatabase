@@ -7,6 +7,7 @@
 \usepackage{wrapfig}
 \usepackage[a4paper]{geometry}
 \usepackage{tabularx}
+\usepackage{amssymb}
 \inputencoding{utf8}
 \begin{document}
 
@@ -25,8 +26,6 @@
 		\textbf{Esittelijä} & <coordinator>\\ 
 	\end{tabular}
 	
-%	\vspace{5mm}
-%	\hrule
 	\vspace{5mm}
 	\begin{tabularx}{\textwidth}{| l X l X |}
 		\hline & & & \\ 
@@ -38,25 +37,20 @@
 		    & <funding.applied-curr-local> <funding.curr-local-unit> /
 		    <funding.applied-curr-eur> EUR 
 		    & \textbf{<titles.duration-months>} & <duration-months> kk\\ 		    
-%		\textbf{<titles.funding.applied> (<funding.curr-local-unit>})
-%		    & <funding.applied-curr-local>
-%		& \textbf{<titles.funding.applied> (EUR)} 
-%		    & <funding.applied-curr-eur>\\ 
-%		\textbf{<titles.duration-months>} & <duration-months> &d &ds \\ 
 		\textbf{<titles.required-appendices>} & \multicolumn{3}{>{\hsize=\dimexpr3\hsize+4\tabcolsep+2\arrayrulewidth\relax}X|}{
-		    <titles.required-appendices.proj-budget> [<required-appendices.proj-budget>], 
-		    <titles.required-appendices.references> [<required-appendices.references>], 
-		    <titles.required-appendices.annual-budget> [<required-appendices.annual-budget>], 
-		    <titles.required-appendices.rules> [<required-appendices.rules>], 
-		    <titles.required-appendices.reg-cert> [<required-appendices.reg-cert>],
-		    <titles.required-appendices.annual-report> [<required-appendices.annual-report>],
-		    <titles.required-appendices.audit-reports> [<required-appendices.audit-reports>]
+		    <titles.required-appendices.proj-budget><required-appendices.proj-budget>,
+		    <titles.required-appendices.references><required-appendices.references>,
+		    <titles.required-appendices.annual-budget><required-appendices.annual-budget>,
+		    <titles.required-appendices.rules><required-appendices.rules>,
+		    <titles.required-appendices.reg-cert><required-appendices.reg-cert>,
+		    <titles.required-appendices.annual-report><required-appendices.annual-report>,
+		    <titles.required-appendices.audit-reports><required-appendices.audit-reports>
 		}\\ 
 		& & & \\ 
 		\textbf{<titles.description>} & \multicolumn{3}{>{\hsize=\dimexpr3\hsize+4\tabcolsep+2\arrayrulewidth\relax}X|}{<description>}  \\ 
 		& & & \\ 
-		\textbf{<titles.approved.themes>} & \multicolumn{3}{>{\hsize=\dimexpr3\hsize+4\tabcolsep+2\arrayrulewidth\relax}X|}{<approved.themes>} \\ 
-	 	& & & \\ \hline
+		\textbf{<titles.approved.themes>} <approved.themes> 
+		& & & \\ \hline
 	\end{tabularx}
 	
 	\restoregeometry

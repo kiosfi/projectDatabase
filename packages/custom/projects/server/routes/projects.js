@@ -67,8 +67,10 @@ module.exports = function (Projects, app, auth) {
             .put(auth.isMongoId, auth.requiresLogin, projects.addIntReport);
     app.route('/api/projects/byOrg/:organisationId')
             .get(auth.requiresLogin, projects.byOrg);
-    app.route('/api/projects/pdf/:projectID')
-            .get(auth.requiresLogin, projects.createPDF);
+    app.route('/api/projects/regRepPDF/:projectID')
+            .put(auth.requiresLogin, projects.createRegRep);
+    app.route('/api/projects/endRepPDF/:projectID')
+            .put(auth.requiresLogin, projects.createEndRep);
 
     app.param('params', projects.getProjects);
     app.param('projectID', projects.project);

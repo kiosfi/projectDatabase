@@ -311,6 +311,15 @@ var ProjectSchema = new Schema({
         trim: true
     },
     /**
+     * This field contains extra notes about the project.
+     *
+     * This field was added in schema version 8.
+     */
+    special_notes: {            // "Erityisiä huomioita"
+        type: String,
+        trim: true
+    },
+    /**
      * This fields contains a checklist of required appendices and it was added
      * in schema version 4. Currently, the values inside this object will be
      * supplied when changing state to <tt>in_review</tt>. They all need to be

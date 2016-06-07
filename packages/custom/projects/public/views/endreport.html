@@ -56,14 +56,23 @@
                 <td class="report-content">{{project.region}}&nbsp;</td>
             </tr>
             <tr>
+                <td class="report-mini-header">
+                    {{fieldNames["signed_signed_date"]}}
+                </td>
+                <td class="report-content">
+                    {{project.signed.signed_date| date : 'dd.MM.yyyy': '+0200'}}
+                </td>
                 <td class="report-mini-header">Avustus&nbsp;ja&nbsp;pvm</td>
                 <td class="report-content">
                     {{numberToString(project.approved.granted_sum_eur)}}
                     EUR;
                     {{project.approved.approved_date| date : 'dd.MM.yyyy': '+0200'}}&nbsp;
                 </td>
+            </tr>
+            <tr>
                 <td class="report-mini-header">Kesto</td>
-                <td class="report-content" data-ng-init="calculateDuration()">
+                <td class="report-content" colspan="3"
+                    data-ng-init="calculateDuration()">
                     {{duration}}&nbsp;
                 </td>
             </tr>
@@ -106,7 +115,7 @@
         </tr>
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
-            <td class="report-header">Hanke</td>
+            <td class="report-header">Rahoitus</td>
             <!--<td class="report-header">{{fieldNames["title"]}}</td>-->
             <td>
                 <div style="margin-bottom: 1em">
@@ -118,17 +127,13 @@
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">Maksatukset</div>
+                    <div class="report-mini-header">Myönnetty avustus</div>
                     <div class="report-subcontent">
                         Hankkeelle myönnettiin
                         {{numberToString(project.approved.granted_sum_eur)}}
                         EUR, mikä käsiteltiin hallituksen kokousessa
-                        {{project.approved.board_notified| date : 'dd.MM.yyyy': '+0200'}}.</div>
-                    <div class="report-subcontent">
-                        Sopimus allekirjoitettiin
-                        {{project.signed.signed_date| date: 'dd.MM.yyyy': '+0200'}}.
+                        {{project.approved.board_notified| date : 'dd.MM.yyyy': '+0200'}}.
                     </div>
-
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
@@ -167,47 +172,10 @@
                         </tr>
                     </table>
                 </div>
-                <div style="margin-bottom: 2em">
+                <div style="margin-bottom: 1em">
                     <div class="report-mini-header">Jäljellä oleva summa</div>
                     <div class="report-subcontent" style="margin-bottom: 2em">
                         {{numberToString(project.funding.left_eur)}} EUR
-                    </div>
-                </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
-                        {{fieldNames["end_report_methods"]}}
-                    </div>
-                    <ul>
-                        <li ng-repeat="method in project.methods"
-                            style="padding-bottom: 1em">
-                            <p><em>{{method.name}}</em> ({{method.level}})</p>
-                            <p class="report-subcontent"><em>Suunnitellut:</em>
-                                <span ng-bind-html="handleEmphasis(method.comment)"></span></p>
-                            <p class="report-subcontent"><em>Toteutuneet:</em>
-                                <span ng-bind-html="handleEmphasis(project.end_report.methods[project.methods.indexOf(method)])"></span></p>
-                        </li>
-                    </ul>
-                </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
-                        {{fieldNames["end_report_objective"]}}
-                    </div>
-                    <div class="report-subcontent">
-                        <p><em><span ng-bind-html="handleEmphasis(project.project_goal)"></span></em></p>
-                        <p><span ng-bind-html="handleEmphasis(project.end_report.objective)"></span></p>
-                    </div>
-                </div>
-                <div style="margin-bottom: 2em">
-                    <div class="report-mini-header">
-                        Hyödynsaajien arvioitu määrä
-                    </div>
-                    <div class="report-subcontent">
-                        <p><em>Suoria:</em>
-                            {{project.end_report.direct_beneficiaries}}
-                        </p>
-                        <p><em>Epäsuoria:</em>
-                            {{project.end_report.indirect_beneficiaries}}
-                        </p>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -222,9 +190,63 @@
         </tr>
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
+            <td class="report-header">Tulokset</td>
+            <td>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames["end_report_methods"]}}
+                    </div>
+                    <ul>
+                        <li ng-repeat="method in project.methods"
+                            style="padding-bottom: 1em">
+                            <p><em>{{method.name}}</em> ({{method.level}})</p>
+                            <p class="report-subcontent"><em>Suunnitelma:</em>
+                                <span ng-bind-html="handleEmphasis(method.comment)"></span></p>
+                            <p class="report-subcontent"><em>Toteutuminen:</em>
+                                <span ng-bind-html="handleEmphasis(project.end_report.methods[project.methods.indexOf(method)])"></span></p>
+                        </li>
+                    </ul>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames["end_report_objective"]}}
+                    </div>
+                    <div class="report-subcontent">
+                        <p><em><span ng-bind-html="handleEmphasis(project.project_goal)"></span></em></p>
+                        <p><span ng-bind-html="handleEmphasis(project.end_report.objective)"></span></p>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        Hyödynsaajien arvioitu määrä
+                    </div>
+                    <div class="report-subcontent">
+                        <p><em>Suoria:</em>
+                            {{project.end_report.direct_beneficiaries}}
+                        </p>
+                        <p><em>Epäsuoria:</em>
+                            {{project.end_report.indirect_beneficiaries}}
+                        </p>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+<<<<<<< HEAD
+                    <div class="report-mini-header">Tilintarkastus</div>
+                    <div class="report-subcontent">
+                        <p><em>Päivämäärä: </em>
+                            {{project.end_report.audit.date| date: 'dd.MM.yyyy': '+0200'}}</p>
+                        <p><span ng-bind-html="handleEmphasis(project.end_report.audit.review)"></span></p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
             <td class="report-header">Arvio</td>
             <td>
                 <div style="margin-bottom: 1em">
+=======
+>>>>>>> pdf
                     <div class="report-mini-header">
                         {{fieldNames["end_report_grade"]}}:
                         <span style="padding-left: 2em; font-weight: normal">
@@ -235,21 +257,25 @@
                         <span ng-bind-html="handleEmphasis(project.end_report.general_review)"></span>
                     </div>
                 </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
-                        {{fieldNames["end_report_proposition"]}}
-                    </div>
-                    <div class="report-subcontent">
-                        <span ng-bind-html="handleEmphasis(project.end_report.proposition)"></span>
-                    </div>
+            </td>
+        </tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td class="report-header">Ehdotus</td>
+            <td>
+                <div class="report-content"
+                     style="padding-right: 0; margin-bottom: 1em"
+                     ng-bind-html="handleEmphasis(project.end_report.proposition)">
                 </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
-                        {{fieldNames["end_report_conclusion"]}}
-                    </div>
-                    <div class="report-subcontent">
-                        <span ng-bind-html="handleEmphasis(project.end_report.conclusion)"></span>
-                    </div>
+            </td>
+        </tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td class="report-header">Päätös</td>
+            <td>
+                <div class="report-content"
+                     style="padding-right: 0; margin-bottom: 1em"
+                     ng-bind-html="handleEmphasis(project.end_report.conclusion)">
                 </div>
             </td>
         </tr>

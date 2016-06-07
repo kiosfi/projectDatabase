@@ -1,0 +1,95 @@
+\documentclass[twoside,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[finnish]{babel}
+\usepackage{graphicx}
+\usepackage{sidecap}
+\usepackage{wrapfig}
+\usepackage[a4paper]{geometry}
+\usepackage{tabularx}
+\usepackage{amssymb}
+\inputencoding{utf8}
+\begin{document}
+
+    \setcounter{page}{0}
+	\newgeometry{left=2cm, right=1cm, bottom=0.1cm}
+	\begin{wrapfigure}{l}{0.5\textwidth}
+		\includegraphics[trim = 10mm 0mm 0mm 70mm,scale=0.25]{logo.pdf}
+	\end{wrapfigure}
+	
+	\hfill
+	\begin{tabular}{l r}
+		\multicolumn{2}{l}{\textbf{Loppuraportti}}\\ 
+		\textbf{Hallituksen kokous} & <end-report.board-meeting>\\  
+		\textbf{Esittelijä} & <coordinator>\\ 
+	\end{tabular}
+	
+	\vspace{5mm}
+	\begin{tabularx}{\textwidth}{| l X l X |}
+		\hline & & & \\ 
+		\textbf{<titles.organisation.name>} & <organisation.name> 
+		& \textbf{<titles.title>} & <title>\\ 
+		\textbf{<titles.project-ref>} & <project-ref> 
+		& \textbf{<titles.region>} & <region>\\ 
+		\textbf{<titles.approved.granted-sum-eur>} & <approved.granted-sum-eur> EUR
+		    & \textbf{<titles.duration>} & <duration>\\ 
+		& & & \\ 
+		\textbf{<titles.description>} & \multicolumn{3}{>{\hsize=\dimexpr3\hsize+4\tabcolsep+2\arrayrulewidth\relax}X|}{<description>}  \\ 
+		& & & \\ 
+		\textbf{<titles.approved.themes>} <approved.themes> 
+	 	& & & \\ \hline
+	\end{tabularx}
+	
+	\restoregeometry
+	
+	\newpage
+	\section{JÄRJESTÖ}
+		
+		\subsection*{<titles.organisation.description>}
+		    <organisation.description>
+		
+	\newpage		
+	\section{RAHOITUS}
+		\subsection*{<titles.end-report.budget>}
+		    <end-report.budget>
+
+		\subsection*{<titles.end-report.planned-payments>}
+		    <end-report.planned-payments>
+		
+		\subsection*{<titles.end-report.completed-payments>}
+		    <end-report.completed-payments>
+		
+		\subsection*{<titles.funding.left-eur>}
+		    <funding.left-eur>
+		    
+		\subsection*{<titles.end-report.audit.review>}
+		    <end-report.audit.review>
+
+	\newpage		
+	\section{TULOKSET}
+		\subsection*{<titles.end-report.methods>}
+		    <end-report.methods>
+		
+		\subsection*{<titles.end-report.objective>}
+		    <end-report.objective>
+		
+		\subsection*{<titles.end-report.direct-beneficiaries>}
+		    <end-report.direct-beneficiaries>
+		
+		\subsection*{<titles.end-report.indirect-beneficiaries>}
+		    <end-report.indirect-beneficiaries>
+		
+		\subsection*{<titles.end-report.grade>}
+		    <end-report.grade>
+		
+		\subsection*{<titles.end-report.general-review>}
+		    <end-report.general-review>
+		
+		\newpage	
+	\section{EHDOTUS}
+		<end-report.proposition>
+		
+	\section{PÄÄTÖS}		
+		<end-report.conclusion>
+	
+\end{document}

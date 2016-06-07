@@ -37,7 +37,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             var string = $filter('currency')(number, '', 2);
             string = string.replace(/,/g, ";");
             string = string.replace(".", ",");
-            return string.replace(/;/g, ".");
+            return string.replace(/;/g, " ");
         };
 
         /**
@@ -61,7 +61,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             pieces.forEach(function (x) {
                 transformed += x;
             });
-            return transformed;
+            return transformed.replace(/\_\_/g, "<br/>&nbsp;&nbsp;&nbsp;&nbsp;");
         };
 
         $scope.toggleThemeSelection = function toggleThemeSelection(theme) {
@@ -156,6 +156,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
+                project.schema_version = 8;
 
                 var reg_date = $scope.convertDate($scope.register_day,
                         $scope.register_month, $scope.register_year);
@@ -163,6 +164,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
                 if ($scope.newOrg) {
                     var org = new Organisations($scope.project.organisation);
+                    org.schema_version = 3;
                     org.$save(function (response) {
                         var orgId = response._id;
                         project.organisation = orgId;
@@ -463,6 +465,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         if (appendix.custom_category ===
                                 "TJ:n päätös uudesta hankkeesta") {
                             $scope.regRepExists = true;
+                        } else if (appendix.custom_category == "Loppuraportti") {
+                            $scope.endRepExists = true;
                         }
                     });
                 }
@@ -577,7 +581,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     project.end_report.proposition = project.end_report.comments;
                     project.end.report.comments = undefined;
                 }
-                project.schema_version = 7;
+            }
+            if (project.schema_version < 8) {
+                // An extra field was added in this version, but it requires no
+                // conversion.
+                project.schema_version = 8;
                 project.$update(function () {
                 });
             }
@@ -979,6 +987,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.regRepExists = false;
 
         /**
+         * <tt>true</tt> if and only if there exists an end report for the
+         * current project as an appendix.
+         */
+        $scope.endRepExists = false;
+
+        /**
          * Creates a new PDF report it there isn't already a corresponding
          * report saved as an appendix.
          */
@@ -989,9 +1003,21 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         $window.alert("Raportti on jo tallennettu. (Katso liitteet.)");
                         break;
                     }
-                    $scope.project.$createPDF(function (response) {
+                    $scope.project.$regRepPDF(function (response) {
                         $window.location.reload();
                     });
+                    break;
+                case "end":
+                    if ($scope.endRepExists) {
+                        $window.alert("Raportti on jo tallennettu. (Katso liitteet.)");
+                        break;
+                    }
+                    $scope.project.$endRepPDF(function (response) {
+                        $window.location.reload();
+                    });
+                    break;
+                case "int":
+                    $window.alert("Ominaisuutta ei ole toteutettu.");
                     break;
                 default:
                     break;

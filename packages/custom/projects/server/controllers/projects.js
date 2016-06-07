@@ -16,8 +16,153 @@ var mongoose = require('mongoose'),
         fs = require('fs'),
         mkdirp = require('mkdirp'),
         mime = require('mime'),
+        numeral = require('numeral').language('fi', {
+            delimiters: {thousands: '\\,', decimal: ','}
+        }),
         _ = require('lodash');
+
+numeral.language('fi');
+
 module.exports = function (Projects) {
+
+    /**
+     * Prepares a LaTeX-compliant string representation of the given object.
+     *
+     * @param {Object} object   The object to be converted.
+     * @returns {String}        The converted string.
+     */
+    function filter(object) {
+        if (object === undefined) {
+            return " ";
+        }
+        var string = JSON.stringify(object);
+
+        if (string.match(/^"\d{4}(-\d{2}){2}T(\d{2}:){2}\d{2}\.\d{3}Z"$/)) {
+            var datePieces = string.replace(/"/g, "").split("T");
+            if (datePieces.length === 2) {
+                datePieces = datePieces[0].split("-");
+                console.log(datePieces);
+                return datePieces[2].replace(/$0/, "") + "."
+                        + datePieces[1].replace(/$0/, "") + "." + datePieces[0];
+            }
+        }
+
+//        if (string.match(/^\d*$/)) {
+//            string = string.replace(/\"/g, "");
+//            for (var i = string.length; i > 0; i++) {
+//                return numeral(string).format("0,0[.]000");
+//            }
+//        }
+
+        string = string
+                .replace(/\\"/g, "''")  // This doesn't break LaTeX, but
+                // quotations are supposed to be
+                // delimited the way it's
+                // replaced here.
+                .replace(/\\n/g, " ")   // line feed
+                .replace(/\\t/g, " ")   // tabulator
+                .replace(/\\/g, "")
+                .replace(/\{/g, "\\{")
+                .replace(/\}/g, "\\}")
+                .replace(/Å/g, "\\AA")  // This workaround is needed
+                .replace(/å/g, "\\aa")  // because the production server
+                .replace(/Ä/g, "\\\"\{A\}") // has insufficient/obsolete
+                .replace(/ä/g, "\\\"\{a\}") // latex packages installed
+                .replace(/Ö/g, "\\\"\{O\}") // (in this case the inputenc
+                .replace(/ö/g, "\\\"\{o\}") // package, but also
+                // the babel package, which
+                // means that currently Finnish
+                .replace(/\&/g, "\\&")  // hyphenation is
+                .replace(/\%/g, "\\%")  // unavailable/broken.
+                .replace(/\$/g, "\\$")
+//                        .replace(/\–/g, "--") // En-dash
+//                        .replace(/\—/g, "---") // Em-dash
+//                        .replace(/\\0/g, "")    // null character
+//                        .replace(/\\r/g, "")    // carriage return
+//                        .replace(/\\b/g, "")    // backspace
+                .replace(/\u00AD/g, "") // "discretionary hyphen"
+                .replace(/\xa0/g, " ")  // The famous non-breaking space
+                .replace(/[^\x20-\x7E]+/g, "")  // ...And the rest of
+                // the weird stuff...
+                .replace(/\_\_/g, "\n\n")   // This is a special code
+                // for this application that
+                // denotes paragraph change.
+                .replace(/\_/g, "\\_");
+
+        var emphPieces = string.split("*");
+        var transformed = "";
+        for (var i = 1, max = emphPieces.length; i < max; i += 2) {
+            emphPieces[i] = "\\emph{" + emphPieces[i] + "}";
+        }
+        emphPieces.forEach(function (x) {
+            transformed += x;
+        });
+        return typeof object === "string"
+                ? transformed.substring(1, transformed.length - 1)
+                : transformed;
+    }
+    ;
+
+    /**
+     *
+     * @param {type} project
+     * @param {String} template
+     * @param {String} ouTDir
+     * @param {String} fileName
+     * @param {String} customCategory
+     * @param {type} res
+     * @returns {undefined}
+     */
+    function savePDF(project, template, outDir, fileName, customCategory, res) {
+        mkdirp.sync(outDir);
+        fs.writeFileSync(outDir + "/" + fileName + ".tex",
+                template, "utf8");
+        var pdflatex = spawn('pdflatex',
+                ["-interaction=batchmode",
+                    "-output-directory=" + outDir,
+                    outDir + "/" + fileName + ".tex"]
+                );
+        pdflatex.on("exit", function (code) {
+            fs.unlinkSync(outDir + "/" + fileName + ".aux");
+            if (code === 0) {
+                fs.unlinkSync(outDir + "/" + fileName + ".tex");
+                fs.unlinkSync(outDir + "/" + fileName + ".log");
+                if (project.appendices === undefined) {
+                    project.appendices = [];
+                }
+                var appendix = {
+                    category: "Muu...",
+                    custom_category: customCategory,
+                    mime_type: "application/pdf",
+                    date: (new Date()).toISOString(),
+                    original_name: "[Järjestelmän generoima]",
+                    url: "/api/projects/data/" + project._id
+                            + "?appendix=" + fileName + ".pdf",
+                    number: project.appendices.length + 1
+                };
+                project.appendices.push(appendix);
+                project.save(function (err) {
+                    if (err) {
+                        return res.status(500).json({
+                            error: 'Liitteen lisäys epäonnistui.'
+                        });
+                    }
+                    Projects.events.publish({
+                        action: 'updated',
+                        name: project.title,
+                        url: config.hostname + '/projects/'
+                                + project._id
+                    });
+                    res.status(201).json({});
+                });
+            } else {
+                return res.status(500).json({
+                    error: 'PDF:n luominen ei onnistu.'
+                });
+            }
+        });
+    }
+    ;
 
     return {
         project: function (req, res, next, id) {
@@ -571,40 +716,33 @@ module.exports = function (Projects) {
                 res.json(project);
             });
         },
-        createPDF: function (req, res) {
+        /**
+         * Creates a registration (approval) report (known in Finnish as
+         * "Toiminnanjohtajan päätös uudesta hankkeesta") in PDF format and
+         * saves it as an appendix of the project given in the request.
+         *
+         * @param {type} req
+         * @param {type} res
+         * @returns {undefined}
+         */
+        createRegRep: function (req, res) {
             var project = req.project;
             var fileName = project.project_ref + "-reg-rep";
             var rootDir = "packages/custom/projects/";
             var outDir = rootDir + "data/" + project._id;
-            var filter = function (object) {
-                if (object === undefined) {
-                    return " ";
-                }
-                var string = JSON.stringify(object);
-                string = string
-                        .replace(/\&/g, "\\&")
-                        .replace(/\$/g, "\\$")
-//                        .replace(/\\/g, "\\")
-                        .replace(/\_/g, "\\_")
-                        .replace(/\{/g, "\\{")
-                        .replace(/\}/g, "\\}")
-                        .replace(/undefined/g, " ");
-                var pieces = string.split("*");
-                var transformed = "";
-                for (var i = 1, max = pieces.length; i < max; i += 2) {
-                    pieces[i] = "\\emph{" + pieces[i] + "}";
-                }
-                pieces.forEach(function (x) {
-                    transformed += x;
-                });
-                return typeof object === "string"
-                        ? transformed.substring(1, transformed.length - 1)
-                        : transformed;
+            var checkbox = function (checked) {
+                return checked ? " \\makebox[0pt][l]{$\\square$}\\raisebox{.15ex}{\\hspace{0.1em}$\\checkmark$}" : " \\makebox[0pt][l]{$\\square$}\\hspace{0.3cm}";
             };
+            var themes = "";
+            project.approved.themes.forEach(function (theme) {
+                themes += "& \\multicolumn{3}{>{\\hsize=\\dimexpr3\\hsize+4\\tabcolsep+2\\arrayrulewidth\\relax}X|}{\\textbullet~ "
+                        + theme.replace(/"/g, "") + "}\\\\ \n";
+            });
             var methods = "\\begin{itemize}";
             project.methods.forEach(function (method) {
                 methods += "\\item \\textbf{" + method.name +
-                        "(" + method.level + ")}\\\\ " + filter(method.comment);
+                        " (" + method.level + ")}\\\\ " + filter(method.comment)
+                        + "\n";
             });
             methods += "\\end{itemize}";
             Project.find({organisation: project.organisation})
@@ -620,8 +758,8 @@ module.exports = function (Projects) {
                                             + p.title + "} &("
                                             + (p.approved.granted_sum_eur
                                                     ? "Myönnetty "
-                                                            + p.approved.granted_sum_eur
-                                                            + " EUR"
+                                                    + numeral(p.approved.granted_sum_eur).format("0,0.00")
+                                                    + " EUR"
                                                     : "Ei myönnettyä avustusta")
                                             + ")\\\\ ";
                                 }
@@ -654,11 +792,12 @@ module.exports = function (Projects) {
                                 .replace("<titles.funding.applied>",
                                         "Haettu avustus")
                                 .replace("<funding.applied-curr-local>",
-                                        filter(project.funding.applied_curr_local))
+                                        numeral(project.funding.applied_curr_local).format("0,0.00"))
                                 .replace("<funding.curr-local-unit>",
-                                        filter(project.funding.curr_local_unit))
+                                        project.funding.curr_local_unit)
                                 .replace("<funding.applied-curr-eur>",
-                                        filter(project.funding.applied_curr_eur))
+                                        numeral(project.funding.applied_curr_eur)
+                                                .format("0,0.00"))
                                 .replace("<titles.duration-months>", "Kesto")
                                 .replace("<duration-months>",
                                         filter(project.duration_months))
@@ -667,49 +806,37 @@ module.exports = function (Projects) {
                                 .replace("<titles.required-appendices.proj-budget>",
                                         "hankebudjetti")
                                 .replace("<required-appendices.proj-budget>",
-                                        project.required_appendices.proj_budget
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.proj_budget))
                                 .replace("<titles.required-appendices.references>",
                                         "suositukset")
                                 .replace("<required-appendices.references>",
-                                        project.required_appendices.references
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.references))
                                 .replace("<titles.required-appendices.annual-budget>",
                                         "vuosibudjetti")
                                 .replace("<required-appendices.annual-budget>",
-                                        project.required_appendices.annual_budget
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.annual_budget))
                                 .replace("<titles.required-appendices.rules>",
                                         "säännöt")
                                 .replace("<required-appendices.rules>",
-                                        project.required_appendices.rules
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.rules))
                                 .replace("<titles.required-appendices.reg-cert>",
                                         "rekisteröintitodistus")
                                 .replace("<required-appendices.reg-cert>",
-                                        project.required_appendices.reg_cert
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.reg_cert))
                                 .replace("<titles.required-appendices.annual-report>",
                                         "vuosikertomus")
                                 .replace("<required-appendices.annual-report>",
-                                        project.required_appendices.annual_report
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.annual_report))
                                 .replace("<titles.required-appendices.audit-reports>",
                                         "tilintarkastukset")
                                 .replace("<required-appendices.audit-reports>",
-                                        project.required_appendices.audit_reports
-                                        ? "x" : "_")
+                                        checkbox(project.required_appendices.audit_reports))
                                 .replace("<titles.description>", "Kuvaus")
                                 .replace("<description>",
                                         filter(project.description))
                                 .replace("<titles.approved.themes>",
                                         "Oikeudellinen fokus")
-                                .replace("<approved.themes>",
-                                        project.approved.themes === undefined
-                                        ? " " : JSON.stringify(project.approved.themes)
-                                        .replace("[", "").replace("]", "")
-                                        .replace(/\"/g, "")
-                                        .replace(/\,/g, ", "))
+                                .replace("<approved.themes>", themes)
                                 .replace("<titles.organisation.www>",
                                         "Websivut")
                                 .replace("<organisation.www>",
@@ -802,54 +929,141 @@ module.exports = function (Projects) {
                                 .replace("<titles.approved.decision>", "PÄÄTÖS")
                                 .replace("<approved.decision>",
                                         filter(project.approved.decision));
-                        mkdirp.sync(outDir);
-                        fs.writeFileSync(outDir + "/" + fileName + ".tex",
-                                template, "utf8");
-                        var pdflatex = spawn('pdflatex',
-                                ["-interaction=batchmode", "-halt-on-error",
-                                    "-output-directory=" + outDir,
-                                    outDir + "/" + fileName + ".tex"]
-                                );
-                        pdflatex.on("exit", function (code) {
-                            fs.unlinkSync(outDir + "/" + fileName + ".tex");
-                            fs.unlinkSync(outDir + "/" + fileName + ".aux");
-                            fs.unlinkSync(outDir + "/" + fileName + ".log");
-                            if (code === 0) {
-                                if (project.appendices === undefined) {
-                                    project.appendices = [];
-                                }
-                                var appendix = {
-                                    category: "Muu...",
-                                    custom_category: "TJ:n päätös uudesta hankkeesta",
-                                    mime_type: "application/pdf",
-                                    date: (new Date()).toISOString(),
-                                    original_name: "[Järjestelmän generoima]",
-                                    url: "/api/projects/data/" + project._id
-                                            + "?appendix=" + fileName + ".pdf",
-                                    number: project.appendices.length + 1
-                                };
-                                project.appendices.push(appendix);
-                                project.save(function (err) {
-                                    if (err) {
-                                        return res.status(500).json({
-                                            error: 'Liitteen lisäys epäonnistui.'
-                                        });
-                                    }
-                                    Projects.events.publish({
-                                        action: 'updated',
-                                        name: project.title,
-                                        url: config.hostname + '/projects/'
-                                                + project._id
-                                    });
-                                    res.status(201).json({});
-                                });
-                            } else {
-                                return res.status(500).json({
-                                    error: 'PDF:n luominen ei onnistu.'
-                                });
-                            }
-                        });
+                        savePDF(project, template, outDir, fileName,
+                                "TJ:n päätös uudesta hankkeesta", res);
                     });
+        },
+        createEndRep: function (req, res) {
+            var project = req.project;
+            var fileName = project.project_ref + "-end-rep";
+            var rootDir = "packages/custom/projects/";
+            var outDir = rootDir + "data/" + project._id;
+
+            var themes = "";
+            project.approved.themes.forEach(function (theme) {
+                themes += "& \\multicolumn{3}{>{\\hsize=\\dimexpr3\\hsize+4\\tabcolsep+2\\arrayrulewidth\\relax}X|}{\\textbullet~ "
+                        + theme.replace(/"/g, "") + "}\\\\ \n";
+            });
+            var methods = "\\begin{itemize}";
+            project.methods.forEach(function (method) {
+                methods += "\\item \\textbf{" + method.name +
+                        " (" + method.level
+                        + ")}\\begin{itemize} \\item \\textbf{Suunnitelma:} "
+                        + filter(method.comment)
+                        + "\n \\item \\textbf{Toteutuminen:} "
+                        + filter(project.end_report.methods[project.methods.indexOf(method)])
+                        + " \\end{itemize}\n";
+            });
+            methods += "\\end{itemize}";
+
+            var objective = "\\subsubsection*{Päätavoitteet}\n"
+                    + filter(project.project_goal)
+                    + "\n \\subsubsection*{Päätavoitteiden toteutuminen}"
+                    + filter(project.end_report.objective);
+
+            var plannedPayments = "\\begin{tabular}{l l l}";
+            var i = 0;
+            project.signed.planned_payments.forEach(function (payment) {
+                plannedPayments += "\\textbf{" + ++i + ". erä} & "
+                        + numeral(payment.sum_eur).format("0,0.00") + " EUR& "
+                        + filter(payment.date) + " \\\\ ";
+            });
+            plannedPayments += "\\end{tabular}";
+
+            var completedPayments = "\\begin{tabular}{l l l}";
+            i = 0;
+            project.payments.forEach(function (payment) {
+                completedPayments += "\\textbf{" + ++i + ". erä} & "
+                        + numeral(payment.sum_eur).format("0,0.00") + " EUR& "
+                        + filter(payment.payment_date) + " \\\\ ";
+            });
+            completedPayments += "\\end{tabular}";
+
+            var template = fs.readFileSync(
+                    rootDir + "latex/end-report-template.tex", "utf8")
+                    .replace("logo.pdf", rootDir + "latex/logo.pdf")
+                    .replace("<end-report.board-meeting>",
+                            filter(project.end_report.board_meeting))
+                    .replace("<coordinator>", filter(project.coordinator))
+                    .replace("<titles.organisation.name>", "Järjestö")
+                    .replace("<organisation.name>",
+                            filter(project.organisation.name))
+                    .replace("<titles.title>", "Hanke")
+                    .replace("<title>", filter(project.title))
+                    .replace("<titles.project-ref>", "Tunnus")
+                    .replace("<project-ref>", filter(project.project_ref))
+                    .replace("<titles.region>", "Alue / Maa")
+                    .replace("<region>", filter(project.region))
+                    .replace("<titles.approved.granted-sum-eur>",
+                            "Myönnetty avustus")
+                    .replace("<approved.granted-sum-eur>",
+                            numeral(project.approved.granted_sum_eur)
+                                    .format("0,0.00"))
+                    .replace("<titles.duration>", "Kesto")
+                    .replace("<duration>",
+                            filter(project.signed.signed_date) + "~--~"
+                            + filter(project.end_report.approved_date)
+                            + "~(" + Math.floor((project.end_report.approved_date - project.signed.signed_date) / 3456000000) + "~kk)")
+                    .replace("<titles.required-appendices>",
+                            "Vaaditut liitteet")
+                    .replace("<titles.required-appendices.proj-budget>",
+                            "hankebudjetti")
+                    .replace("<titles.description>", "Kuvaus")
+                    .replace("<description>", filter(project.description))
+                    .replace("<titles.approved.themes>", "Oikeudellinen fokus")
+                    .replace("<approved.themes>", themes)
+                    .replace("<titles.organisation.description>",
+                            "Tavoitteet ja keskeiset toimintatavat")
+                    .replace("<organisation.description>",
+                            filter(project.organisation.description))
+                    .replace("<titles.end-report.budget>",
+                            "Budjetin toteutuminen ja raportoitu summa")
+                    .replace("<end-report.budget>",
+                            filter(project.end_report.budget))
+                    .replace("<titles.end-report.planned-payments>",
+                            "Suunnitellut maksut")
+                    .replace("<end-report.planned-payments>", plannedPayments)
+                    .replace("<titles.end-report.completed-payments>",
+                            "Toteutuneet maksut")
+                    .replace("<end-report.completed-payments>",
+                            completedPayments)
+                    .replace("<titles.funding.left-eur>",
+                            "Jäljellä oleva summa")
+                    .replace("<funding.left-eur>",
+                            numeral(project.funding.left_eur).format("0,0.00")
+                                    + " EUR")
+                    .replace("<titles.end-report.audit.review>",
+                            "Tilintarkastus")
+                    .replace("<end-report.audit.review>",
+                            filter(project.end_report.audit.review))
+                    .replace("<titles.end-report.methods>", "Toiminnot")
+                    .replace("<end-report.methods>", methods)
+                    .replace("<titles.end-report.objective>",
+                            "Tärkeimmät tulokset")
+                    .replace("<end-report.objective>", objective)
+                    .replace("<titles.end-report.direct-beneficiaries>",
+                            "Suoria hyödynsaajia")
+                    .replace("<end-report.direct-beneficiaries>",
+                            "Noin "
+                            + filter(project.end_report.direct_beneficiaries)
+                            + ".")
+                    .replace("<titles.end-report.indirect-beneficiaries>",
+                            "Epäsuoria hyödynsaajia")
+                    .replace("<end-report.indirect-beneficiaries>",
+                            "Noin "
+                            + filter(project.end_report.indirect_beneficiaries)
+                            + ".")
+                    .replace("<titles.end-report.grade>", "Numeerinen arvio")
+                    .replace("<end-report.grade>", project.end_report.grade)
+                    .replace("<titles.end-report.general-review>",
+                            "Yleisarvio")
+                    .replace("<end-report.general-review>",
+                            filter(project.end_report.general_review))
+                    .replace("<end-report.proposition>",
+                            filter(project.end_report.proposition))
+                    .replace("<end-report.conclusion>",
+                            filter(project.end_report.conclusion));
+            savePDF(project, template, outDir, fileName, "Loppuraportti", res);
         },
         /**
          * Deletes requested project from projects collection.
