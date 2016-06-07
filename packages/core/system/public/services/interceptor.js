@@ -11,9 +11,7 @@ angular.module('mean-factory-interceptor', [])
           }
           return response || $q.when(response);
         },
-
         'responseError': function(rejection) {
-
           if (rejection.status === 401) {
             $location.url('/auth/login');
             return $q.reject(rejection);
