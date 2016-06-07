@@ -37,7 +37,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             var string = $filter('currency')(number, '', 2);
             string = string.replace(/,/g, ";");
             string = string.replace(".", ",");
-            return string.replace(/;/g, ".");
+            return string.replace(/;/g, " ");
         };
 
         /**
@@ -1015,6 +1015,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     $scope.project.$endRepPDF(function (response) {
                         $window.location.reload();
                     });
+                    break;
+                case "int":
+                    $window.alert("Ominaisuutta ei ole toteutettu.");
                     break;
                 default:
                     break;
