@@ -443,8 +443,7 @@
                                 {{fieldNames["approved_user"]}}
                             </div>
                             <div class="col-md-9">{{project.approved.user}},
-                                {{project.approved.date|
-                                                    date:'d.M.yyyy, HH:mm':
+                                {{project.approved.date| date:'d.M.yyyy, HH:mm':
                                                     '+0200'}}</div>
                             <div class="col-md-3 mini-header">
                                 {{fieldNames["approved_approved_by"]}}
@@ -460,24 +459,11 @@
                                                 'd.M.yyyy':'+0200'}}
                             </div>
                             <div class="col-md-3 mini-header">
-                                {{fieldNames["board_notified"]}}
+                                {{fieldNames["approved_board_notified"]}}
                             </div>
                             <div class="col-md-9">
                                 {{project.approved.board_notified| date:
                                                 'd.M.yyyy':'+0200'}}
-                            </div>
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["granted_sum_eur"]}}
-                            </div>
-                            <div class="col-md-9">
-                                {{numberToString(project.approved.granted_sum_eur)}} EUR
-                            </div>
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["approved_themes"]}}
-                            </div>
-                            <div class="col-md-9">
-                                <span data-ng-repeat="theme in project.approved.
-                                                    themes">{{theme}}<br></span>
                             </div>
                         </div>
                         &nbsp;
@@ -577,9 +563,16 @@
                                         Tiedot
                                     </button>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}"
                                        class="btn large-btn">HTML-raportti</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a ng-click="createPDF('int')"
+                                       ng-disabled="true"
+                                       class="btn large-btn">
+                                        Luo PDF
+                                    </a>
                                 </div>
                             </div>
                             <div ng-show="showIntDetails"
