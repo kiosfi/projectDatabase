@@ -1,15 +1,12 @@
-(function () {
-  'use strict';
+'use strict';
 
-  angular
-    .module('mean.manual')
-    .factory('Manual', Manual);
+angular.module('mean.manual').factory('Manual', Manual);
 
-  Manual.$inject = [];
+Manual.$inject = [];
 
-  function Manual() {
+function Manual() {
     return {
-      name: 'manual'
+        name: 'manual'
     };
-  }
-})();
+}
+;

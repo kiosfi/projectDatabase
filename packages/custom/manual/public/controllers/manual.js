@@ -1,17 +1,20 @@
-(function () {
-  'use strict';
+'use strict';
 
-  /* jshint -W098 */
-  angular
-    .module('mean.manual')
-    .controller('ManualController', ManualController);
+angular.module('mean.manual').controller('ManualController',
+        ['$scope', 'Global', 'Manual', ManualController]);
 
-  ManualController.$inject = ['$scope', 'Global', 'Manual'];
-
-  function ManualController($scope, Global, Manual) {
+function ManualController($scope, Global, Manual) {
     $scope.global = Global;
     $scope.package = {
-      name: 'manual'
+        name: 'manual'
     };
-  }
-})();
+    /**
+     * Number of the current figure.
+     */
+    $scope.figNr;
+
+    $scope.init = function () {
+        console.log("dfg");
+        $scope.figNr = 1;
+    };
+}

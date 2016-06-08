@@ -2,8 +2,6 @@
 
 angular.module("mean.projects").config(["$stateProvider",
     function ($stateProvider) {
-
-        // states for my app
         $stateProvider
                 .state("all projects", {
                     url: "/projects",

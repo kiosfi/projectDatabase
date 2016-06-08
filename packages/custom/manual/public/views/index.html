@@ -1,4 +1,4 @@
-<div class="" data-ng-controller="ManualController">
+<div data-ng-controller="ManualController" data-ng-init="init()">
     <h1>Käyttöohje</h1>
     <hr>
     <div>
@@ -33,6 +33,12 @@
             <li>
                 <label><a href="#projView">4. Hankkeen näkymäsivu</a></label>
             </li>
+            <li>
+                <label><a href="#projList">5. Hankkelistaus</a></label>
+            </li>
+            <li>
+                <label><a href="#orgList">6. Järjestölistaus</a></label>
+            </li>
         </ul>
         <!--<div style="margin-left: 220px">-->
         <div style="margin-left: 160px">
@@ -49,11 +55,11 @@
                     </p>
                     <p>
                         Lomakkeiden ja näkymäsivujen yhteydessä kenttien nimet
-                        on merkitty <tt>konekirjoitusfontilla</tt>. Painikkeiden
-                    ja linkkien nimet on merkitty <em>kursiivilla</em>.
-                    Kursiivia on käytetty myös tehokeinona joidenkin
-                    virkkeiden korostamiseen, mutta kursiivin merkitys on
-                    aina asiayhteydestä selvää.
+                        on merkitty <tt>konekirjoitusfontilla</tt>.
+                        Painikkeiden, lomakkeiden ja linkkien nimet on merkitty
+                        <em>kursiivilla</em>. Kursiivia on käytetty myös
+                        tehokeinona joidenkin virkkeiden korostamiseen, mutta
+                        kursiivin merkitys on aina asiayhteydestä selvää.
                     <p>
                     <div class="alert alert-warning">
                         Erityishuomiot ja varoitukset on kirjoitettu
@@ -64,7 +70,9 @@
                         käyttäjätunnus järjestelmään. Kaikki käyttöohjeessa
                         esitetyt käyttötapaukset edellyttävät, että
                         järjestelmään on kirjauduttu sisään ennen niiden
-                        käynnistämistä.
+                        käynnistämistä. Järjestelmä tarjoaa parhaan
+                        käyttökokemuksen (vähintään) Full HD (1920×1080)
+                        resoluutiolla maksimoidulla selainikkunalla.
                     </p>
                     <h5 id="inputs">1.1. Syötekentistä</h5>
                     <div class="man-subcontent">
@@ -140,16 +148,16 @@
                             <img src="manual/assets/img/kuvakaappaus-2.png"
                                  alt="Korostus ja kappalejako syötelomakkeessa">
                             <figcaption>
-                                Kuva 1:
-                                Tekstin korostus ja kappalejako syötelomakkeessa
+                                Kuva {{figNr++}}: Tekstin korostus ja
+                                kappalejako syötelomakkeessa.
                             </figcaption>
                         </figure>
                         <figure>
                             <img src="manual/assets/img/kuvakaappaus-3.png"
                                  alt="Korostus ja kappalejako näkymässä">
                             <figcaption>
-                                Kuva 2:
-                                Tekstin korostus ja kappalejako näkymässä
+                                Kuva {{figNr++}}: Tekstin korostus ja
+                                kappalejako näkymässä.
                             </figcaption>
                         </figure>
                     </div>
@@ -171,14 +179,14 @@
                             Järjestelmään syötetään tietoja HTML-lomakkeiden
                             kautta. Sisäänkirjautumisen jälkeen hankkeen
                             lisäyslomakkeeseen pääsee klikkaamalla sivun
-                            ylälaidassa näkyvässä
-                            navigaatiopalkissa kohtaa <em>Hankkeen lisäys</em>.
+                            ylälaidassa näkyvässä navigaatiopalkissa kohtaa
+                            <em>Hankkeen lisäys</em>.
                         </p>
                         <figure>
                             <img src="manual/assets/img/kuvakaappaus-1.png"
                                  alt="Hankkeen lisäyslomake">
                             <figcaption>
-                                Kuva 3: Hankkeen lisäyslomake
+                                Kuva {{figNr++}}: Hankkeen lisäyslomake.
                             </figcaption>
                         </figure>
                         <p>
@@ -187,21 +195,21 @@
                             tekstuaalisella huomatutuksella. (Erityisesti
                             jokaisella järjestelmään syötettävällä hankkeella
                             tulee olla <tt>nimi</tt> ja
-                        <tt>koordinaattori</tt>.) Lomakkeen tietoja ei voi
-                        tallentaa tietokantaan ennen kuin virheelliset
-                        syötteet on korjattu.
+                            <tt>koordinaattori</tt>.) Lomakkeen tietoja ei voi
+                            tallentaa tietokantaan ennen kuin virheelliset
+                            syötteet on korjattu.
                         </p>
                         <p>
                             Hankkeen <tt>tunnus</tt> on hankkeen yksilöivä
-                        viisinumeroinen tunnusluku, jolla ei ole erillistä
-                        syötekenttää. Sen kaksi ensimmäistä numeroa
-                        määräytyvät rekisteröimisvuoden kahden viimeisen
-                        numeron perusteella. Esimerkiksi vuonna 2016
-                        rekisteröityjen hankkeiden tunnukset ovat siis
-                        muotoa "16XXX"). Tunnusluvun kolme viimeistä numeroa
-                        puolestaan muodostuvat juoksevasta luvusta.
-                        Esimerkiksi 23. vuonna 2016 rekisteröity hanke saa
-                        tunnuksen 16023.
+                            viisinumeroinen tunnusluku, jolla ei ole erillistä
+                            syötekenttää. Sen kaksi ensimmäistä numeroa
+                            määräytyvät rekisteröimisvuoden kahden viimeisen
+                            numeron perusteella. Esimerkiksi vuonna 2016
+                            rekisteröityjen hankkeiden tunnukset ovat siis
+                            muotoa "16XXX"). Tunnusluvun kolme viimeistä numeroa
+                            puolestaan muodostuvat juoksevasta luvusta.
+                            Esimerkiksi 23. vuonna 2016 rekisteröity hanke saa
+                            tunnuksen 16023.
                         </p>
                         <p>
                             Jos hankkeelle rahoitusta hakevan järjestön tiedot
@@ -231,7 +239,8 @@
                                 olla hyötyä lomaketietojen suojelussa
                                 odottamattomien ongelmatilanteiden varalta.
                                 Lisätietoja liitännäisestä löytyy osoitteesta
-                                <a href="http://lazarus.interclue.com/" target="_new">http://lazarus.interclue.com/</a>
+                                <a href="http://lazarus.interclue.com/"
+                                   target="_blank">http://lazarus.interclue.com/</a>
                             </p>
                         </div>
                         <p>
@@ -351,19 +360,96 @@
             <article id="projView" class="man-article">
                 <h4>4. Hankkeen näkymäsivu</h4>
                 <section class="man-content">
-                    <p>
+<!--                    <p>
                         Juuri lisätyn hankkeen tila on siis "rekisteröity".
                         Tässä tilassa olevan hankkeen hakemusta ei ole vielä
                         käsitelty, joten esimerkiksi maksatuksia ei voi lisätä
                         rekisteröidylle hankkeelle.
+                    </p>-->
+                    <p>
+                        Selain siis ohjataan automaattisesti hankkeen
+                        näkymäsivulle, kun hankkeen lisääminen on suoritettu.
+                        Hankkeen näkymäsivu sisältää hankkeen kaikki tiedot
+                        poislukien raporttikohtaiset tiedot, jotka näytetään
+                        raporttien näkymäsivuilla. Muutokset hankkeen tietoihin
+                        suoritetaan yleensä <em>tilasiirtymien</em>,
+                        <em>muokkausten</em> sekä <em>hankkeen poiston</em>
+                        muodossa. Poikkeuksia ovat maksun ja liitetiedoston
+                        lisäys, joille on (teknisistä syistä) omat lomakkeensa
+                        hankkeen näkymäsivulla.
                     </p>
                     <figure>
                         <img src="manual/assets/img/kuvakaappaus-4.png"
-                             alt="Hankkeen lisäyslomake">
+                             alt="Hankkeen näkymäsivu">
                         <figcaption>
-                            Kuva 4: "Loppuraportti"-tilassa oleva hanke
+                            Kuva {{figNr++}}: "Loppuraportti"-tilassa oleva
+                            hanke. Näkymäsivun pääotsikon vieressä näkyy
+                            <em>poisto</em> ("roskakori") ja <em>muokkaus</em>
+                            ("kynä ja paperi") -painikkeet.
+                            <em>Tilasiirtymälomakkeeseen</em> pääsee
+                            valitsemalla seuraava tila vetolaatikosta, jossa lukee
+                            "[Siirry tilaan]" ja painamalla sen oikealla
+                            puolella olevaa nuolikuvaketta.
                         </figcaption>
                     </figure>
+                    <p>
+                        Hankkeen näkymäsivu näyttää hankkeen tiedot sellaisina
+                        kuin ne sivun lataushetkellä olivat tietokannassa.
+                    </p>
+                    <div class="alert alert-warning">
+                        Koska järjestelmä käyttää dokumenttitietokantaa, ei
+                        CRUD-operaatioilla välttämättä ole ACID-ominaisuuksia.
+                        Toisin sanoen samanaikaiset muokkaukset saattavat jättää
+                        tietokannan epäkonsistenttiin tilaan. Toisaalta selain
+                        saattaa näyttää vanhentunutta tietoa hankkeesta jos sitä
+                        muokataan samaan aikaan toisessa selainikkunassa. Tämä
+                        tarkoittaa myös sitä, että
+                        <em>kaikki muutokset tietokantaan ovat pysyviä</em>.
+
+                    </div>
+                </section>
+            </article>
+            <article id="projList" class="man-article">
+                <h4>5. Hankelistaus</h4>
+                <section class="man-content">
+                    <p>
+                        Hankelistaukseen pääsee navigaatiopalkin painikketta
+                        <em>Hankelistaus</em> klikkaamalla. Hankelistaus näyttää
+                        kaikki tietokannassa olevat hankkeet. Listauksen voi
+                        järjestää yhden kentän perusteella kasvavaan ("ylöspäin
+                        osoittava kolmio"-kuvake) taikka laskevaan ("alaspäin
+                        osoittava kolmio"-kuvake) järjestykseen. Listaus on myös
+                        sivutettu (tämänhetkisellä sivunpituudella 10).
+                        Tarkasteltavaa sivua vaihdetaan alareunassa näkyvillä
+                        numeropainikkeilla, joiden numerot vastaavat
+                        sivunumeroita.
+                    </p>
+                    <figure>
+                        <img src="manual/assets/img/kuvakaappaus-5.png"
+                             alt="Hankkeen näkymäsivu">
+                        <figcaption>
+                            Kuva {{figNr++}}: Hankelistaus. Oletusarvoisesti
+                            hankkeet listataan tunnuksen perusteella kasvavaan
+                            järjestykseen.
+                        </figcaption>
+                    </figure>
+                    <p>
+                        Hankkeen nimeä klikkaamalla pääsee kyseisen hankkeen
+                        näkymäsivulle ja vastaavasti järjestön nimeä
+                        klikkaamalla pääsee järjestön näkymäsivulle.
+                    </p>
+                    <p>
+                        Hankkeen <tt>Huomioita</tt>-kenttään ilmestyy punainen
+                        teksti, mikäli kyseisen hankkeen jokin väliraportti on
+                        myöhässä.
+                    </p>
+                </section>
+            </article>
+            <article id="orgList" class="man-article">
+                <h4>6. Järjestölistaus</h4>
+                <section class="man-content">
+                    Järjestölistaus on oleellisesti samankaltainen kuin
+                    hankelistaus. (Ks. <a href="#projList">Hankelistaus</a>).
                 </section>
             </article>
         </div>

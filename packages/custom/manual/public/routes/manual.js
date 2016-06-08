@@ -1,17 +1,12 @@
-(function () {
-  'use strict';
+'use strict';
 
-  angular
-    .module('mean.manual')
-    .config(manual);
+angular.module('mean.manual').config(manual);
 
-  manual.$inject = ['$stateProvider'];
+manual.$inject = ['$stateProvider'];
 
-  function manual($stateProvider) {
+function manual($stateProvider) {
     $stateProvider.state('manual', {
-      url: '/manual',
-      templateUrl: 'manual/views/index.html'
+        url: '/manual',
+        templateUrl: 'manual/views/index.html'
     });
-  }
-
-})();
+}

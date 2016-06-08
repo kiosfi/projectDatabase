@@ -21,6 +21,7 @@ td {
 
 .man-content {
     margin-left:        3em;
+    margin-right:        3em;
 }
 
 .man-subcontent {
@@ -46,5 +47,6 @@ figure {
 
 figcaption {
     margin-top:         0.5em;
+    margin-right:       3em;
     text-align:         center;
 }
