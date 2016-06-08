@@ -113,6 +113,7 @@
     "nopt": "https://registry.npmjs.org/nopt/-/nopt-1.0.10.tgz",
     "npm": "^2.1.0",
     "npmconf": "^2.1.2",
+    "numeral": "^1.5.3",
     "passport-local": "latest",
     "phantomjs": "^1.9.18",
     "progress": "https://registry.npmjs.org/progress/-/progress-1.1.8.tgz",
