@@ -1,0 +1,372 @@
+<div class="" data-ng-controller="ManualController">
+    <h1>Käyttöohje</h1>
+    <hr>
+    <div>
+        <ul id="menu" class="col-md-3 nav nav-list" style="position: fixed">
+            <li>
+                <label><a href="#notes">1. Yleisiä huomioita</a></label>
+                <!--                <ul>
+                                    <li><a href="#inputs">1.1. Syötekentistä</a></li>
+                                    <li><a href="#formatting">1.2. Tekstin muotoilusta</a></li>
+                                </ul>-->
+            </li>
+            <li>
+                <label><a href="#projCreation">2. Hankkeen lisäys</a></label>
+                <!--                <ul>
+                                    <li>
+                                        <a href="#projCreationForm">
+                                            2.1. Hankkeen lisäyslomake
+                                        </a>
+                                    </li>
+                                </ul>-->
+            </li>
+            <li>
+                <label><a href="#orgCreation">3. Järjestön lisäys</a></label>
+                <!--                <ul>
+                                    <li>
+                                        <a href="#orgCreationForm">
+                                            3.1. Järjestön lisäyslomake
+                                        </a>
+                                    </li>
+                                </ul>-->
+            </li>
+            <li>
+                <label><a href="#projView">4. Hankkeen näkymäsivu</a></label>
+            </li>
+        </ul>
+        <!--<div style="margin-left: 220px">-->
+        <div style="margin-left: 160px">
+            <article id="notes" class="man-article">
+                <h4>1. Yleisiä huomioita</h4>
+                <section class="man-content">
+                    <p>
+                        Tämä käyttöohje on jaettu erillisiin osioihin, mutta on
+                        suositeltavaa lukea se alusta loppuun ennen järjestelmän
+                        käytön aloittamista, jotta sen tarjoamia ominaisuuksia
+                        osaisi parhaiten hyödyntää. Selaamisen helpottamiseksi
+                        osioiden alkuun pääsee vasemmalla näkyvän
+                        navigaatiopaneelin linkkejä klikkaamalla.
+                    </p>
+                    <p>
+                        Lomakkeiden ja näkymäsivujen yhteydessä kenttien nimet
+                        on merkitty <tt>konekirjoitusfontilla</tt>. Painikkeiden
+                    ja linkkien nimet on merkitty <em>kursiivilla</em>.
+                    Kursiivia on käytetty myös tehokeinona joidenkin
+                    virkkeiden korostamiseen, mutta kursiivin merkitys on
+                    aina asiayhteydestä selvää.
+                    <p>
+                    <div class="alert alert-warning">
+                        Erityishuomiot ja varoitukset on kirjoitettu
+                        tämänkaltaisiin keltaisiin laatikoihin.
+                    </div>
+                    <p>
+                        Tässä käyttöohjeessa oletetaan, että käyttäjällä on
+                        käyttäjätunnus järjestelmään. Kaikki käyttöohjeessa
+                        esitetyt käyttötapaukset edellyttävät, että
+                        järjestelmään on kirjauduttu sisään ennen niiden
+                        käynnistämistä.
+                    </p>
+                    <h5 id="inputs">1.1. Syötekentistä</h5>
+                    <div class="man-subcontent">
+                        <p>
+                            Ennen varsinaisten lomakkeiden kuvailua on syytä
+                            käydä läpi muutama yleinen huomio syötekentistä.
+                        </p>
+                        <div class="alert alert-warning">
+                            <p>
+                                On syytä huomata, että numeerisia arvoja, kuten
+                                päivämääriä ja rahasummia sisältävissä
+                                syötekentissä on syytä välttää kaikkia muita
+                                merkkejä kuin numeroita 0–9.
+                            </p>
+                            <p>
+                                Rahasummat voi syöttää myös desimaalilukuina,
+                                jolloin <em>desimaalierotin on piste</em> (".").
+                                (Tämä valitettava ominaisuus johtuu käytetyn
+                                teknologian puutteellisesta
+                                kansainvälistämistuesta.) Näkymäsivuilla ja
+                                PDF-raporteissa desimaaliluvut on muotoiltu
+                                SI-järjestelmän mukaisesti käyttämällä
+                                desimaalierottimena pilkkua. Samaa käytäntöä
+                                suositellaan koheesion varmistamiseksi
+                                noudatettavaksi myös vapaamuotoisissa
+                                tekstikentissä.
+                            </p>
+                            <p>
+                                Esimerkiksi välilyönnit luvun alussa tai lopussa
+                                aiheuttavat sen että järjestelmä tulkitsee luvun
+                                virheelliseksi, jolloin lomakkeen lähetys estyy.
+                            </p>
+                        </div>
+                        <p>
+                            Järjestelmän tekstimuotoiset syötekentät tukevat
+                            merkistökoodausta UTF-8.
+                        </p>
+                        <div class="alert alert-warning">
+                            Johtuen tuotantopalvelimen rajoituksista, jotkin
+                            erikoismerkit saattavat aiheuttaa ongelmia
+                            PDF-raporttien tuottamisessa, joten mainituissa
+                            tiedostoissa toimivat ainoastaan tulostettavat
+                            ASCII-merkit sekä merkit "Å", "å", "Ä", "ä", "Ö", ja
+                            "ö".
+                        </div>
+                    </div>
+                    <h5 id="formatting">1.2. Tekstin muotoilusta</h5>
+                    <div class="man-subcontent">
+                        <p>
+                            Lähtökohtaisesti järjestelmään voi syöttää vain
+                            pelkkää tekstiä (ja lukuja). Pidempien tekstien
+                            seasta voi olla vaikeaa löytää vaikkapa tiettyä
+                            kappaletta, jota pitäisi työstää. Tämän vuoksi
+                            järjestelmään on lisätty asteriskeilla ("*")
+                            koodattava tekstin korostusominaisuus. Korostettava
+                            tekstinpätkä koodataan ympäröimällä se
+                            *asteriskeilla*. Asteriskeilla korostettu osuus
+                            näyttää <span class="bg-danger">tältä</span>.
+                        </p>
+                        <p>
+                            Lisäksi pitkän tekstin jäsentämistä auttaa
+                            kappaleisiin jakaminen. Järjestelmässä
+                            kappalevaihdot voi koodata kahdella peräkkäisellä
+                            alaviivalla ("_"). Toisin sanoen merkkijono "__"
+                            korvataan <br>&nbsp;&nbsp;&nbsp;&nbsp;rivinvaihdolla
+                            ja sisennyksellä.
+                        </p>
+                        <p>
+                            Seuraavat kuvat havainnollistavat näitä
+                            ominaisuuksia:
+                        </p>
+                        <figure>
+                            <img src="manual/assets/img/kuvakaappaus-2.png"
+                                 alt="Korostus ja kappalejako syötelomakkeessa">
+                            <figcaption>
+                                Kuva 1:
+                                Tekstin korostus ja kappalejako syötelomakkeessa
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <img src="manual/assets/img/kuvakaappaus-3.png"
+                                 alt="Korostus ja kappalejako näkymässä">
+                            <figcaption>
+                                Kuva 2:
+                                Tekstin korostus ja kappalejako näkymässä
+                            </figcaption>
+                        </figure>
+                    </div>
+                </section>
+            </article>
+            <article id="projCreation" class="man-article">
+                <h4>2. Hankkeen lisäys</h4>
+                <section class="man-content">
+                    KIOS:n hanketietojärjestelmän ensisijainen tarkoitus on
+                    KIOS:n rahoittamien ihmisoikeushankkeiden relevanttien
+                    tietojen säilyttäminen keskitetyssä sähköisessä
+                    tietokannassa. Siispä uuden hankkeen lisääminen on
+                    toiminnoista ehkäpä keskeisin ja samalla hanketietueen
+                    elinkaaren ensimmäinen vaihe. Näin ollen tämä toiminto on
+                    luontevinta käsitellä ensimmäisenä.
+                    <h5 id="projCreationForm">2.1. Hankkeen lisäyslomake</h5>
+                    <div class="man-subcontent">
+                        <p>
+                            Järjestelmään syötetään tietoja HTML-lomakkeiden
+                            kautta. Sisäänkirjautumisen jälkeen hankkeen
+                            lisäyslomakkeeseen pääsee klikkaamalla sivun
+                            ylälaidassa näkyvässä
+                            navigaatiopalkissa kohtaa <em>Hankkeen lisäys</em>.
+                        </p>
+                        <figure>
+                            <img src="manual/assets/img/kuvakaappaus-1.png"
+                                 alt="Hankkeen lisäyslomake">
+                            <figcaption>
+                                Kuva 3: Hankkeen lisäyslomake
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Lomake korostaa puuttuvia taikka virheellisiä
+                            tietoja sisältävät kentät punasella värillä sekä
+                            tekstuaalisella huomatutuksella. (Erityisesti
+                            jokaisella järjestelmään syötettävällä hankkeella
+                            tulee olla <tt>nimi</tt> ja
+                        <tt>koordinaattori</tt>.) Lomakkeen tietoja ei voi
+                        tallentaa tietokantaan ennen kuin virheelliset
+                        syötteet on korjattu.
+                        </p>
+                        <p>
+                            Hankkeen <tt>tunnus</tt> on hankkeen yksilöivä
+                        viisinumeroinen tunnusluku, jolla ei ole erillistä
+                        syötekenttää. Sen kaksi ensimmäistä numeroa
+                        määräytyvät rekisteröimisvuoden kahden viimeisen
+                        numeron perusteella. Esimerkiksi vuonna 2016
+                        rekisteröityjen hankkeiden tunnukset ovat siis
+                        muotoa "16XXX"). Tunnusluvun kolme viimeistä numeroa
+                        puolestaan muodostuvat juoksevasta luvusta.
+                        Esimerkiksi 23. vuonna 2016 rekisteröity hanke saa
+                        tunnuksen 16023.
+                        </p>
+                        <p>
+                            Jos hankkeelle rahoitusta hakevan järjestön tiedot
+                            on jo tallennettu hanketietojärjestelmään, tulee
+                            tämä järjestö valita <tt>Järjestö</tt>-kohdan
+                        vetolaatikosta. Jos taas kyseessä on järjestön
+                        ensimmäinen KIOS:lta rahoitusta hakeva hanke, on
+                        järjestön tiedot tallennettava hanketietojen
+                        lisäämisen yhteydessä (ks.
+                        <a href="#orgCreation">Järjestön lisäys</a>).
+                        </p>
+                        <div class="alert alert-warning">
+                            <p>
+                                Hankkeen lisääminen onnistuu jos ja vain jos
+                                kaikissa pakollisissa syötekentissä on
+                                kelvolliset arvot hankkeen lisäyslomaketta
+                                lähettäessä. Hankkeen lisäyslomakkeessa, kuten
+                                missään muussakaan Hanketietojärjestelmän
+                                lomakkeessa, ei voi tehdä välitallennuksia.
+                            </p>
+                            <p>
+                                Ongelman voi kiertää täyttämällä ensin
+                                ainoastaan pakolliset kentät, ja lisäämällä
+                                myöhemmin tietoja hankkeen muokkauslomakkeen
+                                kautta. Myös Firefox-selaimen
+                                "Lazarus Form Recovery"-liitännäisestä saattaa
+                                olla hyötyä lomaketietojen suojelussa
+                                odottamattomien ongelmatilanteiden varalta.
+                                Lisätietoja liitännäisestä löytyy osoitteesta
+                                <a href="http://lazarus.interclue.com/" target="_new">http://lazarus.interclue.com/</a>
+                            </p>
+                        </div>
+                        <p>
+                            Jos hankkeen lisäys onnistui, järjestelmä ohjaa
+                            selaimen lisätyn hankkeen näkymäsivulle.
+                            Vastalisätyn hankkeen tila on "rekisteröity".
+                        </p>
+                    </div>
+                </section>
+            </article>
+            <article id="orgCreation" class="man-article">
+                <h4>3. Järjestön lisäys</h4>
+                <section class="man-content">
+                    Tällä hetkellä järjestöjen lisäämiselle ei ole erillistä
+                    lomaketta, vaan lisäys tapahtuu hankkeen lisäyksen
+                    yhteydessä. Järjestelmän on tarkoitus sisältää vain KIOS:lta
+                    rahoitusta hakeneiden järjestöjen tiedot. Koska rahoitusta
+                    haetaan tietylle hankkeelle, on myös rahoitusta hakevan
+                    järjestön tietojen syöttäminen luontevaa tehdä hanketietojen
+                    syöttämisen yhteydessä. Tässä kappaleessa mainitut
+                    syötekentät ja painikkeet löytyvät siis hankkeen
+                    lisäyslomakkeesta (ks.
+                    <a href="#projCreation">Hankken lisäys</a>).
+                    <h5 id="orgCreationForm">3.1. Järjestön lisäyslomake</h5>
+                    <div class="man-subcontent">
+                        <p>
+                            Uuden järjestön tietojen syöttäminen aloitetaan
+                            painamalla painiketta <em>Lisää uusi järjestö</em>.
+                        </p>
+                        <p>
+                            Tällä hetkellä järjestön perustietoihin on pakko
+                            syöttää seuraavat kohdat:
+                        </p>
+                        <table>
+                            <tr>
+                                <th>Kenttä</th>
+                                <th>Kuvaus</th>
+                            </tr>
+                            <tr>
+                                <td><tt>Nimi</tt></td>
+                            <td>Järjestön nimi.</td>
+                            </tr>
+                            <tr>
+                                <td><tt>Edustaja</tt></td>
+                            <td>
+                                Järjestön edustaja (sisältäen henkilön nimen,
+                                sähköpostiosoitteen sekä puhelinnumeron tässä
+                                järjestyksessä omilla riveillään).
+                            </td>
+                            </tr>
+                            <tr>
+                                <td><tt>Osoite</tt></td>
+                            <td>Järjestön katuosoite.</td>
+                            </tr>
+                            <tr>
+                                <td><tt>Postinumero</tt></td>
+                            <td>
+                                Järjestön postitoimipaikan numero. Jos järjestö
+                                toimii maassa, jossa ei ole postinumeroita, voi
+                                tämän kentän sivuuttaa vaikkapa merkinnällä
+                                "[Ei postinumeroa]".
+                            </td>
+                            </tr>
+                            <tr>
+                                <td><tt>Kaupunki</tt></td>
+                            <td>Järjestön postitoimipaikka.</td>
+                            </tr>
+                            <tr>
+                                <td><tt>Maa</tt></td>
+                            <td>Maa, jossa järjestöllä on konttori.</td>
+                            </tr>
+                            <tr>
+                                <td><tt>Puhelinnumero</tt></td>
+                            <td>Järjestön puhelinnumero.</td>
+                            </tr>
+                            <tr>
+                                <td><tt>Sähköpostiosoite</tt></td>
+                            <td>Yhteydenpitoon käytettävä järjestön
+                                sähköpostiosoite.</td>
+                            </tr>
+                        </table>
+                        <p>
+                            Lisäksi seuraavat lisätiedot ovat pakolliset:
+                        </p>
+                        <table>
+                            <tr>
+                                <th>Kenttä</th>
+                                <th>Kuvaus</th>
+                            </tr>
+                            <tr>
+                                <td><tt>Vastuullinen johtaja</tt></td>
+                            <td>
+                                Järjestön vastuullinen johtaja (henkilön nimi).
+                            </td>
+                            </tr>
+                            <tr>
+                                <td><tt>Viestintävastaava</tt></td>
+                            <td>
+                                Järjestön viestintävastaava (henkilön nimi).
+                            </td>
+                            </tr>
+                            <tr>
+                                <td>
+                            <tt>Taloushallinto ja tilintarkastus</tt>
+                            </td>
+                            <td>Arvio järjestön taloushallinnosta ja
+                                tilintarkastajan lausunnosta.</td>
+                            </tr>
+                        </table>
+                        <p>
+                            Järjestön lisäämisen voi perua painamalla painiketta
+                            <em>Lisää järjestö listalta</em>.
+                        </p>
+                    </div>
+                </section>
+            </article>
+            <article id="projView" class="man-article">
+                <h4>4. Hankkeen näkymäsivu</h4>
+                <section class="man-content">
+                    <p>
+                        Juuri lisätyn hankkeen tila on siis "rekisteröity".
+                        Tässä tilassa olevan hankkeen hakemusta ei ole vielä
+                        käsitelty, joten esimerkiksi maksatuksia ei voi lisätä
+                        rekisteröidylle hankkeelle.
+                    </p>
+                    <figure>
+                        <img src="manual/assets/img/kuvakaappaus-4.png"
+                             alt="Hankkeen lisäyslomake">
+                        <figcaption>
+                            Kuva 4: "Loppuraportti"-tilassa oleva hanke
+                        </figcaption>
+                    </figure>
+                </section>
+            </article>
+        </div>
+    </div>
+</div>
+

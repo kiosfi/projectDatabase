@@ -27,7 +27,7 @@
                 <div class="col-md-9">
                     <input name="orgrepName" type="text" class="form-control"
                            data-ng-model="organisation.representative.name"
-                           id="orgrepName" required>
+                           id="orgrepName" placeholder="Nimi" required>
 
                     <div ng-show="orgEditForm.orgrepName.$invalid"
                          class="help-block">
@@ -40,7 +40,7 @@
                      ng-class="{'has-error': orgEditForm.orgrepEmail.$invalid}">
                     <input name="orgrepEmail" type="text" class="form-control"
                            data-ng-model="organisation.representative.email"
-                           id="orgrep" required>
+                           id="orgrep" placeholder="Sähköpostiosoite" required>
                     <div ng-show="orgEditForm.orgrepEmail.$invalid"
                          class="help-block">
                         <p ng-show="orgEditForm.orgrepEmail.$error.required">
@@ -52,7 +52,8 @@
                      ng-class="{'has-error': orgEditForm.orgrepPhone.$invalid}">
                     <input name="orgrepPhone" type="text" class="form-control"
                            data-ng-model="organisation.representative.phone"
-                           id="orgrepPhone" required>
+                           id="orgrepPhone" placeholder="Puhelinnumero"
+                           required>
                     <div ng-show="orgEditForm.orgrepPhone.$invalid"
                          class="help-block">
                         <p ng-show="orgEditForm.orgrepPhone.$error.required">

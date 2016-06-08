@@ -175,7 +175,9 @@
                                     <input data-ng-if="newOrg" name="orgrepName"
                                            type="text" class="form-control"
                                            data-ng-model="project.organisation.representative.name"
-                                           id="orgrepName" required>
+                                           id="orgrepName"
+                                           placeholder="Nimi"
+                                           required>
                                     <div ng-show="projectForm.orgrepName.$invalid"
                                          class="help-block">
                                         <p ng-show="projectForm.orgrepName.$error.required">
@@ -189,7 +191,9 @@
                                     <input data-ng-if="newOrg" name="orgrepEmail"
                                            type="text" class="form-control"
                                            data-ng-model="project.organisation.representative.email"
-                                           id="orgrep" required>
+                                           id="orgrep"
+                                           placeholder="Sähköpostiosoite"
+                                           required>
 
                                     <div ng-show="projectForm.orgrepEmail.$invalid"
                                          class="help-block">
@@ -204,6 +208,7 @@
                                     <input data-ng-if="newOrg" name="orgrepPhone"
                                            type="text" class="form-control"
                                            data-ng-model="project.organisation.representative.phone"
+                                           placeholder="Puhelinnumero"
                                            id="orgrepPhone"
                                            required>
 

@@ -188,8 +188,10 @@ module.exports = function (Projects) {
         },
         create: function (req, res) {
             var project = new Project(req.body);
-            var prefix = new Date(project.reg_date).getFullYear().toString().slice(-2);
-            Project.find({project_ref: new RegExp('^' + prefix)}).count(function (err, count) {
+            var prefix = new Date(project.reg_date).getFullYear().toString()
+                    .slice(-2);
+            Project.find({project_ref: new RegExp('^' + prefix)})
+                    .count(function (err, count) {
                 function pad(n) {
                     if (n < 10) {
                         return "00" + n
