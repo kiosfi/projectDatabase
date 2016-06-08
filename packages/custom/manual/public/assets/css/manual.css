@@ -1,14 +1,31 @@
-table {
+.man-body table {
     border:             1px;
 }
 
-th {
+.man-body th {
     padding-left:       2em;
 }
 
-td {
+.man-body td {
     padding-left:       2em;
     padding-top:        0.5em;
+}
+
+.man-body img {
+    border-style:       solid;
+    border-width:       1px;
+    border-color:       #808080;
+}
+
+.man-body figure {
+    margin-top:         2em;
+    margin-bottom:      2em;
+}
+
+.man-body figcaption {
+    margin-top:         0.5em;
+    margin-right:       3em;
+    text-align:         center;
 }
 
 .man-article {
@@ -32,21 +49,4 @@ td {
 .mini-header {
     font-weight:        bold;
     margin-left:        -2em;
-}
-
-img {
-    border-style:       solid;
-    border-width:       1px;
-    border-color:       #808080;
-}
-
-figure {
-    margin-top:         2em;
-    margin-bottom:      2em;
-}
-
-figcaption {
-    margin-top:         0.5em;
-    margin-right:       3em;
-    text-align:         center;
 }
