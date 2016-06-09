@@ -118,7 +118,7 @@ module.exports = function (Projects) {
         fs.writeFileSync(outDir + "/" + fileName + ".tex",
                 template, "utf8");
         var pdflatex = spawn('pdflatex',
-                ["-interaction=batchmode",
+                ["-interaction=batchmode", "-halt-on-error",
                     "-output-directory=" + outDir,
                     outDir + "/" + fileName + ".tex"]
                 );

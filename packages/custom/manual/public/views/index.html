@@ -1,5 +1,4 @@
-<div data-ng-controller="ManualController" data-ng-init="init()"
-     class="man-body">
+<div data-ng-controller="ManualController" class="man-body">
     <h1>Käyttöohje</h1>
     <hr>
     <div>
@@ -32,13 +31,16 @@
                                 </ul>-->
             </li>
             <li>
-                <label><a href="#projView">4. Hankkeen näkymäsivu</a></label>
+                <label><a href="#projView">4. Hankenäkymä</a></label>
             </li>
             <li>
-                <label><a href="#projList">5. Hankkelistaus</a></label>
+                <label><a href="#projList">5. Hankelistaus</a></label>
             </li>
             <li>
                 <label><a href="#orgList">6. Järjestölistaus</a></label>
+            </li>
+            <li>
+                <label><a href="#projSearch">7. Hankehaku</a></label>
             </li>
         </ul>
         <!--<div style="margin-left: 220px">-->
@@ -46,6 +48,20 @@
             <article id="notes" class="man-article">
                 <h4>1. Yleisiä huomioita</h4>
                 <section class="man-content">
+                    <p>
+                        Tämä on KIOS Ry:n hanketietojärjestelmän (myöhemmin
+                        "järjestelmä", "sovellus", tms.) käyttöohje. Kyseessä on
+                        webselaimella (joista Firefox on suositeltavin)
+                        käytettävä intranet-sovellus, jonka tarkoituksena on
+                        toimia sähköisenä käyttöliittymänä KIOS:lta rahoitusta
+                        hakeneiden ihmisoikeushankkeiden relevanttien tietojen
+                        käsittelyyn. Sovelluksen kohdeyleisö on ne KIOS Ry:n
+                        henkilökunnan jäsenet, jotka käsittelevät mainittuja
+                        tietoja. Sovellus on toteutettu "MEAN.io"-nimisen
+                        sovelluskehyksen pohjalle. Lisätietoja MEAN.io:sta
+                        löytyy sovelluksen web-sivuilta osoitteessa
+                        <a href="http://mean.io/">http://mean.io/</a>.
+                    </p>
                     <p>
                         Tämä käyttöohje on jaettu erillisiin osioihin, mutta on
                         suositeltavaa lukea se alusta loppuun ennen järjestelmän
@@ -123,6 +139,10 @@
                     <h5 id="formatting">1.2. Tekstin muotoilusta</h5>
                     <div class="man-subcontent">
                         <p>
+                            Tämän kappaleen tiedot koskevat kaikkia paitsi
+                            hakulomakkeita.
+                        </p>
+                        <p>
                             Lähtökohtaisesti järjestelmään voi syöttää vain
                             pelkkää tekstiä (ja lukuja). Pidempien tekstien
                             seasta voi olla vaikeaa löytää vaikkapa tiettyä
@@ -183,11 +203,17 @@
                             ylälaidassa näkyvässä navigaatiopalkissa kohtaa
                             <em>Hankkeen lisäys</em>.
                         </p>
+                        <p>
+                            Lomake on jaoteltu viiteen osioon, joista neljä on
+                            piilotettu aluksi. Klikkaamalla osion otsikkoa saa
+                            osion kentät esiin/piilotetuksi.
+                        </p>
                         <figure>
                             <img src="manual/assets/img/kuvakaappaus-1.png"
                                  alt="Hankkeen lisäyslomake">
                             <figcaption>
-                                Kuva 3: Hankkeen lisäyslomake.
+                                Kuva 3: Hankkeen lisäyslomake, jonka ensimmäinen
+                                osio on näkyvillä.
                             </figcaption>
                         </figure>
                         <p>
@@ -359,7 +385,7 @@
                 </section>
             </article>
             <article id="projView" class="man-article">
-                <h4>4. Hankkeen näkymäsivu</h4>
+                <h4>4. Hankenäkymä</h4>
                 <section class="man-content">
 <!--                    <p>
                         Juuri lisätyn hankkeen tila on siis "rekisteröity".
@@ -406,7 +432,6 @@
                         muokataan samaan aikaan toisessa selainikkunassa. Tämä
                         tarkoittaa myös sitä, että
                         <em>kaikki muutokset tietokantaan ovat pysyviä</em>.
-
                     </div>
                 </section>
             </article>
@@ -451,6 +476,283 @@
                 <section class="man-content">
                     Järjestölistaus on oleellisesti samankaltainen kuin
                     hankelistaus. (Ks. <a href="#projList">Hankelistaus</a>).
+                </section>
+            </article>
+            <article id="projSearch" class="man-article">
+                <h4>7. Hankehaku</h4>
+                <section class="man-content">
+                    <p>
+                        Hankehaku mahdollistaa monenlaisten hankedokumentteihin
+                        kohdistuvien tietokantakyselyiden suorittamisen, sekä
+                        tulosten tallentamisen CSV-muotoon. Kyseessä on ehkäpä
+                        kaikkien järjestelmän toimintojen kruununjalokivi.
+                        CSV-tiedostoja voi käsitellä helposti esimerkiksi
+                        taulukkolaskentasovelluksella.
+                        Hankehakuun pääsee klikkaamalla navigaatiopalkista
+                        painiketta <em>Haku</em>.
+                    </p>
+                    <p>
+                        Hankkeen luomislomakkeen tavoin hankehakulomake sisältää
+                        piilotettavia osioita. Nämä osiot ovat seuraavassa
+                        kuvassa esiintyvät <em>Kriteerit</em>, <em>Tulokset</em>
+                        sekä <em>Vienti</em>. Näistä viimeinen tosin on
+                        käytettävissä ainoastaan mikäli haussa löytyi hankkeita.
+                    </p>
+                    <figure id="fig6">
+                        <img src="manual/assets/img/kuvakaappaus-6.png"
+                             alt="Hankehaku">
+                        <figcaption>
+                            Kuva 6: Hankehaku.
+                        </figcaption>
+                    </figure>
+                    <h5>7.1. Säännölliset lausekkeet</h5>
+                    <div class="man-subcontent" id="regex">
+                        <p>
+                            Tekstimuotoisissa hakukentissä käytetään
+                            säännöllisiä lausekkeita. Tässä kappaleessa annetaan
+                            lyhyt selostus säännöllisistä lausekkeista
+                            määritelmien sekä käytännön esimerkkien kautta. Myös
+                            tavallinen sanahaku perustuu säännöllisiin
+                            lausekkeisiin, joten tästä näkökulmasta
+                            tarkasteltuna <em>kappale tarjoaa syventävää tietoa,
+                            jonka lukija voi halutessaan ohittaa</em>.
+                        </p>
+                        <p>
+                            <em>Aakkosto</em> on nimitys kokoelmalle merkkejä,
+                            esimerkiksi sellaiselle, joka sisältää merkit "a",
+                            "b" ja "c". Myös alakoulussa opitut aakkoset ovat
+                            aakkosto.
+                        </p>
+                        <p>
+                            <em>Merkkijonot</em> koostuvat peräkkäisistä
+                            merkeistä. Merkkijonot koodataan yleensä
+                            lainausmerkkien sisään, jotteivat ne mene sekaisin
+                            muun tekstin kanssa. Esimerkiksi "abc" ja "bac" ovat
+                            merkkijonoja (kuten myös yllä mainitut "a", "b" ja
+                            "c"). Kaksi merkkijonoa ovat samat täsmälleen
+                            silloin kun ne sisältävät samat merkit samassa
+                            järjestyksessä. Näin ollen esimerkiksi "abc" on sama
+                            kuin "abc", mutta eri kuin esimerkiksi "abcc" tai
+                            "bac".
+                        </p>
+                        <p>
+                            Jos hakutoiminto hakisi vain täsmällisiä
+                            osumia, ei esimerkiksi hakusanalla "kissa" löytyisi
+                            tulosta "kissat". Sen sijaan tässä sovelluksessa
+                            käytetty <em>hakutoiminto hyväksyy kaikki tulokset,
+                            joissa hakusana eli säännöllinen lauseke esiintyy
+                            jossain kohdassa</em>. Esimerkiksi hakusanaan
+                            "kissa" täsmääviä merkkijonoja ovat "kissa",
+                            "abskissa" ja "kissat".
+                        </p>
+                        <p>
+                            Merkkijonojen peruslaskutoimitusta
+                            kutsutaan <em>katenoinniksi</em>. Jos A ja B ovat
+                            merkkijonoja, niin AB on merkkijono. Esimerkiksi
+                            jos A = "kis" ja B = "sa", niin AB = "kissa".
+                        </p>
+                        <p>
+                            Yksinkertaisimmassa muodossaan <em>säännölliset
+                            lausekkeet</em> ovat merkkijonoja sellaisesta
+                            aakkostosta, joka sisältää ainakin merkit "(", ")",
+                            "|" ja "*". Näillä merkeillä on erityinen rooli
+                            säännöllisissä lausekkeissa, jota käsitellään pian.
+                            Säännöllisten lausekkeiden avulla kuvaillaan toisia
+                            merkkijonoja. Seuraava taulukko listaa säännöllisten
+                            lausekkeiden laskutoimitukset tapauksessa A = "kis",
+                            B = "sa":
+                        </p>
+                        <table>
+                            <tr>
+                                <th>Lauseke</th>
+                                <th>Selitys</th>
+                                <th>Esimerkkejä</th>
+                            </tr>
+                            <tr>
+                                <td>AB</td>
+                                <td>
+                                    Merkkijonot, jotka sisältävät ensin A:n ja
+                                    sitten B:n. (Katenointi)
+                                </td>
+                                <td>
+                                    "kissa" (Ei muita.)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>A|B</td>
+                                <td>
+                                    Merkkijonot, jotka sisältävät joko A:n
+                                    taikka B:n, mutta ei molempia.
+                                </td>
+                                <td>
+                                    "kis", "sa" (Ei muita.)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>A*</td>
+                                <td>
+                                    Merkkijonot, jotka koostuvat A:n
+                                    mielivaltaisen monesta katenaatiosta.
+                                </td>
+                                <td>
+                                    "", "kis", "kiskis", "kiskiskis", ...
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            Sulkumerkkien "(" ja ")" rooli on säännöllisten
+                            lausekkeiden ryhmittely. Yksinkertaisia lausekkeita
+                            voidaan liittää yhteen pidemmiksi lausekkeiksi
+                            sulkumerkkien avulla. Esimerkiksi lausekkeeseen
+                            "(kis|sa)*" täsmää ainakin merkkijonot "kis", "sa",
+                            "kissa", "kiskissa", "kissakis", "sakissa", jne.
+                            Toisaalta lausekkeeseen "(kis)*sa" täsmääviä
+                            merkkijonoja ovat "sa", "kissa", "kiskissa",
+                            "kiskiskissa", jne.
+                        </p>
+                        <p>
+                            Näin ollen <a href="#fig6">kuvassa 6</a> näkyvä
+                            neljä tulosta tuottanut haku oli itse asiassa haku
+                            säännöllisellä lausekkeella "af". Järjestelmä
+                            palautti kaikki ne testitietokantaan tallennetut
+                            hankkeet, joiden kentässä <tt>Alue / Maa</tt>
+                            esiintyi jossain kohtaa ensin merkki "a", jota
+                            välittömästi seurasi merkki "f". Esimerkiksi
+                            "Afganistan" ja "Afrikka" täyttävät tämän ehdon.
+                        </p>
+                        <p>
+                            Lisää lukemista säännöllisistä lausekkeista:
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="http://www.w3schools.com/jsref/jsref_obj_regexp.asp" target="_blank">W3Schoolsin lunttilappu</a>
+                                (Huom. Hanketietojärjestelmässä vain syntaksin
+                                "pattern"-osa ilman kauttaviivoja.)
+                            </li>
+                        </ul>
+                    </div>
+                    <h5>7.2. Hakukriteerien yhdistäminen</h5>
+                    <div class="man-subcontent">
+                        <p>
+                            Tällä hetkellä järjestelmä tukee hakukriteerien
+                            yhdistämistä ainoastaan loogisen AND-konjunktion
+                            avulla. Tämä merkitsee, että haku palauttaa vain ne
+                            tulokset, joiden kohdalla <em>jokainen</em>
+                            hakukriteeri täyttyy. Hakukriteerejä lisätään
+                            painamalla painiketta <em>Lisää</em>. Viimeisen
+                            hakukriteerin saa vastaavasti poistettua painamalla
+                            painiketta <em>Poista viimeinen</em>. Hakukriteerin
+                            tyyppi valitaan vetolaatikosta <em>Kriteeri</em> ja
+                            sen arvo riippuu tyypistä.
+                        </p>
+                        <p>
+                            Esimerkiksi hakukenttä <tt>Alue / Maa</tt> on
+                            tekstimuotoinen hakukenttä, joten sen hakusanaa
+                            käsitellään säännöllisenä lausekkeena (ks.
+                            <a href="#regex">7.1. Säännölliset lausekkeet</a>).
+                            Kuva 7. havainnollistaa asiaa.
+                        </p>
+                        <figure>
+                            <img src="manual/assets/img/kuvakaappaus-7.png"
+                                 alt="Hankkeen lisäyslomake">
+                            <figcaption>
+                                Kuva 7: Hankehaku yhdellä ehdolla.
+                                Tekstimuotoisen tiedon haussa käytetään
+                                säännöllisiä lausekkeita (taikka yksinkertaista
+                                sanahakua).
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Tekstimuotoiset hakukentät siis mahdollistavat myös
+                            OR-tyyppiset haut <em>saman kentän sisällä</em>.
+                            Esimerkiksi jos halutaan etsiä hankkeita, jotka
+                            tapahtuvat joko Intiassa, taikka Pakistanissa,
+                            onnistuu haku valitsemalla hakukriteeriksi
+                            <tt>Alue / Maa</tt> ja arvoksi "Intia|Pakistan".
+                        </p>
+                        <p>
+                            Luettelomuotoisissa hakukentissä puolestaan valitaan
+                            yksi vaihtoehto, jolloin haku palauttaa kaikki
+                            täsmäävät projektit. Seuraava kuva havainnollistaa
+                            asiaa.
+                        </p>
+                        <figure>
+                            <img src="manual/assets/img/kuvakaappaus-8.png"
+                                 alt="Hankkeen lisäyslomake">
+                            <figcaption>
+                                Kuva 8: Hankehaku kahdella ehdolla. Toisena
+                                hakuehtona on luettelomuotoinen
+                                <tt>Oikeudellinen fokus</tt>.
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Kuvasta huomataan, että hakukriteerien yhdistäminen
+                            vähentää (tai ei ainakaan koskaan kasvata)
+                            hakutulosten määrää. Esimerkin tapauksessa voidaan
+                            päätellä, että yhdellä kolmesta ensimmäiseen
+                            kriteeriin (<tt>Alue / Maa</tt> täyttää säännöllisen
+                            lausekkeen "a[a-z]*n") täsmänneestä hankkeesta ei
+                            ollut määritelty oikeudellista fokusta
+                            "TSS-oikeudet".
+                        </p>
+                        <div class="alert alert-warning">
+                            Hakukriteerien järjestyksellä ei pitäisi olla väliä
+                            hakutulosten kannalta. Tätä ei ole kuitenkaan vielä
+                            testattu kattavasti.
+                        </div>
+                        <figure>
+                            <img src="manual/assets/img/kuvakaappaus-9.png"
+                                 alt="Hankkeen lisäyslomake">
+                            <figcaption>
+                                Kuva 9: Hankehaku kolmella ehdolla. Kolmantena
+                                ehtona on, että hankkeella pitää olla
+                                loppuraportti, joka on hyväksytty vuonna 2016.
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Esimerkkitapauksesta huomataan, että kolmannen
+                            hakuehdon lisääminen pudotti tulosten määrää
+                            alkuperäisestä kolmesta yhteen.
+                        </p>
+                    </div>
+                    <h5>7.3. Hakutulosten vienti</h5>
+                    <div class="man-subcontent">
+                        <p>
+                            Kun halutut hakutulokset on löydetty, voidaan ne
+                            tallentaa myöhempää käyttöä varten kahdella tavalla.
+                            Ensinnäkin koska kaikki hakuparametrit koodataan
+                            URL:iin, niin on mahdollista lisätä tulossivu
+                            selaimen kirjanmerkkeihin (painamalla Ctrl+d
+                            Firefox-selaimessa). URL:n voi myös kopioida
+                            vaikkapa leikepöydälle ja lähettää sähköpostissa
+                            järjestelmää käyttävälle kollegalle. Toinen
+                            vaihtoehto on hakutulosten vienti CSV-tiedostoon,
+                            mikä on tämän kappaleen aiheena.
+                        </p>
+                        <p>
+                            Kun haluttu haku on suoritettu, voi tulokset viedä
+                            CSV-tiedostoon klikkaamalla painiketta
+                            <em>Vie CSV-tiedostoon</em>. Kaikkia kenttiä ei
+                            tarvitse ottaa mukaan, vaan käyttäjä voi valita
+                            haluamansa kenttä rastittamalla niitä vastaavat
+                            ruudut lomakkeesta ennen viennin suorittamista.
+                        </p>
+                        <figure>
+                            <img src="manual/assets/img/kuvakaappaus-10.png"
+                                 alt="Hankkeen lisäyslomake">
+                            <figcaption>
+                                Kuva 10: Suoritetun haun tulokset voidaan viedä
+                                CSV-tiedostoon valiten vietävät kentät.
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Käyttömukavuuden parantamiseksi vientilomakkeeseen
+                            on lisätty vaihtoehdot <em>Perustiedot</em>,
+                            <em>Järjestön tiedot</em> sekä <em>Lisätiedot</em>,
+                            joiden valitseminen/poistaminen valitsee/poistaa
+                            kaikki aihepiirin kentät.
+                        </p>
+                    </div>
                 </section>
             </article>
         </div>
