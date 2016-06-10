@@ -211,7 +211,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             themes: false, description: false, activities: false,
             context: false, goal: false, target_group: false,
             human_resources: false, equality: false, vulnerable_groups: false,
-            sustainability_risks: false, reporting_evaluation: false,
+            indicators: false, reporting_evaluation: false,
             budget: false, other_funding: false, referees: false,
             background_check: false
         };
@@ -253,7 +253,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.extraFieldsArray = ['themes', 'description', 'activities',
             'context', 'goal', 'target_group', 'human_resources', 'equality',
-            'vulnerable_groups', 'sustainability_risks', 'reporting_evaluation',
+            'vulnerable_groups', 'indicators', 'reporting_evaluation',
             'budget', 'other_funding', 'referees', 'background_check'];
 
         /**

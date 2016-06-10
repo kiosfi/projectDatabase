@@ -13,7 +13,7 @@ module.exports = {
     format: 'common'
   },
   app: {
-    name: 'KIOS Ry - Hanketietojärjestelmä'
+    name: 'KIOS Sr - Hanketietojärjestelmä'
   },
   strategies: {
     local: {

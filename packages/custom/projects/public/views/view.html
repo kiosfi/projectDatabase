@@ -313,13 +313,13 @@
                             <span ng-bind-html="handleEmphasis(project.vulnerable_groups)"></span>
                         </div>
                     </div>
-                    <div ng-show="nonEmpty(project.sustainability_risks)"
+                    <div ng-show="nonEmpty(project.indicators)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
-                            {{fieldNames["sustainability_risks"]}}
+                            {{fieldNames["indicators"]}}
                         </div>
                         <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.sustainability_risks)"></span>
+                            <span ng-bind-html="handleEmphasis(project.indicators)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.reporting_evaluation)"

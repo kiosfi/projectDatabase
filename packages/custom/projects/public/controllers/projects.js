@@ -582,10 +582,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     project.end.report.comments = undefined;
                 }
             }
-            if (project.schema_version < 8) {
-                // An extra field was added in this version, but it requires no
-                // conversion.
-                project.schema_version = 8;
+            if (project.schema_version < 9) {
+                project.schema_version = 9;
+                project.indicators = project.sustainability_risks;
+                project.sustainability_risks = undefined;
                 project.$update(function () {
                 });
             }

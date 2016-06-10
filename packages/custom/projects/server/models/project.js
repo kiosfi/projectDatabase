@@ -7,14 +7,14 @@ var mongoose = require('mongoose'),
         Schema = mongoose.Schema;
 
 // Note that the Finnish translations for the field names are listed in
-// packages/custom/projects/public/assets/json/finnishFieldNames.json
+// packages/custom/projects/public/assets/json/projectConstants.json
 
 var ProjectSchema = new Schema({
     /**
      * This piece of metadata tells the version number of the scheme. It is used
      * for updating old entries to the newest version during runtime.
      */
-    schema_version: {           // Current version is 7.
+    schema_version: {           // Current version is 9.
         type: Number,
         required: true
     },
@@ -207,10 +207,12 @@ var ProjectSchema = new Schema({
         trim: true
     },
     /**
-     * The current Finnish name for this field is "Tavoitteiden saavuttamisen
-     * mittaaminen".
+     * The current Finnish name for this field is "Indikaattotit".
+     *
+     * The name of this field was changed from <tt>sustainability_risks</tt> to
+     * <tt>indicators</tt> in schema version 9.
      */
-    sustainability_risks: {     // "Tavoitteiden saavuttamisen mittaaminen"
+    indicators: {               // "Indikaattorit"
         type: String,
         trim: true
     },
