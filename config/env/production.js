@@ -28,7 +28,7 @@ module.exports = {
   },
   hostname: 'http://localhost:3000',
   app: {
-    name: 'KIOS Sr - Hanketietojärjestelmä'
+    name: 'KIOS - Hanketietojärjestelmä'
   },
   logging: {
     format: 'combined'

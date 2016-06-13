@@ -53,10 +53,18 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (!text) {
                 return "";
             }
-            var pieces = text.split("*");
+            var pieces = text.split("**");
             var transformed = "";
             for (var i = 1, max = pieces.length; i < max; i += 2) {
                 pieces[i] = '<span class="bg-danger">' + pieces[i] + '</span>';
+            }
+            pieces.forEach(function (x) {
+                transformed += x;
+            });
+            pieces = transformed.split("!!");
+            transformed = "";
+            for (var i = 1, max = pieces.length; i < max; i += 2) {
+                pieces[i] = '<h5>' + pieces[i] + '</h5>';
             }
             pieces.forEach(function (x) {
                 transformed += x;

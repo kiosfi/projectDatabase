@@ -51,6 +51,7 @@
         "organisation_email": "Sähköposti",
         "organisation_www": "Websivut",
         "state": "Tila",
+        "incomplete": "Keskeneräinen",
         "reg_date": "Rekisteröimispäivämäärä",
         "funding": "Rahoitus",
         "funding_applied_curr_local": "Haettu avustus",
