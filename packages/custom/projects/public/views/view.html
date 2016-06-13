@@ -77,11 +77,12 @@
                         <span class="col-md-4">
                             {{fieldNames["state"]}}:
                             {{project.state}}
+                            <span ng-if="project.incomplete"> (keskeneräinen)</span>
                         </span>
                         <form name="stateForm" class="proj-content"
                               ng-show="state.next.length !== 0
-                                                      && project.state !== 'hylätty'
-                                                      && project.state !== 'päättynyt'"
+                                          && project.state !== 'hylätty'
+                                          && project.state !== 'päättynyt'"
                               data-ng-init="findState()"
                               data-ng-submit="changeState(project.changeTo);">
                             <select id="stateSelect" data-ng-model="project.changeTo"
@@ -1002,6 +1003,7 @@
                             <option>Sopimus</option>
                             <option>Valokuva</option>
                             <option>Hankkeessa tuotettu materiaali</option>
+                            <option>Talousraportti</option>
                             <option>Muu...</option>
                         </select>
                         <input type="text" name="appendix_custom_category"

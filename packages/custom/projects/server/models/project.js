@@ -75,6 +75,14 @@ var ProjectSchema = new Schema({
         required: true
     },
     /**
+     * The purpose of this flag is to indicate that the current state of the
+     * project is incomplete, i.e. the values of some of its fields are about
+     * to change later on. This field was added in schema version 9.
+     */
+    incomplete: {
+        type: Boolean
+    },
+    /**
      * Date when the application was filed.
      */
     reg_date: {                 // "Rekisteröimispvm"

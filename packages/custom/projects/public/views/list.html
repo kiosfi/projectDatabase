@@ -41,24 +41,22 @@
                     </th>
                     <th class="col-md-3">Huomioita</th>
                     <th class="col-md-3">
-                        <a id="byOrg"
-                           href="" ng-click="updateOrdering('organisation')">
-                            {{fieldNames["organisation"]}}
-                        </a>
-                        <span class="sortorder"
-                              ng-show="ordering === 'organisation'"
-                              ng-class="{reverse:!ascending}"></span>
+                        <!-- Sorting by organisation seems to be broken, so it's
+                        disabled here: -->
+                        {{fieldNames["organisation"]}}
                     </th>
                 </tr>
             </thead>
             <tbody id="projtable">
-                <tr id="proj-{{project.project_ref}}" ng-repeat="project in projects">
+                <tr id="proj-{{project.project_ref}}" ng-repeat="project in projects" ng-class="project.incomplete ? 'text-muted' : ''">
                     <td>{{project.project_ref}}</td>
                     <td><a ng-href="/projects/{{project._id}}">
                             {{project.title}}</a></td>
-                    <td>{{project.state}}
+                    <td>
+                        {{project.state}}
                     </td>
                     <td>
+                        <span ng-if="project.incomplete">Keskeneräinen</span>
                         <span ng-repeat="deadline in project.signed.intreport_deadlines"
                               style="color:red;"
                               ng-if="deadline.date < now &&

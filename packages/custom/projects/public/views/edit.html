@@ -1437,9 +1437,11 @@
             </div>
         </fieldset>
         <fieldset>
+            <legend>Vahvistus</legend>
             <div class="form-group">
-                <div class="col-md-12">
-                    <div class="col-md-6"><label for="special_notes" class="col-md-2">
+                <div class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-6">
+                        <label for="special_notes" class="col-md-2">
                             {{fieldNames["special_notes"]}}
                         </label>
                         <div class="col-md-10">
@@ -1451,13 +1453,19 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <a ng-href="/projects/{{project._id}}" class="btn btn-danger">
-                            Peruuta
-                        </a>
-                        <button mean-token="'edit-submit'" type="submit"
-                                class="btn btn-default"
-                                ng-disabled="projectEditForm.$invalid">Tallenna</button>
+                        <label for="incomplete">Kesken</label>
+                        <input type="checkbox" id="incomplete"
+                               data-ng-model="project.incomplete">
                     </div>
+                </div>
+                <div class="col-md-12" style="text-align: center">
+                    <a ng-href="/projects/{{project._id}}"
+                       class="btn btn-danger">
+                        Peruuta
+                    </a>
+                    <button mean-token="'edit-submit'" type="submit"
+                            class="btn btn-default"
+                            ng-disabled="projectEditForm.$invalid">Tallenna</button>
                 </div>
             </div>
         </fieldset>
