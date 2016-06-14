@@ -201,6 +201,11 @@
                     <span ng-bind-html="handleEmphasis(project.description)">
                     </span>
                 </div>
+                <h4>{{fieldNames["description_en"]}}</h4>
+                <div class="proj-content">
+                    <span ng-bind-html="handleEmphasis(project.description_en)">
+                    </span>
+                </div>
                 &nbsp;
             </article>
             <article id="organisation" class="proj-article">
@@ -262,20 +267,6 @@
             <article id="details" class="proj-article">
                 <h4>Lisätiedot</h4>
                 <div id="appinfo" class="proj-content">
-                    <div class="col-md-12" style="margin-bottom: 1em"
-                         ng-show="project.methods.length > 0">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["methods"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <div ng-repeat="method in project.methods">
-                                <em>{{method.name}}</em> ({{method.level}})
-                                <p class="proj-subcontent">
-                                    <span ng-bind-html="handleEmphasis(method.comment)"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                     <div ng-show="nonEmpty(project.context)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
@@ -301,6 +292,38 @@
                         </div>
                         <div class="col-md-8">
                             <span ng-bind-html="handleEmphasis(project.target_group)"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-bottom: 1em"
+                         ng-show="project.methods.length > 0">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["methods"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <div ng-repeat="method in project.methods">
+                                <em>{{method.name}}</em> ({{method.level}})
+                                <p class="proj-subcontent">
+                                    <span ng-bind-html="handleEmphasis(method.comment)"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.planned_results)"
+                         class="col-md-12" style="margin-bottom: 1em">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["planned_results"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <span ng-bind-html="handleEmphasis(project.planned_results)"></span>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.risk_control)"
+                         class="col-md-12" style="margin-bottom: 1em">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["risk_control"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <span ng-bind-html="handleEmphasis(project.risk_control)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.gender_aspect)"
@@ -355,6 +378,15 @@
                         </div>
                         <div class="col-md-8">
                             <span ng-bind-html="handleEmphasis(project.other_donors_proposed)"></span>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.human_resources)"
+                         class="col-md-12" style="margin-bottom: 1em">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["human_resources"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <span ng-bind-html="handleEmphasis(project.human_resources)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.referees)"
@@ -451,7 +483,9 @@
                             </div>
                             <div class="col-md-2">
                                 <a ng-href="/projects/{{project._id}}/regreport/{{intreport.reportNumber}}"
-                                   class="btn large-btn">HTML-raportti</a>
+                                   target="_blank" class="btn large-btn">
+                                    HTML-raportti
+                                </a>
                             </div>
                             <div class="col-md-4">
                                 <a ng-click="createPDF('reg')"
@@ -589,7 +623,9 @@
                                 </div>
                                 <div class="col-md-2">
                                     <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}"
-                                       class="btn large-btn">HTML-raportti</a>
+                                       target="_blank" class="btn large-btn">
+                                        HTML-raportti
+                                    </a>
                                 </div>
                                 <div class="col-md-4">
                                     <a ng-click="createPDF('int')"
@@ -639,14 +675,19 @@
                             </div>
                             <div class="col-md-2">
                                 <a ng-href="/projects/endReport/{{project._id}}"
-                                   class="btn large-btn">HTML-raportti</a>
+                                   target="_blank" class="btn large-btn">
+                                    HTML-raportti
+                                </a>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <a ng-click="createPDF('end')"
-                                   ng-disabled="endRepExists"
+                                   ng-disabled="endRepExists || nonPDFfinancialRep"
                                    class="btn large-btn">
                                     Luo PDF
                                 </a>
+                            </div>
+                            <div class="col-md-2" ng-show="!financialRepExists">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span> <small>Talousraportti puuttuu</small>
                             </div>
                         </div>
                         <div ng-show="showEndDetails"
@@ -1010,6 +1051,7 @@
                             <option>Sopimus</option>
                             <option>Valokuva</option>
                             <option>Hankkeessa tuotettu materiaali</option>
+                            <option>Välitalousraportti</option>
                             <option>Talousraportti</option>
                             <option>Muu...</option>
                         </select>

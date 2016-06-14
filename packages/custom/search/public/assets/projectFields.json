@@ -1,6 +1,10 @@
 {
     "main_menu": [
         {
+            "name": "incomplete",
+            "fi": "Keskeneräinen"
+        },
+        {
             "name": "project_ref",
             "fi": "Tunnus"
         },
@@ -77,28 +81,72 @@
             "fi": "Ihmisoikeuskonteksti"
         },
         {
+            "name": "project_goal",
+            "fi": "Päätavoitteet"
+        },
+        {
             "name": "target_group",
-            "fi": "Kohderyhmä"
+            "fi": "Hyödynsaajat"
         },
         {
             "name": "gender_aspect",
-            "fi": "T-A. ja muut teemat"
+            "fi": "T-A. ja muut läpileikkaavat teemat"
         },
         {
-            "name": "project_goal",
-            "fi": "Päätavoitteet"
+            "name": "vulnerable_groups",
+            "fi": "Haavoitt. ryhmien huomioon ottaminen"
+        },
+        {
+            "name": "planned_results",
+            "fi": "Odotettavissa olevat keskeiset tulokset"
+        },
+        {
+            "name": "risk_control",
+            "fi": "Riskinhallinnan kuvaus"
         },
         {
             "name": "indicators",
             "fi": "Indikaattorit"
         },
         {
-            "name": "reporting_evaluation",
-            "fi": "Evaluointi ja vaikuttavuuden arviointi"
+            "name": "budget",
+            "fi": "Budjetti ja omarahoitusosuus"
         },
         {
             "name": "other_donors_proposed",
             "fi": "Muualta haettu rahoitus"
+        },
+        {
+            "name": "reporting_evaluation",
+            "fi": "Evaluointi ja vaikuttavuuden arviointi"
+        },
+        {
+            "name": "human_resources",
+            "fi": "Henkilöresurssit"
+        },
+        {
+            "name": "referees",
+            "fi": "Suosittelijat"
+        },
+        {
+            "name": "background_check",
+            "fi": "Taustaselvitys"
+        },
+        {
+            "name": "fitness",
+            "fi": "Sopivuus KIOSin strategiaan"
+        },
+        {
+            "name": "capacity",
+            "fi": "Järjestön kapasiteetti ja asiantuntijuus"
+        },
+        {
+            "name": "feasibility",
+            "fi": "Toteutettavuus ja riskit"
+        },
+        {
+            "name": "effectiveness",
+            "fi": "Tuloksellisuus, vaikutukset ja vaikuttavuus"
         },
         {
             "name": "methods.comment",
@@ -147,6 +195,10 @@
         {
             "name": "ended.other_comments",
             "fi": "Päättämisen kommentit"
+        },
+        {
+            "name": "special_notes",
+            "fi": "Erityishuomiot"
         }
     ],
     "date_fields": [
@@ -205,20 +257,33 @@
     ],
     "string_params": [
         "project_ref",
-        "security_level",
         "title",
         "coordinator",
         "description",
         "description_en",
-        "background",
-        "beneficiaries",
-        "gender_aspect",
-        "project_goal",
-        "sustainability_risk",
-        "reporting_evaluation",
-        "other_donors_proposed",
         "dac",
         "region",
+        "country",
+        "target_group",
+        "vulnerable_groups",
+        "gender_aspect",
+        "project_goal",
+        "context",
+        "planned_results",
+        "risk_control",
+        "indicators",
+        "human_resources",
+        "budget",
+        "referees",
+        "background_check",
+        "fitness",
+        "capacity",
+        "feasibility",
+        "effectiveness",
+        "special_notes",
+        "background_check",
+        "reporting_evaluation",
+        "other_donors_proposed",
         "methods.comment",
         "in_review.comments",
         "rejected.rejection_comments",

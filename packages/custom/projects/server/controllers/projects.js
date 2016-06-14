@@ -902,10 +902,17 @@ module.exports = function (Projects) {
                                         "Haavoittuvimpien ryhmien huomioon ottaminen")
                                 .replace("<vulnerable-groups>",
                                         filter(project.vulnerable_groups))
-                                .replace("<titles.sustainability-risks>",
-                                        "Tavoitteiden saavuttamisen mittaaminen")
-                                .replace("<sustainability-risks>",
-                                        filter(project.sustainability_risks))
+                                .replace("<titles.planned-results>",
+                                        "Odotettavissa olevat keskeiset tulokset")
+                                .replace("<planned-results>",
+                                        filter(project.planned_results))
+                                .replace("<titles.risk-control>",
+                                        "Riskinhallinnan kuvaus")
+                                .replace("<risk-control>",
+                                        filter(project.risk_control))
+                                .replace("<titles.indicators>", "Indikaattorit")
+                                .replace("<indicators>",
+                                        filter(project.indicators))
                                 .replace("<titles.reporting-evaluation>",
                                         "Evaluointi ja vaikuttavuuden arviointi")
                                 .replace("<reporting-evaluation>",

@@ -39,11 +39,19 @@
                                     {{orgField.fi}}
                                 </option>
                             </select>
-                            <div ng-show="query.field === 'org_fields'"
-                                 class="col-md-4">
-                                <input type="text" class="form-control"
+                            <div ng-show="query.field === 'org_fields' && query.orgField"
+                                 class="col-md-12">
+                                <div class="col-md-6">
+                                </div>
+                                <label for="orgFieldPattern" class="col-md-2">
+                                    Hakusana
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control"
                                        data-ng-model="query.orgValue"
+                                       id="orgFieldPattern"
                                        placeholder="Säännöllinen lauseke">
+                                </div>
                             </div>
                             <select ng-show="query.field === 'state'"
                                     data-ng-model="query.value"
@@ -67,6 +75,17 @@
                                        data-ng-model="query.value"
                                        placeholder="Säännöllinen lauseke">
                             </div>
+                            <select ng-show="query.field === 'incomplete'"
+                                    data-ng-model="query.value" class="col-md-4">
+                                <option value="true">Kyllä</option>
+                                <option value="false">Ei</option>
+                            </select>
+                            <select ng-show="query.field === 'security_level'"
+                                    data-ng-model="query.value" class="col-md-4">
+                                <option>Julkinen</option>
+                                <option>Luottamuksellinen</option>
+                                <option>Salainen</option>
+                            </select>
                             <select ng-show="query.field === 'methods.level'"
                                     data-ng-model="query.value"
                                     class="col-md-4">
@@ -402,14 +421,7 @@
                             <span class="col-md-3">
                                 <input type="checkbox" id="target_group"
                                        data-ng-model="exportFields.target_group">
-                                <label for="target_group">Kohderyhmä</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="human_resources"
-                                       data-ng-model="exportFields.human_resources">
-                                <label for="human_resources">
-                                    Henkilöresurssit
-                                </label>
+                                <label for="target_group">Hyödynsaajat</label>
                             </span>
                             <span class="col-md-3">
                                 <input type="checkbox" id="equality"
@@ -426,19 +438,39 @@
                                 </label>
                             </span>
                             <span class="col-md-3">
+                                <input type="checkbox" id="planned_results"
+                                       data-ng-model="exportFields.planned_results">
+                                <label for="planned_results">
+                                    Odot. keskeiset tulokset
+                                </label>
+                            </span>
+                            <span class="col-md-3">
                                 <input type="checkbox"
-                                       id="indicators"
+                                       id="risk_control"
+                                       data-ng-model="exportFields.risk_control">
+                                <label for="risk_control">
+                                    Riskinhallinnan kuvaus
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="indicators"
                                        data-ng-model="exportFields.indicators">
                                 <label for="indicators">
                                     Indikaattorit
                                 </label>
                             </span>
                             <span class="col-md-3">
-                                <input type="checkbox"
-                                       id="reporting_evaluation"
+                                <input type="checkbox" id="reporting_evaluation"
                                        data-ng-model="exportFields.reporting_evaluation">
                                 <label for="reporting_evaluation">
                                     Eval. ja vaikutt. arviointi
+                                </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="checkbox" id="human_resources"
+                                       data-ng-model="exportFields.human_resources">
+                                <label for="human_resources">
+                                    Henkilöresurssit
                                 </label>
                             </span>
                             <span class="col-md-3">

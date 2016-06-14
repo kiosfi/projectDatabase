@@ -473,8 +473,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         if (appendix.custom_category ===
                                 "TJ:n päätös uudesta hankkeesta") {
                             $scope.regRepExists = true;
-                        } else if (appendix.custom_category == "Loppuraportti") {
+                        } else if (appendix.custom_category === "Loppuraportti") {
                             $scope.endRepExists = true;
+                        } else if (appendix.category === "Talousraportti") {
+                            $scope.financialRepExists = true;
+                            if (appendix.mime_type !== "application/pdf") {
+                                $scope.nonPDFfinancialRep = true;
+                            }
                         }
                     });
                 }
@@ -1003,6 +1008,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.endRepExists = false;
 
         /**
+         * <tt>true</tt> if and only if there exists a financial report for this
+         * project and has a MIME type other than <tt>application/pdf</tt>.
+         */
+        $scope.nonPDFfinancialReport = false;
+
+        /**
          * Creates a new PDF report it there isn't already a corresponding
          * report saved as an appendix.
          */
@@ -1020,6 +1031,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 case "end":
                     if ($scope.endRepExists) {
                         $window.alert("Raportti on jo tallennettu. (Katso liitteet.)");
+                        break;
+                    }
+                    if ($scope.nonPDFfinancialRep) {
+                        $window.alert("Talousraportin tulee olla PDF-muodossa.");
                         break;
                     }
                     $scope.project.$endRepPDF(function (response) {
