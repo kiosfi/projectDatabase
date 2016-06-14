@@ -110,6 +110,13 @@
                     </div>
                     <div class="col-md-9">{{project.security_level}}</div>
                 </div>
+                <div ng-show="nonEmpty(project.country)"
+                     class="proj-content col-md-12">
+                    <div class="col-md-3 mini-header">
+                        {{fieldNames["country"]}}
+                    </div>
+                    <div class="col-md-9">{{project.country}}</div>
+                </div>
                 <div ng-show="nonEmpty(project.region)"
                      class="proj-content col-md-12">
                     <div class="col-md-3 mini-header">

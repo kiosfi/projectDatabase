@@ -204,12 +204,12 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * search page.
          */
         $scope.exportFields = {ref: true, title: true, state: true,
-            security_level: false, coordinator: false, region: true, dac: true,
-            reg_date: true, applied_local: false, applied_eur: true,
-            granted_eur: true, duration: true, org_name: true, org_rep: false,
-            org_addr: false, org_tel: false, org_email: false, org_www: false,
-            themes: false, description: false, activities: false,
-            context: false, goal: false, target_group: false,
+            security_level: false, coordinator: false, country: true,
+            region: false, dac: true, reg_date: true, applied_local: false,
+            applied_eur: true, granted_eur: true, duration: true,
+            org_name: true, org_rep: false, org_addr: false, org_tel: false,
+            org_email: false, org_www: false, themes: false, description: false,
+            activities: false, context: false, goal: false, target_group: false,
             human_resources: false, equality: false, vulnerable_groups: false,
             indicators: false, reporting_evaluation: false,
             budget: false, other_funding: false, referees: false,
@@ -226,8 +226,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * List of the basic fields in the project search result export form.
          */
         $scope.basicFieldsArray = ['ref', 'title', 'state', 'security_level',
-            'coordinator', 'region', 'dac', 'reg_date', 'applied_local',
-            'applied_eur', 'duration', 'granted_eur'];
+            'coordinator', 'country', 'region', 'dac', 'reg_date',
+            'applied_local', 'applied_eur', 'duration', 'granted_eur'];
 
         /**
          * The state of a master checkbox contolling all the organisation field

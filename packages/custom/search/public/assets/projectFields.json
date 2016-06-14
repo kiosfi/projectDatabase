@@ -17,8 +17,12 @@
             "fi": "Koordinaattori"
         },
         {
+            "name": "country",
+            "fi": "Maa"
+        },
+        {
             "name": "region",
-            "fi": "Alue / Maa"
+            "fi": "Alue"
         },
         {
             "name": "dac",

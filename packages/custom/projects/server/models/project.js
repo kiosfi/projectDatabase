@@ -16,7 +16,8 @@ var ProjectSchema = new Schema({
      */
     schema_version: {           // Current version is 9.
         type: Number,
-        required: true
+        required: true,
+        default: 1
     },
     /**
      * Security level of the project. The value should be one of the following
@@ -240,9 +241,18 @@ var ProjectSchema = new Schema({
         trim: true
     },
     /**
-     * The current Finnish name for this field is "Alue / Maa".
+     * The country where the project is mean to take place. This field was added
+     * in schema version 9.
      */
-    region: {                   // "Alue / Maa"
+    country: {                  // "Maa"
+        type: String,
+        trim: true
+    },
+    /**
+     * The Finnish name for this field was "Alue / Maa" before schema version 9.
+     * Now it's called "Alue".
+     */
+    region: {                   // "Alue"
         type: String,
         trim: true
     },

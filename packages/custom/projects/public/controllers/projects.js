@@ -586,6 +586,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.schema_version = 9;
                 project.indicators = project.sustainability_risks;
                 project.sustainability_risks = undefined;
+                project.country = project.region;
+                project.region = "";
                 project.$update(function () {
                 });
             }
