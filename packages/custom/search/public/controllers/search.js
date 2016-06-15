@@ -187,15 +187,17 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                     'exec_manager', 'communications_rep', 'address', 'tel',
                     'email', 'website', 'legal_status', 'description',
                     'int_links', 'nat_local_links', 'other_funding_budget',
-                    'accounting_audit'];
+                    'accounting_audit', 'background', 'special_notes'];
 
-                $scope.orgHeaders = ['Nimi', 'Edustaja',
-                    'Vastuullinen johtaja', 'Viestintävastaava', 'Osoite',
-                    'Puh', 'Email', 'WWW', 'Hallintomalli ja henkilöstö',
-                    'Kuvaus', 'Kansainväliset linkit',
-                    'Kansalliset/paikalliset linkit',
-                    'Muu rahoitus ja budjetti',
-                    'Taloushallinto ja tilintarkastus'];
+                $scope.orgHeaders = ['Nimi', 'Edustaja', 'Vastuullinen johtaja',
+                    'Viestintävastaava', 'Osoite', 'Puhelinnumero',
+                    'Sähköpostiosoite', 'Websivut',
+                    'Hallintomalli ja henkilöstö',
+                    'Tavoitteet ja keskeiset toimintatavat',
+                    'Kansainväliset yhteydet', 'Kansalliset yhteydet',
+                    'Muut rahoittajat ja budjetti',
+                    'Taloushallinto ja tilintarkastus',
+                    'Oleelliset taustatiedot', 'Erityishuomiot'];
             });
         };
 

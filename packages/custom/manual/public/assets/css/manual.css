@@ -20,12 +20,12 @@
 .man-body figure {
     margin-top:         2em;
     margin-bottom:      2em;
+    text-align:         center;
 }
 
 .man-body figcaption {
     margin-top:         0.5em;
     margin-right:       3em;
-    text-align:         center;
 }
 
 .man-article {
