@@ -139,7 +139,6 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * fetched from the URL.
          */
         $scope.searchPayments = function () {
-
             var search = $location.search();
 
             if (typeof search.searchBy === 'undefined' ||
