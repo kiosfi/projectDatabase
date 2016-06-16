@@ -2,33 +2,33 @@
     <h1>Käyttöohje</h1>
     <hr>
     <div>
-        <ul id="menu" class="col-md-3 nav nav-list" style="position: fixed; left: 128px">
+        <ul id="menu" class="col-md-3 nav nav-list" style="position: fixed; left: 5%">
             <li>
                 <label><a href="#notes">1. Yleisiä huomioita</a></label>
-                    <ul>
-                        <li><a href="#inputs">1.1. Syötekentistä</a></li>
-                        <li><a href="#formatting">1.2. Tekstin muotoilusta</a></li>
-                    </ul>
+                <ul>
+                    <li><a href="#inputs">1.1. Syötekentistä</a></li>
+                    <li><a href="#formatting">1.2. Tekstin muotoilusta</a></li>
+                </ul>
             </li>
             <li>
                 <label><a href="#projCreation">2. Hankkeen lisäys</a></label>
-                    <ul>
-                        <li>
-                            <a href="#projCreationForm">
-                                2.1. Hankkeen lisäyslomake
-                            </a>
-                        </li>
-                    </ul>
+                <ul>
+                    <li>
+                        <a href="#projCreationForm">
+                            2.1. Hankkeen lisäyslomake
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <label><a href="#orgCreation">3. Järjestön lisäys</a></label>
-                    <ul>
-                        <li>
-                            <a href="#orgCreationForm">
-                                3.1. Järjestön lisäyslomake
-                            </a>
-                        </li>
-                    </ul>
+                <ul>
+                    <li>
+                        <a href="#orgCreationForm">
+                            3.1. Järjestön lisäyslomake
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <label><a href="#projView">4. Hankenäkymä</a></label>
@@ -41,12 +41,12 @@
             </li>
             <li>
                 <label><a href="#projSearch">7. Hankehaku</a></label>
-                    <ul>
-                        <li><a href="#regex">7.1. Säännölliset lausekkeet</a></li>
-                        <li><a href="#combinations">7.2. Hakukriteerien yhdistäminen</a></li>
-                        <li><a href="#export">7.3. Hakutulosten vienti</a></li>
-                        <li><a href="#criteria">7.4. Hakukriteerien tyypit</a></li>
-                    </ul>
+                <ul>
+                    <li><a href="#regex">7.1. Säännölliset lausekkeet</a></li>
+                    <li><a href="#combinations">7.2. Hakukriteerien yhdistäminen</a></li>
+                    <li><a href="#export">7.3. Hakutulosten vienti</a></li>
+                    <li><a href="#criteria">7.4. Hakukriteerien tyypit</a></li>
+                </ul>
             </li>
             <li>
                 <label><a href="#orgSearch">8. Järjestöhaku</a></label>
@@ -56,9 +56,19 @@
             </li>
             <li>
                 <label><a href="#states">10. Hankkeen tilat</a></label>
+                <ul>
+                    <li><a href="#stateModel">10.1. Tilamalli</a></li>
+                    <li><a href="#stateProperties">10.2. Tilojen erityispiirteitä</a></li>
+                    <li><a href="#incompleteness">10.3. Keskeneräiset tilat</a></li>
+                </ul>
             </li>
             <li>
                 <label><a href="#projEdit">11. Hankkeen muokkaus</a></label>
+                <ul>
+                    <li><a href="#projeEditForm">11.1. Hankkeen muokkauslomake</a></li>
+                    <li><a href="#addPayment">11.2. Maksun lisäyslomake</a></li>
+                    <li><a href="#addAppendix">11.3. Liitteen lisäyslomake</a></li>
+                </ul>
             </li>
             <li>
                 <label><a href="#orgEdit">12. Järjestön muokkaus</a></label>
@@ -422,6 +432,14 @@
                     <p>
                         Selain siis ohjataan automaattisesti hankkeen
                         näkymäsivulle, kun hankkeen lisääminen on suoritettu.
+                        Hankkeen näkymäsivulle pääsee myöhemmin esimerkiksi
+                        <em>hankelistauksen</em>
+                        (ks. <a href="#projList">5.&nbsp;Hankelistaus</a>)
+                        sekä <em>hankehaun</em>
+                        (ks. <a href="#projSearch">7.&nbsp;Hankehaku</a>)
+                        kautta.
+                    </p>
+                    <p>
                         Hankkeen näkymäsivu sisältää hankkeen kaikki tiedot
                         poislukien raporttikohtaiset tiedot, jotka näytetään
                         raporttien näkymäsivuilla. Muutokset hankkeen tietoihin
@@ -431,7 +449,7 @@
                         lisäys, joille on (teknisistä syistä) omat lomakkeensa
                         hankkeen näkymäsivulla.
                     </p>
-                    <figure>
+                    <figure id="fig4">
                         <img src="manual/assets/img/kuvakaappaus-4.png"
                              alt="Hankkeen näkymäsivu">
                         <figcaption>
@@ -545,8 +563,8 @@
                             Kuva 6: Hankehaku.
                         </figcaption>
                     </figure>
-                    <h5>7.1. Säännölliset lausekkeet</h5>
-                    <div class="man-subcontent" id="regex">
+                    <h5 id="regex">7.1. Säännölliset lausekkeet</h5>
+                    <div class="man-subcontent">
                         <p>
                             Tekstimuotoisissa hakukentissä käytetään
                             säännöllisiä lausekkeita. Tässä kappaleessa annetaan
@@ -928,7 +946,7 @@
             </article>
             <article id="paymentSearch" class="man-article">
                 <h4>9. Maksuhaku</h4>
-                <article class="man-content">
+                <section class="man-content">
                     <p>
                         Maksuhaku on oleellisesti samankaltainen kuin hankehaku
                         (ks. <a href="#projSearch">7.&nbsp;Hankehaku</a>).
@@ -945,136 +963,249 @@
                         <li><tt>Hankkeen koordinaattori</tt></li>
                         <li><tt>Hankkeen alue</tt></li>
                     </ol>
-                </article>
+                </section>
             </article>
             <article id="states" class="man-article">
                 <h4>10. Hankkeen tilat</h4>
-                <article class="man-content">
+                <section class="man-content">
                     <p>
-                        Hankkeen tilat on mallinnettavissa samankaltaisen
-                        äärellisen automaatin avulla, kuin millä säännöllinen
-                        lauseke on mahdollista käsitellä.
+                        Järjestelmään tallennetulla hankkeella on millä tahansa
+                        ajan hetkellä yksikäsitteinen tila. Tila määrää mm. mitä
+                        tietoja hanke sisältää, millaisia tietoja siihen voidaan
+                        lisätä, miten sitä voidaan muokta sekä mihin tilaan se
+                        voidaan seuraavaksi siirtää.
                     </p>
-                    <p>
-                        Järjestelmän tilamallissa hankkeen <em>alkutila</em> on
-                        <tt>Rekisteröity</tt>. Jokainen lisätty hanke aluksi
-                        siirretään tähän tilaan kun
-                        <em>hankkeen lisäyslomake</em> (ks.
-                        <a href="#projCreationForm">
-                            2.1&nbsp;Hankkeen&nbsp;lisäyslomake
-                        </a>) on täytetty.
-<!--                        (Automaattien slangissa lomakkeita
-                        kutsutaan <em>syötteeksi</em> ja lomakkeiden täytön
-                        aiheuttamaa tilan vaihdosta <em>tilasiirtymäksi</em>.)-->
-                        Myöhemmät <em>tilasiirtymät</em> käynnistetään hankkeen
-                        näkymäsivun yläosassa olevalla lomakkeella (ks.
-                        <a href="#projView">4.&nbsp;Hankenäkymä</a>). Lisäksi
-                        hankkeen <em>muokkauslomake</em> on järjestetty hankkeen
-                        tiloja vastaaviin osioihin (ks.
-                        <a href="#projEdit">11.&nbsp;Hankkeen&nbsp;muokkaus</a>).
-                    </p>
-                    <figure>
-                        <img src="manual/assets/img/states.png"
-                             alt="Hankkeen tilat" style="border: 0px">
-                        <figcaption>
-                            Kuva 11: Kaavio hankkeen tiloista. Jokaista nuolta
-                            vastaa syötelomake, jossa hankkeeseen tallennetaan
-                            uusia tietoja.
-                        </figcaption>
-                    </figure>
-                    <p>
-                        Hanke voi siis olla kerrallaan yhdessä seuraavista
-                        tiloista:
-                    </p>
-                    <ul>
-                        <li><tt>Rekisteröity</tt></li>
-                        <li><tt>Käsittelyssä</tt></li>
-                        <li><tt>Hyväksytty</tt></li>
-                        <li><tt>Allekirjoitettu</tt></li>
-                        <li><tt>Väliraportti</tt></li>
-                        <li><tt>Loppuraportti</tt></li>
-                        <li><tt>Päättynyt</tt></li>
-                        <li><tt>Hylätty</tt></li>
-                    </ul>
-                    <p>
-                        Tiloista siirrytään toisiin nuolten mukaisesti
-                        täyttämällä tilasiirtymän vaatimat tiedot lomakkeella.
-                        Luetelluista tiloista kaksi viimestä ovat sellaisia,
-                        ettei niistä voi siirtyä muihin tiloihin, vaan hanke
-                        katsotaan loppuun käsitellyksi jos se on viety toiseen
-                        niistä. Lisäksi keltasella väritetyt tilat ovat
-                        sellaisia, että hankkeen katsotaan olevan käsittelyssä
-                        kun se on jossain näistä tiloista. Käsittelyssä oleville
-                        tiloille on oma hakukriteerinsä (ks.
-                        <a href="#projSearch">7.&nbsp;Hankehaku</a>).
-                    </p>
-                    <p>
-                        Hankkeen näkymäsivulla (ks.
-                        <a href="#projView">4.&nbsp;Hankenäkymä</a>) pääsee
-                        tarkastelemaan eri tiloissa syötettyjä tietoja sekä
-                        tilasiirtymiin liittyviä metatietoja. Joihinkin
-                        tilasiirtymiin liittyy järjestelmän generoimia HTML-
-                        taikka PDF-muotoisia raportteja.
-                    </p>
-                    <figure>
-                        <img src="manual/assets/img/kuvakaappaus-11.png"
-                             alt="Hankkeen toteutunut aikataulu"
-                             style="border: 0px">
-                        <figcaption>
-                            Kuva 12: Hankkeen näkymäsivun
-                            <em>Toteutunut aikataulu</em>-osiossa näkyy
-                            tilasiirtymien tietoja.
-                        </figcaption>
-                    </figure>
-                    <p>
-                        PDF-muotoisten raporttien luominen onnistuu klikkaamalla
-                        tilaa vastaavaa painiketta <em>Luo PDF</em> hankkeen
-                        näkymäsivun <em>Toteutunut aikataulu</em>-osiossa.
-                        Järjestelmä luo tällöin PDF-tiedoston, joka ilmestyy
-                        osioon <em>liitteet</em>.
-                    </p>
-                    <figure>
-                        <img src="manual/assets/img/kuvakaappaus-12.png"
-                             alt="Hankkeen liitteet"
-                             style="border: 0px">
-                        <figcaption>
-                            Kuva 13: Jos hankkeelle lisää talousraportin, se
-                            sisällytetään automaattisesti mukaan loppuraportin
-                            PDF-versioon.
-                        </figcaption>
-                    </figure>
-                    <p>
-                        Loppuraporttiin on mahdollista liittää talousraportti.
-                        Talousraportti tulee tallentaa PDF-muotoisena
-                        liitetiedostona, jonka <tt>Kategoria</tt> on
-                        "Talousraportti". Jos tällainen liitetiedosto löytyy,
-                        liitetään se automaattisesti loppuraportin PDF-versioon.
-                    </p>
-                    <p>
-                        Yllä olevassa kuvassa näkyy <em>Liitteen lisäys</em>
-                        -lomake, jonka kautta talousraportin ja muidenkin
-                        liitteiden lisäys onnistuu. Liitteelle tulee valita
-                        kategoria valintalaatikosta. Jos mikään listan kategoria
-                        ei kuvaa lisättävää liitettä, voi sille luoda oman
-                        kategorian valitsemalla listalta kohta "Muu..." ja
-                        täydentämällä valintalaatikon oikealle puolelle
-                        ilmestyvään tekstikenttään sopiva kuvaus.
-                        Lisättävän tiedoston valintaikkunaan pääsee painamalla
-                        painiketta <em>Selaa...</em>. Liitteen lisäys
-                        vahvistetaan painamalla painiketta <em>Tallenna</em>.
-                    </p>
-                </article>
+                    <h5 id="stateModel">10.1. Tilamalli</h5>
+                    <div class="man-subcontent">
+                        <p>
+                            Järjestelmän tilamallissa hankkeen <em>alkutila</em>
+                            on <tt>Rekisteröity</tt>. Jokainen lisätty hanke
+                            aluksi siirretään tähän tilaan kun
+                            <em>hankkeen lisäyslomake</em> (ks.
+                            <a href="#projCreationForm">
+                                2.1&nbsp;Hankkeen&nbsp;lisäyslomake
+                            </a>) on täytetty.
+    <!--                        (Automaattien slangissa lomakkeita
+                            kutsutaan <em>syötteeksi</em> ja lomakkeiden täytön
+                            aiheuttamaa tilan vaihdosta <em>tilasiirtymäksi</em>.)-->
+                            Myöhemmät <em>tilasiirtymät</em> käynnistetään
+                            hankkeen näkymäsivun yläosassa olevalla lomakkeella
+                            (ks. <a href="#projView">4.&nbsp;Hankenäkymä</a>).
+                            Lisäksi hankkeen <em>muokkauslomake</em> on
+                            järjestetty hankkeen tiloja vastaaviin osioihin (ks.
+                            <a href="#projEdit">11.&nbsp;Hankkeen&nbsp;muokkaus</a>).
+                        </p>
+                        <figure id="fig11">
+                            <img src="manual/assets/img/states.png"
+                                 alt="Hankkeen tilat" style="border: 0px">
+                            <figcaption>
+                                Kuva 11: Kaavio hankkeen tiloista. Jokaista
+                                nuolta vastaa syötelomake, jossa hankkeeseen
+                                tallennetaan uusia tietoja.
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Hanke voi siis olla kerrallaan yhdessä seuraavista
+                            tiloista:
+                        </p>
+                        <table>
+                            <tr>
+                                <th>Tila</th>
+                                <th>Huomioita</th>
+                            </tr>
+                            <tr>
+                                <td><tt>Rekisteröity</tt></td>
+                                <td>Hankkeen alkutila.</td>
+                            </tr>
+                            <tr>
+                                <td><tt>Käsittelyssä</tt></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><tt>Hyväksytty</tt></td>
+                                <td>Mahdollisuus luoda <em>hyväksymisraportti</em>.</td>
+                            </tr>
+                            <tr>
+                                <td><tt>Allekirjoitettu</tt></td>
+                                <td>Hanke käynnistyy.</td>
+                            </tr>
+                            <tr>
+                                <td><tt>Väliraportti</tt></td>
+                                <td>Mahdollisuus luoda <em>väliraportti</em>.</td>
+                            </tr>
+                            <tr>
+                                <td><tt>Loppuraportti</tt></td>
+                                <td>Mahdollisuus luoda <em>loppuraportti</em>.</td>
+                            </tr>
+                            <tr>
+                                <td><tt>Päättynyt</tt></td>
+                                <td>Hankkeen lopputila.</td>
+                            </tr>
+                            <tr>
+                                <td><tt>Hylätty</tt></td>
+                                <td>Hankkeen lopputila.</td>
+                            </tr>
+                        </table>
+                        <p>
+                            Tiloista siirrytään toisiin nuolten mukaisesti
+                            täyttämällä tilasiirtymän vaatimat tiedot lomakkeella.
+                        </p>
+                        <div class="alert alert-warning">
+                            <p>
+                                Kuten edellisestä kuvasta saattaa arvata,
+                                <em>tilasiirtymät ovat peruuttamattomia</em>.
+                                Tämä johtuu yksinkertaisesti siitä, että
+                                mielivaltaisella tilalla ei ole yksikäsitteistä
+                                edeltäjätilaa.
+                            </p>
+                        </div>
+                    </div>
+                    <h5 id="stateProperties">10.2. Tilojen erityispiirteitä</h5>
+                    <div class="man-subcontent">
+                        <p>
+                            <a href="#fig11">Kuvassa&nbsp;11</a> keltasella
+                            väritetyt tilat ovat sellaisia, että hankkeen
+                            katsotaan olevan <em>käynnissä</em> kun se on
+                            jossain näistä tiloista. Näille tiloille on oma
+                            hakukriteerinsä
+                            (ks. <a href="#projSearch">7.&nbsp;Hankehaku</a>).
+                            Lisäksi käynnissä oleville hankkeille voidaan lisätä
+                            maksuja. Maksun lisäämistä hankkeelle käsitellään
+                            kappaleessa
+                            <a href="#addPayment">11.2.&nbsp;Maksun&nbsp;lisäyslomake</a>.
+                        </p>
+                        <p>
+
+                        </p>
+                        <p>
+                            Hankkeen näkymäsivulla (ks.
+                            <a href="#projView">4.&nbsp;Hankenäkymä</a>) pääsee
+                            tarkastelemaan eri tiloissa syötettyjä tietoja sekä
+                            tilasiirtymiin liittyviä metatietoja. Joihinkin
+                            tilasiirtymiin liittyy järjestelmän generoimia HTML-
+                            taikka PDF-muotoisia raportteja.
+                        </p>
+                        <figure>
+                            <img src="manual/assets/img/kuvakaappaus-11.png"
+                                 alt="Hankkeen toteutunut aikataulu"
+                                 style="border: 0px">
+                            <figcaption>
+                                Kuva 12: Hankkeen näkymäsivun
+                                <em>Toteutunut aikataulu</em>-osiossa näkyy
+                                tilasiirtymien tietoja.
+                            </figcaption>
+                        </figure>
+                        <p>
+                            PDF-muotoisten raporttien luominen onnistuu
+                            klikkaamalla tilaa vastaavaa painiketta
+                            <em>Luo PDF</em> hankkeen
+                            näkymäsivun <em>Toteutunut aikataulu</em>-osiossa.
+                            Järjestelmä luo tällöin PDF-tiedoston, joka ilmestyy
+                            osioon <em>liitteet</em>.
+                        </p>
+                        <p>
+                            Loppuraporttiin on mahdollista liittää
+                            talousraportti. Talousraportti tulee tallentaa
+                            PDF-muotoisena liitetiedostona, jonka
+                            <tt>Kategoria</tt> on "Talousraportti" (ks.
+                            <a href="#addAppendix">11.3.&nbsp;Liitteen&nbsp;lisäyslomake</a>).
+                            Jos tällainen liitetiedosto löytyy, liitetään se
+                            automaattisesti loppuraportin PDF-versioon.
+                        </p>
+                    </div>
+                    <h5 id="incompleteness">10.3. Keskeneräiset tilat</h5>
+                    <div class="man-subcontent">
+                        <p>
+                            Järjestelmän tilamallin heikkokutena on, että se
+                            joutuu olettamaan tilasiirtymässä annetut tiedot
+                            oikeiksi ja täydellisiksi. Tilanteen helpottamiseksi
+                            on kehitetty ominaisuus, jonka avulla voi lisätä
+                            hankkeeseen määreen <tt>Keskeneräinen</tt>. Määreen
+                            tarkoitus on tiedottaa järjestelmän käyttäjiä siitä,
+                            että hankkeen nykyisen tilan (sekä edeltävient
+                            tilojen) tietoja saatetaan vielä muuttaa.
+                        </p>
+                        <p>
+                            Hankkeen keskeneräisyydestä ilmotetaan mm.
+                            <em>hankkeen näkymäsivulla</em> (ks.
+                            <a href="#projView">4.&nbsp;Hankenäkymä</a>) sekä
+                            <em>hankelistauksessa</em>
+                            (ks. <a href="5.&nbsp;">Hankelistaus</a>). Lisäksi
+                            hankkeen keskeneräisyys on hakukriteeri
+                            (ks. <a href="#projSearch">7.&nbsp;Hankehaku</a>).
+                        </p>
+                    </div>
+                </section>
             </article>
             <article id="projEdit" class="man-article">
                 <h4>11. Hankkeen muokkaus</h4>
-                <article class="man-content">
+                <section class="man-content">
+                    <p>
+                        Tämä kappale käsittelee hankkeen muokkausta muuten kuin
+                        tilasiirtymien yhteydessä. Tilasiirtymiä käsitellään
+                        luvussa
+                        <a href="#states">10.&nbsp;Hankkeen&nbsp;tilat</a>.
+                        <em>Tilasiirtymälomakkeeseen</em> pääsee hankkeen
+                        näkymäsivun yläosan lomakkeesta (ks.
+                        <a href="#fig4">Kuva&nbsp;4</a>).
+                    </p>
+                    <h5 id="projEditFom">11.1. Hankkeen muokkauslomake</h5>
+                    <div class="man-subcontent">
 
-                </article>
+                    </div>
+                    <h5 id="addPayment">11.2. Maksun lisäyslomake</h5>
+                    <div class="man-subcontent">
+
+                        <div class="alert alert-warning">
+                            Järjestelmä ei voi vaikuttaa pankkitapahtumiin, eikä
+                            myöskään valvo maksusuunnitelman toteutumista taikka
+                            maksujen lisäystä. Maksusuunnitelman huomiointi on
+                            käyttäjän vastuulla.
+                        </div>
+                        <figure>
+                            <img src="manual/assets/img/kuvakaappaus-14.png"
+                                 alt="Hankkeen liitteet"
+                                 style="border: 0px">
+                            <figcaption>
+                                Kuva 13: Maksun lisäyslomake.
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <h5 id="addAppendix">11.3. Liitteen lisäyslomake</h5>
+                    <div class="man-subcontent">
+
+                        <figure>
+                            <img src="manual/assets/img/kuvakaappaus-12.png"
+                                 alt="Hankkeen liitteet"
+                                 style="border: 0px">
+                            <figcaption>
+                                Kuva 14: Liitteen lisäyslomake. Jos hankkeelle
+                                lisää talousraportin, se sisällytetään
+                                automaattisesti mukaan loppuraportin
+                                PDF-versioon.
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Yllä olevassa kuvassa näkyy <em>Liitteen lisäys</em>
+                            -lomake, jonka kautta talousraportin ja muidenkin
+                            liitteiden lisäys onnistuu. Liitteelle tulee valita
+                            kategoria vetolaatikosta. Jos mikään listan
+                            kategoria ei kuvaa lisättävää liitettä, voi sille
+                            luoda oman kategorian valitsemalla listalta kohta
+                            "Muu..." ja täydentämällä vetolaatikon oikealle
+                            puolelle ilmestyvään tekstikenttään sopiva kuvaus.
+                            Lisättävän tiedoston valintaikkunaan pääsee
+                            painamalla painiketta <em>Selaa...</em>. Liitteen
+                            lisäys vahvistetaan painamalla painiketta
+                            <em>Tallenna</em>.
+                        </p>
+                    </div>
+                </section>
             </article>
             <article id="orgEdit" class="man-article">
-                <h4>12. Järjestön muokkaus</h4>
-                <article class="man-content">
-                </article>
+                <h4>12. Järjestönäkymä</h4>
+                <section class="man-content">
+                </section>
             </article>
         </div>
     </div>
