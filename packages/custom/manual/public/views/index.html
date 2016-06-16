@@ -59,13 +59,13 @@
                 <ul>
                     <li><a href="#stateModel">10.1. Tilamalli</a></li>
                     <li><a href="#stateProperties">10.2. Tilojen erityispiirteitä</a></li>
-                    <li><a href="#incompleteness">10.3. Keskeneräiset tilat</a></li>
+                    <li><a href="#incompleteness">10.3. Hanketietojen keskeneräisyys</a></li>
                 </ul>
             </li>
             <li>
                 <label><a href="#projEdit">11. Hankkeen muokkaus</a></label>
                 <ul>
-                    <li><a href="#projeEditForm">11.1. Hankkeen muokkauslomake</a></li>
+                    <li><a href="#projEditForm">11.1. Hankkeen muokkauslomake</a></li>
                     <li><a href="#addPayment">11.2. Maksun lisäyslomake</a></li>
                     <li><a href="#addAppendix">11.3. Liitteen lisäyslomake</a></li>
                 </ul>
@@ -227,8 +227,9 @@
                     tietojen säilyttäminen keskitetyssä sähköisessä
                     tietokannassa. Siispä uuden hankkeen lisääminen on
                     toiminnoista ehkäpä keskeisin ja samalla hanketietueen
-                    elinkaaren ensimmäinen vaihe. Näin ollen tämä toiminto on
-                    luontevinta käsitellä ensimmäisenä.
+                    elinkaaren ensimmäinen vaihe (ks.
+                    <a href="#stateModel">10.1.&nbsp;Tilamalli</a>). Näin ollen
+                    tämä toiminto on luontevinta käsitellä ensimmäisenä.
                     <h5 id="projCreationForm">2.1. Hankkeen lisäyslomake</h5>
                     <div class="man-subcontent">
                         <p>
@@ -517,7 +518,9 @@
                     <p>
                         Hankkeen <tt>Huomioita</tt>-kenttään ilmestyy punainen
                         teksti, mikäli kyseisen hankkeen jokin väliraportti on
-                        myöhässä.
+                        myöhässä. Lisäksi jos hanke on merkitty keskeneräiseksi
+                        (ks. <a href="#incompleteness">10.3.&nbsp;Hanketietojen&nbsp;keskeneräisyys</a>),
+                        huomautetaan siitä tässä kentässä.
                     </p>
                 </section>
             </article>
@@ -969,18 +972,18 @@
                 <h4>10. Hankkeen tilat</h4>
                 <section class="man-content">
                     <p>
-                        Järjestelmään tallennetulla hankkeella on millä tahansa
-                        ajan hetkellä yksikäsitteinen tila. Tila määrää mm. mitä
-                        tietoja hanke sisältää, millaisia tietoja siihen voidaan
-                        lisätä, miten sitä voidaan muokta sekä mihin tilaan se
-                        voidaan seuraavaksi siirtää.
+                        Järjestelmään tallennetulla hankkeella on aina
+                        yksikäsitteinen tila. Tila määrää mm. mitä tietoja hanke
+                        sisältää, millaisia tietoja siihen voidaan lisätä, miten
+                        sitä voidaan muokta sekä mihin tilaan se voidaan
+                        seuraavaksi siirtää.
                     </p>
                     <h5 id="stateModel">10.1. Tilamalli</h5>
                     <div class="man-subcontent">
                         <p>
-                            Järjestelmän tilamallissa hankkeen <em>alkutila</em>
-                            on <tt>Rekisteröity</tt>. Jokainen lisätty hanke
-                            aluksi siirretään tähän tilaan kun
+                            Järjestelmän tilamallissa hankkeen alkutila on
+                            <tt>Rekisteröity</tt>. Jokainen lisätty uusi hanke
+                            siirretään tähän tilaan kun
                             <em>hankkeen lisäyslomake</em> (ks.
                             <a href="#projCreationForm">
                                 2.1&nbsp;Hankkeen&nbsp;lisäyslomake
@@ -1005,7 +1008,7 @@
                             </figcaption>
                         </figure>
                         <p>
-                            Hanke voi siis olla kerrallaan yhdessä seuraavista
+                            Hanke voi siis olla tasan yhdessä seuraavista
                             tiloista:
                         </p>
                         <table>
@@ -1052,13 +1055,19 @@
                         </p>
                         <div class="alert alert-warning">
                             <p>
-                                Kuten edellisestä kuvasta saattaa arvata,
-                                <em>tilasiirtymät ovat peruuttamattomia</em>.
-                                Tämä johtuu yksinkertaisesti siitä, että
-                                mielivaltaisella tilalla ei ole yksikäsitteistä
+                                <em>Tilasiirtymät ovat peruuttamattomia</em>.
+                                Tämä johtuu yksinkertaisesti siitä, ettei
+                                mielivaltaisella tilalla ole yksikäsitteistä
                                 edeltäjätilaa.
                             </p>
                         </div>
+                        <p>
+                            Hankkeen tilasiirtymälomake on oleellisesti
+                            samankaltainen kuin <em>lisäyslomake</em> (ks.
+                            <a href="#projCreationForm">2.1.&nbsp;Hankkeen&nbsp;lisäyslomake</a>)
+                            ja <em>muokkauslomake</em> (ks.
+                            <a href="#projEditForm">11.1.&nbsp;Hankkeen&nbsp;muokkauslomake</a>).
+                        </p>
                     </div>
                     <h5 id="stateProperties">10.2. Tilojen erityispiirteitä</h5>
                     <div class="man-subcontent">
@@ -1066,33 +1075,32 @@
                             <a href="#fig11">Kuvassa&nbsp;11</a> keltasella
                             väritetyt tilat ovat sellaisia, että hankkeen
                             katsotaan olevan <em>käynnissä</em> kun se on
-                            jossain näistä tiloista. Näille tiloille on oma
-                            hakukriteerinsä
+                            jossain näistä tiloista. Käynnissä oleville
+                            hankkeille on oma hakukriteerinsä
                             (ks. <a href="#projSearch">7.&nbsp;Hankehaku</a>).
-                            Lisäksi käynnissä oleville hankkeille voidaan lisätä
-                            maksuja. Maksun lisäämistä hankkeelle käsitellään
-                            kappaleessa
+                            Niille voidaan lisätä maksuja. Maksun lisäämistä
+                            hankkeelle käsitellään kappaleessa
                             <a href="#addPayment">11.2.&nbsp;Maksun&nbsp;lisäyslomake</a>.
-                        </p>
-                        <p>
-
+                            (Koska väliraportteja voi olla useampia, on
+                            <tt>Väliraportti</tt>-tilassa takaisinkytkentä.
+                            Ks. esim. <a href="#fig12">Kuva&nbsp;12</a>.)
                         </p>
                         <p>
                             Hankkeen näkymäsivulla (ks.
                             <a href="#projView">4.&nbsp;Hankenäkymä</a>) pääsee
                             tarkastelemaan eri tiloissa syötettyjä tietoja sekä
                             tilasiirtymiin liittyviä metatietoja. Joihinkin
-                            tilasiirtymiin liittyy järjestelmän generoimia HTML-
-                            taikka PDF-muotoisia raportteja.
+                            tilasiirtymiin liittyy järjestelmän generoia HTML-
+                            ja/tai PDF-muotoinen raportti.
                         </p>
-                        <figure>
+                        <figure id="fig12">
                             <img src="manual/assets/img/kuvakaappaus-11.png"
-                                 alt="Hankkeen toteutunut aikataulu"
-                                 style="border: 0px">
+                                 alt="Hankkeen toteutunut aikataulu">
                             <figcaption>
                                 Kuva 12: Hankkeen näkymäsivun
                                 <em>Toteutunut aikataulu</em>-osiossa näkyy
-                                tilasiirtymien tietoja.
+                                tilasiirtymien tietoja. Tilaan
+                                <tt>Väliraportti</tt> on siirrytty kahdesti.
                             </figcaption>
                         </figure>
                         <p>
@@ -1101,7 +1109,11 @@
                             <em>Luo PDF</em> hankkeen
                             näkymäsivun <em>Toteutunut aikataulu</em>-osiossa.
                             Järjestelmä luo tällöin PDF-tiedoston, joka ilmestyy
-                            osioon <em>liitteet</em>.
+                            osioon <em>liitteet</em>. Jokaisella tilalla voi
+                            olla korkeintaan yksi PDF-muotoinen raportti.
+                            PDF-raportti on suositeltavaa luoda vasta sitten,
+                            kun tilan tietoihin ei tule enää muutoksia (ks.
+                            <a href="#incompleteness">10.3.&nbsp;Hanketietojen&nbsp;keskeneräisyys</a>).
                         </p>
                         <p>
                             Loppuraporttiin on mahdollista liittää
@@ -1112,8 +1124,14 @@
                             Jos tällainen liitetiedosto löytyy, liitetään se
                             automaattisesti loppuraportin PDF-versioon.
                         </p>
+                        <p>
+                            Hankkeen elinkaaren päätepisteet ovat
+                            <tt>Hylätty</tt> ja <tt>Päättynyt</tt>. Näistä
+                            tiloista ei ole siirtymiä, eikä maksuja taikka
+                            liitteitä voi lisätä.
+                        </p>
                     </div>
-                    <h5 id="incompleteness">10.3. Keskeneräiset tilat</h5>
+                    <h5 id="incompleteness">10.3. Hanketietojen keskeneräisyys</h5>
                     <div class="man-subcontent">
                         <p>
                             Järjestelmän tilamallin heikkokutena on, että se
@@ -1122,8 +1140,14 @@
                             on kehitetty ominaisuus, jonka avulla voi lisätä
                             hankkeeseen määreen <tt>Keskeneräinen</tt>. Määreen
                             tarkoitus on tiedottaa järjestelmän käyttäjiä siitä,
-                            että hankkeen nykyisen tilan (sekä edeltävient
+                            että hankkeen nykyisen tilan (taikka edeltävien
                             tilojen) tietoja saatetaan vielä muuttaa.
+                            Keskeneräisyydellä ei ole vaikutusta hankkeen
+                            toiminnallisuuteen, kuten raporttien luomiseen
+                            taikka tilasiirtymiin, vaan sen huomiointi on
+                            käyttäjän vastuulla. On suositeltavaa esimerkiksi
+                            luoda PDF-raportti vasta siinä vaiheessa, kun sitä
+                            vastaavan tilan tietoja ei enää muokata.
                         </p>
                         <p>
                             Hankkeen keskeneräisyydestä ilmotetaan mm.
@@ -1147,55 +1171,94 @@
                         <a href="#states">10.&nbsp;Hankkeen&nbsp;tilat</a>.
                         <em>Tilasiirtymälomakkeeseen</em> pääsee hankkeen
                         näkymäsivun yläosan lomakkeesta (ks.
-                        <a href="#fig4">Kuva&nbsp;4</a>).
+                        <a href="#fig4">Kuva&nbsp;4</a>). Linkki hankkeen
+                        <em>muokkauslomakkeeseen</em> on myös näkymäsivun
+                        yläosassa (ensimmäinen painike oikealla hankkeen
+                        otsikkorivillä). Maksun ja liitteen lisäämiselle on omat
+                        lomakkeensa alempana hankkeen näkymäsivulla.
                     </p>
-                    <h5 id="projEditFom">11.1. Hankkeen muokkauslomake</h5>
+                    <h5 id="projEditForm">11.1. Hankkeen muokkauslomake</h5>
                     <div class="man-subcontent">
+                        <p>
+                            Seuraavassa kuvassa näkyy hankkeen muokkauslomake,
+                            joka on jaettu hankkeen tiloja vastaaviin osioihin.
+                            Hankkeen lisäyslomakkeen tavoin myös hankkeen
+                            muokkaus lomakkeen osiot saa
+                            näytetyiksi/piilotetuiksi otsikkoa klikkaamalla.
+                        </p>
+                        <figure>
+                            <img src="manual/assets/img/kuvakaappaus-15.png"
+                                 alt="Hankkeen liitteet">
+                            <figcaption>
+                                Kuva 13: Hankkeen muokkauslomake.
+                                Hankkeen lisäyslomakkeen tavoin tämä lomake on
+                                jaettu erillisiin piilotettaviin osioihin.
+                            </figcaption>
+                        </figure>
 
                     </div>
                     <h5 id="addPayment">11.2. Maksun lisäyslomake</h5>
                     <div class="man-subcontent">
-
+                        <p>
+                            Seuraavassa kuvassa näkyvä maksun lisäyslomake:
+                        </p>
+                        <figure>
+                            <img src="manual/assets/img/kuvakaappaus-14.png"
+                                 alt="Hankkeen liitteet">
+                            <figcaption>
+                                Kuva 14: Maksun lisäyslomake.
+                            </figcaption>
+                        </figure>
+                        <p>
+                            Maksun lisäyslomakkeen vasemmassa puoliskossa on
+                            numeeriset kentät päivämäärän syöttämiselle. Päivä
+                            tulee syöttää kokonaislukuna 1–31, kuukausi
+                            kokonaislukuna 1–12 sekä vuosi nelinumeroisena
+                            kokonaislukuna. Summa tulee syöttää
+                            <em>positiivisena lukuna ilman välilyöntejä
+                            muistaen, että desimaalierotin (jos tarpeen) on
+                            piste (".")</em>. Kun tiedot on syötetty,
+                            vahvistetaan maksumerkinnän lisäys painamalla
+                            painiketta <em>Tallenna</em>.
+                        </p>
+                        <p>
+                            On syytä huomata, että <em>maksusuunnitelma</em>
+                            lisätään tilassa <tt>Allekirjoitettu</tt> ja sitä
+                            muokataan toisilla lomakkeilla (ks.
+                            <a href="#states">10.&nbsp;Hankkeen&nbsp;tilat</a>,
+                            <a href="#states">11.1.&nbsp;Hankkeen&nbsp;muokkauslomake</a>).
+                        </p>
                         <div class="alert alert-warning">
                             Järjestelmä ei voi vaikuttaa pankkitapahtumiin, eikä
                             myöskään valvo maksusuunnitelman toteutumista taikka
                             maksujen lisäystä. Maksusuunnitelman huomiointi on
                             käyttäjän vastuulla.
                         </div>
-                        <figure>
-                            <img src="manual/assets/img/kuvakaappaus-14.png"
-                                 alt="Hankkeen liitteet"
-                                 style="border: 0px">
-                            <figcaption>
-                                Kuva 13: Maksun lisäyslomake.
-                            </figcaption>
-                        </figure>
                     </div>
                     <h5 id="addAppendix">11.3. Liitteen lisäyslomake</h5>
                     <div class="man-subcontent">
-
+                        <p>
+                            Seuraavassa kuvassa näkyy <em>Liitteen lisäys</em>
+                            -lomake, jonka kautta talousraportin ja muidenkin
+                            liitteiden lisäys onnistuu.
+                        </p>
                         <figure>
                             <img src="manual/assets/img/kuvakaappaus-12.png"
-                                 alt="Hankkeen liitteet"
-                                 style="border: 0px">
+                                 alt="Hankkeen liitteet">
                             <figcaption>
-                                Kuva 14: Liitteen lisäyslomake. Jos hankkeelle
-                                lisää talousraportin, se sisällytetään
-                                automaattisesti mukaan loppuraportin
-                                PDF-versioon.
+                                Kuva 15: Liitteen lisäyslomake.
                             </figcaption>
                         </figure>
                         <p>
-                            Yllä olevassa kuvassa näkyy <em>Liitteen lisäys</em>
-                            -lomake, jonka kautta talousraportin ja muidenkin
-                            liitteiden lisäys onnistuu. Liitteelle tulee valita
-                            kategoria vetolaatikosta. Jos mikään listan
-                            kategoria ei kuvaa lisättävää liitettä, voi sille
-                            luoda oman kategorian valitsemalla listalta kohta
-                            "Muu..." ja täydentämällä vetolaatikon oikealle
-                            puolelle ilmestyvään tekstikenttään sopiva kuvaus.
-                            Lisättävän tiedoston valintaikkunaan pääsee
-                            painamalla painiketta <em>Selaa...</em>. Liitteen
+                            Liitteelle tulee valita kategoria vetolaatikosta.
+                            Jos mikään listatuista kategorioista ei kuvaa
+                            lisättävää liitettä, voi sille luoda oman kategorian
+                            valitsemalla listalta kohta "Muu..." ja
+                            täydentämällä vetolaatikon oikealle puolelle
+                            ilmestyvään tekstikenttään sopiva kuvaus. Lisättävän
+                            tiedoston valintaikkunaan pääsee painamalla
+                            painiketta <em>Selaa...</em>. Lähetettävän tiedoston
+                            voi myös raahata tiedoston valintakenttään. Liitteen
                             lisäys vahvistetaan painamalla painiketta
                             <em>Tallenna</em>.
                         </p>
@@ -1203,8 +1266,18 @@
                 </section>
             </article>
             <article id="orgEdit" class="man-article">
-                <h4>12. Järjestönäkymä</h4>
+                <h4>12. Järjestön muokkaus</h4>
                 <section class="man-content">
+                    <p>
+                        Hankkeen tavoin myös järjestöllä on näkymäsivu.
+                        Myös järjestön nimen vieressä on poisto- ja
+                        muokkauspainikkeet, joilla on vastaavanlainen merkitys
+                        kuin hankkeen näkymäsivulla (ks.
+                        <a href="#projView">4.&nbsp;Hankenäkymä</a>). Järjestön
+                        muokkauslomake on oleellisesti samankaltainen kuin
+                        hankkeen muokkauslomake (ks.
+                        <a href="#projEdit">11.&nbsp;Hankkeen&nbsp;muokkaus</a>).
+                    </p>
                 </section>
             </article>
         </div>
