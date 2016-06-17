@@ -85,9 +85,9 @@
                 <p>
                     Tämä on KIOSin hanketietojärjestelmän (myöhemmin
                     "järjestelmä", "sovellus", tms.) käyttöohje. Kyseessä on
-                    webselaimella (joista Firefox on suositeltavin) käytettävä
-                    intranet-sovellus, jonka tarkoituksena on toimia sähköisenä
-                    käyttöliittymänä KIOS:lta rahoitusta hakeneiden
+                    webselaimella (joista Mozilla Firefox on suositeltavin)
+                    käytettävä intranet-sovellus, jonka tarkoituksena on toimia
+                    sähköisenä käyttöliittymänä KIOSilta rahoitusta hakeneiden
                     ihmisoikeushankkeiden relevanttien tietojen käsittelyyn.
                     Sovelluksen kohdeyleisö on ne KIOSin henkilökunnan jäsenet,
                     jotka käsittelevät mainittuja tietoja. Sovellus on
@@ -120,8 +120,8 @@
                     käyttäjätunnus järjestelmään. Kaikki käyttöohjeessa esitetyt
                     käyttötapaukset edellyttävät, että järjestelmään on
                     kirjauduttu sisään ennen niiden käynnistämistä. Järjestelmä
-                    tarjoaa parhaan käyttökokemuksen (vähintään) Full HD
-                    (1920×1080) resoluutiolla maksimoidulla selainikkunalla.
+                    tarjoaa parhaan käyttökokemuksen (vähintään) 1366×768
+                    resoluutiolla maksimoidulla selainikkunalla.
                 </p>
                 <h5 id="inputs">1.1. Syötekentistä</h5>
                 <div class="man-subcontent">
@@ -175,27 +175,33 @@
                         hakulomakkeita.
                     </p>
                     <p>
-                        Lähtökohtaisesti järjestelmään voi syöttää vain
-                        pelkkää tekstiä (ja lukuja). Pidempien tekstien
-                        seasta voi olla vaikeaa löytää vaikkapa tiettyä
-                        kappaletta, jota pitäisi työstää. Tämän vuoksi
-                        järjestelmään on lisätty asteriskeilla ("*")
-                        koodattava tekstin korostusominaisuus. Korostettava
-                        tekstinpätkä koodataan ympäröimällä se
-                        *asteriskeilla*. Asteriskeilla korostettu osuus
-                        näyttää <span class="bg-danger">tältä</span>.
+                        Lähtökohtaisesti järjestelmään voi syöttää vain pelkkää
+                        tekstiä (ja lukuja). Pidempien tekstien seasta voi olla
+                        vaikeaa löytää vaikkapa tiettyä kappaletta, jota pitäisi
+                        työstää. Tämän vuoksi järjestelmään on lisätty
+                        asteriskeilla ("*") koodattava tekstin
+                        korostusominaisuus. Korostettava tekstinpätkä koodataan
+                        ympäröimällä se **asteriskeilla**. Asteriskeilla
+                        korostettu osuus näyttää
+                        <span class="bg-danger">tältä</span>.
                     </p>
                     <p>
-                        Lisäksi pitkän tekstin jäsentämistä auttaa
-                        kappaleisiin jakaminen. Järjestelmässä
-                        kappalevaihdot voi koodata kahdella peräkkäisellä
-                        alaviivalla ("_"). Toisin sanoen merkkijono "__"
-                        korvataan <br>&nbsp;&nbsp;&nbsp;&nbsp;rivinvaihdolla
+                        Lisäksi pitkän tekstin jäsentämistä auttaa kappaleisiin
+                        jakaminen. Järjestelmässä kappalevaihdot voi koodata
+                        kahdella peräkkäisellä alaviivalla ("_"). Toisin sanoen
+                        merkkijono "__" korvataan
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;rivinvaihdolla
                         ja sisennyksellä.
                     </p>
                     <p>
-                        Seuraavat kuvat havainnollistavat näitä
-                        ominaisuuksia:
+                        Edelleen tekstin muotoilua helpottamaan on lisätty
+                        väliotsikot, jotka muotoillaan ympäröimällä haluttu
+                        teksti huutomerkeillä ("!") !!näin!!. Huutomerkeillä
+                        ympäröity merkkijono näyttää
+                    </p>
+                    <h5>tältä</h5>
+                    <p>
+                        Seuraavat kuvat havainnollistavat näitä ominaisuuksia:
                     </p>
                     <figure>
                         <img src="manual/assets/img/kuvakaappaus-2.png"
@@ -209,8 +215,7 @@
                         <img src="manual/assets/img/kuvakaappaus-3.png"
                              alt="Korostus ja kappalejako näkymässä">
                         <figcaption>
-                            Kuva 2: Tekstin korostus ja kappalejako
-                            näkymässä.
+                            Kuva 2: Tekstin korostus ja kappalejako näkymässä.
                         </figcaption>
                     </figure>
                 </div>
@@ -219,27 +224,28 @@
         <article id="projCreation" class="man-article">
             <h4>2. Hankkeen lisäys</h4>
             <section class="man-content">
-                KIOS:n hanketietojärjestelmän ensisijainen tarkoitus on
-                KIOS:n rahoittamien ihmisoikeushankkeiden relevanttien
-                tietojen säilyttäminen keskitetyssä sähköisessä
-                tietokannassa. Siispä uuden hankkeen lisääminen on
-                toiminnoista ehkäpä keskeisin ja samalla hanketietueen
-                elinkaaren ensimmäinen vaihe (ks.
-                <a href="#stateModel">10.1.&nbsp;Tilamalli</a>). Näin ollen
-                tämä toiminto on luontevinta käsitellä ensimmäisenä.
+                <p>
+                    KIOSin hanketietojärjestelmän ensisijainen tarkoitus on
+                    KIOSin rahoittamien ihmisoikeushankkeiden relevanttien
+                    tietojen säilyttäminen keskitetyssä sähköisessä
+                    tietokannassa. Siispä uuden hankkeen lisääminen on
+                    toiminnoista ehkäpä keskeisin ja samalla hanketietueen
+                    elinkaaren ensimmäinen vaihe (ks.
+                    <a href="#stateModel">10.1.&nbsp;Tilamalli</a>). Näin ollen
+                    tämä toiminto on luontevinta käsitellä ensimmäisenä.
+                </p>
                 <h5 id="projCreationForm">2.1. Hankkeen lisäyslomake</h5>
                 <div class="man-subcontent">
                     <p>
-                        Järjestelmään syötetään tietoja HTML-lomakkeiden
-                        kautta. Sisäänkirjautumisen jälkeen hankkeen
-                        lisäyslomakkeeseen pääsee klikkaamalla sivun
-                        ylälaidassa näkyvässä navigaatiopalkissa kohtaa
-                        <em>Hankkeen lisäys</em>.
+                        Järjestelmään syötetään tietoja HTML-lomakkeiden kautta.
+                        Sisäänkirjautumisen jälkeen hankkeen lisäyslomakkeeseen
+                        pääsee klikkaamalla sivun ylälaidassa näkyvässä
+                        navigaatiopalkissa kohtaa <em>Hankkeen lisäys</em>.
                     </p>
                     <p>
                         Lomake on jaoteltu viiteen osioon, joista neljä on
-                        piilotettu aluksi. Klikkaamalla osion otsikkoa saa
-                        osion kentät esiin/piilotetuksi.
+                        piilotettu aluksi. Klikkaamalla osion otsikkoa saa osion
+                        kentät esiin/piilotetuksi.
                     </p>
                     <figure>
                         <img src="manual/assets/img/kuvakaappaus-1.png"
@@ -250,51 +256,48 @@
                         </figcaption>
                     </figure>
                     <p>
-                        Lomake korostaa puuttuvia taikka virheellisiä
-                        tietoja sisältävät kentät punasella värillä sekä
-                        tekstuaalisella huomatutuksella. (Erityisesti
-                        jokaisella järjestelmään syötettävällä hankkeella
-                        tulee olla <tt>nimi</tt> ja
-                    <tt>koordinaattori</tt>.) Lomakkeen tietoja ei voi
-                    tallentaa tietokantaan ennen kuin virheelliset
-                    syötteet on korjattu.
+                        Lomake korostaa puuttuvia taikka virheellisiä tietoja
+                        sisältävät kentät punasella värillä sekä tekstuaalisella
+                        huomatutuksella. (Erityisesti jokaisella järjestelmään
+                        syötettävällä hankkeella tulee olla <tt>nimi</tt> ja
+                        <tt>koordinaattori</tt>.) Lomakkeen tietoja ei voi
+                        tallentaa tietokantaan ennen kuin virheelliset syötteet
+                        on korjattu.
                     </p>
                     <p>
                         Hankkeen <tt>tunnus</tt> on hankkeen yksilöivä
-                    viisinumeroinen tunnusluku, jolla ei ole erillistä
-                    syötekenttää. Sen kaksi ensimmäistä numeroa
-                    määräytyvät rekisteröimisvuoden kahden viimeisen
-                    numeron perusteella. Esimerkiksi vuonna 2016
-                    rekisteröityjen hankkeiden tunnukset ovat siis
-                    muotoa "16XXX"). Tunnusluvun kolme viimeistä numeroa
-                    puolestaan muodostuvat juoksevasta luvusta.
-                    Esimerkiksi 23. vuonna 2016 rekisteröity hanke saa
-                    tunnuksen 16023.
+                        viisinumeroinen tunnusluku, jolla ei ole erillistä
+                        syötekenttää. Sen kaksi ensimmäistä numeroa määräytyvät
+                        rekisteröimisvuoden kahden viimeisen numeron
+                        perusteella. Esimerkiksi vuonna 2016 rekisteröityjen
+                        hankkeiden tunnukset ovat siis muotoa "16XXX").
+                        Tunnusluvun kolme viimeistä numeroa puolestaan
+                        muodostuvat juoksevasta luvusta. Esimerkiksi 23. vuonna
+                        2016 rekisteröity hanke saa tunnuksen 16023.
                     </p>
                     <p>
-                        Jos hankkeelle rahoitusta hakevan järjestön tiedot
-                        on jo tallennettu hanketietojärjestelmään, tulee
-                        tämä järjestö valita <tt>Järjestö</tt>-kohdan
-                    vetolaatikosta. Jos taas kyseessä on järjestön
-                    ensimmäinen KIOS:lta rahoitusta hakeva hanke, on
-                    järjestön tiedot tallennettava hanketietojen
-                    lisäämisen yhteydessä (ks.
-                    <a href="#orgCreation">3.&nbsp;Järjestön lisäys</a>).
+                        Jos hankkeelle rahoitusta hakevan järjestön tiedot on jo
+                        tallennettu hanketietojärjestelmään, tulee tämä järjestö
+                        valita <tt>Järjestö</tt>-kohdan vetolaatikosta. Jos taas
+                        kyseessä on järjestön ensimmäinen KIOSilta rahoitusta
+                        hakeva hanke, on järjestön tiedot tallennettava
+                        hanketietojen lisäämisen yhteydessä (ks.
+                        <a href="#orgCreation">3.&nbsp;Järjestön lisäys</a>).
                     </p>
                     <div class="alert alert-warning">
                         <p>
                             Hankkeen lisääminen onnistuu jos ja vain jos
-                            kaikissa pakollisissa syötekentissä on
-                            kelvolliset arvot hankkeen lisäyslomaketta
-                            lähettäessä. Hankkeen lisäyslomakkeessa, kuten
-                            missään muussakaan Hanketietojärjestelmän
-                            lomakkeessa, ei voi tehdä välitallennuksia.
+                            kaikissa pakollisissa syötekentissä on kelvolliset
+                            arvot hankkeen lisäyslomaketta lähettäessä. Hankkeen
+                            lisäyslomakkeessa, kuten missään muussakaan
+                            Hanketietojärjestelmän lomakkeessa, ei voi tehdä
+                            välitallennuksia.
                         </p>
                         <p>
-                            Ongelman voi kiertää täyttämällä ensin
-                            ainoastaan pakolliset kentät, ja lisäämällä
-                            myöhemmin tietoja hankkeen muokkauslomakkeen
-                            kautta.
+                            Ongelman voi kiertää täyttämällä ensin ainoastaan
+                            pakolliset kentät, ja lisäämällä myöhemmin tietoja
+                            hankkeen muokkauslomakkeen kautta (ks.
+                            <a href="#projEditForm">11.1.&nbsp;Hankkeen&nbsp;muokkauslomake</a>).
                             <!--                                Myös Firefox-selaimen
                                                             "Lazarus Form Recovery"-liitännäisestä saattaa
                                                             olla hyötyä lomaketietojen suojelussa
@@ -305,9 +308,10 @@
                         </p>
                     </div>
                     <p>
-                        Jos hankkeen lisäys onnistui, järjestelmä ohjaa
-                        selaimen lisätyn hankkeen näkymäsivulle.
-                        Vastalisätyn hankkeen tila on "rekisteröity".
+                        Jos hankkeen lisäys onnistui, järjestelmä ohjaa selaimen
+                        lisätyn hankkeen näkymäsivulle (ks.
+                        <a href="#projView">4.&nbsp;Hankenäkymä</a>).
+                        Vastalisätyn hankkeen tila on <tt>Rekisteröity</tt>.
                     </p>
                 </div>
             </section>
@@ -315,16 +319,18 @@
         <article id="orgCreation" class="man-article">
             <h4>3. Järjestön lisäys</h4>
             <section class="man-content">
-                Tällä hetkellä järjestöjen lisäämiselle ei ole erillistä
-                lomaketta, vaan lisäys tapahtuu hankkeen lisäyksen
-                yhteydessä. Järjestelmän on tarkoitus sisältää vain KIOS:lta
-                rahoitusta hakeneiden järjestöjen tiedot. Koska rahoitusta
-                haetaan tietylle hankkeelle, on myös rahoitusta hakevan
-                järjestön tietojen syöttäminen luontevaa tehdä hanketietojen
-                syöttämisen yhteydessä. Tässä kappaleessa mainitut
-                syötekentät ja painikkeet löytyvät siis hankkeen
-                lisäyslomakkeesta (ks.
-                <a href="#projCreation">2.&nbsp;Hankken lisäys</a>).
+                <p>
+                    Tällä hetkellä järjestöjen lisäämiselle ei ole erillistä
+                    lomaketta, vaan lisäys tapahtuu hankkeen lisäyksen
+                    yhteydessä. Järjestelmän on tarkoitus sisältää vain KIOSilta
+                    rahoitusta hakeneiden järjestöjen tiedot. Koska rahoitusta
+                    haetaan tietylle hankkeelle, on myös rahoitusta hakevan
+                    järjestön tietojen syöttäminen luontevaa tehdä hanketietojen
+                    syöttämisen yhteydessä. Tässä kappaleessa mainitut
+                    syötekentät ja painikkeet löytyvät siis hankkeen
+                    lisäyslomakkeesta (ks.
+                    <a href="#projCreation">2.&nbsp;Hankken&nbsp;lisäys</a>).
+                </p>
                 <h5 id="orgCreationForm">3.1. Järjestön lisäyslomake</h5>
                 <div class="man-subcontent">
                     <p>
@@ -332,8 +338,8 @@
                         painamalla painiketta <em>Lisää uusi järjestö</em>.
                     </p>
                     <p>
-                        Tällä hetkellä järjestön perustietoihin on pakko
-                        syöttää seuraavat kohdat:
+                        Tällä hetkellä järjestön perustietoihin on pakko syöttää
+                        seuraavat kohdat:
                     </p>
                     <table>
                         <tr>
@@ -342,45 +348,47 @@
                         </tr>
                         <tr>
                             <td><tt>Nimi</tt></td>
-                        <td>Järjestön nimi.</td>
+                            <td>Järjestön nimi.</td>
                         </tr>
                         <tr>
                             <td><tt>Edustaja</tt></td>
-                        <td>
-                            Järjestön edustaja (sisältäen henkilön nimen,
-                            sähköpostiosoitteen sekä puhelinnumeron tässä
-                            järjestyksessä omilla riveillään).
-                        </td>
+                            <td>
+                                Järjestön edustaja (sisältäen henkilön nimen,
+                                sähköpostiosoitteen sekä puhelinnumeron tässä
+                                järjestyksessä omilla riveillään).
+                            </td>
                         </tr>
                         <tr>
                             <td><tt>Osoite</tt></td>
-                        <td>Järjestön katuosoite.</td>
+                            <td>Järjestön katuosoite.</td>
                         </tr>
                         <tr>
                             <td><tt>Postinumero</tt></td>
-                        <td>
-                            Järjestön postitoimipaikan numero. Jos järjestö
-                            toimii maassa, jossa ei ole postinumeroita, voi
-                            tämän kentän sivuuttaa vaikkapa merkinnällä
-                            "[Ei postinumeroa]".
-                        </td>
+                            <td>
+                                Järjestön postitoimipaikan numero. Jos järjestö
+                                toimii maassa, jossa ei ole postinumeroita, voi
+                                tämän kentän sivuuttaa vaikkapa merkinnällä
+                                "[Ei postinumeroa]".
+                            </td>
                         </tr>
                         <tr>
                             <td><tt>Kaupunki</tt></td>
-                        <td>Järjestön postitoimipaikka.</td>
+                            <td>Järjestön postitoimipaikka.</td>
                         </tr>
                         <tr>
                             <td><tt>Maa</tt></td>
-                        <td>Maa, jossa järjestöllä on konttori.</td>
+                            <td>Maa, jossa järjestöllä on konttori.</td>
                         </tr>
                         <tr>
                             <td><tt>Puhelinnumero</tt></td>
-                        <td>Järjestön puhelinnumero.</td>
+                            <td>Järjestön puhelinnumero.</td>
                         </tr>
                         <tr>
                             <td><tt>Sähköpostiosoite</tt></td>
-                        <td>Yhteydenpitoon käytettävä järjestön
-                            sähköpostiosoite.</td>
+                            <td>
+                                Yhteydenpitoon käytettävä järjestön
+                                sähköpostiosoite.
+                            </td>
                         </tr>
                     </table>
                     <p>
@@ -393,22 +401,22 @@
                         </tr>
                         <tr>
                             <td><tt>Vastuullinen johtaja</tt></td>
-                        <td>
-                            Järjestön vastuullinen johtaja (henkilön nimi).
-                        </td>
+                            <td>
+                                Järjestön vastuullinen johtaja (henkilön nimi).
+                            </td>
                         </tr>
                         <tr>
                             <td><tt>Viestintävastaava</tt></td>
-                        <td>
-                            Järjestön viestintävastaava (henkilön nimi).
-                        </td>
+                            <td>
+                                Järjestön viestintävastaava (henkilön nimi).
+                            </td>
                         </tr>
                         <tr>
-                            <td>
-                        <tt>Taloushallinto ja tilintarkastus</tt>
+                            <td><tt>Taloushallinto ja tilintarkastus</tt></td>
+                        <td>
+                            Arvio järjestön taloushallinnosta ja
+                            tilintarkastajan lausunnosta.
                         </td>
-                        <td>Arvio järjestön taloushallinnosta ja
-                            tilintarkastajan lausunnosta.</td>
                         </tr>
                     </table>
                     <p>
@@ -421,20 +429,16 @@
         <article id="projView" class="man-article">
             <h4>4. Hankenäkymä</h4>
             <section class="man-content">
-                <!--                    <p>
-                                        Juuri lisätyn hankkeen tila on siis "rekisteröity".
-                                        Tässä tilassa olevan hankkeen hakemusta ei ole vielä
-                                        käsitelty, joten esimerkiksi maksatuksia ei voi lisätä
-                                        rekisteröidylle hankkeelle.
-                                    </p>-->
                 <p>
-                    Selain siis ohjataan automaattisesti hankkeen
-                    näkymäsivulle, kun hankkeen lisääminen on suoritettu.
-                    Hankkeen näkymäsivulle pääsee myöhemmin esimerkiksi
+                    Selain siis ohjataan automaattisesti hankkeen näkymäsivulle,
+                    kun hankkeen lisääminen on suoritettu. Hankkeen
+                    näkymäsivulle pääsee myöhemmin esimerkiksi
                     <em>hankelistauksen</em>
-                    (ks. <a href="#projList">5.&nbsp;Hankelistaus</a>)
-                    sekä <em>hankehaun</em>
-                    (ks. <a href="#projSearch">7.&nbsp;Hankehaku</a>)
+                    (ks. <a href="#projList">5.&nbsp;Hankelistaus</a>),
+                    <em>hankehaun</em>
+                    (ks. <a href="#projSearch">7.&nbsp;Hankehaku</a>) sekä
+                    <em>järjestönäkymän</em>
+                    (ks. <a href="#orgEdit">12.&nbsp;Järjestön&nbsp;muokkaus</a>)
                     kautta.
                 </p>
                 <p>
@@ -443,22 +447,21 @@
                     raporttien näkymäsivuilla. Muutokset hankkeen tietoihin
                     suoritetaan yleensä <em>tilasiirtymien</em>,
                     <em>muokkausten</em> sekä <em>hankkeen poiston</em>
-                    muodossa. Poikkeuksia ovat maksun ja liitetiedoston
-                    lisäys, joille on (teknisistä syistä) omat lomakkeensa
-                    hankkeen näkymäsivulla.
+                    muodossa. Poikkeuksia ovat maksun ja liitetiedoston lisäys,
+                    joille on (teknisistä syistä) omat lomakkeensa hankkeen
+                    näkymäsivulla.
                 </p>
                 <figure id="fig4">
                     <img src="manual/assets/img/kuvakaappaus-4.png"
                          alt="Hankkeen näkymäsivu">
                     <figcaption>
-                        Kuva 4: "Loppuraportti"-tilassa oleva hanke.
-                        Näkymäsivun pääotsikon vieressä näkyy
-                        <em>poisto</em> ("roskakori") ja <em>muokkaus</em>
-                        ("kynä ja paperi") -painikkeet.
-                        <em>Tilasiirtymälomakkeeseen</em> pääsee
-                        valitsemalla seuraava tila vetolaatikosta, jossa
-                        lukee "[Siirry tilaan]" ja painamalla sen oikealla
-                        puolella olevaa nuolikuvaketta.
+                        Kuva 4: "Loppuraportti"-tilassa oleva hanke. Näkymäsivun
+                        pääotsikon vieressä näkyy <em>poisto</em> ("roskakori")
+                        ja <em>muokkaus</em> ("kynä ja paperi") -painikkeet.
+                        <em>Tilasiirtymälomakkeeseen</em> pääsee valitsemalla
+                        seuraava tila vetolaatikosta, jossa lukee
+                        "[Siirry tilaan]" ja painamalla sen oikealla puolella
+                        olevaa nuolikuvaketta.
                     </figcaption>
                 </figure>
                 <p>
@@ -467,13 +470,26 @@
                 </p>
                 <div class="alert alert-warning">
                     Koska järjestelmä käyttää dokumenttitietokantaa, ei
-                    CRUD-operaatioilla välttämättä ole ACID-ominaisuuksia.
-                    Toisin sanoen samanaikaiset muokkaukset saattavat jättää
-                    tietokannan epäkonsistenttiin tilaan. Toisaalta selain
-                    saattaa näyttää vanhentunutta tietoa hankkeesta jos sitä
-                    muokataan samaan aikaan toisessa selainikkunassa. Tämä
-                    tarkoittaa myös sitä, että
-                    <em>kaikki muutokset tietokantaan ovat pysyviä</em>.
+                    CRUD-operaatioilla välttämättä ole ACID-ominaisuuksia. Tämä
+                    merkitsee mm. että
+                    <ol>
+                        <li>
+                            <em>Samanaikaiset muokkaukset saattavat aiheuttaa
+                            kilpatilanteita ja/tai jättää tietokannan
+                            epäkonistenttiin tilaan.</em> Siispä esimerkiksi
+                            saman hankkeen tietoja on syytä välttää muokkaamasta
+                            samanaikaisesti useammasta selainikkunasta.
+                        </li>
+                        <li>
+                            <em>Selaimessa näytettävä tieto voi olla vanhentunutta.</em>
+                            Tämä ongelma korjaantuu sivun uudelleenlataamisella
+                            (Suosituimmat selaimet lataavat sivun uudelleen
+                            painettaessa F5-näppäintä.)
+                        </li>
+                        <li>
+                            <em>Kaikki muutokset tietokantaan ovat pysyviä.</em>
+                        </li>
+                    </ol>
                 </div>
                 <p>
                     Lisää tietoa hankkeen tiloista löytyy luvusta
@@ -495,29 +511,31 @@
                     osoittava kolmio"-kuvake) järjestykseen. Listaus on myös
                     sivutettu (tämänhetkisellä sivunpituudella 10).
                     Tarkasteltavaa sivua vaihdetaan alareunassa näkyvillä
-                    numeropainikkeilla, joiden numerot vastaavat
-                    sivunumeroita.
+                    numeropainikkeilla, joiden numerot vastaavat sivunumeroita.
                 </p>
                 <figure>
                     <img src="manual/assets/img/kuvakaappaus-5.png"
                          alt="Hankkeen näkymäsivu">
                     <figcaption>
                         Kuva 5: Hankelistaus. Oletusarvoisesti hankkeet
-                        listataan tunnuksen perusteella kasvavaan
-                        järjestykseen.
+                        listataan tunnuksen perusteella kasvavaan järjestykseen.
                     </figcaption>
                 </figure>
                 <p>
                     Hankkeen nimeä klikkaamalla pääsee kyseisen hankkeen
-                    näkymäsivulle ja vastaavasti järjestön nimeä
-                    klikkaamalla pääsee järjestön näkymäsivulle.
+                    näkymäsivulle ja vastaavasti järjestön nimeä klikkaamalla
+                    pääsee järjestön näkymäsivulle.
                 </p>
                 <p>
                     Hankkeen <tt>Huomioita</tt>-kenttään ilmestyy punainen
-                teksti, mikäli kyseisen hankkeen jokin väliraportti on
-                myöhässä. Lisäksi jos hanke on merkitty keskeneräiseksi
-                (ks. <a href="#incompleteness">10.3.&nbsp;Hanketietojen&nbsp;keskeneräisyys</a>),
-                huomautetaan siitä tässä kentässä.
+                    teksti, mikäli kyseisen hankkeen jokin väliraportti on
+                    myöhässä. Väliraporttien eräpäivät syötetään hankkeen
+                    tilassa <tt>Allekirjoitetut</tt> (ks.
+                    <a href="#states">10.&nbsp;Hankkeen&nbsp;Tilat</a>,
+                    <a href="#projEditForm">11.1.&nbsp;Hankkeen&nbsp;muokkauslomake</a>).
+                    Lisäksi jos hanke on merkitty keskeneräiseksi (ks.
+                    <a href="#incompleteness">10.3.&nbsp;Hanketietojen&nbsp;keskeneräisyys</a>),
+                    huomautetaan siitä tässä kentässä.
                 </p>
             </section>
         </article>
@@ -538,9 +556,8 @@
                     tulosten tallentamisen CSV-muotoon. Kyseessä on ehkäpä
                     kaikkien järjestelmän toimintojen kruununjalokivi.
                     CSV-tiedostoja voi käsitellä helposti esimerkiksi
-                    taulukkolaskentasovelluksella.
-                    Hankehakuun pääsee klikkaamalla navigaatiopalkista
-                    painiketta <em>Haku</em>.
+                    taulukkolaskentasovelluksella. Hankehakuun pääsee
+                    klikkaamalla navigaatiopalkista painiketta <em>Haku</em>.
                 </p>
                 <p>
                     Haku toimii valitsemalla ensin hakukriteeri listasta ja
@@ -551,10 +568,10 @@
                 </p>
                 <p>
                     Hankkeen luomislomakkeen tavoin hankehakulomake sisältää
-                    piilotettavia osioita. Nämä osiot ovat seuraavassa
-                    kuvassa esiintyvät <em>Kriteerit</em>, <em>Tulokset</em>
-                    sekä <em>Vienti</em>. Näistä viimeinen tosin on
-                    käytettävissä ainoastaan mikäli haussa löytyi hankkeita.
+                    piilotettavia osioita. Nämä osiot ovat seuraavassa kuvassa
+                    esiintyvät <em>Kriteerit</em>, <em>Tulokset</em> sekä
+                    <em>Vienti</em>. Näistä viimeinen tosin on käytettävissä
+                    ainoastaan mikäli haussa löytyi hankkeita.
                 </p>
                 <figure id="fig6">
                     <img src="manual/assets/img/kuvakaappaus-6.png"
@@ -566,61 +583,58 @@
                 <h5 id="regex">7.1. Säännölliset lausekkeet</h5>
                 <div class="man-subcontent">
                     <p>
-                        Tekstimuotoisissa hakukentissä käytetään
-                        säännöllisiä lausekkeita. Tässä kappaleessa annetaan
-                        lyhyt selostus säännöllisistä lausekkeista
-                        määritelmien sekä käytännön esimerkkien kautta. Myös
-                        tavallinen sanahaku perustuu säännöllisiin
-                        lausekkeisiin, joten tästä näkökulmasta
+                        Tekstimuotoisissa hakukentissä käytetään säännöllisiä
+                        lausekkeita. Tässä kappaleessa annetaan lyhyt selostus
+                        säännöllisistä lausekkeista määritelmien sekä käytännön
+                        esimerkkien kautta. Myös tavallinen sanahaku perustuu
+                        säännöllisiin lausekkeisiin, joten tästä näkökulmasta
                         tarkasteltuna <em>kappale tarjoaa syventävää tietoa,
-                            jonka lukija voi halutessaan ohittaa</em>.
+                        jonka lukija voi halutessaan ohittaa</em>.
                     </p>
                     <p>
                         <em>Aakkosto</em> on nimitys kokoelmalle merkkejä,
-                        esimerkiksi sellaiselle, joka sisältää merkit "a",
-                        "b" ja "c". Myös alakoulussa opitut aakkoset ovat
-                        aakkosto.
+                        esimerkiksi sellaiselle, joka sisältää merkit "a", "b"
+                        ja "c". Myös alakoulussa opitut aakkoset ovat aakkosto.
                     </p>
                     <p>
-                        <em>Merkkijonot</em> koostuvat peräkkäisistä
-                        merkeistä. Merkkijonot koodataan yleensä
-                        lainausmerkkien sisään, jotteivat ne mene sekaisin
-                        muun tekstin kanssa. Esimerkiksi "abc" ja "bac" ovat
-                        merkkijonoja (kuten myös yllä mainitut "a", "b" ja
-                        "c"). Kaksi merkkijonoa ovat samat täsmälleen
-                        silloin kun ne sisältävät samat merkit samassa
-                        järjestyksessä. Näin ollen esimerkiksi "abc" on sama
-                        kuin "abc", mutta eri kuin esimerkiksi "abcc" tai
-                        "bac".
+                        <em>Merkkijonot</em> koostuvat peräkkäin merkityistä
+                        aakkoston merkeistä. Merkkijonot koodataan yleensä
+                        lainausmerkkien sisään, jotteivat ne mene sekaisin muun
+                        tekstin kanssa. Esimerkiksi "abc" ja "bac" ovat
+                        merkkijonoja (kuten myös yllä mainitut "a", "b" sekä
+                        "c"). Kaksi merkkijonoa ovat samat täsmälleen silloin
+                        kun ne sisältävät samat merkit samassa järjestyksessä.
+                        Näin ollen esimerkiksi "abc" on sama kuin "abc", mutta
+                        eri kuin esimerkiksi "abcc" tai "bac".
                     </p>
                     <p>
-                        Jos hakutoiminto hakisi vain täsmällisiä
-                        osumia, ei esimerkiksi hakusanalla "kissa" löytyisi
-                        tulosta "kissat". Sen sijaan tässä sovelluksessa
-                        käytetty <em>hakutoiminto hyväksyy kaikki tulokset,
-                            joissa hakusana eli säännöllinen lauseke esiintyy
-                            jossain kohdassa</em>. Esimerkiksi hakusanaan
-                        "kissa" täsmääviä merkkijonoja ovat "kissa",
-                        "abskissa" ja "kissat".
+                        Jos hakutoiminto hakisi vain täsmällisiä osumia, ei
+                        esimerkiksi hakusanalla "kissa" löytyisi tulosta
+                        "kissat". Sen sijaan tässä sovelluksessa käytetty
+                        <em>hakutoiminto hyväksyy kaikki tulokset, joissa
+                            hakusana eli säännöllinen lauseke esiintyy jossain
+                            kohdassa</em>. Esimerkiksi hakusanaan "kissa"
+                        täsmääviä merkkijonoja ovat "kissa", "abskissa" ja
+                        "kissat".
                     </p>
                     <p>
-                        Merkkijonojen peruslaskutoimitusta
-                        kutsutaan <em>katenoinniksi</em>. Jos A ja B ovat
-                        merkkijonoja, niin AB on merkkijono. Esimerkiksi
-                        jos A = "kis" ja B = "sa", niin AB = "kissa".
+                        Merkkijonojen peruslaskutoimitusta kutsutaan
+                        <em>katenoinniksi</em>. Jos A ja B ovat merkkijonoja,
+                        niin AB on merkkijono. Esimerkiksi jos A = "kis" ja
+                        B = "sa", niin AB = "kissa".
                     </p>
                     <p>
-                        Yksinkertaisimmassa muodossaan <em>säännölliset
-                            lausekkeet</em> ovat merkkijonoja sellaisesta
-                        aakkostosta, joka sisältää ainakin merkit "(", ")",
-                        "|" ja "*". Näillä merkeillä on erityinen rooli
-                        säännöllisissä lausekkeissa, jota käsitellään pian.
-                        Säännöllisten lausekkeiden avulla kuvaillaan toisia
-                        merkkijonoja. Seuraava taulukko listaa säännöllisten
-                        lausekkeiden laskutoimitukset tapauksessa A = "kis",
-                        B = "sa":
+                        Yksinkertaisimmassa muodossaan
+                        <em>säännölliset lausekkeet</em> ovat merkkijonoja
+                        sellaisesta aakkostosta, joka sisältää ainakin merkit
+                        "(", ")", "|" ja "*". Näillä merkeillä on erityinen
+                        rooli säännöllisissä lausekkeissa, jota käsitellään
+                        pian. Säännöllisten lausekkeiden avulla kuvaillaan
+                        toisia merkkijonoja. Seuraava taulukko listaa
+                        säännöllisten lausekkeiden laskutoimitukset tapauksessa
+                        A = "kis", B = "sa":
                     </p>
-                    <table>
+                    <table id="regexOperators">
                         <tr>
                             <th>Lauseke</th>
                             <th>Selitys</th>
@@ -639,8 +653,8 @@
                         <tr>
                             <td>A|B</td>
                             <td>
-                                Merkkijonot, jotka sisältävät joko A:n
-                                taikka B:n, mutta ei molempia.
+                                Merkkijonot, jotka sisältävät joko A:n taikka
+                                B:n, mutta ei molempia.
                             </td>
                             <td>
                                 "kis", "sa" (Ei muita.)
@@ -649,8 +663,8 @@
                         <tr>
                             <td>A*</td>
                             <td>
-                                Merkkijonot, jotka koostuvat A:n
-                                mielivaltaisen monesta katenaatiosta.
+                                Merkkijonot, jotka koostuvat A:n mielivaltaisen
+                                monesta katenaatiosta.
                             </td>
                             <td>
                                 "", "kis", "kiskis", "kiskiskis", ...
@@ -669,14 +683,14 @@
                         "kiskiskissa", jne.
                     </p>
                     <p>
-                        Näin ollen <a href="#fig6">kuvassa 6</a> näkyvä
-                        neljä tulosta tuottanut haku oli itse asiassa haku
-                        säännöllisellä lausekkeella "af". Järjestelmä
-                        palautti kaikki ne testitietokantaan tallennetut
-                        hankkeet, joiden kentässä <tt>Alue / Maa</tt>
-                    esiintyi jossain kohtaa ensin merkki "a", jota
-                    välittömästi seurasi merkki "f". Esimerkiksi
-                    "Afganistan" ja "Afrikka" täyttävät tämän ehdon.
+                        Näin ollen <a href="#fig6">kuvassa 6</a> näkyvät neljä
+                        tulosta tuottanut haku oli itse asiassa haku
+                        säännöllisellä lausekkeella "af". Järjestelmä palautti
+                        kaikki ne testitietokantaan tallennetut hankkeet, joiden
+                        kentässä <tt>Alue / Maa</tt> esiintyi jossain kohtaa
+                        ensin merkki "a", jota välittömästi seurasi merkki "f".
+                        Esimerkiksi "Afganistan" ja "Afrikka" täyttävät tämän
+                        ehdon.
                     </p>
                     <p>
                         Lisää lukemista säännöllisistä lausekkeista:
@@ -693,46 +707,46 @@
                 <div class="man-subcontent">
                     <p>
                         Tällä hetkellä järjestelmä tukee hakukriteerien
-                        yhdistämistä ainoastaan loogisen AND-konjunktion
-                        avulla. Tämä merkitsee, että haku palauttaa vain ne
-                        tulokset, joiden kohdalla <em>jokainen</em>
-                        hakukriteeri täyttyy. Hakukriteerejä lisätään
-                        painamalla painiketta <em>Lisää</em>. Viimeisen
-                        hakukriteerin saa vastaavasti poistettua painamalla
-                        painiketta <em>Poista viimeinen</em>. Hakukriteerin
-                        tyyppi valitaan vetolaatikosta <em>Kriteeri</em> ja
-                        sen arvo riippuu tyypistä.
+                        yhdistämistä ainoastaan loogisen AND-konjunktion avulla.
+                        Tämä merkitsee, että haku palauttaa vain ne tulokset,
+                        joiden kohdalla <em>jokainen</em> hakukriteeri täyttyy.
+                        Hakukriteerejä lisätään painamalla painiketta
+                        <em>Lisää</em>. Viimeisen hakukriteerin saa vastaavasti
+                        poistettua painamalla painiketta
+                        <em>Poista viimeinen</em>. Hakukriteerin tyyppi valitaan
+                        vetolaatikosta <em>Kriteeri</em> ja sen arvo riippuu
+                        tyypistä.
                     </p>
                     <p>
                         Esimerkiksi hakukenttä <tt>Alue / Maa</tt> on
-                    tekstimuotoinen hakukenttä, joten sen hakusanaa
-                    käsitellään säännöllisenä lausekkeena (ks.
-                    <a href="#regex">7.1.&nbsp;Säännölliset lausekkeet</a>).
-                    Kuva 7. havainnollistaa asiaa.
+                        tekstimuotoinen hakukenttä, joten sen hakusanaa
+                        käsitellään säännöllisenä lausekkeena (ks.
+                        <a href="#regex">7.1.&nbsp;Säännölliset lausekkeet</a>).
+                        Kuva 7. havainnollistaa asiaa:
                     </p>
                     <figure>
                         <img src="manual/assets/img/kuvakaappaus-7.png"
                              alt="Hankkeen lisäyslomake">
                         <figcaption>
-                            Kuva 7: Hankehaku yhdellä ehdolla.
-                            Tekstimuotoisen tiedon haussa käytetään
-                            säännöllisiä lausekkeita (taikka yksinkertaista
-                            sanahakua).
+                            Kuva 7: Hankehaku yhdellä ehdolla. Tekstimuotoisen
+                            tiedon haussa käytetään säännöllisiä lausekkeita
+                            (taikka yksinkertaista sanahakua).
                         </figcaption>
                     </figure>
                     <p>
                         Tekstimuotoiset hakukentät siis mahdollistavat myös
-                        OR-tyyppiset haut <em>saman kentän sisällä</em>.
+                        (X)OR-tyyppiset haut <em>saman kentän sisällä</em> kun
+                        käytetään <a href="#regexOperators">operaattoria "|"</a>.
                         Esimerkiksi jos halutaan etsiä hankkeita, jotka
-                        tapahtuvat joko Intiassa, taikka Pakistanissa,
-                        onnistuu haku valitsemalla hakukriteeriksi
-                    <tt>Alue / Maa</tt> ja arvoksi "Intia|Pakistan".
+                        tapahtuvat joko Intiassa, taikka Pakistanissa, onnistuu
+                        haku valitsemalla hakukriteeriksi <tt>Alue / Maa</tt> ja
+                        arvoksi "Intia|Pakistan".
                     </p>
                     <p>
                         Luettelomuotoisissa hakukentissä puolestaan valitaan
                         yksi vaihtoehto, jolloin haku palauttaa kaikki
                         täsmäävät projektit. Seuraava kuva havainnollistaa
-                        asiaa.
+                        asiaa:
                     </p>
                     <figure>
                         <img src="manual/assets/img/kuvakaappaus-8.png"
@@ -745,13 +759,12 @@
                     </figure>
                     <p>
                         Kuvasta huomataan, että hakukriteerien yhdistäminen
-                        vähentää (tai ei ainakaan koskaan kasvata)
-                        hakutulosten määrää. Esimerkin tapauksessa voidaan
-                        päätellä, että yhdellä kolmesta ensimmäiseen
-                        kriteeriin (<tt>Alue / Maa</tt> täyttää säännöllisen
-                    lausekkeen "a[a-z]*n") täsmänneestä hankkeesta ei
-                    ollut määritelty oikeudellista fokusta
-                    "TSS-oikeudet".
+                        vähentää (tai ei ainakaan koskaan kasvata) hakutulosten
+                        määrää. Esimerkin tapauksessa voidaan päätellä, että
+                        yhdellä kolmesta ensimmäiseen kriteeriin
+                        (<tt>Alue / Maa</tt> täyttää säännöllisen lausekkeen
+                        "a[a-z]*n") täsmänneestä hankkeesta ei ollut määritelty
+                        oikeudellista fokusta "TSS-oikeudet".
                     </p>
                     <div class="alert alert-warning">
                         Hakukriteerien järjestyksellä ei pitäisi olla väliä
@@ -770,7 +783,9 @@
                     <p>
                         Esimerkkitapauksesta huomataan, että kolmannen
                         hakuehdon lisääminen pudotti tulosten määrää
-                        alkuperäisestä kolmesta yhteen.
+                        alkuperäisestä kolmesta yhteen. Relevanttien tulosten
+                        saamiseksi sekä tulosten määrän rajaamiseksi siis
+                        oikeiden hakukriteerien yhdistäminen on tärkeää.
                     </p>
                 </div>
                 <h5 id="export">7.3. Hakutulosten vienti</h5>
@@ -779,21 +794,20 @@
                         Kun halutut hakutulokset on löydetty, voidaan ne
                         tallentaa myöhempää käyttöä varten kahdella tavalla.
                         Ensinnäkin koska kaikki hakuparametrit koodataan
-                        URL:iin, niin on mahdollista lisätä tulossivu
-                        selaimen kirjanmerkkeihin (painamalla Ctrl+d
-                        Firefox-selaimessa). URL:n voi myös kopioida
-                        vaikkapa leikepöydälle ja lähettää sähköpostissa
-                        järjestelmää käyttävälle kollegalle. Toinen
-                        vaihtoehto on hakutulosten vienti CSV-tiedostoon,
-                        mikä on tämän kappaleen aiheena.
+                        URL:iin, niin on mahdollista lisätä tulossivu selaimen
+                        kirjanmerkkeihin (painamalla Ctrl+d Firefox-selaimessa).
+                        URL:n voi myös kopioida vaikkapa leikepöydälle ja
+                        lähettää sähköpostissa järjestelmää käyttävälle
+                        kollegalle. Toinen vaihtoehto on hakutulosten vienti
+                        CSV-tiedostoon, mikä on tämän kappaleen aiheena.
                     </p>
                     <p>
                         Kun haluttu haku on suoritettu, voi tulokset viedä
                         CSV-tiedostoon klikkaamalla painiketta
-                        <em>Vie CSV-tiedostoon</em>. Kaikkia kenttiä ei
-                        tarvitse ottaa mukaan, vaan käyttäjä voi valita
-                        haluamansa kenttä rastittamalla niitä vastaavat
-                        ruudut lomakkeesta ennen viennin suorittamista.
+                        <em>Vie CSV-tiedostoon</em>. Kaikkia kenttiä ei tarvitse
+                        ottaa mukaan, vaan käyttäjä voi valita haluamansa kenttä
+                        rastittamalla niitä vastaavat ruudut lomakkeesta ennen
+                        viennin suorittamista.
                     </p>
                     <figure>
                         <img src="manual/assets/img/kuvakaappaus-10.png"
@@ -804,11 +818,11 @@
                         </figcaption>
                     </figure>
                     <p>
-                        Käyttömukavuuden parantamiseksi vientilomakkeeseen
-                        on lisätty vaihtoehdot <em>Perustiedot</em>,
+                        Käyttömukavuuden parantamiseksi vientilomakkeeseen on
+                        lisätty vaihtoehdot <em>Perustiedot</em>,
                         <em>Järjestön tiedot</em> sekä <em>Lisätiedot</em>,
-                        joiden valitseminen/poistaminen valitsee/poistaa
-                        kaikki aihepiirin kentät.
+                        joiden valitseminen/poistaminen valitsee/poistaa kaikki
+                        osion kentät.
                     </p>
                 </div>
                 <h5 id="criteria">7.4. Hakukriteerien tyypit</h5>
@@ -816,14 +830,13 @@
                     <p>
                         Kuten kappaleen 7.2. esimerkeistä kävi ilmi,
                         hakukriteerejä on erityyppisiä. Vaikka eri
-                        hakukriteerejä onkin 50, ne voidaan kaikki
+                        hakukriteerejä onkin yli 50, ne voidaan kaikki
                         luokitella muutamaan eri tyyppiin. Seuraava taulukko
-                        listaa hakukriteerien tyypit sekä esimerkkejä
-                        kenttien nimistä ja mahdollisista hakusanoista.
-                        (Huom. lainausmerkit ovat taulukossa vain
-                        esimerkkien erottelua varten, eikä hakukenttiin tule
-                        syöttää lainausmerkkejä, ellei nimenomaisesti haluta
-                        etsiä sitaatteja.)
+                        listaa hakukriteerien tyypit sekä esimerkkejä kenttien
+                        nimistä ja mahdollisista hakusanoista. (Huom.
+                        lainausmerkit ovat taulukossa vain esimerkkien erottelua
+                        varten, eikä hakukenttiin tule syöttää lainausmerkkejä,
+                        ellei nimenomaisesti haluta etsiä sitaatteja.)
                     </p>
                     <table>
                         <tr>
@@ -835,54 +848,52 @@
                         <tr>
                             <td>Teksti</td>
                             <td>
-                        <tt>Tunnus</tt>, <tt>Kuvaus</tt>,
-                        <tt>Päätavoitteet</tt>, ... (suurin osa
-                        kriteereistä)
-                        </td>
-                        <td>"16[0-9]{3}", "12345", "[a-z]*ia", "Intia"</td>
-                        <td>
-                            <a href="#regex">Säännöllinen lauseke</a>
-                            (sis. tavallisen sanahaun). Kirjainkokoa ei
-                            huomioida (eli hakusanat "Intia" ja "intia"
-                            tuottavat täsmälleen samat hakutulokset).
-                        </td>
+                                <tt>Tunnus</tt>, <tt>Kuvaus</tt>,
+                                <tt>Päätavoitteet</tt>, ... (suurin osa
+                                kriteereistä)
+                            </td>
+                            <td>"16[0-9]{3}", "12345", "[a-z]*ia", "Intia"</td>
+                            <td>
+                                <a href="#regex">Säännöllinen lauseke</a>
+                                (sis. tavallisen sanahaun). Kirjainkokoa ei
+                                huomioida (eli hakusanat "Intia" ja "intia"
+                                tuottavat täsmälleen samat hakutulokset).
+                            </td>
                         </tr>
                         <tr>
                             <td>Luettelo</td>
                             <td>
-                        <tt>Keskeneräinen</tt>,
-                        <tt>Turvaluokitus</tt>, <tt>Tila</tt>,
-                        <tt>Oikeudellinen fokus</tt> ja
-                        <tt>Tasot</tt>
-                        </td>
-                        <td>
-                            Riippuu kriteeristä. Esim. "Kyllä" / "Ei"
-                            taikka "Julkinen" / "Luottamuksellinen" /
-                            "Salainen"
-                        </td>
-                        <td>
-                            Hakukriteerin arvo valitaan
-                            valintalaatikosta. Vaihtoehdot ovat
-                            toistensa poissulkevia.
-                        </td>
+                                <tt>Keskeneräinen</tt>,
+                                <tt>Turvaluokitus</tt>, <tt>Tila</tt>,
+                                <tt>Oikeudellinen fokus</tt> ja
+                                <tt>Tasot</tt>
+                            </td>
+                            <td>
+                                Riippuu kriteeristä. Esim. "Kyllä" / "Ei" taikka
+                                "Julkinen" / "Luottamuksellinen" / "Salainen".
+                            </td>
+                            <td>
+                                Hakukriteerin arvo valitaan valintalaatikosta.
+                                Vaihtoehdot ovat toistensa poissulkevia.
+                            </td>
                         </tr>
                         <tr>
                             <td>Päivämäärä</td>
                             <td>
-                        <tt>Hankkeen rekisteröintipäivä</tt>,
-                        <tt>Hyväksymispäivämäärä</tt>,
-                        <tt>Tilintarkastuksen päiävmäärä</tt>, ...
-                        </td>
-                        <td>
-                            1.1.2016 – 31.12.2016
-                        </td>
-                        <td>
-                            Päivämäärät haetaan annetulla aikavälillä.
-                            Välin alkamis- ja loppumispäivämäärät
-                            syötetään numeerisesti antamalla ensin päivä
-                            (1-31), sitten kuukausi (1-12) ja lopuksi
-                            vuosi (nelinumeroinen).
-                        </td>
+                                <tt>Hankkeen rekisteröintipäivä</tt>,
+                                <tt>Hyväksymispäivämäärä</tt>,
+                                <tt>Tilintarkastuksen päiävmäärä</tt>, ...
+                            </td>
+                            <td>
+                                1.1.2016 – 31.12.2016
+                            </td>
+                            <td>
+                                Päivämäärät haetaan annetulla aikavälillä.
+                                Välin alkamis- ja loppumispäivämäärät syötetään
+                                numeerisesti antamalla ensin päivä (1-31),
+                                sitten kuukausi (1-12) ja lopuksi vuosi
+                                (nelinumeroinen).
+                            </td>
                         </tr>
                     </table>
                     <div class="alert alert-warning">
@@ -890,18 +901,17 @@
                             Edes luettelokenttien vaihtoehdot eivät ole
                             välttämättä tyhjentäviä. Esimerkiksi kun
                             järjestelmään lisätään uusia kenttiä hankkeille,
-                            niin tietokantaan jo tallennetujen hankkeiden
+                            Niin tietokantaan jo tallennetujen hankkeiden
                             uusille kentille ei välttämättä automaattisesti
                             määritellä arvoa.
                         </p>
                         <p>
-                            Käytännössä esimerkiksi tietokannassa saattaa
-                            olla hankkeita, joiden kentän
-                        <tt>Turvaluokitus</tt> arvo on määrittelemätön.
-                        Nämä hankkeet eivät löydy haettaessa kriteerillä
-                        <tt>Turvaluokitus</tt>. Nämä hankkeet eivät siis
-                        ole julkisia, eivätkä luottamuksellisia, eivätkä
-                        edes salaisia.
+                            Käytännössä esimerkiksi tietokannassa saattaa olla
+                            hankkeita, joiden kentän <tt>Turvaluokitus</tt> arvo
+                            on määrittelemätön. Nämä hankkeet eivät löydy
+                            haettaessa kriteerillä <tt>Turvaluokitus</tt>. Nämä
+                            hankkeet eivät siis ole julkisia, eivätkä
+                            luottamuksellisia, eivätkä edes salaisia.
                         </p>
                     </div>
                 </div>
@@ -911,13 +921,11 @@
             <h4>8. Järjestöhaku</h4>
             <section class="man-content">
                 <p>
-                    Järjestöhaku on oleellisesti samankaltainen kuin
-                    hankehaku
+                    Järjestöhaku on oleellisesti samankaltainen kuin hankehaku
                     (ks. <a href="#projSearch">7.&nbsp;Hankehaku</a>).
-                    Hankehausta poiketen järjestöhaussa CSV-tiedostoon
-                    vietävien kenttien valinta ei ole mahdollista.
-                    CSV-tiedostoon viedään aina seuraavat hakutulosten
-                    kentät:
+                    Hankehausta poiketen järjestöhaussa CSV-tiedostoon vietävien
+                    kenttien valinta ei ole mahdollista. CSV-tiedostoon viedään
+                    aina seuraavat hakutulosten kentät:
                 </p>
                 <ol>
                     <li><tt>Nimi</tt></li>
@@ -938,10 +946,6 @@
                     <li><tt>Oleelliset taustatiedot</tt></li>
                     <li><tt>Erityishuomiot</tt>
                 </ol>
-                <!--                    <p>
-                                        CSV-tiedosto sisältää nämä kentät tässä järjestyksessä
-                                        puolipistein (";") eroteltuna.
-                                    </p>-->
             </section>
         </article>
         <article id="paymentSearch" class="man-article">
@@ -950,10 +954,9 @@
                 <p>
                     Maksuhaku on oleellisesti samankaltainen kuin hankehaku
                     (ks. <a href="#projSearch">7.&nbsp;Hankehaku</a>).
-                    Hankehausta poiketen maksuhaussa CSV-tiedostoon
-                    vietävien kenttien valinta ei ole mahdollista.
-                    CSV-tiedostoon viedään aina seuraavat hakutulosten
-                    kentät:
+                    Hankehausta poiketen maksuhaussa CSV-tiedostoon vietävien
+                    kenttien valinta ei ole mahdollista. CSV-tiedostoon viedään
+                    aina seuraavat hakutulosten kentät:
                 </p>
                 <ol>
                     <li><tt>Maksu (EUR)</tt></li>
@@ -972,41 +975,36 @@
                     Järjestelmään tallennetulla hankkeella on aina
                     yksikäsitteinen tila. Tila määrää mm. mitä tietoja hanke
                     sisältää, millaisia tietoja siihen voidaan lisätä, miten
-                    sitä voidaan muokta sekä mihin tilaan se voidaan
-                    seuraavaksi siirtää.
+                    sitä voidaan muokta sekä mihin tilaan se voidaan seuraavaksi
+                    siirtää.
                 </p>
                 <h5 id="stateModel">10.1. Tilamalli</h5>
                 <div class="man-subcontent">
                     <p>
                         Järjestelmän tilamallissa hankkeen alkutila on
-                    <tt>Rekisteröity</tt>. Jokainen lisätty uusi hanke
-                    siirretään tähän tilaan kun
-                    <em>hankkeen lisäyslomake</em> (ks.
-                    <a href="#projCreationForm">
-                        2.1&nbsp;Hankkeen&nbsp;lisäyslomake
-                    </a>) on täytetty.
-                    <!--                        (Automaattien slangissa lomakkeita
-                                            kutsutaan <em>syötteeksi</em> ja lomakkeiden täytön
-                                            aiheuttamaa tilan vaihdosta <em>tilasiirtymäksi</em>.)-->
-                    Myöhemmät <em>tilasiirtymät</em> käynnistetään
-                    hankkeen näkymäsivun yläosassa olevalla lomakkeella
-                    (ks. <a href="#projView">4.&nbsp;Hankenäkymä</a>).
-                    Lisäksi hankkeen <em>muokkauslomake</em> on
-                    järjestetty hankkeen tiloja vastaaviin osioihin (ks.
-                    <a href="#projEdit">11.&nbsp;Hankkeen&nbsp;muokkaus</a>).
+                        <tt>Rekisteröity</tt>. Jokainen lisätty uusi hanke
+                        siirretään tähän tilaan kun
+                        <em>hankkeen lisäyslomake</em> (ks.
+                        <a href="#projCreationForm">2.1&nbsp;Hankkeen&nbsp;lisäyslomake</a>)
+                        on täytetty. Myöhemmät <em>tilasiirtymät</em>
+                        käynnistetään hankkeen näkymäsivun yläosassa olevalla
+                        lomakkeella (ks.
+                        <a href="#projView">4.&nbsp;Hankenäkymä</a>). Lisäksi
+                        hankkeen <em>muokkauslomake</em> on järjestetty hankkeen
+                        tiloja vastaaviin osioihin (ks.
+                        <a href="#projEdit">11.&nbsp;Hankkeen&nbsp;muokkaus</a>).
                     </p>
                     <figure id="fig11">
                         <img src="manual/assets/img/states.png"
                              alt="Hankkeen tilat" style="border: 0px">
                         <figcaption>
-                            Kuva 11: Kaavio hankkeen tiloista. Jokaista
-                            nuolta vastaa syötelomake, jossa hankkeeseen
-                            tallennetaan uusia tietoja.
+                            Kuva 11: Kaavio hankkeen tiloista. Jokaista nuolta
+                            vastaa syötelomake, jossa hankkeeseen tallennetaan
+                            uusia tietoja.
                         </figcaption>
                     </figure>
                     <p>
-                        Hanke voi siis olla tasan yhdessä seuraavista
-                        tiloista:
+                        Hanke voi siis olla tasan yhdessä seuraavista tiloista:
                     </p>
                     <table>
                         <tr>
@@ -1015,35 +1013,35 @@
                         </tr>
                         <tr>
                             <td><tt>Rekisteröity</tt></td>
-                        <td>Hankkeen alkutila.</td>
+                            <td>Hankkeen alkutila.</td>
                         </tr>
                         <tr>
                             <td><tt>Käsittelyssä</tt></td>
-                        <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><tt>Hyväksytty</tt></td>
-                        <td>Mahdollisuus luoda <em>hyväksymisraportti</em>.</td>
+                            <td>Mahdollisuus luoda <em>hyväksymisraportti</em>.</td>
                         </tr>
                         <tr>
                             <td><tt>Allekirjoitettu</tt></td>
-                        <td>Hanke käynnistyy.</td>
+                            <td>Hanke käynnistyy.</td>
                         </tr>
                         <tr>
                             <td><tt>Väliraportti</tt></td>
-                        <td>Mahdollisuus luoda <em>väliraportti</em>.</td>
+                            <td>Mahdollisuus luoda <em>väliraportti</em>.</td>
                         </tr>
                         <tr>
                             <td><tt>Loppuraportti</tt></td>
-                        <td>Mahdollisuus luoda <em>loppuraportti</em>.</td>
+                            <td>Mahdollisuus luoda <em>loppuraportti</em>.</td>
                         </tr>
                         <tr>
                             <td><tt>Päättynyt</tt></td>
-                        <td>Hankkeen lopputila.</td>
+                            <td>Hankkeen lopputila.</td>
                         </tr>
                         <tr>
                             <td><tt>Hylätty</tt></td>
-                        <td>Hankkeen lopputila.</td>
+                            <td>Hankkeen lopputila.</td>
                         </tr>
                     </table>
                     <p>
@@ -1052,8 +1050,8 @@
                     </p>
                     <div class="alert alert-warning">
                         <p>
-                            <em>Tilasiirtymät ovat peruuttamattomia</em>.
-                            Tämä johtuu yksinkertaisesti siitä, ettei
+                            <em>Tilasiirtymät ovat peruuttamattomia</em>. Tämä
+                            johtuu yksinkertaisesti siitä, ettei
                             mielivaltaisella tilalla ole yksikäsitteistä
                             edeltäjätilaa.
                         </p>
@@ -1070,17 +1068,17 @@
                 <div class="man-subcontent">
                     <p>
                         <a href="#fig11">Kuvassa&nbsp;11</a> keltasella
-                        väritetyt tilat ovat sellaisia, että hankkeen
-                        katsotaan olevan <em>käynnissä</em> kun se on
-                        jossain näistä tiloista. Käynnissä oleville
-                        hankkeille on oma hakukriteerinsä
+                        väritetyt tilat ovat sellaisia, että hankkeen katsotaan
+                        olevan <em>käynnissä</em> kun se on jossain näistä
+                        tiloista. Käynnissä oleville hankkeille on oma
+                        hakukriteerinsä
                         (ks. <a href="#projSearch">7.&nbsp;Hankehaku</a>).
                         Niille voidaan lisätä maksuja. Maksun lisäämistä
                         hankkeelle käsitellään kappaleessa
                         <a href="#addPayment">11.2.&nbsp;Maksun&nbsp;lisäyslomake</a>.
-                        (Koska väliraportteja voi olla useampia, on
-                    <tt>Väliraportti</tt>-tilassa takaisinkytkentä.
-                    Ks. esim. <a href="#fig12">Kuva&nbsp;12</a>.)
+<!--                        (Koska väliraportteja voi olla useampia, on
+                        <tt>Väliraportti</tt>-tilassa takaisinkytkentä. Ks.
+                        <a href="#fig12">Kuva&nbsp;12</a>.)-->
                     </p>
                     <p>
                         Hankkeen näkymäsivulla (ks.
@@ -1096,55 +1094,53 @@
                         <figcaption>
                             Kuva 12: Hankkeen näkymäsivun
                             <em>Toteutunut aikataulu</em>-osiossa näkyy
-                            tilasiirtymien tietoja. Tilaan
-                            <tt>Väliraportti</tt> on siirrytty kahdesti.
+                            tilasiirtymien tietoja. Tilaan <tt>Väliraportti</tt>
+                            on siirrytty kahdesti.
                         </figcaption>
                     </figure>
                     <p>
-                        PDF-muotoisten raporttien luominen onnistuu
-                        klikkaamalla tilaa vastaavaa painiketta
-                        <em>Luo PDF</em> hankkeen
+                        PDF-muotoisten raporttien luominen onnistuu klikkaamalla
+                        tilaa vastaavaa painiketta <em>Luo PDF</em> hankkeen
                         näkymäsivun <em>Toteutunut aikataulu</em>-osiossa.
                         Järjestelmä luo tällöin PDF-tiedoston, joka ilmestyy
-                        osioon <em>liitteet</em>. Jokaisella tilalla voi
-                        olla korkeintaan yksi PDF-muotoinen raportti.
-                        PDF-raportti on suositeltavaa luoda vasta sitten,
-                        kun tilan tietoihin ei tule enää muutoksia (ks.
+                        osioon <em>liitteet</em>. Jokaisella tilalla voi olla
+                        korkeintaan yksi PDF-muotoinen raportti. PDF-raportti on
+                        suositeltavaa luoda vasta sitten, kun tilan tietoihin ei
+                        tule enää muutoksia (ks.
                         <a href="#incompleteness">10.3.&nbsp;Hanketietojen&nbsp;keskeneräisyys</a>).
                     </p>
                     <p>
-                        Loppuraporttiin on mahdollista liittää
-                        talousraportti. Talousraportti tulee tallentaa
-                        PDF-muotoisena liitetiedostona, jonka
-                    <tt>Kategoria</tt> on "Talousraportti" (ks.
-                    <a href="#addAppendix">11.3.&nbsp;Liitteen&nbsp;lisäyslomake</a>).
-                    Jos tällainen liitetiedosto löytyy, liitetään se
-                    automaattisesti loppuraportin PDF-versioon.
+                        Loppuraporttiin on mahdollista liittää talousraportti.
+                        Talousraportti tulee tallentaa PDF-muotoisena
+                        liitetiedostona, jonka <tt>Kategoria</tt> on
+                        "Talousraportti" (ks.
+                        <a href="#addAppendix">11.3.&nbsp;Liitteen&nbsp;lisäyslomake</a>).
+                        Jos tällainen liitetiedosto löytyy, liitetään se
+                        automaattisesti loppuraportin PDF-versioon.
                     </p>
                     <p>
-                        Hankkeen elinkaaren päätepisteet ovat
-                    <tt>Hylätty</tt> ja <tt>Päättynyt</tt>. Näistä
-                    tiloista ei ole siirtymiä, eikä maksuja taikka
-                    liitteitä voi lisätä.
+                        Hankkeen elinkaaren päätepisteet ovat <tt>Hylätty</tt>
+                        ja <tt>Päättynyt</tt>. Näistä tiloista ei ole siirtymiä,
+                        eikä maksuja taikka liitteitä voi lisätä.
                     </p>
                 </div>
                 <h5 id="incompleteness">10.3. Hanketietojen keskeneräisyys</h5>
                 <div class="man-subcontent">
                     <p>
-                        Järjestelmän tilamallin heikkokutena on, että se
-                        joutuu olettamaan tilasiirtymässä annetut tiedot
-                        oikeiksi ja täydellisiksi. Tilanteen helpottamiseksi
-                        on kehitetty ominaisuus, jonka avulla voi lisätä
-                        hankkeeseen määreen <tt>Keskeneräinen</tt>. Määreen
-                    tarkoitus on tiedottaa järjestelmän käyttäjiä siitä,
-                    että hankkeen nykyisen tilan (taikka edeltävien
-                    tilojen) tietoja saatetaan vielä muuttaa.
-                    Keskeneräisyydellä ei ole vaikutusta hankkeen
-                    toiminnallisuuteen, kuten raporttien luomiseen
-                    taikka tilasiirtymiin, vaan sen huomiointi on
-                    käyttäjän vastuulla. On suositeltavaa esimerkiksi
-                    luoda PDF-raportti vasta siinä vaiheessa, kun sitä
-                    vastaavan tilan tietoja ei enää muokata.
+                        Järjestelmän tilamallin heikkokutena on, että se joutuu
+                        olettamaan tilasiirtymässä annetut tiedot oikeiksi ja
+                        täydellisiksi. Tilanteen helpottamiseksi on kehitetty
+                        ominaisuus, jonka avulla voi lisätä hankkeeseen määreen
+                        <tt>Keskeneräinen</tt>. Määreen tarkoitus on tiedottaa
+                        järjestelmän käyttäjiä siitä, että hankkeen nykyisen
+                        tilan (taikka edeltävien tilojen) tietoja saatetaan
+                        vielä muuttaa. Keskeneräisyydellä ei ole vaikutusta
+                        hankkeen toiminnallisuuteen, kuten raporttien luomiseen
+                        taikka tilasiirtymiin, vaan sen huomiointi on käyttäjän
+                        vastuulla. On suositeltavaa esimerkiksi luoda
+                        PDF-raportti vasta siinä vaiheessa, kun sitä vastaavan
+                        tilan tietoja ei enää muokata. Toki luodun PDF-tiedoston
+                        voi poistaa ja luoda uudelleen.
                     </p>
                     <p>
                         Hankkeen keskeneräisyydestä ilmotetaan mm.
@@ -1163,33 +1159,32 @@
             <section class="man-content">
                 <p>
                     Tämä kappale käsittelee hankkeen muokkausta muuten kuin
-                    tilasiirtymien yhteydessä. Tilasiirtymiä käsitellään
-                    luvussa
+                    tilasiirtymien yhteydessä. Tilasiirtymiä käsitellään luvussa
                     <a href="#states">10.&nbsp;Hankkeen&nbsp;tilat</a>.
                     <em>Tilasiirtymälomakkeeseen</em> pääsee hankkeen
                     näkymäsivun yläosan lomakkeesta (ks.
                     <a href="#fig4">Kuva&nbsp;4</a>). Linkki hankkeen
-                    <em>muokkauslomakkeeseen</em> on myös näkymäsivun
-                    yläosassa (ensimmäinen painike oikealla hankkeen
-                    otsikkorivillä). Maksun ja liitteen lisäämiselle on omat
-                    lomakkeensa alempana hankkeen näkymäsivulla.
+                    <em>muokkauslomakkeeseen</em> on myös näkymäsivun yläosassa
+                    (ensimmäinen painike oikealla hankkeen otsikkorivillä).
+                    Maksun ja liitteen lisäämiselle on omat lomakkeensa alempana
+                    hankkeen näkymäsivulla.
                 </p>
                 <h5 id="projEditForm">11.1. Hankkeen muokkauslomake</h5>
                 <div class="man-subcontent">
                     <p>
-                        Seuraavassa kuvassa näkyy hankkeen muokkauslomake,
-                        joka on jaettu hankkeen tiloja vastaaviin osioihin.
-                        Hankkeen lisäyslomakkeen tavoin myös hankkeen
-                        muokkaus lomakkeen osiot saa
-                        näytetyiksi/piilotetuiksi otsikkoa klikkaamalla.
+                        Seuraavassa kuvassa näkyy hankkeen muokkauslomake, joka
+                        on jaettu hankkeen tiloja vastaaviin osioihin. Hankkeen
+                        lisäyslomakkeen tavoin myös hankkeen muokkaus lomakkeen
+                        osiot saa näytetyiksi/piilotetuiksi otsikkoa
+                        klikkaamalla.
                     </p>
                     <figure>
                         <img src="manual/assets/img/kuvakaappaus-15.png"
                              alt="Hankkeen liitteet">
                         <figcaption>
-                            Kuva 13: Hankkeen muokkauslomake.
-                            Hankkeen lisäyslomakkeen tavoin tämä lomake on
-                            jaettu erillisiin piilotettaviin osioihin.
+                            Kuva 13: Hankkeen muokkauslomake. Hankkeen
+                            lisäyslomakkeen tavoin tämä lomake on jaettu
+                            erillisiin piilotettaviin osioihin.
                         </figcaption>
                     </figure>
                 </div>
@@ -1207,22 +1202,21 @@
                     </figure>
                     <p>
                         Maksun lisäyslomakkeen vasemmassa puoliskossa on
-                        numeeriset kentät päivämäärän syöttämiselle. Päivä
-                        tulee syöttää kokonaislukuna 1–31, kuukausi
-                        kokonaislukuna 1–12 sekä vuosi nelinumeroisena
-                        kokonaislukuna. Summa tulee syöttää
-                        <em>positiivisena lukuna ilman välilyöntejä
-                            muistaen, että desimaalierotin (jos tarpeen) on
-                            piste (".")</em>. Kun tiedot on syötetty,
-                        vahvistetaan maksumerkinnän lisäys painamalla
+                        numeeriset kentät päivämäärän syöttämiselle. Päivä tulee
+                        syöttää kokonaislukuna 1–31, kuukausi kokonaislukuna
+                        1–12 sekä vuosi nelinumeroisena kokonaislukuna. Summa
+                        tulee syöttää <em>positiivisena lukuna ilman
+                            välilyöntejä muistaen, että desimaalierotin (jos
+                            tarpeen) on piste (".")</em>. Kun tiedot on
+                        syötetty, vahvistetaan maksumerkinnän lisäys painamalla
                         painiketta <em>Tallenna</em>.
                     </p>
                     <p>
                         On syytä huomata, että <em>maksusuunnitelma</em>
                         lisätään tilassa <tt>Allekirjoitettu</tt> ja sitä
-                    muokataan toisilla lomakkeilla (ks.
-                    <a href="#states">10.&nbsp;Hankkeen&nbsp;tilat</a>,
-                    <a href="#states">11.1.&nbsp;Hankkeen&nbsp;muokkauslomake</a>).
+                        muokataan toisilla lomakkeilla (ks.
+                        <a href="#states">10.&nbsp;Hankkeen&nbsp;tilat</a>,
+                        <a href="#states">11.1.&nbsp;Hankkeen&nbsp;muokkauslomake</a>).
                     </p>
                     <div class="alert alert-warning">
                         Järjestelmä ei voi vaikuttaa pankkitapahtumiin, eikä
@@ -1246,16 +1240,15 @@
                         </figcaption>
                     </figure>
                     <p>
-                        Liitteelle tulee valita kategoria vetolaatikosta.
-                        Jos mikään listatuista kategorioista ei kuvaa
-                        lisättävää liitettä, voi sille luoda oman kategorian
-                        valitsemalla listalta kohta "Muu..." ja
-                        täydentämällä vetolaatikon oikealle puolelle
-                        ilmestyvään tekstikenttään sopiva kuvaus. Lisättävän
-                        tiedoston valintaikkunaan pääsee painamalla
-                        painiketta <em>Selaa...</em>. Lähetettävän tiedoston
-                        voi myös raahata tiedoston valintakenttään. Liitteen
-                        lisäys vahvistetaan painamalla painiketta
+                        Liitteelle tulee valita kategoria vetolaatikosta. Jos
+                        mikään listatuista kategorioista ei kuvaa lisättävää
+                        liitettä, voi sille luoda oman kategorian valitsemalla
+                        listalta kohta "Muu..." ja täydentämällä vetolaatikon
+                        oikealle puolelle ilmestyvään tekstikenttään sopiva
+                        kuvaus. Lisättävän tiedoston valintaikkunaan pääsee
+                        painamalla painiketta <em>Selaa...</em>. Lähetettävän
+                        tiedoston voi myös raahata tiedoston valintakenttään.
+                        Liitteen lisäys vahvistetaan painamalla painiketta
                         <em>Tallenna</em>.
                     </p>
                 </div>
@@ -1265,15 +1258,22 @@
             <h4>12. Järjestön muokkaus</h4>
             <section class="man-content">
                 <p>
-                    Hankkeen tavoin myös järjestöllä on näkymäsivu.
-                    Myös järjestön nimen vieressä on poisto- ja
-                    muokkauspainikkeet, joilla on vastaavanlainen merkitys
-                    kuin hankkeen näkymäsivulla (ks.
+                    Hankkeen tavoin myös järjestöllä on näkymäsivu. Myös
+                    järjestön nimen vieressä on poisto- ja muokkauspainikkeet,
+                    joilla on vastaavanlainen merkitys kuin hankkeen
+                    näkymäsivulla (ks.
                     <a href="#projView">4.&nbsp;Hankenäkymä</a>). Järjestön
-                    muokkauslomake on oleellisesti samankaltainen kuin
-                    hankkeen muokkauslomake (ks.
+                    muokkauslomake on oleellisesti samankaltainen kuin hankkeen
+                    muokkauslomake (ks.
                     <a href="#projEdit">11.&nbsp;Hankkeen&nbsp;muokkaus</a>).
                 </p>
+                <figure>
+                    <img src="manual/assets/img/kuvakaappaus-17.png"
+                         alt="Hankkeen liitteet">
+                    <figcaption>
+                        Kuva 15: Järjestön näkymäsivu.
+                    </figcaption>
+                </figure>
             </section>
         </article>
     </div>
