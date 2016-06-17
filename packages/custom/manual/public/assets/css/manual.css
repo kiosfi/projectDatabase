@@ -31,6 +31,7 @@
 
 .man-nav {
     position:           fixed;
+    width:              20em;
 }
 
 .man-article {
@@ -86,9 +87,15 @@
 @media only screen and (max-width: 1429px) {
     .man-nav {
         left:           1em;
-        width:          20em;
     }
     .man-article {
         margin-left:    16em;
+    }
+}
+
+@media only screen and (max-height: 768px) {
+    .man-nav {
+        overflow-y:     scroll;
+        height:         67%;
     }
 }
