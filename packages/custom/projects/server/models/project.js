@@ -76,6 +76,14 @@ var ProjectSchema = new Schema({
         required: true
     },
     /**
+     * The purpose of this flag is to indicate that the current state of the
+     * project is incomplete, i.e. the values of some of its fields are about
+     * to change later on. This field was added in schema version 9.
+     */
+    incomplete: {
+        type: Boolean
+    },
+    /**
      * Date when the application was filed.
      */
     reg_date: {                 // "Rekisteröimispvm"
@@ -170,7 +178,7 @@ var ProjectSchema = new Schema({
      * Before schema version 4, this field was known as "beneficiaries". It has
      * been renamed to avoid confusion with the fields in end_report state.
      */
-    target_group: {             // "Kohderyhmä"
+    target_group: {             // "Hyödynsaajat"
         type: String,
         trim: true
     },
@@ -204,6 +212,25 @@ var ProjectSchema = new Schema({
      * The current Finnish name for this field is "Päätavoitteet".
      */
     project_goal: {             // "Hankkeen päätavoitteet"
+        type: String,
+        trim: true
+    },
+    /**
+     * The planned results for the project. The Finnish name of this field is
+     * "Odotettavissa olevat keskeiset tulokset". This field was added in schema
+     * version 9.
+     */
+    planned_results: {
+        type: String,           // "Odotettavissa olevat keskeiset tulokset"
+        trim: true
+    },
+    /**
+     * The current Finnish name for this field is "Indikaattotit".
+     *
+     * The name of this field was changed from <tt>sustainability_risks</tt> to
+     * <tt>indicators</tt> in schema version 9.
+     */
+    risk_control: {             // "Riskinhallinnan kuvaus"
         type: String,
         trim: true
     },
@@ -284,7 +311,7 @@ var ProjectSchema = new Schema({
      * This field contains a textual description for how this project fits into
      * the strategy of KIOS. This field was added in schema version 4.
      */
-    fitness: {                  // "Sopivuus KIOS:n strategiaan"
+    fitness: {                  // "Sopivuus KIOSin strategiaan"
         type: String,
         trim: true
     },
@@ -608,7 +635,15 @@ var ProjectSchema = new Schema({
         type: Array
     },
     /**
-     * An array containing paths of the appendix files of a project.
+     * An array containing the metadata of the project's appendix files. The
+     * objects in this array contain the following fields:
+     * <tt>category</tt> (String) for the category of the appendix,
+     * <tt>custom_category</tt> (String) for a custom category (with the
+     * <tt>category</tt> having value "Muu..."), <tt>mime_type</tt> (String) for
+     * the MIME type of the appendix file, <tt>date</tt> (String) for the upload
+     * date of the appendix, <tt>original_name</tt> (String) for the original
+     * filename of the appendix, <tt>url</tt> (String) for the URL for fetching
+     * the appendix file from the server.
      */
     appendices: {               // "Liitteet"
         type: Array

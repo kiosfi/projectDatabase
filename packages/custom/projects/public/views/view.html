@@ -81,11 +81,12 @@
                         <span class="col-md-4">
                             {{fieldNames["state"]}}:
                             {{project.state}}
+                            <span ng-if="project.incomplete"> (keskeneräinen)</span>
                         </span>
                         <form name="stateForm" class="proj-content"
                               ng-show="state.next.length !== 0
-                                                      && project.state !== 'hylätty'
-                                                      && project.state !== 'päättynyt'"
+                                          && project.state !== 'hylätty'
+                                          && project.state !== 'päättynyt'"
                               data-ng-init="findState()"
                               data-ng-submit="changeState(project.changeTo);">
                             <select id="stateSelect" data-ng-model="project.changeTo"
@@ -204,6 +205,11 @@
                     <span ng-bind-html="handleEmphasis(project.description)">
                     </span>
                 </div>
+                <h4>{{fieldNames["description_en"]}}</h4>
+                <div class="proj-content">
+                    <span ng-bind-html="handleEmphasis(project.description_en)">
+                    </span>
+                </div>
                 &nbsp;
             </article>
             <article id="organisation" class="proj-article">
@@ -265,20 +271,6 @@
             <article id="details" class="proj-article">
                 <h4>Lisätiedot</h4>
                 <div id="appinfo" class="proj-content">
-                    <div class="col-md-12" style="margin-bottom: 1em"
-                         ng-show="project.methods.length > 0">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["methods"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <div ng-repeat="method in project.methods">
-                                <em>{{method.name}}</em> ({{method.level}})
-                                <p class="proj-subcontent">
-                                    <span ng-bind-html="handleEmphasis(method.comment)"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                     <div ng-show="nonEmpty(project.context)"
                          class="col-md-12" style="margin-bottom: 1em">
                         <div class="col-md-4 mini-header">
@@ -304,6 +296,38 @@
                         </div>
                         <div class="col-md-8">
                             <span ng-bind-html="handleEmphasis(project.target_group)"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-bottom: 1em"
+                         ng-show="project.methods.length > 0">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["methods"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <div ng-repeat="method in project.methods">
+                                <em>{{method.name}}</em> ({{method.level}})
+                                <p class="proj-subcontent">
+                                    <span ng-bind-html="handleEmphasis(method.comment)"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.planned_results)"
+                         class="col-md-12" style="margin-bottom: 1em">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["planned_results"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <span ng-bind-html="handleEmphasis(project.planned_results)"></span>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.risk_control)"
+                         class="col-md-12" style="margin-bottom: 1em">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["risk_control"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <span ng-bind-html="handleEmphasis(project.risk_control)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.gender_aspect)"
@@ -358,6 +382,15 @@
                         </div>
                         <div class="col-md-8">
                             <span ng-bind-html="handleEmphasis(project.other_donors_proposed)"></span>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.human_resources)"
+                         class="col-md-12" style="margin-bottom: 1em">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["human_resources"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <span ng-bind-html="handleEmphasis(project.human_resources)"></span>
                         </div>
                     </div>
                     <div ng-show="nonEmpty(project.referees)"
@@ -454,7 +487,9 @@
                             </div>
                             <div class="col-md-2">
                                 <a ng-href="/projects/{{project._id}}/regreport/{{intreport.reportNumber}}"
-                                   class="btn large-btn">HTML-raportti</a>
+                                   target="_blank" class="btn large-btn">
+                                    HTML-raportti
+                                </a>
                             </div>
                             <div class="col-md-4">
                                 <a ng-click="createPDF('reg')"
@@ -592,7 +627,9 @@
                                 </div>
                                 <div class="col-md-2">
                                     <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}"
-                                       class="btn large-btn">HTML-raportti</a>
+                                       target="_blank" class="btn large-btn">
+                                        HTML-raportti
+                                    </a>
                                 </div>
                                 <div class="col-md-4">
                                     <a ng-click="createPDF('int')"
@@ -642,14 +679,19 @@
                             </div>
                             <div class="col-md-2">
                                 <a ng-href="/projects/endReport/{{project._id}}"
-                                   class="btn large-btn">HTML-raportti</a>
+                                   target="_blank" class="btn large-btn">
+                                    HTML-raportti
+                                </a>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <a ng-click="createPDF('end')"
-                                   ng-disabled="endRepExists"
+                                   ng-disabled="endRepExists || nonPDFfinancialRep"
                                    class="btn large-btn">
                                     Luo PDF
                                 </a>
+                            </div>
+                            <div class="col-md-2" ng-show="!financialRepExists">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span> <small>Talousraportti puuttuu</small>
                             </div>
                         </div>
                         <div ng-show="showEndDetails"
@@ -789,61 +831,59 @@
                       role="form"
                       data-ng-submit="addPaymentInfo(paymentForm.$valid)"
                       novalidate>
-                    <div class="form-group col-xs-12" id="PaymentDate">
-                        <label class="col-xs-2 control-label">
+                    <div class="form-group col-md-6" id="PaymentDate">
+                        <label class="col-md-3 control-label">
                             Päiväys
                         </label>
-                        <div id="paymentDate">
-                            <div class="col-xs-3"
-                                 ng-class="{'has-error': paymentForm.paymentDay.$invalid }">
-                                <input name="paymentDay" type="number"
-                                       ng-trim="true" class="form-control"
-                                       data-ng-model="payment_day"
-                                       id="paymentDay" required
-                                       />
-                                <div ng-show="paymentForm.paymentDay.$invalid"
-                                     class="help-block" >
-                                    <p ng-show="paymentForm.paymentDay.$error.required">
-                                        Päivä on pakollinen
-                                    </p>
-                                </div>
+                        <div class="col-md-3"
+                             ng-class="{'has-error': paymentForm.paymentDay.$invalid }">
+                            <input name="paymentDay" type="number"
+                                   ng-trim="true" class="form-control"
+                                   data-ng-model="payment_day"
+                                   id="paymentDay" required
+                                   />
+                            <div ng-show="paymentForm.paymentDay.$invalid"
+                                 class="help-block" >
+                                <p ng-show="paymentForm.paymentDay.$error.required">
+                                    Päivä on pakollinen
+                                </p>
                             </div>
-                            <div class="col-xs-3"
-                                 ng-class="{'has-error': paymentForm.paymentMonth.$invalid }">
-                                <input name="paymentMonth" type="number"
-                                       ng-trim="true" class="form-control"
-                                       data-ng-model="payment_month"
-                                       id="paymentMonth"
-                                       required />
-                                <div ng-show="paymentForm.paymentMonth.$invalid"
-                                     class="help-block">
-                                    <p ng-show="paymentForm.paymentMonth.$error.required">
-                                        Kuukausi on pakollinen
-                                    </p>
-                                </div>
+                        </div>
+                        <div class="col-md-3"
+                             ng-class="{'has-error': paymentForm.paymentMonth.$invalid }">
+                            <input name="paymentMonth" type="number"
+                                   ng-trim="true" class="form-control"
+                                   data-ng-model="payment_month"
+                                   id="paymentMonth"
+                                   required />
+                            <div ng-show="paymentForm.paymentMonth.$invalid"
+                                 class="help-block">
+                                <p ng-show="paymentForm.paymentMonth.$error.required">
+                                    Kuukausi on pakollinen
+                                </p>
                             </div>
-                            <div class="col-xs-3"
-                                 ng-class="{'has-error': paymentForm.paymentYear.$invalid }">
-                                <input name="paymentYear" type="number"
-                                       ng-trim="true" class="form-control"
-                                       data-ng-model="payment_year"
-                                       id="paymentYear"
-                                       required />
-                                <div ng-show="paymentForm.paymentYear.$invalid"
-                                     class="help-block">
-                                    <p ng-show="paymentForm.paymentYear.$error.required">
-                                        Vuosi on pakollinen
-                                    </p>
-                                </div>
+                        </div>
+                        <div class="col-md-3"
+                             ng-class="{'has-error': paymentForm.paymentYear.$invalid }">
+                            <input name="paymentYear" type="number"
+                                   ng-trim="true" class="form-control"
+                                   data-ng-model="payment_year"
+                                   id="paymentYear"
+                                   required />
+                            <div ng-show="paymentForm.paymentYear.$invalid"
+                                 class="help-block">
+                                <p ng-show="paymentForm.paymentYear.$error.required">
+                                    Vuosi on pakollinen
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group col-xs-12"
+                    <div class="form-group col-md-6"
                          ng-class="{'has-error': paymentForm.paymentSumEUR.$invalid}">
                         <label for="paymentSumEUR" class="col-xs-2 control-label">
                             Summa (EUR)
                         </label>
-                        <div class="col-xs-4" >
+                        <div class="col-md-4" >
                             <input name="paymentSumEUR" type="number"
                                    ng-trim="true" class="form-control"
                                    data-ng-model="project.payment.sum_eur"
@@ -863,8 +903,8 @@
                             </p>
                         </div>
                     </div>
-                    <div class="form-group col-xs-12">
-                        <div class="col-xs-4">
+                    <div class="form-group col-md-12">
+                        <div class="col-md-4">
                             <button type="submit" id="btn-pay"
                                     class="btn btn-default"
                                     ng-disabled="paymentForm.$invalid">
@@ -1006,16 +1046,7 @@
                                 class="col-md-4"
                                 ng-model="project.appendix.category" required>
                             <option value="">[Valitse yksi]</option>
-                            <option>Hankehakemus</option>
-                            <option>Hankebudjetti</option>
-                            <option>Rekisteröintitodistus</option>
-                            <option>Suositus</option>
-                            <option>Järjestön vuosibudjetti</option>
-                            <option>Tilinpäätös</option>
-                            <option>Sopimus</option>
-                            <option>Valokuva</option>
-                            <option>Hankkeessa tuotettu materiaali</option>
-                            <option>Muu...</option>
+                            <option data-ng-repeat="category in appendixCategories">{{category}}</option>
                         </select>
                         <input type="text" name="appendix_custom_category"
                                value="" class="col-md-6"

@@ -7,11 +7,14 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $http.get("projects/assets/json/projectConstants.json").success(
                 function (response) {
-                    $scope.themes = response.themes;
-                    $scope.methodNames = response.method_names;
-                    $scope.methodLevels = response.method_levels;
-                    $scope.rejCategories = response.rej_categories;
-                    $scope.fieldNames = response.field_names;
+                    $scope.securityLevels       = response.security_levels;
+                    $scope.currencyUnits        = response.currency_units;
+                    $scope.themes               = response.themes;
+                    $scope.methodNames          = response.method_names;
+                    $scope.methodLevels         = response.method_levels;
+                    $scope.rejCategories        = response.rej_categories;
+                    $scope.fieldNames           = response.field_names;
+                    $scope.appendixCategories   = response.appendix_categories;
                 });
 
         $scope.addedMethods = [];
@@ -53,10 +56,18 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (!text) {
                 return "";
             }
-            var pieces = text.split("*");
+            var pieces = text.split("**");
             var transformed = "";
             for (var i = 1, max = pieces.length; i < max; i += 2) {
                 pieces[i] = '<span class="bg-danger">' + pieces[i] + '</span>';
+            }
+            pieces.forEach(function (x) {
+                transformed += x;
+            });
+            pieces = transformed.split("!!");
+            transformed = "";
+            for (var i = 1, max = pieces.length; i < max; i += 2) {
+                pieces[i] = '<h5>' + pieces[i] + '</h5>';
             }
             pieces.forEach(function (x) {
                 transformed += x;
@@ -465,8 +476,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         if (appendix.custom_category ===
                                 "TJ:n päätös uudesta hankkeesta") {
                             $scope.regRepExists = true;
-                        } else if (appendix.custom_category == "Loppuraportti") {
+                        } else if (appendix.custom_category === "Loppuraportti") {
                             $scope.endRepExists = true;
+                        } else if (appendix.category === "Talousraportti") {
+                            $scope.financialRepExists = true;
+                            if (appendix.mime_type !== "application/pdf") {
+                                $scope.nonPDFfinancialRep = true;
+                            }
                         }
                     });
                 }
@@ -995,6 +1011,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
         $scope.endRepExists = false;
 
         /**
+         * <tt>true</tt> if and only if there exists a financial report for this
+         * project and has a MIME type other than <tt>application/pdf</tt>.
+         */
+        $scope.nonPDFfinancialReport = false;
+
+        /**
          * Creates a new PDF report it there isn't already a corresponding
          * report saved as an appendix.
          */
@@ -1012,6 +1034,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 case "end":
                     if ($scope.endRepExists) {
                         $window.alert("Raportti on jo tallennettu. (Katso liitteet.)");
+                        break;
+                    }
+                    if ($scope.nonPDFfinancialRep) {
+                        $window.alert("Talousraportin tulee olla PDF-muodossa.");
                         break;
                     }
                     $scope.project.$endRepPDF(function (response) {

@@ -108,6 +108,13 @@
             </tr>
             <tr><td colspan="4">&nbsp;</td></tr>
             <tr>
+                <td class="report-mini-header">{{fieldNames["planned_results"]}}</td>
+                <td colspan="3" class="report-content">
+                    <span ng-bind-html="handleEmphasis(project.planned_results)"></span>&nbsp;
+                </td>
+            </tr>
+            <tr><td colspan="4">&nbsp;</td></tr>
+            <tr>
                 <!-- The &nbsp; is necessary for correct printing. -->
                 <td class="report-mini-header">Oikeudellinen&nbsp;fokus
                     <!--{{fieldNames["approved_themes"]}}-->
@@ -251,14 +258,6 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        {{fieldNames["human_resources"]}}
-                    </div>
-                    <div class="report-subcontent">
-                        <span ng-bind-html="handleEmphasis(project.human_resources)"></span>
-                    </div>
-                </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
                         {{fieldNames["gender_aspect"]}}
                     </div>
                     <div class="report-subcontent">
@@ -275,6 +274,22 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
+                        {{fieldNames["planned_results"]}}
+                    </div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.planned_results)"></span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames["risk_control"]}}
+                    </div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.risk_control)"></span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
                         {{fieldNames["indicators"]}}
                     </div>
                     <div class="report-subcontent">
@@ -287,6 +302,14 @@
                     </div>
                     <div class="report-subcontent">
                         <span ng-bind-html="handleEmphasis(project.reporting_evaluation)"></span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames["human_resources"]}}
+                    </div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.human_resources)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">

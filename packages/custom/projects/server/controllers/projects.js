@@ -41,7 +41,6 @@ module.exports = function (Projects) {
             var datePieces = string.replace(/"/g, "").split("T");
             if (datePieces.length === 2) {
                 datePieces = datePieces[0].split("-");
-                console.log(datePieces);
                 return datePieces[2].replace(/$0/, "") + "."
                         + datePieces[1].replace(/$0/, "") + "." + datePieces[0];
             }
@@ -89,12 +88,20 @@ module.exports = function (Projects) {
                 // denotes paragraph change.
                 .replace(/\_/g, "\\_");
 
-        var emphPieces = string.split("*");
+        var pieces = string.split("**");
         var transformed = "";
-        for (var i = 1, max = emphPieces.length; i < max; i += 2) {
-            emphPieces[i] = "\\emph{" + emphPieces[i] + "}";
+        for (var i = 1, max = pieces.length; i < max; i += 2) {
+            pieces[i] = "\\emph{" + pieces[i] + "}";
         }
-        emphPieces.forEach(function (x) {
+        pieces.forEach(function (x) {
+            transformed += x;
+        });
+        pieces = transformed.split("!!");
+        var transformed = "";
+        for (var i = 1, max = pieces.length; i < max; i += 2) {
+            pieces[i] = "\\subsection*{" + pieces[i] + "}";
+        }
+        pieces.forEach(function (x) {
             transformed += x;
         });
         return typeof object === "string"
@@ -308,7 +315,7 @@ module.exports = function (Projects) {
             }
 
             Project.find({}, {_id: 1, project_ref: 1, title: 1, state: 1,
-                organisation: 1, intermediary_reports: 1}
+                organisation: 1, intermediary_reports: 1, incomplete: 1}
             ).populate('organisation', {_id: 1, name: 1})
                     .sort(orderingJSON)
                     .skip((page - 1) * pageSize)
@@ -895,10 +902,17 @@ module.exports = function (Projects) {
                                         "Haavoittuvimpien ryhmien huomioon ottaminen")
                                 .replace("<vulnerable-groups>",
                                         filter(project.vulnerable_groups))
-                                .replace("<titles.sustainability-risks>",
-                                        "Tavoitteiden saavuttamisen mittaaminen")
-                                .replace("<sustainability-risks>",
-                                        filter(project.sustainability_risks))
+                                .replace("<titles.planned-results>",
+                                        "Odotettavissa olevat keskeiset tulokset")
+                                .replace("<planned-results>",
+                                        filter(project.planned_results))
+                                .replace("<titles.risk-control>",
+                                        "Riskinhallinnan kuvaus")
+                                .replace("<risk-control>",
+                                        filter(project.risk_control))
+                                .replace("<titles.indicators>", "Indikaattorit")
+                                .replace("<indicators>",
+                                        filter(project.indicators))
                                 .replace("<titles.reporting-evaluation>",
                                         "Evaluointi ja vaikuttavuuden arviointi")
                                 .replace("<reporting-evaluation>",
@@ -980,6 +994,17 @@ module.exports = function (Projects) {
                         + filter(payment.payment_date) + " \\\\ ";
             });
             completedPayments += "\\end{tabular}";
+            var index = _.findIndex(project.appendices,
+                    {category: "Talousraportti"});
+
+            // The URL of the file contains only one "=" symbol (see
+            // addAppendix):
+            var financialReport = index >= 0
+            ? "\\section*{Talousraportti}\nTalousraportti on seuraavalla sivulla.\\newpage\n\\begin{figure}[H]\n\\centerline{\\includegraphics{"
+                    + outDir + "/"
+                    + project.appendices[index].url.split("=")[1] + "}}\n"
+                    + "\\end{figure}\n"
+            : "";
 
             var template = fs.readFileSync(
                     rootDir + "latex/end-report-template.tex", "utf8")
@@ -1018,6 +1043,7 @@ module.exports = function (Projects) {
                             "Tavoitteet ja keskeiset toimintatavat")
                     .replace("<organisation.description>",
                             filter(project.organisation.description))
+                    .replace("<financial-report>", financialReport)
                     .replace("<titles.end-report.budget>",
                             "Budjetin toteutuminen ja raportoitu summa")
                     .replace("<end-report.budget>",

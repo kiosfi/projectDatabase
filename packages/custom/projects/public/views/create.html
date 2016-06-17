@@ -11,9 +11,7 @@
             </legend>
             <div ng-show="showInfo">
                 <div class="form-group col-md-6"
-                     ng-class="{
-                             'has-error'
-                             : projectForm.title.$invalid }">
+                     ng-class="{'has-error': projectForm.title.$invalid }">
                     <label class="col-md-3 control-label">
                         {{fieldNames["title"]}}
                     </label>
@@ -30,9 +28,7 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6"
-                     ng-class="{
-                             'has-error'
-                             : projectForm.coordinator.$invalid }">
+                     ng-class="{'has-error': projectForm.coordinator.$invalid }">
                     <label  class="col-md-3 control-label">
                         {{fieldNames["coordinator"]}}
                     </label>
@@ -57,9 +53,7 @@
                         </label>
                         <div class="col-md-9">
                             <div class="col-md-4"
-                                 ng-class="{
-                                         'has-error'
-                                         : registerForm.registerMonth.$invalid }">
+                                 ng-class="{'has-error': registerForm.registerMonth.$invalid }">
                                 <input name="registerDay" type="number"
                                        class="form-control"
                                        data-ng-model="register_day"
@@ -72,9 +66,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4"
-                                 ng-class="{
-                                         'has-error'
-                                         : registerForm.registerMonth.$invalid }">
+                                 ng-class="{'has-error': registerForm.registerMonth.$invalid }">
                                 <input name="registerMonth" type="number"
                                        class="form-control"
                                        data-ng-model="register_month"
@@ -87,9 +79,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4"
-                                 ng-class="{
-                                         'has-error'
-                                         : projectForm.registerYear.$invalid }">
+                                 ng-class="{'has-error': projectForm.registerYear.$invalid }">
                                 <input name="registerYear" type="number"
                                        class="form-control"
                                        data-ng-model="register_year"
@@ -111,9 +101,7 @@
                         <div class="col-md-9">
                             <select id="security_level"
                                     data-ng-model="project.security_level">
-                                <option selected>Julkinen</option>
-                                <option>Luottamuksellinen</option>
-                                <option>Salainen</option>
+                                <option data-ng-repeat="sec_level in securityLevels">{{sec_level}}</option>
                             </select>
                         </div>
                     </div>
@@ -150,9 +138,7 @@
                         </legend>
                         <div ng-show="showOrgInfo">
                             <div class="form-group col-md-6"
-                                 ng-class="{
-                                         'has-error'
-                                         : projectForm.orgname.$invalid}">
+                                 ng-class="{'has-error': projectForm.orgname.$invalid}">
                                 <label class="col-md-3 control-label">Nimi</label>
                                 <div class="col-md-9">
                                     <input data-ng-if="newOrg" name="orgname"
@@ -167,9 +153,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6" ng-class="{
-                                    'has-error'
-                                            : projectForm.orgrepName.$invalid }">
+                            <div class="form-group col-md-6"
+                                 ng-class="{'has-error': projectForm.orgrepName.$invalid }">
                                 <label class="col-md-3 control-label">Edustaja</label>
                                 <div class="col-md-9">
                                     <input data-ng-if="newOrg" name="orgrepName"
@@ -185,16 +170,14 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-md-9" style="float:right;" ng-class="{
-                                        'has-error'
-                                                : projectForm.orgrepEmail.$invalid }">
+                                <div class="col-md-9" style="float:right;"
+                                     ng-class="{'has-error': projectForm.orgrepEmail.$invalid }">
                                     <input data-ng-if="newOrg" name="orgrepEmail"
                                            type="text" class="form-control"
                                            data-ng-model="project.organisation.representative.email"
                                            id="orgrep"
                                            placeholder="Sähköpostiosoite"
                                            required>
-
                                     <div ng-show="projectForm.orgrepEmail.$invalid"
                                          class="help-block">
                                         <p ng-show="projectForm.orgrepEmail.$error.required">
@@ -202,9 +185,8 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-md-9" style="float:right;" ng-class="{
-                                        'has-error'
-                                                : projectForm.orgrepPhone.$invalid }">
+                                <div class="col-md-9" style="float:right;"
+                                     ng-class="{'has-error': projectForm.orgrepPhone.$invalid }">
                                     <input data-ng-if="newOrg" name="orgrepPhone"
                                            type="text" class="form-control"
                                            data-ng-model="project.organisation.representative.phone"
@@ -221,9 +203,8 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <div class="form-group" ng-class="{
-                                        'has-error'
-                                                :  projectForm.orgaddr.$invalid }">
+                                <div class="form-group"
+                                     ng-class="{'has-error': projectForm.orgaddr.$invalid }">
                                     <label class="col-md-3 control-label">Osoite</label>
 
                                     <div class="col-md-9">
@@ -240,9 +221,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group"
-                                     ng-class="{
-                                             'has-error'
-                                             : projectForm.orgaddrcode.$invalid }">
+                                     ng-class="{'has-error': projectForm.orgaddrcode.$invalid }">
                                     <label class="col-md-3 control-label">Postinumero</label>
 
                                     <div class="col-md-9">
@@ -260,9 +239,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group"
-                                     ng-class="{
-                                             'has-error'
-                                             : projectForm.orgaddrcity.$invalid }">
+                                     ng-class="{'has-error': projectForm.orgaddrcity.$invalid }">
                                     <label  class="col-md-3 control-label">Kaupunki</label>
 
                                     <div class="col-md-9">
@@ -280,9 +257,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group"
-                                     ng-class="{
-                                             'has-error'
-                                             :projectForm.orgaddrcntry.$invalid }">
+                                     ng-class="{'has-error':projectForm.orgaddrcntry.$invalid }">
                                     <label  class="col-md-3 control-label">Maa</label>
 
                                     <div class="col-md-9">
@@ -300,9 +275,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6" ng-class="{
-                                    'has-error'
-                                            :  projectForm.orgtel.$invalid }">
+                            <div class="form-group col-md-6"
+                                 ng-class="{'has-error': projectForm.orgtel.$invalid }">
                                 <label class="col-md-3 control-label">
                                     Puhelinnumero
                                 </label>
@@ -320,9 +294,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6" ng-class="{
-                                    'has-error'
-                                            :  projectForm.orgemail.$invalid }">
+                            <div class="form-group col-md-6"
+                                 ng-class="{'has-error': projectForm.orgemail.$invalid }">
                                 <label  class="col-md-3 control-label">
                                     Sähköpostiosoite
                                 </label>
@@ -645,25 +618,16 @@
                                data-ng-model="project.funding.applied_curr_local"
                                id="appliedlocal" min="0">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <select id="curr_local_unit"
                                 data-ng-model="project.funding.curr_local_unit">
-                            <option>AFN</option>
-                            <option>BDT</option>
-                            <option>BIF</option>
-                            <option>CDF</option>
-                            <option>ETB</option>
-                            <option>EUR</option>
-                            <option>INR</option>
-                            <option>KES</option>
-                            <option>LKR</option>
-                            <option>NPR</option>
-                            <option>PKR</option>
-                            <option>RWF</option>
-                            <option>UGX</option>
-                            <option>USD</option>
-                            <option>muu</option>
+                            <option data-ng-repeat="unit in currencyUnits">{{unit}}</option>
                         </select>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text"
+                               data-ng-model="project.funding.curr_local_unit"
+                               class="form-control">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -717,10 +681,11 @@
                         </select>
                         <div style="clear:both;">&nbsp;</div>
                         <!-- TODO: Warn the user about the fact that this is a
-                        requiref field too: -->
+                        required field too: -->
                         <textarea name="methodComment"
                                   data-ng-model="method.comment"
                                   id="methodComment" class="form-control"
+                                  placeholder="Toiminnon kuvaus (pakollinen)"
                                   required>
                         </textarea>
                     </div>
@@ -733,8 +698,18 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="form-group col-md-6">
-                        <label class="col-md-3 control-label">
+                    <div class="form-group col-md-4">
+                        <label class="col-md-3 control-label" for="country">
+                            {{fieldNames["country"]}}
+                        </label>
+                        <div class="col-md-9">
+                            <input name="country" type="text"
+                                   class="form-control"
+                                   data-ng-model="project.country" id="country">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="col-md-3 control-label" for="region">
                             {{fieldNames["region"]}}
                         </label>
                         <div class="col-md-9">
@@ -743,8 +718,8 @@
                                    data-ng-model="project.region" id="region">
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-md-3 control-label">
+                    <div class="form-group col-md-4">
+                        <label class="col-md-3 control-label" for="dac">
                             {{fieldNames["dac"]}}
                         </label>
                         <div class="col-md-9">
@@ -769,7 +744,8 @@
                     <div class="form-group col-md-6">
                         <label for="context"
                                class="col-md-3 control-label">
-                            {{fieldNames["context"]}}
+                            Konteksti
+                            <!--{{fieldNames["context"]}}-->
                         </label>
                         <div class="col-md-9">
                             <textarea name="context"
@@ -792,24 +768,10 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="human_resources"
-                               class="col-md-3 control-label">
-                            {{fieldNames["human_resources"]}}
-                        </label>
-
-                        <div class="col-md-9">
-                            <textarea name="human_resources"
-                                      data-ng-model="project.human_resources"
-                                      id="human_resources" class="form-control">
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group col-md-6">
                         <label for="gender_aspect"
                                class="col-md-3 control-label">
-                            {{fieldNames["gender_aspect"]}}
+                            T-A. ja muut teemat
+                            <!--{{fieldNames["gender_aspect"]}}-->
                         </label>
                         <div class="col-md-9">
                             <textarea name="gender_aspect"
@@ -818,16 +780,33 @@
                             </textarea>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-12">
                     <div class="form-group col-md-6">
                         <label for="vulnerable_groups"
                                class="col-md-3 control-label">
-                            {{fieldNames["vulnerable_groups"]}}
+                            Haavoitt. ryhmien huomiointi
+                            <!--{{fieldNames["vulnerable_groups"]}}-->
                         </label>
                         <div class="col-md-9">
                             <textarea name="vulnerable_groups"
                                       data-ng-model="project.vulnerable_groups"
                                       id="vulnerable_groups"
                                       class="form-control">
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="planned_results"
+                               class="col-md-3 control-label">
+                            Odotetut keskeiset tulokset
+                            <!--{{fieldNames["planned_results"]}}-->
+                        </label>
+
+                        <div class="col-md-9">
+                            <textarea name="planned_results"
+                                      data-ng-model="project.planned_results"
+                                      id="planned_results" class="form-control">
                             </textarea>
                         </div>
                     </div>
@@ -846,6 +825,20 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
+                        <label for="risk_control"
+                               class="col-md-3 control-label">
+                            {{fieldNames["risk_control"]}}
+                        </label>
+                        <div class="col-md-9">
+                            <textarea name="risk_control"
+                                      data-ng-model="project.risk_control"
+                                      id="risk_control" class="form-control">
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
                         <label for="reporting_evaluation"
                                class="col-md-3 control-label">
                             {{fieldNames["reporting_evaluation"]}}
@@ -855,6 +848,19 @@
                                       data-ng-model="project.reporting_evaluation"
                                       id="reporting_evaluation"
                                       class="form-control">
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="human_resources"
+                               class="col-md-3 control-label">
+                            {{fieldNames["human_resources"]}}
+                        </label>
+
+                        <div class="col-md-9">
+                            <textarea name="human_resources"
+                                      data-ng-model="project.human_resources"
+                                      id="human_resources" class="form-control">
                             </textarea>
                         </div>
                     </div>

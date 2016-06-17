@@ -4,18 +4,15 @@ A form for project state change.
 -->
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
     <article class="col-md-12">
-        <h2><span>{{project.project_ref}}: {{project.title}}</span></h2>
-
+        <h1><span>{{project.project_ref}}: {{project.title}}</span></h1>
+        <hr>
+        <h2>
+            Siirto tilasta "{{project.state}}" tilaan "{{global.newState}}"
+        </h2>
         <h3>{{fieldNames["coordinator"]}}:
-            <a href="">{{project.coordinator}}</a>
-            <span class="tila">{{project.state}}</span>
+            {{project.coordinator}}
         </h3>
     </article>
-
-    <article class="col-md-12">
-        Hankkeen siirto tilasta "{{project.state}}" tilaan "{{global.newState}}"
-    </article>
-
     <article class="col-md-12">
         <div class="col-md-5 proj-article" style="margin: 0.5em">
             <h4>Hanke</h4>
@@ -65,7 +62,6 @@ A form for project state change.
                 </div>
             </div>
         </div>
-
         <div class="col-md-12 proj-article" style="margin: 0.5em">
             <h4>Kuvaus</h4>
             <div>
@@ -406,27 +402,23 @@ A form for project state change.
         <!--Allekirjoitettu-->
 
 
-        <form name="signedForm" class="form-horizontal col-md-8"
+        <form name="signedForm" class="form-horizontal col-md-12"
               ng-show="global.newState === 'allekirjoitettu'"  role="form"
               data-ng-submit="addSignedState(signedForm.$valid)" novalidate>
-
-            <div class="form-group col-md-12">
-                <label for="signed_by" class="col-md-2">Allekirjoittaja</label>
-                <div class="col-md-10">
+            <div class="form-group col-md-6">
+                <label for="signed_by" class="col-md-4">Allekirjoittaja</label>
+                <div class="col-md-8">
                     <input name="signed_by" type="text" class="form-control"
                            data-ng-model="project.signed.signed_by"
                            id="signed_by"
                            placeholder="Sopimuksen allekirjoittajan nimi"
                            required>
                 </div>
-
             </div>
-
-            <div class="form-group col-md-12">
-                <label for="signed_date_day" class="col-md-2">Päivämäärä</label>
-                <div class="col-md-2" style="float:left;" ng-class="{
-                    'has-error'
-                            :  signedForm.signed_date_day.$invalid }">
+            <div class="form-group col-md-6">
+                <label for="signed_date_day" class="col-md-3">Päivämäärä</label>
+                <div class="col-md-3"
+                     ng-class="{'has-error': signedForm.signed_date_day.$invalid}">
                     <input name="signed_date_day" type="number"
                            class="form-control" data-ng-model="signed_day"
                            id="signed_date_day" placeholder="p">
@@ -437,9 +429,8 @@ A form for project state change.
                         </p>
                     </div>
                 </div>
-                <div class="col-md-2" style="float:left;" ng-class="{
-                    'has-error'
-                            :  signedForm.signed_date_month.$invalid }">
+                <div class="col-md-3"
+                     ng-class="{'has-error': signedForm.signed_date_month.$invalid}">
                     <input name="signed_date_month" type="number"
                            class="form-control" data-ng-model="signed_month"
                            id="signed_date_month" placeholder="k">
@@ -450,9 +441,8 @@ A form for project state change.
                         </p>
                     </div>
                 </div>
-                <div class="col-md-2" style="float:left;" ng-class="{
-                    'has-error'
-                            :  signedForm.signed_date_year.$invalid }">
+                <div class="col-md-3"
+                     ng-class="{'has-error': signedForm.signed_date_year.$invalid}">
                     <input name="signed_date_year" type="number"
                            class="form-control" data-ng-model="signed_year"
                            id="signed_date_year" placeholder="vvvv">
@@ -463,48 +453,46 @@ A form for project state change.
                         </p>
                     </div>
                 </div>
-                <div style="clear:both;">&nbsp;</div>
             </div>
-
-            <label for="plannedPaymentSelection" class="col-md-3">
-                Maksusuunnitelma
-            </label>
-            <div class="form-group col-md-12"><p>Myönnetty summa:
-                    {{project.approved.granted_sum_eur| currency : ""}} €</p>
+            <div class="col-md-12">
+                <label for="plannedPaymentSelection">
+                    Maksusuunnitelma
+                </label>
+                myönnetylle avustukselle
+                {{project.approved.granted_sum_eur| currency : ""}} €
             </div>
             <div class="form-group col-md-12" id="plPayments">
                 <div class="col-md-12" name="plannedPaymentSelection"
                      id="plannedPaymentSelection"
                      data-ng-repeat="plannedPayment in plannedPayments">
-                    <div>
-                        <label for="plannedDay" class="col-md-2 control-label">
+                    <div class="col-md-6">
+                        <label for="plannedDay" class="col-md-3 control-label">
                             Päivämäärä
                         </label>
-                        <div class="col-md-2" style="float:left;">
+                        <div class="col-md-3">
                             <input name="plannedDay" type="number"
                                    class="form-control"
                                    data-ng-model="plannedPayment.day"
                                    id="plannedDay" placeholder="p">
                         </div>
-                        <div class="col-md-2" style="float:left;">
+                        <div class="col-md-3">
                             <input name="plannedMonth" type="number"
                                    class="form-control"
                                    data-ng-model="plannedPayment.month"
                                    id="plannedMonth" placeholder="k">
                         </div>
-                        <div class="col-md-2" style="float:left;">
+                        <div class="col-md-3">
                             <input name="plannedYear" type="number"
                                    class="form-control"
                                    data-ng-model="plannedPayment.year"
                                    id="plannedYear" placeholder="vvvv">
                         </div>
                     </div>
-                    <div style="clear:both;">&nbsp;</div>
-                    <div>
-                        <label for="plannedSumEUR" class="col-md-2 control-label">
-                            Summa (EUR)
+                    <div class="col-md-6">
+                        <label for="plannedSumEUR" class="col-md-4 control-label">
+                            Maksu (EUR)
                         </label>
-                        <div class="col-md-5">
+                        <div class="col-md-8">
                             <input name="plannedSumEUR" type="number"
                                    class="form-control"
                                    data-ng-model="plannedPayment.sum_eur"
@@ -512,56 +500,49 @@ A form for project state change.
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-12">
                     <input type="button" id="add-btn" value="Lisää uusi"
                            ng-click="addPlannedPayment();"/>
                     <input type="button" value="Poista viimeinen"
                            ng-click="removePlannedPayment();"/>
                 </div>
-
             </div>
-
-            <label for="reportDeadlines" class="col-md-3">
+            <label for="reportDeadlines" class="col-md-12">
                 Raporttien eräpäivät
             </label>
             <div class="form-group col-md-12">
-
                 <div class="col-md-12" name="reportDeadlines"
                      id="reportDeadlines" data-ng-repeat="deadline in deadlines">
                     <label for="dlRep" class="col-md-2 control-label">
                         Raportti
                     </label>
-                    <div class="col-md-5" style="float:left;">
+                    <div class="col-md-4">
                         <input name="dlRep" type="text" class="form-control"
                                data-ng-model="deadline.report" id="dlRep"
                                placeholder="Raportti">
                     </div>
-                    <div style="clear:both;">&nbsp;</div>
-                    <div name="dlDate">
-                        <label for="dlDay" class="col-md-2 control-label">
+                    <div id="dlDate" class="col-md-6">
+                        <label for="dlDay" class="col-md-3 control-label">
                             Eräpäivä
                         </label>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <input name="dlDay" type="number"
                                    class="form-control"
                                    data-ng-model="deadline.day" id="dlDay"
                                    placeholder="p">
                         </div>
-                        <div class="col-md-2" style="float:left;">
+                        <div class="col-md-3">
                             <input name="dlMonth" type="number"
                                    class="form-control"
                                    data-ng-model="deadline.month" id="dlMonth"
                                    placeholder="k">
                         </div>
-                        <div class="col-md-2" style="float:left;">
+                        <div class="col-md-3">
                             <input name="dlYear" type="number"
                                    class="form-control"
                                    data-ng-model="deadline.year" id="dlYear"
                                    placeholder="vvvv">
                         </div>
-                        <div style="clear:both;">&nbsp;</div>
-                        <br>
                     </div>
                 </div>
 

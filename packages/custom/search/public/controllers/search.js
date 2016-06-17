@@ -139,7 +139,6 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * fetched from the URL.
          */
         $scope.searchPayments = function () {
-
             var search = $location.search();
 
             if (typeof search.searchBy === 'undefined' ||
@@ -213,9 +212,9 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             org_email: false, org_www: false, themes: false, description: false,
             activities: false, context: false, goal: false, target_group: false,
             human_resources: false, equality: false, vulnerable_groups: false,
-            indicators: false, reporting_evaluation: false,
-            budget: false, other_funding: false, referees: false,
-            background_check: false
+            planned_results: false, risk_control: false, indicators: false,
+            reporting_evaluation: false, budget: false, other_funding: false,
+            referees: false, background_check: false
         };
 
         /**
@@ -255,8 +254,9 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.extraFieldsArray = ['themes', 'description', 'activities',
             'context', 'goal', 'target_group', 'human_resources', 'equality',
-            'vulnerable_groups', 'indicators', 'reporting_evaluation',
-            'budget', 'other_funding', 'referees', 'background_check'];
+            'vulnerable_groups', 'planned_results', 'risk_control',
+            'indicators', 'reporting_evaluation', 'budget', 'other_funding',
+            'referees', 'background_check'];
 
         /**
          * Sets the states of the given field selections to match the given
