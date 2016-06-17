@@ -29,6 +29,10 @@
     margin-right:       3em;
 }
 
+.man-nav {
+    position:           fixed;
+}
+
 .man-article {
     border-style:       none;
     border-radius:      0.5em;
@@ -50,4 +54,41 @@
 .mini-header {
     font-weight:        bold;
     margin-left:        -2em;
+}
+
+@media only screen and (min-width: 1720px) {
+    .man-nav {
+        left:           5%;
+    }
+    .man-article {
+        margin-left:    5em;
+    }
+}
+
+@media only screen and (min-width: 1620px) and (max-width: 1719px) {
+    .man-nav {
+        left:           2%;
+    }
+    .man-article {
+        margin-left:    5em;
+    }
+}
+
+@media only screen and (min-width: 1430px) and (max-width: 1619px) {
+    .man-nav {
+        left:           1em;
+    }
+    .man-article {
+        margin-left:    10em;
+    }
+}
+
+@media only screen and (max-width: 1429px) {
+    .man-nav {
+        left:           1em;
+        width:          15em;
+    }
+    .man-article {
+        margin-left:    16em;
+    }
 }
