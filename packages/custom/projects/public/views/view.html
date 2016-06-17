@@ -1040,18 +1040,7 @@
                                 class="col-md-4"
                                 ng-model="project.appendix.category" required>
                             <option value="">[Valitse yksi]</option>
-                            <option>Hankehakemus</option>
-                            <option>Hankebudjetti</option>
-                            <option>Rekisteröintitodistus</option>
-                            <option>Suositus</option>
-                            <option>Järjestön vuosibudjetti</option>
-                            <option>Tilinpäätös</option>
-                            <option>Sopimus</option>
-                            <option>Valokuva</option>
-                            <option>Hankkeessa tuotettu materiaali</option>
-                            <option>Välitalousraportti</option>
-                            <option>Talousraportti</option>
-                            <option>Muu...</option>
+                            <option data-ng-repeat="category in appendixCategories">{{category}}</option>
                         </select>
                         <input type="text" name="appendix_custom_category"
                                value="" class="col-md-6"

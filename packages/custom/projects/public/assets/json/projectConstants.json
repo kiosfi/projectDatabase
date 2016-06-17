@@ -1,4 +1,7 @@
 {
+    "security_levels": ["Julkinen", "Luottamuksellinen", "Salainen"],
+    "currency_units": ["AFN", "BDT", "BIF", "CDF", "ETB", "EUR", "INR", "KES",
+        "LKR", "NPR", "PKR", "RWF", "UGX", "USD"],
     "themes": [
         "Oikeusvaltio ja demokratia",
         "TSS-oikeudet",
@@ -160,5 +163,9 @@
         "updated": "Päivitetty",
         "appendices": "Liitteet",
         "special_notes": "Erityishuomioita"
-    }
+    },
+    "appendix_categories": ["Hankehakemus", "Hankebudjetti", "Rekisteröintitodistus",
+        "Suositus", "Järjestön vuosibudjetti", "Tilinpäätös", "Sopimus",
+        "Valokuva", "Hankkeessa tuotettu materiaali", "Välitalousraportti",
+        "Talousraportti", "Muu..."]
 }

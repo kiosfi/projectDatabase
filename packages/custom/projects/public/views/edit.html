@@ -24,9 +24,7 @@
                                 </label>
                                 <div class="col-md-9">
                                     <select data-ng-model="project.security_level">
-                                        <option>Julkinen</option>
-                                        <option>Luottamuksellinen</option>
-                                        <option>Salainen</option>
+                                        <option data-ng-repeat="sec_level in securityLevels">{{sec_level}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -105,20 +103,7 @@
                                 <div class="col-md-2">
                                     <select id="curr_local_unit"
                                             data-ng-model="project.funding.curr_local_unit">
-                                        <option>AFN</option>
-                                        <option>BDT</option>
-                                        <option>BIF</option>
-                                        <option>CDF</option>
-                                        <option>ETB</option>
-                                        <option>EUR</option>
-                                        <option>INR</option>
-                                        <option>KES</option>
-                                        <option>LKR</option>
-                                        <option>NPR</option>
-                                        <option>PKR</option>
-                                        <option>RWF</option>
-                                        <option>UGX</option>
-                                        <option>USD</option>
+                                        <option data-ng-repeat="unit in currencyUnits">{{unit}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">

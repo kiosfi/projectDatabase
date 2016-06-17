@@ -7,11 +7,14 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         $http.get("projects/assets/json/projectConstants.json").success(
                 function (response) {
-                    $scope.themes = response.themes;
-                    $scope.methodNames = response.method_names;
-                    $scope.methodLevels = response.method_levels;
-                    $scope.rejCategories = response.rej_categories;
-                    $scope.fieldNames = response.field_names;
+                    $scope.securityLevels       = response.security_levels;
+                    $scope.currencyUnits        = response.currency_units;
+                    $scope.themes               = response.themes;
+                    $scope.methodNames          = response.method_names;
+                    $scope.methodLevels         = response.method_levels;
+                    $scope.rejCategories        = response.rej_categories;
+                    $scope.fieldNames           = response.field_names;
+                    $scope.appendixCategories   = response.appendix_categories;
                 });
 
         $scope.addedMethods = [];
