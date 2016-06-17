@@ -28,6 +28,7 @@
         "Toimintatuki",
         "Muu"
     ],
+    "method_levels": ["Kansainvälinen", "Kansallinen", "Paikallinen", "Yhteisö"],
     "rej_categories": [
         "1 Hanke ei ole ihmisoikeushanke",
         "2 Järjestöllä ei ole ihmisoikeushankkeen toteutuskapasiteettia",
