@@ -739,6 +739,7 @@ module.exports = function (Projects) {
             var fileName = project.project_ref + "-reg-rep";
             var rootDir = "packages/custom/projects/";
             var outDir = rootDir + "data/" + project._id;
+            var date = new Date();
             var checkbox = function (checked) {
                 return checked ? " \\makebox[0pt][l]{$\\square$}\\raisebox{.15ex}{\\hspace{0.1em}$\\checkmark$}" : " \\makebox[0pt][l]{$\\square$}\\hspace{0.3cm}";
             };
@@ -783,6 +784,12 @@ module.exports = function (Projects) {
                                 rootDir + "latex/reg-report-template.tex",
                                 "utf8")
                                 .replace("logo.pdf", rootDir + "latex/logo.pdf")
+                                .replace("<report-generated>",
+                                        date.getDate() + "." +
+                                        (date.getMonth() + 1) + "." +
+                                        date.getFullYear() + " " +
+                                        date.getHours() + ":" +
+                                        date.getMinutes())
                                 .replace("<approved.board-meeting>",
                                         filter(project.approved.board_meeting))
                                 .replace("<coordinator>",
@@ -954,7 +961,7 @@ module.exports = function (Projects) {
             var fileName = project.project_ref + "-end-rep";
             var rootDir = "packages/custom/projects/";
             var outDir = rootDir + "data/" + project._id;
-
+            var date = new Date();
             var themes = "";
             project.approved.themes.forEach(function (theme) {
                 themes += "& \\multicolumn{3}{>{\\hsize=\\dimexpr3\\hsize+4\\tabcolsep+2\\arrayrulewidth\\relax}X|}{\\textbullet~ "
@@ -1009,6 +1016,12 @@ module.exports = function (Projects) {
             var template = fs.readFileSync(
                     rootDir + "latex/end-report-template.tex", "utf8")
                     .replace("logo.pdf", rootDir + "latex/logo.pdf")
+                    .replace("<report-generated>",
+                            date.getDate() + "." +
+                            (date.getMonth() + 1) + "." +
+                            date.getFullYear() + " " +
+                            date.getHours() + ":" +
+                            date.getMinutes())
                     .replace("<end-report.board-meeting>",
                             filter(project.end_report.board_meeting))
                     .replace("<coordinator>", filter(project.coordinator))
