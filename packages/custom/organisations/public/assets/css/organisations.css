@@ -53,16 +53,16 @@ hr {
     position:           fixed;
 }
 
-@media only screen and (min-width: 1720px) {
+@media only screen and (min-width: 1800px) {
     .org-nav {
-        left:           5%;
+        left:           3%;
     }
     .org-article {
-        margin-left:    5em;
+        margin-left:    1em;
     }
 }
 
-@media only screen and (min-width: 1620px) and (max-width: 1719px) {
+@media only screen and (min-width: 1620px) and (max-width: 1799px) {
     .org-nav {
         left:           2%;
     }
@@ -71,7 +71,7 @@ hr {
     }
 }
 
-@media only screen and (min-width: 1430px) and (max-width: 1619px) {
+@media only screen and (min-width: 1440px) and (max-width: 1619px) {
     .org-nav {
         left:           1em;
     }
@@ -80,12 +80,12 @@ hr {
     }
 }
 
-@media only screen and (max-width: 1429px) {
+@media only screen and (max-width: 1439px) {
     .org-nav {
         left:           1em;
     }
     .org-article {
-        margin-left:    16em;
+        margin-left:    15em;
     }
 }
 
