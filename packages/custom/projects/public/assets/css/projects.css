@@ -140,6 +140,10 @@ hr {
     margin-right:       2em;
 }
 
+.proj-nav {
+    position:           fixed;
+}
+
 .proj-article {
     border-style:       none;
     border-radius:      0.5em;
@@ -154,7 +158,6 @@ hr {
 }
 
 .medium-header {
-    //text-align:         right;
     font-size:          18px;
     font-weight:        bold;
     margin-left:        -1em;
@@ -203,7 +206,45 @@ hr {
     border-width:       1px;
 }
 
-/*.report-body > ol {
-    margin-left:        0;
-    padding-left:       2em;
-}*/
+@media only screen and (min-width: 1720px) {
+    .proj-nav {
+        left:           5%;
+    }
+    .proj-article {
+        margin-left:    5em;
+    }
+}
+
+@media only screen and (min-width: 1620px) and (max-width: 1719px) {
+    .proj-nav {
+        left:           2%;
+    }
+    .proj-article {
+        margin-left:    5em;
+    }
+}
+
+@media only screen and (min-width: 1430px) and (max-width: 1619px) {
+    .proj-nav {
+        left:           1em;
+    }
+    .proj-article {
+        margin-left:    10em;
+    }
+}
+
+@media only screen and (max-width: 1429px) {
+    .proj-nav {
+        left:           1em;
+    }
+    .proj-article {
+        margin-left:    16em;
+    }
+}
+
+@media only screen and (max-height: 768px) {
+    .proj-nav {
+        overflow-y:     scroll;
+        height:         67%;
+    }
+}

@@ -19,7 +19,7 @@
         <hr>
     </div>
     <div>
-        <ul id="menu" class="nav nav-list" style="position: fixed; left: 128px">
+        <ul id="menu" class="nav nav-list proj-nav">
             <li>
                 <label><a href="#header">Hanke</a></label>
                 <ul>
@@ -70,1073 +70,1071 @@
                 <label><a href="#log">Muokkaukset</a></label>
             </li>
         </ul>
-        <div>
-            <article class="proj-article">
-                <h4>
+        <article class="proj-article">
+            <h4>
+                <span class="col-md-4">
+                    {{fieldNames["coordinator"]}}:
+                    {{project.coordinator}}
+                </span>
+                <span class="col-md-8">
                     <span class="col-md-4">
-                        {{fieldNames["coordinator"]}}:
-                        {{project.coordinator}}
+                        {{fieldNames["state"]}}:
+                        {{project.state}}
+                        <span ng-if="project.incomplete"> (keskeneräinen)</span>
                     </span>
-                    <span class="col-md-8">
-                        <span class="col-md-4">
-                            {{fieldNames["state"]}}:
-                            {{project.state}}
-                            <span ng-if="project.incomplete"> (keskeneräinen)</span>
-                        </span>
-                        <form name="stateForm" class="proj-content"
-                              ng-show="state.next.length !== 0
-                                          && project.state !== 'hylätty'
-                                          && project.state !== 'päättynyt'"
-                              data-ng-init="findState()"
-                              data-ng-submit="changeState(project.changeTo);">
-                            <select id="stateSelect" data-ng-model="project.changeTo"
-                                    class="col-md-4" required>
-                                <option value="" selected>[Siirry tilaan]</option>
-                                <option data-ng-repeat="next_state in state.next_states"
-                                        value="{{next_state}}">{{next_state}}</option>
-                            </select>
-                            <div class="col-md-4">
-                                <button type="submit" class="btn-lg btn-link"
-                                        id="st" ng-disalbed="stateform.$invalid">
-                                    <span class="glyphicon glyphicon-share-alt">
-                                    </span>
-                                </button>
-                            </div>
-                        </form>
-                    </span>
-                </h4>
-                &nbsp;
-            </article>
-            <article id="summary" class="proj-article">
-                <h4>Perustiedot</h4>
-                <div class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["security_level"]}}
-                    </div>
-                    <div class="col-md-9">{{project.security_level}}</div>
+                    <form name="stateForm" class="proj-content"
+                          ng-show="state.next.length !== 0
+                                                  && project.state !== 'hylätty'
+                                                  && project.state !== 'päättynyt'"
+                          data-ng-init="findState()"
+                          data-ng-submit="changeState(project.changeTo);">
+                        <select id="stateSelect" data-ng-model="project.changeTo"
+                                class="col-md-4" required>
+                            <option value="" selected>[Siirry tilaan]</option>
+                            <option data-ng-repeat="next_state in state.next_states"
+                                    value="{{next_state}}">{{next_state}}</option>
+                        </select>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn-lg btn-link"
+                                    id="st" ng-disalbed="stateform.$invalid">
+                                <span class="glyphicon glyphicon-share-alt">
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </span>
+            </h4>
+            &nbsp;
+        </article>
+        <article id="summary" class="proj-article">
+            <h4>Perustiedot</h4>
+            <div class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["security_level"]}}
                 </div>
-                <div ng-show="nonEmpty(project.country)"
-                     class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["country"]}}
-                    </div>
-                    <div class="col-md-9">{{project.country}}</div>
+                <div class="col-md-9">{{project.security_level}}</div>
+            </div>
+            <div ng-show="nonEmpty(project.country)"
+                 class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["country"]}}
                 </div>
-                <div ng-show="nonEmpty(project.region)"
-                     class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["region"]}}
-                    </div>
-                    <div class="col-md-9">{{project.region}}</div>
+                <div class="col-md-9">{{project.country}}</div>
+            </div>
+            <div ng-show="nonEmpty(project.region)"
+                 class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["region"]}}
                 </div>
-                <div ng-show="nonEmpty(project.dac)"
-                     class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["dac"]}}
-                    </div>
-                    <div class="col-md-9">{{project.dac}}</div>
+                <div class="col-md-9">{{project.region}}</div>
+            </div>
+            <div ng-show="nonEmpty(project.dac)"
+                 class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["dac"]}}
                 </div>
-                <div ng-show="nonEmpty(project.state)"
-                     class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["state"]}}
-                    </div>
-                    <div class="col-md-9">{{project.state}}</div>
+                <div class="col-md-9">{{project.dac}}</div>
+            </div>
+            <div ng-show="nonEmpty(project.state)"
+                 class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["state"]}}
                 </div>
-                <div class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["reg_date"]}}
-                    </div>
-                    <div class="col-md-9">{{project.reg_date| date:'d.M.yyyy': '+0200'}}</div>
+                <div class="col-md-9">{{project.state}}</div>
+            </div>
+            <div class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["reg_date"]}}
                 </div>
-                <div ng-show="project.approved.granted_sum_eur"
-                     class="ng-hide proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["approved_granted_sum_eur"]}}
-                    </div>
-                    <div class="col-md-9">
-                        {{numberToString(project.approved.granted_sum_eur)}}
-                    </div>
+                <div class="col-md-9">{{project.reg_date| date:'d.M.yyyy': '+0200'}}</div>
+            </div>
+            <div ng-show="project.approved.granted_sum_eur"
+                 class="ng-hide proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["approved_granted_sum_eur"]}}
                 </div>
-                <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
-                                        project.funding.applied_curr_eur >= 0"
-                     class="ng-hide proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["funding_applied_curr_eur"]}}
-                    </div>
-                    <div class="col-md-9">
-                        {{numberToString(project.funding.applied_curr_eur)}}
-                    </div>
+                <div class="col-md-9">
+                    {{numberToString(project.approved.granted_sum_eur)}}
                 </div>
-                <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
-                                        project.funding.applied_curr_local"
-                     class="ng-hide proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["funding_applied_curr_local"]}}
-                        ({{project.funding.curr_local_unit ?
+            </div>
+            <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
+                                    project.funding.applied_curr_eur >= 0"
+                 class="ng-hide proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["funding_applied_curr_eur"]}}
+                </div>
+                <div class="col-md-9">
+                    {{numberToString(project.funding.applied_curr_eur)}}
+                </div>
+            </div>
+            <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
+                                    project.funding.applied_curr_local"
+                 class="ng-hide proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["funding_applied_curr_local"]}}
+                    ({{project.funding.curr_local_unit ?
                             project.funding.curr_local_unit : "paik. val."}})
+                </div>
+                <div class="col-md-9">
+                    {{numberToString(project.funding.applied_curr_local)}}
+                </div>
+            </div>
+            <div ng-show="project.duration_months >= 0"
+                 class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["duration_months"]}}
+                </div>
+                <div class="col-md-9">{{project.duration_months}}</div>
+            </div>
+            &nbsp;
+        </article>
+        <article ng-show="project.approved" class="proj-article">
+            <h4>{{fieldNames["approved_themes"]}}</h4>
+            <button type="button" class="proj-content"
+                    data-ng-model="project.approved.themes"
+                    data-ng-repeat="theme in project.approved.themes"
+                    disabled>
+                <span class="glyphicon glyphicon-tag">
+                </span> {{theme}}
+            </button>
+        </article>
+        <article id="description" class="proj-article">
+            <h4>{{fieldNames["description"]}}</h4>
+            <div class="proj-content">
+                <span ng-bind-html="handleEmphasis(project.description)">
+                </span>
+            </div>
+            <h4>{{fieldNames["description_en"]}}</h4>
+            <div class="proj-content">
+                <span ng-bind-html="handleEmphasis(project.description_en)">
+                </span>
+            </div>
+            &nbsp;
+        </article>
+        <article id="organisation" class="proj-article">
+            <h4>{{fieldNames["organisation"]}}</h4>
+            <div ng-show="nonEmpty(project.organisation.name)"
+                 class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["organisation_name"]}}
+                </div>
+                <div class="col-md-9">
+                    <a data-ng-href="/organisations/{{project.organisation._id}}">
+                        {{project.organisation.name}}</a>
+                </div>
+            </div>
+            <div ng-show="nonEmpty(project.organisation.
+                                    representative.name)"
+                 class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["organisation_representative"]}}
+                </div>
+                <div class="col-md-9">
+                    {{project.organisation.representative.name}}
+                </div>
+            </div>
+            <div class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["organisation_address"]}}
+                </div>
+                <div class="col-md-9">
+                    {{project.organisation.address.street}}<br>
+                    {{project.organisation.address.postal_code}}
+                    {{project.organisation.address.city}}<br>
+                    {{project.organisation.address.country}}
+                </div>
+            </div>
+            <div ng-show="nonEmpty(project.organisation.tel)"
+                 class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["organisation_tel"]}}
+                </div>
+                <div class="col-md-9">{{project.organisation.tel}}</div>
+            </div>
+            <div ng-show="nonEmpty(project.organisation.email)"
+                 class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["organisation_email"]}}
+                </div>
+                <div class="col-md-9">{{project.organisation.email}}</div>
+            </div>
+            <div ng-show="nonEmpty(project.organisation.website)"
+                 class="proj-content col-md-12">
+                <div class="col-md-3 mini-header">
+                    {{fieldNames["organisation_www"]}}
+                </div>
+                <div class="col-md-9">{{project.organisation.website}}</div>
+            </div>
+            &nbsp;
+        </article>
+        <article id="details" class="proj-article">
+            <h4>Lisätiedot</h4>
+            <div id="appinfo" class="proj-content">
+                <div ng-show="nonEmpty(project.context)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["context"]}}
                     </div>
-                    <div class="col-md-9">
-                        {{numberToString(project.funding.applied_curr_local)}}
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.context)"></span>
                     </div>
                 </div>
-                <div ng-show="project.duration_months >= 0"
-                     class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["duration_months"]}}
+                <div ng-show="nonEmpty(project.project_goal)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["project_goal"]}}
                     </div>
-                    <div class="col-md-9">{{project.duration_months}}</div>
-                </div>
-                &nbsp;
-            </article>
-            <article ng-show="project.approved" class="proj-article">
-                <h4>{{fieldNames["approved_themes"]}}</h4>
-                <button type="button" class="proj-content"
-                        data-ng-model="project.approved.themes"
-                        data-ng-repeat="theme in project.approved.themes"
-                        disabled>
-                    <span class="glyphicon glyphicon-tag">
-                    </span> {{theme}}
-                </button>
-            </article>
-            <article id="description" class="proj-article">
-                <h4>{{fieldNames["description"]}}</h4>
-                <div class="proj-content">
-                    <span ng-bind-html="handleEmphasis(project.description)">
-                    </span>
-                </div>
-                <h4>{{fieldNames["description_en"]}}</h4>
-                <div class="proj-content">
-                    <span ng-bind-html="handleEmphasis(project.description_en)">
-                    </span>
-                </div>
-                &nbsp;
-            </article>
-            <article id="organisation" class="proj-article">
-                <h4>{{fieldNames["organisation"]}}</h4>
-                <div ng-show="nonEmpty(project.organisation.name)"
-                     class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["organisation_name"]}}
-                    </div>
-                    <div class="col-md-9">
-                        <a data-ng-href="/organisations/{{project.organisation._id}}">
-                            {{project.organisation.name}}</a>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.project_goal)"></span>
                     </div>
                 </div>
-                <div ng-show="nonEmpty(project.organisation.
-                                        representative.name)"
-                     class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["organisation_representative"]}}
+                <div ng-show="nonEmpty(project.target_group)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["target_group"]}}
                     </div>
-                    <div class="col-md-9">
-                        {{project.organisation.representative.name}}
-                    </div>
-                </div>
-                <div class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["organisation_address"]}}
-                    </div>
-                    <div class="col-md-9">
-                        {{project.organisation.address.street}}<br>
-                        {{project.organisation.address.postal_code}}
-                        {{project.organisation.address.city}}<br>
-                        {{project.organisation.address.country}}
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.target_group)"></span>
                     </div>
                 </div>
-                <div ng-show="nonEmpty(project.organisation.tel)"
-                     class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["organisation_tel"]}}
+                <div class="col-md-12" style="margin-bottom: 1em"
+                     ng-show="project.methods.length > 0">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["methods"]}}
                     </div>
-                    <div class="col-md-9">{{project.organisation.tel}}</div>
-                </div>
-                <div ng-show="nonEmpty(project.organisation.email)"
-                     class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["organisation_email"]}}
-                    </div>
-                    <div class="col-md-9">{{project.organisation.email}}</div>
-                </div>
-                <div ng-show="nonEmpty(project.organisation.website)"
-                     class="proj-content col-md-12">
-                    <div class="col-md-3 mini-header">
-                        {{fieldNames["organisation_www"]}}
-                    </div>
-                    <div class="col-md-9">{{project.organisation.website}}</div>
-                </div>
-                &nbsp;
-            </article>
-            <article id="details" class="proj-article">
-                <h4>Lisätiedot</h4>
-                <div id="appinfo" class="proj-content">
-                    <div ng-show="nonEmpty(project.context)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["context"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.context)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.project_goal)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["project_goal"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.project_goal)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.target_group)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["target_group"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.target_group)"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-12" style="margin-bottom: 1em"
-                         ng-show="project.methods.length > 0">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["methods"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <div ng-repeat="method in project.methods">
-                                <em>{{method.name}}</em> ({{method.level}})
-                                <p class="proj-subcontent">
-                                    <span ng-bind-html="handleEmphasis(method.comment)"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.planned_results)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["planned_results"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.planned_results)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.risk_control)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["risk_control"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.risk_control)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.gender_aspect)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["gender_aspect"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.gender_aspect)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.vulnerable_groups)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["vulnerable_groups"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.vulnerable_groups)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.indicators)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["indicators"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.indicators)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.reporting_evaluation)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["reporting_evaluation"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.reporting_evaluation)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.budget)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["budget"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.budget)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.other_donors_proposed)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["other_donors_proposed"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.other_donors_proposed)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.human_resources)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["human_resources"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.human_resources)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.referees)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["referees"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.referees)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.background_check)"
-                         class="col-md-12">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["background_check"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.background_check)"></span>
-                        </div>
-                    </div>
-                </div>
-                &nbsp;
-            </article>
-            <article id="assessment" class="proj-article">
-                <h4>KIOS:n arvio</h4>
-                <div class="proj-content">
-                    <div ng-show="nonEmpty(project.fitness)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["fitness"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.fitness)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.capacity)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["capacity"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.capacity)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.feasibility)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["feasibility"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.feasibility)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.effectiveness)"
-                         class="col-md-12" style="margin-bottom: 1em">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["effectiveness"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.effectiveness)"></span>
-                        </div>
-                    </div>
-                    <div ng-show="nonEmpty(project.proposed_funding)"
-                         class="col-md-12">
-                        <div class="col-md-4 mini-header">
-                            {{fieldNames["proposed_funding"]}}
-                        </div>
-                        <div class="col-md-8">
-                            <span ng-bind-html="handleEmphasis(project.proposed_funding)"></span>
-                        </div>
-                    </div>
-                    &nbsp;
-                </div>
-            </article>
-            <article id="special_notes" class="proj-article"
-                     ng-show="project.special_notes">
-                <h4>{{fieldNames["special_notes"]}}</h4>
-                <div class="proj-content">
-                    <span ng-bind-html="handleEmphasis(project.special_notes)">
-                    </span>
-                </div>
-                &nbsp;
-            </article>
-            <article id="schedule" class="proj-article"
-                     ng-show="project.signed.intreport_deadlines.length > 0">
-                <h4>Suunniteltu aikataulu</h4>
-                <section class="proj-content">
-                    <h5>{{fieldNames["signed_intreport_deadlines"]}}</h5>
-                    <div ng-repeat="deadline in project.signed.intreport_deadlines" class="proj-subcontent col-md-12">
-                        <div class="col-md-3 mini-header">
-                            {{deadline.report}}
-                        </div>
-                        <div class="col-md-9">
-                            {{deadline.date| date: 'd.M.yyyy': '+0200'}}
-                        </div>
-                    </div>
-                    &nbsp;
-                </section>
-            </article>
-            <article id="reports" class="proj-article">
-                <h4>Toteutunut aikataulu</h4>
-                <section  class="proj-content">
-                    <section ng-show="project.in_review.date">
-                        <div class="col-md-12">
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["in_review_date"]}}
-                            </div>
-                            <div class="col-md-2">
-                                {{project.in_review.date| date:'d.M.yyyy': '+0200'}}
-                            </div>
-                            <div class="col-md-7">
-                                <button class="btn small-btn"
-                                        onclick="toggleCollapse('reviewinfo')">
-                                    Tiedot</button>
-                            </div>
-                        </div>
-                        <div id="reviewinfo" class="proj-subcontent col-md-12"
-                             style="display: none">
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["in_review_user"]}}
-                            </div>
-                            <div class="col-md-9">{{project.in_review.user}},
-                                {{project.in_review.date| date:'d.M.yyyy, HH:mm': '+0200'}}</div>
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["in_review_comments"]}}
-                            </div>
-                            <div class="col-md-9">
-                                {{project.in_review.comments}}
-                            </div>
-                        </div>
-                        &nbsp;
-                    </section>
-                    <section ng-show="project.approved.date">
-                        <div class="col-md-12">
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["approved_date"]}}
-                            </div>
-                            <div class="col-md-2">
-                                {{project.approved.date| date:'d.M.yyyy':'+0200'}}
-                            </div>
-                            <div class="col-md-1">
-                                <button class="btn small-btn"
-                                        onclick="toggleCollapse('approvedinfo')">
-                                    Tiedot</button>
-                            </div>
-                            <div class="col-md-2">
-                                <a ng-href="/projects/{{project._id}}/regreport/{{intreport.reportNumber}}"
-                                   target="_blank" class="btn large-btn">
-                                    HTML-raportti
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a ng-click="createPDF('reg')"
-                                   ng-disabled="regRepExists"
-                                   class="btn large-btn">
-                                    Luo PDF
-                                </a>
-                            </div>
-                        </div>
-                        <div id="approvedinfo" class="proj-subcontent col-md-12"
-                             style="display: none">
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["approved_user"]}}
-                            </div>
-                            <div class="col-md-9">{{project.approved.user}},
-                                {{project.approved.date| date:'d.M.yyyy, HH:mm':
-                                                    '+0200'}}</div>
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["approved_approved_by"]}}
-                            </div>
-                            <div class="col-md-9">
-                                {{project.approved.approved_by}}
-                            </div>
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["approved_approved_date"]}}
-                            </div>
-                            <div class="col-md-9">
-                                {{project.approved.approved_date| date:
-                                                'd.M.yyyy':'+0200'}}
-                            </div>
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["approved_board_notified"]}}
-                            </div>
-                            <div class="col-md-9">
-                                {{project.approved.board_notified| date:
-                                                'd.M.yyyy':'+0200'}}
-                            </div>
-                        </div>
-                        &nbsp;
-                    </section>
-                    <section ng-show="project.rejected.date">
-                        <div class="col-md-12">
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["rejected_date"]}}
-                            </div>
-                            <div class="col-md-2">
-                                {{project.rejected.date| date:'d.M.yyyy': '+0200'}}
-                            </div>
-                            <div class="col-md-7">
-                                <button class="btn small-btn"
-                                        onclick="toggleCollapse('rejectedinfo')">
-                                    Tiedot
-                                </button>
-                            </div>
-                        </div>
-                        <div id="rejectedinfo"
-                             class="proj-subcontent col-md-12"
-                             style="display: none">
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["rejected_user"]}}
-                            </div>
-                            <div class="col-md-9">{{project.rejected.user}},
-                                {{project.rejected.date|
-                                                    date:'d.M.yyyy, HH:mm':
-                                                    '+0200'}}</div>
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["rejected_rejection_categories"]}}
-                            </div>
-                            <div class="col-md-9">
-                                <ul>
-                                    <li ng-repeat="rej in project.
-                                                        rejected.rejection_categories">
-                                        {{rej.rejection}}
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["rejected_rejection_comments"]}}
-                            </div>
-                            <div class="col-md-9">
-                                {{project.rejected.rejection_comments}}
-                            </div>
-                        </div>
-                        &nbsp;
-                    </section>
-                    <section ng-show="project.signed.date">
-                        <div class="col-md-12">
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["signed_date"]}}
-                            </div>
-                            <div class="col-md-2">
-                                {{project.signed.date| date:'d.M.yyyy': '+0200'}}
-                            </div>
-                            <div class="col-md-7">
-                                <button class="btn small-btn"
-                                        onclick="toggleCollapse('signedinfo')">
-                                    Tiedot
-                                </button>
-                            </div>
-                        </div>
-                        <div id="signedinfo" class="proj-subcontent col-md-12"
-                             style="display: none">
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["signed_user"]}}
-                            </div>
-                            <div class="col-md-9">{{project.signed.user}},
-                                {{project.signed.date|
-                                                date:'d.M.yyyy, HH:mm': '+0200'}}
-                            </div>
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["signed_signed_by"]}}
-                            </div>
-                            <div class="col-md-9">{{project.signed.signed_by}},
-                                {{project.signed.signed_date|
-                                                    date:'d.M.yyyy': '+0200'}}</div>
-                        </div>
-                        &nbsp;
-                    </section>
-                    <section ng-show="project.intermediary_reports.length > 0">
-                        <div ng-repeat="intreport in project.intermediary_reports">
-                            <div class="col-md-12">
-                                <div class="col-md-3 mini-header">
-                                    {{intreport.reportNumber}}.
-                                    {{fieldNames["intreport_date"]}}
-                                </div>
-                                <div class="col-md-2">
-                                    {{intreport.date| date:'d.M.yyyy': '+0200'}}
-                                </div>
-                                <div class="col-md-1">
-                                    <button class="btn small-btn"
-                                            ng-click="showIntDetails =
-                                                                    !showIntDetails">
-                                        Tiedot
-                                    </button>
-                                </div>
-                                <div class="col-md-2">
-                                    <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}"
-                                       target="_blank" class="btn large-btn">
-                                        HTML-raportti
-                                    </a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a ng-click="createPDF('int')"
-                                       ng-disabled="true"
-                                       class="btn large-btn">
-                                        Luo PDF
-                                    </a>
-                                </div>
-                            </div>
-                            <div ng-show="showIntDetails"
-                                 class="proj-subcontent col-md-12">
-                                <div class="col-md-3 mini-header">
-                                    {{fieldNames["intreport_user"]}}
-                                </div>
-                                <div class="col-md-9">{{intreport.user}},
-                                    {{intreport.date|
-                                                        date:'d.M.yyyy, HH:mm':
-                                                        '+0200'}}</div>
-                                <div class="col-md-3 mini-header">
-                                    Raportin esitti
-                                </div>
-                                <div class="col-md-9">{{intreport.approved_by}},
-                                    {{intreport.date_approved|
-                                                        date : 'd.M.yyyy':
-                                                        '+0200'}}</div>
-                            </div>
-                            <p ng-show="intreport.processed === true">
-                                Väliraportti on käsitelty.
+                    <div class="col-md-8">
+                        <div ng-repeat="method in project.methods">
+                            <em>{{method.name}}</em> ({{method.level}})
+                            <p class="proj-subcontent">
+                                <span ng-bind-html="handleEmphasis(method.comment)"></span>
                             </p>
-                            &nbsp;
                         </div>
-                    </section>
-                    <section ng-show="project.end_report.date">
-                        <div class="col-md-12">
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["end_report_date"]}}
-                            </div>
-                            <div class="col-md-2">
-                                {{project.end_report.date| date:'d.M.yyyy':'+0200'}}
-                            </div>
-                            <div class="col-md-1">
-                                <button class="btn small-btn"
-                                        ng-click="showEndDetails =
-                                                            !showEndDetails">
-                                    Tiedot
-                                </button>
-                            </div>
-                            <div class="col-md-2">
-                                <a ng-href="/projects/endReport/{{project._id}}"
-                                   target="_blank" class="btn large-btn">
-                                    HTML-raportti
-                                </a>
-                            </div>
-                            <div class="col-md-2">
-                                <a ng-click="createPDF('end')"
-                                   ng-disabled="endRepExists || nonPDFfinancialRep"
-                                   class="btn large-btn">
-                                    Luo PDF
-                                </a>
-                            </div>
-                            <div class="col-md-2" ng-show="!financialRepExists">
-                                <span class="glyphicon glyphicon-exclamation-sign"></span> <small>Talousraportti puuttuu</small>
-                            </div>
-                        </div>
-                        <div ng-show="showEndDetails"
-                             class="proj-subcontent col-md-12">
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["end_report_user"]}}
-                            </div>
-                            <div class="col-md-9">{{project.end_report.user}},
-                                {{project.end_report.date|
-                                                    date:'d.M.yyyy, HH:mm':
-                                                    '+0200'}}</div>
-                            <div class="col-md-3 mini-header">
-                                Raportti hyväksytty
-                            </div>
-                            <div class="col-md-9">{{project.end_report.approved_by}},
-                                {{project.end_report.date_approved|
-                                                    date : 'd.M.yyyy': '+0200'}}</div>
-                        </div>
-                        <p ng-show="project.end_report.processed === true">
-                            Väliraportti on käsitelty.
-                        </p>
-                        &nbsp;
-                    </section>
-                    <section ng-show="project.ended.date">
-                        <div class="col-md-12">
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["ended_date"]}}
-                            </div>
-                            <div class="col-md-2">
-                                {{project.ended.end_date| date:'d.M.yyyy':'+0200'}}
-                            </div>
-                            <div class="col-md-7"><button class="btn small-btn"
-                                                          onclick="toggleCollapse('endedinfo')">
-                                    Tiedot
-                                </button></div>
-                        </div>
-                        <div id="endedinfo" class="proj-subcontent col-md-12">
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["ended_user"]}}
-                            </div>
-                            <div class="col-md-9">{{project.ended.user}},
-                                {{project.ended.date|
-                                                date:'d.M.yyyy, HH:mm': '+0200'}}
-                            </div>
-                            <div class="col-md-3 mini-header">Hyväksyjä</div>
-                            <div class="col-md-9">
-                                {{project.ended.approved_by}}
-                            </div>
-                            <div class="col-md-3 mini-header">
-                                {{fieldNames["ended_board_notified"]}}
-                            </div>
-                            <div class="col-md-9">{{project.ended.board_notified|
-                                            date: 'd.M.yyyy': '+0200'}}</div>
-                            <div class="col-md-3 mini-header">
-                                Muut päättämiseen liittyvät kommentit
-                            </div>
-                            <div class="col-md-9">
-                                {{project.ended.other_comments}}
-                            </div>
-                        </div>
-                        &nbsp;
-                    </section>
-                </section>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.planned_results)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["planned_results"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.planned_results)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.risk_control)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["risk_control"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.risk_control)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.gender_aspect)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["gender_aspect"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.gender_aspect)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.vulnerable_groups)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["vulnerable_groups"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.vulnerable_groups)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.indicators)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["indicators"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.indicators)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.reporting_evaluation)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["reporting_evaluation"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.reporting_evaluation)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.budget)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["budget"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.budget)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.other_donors_proposed)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["other_donors_proposed"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.other_donors_proposed)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.human_resources)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["human_resources"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.human_resources)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.referees)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["referees"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.referees)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.background_check)"
+                     class="col-md-12">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["background_check"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.background_check)"></span>
+                    </div>
+                </div>
+            </div>
+            &nbsp;
+        </article>
+        <article id="assessment" class="proj-article">
+            <h4>KIOS:n arvio</h4>
+            <div class="proj-content">
+                <div ng-show="nonEmpty(project.fitness)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["fitness"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.fitness)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.capacity)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["capacity"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.capacity)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.feasibility)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["feasibility"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.feasibility)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.effectiveness)"
+                     class="col-md-12" style="margin-bottom: 1em">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["effectiveness"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.effectiveness)"></span>
+                    </div>
+                </div>
+                <div ng-show="nonEmpty(project.proposed_funding)"
+                     class="col-md-12">
+                    <div class="col-md-4 mini-header">
+                        {{fieldNames["proposed_funding"]}}
+                    </div>
+                    <div class="col-md-8">
+                        <span ng-bind-html="handleEmphasis(project.proposed_funding)"></span>
+                    </div>
+                </div>
                 &nbsp;
-            </article>
-            <article id="payments" class="proj-article"
-                     ng-show="project.approved.date">
-                <h4>Maksatus</h4>
-                <div class="proj-content col-md-12" style="margin-bottom: 1em">
+            </div>
+        </article>
+        <article id="special_notes" class="proj-article"
+                 ng-show="project.special_notes">
+            <h4>{{fieldNames["special_notes"]}}</h4>
+            <div class="proj-content">
+                <span ng-bind-html="handleEmphasis(project.special_notes)">
+                </span>
+            </div>
+            &nbsp;
+        </article>
+        <article id="schedule" class="proj-article"
+                 ng-show="project.signed.intreport_deadlines.length > 0">
+            <h4>Suunniteltu aikataulu</h4>
+            <section class="proj-content">
+                <h5>{{fieldNames["signed_intreport_deadlines"]}}</h5>
+                <div ng-repeat="deadline in project.signed.intreport_deadlines" class="proj-subcontent col-md-12">
                     <div class="col-md-3 mini-header">
-                        <div ng-show="project.approved.granted_sum_eur">
-                            Myönnetty avustus
-                            <!--{{fieldNames["approved_granted_sum_eur"]}}-->
-                        </div>
+                        {{deadline.report}}
                     </div>
-                    <div class="col-md-2">
-                        {{numberToString(project.approved.granted_sum_eur)}} EUR
-                    </div>
-                    <div class="col-md-7">
-                        {{project.approved.approved_date| date:'d.M.yyyy': '+0200'}}
+                    <div class="col-md-9">
+                        {{deadline.date| date: 'd.M.yyyy': '+0200'}}
                     </div>
                 </div>
-                <div class="proj-content" ng-show="project.signed.date">
-                    <h5>Maksuaikataulu</h5>
-                    <div ng-repeat="planned_payment in project.signed.
-                                        planned_payments" class="col-md-12">
-                        <div class="col-md-1"><em>{{project.signed.
-                                                planned_payments.indexOf(planned_payment) + 1}}. erä</em></div>
-                        <div class="col-md-2">{{numberToString(planned_payment.sum_eur)}} EUR</div>
-                        <div class="col-md-9">{{planned_payment.date| date:'d.M.yyyy': '+0200'}}</div>
-                    </div>
-                    &nbsp;
-                </div>
-                <div ng-show="project.payments.length > 0" class="proj-content">
-                    <h5>Maksetut erät</h5>
-                    <div ng-repeat="payment in project.payments| orderBy: 'payment_date'"
-                         class="col-md-12">
-                        <div class="col-md-1">
-                            <em id="paid">{{$index + 1}}. erä</em>
+                &nbsp;
+            </section>
+        </article>
+        <article id="reports" class="proj-article">
+            <h4>Toteutunut aikataulu</h4>
+            <section  class="proj-content">
+                <section ng-show="project.in_review.date">
+                    <div class="col-md-12">
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["in_review_date"]}}
                         </div>
                         <div class="col-md-2">
-                            {{numberToString(payment.sum_eur)}} EUR
+                            {{project.in_review.date| date:'d.M.yyyy': '+0200'}}
+                        </div>
+                        <div class="col-md-7">
+                            <button class="btn small-btn"
+                                    onclick="toggleCollapse('reviewinfo')">
+                                Tiedot</button>
+                        </div>
+                    </div>
+                    <div id="reviewinfo" class="proj-subcontent col-md-12"
+                         style="display: none">
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["in_review_user"]}}
+                        </div>
+                        <div class="col-md-9">{{project.in_review.user}},
+                            {{project.in_review.date| date:'d.M.yyyy, HH:mm': '+0200'}}</div>
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["in_review_comments"]}}
+                        </div>
+                        <div class="col-md-9">
+                            {{project.in_review.comments}}
+                        </div>
+                    </div>
+                    &nbsp;
+                </section>
+                <section ng-show="project.approved.date">
+                    <div class="col-md-12">
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["approved_date"]}}
+                        </div>
+                        <div class="col-md-2">
+                            {{project.approved.date| date:'d.M.yyyy':'+0200'}}
                         </div>
                         <div class="col-md-1">
-                            {{payment.payment_date| date:'d.M.yyyy': '+0200'}}
+                            <button class="btn small-btn"
+                                    onclick="toggleCollapse('approvedinfo')">
+                                Tiedot</button>
                         </div>
-                        <div class="col-md-8">
-                            <a data-ng-click="confirmPaymentDeletion(payment.payment_number, $index + 1)"
-                               class="btn-lg">
-                                <span class="glyphicon glyphicon-trash"></span>
+                        <div class="col-md-2">
+                            <a ng-href="/projects/{{project._id}}/regreport/{{intreport.reportNumber}}"
+                               target="_blank" class="btn large-btn">
+                                HTML-raportti
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a ng-click="createPDF('reg')"
+                               ng-disabled="regRepExists"
+                               class="btn large-btn">
+                                Luo PDF
                             </a>
                         </div>
                     </div>
+                    <div id="approvedinfo" class="proj-subcontent col-md-12"
+                         style="display: none">
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["approved_user"]}}
+                        </div>
+                        <div class="col-md-9">{{project.approved.user}},
+                            {{project.approved.date| date:'d.M.yyyy, HH:mm':
+                                                    '+0200'}}</div>
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["approved_approved_by"]}}
+                        </div>
+                        <div class="col-md-9">
+                            {{project.approved.approved_by}}
+                        </div>
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["approved_approved_date"]}}
+                        </div>
+                        <div class="col-md-9">
+                            {{project.approved.approved_date| date:
+                                                'd.M.yyyy':'+0200'}}
+                        </div>
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["approved_board_notified"]}}
+                        </div>
+                        <div class="col-md-9">
+                            {{project.approved.board_notified| date:
+                                                'd.M.yyyy':'+0200'}}
+                        </div>
+                    </div>
                     &nbsp;
-                </div>
-                <div class="proj-content col-md-12" style="margin-bottom: 1em"
-                     ng-show="project.payments.length > 0">
-                    <div class="col-md-3 mini-header">Maksettu yhteensä</div>
-                    <div class="col-md-9">
-                        {{numberToString(project.funding.paid_eur)}} EUR
-                    </div>
-                </div>
-                <div class="proj-content col-md-12"
-                     ng-show="project.signed.date">
-                    <div class="col-md-3 mini-header">Jäljellä</div>
-                    <div class="col-md-9">
-                        {{numberToString(project.funding.left_eur)}} EUR
-                    </div>
-                </div>
-                &nbsp;
-            </article>
-            <article id="addPayment"
-                     ng-show="project.signed.date && project.state !== 'päättynyt' && project.state !== 'hylätty'"
-                     class="proj-article">
-                <h4>Maksutiedon lisäys</h4>
-                <form name="paymentForm" class="form-horizonal proj-content"
-                      role="form"
-                      data-ng-submit="addPaymentInfo(paymentForm.$valid)"
-                      novalidate>
-                    <div class="form-group col-md-6" id="PaymentDate">
-                        <label class="col-md-3 control-label">
-                            Päiväys
-                        </label>
-                        <div class="col-md-3"
-                             ng-class="{'has-error': paymentForm.paymentDay.$invalid }">
-                            <input name="paymentDay" type="number"
-                                   ng-trim="true" class="form-control"
-                                   data-ng-model="payment_day"
-                                   id="paymentDay" required
-                                   />
-                            <div ng-show="paymentForm.paymentDay.$invalid"
-                                 class="help-block" >
-                                <p ng-show="paymentForm.paymentDay.$error.required">
-                                    Päivä on pakollinen
-                                </p>
-                            </div>
+                </section>
+                <section ng-show="project.rejected.date">
+                    <div class="col-md-12">
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["rejected_date"]}}
                         </div>
-                        <div class="col-md-3"
-                             ng-class="{'has-error': paymentForm.paymentMonth.$invalid }">
-                            <input name="paymentMonth" type="number"
-                                   ng-trim="true" class="form-control"
-                                   data-ng-model="payment_month"
-                                   id="paymentMonth"
-                                   required />
-                            <div ng-show="paymentForm.paymentMonth.$invalid"
-                                 class="help-block">
-                                <p ng-show="paymentForm.paymentMonth.$error.required">
-                                    Kuukausi on pakollinen
-                                </p>
-                            </div>
+                        <div class="col-md-2">
+                            {{project.rejected.date| date:'d.M.yyyy': '+0200'}}
                         </div>
-                        <div class="col-md-3"
-                             ng-class="{'has-error': paymentForm.paymentYear.$invalid }">
-                            <input name="paymentYear" type="number"
-                                   ng-trim="true" class="form-control"
-                                   data-ng-model="payment_year"
-                                   id="paymentYear"
-                                   required />
-                            <div ng-show="paymentForm.paymentYear.$invalid"
-                                 class="help-block">
-                                <p ng-show="paymentForm.paymentYear.$error.required">
-                                    Vuosi on pakollinen
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         ng-class="{'has-error': paymentForm.paymentSumEUR.$invalid}">
-                        <label for="paymentSumEUR" class="col-xs-2 control-label">
-                            Summa (EUR)
-                        </label>
-                        <div class="col-md-4" >
-                            <input name="paymentSumEUR" type="number"
-                                   ng-trim="true" class="form-control"
-                                   data-ng-model="project.payment.sum_eur"
-                                   id="paymentSumEUR" placeholder="Summa (EUR)"
-                                   required />
-                        </div>
-                        <div ng-show="paymentForm.paymentSumEUR.$invalid"
-                             class="help-block">
-                            <p ng-show="paymentForm.paymentSumEUR.$error.number">
-                                Summan täytyy olla luku
-                            </p>
-                        </div>
-                        <div ng-show="paymentForm.paymentSumEUR.$invalid"
-                             class="help-block">
-                            <p ng-show="paymentForm.paymentSumEUR.$error.required">
-                                Kenttä on pakollinen
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <div class="col-md-4">
-                            <button type="submit" id="btn-pay"
-                                    class="btn btn-default"
-                                    ng-disabled="paymentForm.$invalid">
-                                Tallenna
+                        <div class="col-md-7">
+                            <button class="btn small-btn"
+                                    onclick="toggleCollapse('rejectedinfo')">
+                                Tiedot
                             </button>
                         </div>
                     </div>
-                </form>
-                &nbsp;
-            </article>
-            <article id="checklist" class="proj-article">
-                <h4>{{fieldNames["required_appendices"]}}</h4>
-                <ul style="padding-left: 1em">
-                    <li class="col-md-12">
-                        <span class="col-md-3">
-                            <label>{{fieldNames["required_appendices_proj_budget"]}}</label>
-                        </span>
-                        <span class="col-md-9">
-                            <span class="glyphicon glyphicon-check"
-                                  ng-show="project.required_appendices.proj_budget"></span>
-                            <span class="glyphicon glyphicon-unchecked"
-                                  ng-show="!project.required_appendices.proj_budget"></span>
-                        </span>
-                    </li>
-                    <li class="col-md-12">
-                        <span class="col-md-3">
-                            <label>{{fieldNames["required_appendices_references"]}}</label>
-                        </span>
-                        <span class="col-md-9">
-                            <span class="glyphicon glyphicon-check"
-                                  ng-show="project.required_appendices.references"></span>
-                            <span class="glyphicon glyphicon-unchecked"
-                                  ng-show="!project.required_appendices.references"></span>
-                        </span>
-                    </li>
-                    <li class="col-md-12">
-                        <span class="col-md-3">
-                            <label>{{fieldNames["required_appendices_annual_budget"]}}</label>
-                        </span>
-                        <span class="col-md-9">
-                            <span class="glyphicon glyphicon-check"
-                                  ng-show="project.required_appendices.annual_budget"></span>
-                            <span class="glyphicon glyphicon-unchecked"
-                                  ng-show="!project.required_appendices.annual_budget"></span>
-                        </span>
-                    </li>
-                    <li class="col-md-12">
-                        <span class="col-md-3">
-                            <label>{{fieldNames["required_appendices_rules"]}}</label>
-                        </span>
-                        <span class="col-md-9">
-                            <span class="glyphicon glyphicon-check"
-                                  ng-show="project.required_appendices.rules"></span>
-                            <span class="glyphicon glyphicon-unchecked"
-                                  ng-show="!project.required_appendices.rules"></span>
-                        </span>
-                    </li>
-                    <li class="col-md-12">
-                        <span class="col-md-3">
-                            <label>{{fieldNames["required_appendices_reg_cert"]}}</label>
-                        </span>
-                        <span class="col-md-9">
-                            <span class="glyphicon glyphicon-check"
-                                  ng-show="project.required_appendices.reg_cert"></span>
-                            <span class="glyphicon glyphicon-unchecked"
-                                  ng-show="!project.required_appendices.reg_cert"></span>
-                        </span>
-                    </li>
-                    <li class="col-md-12">
-                        <span class="col-md-3">
-                            <label>{{fieldNames["required_appendices_annual_report"]}}</label>
-                        </span>
-                        <span class="col-md-9">
-                            <span class="glyphicon glyphicon-check"
-                                  ng-show="project.required_appendices.annual_report"></span>
-                            <span class="glyphicon glyphicon-unchecked"
-                                  ng-show="!project.required_appendices.annual_report"></span>
-                        </span>
-                    </li>
-                    <li class="col-md-12">
-                        <span class="col-md-3">
-                            <label>{{fieldNames["required_appendices_audit_reports"]}}</label>
-                        </span>
-                        <span class="col-md-9">
-                            <span class="glyphicon glyphicon-check"
-                                  ng-show="project.required_appendices.audit_reports"></span>
-                            <span class="glyphicon glyphicon-unchecked"
-                                  ng-show="!project.required_appendices.audit_reports"></span>
-                        </span>
-                    </li>
-                </ul>
-                &nbsp;
-            </article>
-            <article id="appendices" class="proj-article"
-                     ng-show="project.appendices.length > 0">
-                <h4>Tallennetut liitteet</h4>
-                <div ng-repeat="appendix in project.appendices"
-                     class="proj-content col-md-12">
-                    <div class="col-md-4 mini-header">{{appendix.number}}.
-                        <!-- TODO: Figure out how to hyperlink the
-                        appendices using client-side services in order to
-                        enable proper access control: -->
-                        <a ng-href="{{appendix.url}}&action=download"
-                           target="_blank">
-                            {{appendix.category !== 'Muu...' ?
-                                        appendix.category : appendix.custom_category}}
-                        </a>
+                    <div id="rejectedinfo"
+                         class="proj-subcontent col-md-12"
+                         style="display: none">
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["rejected_user"]}}
+                        </div>
+                        <div class="col-md-9">{{project.rejected.user}},
+                            {{project.rejected.date|
+                                                    date:'d.M.yyyy, HH:mm':
+                                                    '+0200'}}</div>
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["rejected_rejection_categories"]}}
+                        </div>
+                        <div class="col-md-9">
+                            <ul>
+                                <li ng-repeat="rej in project.
+                                                    rejected.rejection_categories">
+                                    {{rej.rejection}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["rejected_rejection_comments"]}}
+                        </div>
+                        <div class="col-md-9">
+                            {{project.rejected.rejection_comments}}
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <em>{{appendix.original_name}}</em>
+                    &nbsp;
+                </section>
+                <section ng-show="project.signed.date">
+                    <div class="col-md-12">
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["signed_date"]}}
+                        </div>
+                        <div class="col-md-2">
+                            {{project.signed.date| date:'d.M.yyyy': '+0200'}}
+                        </div>
+                        <div class="col-md-7">
+                            <button class="btn small-btn"
+                                    onclick="toggleCollapse('signedinfo')">
+                                Tiedot
+                            </button>
+                        </div>
+                    </div>
+                    <div id="signedinfo" class="proj-subcontent col-md-12"
+                         style="display: none">
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["signed_user"]}}
+                        </div>
+                        <div class="col-md-9">{{project.signed.user}},
+                            {{project.signed.date|
+                                                date:'d.M.yyyy, HH:mm': '+0200'}}
+                        </div>
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["signed_signed_by"]}}
+                        </div>
+                        <div class="col-md-9">{{project.signed.signed_by}},
+                            {{project.signed.signed_date|
+                                                    date:'d.M.yyyy': '+0200'}}</div>
+                    </div>
+                    &nbsp;
+                </section>
+                <section ng-show="project.intermediary_reports.length > 0">
+                    <div ng-repeat="intreport in project.intermediary_reports">
+                        <div class="col-md-12">
+                            <div class="col-md-3 mini-header">
+                                {{intreport.reportNumber}}.
+                                {{fieldNames["intreport_date"]}}
+                            </div>
+                            <div class="col-md-2">
+                                {{intreport.date| date:'d.M.yyyy': '+0200'}}
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn small-btn"
+                                        ng-click="showIntDetails =
+                                                                !showIntDetails">
+                                    Tiedot
+                                </button>
+                            </div>
+                            <div class="col-md-2">
+                                <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}"
+                                   target="_blank" class="btn large-btn">
+                                    HTML-raportti
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a ng-click="createPDF('int')"
+                                   ng-disabled="true"
+                                   class="btn large-btn">
+                                    Luo PDF
+                                </a>
+                            </div>
+                        </div>
+                        <div ng-show="showIntDetails"
+                             class="proj-subcontent col-md-12">
+                            <div class="col-md-3 mini-header">
+                                {{fieldNames["intreport_user"]}}
+                            </div>
+                            <div class="col-md-9">{{intreport.user}},
+                                {{intreport.date|
+                                                        date:'d.M.yyyy, HH:mm':
+                                                        '+0200'}}</div>
+                            <div class="col-md-3 mini-header">
+                                Raportin esitti
+                            </div>
+                            <div class="col-md-9">{{intreport.approved_by}},
+                                {{intreport.date_approved|
+                                                        date : 'd.M.yyyy':
+                                                        '+0200'}}</div>
+                        </div>
+                        <p ng-show="intreport.processed === true">
+                            Väliraportti on käsitelty.
+                        </p>
+                        &nbsp;
+                    </div>
+                </section>
+                <section ng-show="project.end_report.date">
+                    <div class="col-md-12">
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["end_report_date"]}}
+                        </div>
+                        <div class="col-md-2">
+                            {{project.end_report.date| date:'d.M.yyyy':'+0200'}}
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn small-btn"
+                                    ng-click="showEndDetails =
+                                                        !showEndDetails">
+                                Tiedot
+                            </button>
+                        </div>
+                        <div class="col-md-2">
+                            <a ng-href="/projects/endReport/{{project._id}}"
+                               target="_blank" class="btn large-btn">
+                                HTML-raportti
+                            </a>
+                        </div>
+                        <div class="col-md-2">
+                            <a ng-click="createPDF('end')"
+                               ng-disabled="endRepExists || nonPDFfinancialRep"
+                               class="btn large-btn">
+                                Luo PDF
+                            </a>
+                        </div>
+                        <div class="col-md-2" ng-show="!financialRepExists">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span> <small>Talousraportti puuttuu</small>
+                        </div>
+                    </div>
+                    <div ng-show="showEndDetails"
+                         class="proj-subcontent col-md-12">
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["end_report_user"]}}
+                        </div>
+                        <div class="col-md-9">{{project.end_report.user}},
+                            {{project.end_report.date|
+                                                    date:'d.M.yyyy, HH:mm':
+                                                    '+0200'}}</div>
+                        <div class="col-md-3 mini-header">
+                            Raportti hyväksytty
+                        </div>
+                        <div class="col-md-9">{{project.end_report.approved_by}},
+                            {{project.end_report.date_approved|
+                                                    date : 'd.M.yyyy': '+0200'}}</div>
+                    </div>
+                    <p ng-show="project.end_report.processed === true">
+                        Väliraportti on käsitelty.
+                    </p>
+                    &nbsp;
+                </section>
+                <section ng-show="project.ended.date">
+                    <div class="col-md-12">
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["ended_date"]}}
+                        </div>
+                        <div class="col-md-2">
+                            {{project.ended.end_date| date:'d.M.yyyy':'+0200'}}
+                        </div>
+                        <div class="col-md-7"><button class="btn small-btn"
+                                                      onclick="toggleCollapse('endedinfo')">
+                                Tiedot
+                            </button></div>
+                    </div>
+                    <div id="endedinfo" class="proj-subcontent col-md-12">
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["ended_user"]}}
+                        </div>
+                        <div class="col-md-9">{{project.ended.user}},
+                            {{project.ended.date|
+                                                date:'d.M.yyyy, HH:mm': '+0200'}}
+                        </div>
+                        <div class="col-md-3 mini-header">Hyväksyjä</div>
+                        <div class="col-md-9">
+                            {{project.ended.approved_by}}
+                        </div>
+                        <div class="col-md-3 mini-header">
+                            {{fieldNames["ended_board_notified"]}}
+                        </div>
+                        <div class="col-md-9">{{project.ended.board_notified|
+                                            date: 'd.M.yyyy': '+0200'}}</div>
+                        <div class="col-md-3 mini-header">
+                            Muut päättämiseen liittyvät kommentit
+                        </div>
+                        <div class="col-md-9">
+                            {{project.ended.other_comments}}
+                        </div>
+                    </div>
+                    &nbsp;
+                </section>
+            </section>
+            &nbsp;
+        </article>
+        <article id="payments" class="proj-article"
+                 ng-show="project.approved.date">
+            <h4>Maksatus</h4>
+            <div class="proj-content col-md-12" style="margin-bottom: 1em">
+                <div class="col-md-3 mini-header">
+                    <div ng-show="project.approved.granted_sum_eur">
+                        Myönnetty avustus
+                        <!--{{fieldNames["approved_granted_sum_eur"]}}-->
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    {{numberToString(project.approved.granted_sum_eur)}} EUR
+                </div>
+                <div class="col-md-7">
+                    {{project.approved.approved_date| date:'d.M.yyyy': '+0200'}}
+                </div>
+            </div>
+            <div class="proj-content" ng-show="project.signed.date">
+                <h5>Maksuaikataulu</h5>
+                <div ng-repeat="planned_payment in project.signed.
+                                    planned_payments" class="col-md-12">
+                    <div class="col-md-1"><em>{{project.signed.
+                                            planned_payments.indexOf(planned_payment) + 1}}. erä</em></div>
+                    <div class="col-md-2">{{numberToString(planned_payment.sum_eur)}} EUR</div>
+                    <div class="col-md-9">{{planned_payment.date| date:'d.M.yyyy': '+0200'}}</div>
+                </div>
+                &nbsp;
+            </div>
+            <div ng-show="project.payments.length > 0" class="proj-content">
+                <h5>Maksetut erät</h5>
+                <div ng-repeat="payment in project.payments| orderBy: 'payment_date'"
+                     class="col-md-12">
+                    <div class="col-md-1">
+                        <em id="paid">{{$index + 1}}. erä</em>
+                    </div>
+                    <div class="col-md-2">
+                        {{numberToString(payment.sum_eur)}} EUR
                     </div>
                     <div class="col-md-1">
-                        {{appendix.date| date: 'd.M.yyyy': '+0200'}}
+                        {{payment.payment_date| date:'d.M.yyyy': '+0200'}}
                     </div>
-                    <div class="col-md-3">
-                        <a data-ng-click="confirmAppendixDeletion(appendix.url)"
+                    <div class="col-md-8">
+                        <a data-ng-click="confirmPaymentDeletion(payment.payment_number, $index + 1)"
                            class="btn-lg">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </div>
                 </div>
                 &nbsp;
-            </article>
-            <article id="addAppendix" class="proj-article"
-                     ng-show="project.state !== 'päättynyt' && project.state !== 'hylätty'">
-                <h4>Liitteen lisäys</h4>
-                <!-- TODO: Figure out how to make this form work through a
-                client-side service in order to enable proper acces contol: -->
-                <form name="appendixForm" class="form-horizonal proj-content"
-                      action="/api/projects/upload"
-                      method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="project_id" value="{{project._id}}">
-                    <div class="form-group col-md-12">
-                        <label for="appendixTypeSelect"
-                               class="col-md-2 control-label">
-                            Kategoria
-                        </label>
-                        <select id="appendixTypeSelect" name="appendix_category"
-                                class="col-md-4"
-                                ng-model="project.appendix.category" required>
-                            <option value="">[Valitse yksi]</option>
-                            <option data-ng-repeat="category in appendixCategories">{{category}}</option>
-                        </select>
-                        <input type="text" name="appendix_custom_category"
-                               value="" class="col-md-6"
-                               ng-show="project.appendix.category === 'Muu...'"
-                               ng-model="project.appendix.customCategory">
+            </div>
+            <div class="proj-content col-md-12" style="margin-bottom: 1em"
+                 ng-show="project.payments.length > 0">
+                <div class="col-md-3 mini-header">Maksettu yhteensä</div>
+                <div class="col-md-9">
+                    {{numberToString(project.funding.paid_eur)}} EUR
+                </div>
+            </div>
+            <div class="proj-content col-md-12"
+                 ng-show="project.signed.date">
+                <div class="col-md-3 mini-header">Jäljellä</div>
+                <div class="col-md-9">
+                    {{numberToString(project.funding.left_eur)}} EUR
+                </div>
+            </div>
+            &nbsp;
+        </article>
+        <article id="addPayment"
+                 ng-show="project.signed.date && project.state !== 'päättynyt' && project.state !== 'hylätty'"
+                 class="proj-article">
+            <h4>Maksutiedon lisäys</h4>
+            <form name="paymentForm" class="form-horizonal proj-content"
+                  role="form"
+                  data-ng-submit="addPaymentInfo(paymentForm.$valid)"
+                  novalidate>
+                <div class="form-group col-md-6" id="PaymentDate">
+                    <label class="col-md-3 control-label">
+                        Päiväys
+                    </label>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': paymentForm.paymentDay.$invalid }">
+                        <input name="paymentDay" type="number"
+                               ng-trim="true" class="form-control"
+                               data-ng-model="payment_day"
+                               id="paymentDay" required
+                               />
+                        <div ng-show="paymentForm.paymentDay.$invalid"
+                             class="help-block" >
+                            <p ng-show="paymentForm.paymentDay.$error.required">
+                                Päivä on pakollinen
+                            </p>
+                        </div>
                     </div>
-                    <div class="col-md-12">
-                        <label for="appendixFileInput" class="col-md-2">
-                            Tiedosto
-                        </label>
-                        <input type="file" id="appendixFileInput"
-                               name="appendix_file" class="col-md-10"
-                               accept="application/msword,application/pdf,application/rtf,application/vnd.oasis.opendocument.text,text/plain,text/csv,image/*"
-                               ng-model="project.appendix.file">
+                    <div class="col-md-3"
+                         ng-class="{'has-error': paymentForm.paymentMonth.$invalid }">
+                        <input name="paymentMonth" type="number"
+                               ng-trim="true" class="form-control"
+                               data-ng-model="payment_month"
+                               id="paymentMonth"
+                               required />
+                        <div ng-show="paymentForm.paymentMonth.$invalid"
+                             class="help-block">
+                            <p ng-show="paymentForm.paymentMonth.$error.required">
+                                Kuukausi on pakollinen
+                            </p>
+                        </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <button type="submit" id="btn-add-appendix"
-                                value="Submit" class="btn btn-default"
-                                ng-disabled="appendixForm.$invalid || (project.appendix.category === 'Muu...' && project.appendix.custom_category === '')">
+                    <div class="col-md-3"
+                         ng-class="{'has-error': paymentForm.paymentYear.$invalid }">
+                        <input name="paymentYear" type="number"
+                               ng-trim="true" class="form-control"
+                               data-ng-model="payment_year"
+                               id="paymentYear"
+                               required />
+                        <div ng-show="paymentForm.paymentYear.$invalid"
+                             class="help-block">
+                            <p ng-show="paymentForm.paymentYear.$error.required">
+                                Vuosi on pakollinen
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6"
+                     ng-class="{'has-error': paymentForm.paymentSumEUR.$invalid}">
+                    <label for="paymentSumEUR" class="col-xs-2 control-label">
+                        Summa (EUR)
+                    </label>
+                    <div class="col-md-4" >
+                        <input name="paymentSumEUR" type="number"
+                               ng-trim="true" class="form-control"
+                               data-ng-model="project.payment.sum_eur"
+                               id="paymentSumEUR" placeholder="Summa (EUR)"
+                               required />
+                    </div>
+                    <div ng-show="paymentForm.paymentSumEUR.$invalid"
+                         class="help-block">
+                        <p ng-show="paymentForm.paymentSumEUR.$error.number">
+                            Summan täytyy olla luku
+                        </p>
+                    </div>
+                    <div ng-show="paymentForm.paymentSumEUR.$invalid"
+                         class="help-block">
+                        <p ng-show="paymentForm.paymentSumEUR.$error.required">
+                            Kenttä on pakollinen
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <div class="col-md-4">
+                        <button type="submit" id="btn-pay"
+                                class="btn btn-default"
+                                ng-disabled="paymentForm.$invalid">
                             Tallenna
                         </button>
                     </div>
-                </form>
-                &nbsp;
-            </article>
-            <article id="log" class="proj-article">
-                <h4>Muokkaukset</h4>
-                <section class="proj-content">
-                    <ul ng-show="project.updated.length > 0">
-                        <li data-ng-repeat="update in project.updated">
-                            {{update.time| date: 'd.M.yyyy HH:mm'}};
-                            muokkaajana {{update.user}}
-                        </li>
-                    </ul>
-                    <div ng-show="project.updated.length === 0">
-                        Ei muokkauksia.
-                    </div>
-                </section>
-            </article>
-        </div>
+                </div>
+            </form>
+            &nbsp;
+        </article>
+        <article id="checklist" class="proj-article">
+            <h4>{{fieldNames["required_appendices"]}}</h4>
+            <ul style="padding-left: 1em">
+                <li class="col-md-12">
+                    <span class="col-md-3">
+                        <label>{{fieldNames["required_appendices_proj_budget"]}}</label>
+                    </span>
+                    <span class="col-md-9">
+                        <span class="glyphicon glyphicon-check"
+                              ng-show="project.required_appendices.proj_budget"></span>
+                        <span class="glyphicon glyphicon-unchecked"
+                              ng-show="!project.required_appendices.proj_budget"></span>
+                    </span>
+                </li>
+                <li class="col-md-12">
+                    <span class="col-md-3">
+                        <label>{{fieldNames["required_appendices_references"]}}</label>
+                    </span>
+                    <span class="col-md-9">
+                        <span class="glyphicon glyphicon-check"
+                              ng-show="project.required_appendices.references"></span>
+                        <span class="glyphicon glyphicon-unchecked"
+                              ng-show="!project.required_appendices.references"></span>
+                    </span>
+                </li>
+                <li class="col-md-12">
+                    <span class="col-md-3">
+                        <label>{{fieldNames["required_appendices_annual_budget"]}}</label>
+                    </span>
+                    <span class="col-md-9">
+                        <span class="glyphicon glyphicon-check"
+                              ng-show="project.required_appendices.annual_budget"></span>
+                        <span class="glyphicon glyphicon-unchecked"
+                              ng-show="!project.required_appendices.annual_budget"></span>
+                    </span>
+                </li>
+                <li class="col-md-12">
+                    <span class="col-md-3">
+                        <label>{{fieldNames["required_appendices_rules"]}}</label>
+                    </span>
+                    <span class="col-md-9">
+                        <span class="glyphicon glyphicon-check"
+                              ng-show="project.required_appendices.rules"></span>
+                        <span class="glyphicon glyphicon-unchecked"
+                              ng-show="!project.required_appendices.rules"></span>
+                    </span>
+                </li>
+                <li class="col-md-12">
+                    <span class="col-md-3">
+                        <label>{{fieldNames["required_appendices_reg_cert"]}}</label>
+                    </span>
+                    <span class="col-md-9">
+                        <span class="glyphicon glyphicon-check"
+                              ng-show="project.required_appendices.reg_cert"></span>
+                        <span class="glyphicon glyphicon-unchecked"
+                              ng-show="!project.required_appendices.reg_cert"></span>
+                    </span>
+                </li>
+                <li class="col-md-12">
+                    <span class="col-md-3">
+                        <label>{{fieldNames["required_appendices_annual_report"]}}</label>
+                    </span>
+                    <span class="col-md-9">
+                        <span class="glyphicon glyphicon-check"
+                              ng-show="project.required_appendices.annual_report"></span>
+                        <span class="glyphicon glyphicon-unchecked"
+                              ng-show="!project.required_appendices.annual_report"></span>
+                    </span>
+                </li>
+                <li class="col-md-12">
+                    <span class="col-md-3">
+                        <label>{{fieldNames["required_appendices_audit_reports"]}}</label>
+                    </span>
+                    <span class="col-md-9">
+                        <span class="glyphicon glyphicon-check"
+                              ng-show="project.required_appendices.audit_reports"></span>
+                        <span class="glyphicon glyphicon-unchecked"
+                              ng-show="!project.required_appendices.audit_reports"></span>
+                    </span>
+                </li>
+            </ul>
+            &nbsp;
+        </article>
+        <article id="appendices" class="proj-article"
+                 ng-show="project.appendices.length > 0">
+            <h4>Tallennetut liitteet</h4>
+            <div ng-repeat="appendix in project.appendices"
+                 class="proj-content col-md-12">
+                <div class="col-md-4 mini-header">{{appendix.number}}.
+                    <!-- TODO: Figure out how to hyperlink the
+                    appendices using client-side services in order to
+                    enable proper access control: -->
+                    <a ng-href="{{appendix.url}}&action=download"
+                       target="_blank">
+                        {{appendix.category !== 'Muu...' ?
+                                        appendix.category : appendix.custom_category}}
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <em>{{appendix.original_name}}</em>
+                </div>
+                <div class="col-md-1">
+                    {{appendix.date| date: 'd.M.yyyy': '+0200'}}
+                </div>
+                <div class="col-md-3">
+                    <a data-ng-click="confirmAppendixDeletion(appendix.url)"
+                       class="btn-lg">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </div>
+            </div>
+            &nbsp;
+        </article>
+        <article id="addAppendix" class="proj-article"
+                 ng-show="project.state !== 'päättynyt' && project.state !== 'hylätty'">
+            <h4>Liitteen lisäys</h4>
+            <!-- TODO: Figure out how to make this form work through a
+            client-side service in order to enable proper acces contol: -->
+            <form name="appendixForm" class="form-horizonal proj-content"
+                  action="/api/projects/upload"
+                  method="post" enctype="multipart/form-data">
+                <input type="hidden" name="project_id" value="{{project._id}}">
+                <div class="form-group col-md-12">
+                    <label for="appendixTypeSelect"
+                           class="col-md-2 control-label">
+                        Kategoria
+                    </label>
+                    <select id="appendixTypeSelect" name="appendix_category"
+                            class="col-md-4"
+                            ng-model="project.appendix.category" required>
+                        <option value="">[Valitse yksi]</option>
+                        <option data-ng-repeat="category in appendixCategories">{{category}}</option>
+                    </select>
+                    <input type="text" name="appendix_custom_category"
+                           value="" class="col-md-6"
+                           ng-show="project.appendix.category === 'Muu...'"
+                           ng-model="project.appendix.customCategory">
+                </div>
+                <div class="col-md-12">
+                    <label for="appendixFileInput" class="col-md-2">
+                        Tiedosto
+                    </label>
+                    <input type="file" id="appendixFileInput"
+                           name="appendix_file" class="col-md-10"
+                           accept="application/msword,application/pdf,application/rtf,application/vnd.oasis.opendocument.text,text/plain,text/csv,image/*"
+                           ng-model="project.appendix.file">
+                </div>
+                <div class="form-group col-md-12">
+                    <button type="submit" id="btn-add-appendix"
+                            value="Submit" class="btn btn-default"
+                            ng-disabled="appendixForm.$invalid || (project.appendix.category === 'Muu...' && project.appendix.custom_category === '')">
+                        Tallenna
+                    </button>
+                </div>
+            </form>
+            &nbsp;
+        </article>
+        <article id="log" class="proj-article">
+            <h4>Muokkaukset</h4>
+            <section class="proj-content">
+                <ul ng-show="project.updated.length > 0">
+                    <li data-ng-repeat="update in project.updated">
+                        {{update.time| date: 'd.M.yyyy HH:mm'}};
+                        muokkaajana {{update.user}}
+                    </li>
+                </ul>
+                <div ng-show="project.updated.length === 0">
+                    Ei muokkauksia.
+                </div>
+            </section>
+        </article>
     </div>
 </article>
