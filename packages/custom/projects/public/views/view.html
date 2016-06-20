@@ -34,9 +34,9 @@
             <li>
                 <label><a href="#organisation">Järjestö</a></label>
             </li>
-            <!--            <li>
-                            <label><a href="#assessment">KIOS:n arvio</a></label>
-                        </li>-->
+            <li>
+                <label><a href="#assessment">KIOS:n arvio</a></label>
+            </li>
             <li>
                 <label><a href="#schedule">Aikataulu</a></label>
                 <ul>
@@ -413,6 +413,57 @@
                     </div>
                 </div>
                 &nbsp;
+            </article>
+            <article id="assessment" class="proj-article">
+                <h4>KIOS:n arvio</h4>
+                <div class="proj-content">
+                    <div ng-show="nonEmpty(project.fitness)"
+                         class="col-md-12" style="margin-bottom: 1em">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["fitness"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <span ng-bind-html="handleEmphasis(project.fitness)"></span>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.capacity)"
+                         class="col-md-12" style="margin-bottom: 1em">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["capacity"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <span ng-bind-html="handleEmphasis(project.capacity)"></span>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.feasibility)"
+                         class="col-md-12" style="margin-bottom: 1em">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["feasibility"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <span ng-bind-html="handleEmphasis(project.feasibility)"></span>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.effectiveness)"
+                         class="col-md-12" style="margin-bottom: 1em">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["effectiveness"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <span ng-bind-html="handleEmphasis(project.effectiveness)"></span>
+                        </div>
+                    </div>
+                    <div ng-show="nonEmpty(project.proposed_funding)"
+                         class="col-md-12">
+                        <div class="col-md-4 mini-header">
+                            {{fieldNames["proposed_funding"]}}
+                        </div>
+                        <div class="col-md-8">
+                            <span ng-bind-html="handleEmphasis(project.proposed_funding)"></span>
+                        </div>
+                    </div>
+                    &nbsp;
+                </div>
             </article>
             <article id="special_notes" class="proj-article"
                      ng-show="project.special_notes">

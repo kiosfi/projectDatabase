@@ -99,7 +99,7 @@ module.exports = function (Projects) {
         pieces = transformed.split("!!");
         var transformed = "";
         for (var i = 1, max = pieces.length; i < max; i += 2) {
-            pieces[i] = "\\subsection*{" + pieces[i] + "}";
+            pieces[i] = "\\subsubsection*{" + pieces[i] + "}";
         }
         pieces.forEach(function (x) {
             transformed += x;
@@ -108,7 +108,6 @@ module.exports = function (Projects) {
                 ? transformed.substring(1, transformed.length - 1)
                 : transformed;
     }
-    ;
 
     /**
      *
@@ -169,7 +168,6 @@ module.exports = function (Projects) {
             }
         });
     }
-    ;
 
     return {
         project: function (req, res, next, id) {
