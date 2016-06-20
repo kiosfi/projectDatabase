@@ -15,10 +15,11 @@ var mongoose = require('mongoose'),
         spawn = require("child_process").spawn,
         fs = require('fs'),
         mkdirp = require('mkdirp'),
+        crypto = require('crypto'),
         mime = require('mime'),
         numeral = require('numeral').language('fi', {
-            delimiters: {thousands: '\\,', decimal: ','}
-        }),
+    delimiters: {thousands: '\\,', decimal: ','}
+}),
         _ = require('lodash');
 
 numeral.language('fi');
@@ -109,6 +110,26 @@ module.exports = function (Projects) {
                 : transformed;
     }
 
+    function uniqueFilename(directory) {
+        var bytes;
+        var filename;
+        while (true) {
+            try {
+                bytes = crypto.randomBytes(18);
+            } catch (err) {
+                bytes = crypto.pseudoRandomBytes(18);
+            }
+            filename = bytes.toString("base64").replace(/\//g, "_");
+            try {
+                fs.accessSync(directory + "/" + filename);
+            } catch (e) {
+                // The file isn't accessible, so we assume it doesn't exist, and
+                // therefore the filename is unique.
+                return filename;
+            }
+        }
+    }
+
     /**
      *
      * @param {type} project
@@ -197,33 +218,33 @@ module.exports = function (Projects) {
                     .slice(-2);
             Project.find({project_ref: new RegExp('^' + prefix)})
                     .count(function (err, count) {
-                function pad(n) {
-                    if (n < 10) {
-                        return "00" + n
-                    } else if (n >= 10 && n < 100) {
-                        return "0" + n
-                    } else {
-                        return n
-                    }
-                }
+                        function pad(n) {
+                            if (n < 10) {
+                                return "00" + n
+                            } else if (n >= 10 && n < 100) {
+                                return "0" + n
+                            } else {
+                                return n
+                            }
+                        }
 
-                project.schema_version = 2;
-                project.project_ref = prefix + pad(count + 1);
-                project.organisation = req.body.organisation;
-                project.save(function (err) {
-                    if (err) {
-                        return res.status(500).json({
-                            error: 'Hanketta ei voi tallentaa'
+                        project.schema_version = 2;
+                        project.project_ref = prefix + pad(count + 1);
+                        project.organisation = req.body.organisation;
+                        project.save(function (err) {
+                            if (err) {
+                                return res.status(500).json({
+                                    error: 'Hanketta ei voi tallentaa'
+                                });
+                            }
+                            res.json(project);
                         });
-                    }
-                    res.json(project);
-                });
-                Projects.events.publish({
-                    action: 'created',
-                    url: config.hostname + '/projects/' + project._id,
-                    name: project.title
-                });
-            });
+                        Projects.events.publish({
+                            action: 'created',
+                            url: config.hostname + '/projects/' + project._id,
+                            name: project.title
+                        });
+                    });
         },
         /**
          * Loads a project for display.
@@ -734,9 +755,10 @@ module.exports = function (Projects) {
          */
         createRegRep: function (req, res) {
             var project = req.project;
-            var fileName = project.project_ref + "-reg-rep";
+//            var fileName = project.project_ref + "-reg-rep";
             var rootDir = "packages/custom/projects/";
             var outDir = rootDir + "data/" + project._id;
+            var fileName = uniqueFilename(outDir);
             var date = new Date();
             var checkbox = function (checked) {
                 return checked ? " \\makebox[0pt][l]{$\\square$}\\raisebox{.15ex}{\\hspace{0.1em}$\\checkmark$}" : " \\makebox[0pt][l]{$\\square$}\\hspace{0.3cm}";
@@ -811,7 +833,7 @@ module.exports = function (Projects) {
                                         project.funding.curr_local_unit)
                                 .replace("<funding.applied-curr-eur>",
                                         numeral(project.funding.applied_curr_eur)
-                                                .format("0,0.00"))
+                                        .format("0,0.00"))
                                 .replace("<titles.duration-months>", "Kesto")
                                 .replace("<duration-months>",
                                         filter(project.duration_months))
@@ -956,9 +978,10 @@ module.exports = function (Projects) {
         },
         createEndRep: function (req, res) {
             var project = req.project;
-            var fileName = project.project_ref + "-end-rep";
+//            var fileName = project.project_ref + "-end-rep";
             var rootDir = "packages/custom/projects/";
             var outDir = rootDir + "data/" + project._id;
+            var fileName = uniqueFilename(outDir);
             var date = new Date();
             var themes = "";
             project.approved.themes.forEach(function (theme) {
@@ -1005,11 +1028,11 @@ module.exports = function (Projects) {
             // The URL of the file contains only one "=" symbol (see
             // addAppendix):
             var financialReport = index >= 0
-            ? "\\section*{Talousraportti}\nTalousraportti on seuraavalla sivulla.\\newpage\n\\begin{figure}[H]\n\\centerline{\\includegraphics{"
+                    ? "\\section*{Talousraportti}\nTalousraportti on seuraavalla sivulla.\\newpage\n\\begin{figure}[H]\n\\centerline{\\includegraphics{"
                     + outDir + "/"
                     + project.appendices[index].url.split("=")[1] + "}}\n"
                     + "\\end{figure}\n"
-            : "";
+                    : "";
 
             var template = fs.readFileSync(
                     rootDir + "latex/end-report-template.tex", "utf8")
@@ -1036,7 +1059,7 @@ module.exports = function (Projects) {
                             "Myönnetty avustus")
                     .replace("<approved.granted-sum-eur>",
                             numeral(project.approved.granted_sum_eur)
-                                    .format("0,0.00"))
+                            .format("0,0.00"))
                     .replace("<titles.duration>", "Kesto")
                     .replace("<duration>",
                             filter(project.signed.signed_date) + "~--~"
@@ -1070,7 +1093,7 @@ module.exports = function (Projects) {
                             "Jäljellä oleva summa")
                     .replace("<funding.left-eur>",
                             numeral(project.funding.left_eur).format("0,0.00")
-                                    + " EUR")
+                            + " EUR")
                     .replace("<titles.end-report.audit.review>",
                             "Tilintarkastus")
                     .replace("<end-report.audit.review>",

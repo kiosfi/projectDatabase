@@ -40,6 +40,7 @@
     "consolidate": "latest",
     "cookie-parser": "latest",
     "core-js": "^1.2.3",
+    "crypto": "0.0.3",
     "del": "^2.0.2",
     "di": "https://registry.npmjs.org/di/-/di-0.0.1.tgz",
     "dom-serialize": "https://registry.npmjs.org/dom-serialize/-/dom-serialize-2.2.0.tgz",
