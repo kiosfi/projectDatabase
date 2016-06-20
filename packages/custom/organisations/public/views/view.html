@@ -1,217 +1,215 @@
 <section data-ng-controller="OrganisationsController" data-ng-init="findOne()">
-    <div>
-        <div id="header">
-            <h1><span class="name">{{organisation.name}}</span>
-                <span>
-                    <a class="btn-lg" id="delete"
-                       data-ng-click="confirm(organisation);">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </a>
-                    <a ng-href="/organisations/{{organisation._id}}/edit"
-                       class="btn-lg" id="edit">
-                        <span class="glyphicon glyphicon-edit"></span>
-                    </a>
-                </span>
-            </h1>
-            <hr>
-        </div>
-        <ul id="menu" class="nav nav-list org-nav">
-            <li>
-                <label><a href="#header">Järjestö</a></label>
-                <ul>
-                    <li><a href="#summary">Perustiedot</a></li>
-                    <li><a href="#legalStatus">Hallintomalli ja henkilöstö</a></li>
-                    <li><a href="#description">Tavoitteet ja toimintatavat</a></li>
-                    <li><a href="#connections">Yhteydet</a></li>
-                    <li><a href="#bankInfo">Tilitiedot</a></li>
-                    <li><a href="#prevApp">Aiemmat hakemukset</a></li>
-                    <li><a href="#otherDonors">Taloustilanne</a></li>
-                    <li><a href="#background">Taustatiedot</a></li>
-                    <li ng-show="organisation.special_notes">
-                        <a href="#special_notes">Erityishuomioita</a>
-                    </li>
-                </ul>
-                <label><a href="#log">Muokkaukset</a></label>
-            </li>
-        </ul>
-        <article id="summary" class="org-article">
-            <h4>Perustiedot</h4>
-            <div class="org-content">
-                <div class="col-md-12">
-                    <div class="col-md-3 mini-header">Edustaja</div>
-                    <div class="col-md-9">
-                        {{organisation.representative.name}}<br>
-                        {{organisation.representative.email}}<br>
-                        {{organisation.representative.phone}}
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-3 mini-header">
-                        Vastuullinen johtaja
-                    </div>
-                    <div class="col-md-9">
-                        {{organisation.exec_manager}}
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-3 mini-header">
-                        Viestintävastaava
-                    </div>
-                    <div class="col-md-9">
-                        {{organisation.communications_rep}}
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-3 mini-header">Osoite</div>
-                    <div class="col-md-9">
-                        {{organisation.address.street}}<br>
-                        {{organisation.address.postal_code}}
-                        {{organisation.address.city}}<br>
-                        {{organisation.address.country}}
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-3 mini-header">Puhelinnumero</div>
-                    <div class="col-md-9">{{organisation.tel}}</div>
-
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-3 mini-header">Sähköposti</div>
-                    <div class="col-md-9">
-                        <a href="mailto:{{organisation.email}}">
-                            {{organisation.email}}
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-3 mini-header">Websivut</div>
-                    <div class="col-md-9">
-                        <a href="{{
-                                    organisation.website.startsWith('http://') ?
-                                            organisation.websiet :
-                                            'http://' + organisation.website}}">
-                            {{organisation.website}}
-                        </a>
-                    </div>
-                </div>
-            </div>
-            &nbsp;
-        </article>
-        <article id="bankInfo" class="org-article">
-            <h4>Tilitiedot</h4>
-            <div class="org-content">
-                <div class="col-md-12">
-                    <div class="col-md-3 mini-header">Tilin haltija</div>
-                    <div class="col-md-9">
-                        {{organisation.bank_account.holder_name}}
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-3 mini-header">
-                        Tilinumero (IBAN)
-                    </div>
-                    <div class="col-md-9">
-                        {{organisation.bank_account.iban}}
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-3 mini-header">SWIFT</div>
-                    <div class="col-md-9">
-                        {{organisation.bank_account.swift}}
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-3 mini-header">
-                        Pankin yhteystiedot
-                    </div>
-                    <div class="col-md-9">
-                        {{organisation.bank_account.bank_contact_details}}
-                    </div>
-                </div>
-            </div>
-            &nbsp;
-        </article>
-        <article id="prevApp" class="org-article"
-                 data-ng-init="findOrgProjects()">
-            <h4>KIOS:lta rahoitusta hakeneet hankkeet</h4>
-            <div class="org-content">
-                <div data-ng-repeat="project in orgProjects"
-                     class="col-md-12">
-                    <div class="col-md-6 mini-header">
-                        <a data-ng-href="/projects/{{project._id}}">
-                            {{project.title}}
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        {{project.approved.granted_sum_eur
-                                                ? numberToString(project.approved.granted_sum_eur)
-                                                + " EUR" : "-"}}
-                    </div>
-                </div>
-                <div data-ng-if="!orgProjects.length">
-                    Ei rahoitusta hakeneita hankkeita
-                </div>
-            </div>
-            &nbsp;
-        </article>
-        <article id="legalStatus" class="org-article">
-            <h4>Hallintomalli ja henkilöstö</h4>
-            <section class="org-content">
-                <p>{{organisation.legal_status}}</p>
-            </section>
-        </article>
-        <article id="description" class="org-article">
-            <h4>Tavoitteet ja keskeiset toimintatavat</h4>
-            <section class="org-content">
-                <p>{{organisation.description}}</p>
-            </section>
-        </article>
-        <article id="connections" class="org-article">
-            <h4>Kansalliset yhteydet</h4>
-            <section class="org-content">
-                {{organisation.nat_local_links}}
-            </section>
-            <h4>Kansainväliset yhteydet</h4>
-            <section class="org-content">
-                {{organisation.int_links}}
-            </section>
-        </article>
-        <article id="otherDonors" class="org-article">
-            <h4>Muut rahoittajat ja budjetti</h4>
-            <section class="org-content">
-                <p>{{organisation.other_funding_budget}}</p>
-            </section>
-            <h4>Taloushallinto ja tilintarkastus</h4>
-            <section class="org-content">
-                <p>{{organisation.accounting_audit}}</p>
-            </section>
-        </article>
-        <article id="background" class="org-article">
-            <h4>Oleelliset taustatiedot</h4>
-            <section class="org-content">
-                <p>{{organisation.background}}</p>
-            </section>
-        </article>
-        <article id="special_notes" class="org-article"
-                 ng-show="organisation.special_notes">
-            <h4>Erityishuomioita</h4>
-            <section class="org-content">
-                <p>{{organisation.special_notes}}</p>
-            </section>
-        </article>
-        <article id="log" class="org-article">
-            <h4>Muokkaukset</h4>
-            <section class="org-content">
-                <ul ng-show="organisation.updated.length > 0">
-                    <li data-ng-repeat="update in organisation.updated">
-                        {{update.time| date: 'dd.MM.yyyy HH:mm'}},
-                        muokkaaja: {{update.user}}
-                    </li>
-                </ul>
-                <div ng-show="organisation.updated.length === 0">
-                    Ei muokkauksia.
-                </div>
-            </section>
-        </article>
+    <div id="header">
+        <h1><span class="name">{{organisation.name}}</span>
+            <span>
+                <a class="btn-lg" id="delete"
+                   data-ng-click="confirm(organisation);">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+                <a ng-href="/organisations/{{organisation._id}}/edit"
+                   class="btn-lg" id="edit">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+            </span>
+        </h1>
+        <hr>
     </div>
+    <ul id="menu" class="nav nav-list org-nav">
+        <li>
+            <label><a href="#header">Järjestö</a></label>
+            <ul>
+                <li><a href="#summary">Perustiedot</a></li>
+                <li><a href="#legalStatus">Hallintomalli ja henkilöstö</a></li>
+                <li><a href="#description">Tavoitteet ja toimintatavat</a></li>
+                <li><a href="#connections">Yhteydet</a></li>
+                <li><a href="#bankInfo">Tilitiedot</a></li>
+                <li><a href="#prevApp">Aiemmat hakemukset</a></li>
+                <li><a href="#otherDonors">Taloustilanne</a></li>
+                <li><a href="#background">Taustatiedot</a></li>
+                <li ng-show="organisation.special_notes">
+                    <a href="#special_notes">Erityishuomioita</a>
+                </li>
+            </ul>
+            <label><a href="#log">Muokkaukset</a></label>
+        </li>
+    </ul>
+    <article id="summary" class="org-article">
+        <h4>Perustiedot</h4>
+        <div class="org-content">
+            <div class="col-md-12">
+                <div class="col-md-3 mini-header">Edustaja</div>
+                <div class="col-md-9">
+                    {{organisation.representative.name}}<br>
+                    {{organisation.representative.email}}<br>
+                    {{organisation.representative.phone}}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3 mini-header">
+                    Vastuullinen johtaja
+                </div>
+                <div class="col-md-9">
+                    {{organisation.exec_manager}}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3 mini-header">
+                    Viestintävastaava
+                </div>
+                <div class="col-md-9">
+                    {{organisation.communications_rep}}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3 mini-header">Osoite</div>
+                <div class="col-md-9">
+                    {{organisation.address.street}}<br>
+                    {{organisation.address.postal_code}}
+                    {{organisation.address.city}}<br>
+                    {{organisation.address.country}}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3 mini-header">Puhelinnumero</div>
+                <div class="col-md-9">{{organisation.tel}}</div>
+
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3 mini-header">Sähköposti</div>
+                <div class="col-md-9">
+                    <a href="mailto:{{organisation.email}}">
+                        {{organisation.email}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3 mini-header">Websivut</div>
+                <div class="col-md-9">
+                    <a href="{{
+                                organisation.website.startsWith('http://') ?
+                                        organisation.websiet :
+                                        'http://' + organisation.website}}">
+                        {{organisation.website}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        &nbsp;
+    </article>
+    <article id="bankInfo" class="org-article">
+        <h4>Tilitiedot</h4>
+        <div class="org-content">
+            <div class="col-md-12">
+                <div class="col-md-3 mini-header">Tilin haltija</div>
+                <div class="col-md-9">
+                    {{organisation.bank_account.holder_name}}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3 mini-header">
+                    Tilinumero (IBAN)
+                </div>
+                <div class="col-md-9">
+                    {{organisation.bank_account.iban}}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3 mini-header">SWIFT</div>
+                <div class="col-md-9">
+                    {{organisation.bank_account.swift}}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3 mini-header">
+                    Pankin yhteystiedot
+                </div>
+                <div class="col-md-9">
+                    {{organisation.bank_account.bank_contact_details}}
+                </div>
+            </div>
+        </div>
+        &nbsp;
+    </article>
+    <article id="prevApp" class="org-article"
+             data-ng-init="findOrgProjects()">
+        <h4>KIOS:lta rahoitusta hakeneet hankkeet</h4>
+        <div class="org-content">
+            <div data-ng-repeat="project in orgProjects"
+                 class="col-md-12">
+                <div class="col-md-6 mini-header">
+                    <a data-ng-href="/projects/{{project._id}}">
+                        {{project.title}}
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    {{project.approved.granted_sum_eur
+                                            ? numberToString(project.approved.granted_sum_eur)
+                                            + " EUR" : "-"}}
+                </div>
+            </div>
+            <div data-ng-if="!orgProjects.length">
+                Ei rahoitusta hakeneita hankkeita
+            </div>
+        </div>
+        &nbsp;
+    </article>
+    <article id="legalStatus" class="org-article">
+        <h4>Hallintomalli ja henkilöstö</h4>
+        <section class="org-content">
+            <p>{{organisation.legal_status}}</p>
+        </section>
+    </article>
+    <article id="description" class="org-article">
+        <h4>Tavoitteet ja keskeiset toimintatavat</h4>
+        <section class="org-content">
+            <p>{{organisation.description}}</p>
+        </section>
+    </article>
+    <article id="connections" class="org-article">
+        <h4>Kansalliset yhteydet</h4>
+        <section class="org-content">
+            {{organisation.nat_local_links}}
+        </section>
+        <h4>Kansainväliset yhteydet</h4>
+        <section class="org-content">
+            {{organisation.int_links}}
+        </section>
+    </article>
+    <article id="otherDonors" class="org-article">
+        <h4>Muut rahoittajat ja budjetti</h4>
+        <section class="org-content">
+            <p>{{organisation.other_funding_budget}}</p>
+        </section>
+        <h4>Taloushallinto ja tilintarkastus</h4>
+        <section class="org-content">
+            <p>{{organisation.accounting_audit}}</p>
+        </section>
+    </article>
+    <article id="background" class="org-article">
+        <h4>Oleelliset taustatiedot</h4>
+        <section class="org-content">
+            <p>{{organisation.background}}</p>
+        </section>
+    </article>
+    <article id="special_notes" class="org-article"
+             ng-show="organisation.special_notes">
+        <h4>Erityishuomioita</h4>
+        <section class="org-content">
+            <p>{{organisation.special_notes}}</p>
+        </section>
+    </article>
+    <article id="log" class="org-article">
+        <h4>Muokkaukset</h4>
+        <section class="org-content">
+            <ul ng-show="organisation.updated.length > 0">
+                <li data-ng-repeat="update in organisation.updated">
+                    {{update.time| date: 'dd.MM.yyyy HH:mm'}},
+                    muokkaaja: {{update.user}}
+                </li>
+            </ul>
+            <div ng-show="organisation.updated.length === 0">
+                Ei muokkauksia.
+            </div>
+        </section>
+    </article>
 </section>
