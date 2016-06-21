@@ -110,6 +110,13 @@ module.exports = function (Projects) {
                 : transformed;
     }
 
+    /**
+     * Creates a unique (i.e. unused) file name in the given directory.
+     *
+     * @param {String} directory    The directory to be checked.
+     * @returns {String}            A non-existent name for a file (excluding
+     * file type extension) inside the given directory.
+     */
     function uniqueFilename(directory) {
         var bytes;
         var filename;
