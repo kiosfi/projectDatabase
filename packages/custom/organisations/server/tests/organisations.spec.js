@@ -24,9 +24,6 @@ describe('<Unit Test>', function () {
         beforeEach(function (done) {
             this.timeout(10000);
 
-            /**
-             * TODO: Check compliance with the current schema version.
-             */
             bank_account = new BankAccount({
                 "bank_contact_details": "Branch, address",
                 "iban": "abcdefg1234",
