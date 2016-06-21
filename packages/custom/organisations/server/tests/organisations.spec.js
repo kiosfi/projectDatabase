@@ -24,6 +24,9 @@ describe('<Unit Test>', function () {
         beforeEach(function (done) {
             this.timeout(10000);
 
+            /**
+             * TODO: Check compliance with the current schema version.
+             */
             bank_account = new BankAccount({
                 "bank_contact_details": "Branch, address",
                 "iban": "abcdefg1234",
@@ -31,6 +34,7 @@ describe('<Unit Test>', function () {
                 "holder_name": "John Smith"});
             bank_account.save();
             organisation = new Organisation({
+                "schema_version": 3,
                 "name": "Human rights org",
                 "representative": {
                     "name": "Representative",
@@ -55,9 +59,11 @@ describe('<Unit Test>', function () {
                 "description": "description for organisation .....",
                 "other_funding_budget": "other funders",
                 "accounting_audit": "accounting",
-                "bank_account": bank_account});
+                "bank_account": bank_account,
+                "background": "Nulla pretium feugiat dolor, quis tempor enim dignissim at."});
             organisation.save();
             organisation2 = new Organisation({
+                "schema_version": 3,
                 "name": "Children's Rights Org",
                 "representative": {
                     "name": "Representative2",
@@ -82,9 +88,11 @@ describe('<Unit Test>', function () {
                 "description": "description for organisation .....",
                 "other_funding_budget": "other funders",
                 "accounting_audit": "audit",
-                "bank_account": bank_account});
+                "bank_account": bank_account,
+                "background": "Sed tempus lacus a libero finibus, id blandit odio maximus."});
             organisation2.save();
             organisation3 = new Organisation({
+                "schema_version": 3,
                 "name": "Women's Rights Org",
                 "representative": {
                     "name": "Representative3",
@@ -109,7 +117,8 @@ describe('<Unit Test>', function () {
                 "description": "description for organisation .....",
                 "other_funding_budget": "other funders",
                 "accounting_audit": "audit",
-                "bank_account": bank_account});
+                "bank_account": bank_account,
+                "background": "Quisque eget nisi a ex porttitor ultricies quis eget sem."});
             organisation3.save();
             done();
         });
