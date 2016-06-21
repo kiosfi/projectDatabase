@@ -17,7 +17,8 @@ var OrganisationSchema = new Schema({
      */
     schema_version: {   // Current version is 3.
         type: Number,
-        required: true
+        required: true,
+        default: 1
     },
     representative: {
         name: {
