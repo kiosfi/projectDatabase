@@ -48,7 +48,7 @@
             </li>
             <li ng-show="project.approved.granted_sum_eur">
                 <label><a href="#payments">Maksatus</a></label>
-                <ul ng-show="project.signed.date && project.state !== 'päättynyt' && project.state !== 'hylätty'">
+                <ul ng-show="project.signed.date">
                     <li>
                         <a href="#addPayment">Maksun lisäys</a>
                     </li>
@@ -61,7 +61,7 @@
                     <li ng-show="project.appendices.length > 0">
                         <a href="#appendices">Tallennetut liitteet</a>
                     </li>
-                    <li ng-show="project.state !== 'päättynyt' && project.state !== 'hylätty'">
+                    <li>
                         <a href="#addAppendix">Liitteen lisäys</a>
                     </li>
                 </ul>
@@ -874,8 +874,7 @@
             &nbsp;
         </article>
         <article id="addPayment"
-                 ng-show="project.signed.date && project.state !== 'päättynyt' && project.state !== 'hylätty'"
-                 class="proj-article">
+                 ng-show="project.signed.date" class="proj-article">
             <h4>Maksutiedon lisäys</h4>
             <form name="paymentForm" class="form-horizonal proj-content"
                   role="form"
@@ -1078,8 +1077,7 @@
             </div>
             &nbsp;
         </article>
-        <article id="addAppendix" class="proj-article"
-                 ng-show="project.state !== 'päättynyt' && project.state !== 'hylätty'">
+        <article id="addAppendix" class="proj-article">
             <h4>Liitteen lisäys</h4>
             <!-- TODO: Figure out how to make this form work through a
             client-side service in order to enable proper acces contol: -->
