@@ -110,82 +110,82 @@
             <article id="summary" class="col-md-6">
                 <h4>Perustiedot</h4>
                 <div class="proj-content col-md-12">
-                    <div class="col-md-6 mini-header">
+                    <div class="col-md-5 mini-header">
                         {{fieldNames["security_level"]}}
                     </div>
-                    <div class="col-md-6">{{project.security_level}}</div>
+                    <div class="col-md-7">{{project.security_level}}</div>
                 </div>
                 <div ng-show="nonEmpty(project.country)"
                      class="proj-content col-md-12">
-                    <div class="col-md-6 mini-header">
+                    <div class="col-md-5 mini-header">
                         {{fieldNames["country"]}}
                     </div>
-                    <div class="col-md-6">{{project.country}}</div>
+                    <div class="col-md-7">{{project.country}}</div>
                 </div>
                 <div ng-show="nonEmpty(project.region)"
                      class="proj-content col-md-12">
-                    <div class="col-md-6 mini-header">
+                    <div class="col-md-5 mini-header">
                         {{fieldNames["region"]}}
                     </div>
-                    <div class="col-md-6">{{project.region}}</div>
+                    <div class="col-md-7">{{project.region}}</div>
                 </div>
                 <div ng-show="nonEmpty(project.dac)"
                      class="proj-content col-md-12">
-                    <div class="col-md-6 mini-header">
+                    <div class="col-md-5 mini-header">
                         {{fieldNames["dac"]}}
                     </div>
-                    <div class="col-md-6">{{project.dac}}</div>
+                    <div class="col-md-7">{{project.dac}}</div>
                 </div>
                 <div ng-show="nonEmpty(project.state)"
                      class="proj-content col-md-12">
-                    <div class="col-md-6 mini-header">
+                    <div class="col-md-5 mini-header">
                         {{fieldNames["state"]}}
                     </div>
-                    <div class="col-md-6">{{project.state}}</div>
+                    <div class="col-md-7">{{project.state}}</div>
                 </div>
                 <div class="proj-content col-md-12">
-                    <div class="col-md-6 mini-header">
+                    <div class="col-md-5 mini-header">
                         {{fieldNames["reg_date"]}}
                     </div>
-                    <div class="col-md-6">{{project.reg_date| date:'d.M.yyyy': '+0200'}}</div>
+                    <div class="col-md-7">{{project.reg_date| date:'d.M.yyyy': '+0200'}}</div>
                 </div>
                 <div ng-show="project.approved.granted_sum_eur"
                      class="ng-hide proj-content col-md-12">
-                    <div class="col-md-6 mini-header">
+                    <div class="col-md-5 mini-header">
                         {{fieldNames["approved_granted_sum_eur"]}}
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         {{numberToString(project.approved.granted_sum_eur)}}
                     </div>
                 </div>
                 <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
                                         project.funding.applied_curr_eur >= 0"
                      class="ng-hide proj-content col-md-12">
-                    <div class="col-md-6 mini-header">
+                    <div class="col-md-5 mini-header">
                         {{fieldNames["funding_applied_curr_eur"]}}
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         {{numberToString(project.funding.applied_curr_eur)}}
                     </div>
                 </div>
                 <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
                                         project.funding.applied_curr_local"
                      class="ng-hide proj-content col-md-12">
-                    <div class="col-md-6 mini-header">
+                    <div class="col-md-5 mini-header">
                         {{fieldNames["funding_applied_curr_local"]}}
                         ({{project.funding.curr_local_unit ?
                             project.funding.curr_local_unit : "paik. val."}})
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         {{numberToString(project.funding.applied_curr_local)}}
                     </div>
                 </div>
                 <div ng-show="project.duration_months >= 0"
                      class="proj-content col-md-12">
-                    <div class="col-md-6 mini-header">
+                    <div class="col-md-5 mini-header">
                         {{fieldNames["duration_months"]}}
                     </div>
-                    <div class="col-md-6">{{project.duration_months}}</div>
+                    <div class="col-md-7">{{project.duration_months}}</div>
                 </div>
                 &nbsp;
             </article>

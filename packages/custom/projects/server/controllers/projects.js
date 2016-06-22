@@ -944,7 +944,8 @@ module.exports = function (Projects) {
                                         "Riskinhallinnan kuvaus")
                                 .replace("<risk-control>",
                                         filter(project.risk_control))
-                                .replace("<titles.indicators>", "Indikaattorit")
+                                .replace("<titles.indicators>",
+                                        "Tulosten saavuttamisen todentaminen")
                                 .replace("<indicators>",
                                         filter(project.indicators))
                                 .replace("<titles.reporting-evaluation>",

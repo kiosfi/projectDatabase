@@ -235,12 +235,14 @@ var ProjectSchema = new Schema({
         trim: true
     },
     /**
-     * The current Finnish name for this field is "Indikaattotit".
+     * The current Finnish name for this field is "Tulosten saavuttamisen
+     * todentaminen" it was earlier known as "Indikaattorit" and before that its
+     * name was "Tavoitteiden saavuttamisen mittaaminen".
      *
      * The name of this field was changed from <tt>sustainability_risks</tt> to
      * <tt>indicators</tt> in schema version 9.
      */
-    indicators: {               // "Indikaattorit"
+    indicators: {               // "Tulosten saavuttamisen todentaminen"
         type: String,
         trim: true
     },
