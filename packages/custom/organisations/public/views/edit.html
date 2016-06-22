@@ -174,8 +174,7 @@
         <fieldset>
             <legend>Lisätiedot</legend>
             <div class="col-md-12">
-                <div class="form-group col-md-6"
-                     ng-class="{'has-error': orgEditForm.orgExecMan.$invalid}">
+                <div class="form-group col-md-6">
                     <label class="col-md-3 control-label">
                         Vastuullinen johtaja
                     </label>
@@ -183,18 +182,10 @@
                         <input name="orgExecMan" type="text"
                                class="form-control"
                                data-ng-model="organisation.exec_manager"
-                               id="orgExecMan" required>
-                        <div ng-show="orgEditForm.orgExecMan.$invalid"
-                             class="help-block">
-                            <p ng-show="orgEditForm.orgExecMan.$error.required"
-                               class="help-block">
-                                Kenttä on pakollinen
-                            </p>
-                        </div>
+                               id="orgExecMan">
                     </div>
                 </div>
-                <div class="form-group col-md-6"
-                     ng-class="{'has-error': orgEditForm.orgCommRep.$invalid}">
+                <div class="form-group col-md-6">
                     <label class="col-md-3 control-label">
                         Viestintävastaava
                     </label>
@@ -202,14 +193,7 @@
                         <input name="orgCommRep" type="text"
                                class="form-control"
                                data-ng-model="organisation.communications_rep"
-                               id="orgCommRep" required>
-                        <div ng-show="orgEditForm.orgCommRep.$invalid"
-                             class="help-block">
-                            <p ng-show="orgEditForm.orgCommRep.$error.required"
-                               class="help-block">
-                                Kenttä on pakollinen
-                            </p>
-                        </div>
+                               id="orgCommRep">
                     </div>
                 </div>
             </div>
@@ -273,23 +257,15 @@
                         </textarea>
                     </div>
                 </div>
-                <div class="form-group col-md-6"
-                     ng-class="{'has-error': orgEditForm.orgAcct.$invalid}">
+                <div class="form-group col-md-6">
                     <label for="orgAcct" class="col-md-3 control-label">
                         Taloushallinto ja Tilintarkastus
                     </label>
                     <div class="col-md-9">
                         <textarea name="orgAcct"
                                   data-ng-model="organisation.accounting_audit"
-                            id="orgAcct" class="form-control" required>
+                            id="orgAcct" class="form-control">
                         </textarea>
-                        <div ng-show="orgEditForm.orgAcct.$invalid"
-                             class="help-block">
-                            <p ng-show="orgEditForm.orgAcct.$error.required"
-                               class="help-block">
-                                Kenttä on pakollinen
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
