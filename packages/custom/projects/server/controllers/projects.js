@@ -937,7 +937,7 @@ module.exports = function (Projects) {
                                 .replace("<vulnerable-groups>",
                                         filter(project.vulnerable_groups))
                                 .replace("<titles.planned-results>",
-                                        "Odotettavissa olevat keskeiset tulokset")
+                                        "Tulostavoitteet")
                                 .replace("<planned-results>",
                                         filter(project.planned_results))
                                 .replace("<titles.risk-control>",

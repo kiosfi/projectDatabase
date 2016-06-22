@@ -217,11 +217,11 @@ var ProjectSchema = new Schema({
     },
     /**
      * The planned results for the project. The Finnish name of this field is
-     * "Odotettavissa olevat keskeiset tulokset". This field was added in schema
-     * version 9.
+     * "Tulostavoitteet". It was earlier known as "Odotettavissa olevat
+     * keskeiset tulokset". This field was added in schema version 9.
      */
     planned_results: {
-        type: String,           // "Odotettavissa olevat keskeiset tulokset"
+        type: String,           // "Tulostavoitteet"
         trim: true
     },
     /**
