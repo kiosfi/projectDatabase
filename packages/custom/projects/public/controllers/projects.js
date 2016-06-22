@@ -268,7 +268,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     angular.forEach($scope.int_reports, function (report) {
                         project.intermediary_reports.push({
                             methods: report.methods,
-                            overall_rating_kios: report.overall_rating_kios,
+                            overall_rating_KIOSi report.overall_rating_kios,
                             objectives: report.objectives,
                             communication: report.communication,
                             evaluation: report.evaluation,
@@ -394,7 +394,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     angular.forEach(project.intermediary_reports, function (obj) {
                         var date = new Date(obj.date_approved);
 
-                        $scope.int_reports.push({methods: obj.methods, overall_rating_kios: obj.overall_rating_kios, objectives: obj.objectives,
+                        $scope.int_reports.push({methods: obj.methods, overall_rating_KIOSi obj.overall_rating_kios, objectives: obj.objectives,
                             comments: obj.comments, approved_by: obj.approved_by, date_day: date.getDate(),
                             date_month: date.getMonth() + 1, date_year: date.getFullYear(), reportNumber: obj.reportNumber, date: obj.date,
                             user: obj.user});

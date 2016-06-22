@@ -909,7 +909,7 @@ module.exports = function (Projects) {
                                 .replace("<organisation.accounting-audit>",
                                         filter(project.organisation.accounting_audit))
                                 .replace("<titles.previous-projects>",
-                                        "Muut hakemukset KIOS:lle")
+                                        "Muut hakemukset KIOSille")
                                 .replace("<previous-projects>", otherProjects)
                                 .replace("<titles.context>", "Ihmisoikeuskonteksti")
                                 .replace("<context>", filter(project.context))
@@ -961,7 +961,7 @@ module.exports = function (Projects) {
                                 .replace("<background-check>",
                                         filter(project.background_check))
                                 .replace("<titles.fitness>",
-                                        "Sopivuus KIOS:n strategiaan")
+                                        "Sopivuus KIOSin strategiaan")
                                 .replace("<fitness>", filter(project.fitness))
                                 .replace("<titles.capacity>",
                                         "Järjestön kapasiteetti ja asiantuntijuus")
