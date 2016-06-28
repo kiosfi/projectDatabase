@@ -672,8 +672,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          * @param {type} url   The URL for appendix access page.
          * @returns {undefined}
          */
-        $scope.confirmAppendixDeletion = function (url) {
-            if (confirm("Haluatko varmasti poistaa liitteen?")) {
+        $scope.confirmAppendixDeletion = function (name, url) {
+            if (confirm("Haluatko varmasti poistaa liitteen \"" + name + "\"?")) {
                 $window.location = url + "&action=delete";
             }
         };

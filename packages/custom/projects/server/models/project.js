@@ -567,6 +567,14 @@ var ProjectSchema = new Schema({
             type: String,
             trim: true
         },
+//        /**
+//         * The date when the board was notified. This field was added in the
+//         * schema version 10.
+//         */
+//        board_notified: {       // "Hallitukselle tiedoksi"
+//            type: String,
+//            trim: true
+//        },
         /**
          * Since schema version 3, this file is used for the proposed end
          * resolution for the project. The name of this field was changed from

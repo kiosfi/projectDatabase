@@ -389,6 +389,14 @@
                         <span ng-bind-html="handleEmphasis(project.approved.decision)"></span>
                     </div>
                 </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames["approved_approved_date"]}}
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.approved.approved_date| date : 'dd.MM.yyyy': '+0200'}}
+                    </div>
+                </div>
             </td>
         </tr>
     </table>

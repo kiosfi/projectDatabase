@@ -800,7 +800,7 @@
                          data-ng-repeat="rej in addedRejections">
                         <select name="rejSelect" id="rejSelect"
                                 data-ng-model="rej.rejection">
-                            <option data-ng-repeat="rejCat in rejcategories"
+                            <option data-ng-repeat="rejCat in rejCategories"
                                     value="{{rejCat}}">{{rejCat}}</option>
                         </select>
                     </div>
@@ -1155,6 +1155,57 @@
                 </a>
             </legend>
             <div ng-show="showEndRepDetails">
+                <div class="form-group col-md-6">
+                    <label class="col-md-4" for="end_board_meeting">
+                        {{fieldNames["end_report_board_meeting"]}}
+                    </label>
+                    <div class="col-md-8">
+                        <input id="end_board_meeting" name="end_board_meeting"
+                               data-ng-model="project.end_report.board_meeting"
+                               class="form-control">
+                    </div>
+                </div>
+<!--                <div class="form-group col-md-6">
+                    <label for="board_notified_date" class="col-md-3">
+                        Hallitukselle tiedoksi
+                    </label>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': projectEditForm.board_notified_day.$invalid}">
+                        <input name="board_notified_day" type="number"
+                               class="form-control" data-ng-model="board_notified_day"
+                               id="board_notified_day" placeholder="p" min="1">
+                        <div ng-show="projectEditForm.board_notified_day.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.board_notified_day.$error.number">
+                                Päivän täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': projectEditForm.board_notified_month.$invalid}">
+                        <input name="board_notified_month" type="number"
+                               class="form-control" data-ng-model="board_notified_month"
+                               id="board_notified_month" placeholder="k" min="1">
+                        <div ng-show="projectEditForm.board_notified_month.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.board_notified_month.$error.number">
+                                Kuukauden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': projectEditForm.board_notified_year.$invalid}">
+                        <input name="board_notified_year" type="number"
+                               class="form-control" data-ng-model="board_notified_year"
+                               id="board_notified_year" placeholder="vvvv" min="1">
+                        <div ng-show="projectEditForm.board_notified_year.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.board_notified_year.$error.number">
+                                Vuoden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                </div>-->
                 <div class="form-group col-md-12">
                     <label for="end_budget" class="col-md-4">
                         {{fieldNames["end_report_budget"]}}
@@ -1343,18 +1394,9 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6">
-                    <label class="col-md-4" for="end_board_meeting">
-                        {{fieldNames["end_report_board_meeting"]}}
-                    </label>
-                    <div class="col-md-8">
-                        <input id="end_board_meeting" name="end_board_meeting"
-                               data-ng-model="project.end_report.board_meeting"
-                               class="form-control">
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
                     <label for="audit_day" class="col-md-3">
                         Hyväksymispvm
+                        <!--{{fieldNames["end_report_approved_date"]}}-->
                     </label>
                     <div class="col-md-3"
                          ng-class="{'has-error': projectEditForm.er_approved_day.$invalid}">
@@ -1405,62 +1447,24 @@
                 </a>
             </legend>
             <div ng-show="showEndedDetails">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     <div>
-                        <label for="endDay" class="col-md-2 control-label">
-                            {{fieldNames["ended_end_date"]}}
-                        </label>
-                        <div class="col-md-2" style="float:left;">
-                            <input name="endDay" type="number"
-                                   class="form-control" data-ng-model="end_day"
-                                   id="endDay" placeholder="p">
-                        </div>
-                        <div class="col-md-2" style="float:left;">
-                            <input name="endMonth" type="number"
-                                   class="form-control"
-                                   data-ng-model="end_month" id="endMonth"
-                                   placeholder="k">
-                        </div>
-                        <div class="col-md-2" style="float:left;">
-                            <input name="endYear" type="number"
-                                   class="form-control" data-ng-model="end_year"
-                                   id="endYear" placeholder="vvvv">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="approved_by" class="col-md-2">
-                        {{fieldNames["ended_approved_by"]}}
-                    </label>
-                    <div class="col-md-10">
-                        <select id="approved_by"
-                                data-ng-model="project.ended.approved_by"
-                                class='form-control'>
-                            <option value="toiminnanjohtaja">
-                                Toiminnanjohtaja
-                            </option>
-                            <option value="hallitus">Hallitus</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <div>
-                        <label for="notifiedDay" class="col-md-2">
+                        <label for="notifiedDay" class="col-md-3">
                             {{fieldNames["ended_board_notified"]}}
                         </label>
-                        <div class="col-md-2" style="float:left;">
+                        <div class="col-md-3">
                             <input name="endNotifiedDay" type="number"
                                    class="form-control"
                                    data-ng-model="end_notified_day"
                                    id="notifiedDay" placeholder="p">
                         </div>
-                        <div class="col-md-2" style="float:left;">
+                        <div class="col-md-3">
                             <input name="endNotifiedMonth" type="number"
                                    class="form-control"
                                    data-ng-model="end_notified_month"
                                    id="notifiedMonth" placeholder="k">
                         </div>
-                        <div class="col-md-2" style="float:left;">
+                        <div class="col-md-3">
                             <input name="endNotifiedYear" type="number"
                                    class="form-control"
                                    data-ng-model="end_notified_year"
@@ -1468,7 +1472,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     <label for="comments" class="col-md-2">
                         {{fieldNames["ended_other_comments"]}}
                     </label>
@@ -1478,6 +1482,45 @@
                                   data-ng-model="project.ended.other_comments"
                                   id="comments">
                         </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div>
+                        <label for="endDay" class="col-md-3 control-label">
+                            Päättymispvm
+                            <!--{{fieldNames["ended_end_date"]}}-->
+                        </label>
+                        <div class="col-md-3">
+                            <input name="endDay" type="number"
+                                   class="form-control" data-ng-model="end_day"
+                                   id="endDay" placeholder="p">
+                        </div>
+                        <div class="col-md-3">
+                            <input name="endMonth" type="number"
+                                   class="form-control"
+                                   data-ng-model="end_month" id="endMonth"
+                                   placeholder="k">
+                        </div>
+                        <div class="col-md-3">
+                            <input name="endYear" type="number"
+                                   class="form-control" data-ng-model="end_year"
+                                   id="endYear" placeholder="vvvv">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="approved_by" class="col-md-4">
+                        {{fieldNames["ended_approved_by"]}}
+                    </label>
+                    <div class="col-md-8">
+                        <select id="approved_by"
+                                data-ng-model="project.ended.approved_by"
+                                class='form-control'>
+                            <option value="toiminnanjohtaja">
+                                Toiminnanjohtaja
+                            </option>
+                            <option value="hallitus">Hallitus</option>
+                        </select>
                     </div>
                 </div>
             </div>

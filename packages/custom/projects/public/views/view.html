@@ -1072,7 +1072,9 @@
                     {{appendix.date| date: 'd.M.yyyy': '+0200'}}
                 </div>
                 <div class="col-md-3">
-                    <a data-ng-click="confirmAppendixDeletion(appendix.url)"
+                    <a data-ng-click="confirmAppendixDeletion(
+                                appendix.category !== 'Muu...' ? appendix.category : appendix.custom_category,
+                                appendix.url)"
                        class="btn-lg">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>

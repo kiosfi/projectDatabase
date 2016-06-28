@@ -762,7 +762,6 @@ module.exports = function (Projects) {
          */
         createRegRep: function (req, res) {
             var project = req.project;
-//            var fileName = project.project_ref + "-reg-rep";
             var rootDir = "packages/custom/projects/";
             var outDir = rootDir + "data/" + project._id;
             var fileName = uniqueFilename(outDir);
@@ -770,6 +769,10 @@ module.exports = function (Projects) {
             var checkbox = function (checked) {
                 return checked ? " \\makebox[0pt][l]{$\\square$}\\raisebox{.15ex}{\\hspace{0.1em}$\\checkmark$}" : " \\makebox[0pt][l]{$\\square$}\\hspace{0.3cm}";
             };
+            var description = filter(project.description.substring(0, 1000));
+            description += project.description.length > 1000 ? "..." : "";
+            var plannedResultsSummary = filter(project.planned_results.substring(0, 1000));
+            plannedResultsSummary += project.planned_results.length > 1000 ? "..." : "";
             var themes = "";
             project.approved.themes.forEach(function (theme) {
                 themes += "& \\multicolumn{3}{>{\\hsize=\\dimexpr3\\hsize+4\\tabcolsep+2\\arrayrulewidth\\relax}X|}{\\textbullet~ "
@@ -806,7 +809,6 @@ module.exports = function (Projects) {
                         } else {
                             otherProjects = "Ei muita hakemuksia.";
                         }
-
                         var template = fs.readFileSync(
                                 rootDir + "latex/reg-report-template.tex",
                                 "utf8")
@@ -819,6 +821,8 @@ module.exports = function (Projects) {
                                         date.getMinutes())
                                 .replace("<approved.board-meeting>",
                                         filter(project.approved.board_meeting))
+                                .replace("<approved.board-notified>",
+                                        filter(project.approved.board_notified))
                                 .replace("<coordinator>",
                                         filter(project.coordinator))
                                 .replace("<titles.organisation.name>",
@@ -874,9 +878,12 @@ module.exports = function (Projects) {
                                         "tilintarkastukset")
                                 .replace("<required-appendices.audit-reports>",
                                         checkbox(project.required_appendices.audit_reports))
+                                .replace("<titles.planned-results-summary>",
+                                        "Tulostavoitteet")
+                                .replace("<planned-results-summary>",
+                                        plannedResultsSummary)
                                 .replace("<titles.description>", "Kuvaus")
-                                .replace("<description>",
-                                        filter(project.description))
+                                .replace("<description>", description)
                                 .replace("<titles.approved.themes>",
                                         "Oikeudellinen fokus")
                                 .replace("<approved.themes>", themes)
@@ -979,18 +986,25 @@ module.exports = function (Projects) {
                                         filter(project.proposed_funding))
                                 .replace("<titles.approved.decision>", "Päätös")
                                 .replace("<approved.decision>",
-                                        filter(project.approved.decision));
+                                        filter(project.approved.decision))
+                                .replace("<titles.approved.approved-date>",
+                                        "Päiväys")
+                                .replace("<approved.approved-date>",
+                                        filter(project.approved.approved_date));
                         savePDF(project, template, outDir, fileName,
                                 "TJ:n päätös uudesta hankkeesta", res);
                     });
         },
         createEndRep: function (req, res) {
             var project = req.project;
-//            var fileName = project.project_ref + "-end-rep";
             var rootDir = "packages/custom/projects/";
             var outDir = rootDir + "data/" + project._id;
             var fileName = uniqueFilename(outDir);
             var date = new Date();
+            var description = filter(project.description.substring(0, 1000));
+            description += project.description.length > 1000 ? "..." : "";
+            var plannedResultsSummary = filter(project.planned_results.substring(0, 1000));
+            plannedResultsSummary += project.planned_results.length > 1000 ? "..." : "";
             var themes = "";
             project.approved.themes.forEach(function (theme) {
                 themes += "& \\multicolumn{3}{>{\\hsize=\\dimexpr3\\hsize+4\\tabcolsep+2\\arrayrulewidth\\relax}X|}{\\textbullet~ "
@@ -1073,12 +1087,11 @@ module.exports = function (Projects) {
                             filter(project.signed.signed_date) + "~--~"
                             + filter(project.end_report.approved_date)
                             + "~(" + Math.floor((project.end_report.approved_date - project.signed.signed_date) / 3456000000) + "~kk)")
-                    .replace("<titles.required-appendices>",
-                            "Vaaditut liitteet")
-                    .replace("<titles.required-appendices.proj-budget>",
-                            "hankebudjetti")
+                    .replace("<titles.planned-results-summary>",
+                            "Tulostavoitteet")
+                    .replace("<planned-results-summary>", plannedResultsSummary)
                     .replace("<titles.description>", "Kuvaus")
-                    .replace("<description>", filter(project.description))
+                    .replace("<description>", description)
                     .replace("<titles.approved.themes>", "Oikeudellinen fokus")
                     .replace("<approved.themes>", themes)
                     .replace("<titles.organisation.description>",
@@ -1098,7 +1111,7 @@ module.exports = function (Projects) {
                     .replace("<end-report.completed-payments>",
                             completedPayments)
                     .replace("<titles.funding.left-eur>",
-                            "Jäljellä oleva summa")
+                            "Jäljellä oleva avustus")
                     .replace("<funding.left-eur>",
                             numeral(project.funding.left_eur).format("0,0.00")
                             + " EUR")
@@ -1129,10 +1142,15 @@ module.exports = function (Projects) {
                             "Yleisarvio")
                     .replace("<end-report.general-review>",
                             filter(project.end_report.general_review))
+                    .replace("<titles.end-report.proposition>", "Esitys")
                     .replace("<end-report.proposition>",
                             filter(project.end_report.proposition))
+                    .replace("<titles.end-report.conclusion>", "Päätös")
                     .replace("<end-report.conclusion>",
-                            filter(project.end_report.conclusion));
+                            filter(project.end_report.conclusion))
+                    .replace("<titles.end-report.approved-date>", "Päiväys")
+                    .replace("<end-report.approved-date>",
+                            filter(project.end_report.approved_date));
             savePDF(project, template, outDir, fileName, "Loppuraportti", res);
         },
         /**
