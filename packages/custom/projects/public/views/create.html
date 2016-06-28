@@ -635,7 +635,8 @@
                     </label>
                     <div class="col-md-12" id="methodsSelection"
                          data-ng-repeat="method in addedMethods">
-                        <select id="methodSelect" data-ng-model="method.name">
+                        <select id="methodSelect" data-ng-model="method.name"
+                                style="margin-top: 1em">
                             <option data-ng-repeat="methodName in methodNames"
                                     value="{{methodName}}">
                                 {{methodName}}
@@ -647,7 +648,6 @@
                                 {{methodLevel}}
                             </option>
                         </select>
-                        <div style="clear:both;">&nbsp;</div>
                         <!-- TODO: Warn the user about the fact that this is a
                         required field too: -->
                         <textarea name="methodComment"

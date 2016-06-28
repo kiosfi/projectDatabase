@@ -977,7 +977,7 @@ module.exports = function (Projects) {
                                 .replace("<titles.proposed-funding>", "Esitys")
                                 .replace("<proposed-funding>",
                                         filter(project.proposed_funding))
-                                .replace("<titles.approved.decision>", "PÄÄTÖS")
+                                .replace("<titles.approved.decision>", "Päätös")
                                 .replace("<approved.decision>",
                                         filter(project.approved.decision));
                         savePDF(project, template, outDir, fileName,
