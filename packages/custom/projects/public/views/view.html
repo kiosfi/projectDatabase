@@ -495,22 +495,26 @@
         <article id="reports" class="proj-article">
             <h4>Toteutunut aikataulu</h4>
             <section  class="proj-content">
-                <section ng-show="project.in_review.date">
+                <section ng-show="project.in_review.date"
+                         class="proj-subarticle">
                     <div class="col-md-12">
                         <div class="col-md-3 mini-header">
-                            {{fieldNames["in_review_date"]}}
+                            <a ng-click="showReviewDetails = !showReviewDetails">
+                                <span class="glyphicon"
+                                      ng-class="showReviewDetails
+                                          ? 'glyphicon-minus-sign'
+                                          : 'glyphicon-plus-sign'">
+                                </span>
+                                {{fieldNames["in_review_date"]}}
+                            </a>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-9">
                             {{project.in_review.date| date:'d.M.yyyy': '+0200'}}
-                        </div>
-                        <div class="col-md-7">
-                            <button class="btn small-btn"
-                                    onclick="toggleCollapse('reviewinfo')">
-                                Tiedot</button>
                         </div>
                     </div>
                     <div id="reviewinfo" class="proj-subcontent col-md-12"
-                         style="display: none">
+                         ng-show="showReviewDetails">
+                        <hr>
                         <div class="col-md-3 mini-header">
                             {{fieldNames["in_review_user"]}}
                         </div>
@@ -525,35 +529,39 @@
                     </div>
                     &nbsp;
                 </section>
-                <section ng-show="project.approved.date">
+                <section ng-show="project.approved.date"
+                         class="proj-subarticle">
                     <div class="col-md-12">
                         <div class="col-md-3 mini-header">
-                            {{fieldNames["approved_date"]}}
+                            <a ng-click="showApprovedDetails = !showApprovedDetails">
+                                <span class="glyphicon"
+                                      ng-class="showApprovedDetails
+                                          ? 'glyphicon-minus-sign'
+                                          : 'glyphicon-plus-sign'">
+                                </span>
+                                {{fieldNames["approved_date"]}}
+                            </a>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             {{project.approved.date| date:'d.M.yyyy':'+0200'}}
                         </div>
                         <div class="col-md-1">
-                            <button class="btn small-btn"
-                                    onclick="toggleCollapse('approvedinfo')">
-                                Tiedot</button>
-                        </div>
-                        <div class="col-md-2">
                             <a ng-href="/projects/{{project._id}}/regreport/{{intreport.reportNumber}}"
-                               target="_blank" class="btn large-btn">
-                                HTML-raportti
+                               target="_blank" class="btn small-btn">
+                                HTML
                             </a>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-7">
                             <a ng-click="createPDF('reg')"
                                ng-disabled="regRepExists"
-                               class="btn large-btn">
-                                Luo PDF
+                               class="btn small-btn">
+                                PDF
                             </a>
                         </div>
                     </div>
                     <div id="approvedinfo" class="proj-subcontent col-md-12"
-                         style="display: none">
+                         ng-show="showApprovedDetails">
+                        <hr>
                         <div class="col-md-3 mini-header">
                             {{fieldNames["approved_user"]}}
                         </div>
@@ -583,24 +591,26 @@
                     </div>
                     &nbsp;
                 </section>
-                <section ng-show="project.rejected.date">
+                <section ng-show="project.rejected.date"
+                         class="proj-subarticle">
                     <div class="col-md-12">
                         <div class="col-md-3 mini-header">
-                            {{fieldNames["rejected_date"]}}
+                            <a ng-click="showRejectedDetails = !showRejectedDetails">
+                                <span class="glyphicon"
+                                      ng-class="showRejectedDetails
+                                          ? 'glyphicon-minus-sign'
+                                          : 'glyphicon-plus-sign'">
+                                </span>
+                                {{fieldNames["rejected_date"]}}
+                            </a>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-9">
                             {{project.rejected.date| date:'d.M.yyyy': '+0200'}}
                         </div>
-                        <div class="col-md-7">
-                            <button class="btn small-btn"
-                                    onclick="toggleCollapse('rejectedinfo')">
-                                Tiedot
-                            </button>
-                        </div>
                     </div>
-                    <div id="rejectedinfo"
-                         class="proj-subcontent col-md-12"
-                         style="display: none">
+                    <div id="rejectedinfo" class="proj-subcontent col-md-12"
+                         ng-show="showRejectedDetails">
+                        <hr>
                         <div class="col-md-3 mini-header">
                             {{fieldNames["rejected_user"]}}
                         </div>
@@ -628,23 +638,25 @@
                     </div>
                     &nbsp;
                 </section>
-                <section ng-show="project.signed.date">
+                <section ng-show="project.signed.date" class="proj-subarticle">
                     <div class="col-md-12">
                         <div class="col-md-3 mini-header">
-                            {{fieldNames["signed_date"]}}
+                            <a ng-click="showSignedDetails = !showSignedDetails">
+                                <span class="glyphicon"
+                                      ng-class="showSignedDetails
+                                          ? 'glyphicon-minus-sign'
+                                          : 'glyphicon-plus-sign'">
+                                </span>
+                                {{fieldNames["signed_date"]}}
+                            </a>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-9">
                             {{project.signed.date| date:'d.M.yyyy': '+0200'}}
-                        </div>
-                        <div class="col-md-7">
-                            <button class="btn small-btn"
-                                    onclick="toggleCollapse('signedinfo')">
-                                Tiedot
-                            </button>
                         </div>
                     </div>
                     <div id="signedinfo" class="proj-subcontent col-md-12"
-                         style="display: none">
+                         ng-show="showSignedDetails">
+                        <hr>
                         <div class="col-md-3 mini-header">
                             {{fieldNames["signed_user"]}}
                         </div>
@@ -661,39 +673,41 @@
                     </div>
                     &nbsp;
                 </section>
-                <section ng-show="project.intermediary_reports.length > 0">
+                <section ng-show="project.intermediary_reports.length > 0"
+                         class="proj-subarticle">
                     <div ng-repeat="intreport in project.intermediary_reports">
                         <div class="col-md-12">
                             <div class="col-md-3 mini-header">
+                                <a ng-click="showIntDetails = !showIntDetails">
+                                <span class="glyphicon"
+                                      ng-class="showIntDetails
+                                          ? 'glyphicon-minus-sign'
+                                          : 'glyphicon-plus-sign'">
+                                </span>
                                 {{intreport.reportNumber}}.
                                 {{fieldNames["intreport_date"]}}
+                            </a>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 {{intreport.date| date:'d.M.yyyy': '+0200'}}
                             </div>
                             <div class="col-md-1">
-                                <button class="btn small-btn"
-                                        ng-click="showIntDetails =
-                                                                !showIntDetails">
-                                    Tiedot
-                                </button>
-                            </div>
-                            <div class="col-md-2">
                                 <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}"
-                                   target="_blank" class="btn large-btn">
-                                    HTML-raportti
+                                   target="_blank" class="btn small-btn">
+                                    HTML
                                 </a>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-7">
                                 <a ng-click="createPDF('int')"
                                    ng-disabled="true"
-                                   class="btn large-btn">
-                                    Luo PDF
+                                   class="btn small-btn">
+                                    PDF
                                 </a>
                             </div>
                         </div>
                         <div ng-show="showIntDetails"
                              class="proj-subcontent col-md-12">
+                            <hr>
                             <div class="col-md-3 mini-header">
                                 {{fieldNames["intreport_user"]}}
                             </div>
@@ -715,40 +729,44 @@
                         &nbsp;
                     </div>
                 </section>
-                <section ng-show="project.end_report.date">
+                <section ng-show="project.end_report.date"
+                         class="proj-subarticle">
                     <div class="col-md-12">
                         <div class="col-md-3 mini-header">
-                            {{fieldNames["end_report_date"]}}
+                            <a ng-click="showEndDetails = !showEndDetails">
+                                <span class="glyphicon"
+                                      ng-class="showEndDetails
+                                          ? 'glyphicon-minus-sign'
+                                          : 'glyphicon-plus-sign'">
+                                </span>
+                                {{fieldNames["end_report_date"]}}
+                            </a>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             {{project.end_report.date| date:'d.M.yyyy':'+0200'}}
                         </div>
                         <div class="col-md-1">
-                            <button class="btn small-btn"
-                                    ng-click="showEndDetails =
-                                                        !showEndDetails">
-                                Tiedot
-                            </button>
-                        </div>
-                        <div class="col-md-2">
                             <a ng-href="/projects/endReport/{{project._id}}"
-                               target="_blank" class="btn large-btn">
-                                HTML-raportti
+                               target="_blank" class="btn small-btn">
+                                HTML
                             </a>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <a ng-click="createPDF('end')"
                                ng-disabled="endRepExists || nonPDFfinancialRep"
-                               class="btn large-btn">
-                                Luo PDF
+                               class="btn small-btn">
+                                PDF
                             </a>
                         </div>
-                        <div class="col-md-2" ng-show="!financialRepExists">
-                            <span class="glyphicon glyphicon-exclamation-sign"></span> <small>Talousraportti puuttuu</small>
+                        <div class="col-md-6 bg-warning"
+                             ng-show="!financialRepExists">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                            <small>Talousraportti puuttuu</small>
                         </div>
                     </div>
                     <div ng-show="showEndDetails"
                          class="proj-subcontent col-md-12">
+                        <hr>
                         <div class="col-md-3 mini-header">
                             {{fieldNames["end_report_user"]}}
                         </div>
@@ -768,20 +786,25 @@
                     </p>
                     &nbsp;
                 </section>
-                <section ng-show="project.ended.date">
+                <section ng-show="project.ended.date" class="proj-subarticle">
                     <div class="col-md-12">
                         <div class="col-md-3 mini-header">
-                            {{fieldNames["ended_date"]}}
+                            <a ng-click="showEndedDetails = !showEndedDetails">
+                                <span class="glyphicon"
+                                      ng-class="showEndedDetails
+                                          ? 'glyphicon-minus-sign'
+                                          : 'glyphicon-plus-sign'">
+                                </span>
+                                {{fieldNames["ended_date"]}}
+                            </a>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-9">
                             {{project.ended.end_date| date:'d.M.yyyy':'+0200'}}
                         </div>
-                        <div class="col-md-7"><button class="btn small-btn"
-                                                      onclick="toggleCollapse('endedinfo')">
-                                Tiedot
-                            </button></div>
                     </div>
-                    <div id="endedinfo" class="proj-subcontent col-md-12">
+                    <div id="endedinfo" class="proj-subcontent col-md-12"
+                         ng-show="showEndedDetails">
+                        <hr>
                         <div class="col-md-3 mini-header">
                             {{fieldNames["ended_user"]}}
                         </div>
