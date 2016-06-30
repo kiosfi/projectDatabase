@@ -314,6 +314,7 @@ module.exports = function (Search) {
                 } else {
                     orgs = _.map(orgs, function (org) {
                         return {
+                            "_id": org._id,
                             "name": org.name,
                             "representative": org.representative.name +
                                     ", " + org.representative.email + ", " +

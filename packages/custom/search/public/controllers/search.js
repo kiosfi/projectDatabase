@@ -445,7 +445,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          *
          */
         $scope.updateSearch = function () {
-            var search = {"choice": $scope.searchChoice}
+            var search = {"choice": $scope.searchChoice};
             $window.location = '/search/payments?searchBy='
                     + JSON.stringify($scope.searchPay)
                     + '&choice=' + JSON.stringify(search);
