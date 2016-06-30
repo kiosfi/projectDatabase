@@ -92,11 +92,10 @@
                        class="panel-button">Vienti</a></h4>
             </div>
             <div class="panel-body" ng-show="showExport">
-                <p>Järjestöjä löydettiin {{organisations.length}}.</p>
                 <button type="button" ng-csv="organisations" lazy-load="true"
                         csv-header="orgHeaders" csv-column-order="csvColOrder"
                         filename="järjestöt.csv" field-separator=";"
-                        add-bom="true">Vie CSV-tiedostoon</button>
+                        add-bom="true" class="btn">CSV</button>
             </div>
         </div>
     </article>
