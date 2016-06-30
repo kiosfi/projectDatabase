@@ -1,12 +1,12 @@
 <section data-ng-controller="SearchController">
     <h1>Haku</h1>
     <hr>
-    <ul class="nav nav-pills" style="margin-bottom: 1em">
+    <ul class="nav nav-pills nav-stacked search-nav">
         <li class="active"><a ng-href="/search">Hankkeet</a></li>
         <li><a ng-href="/search/orgs">Järjestöt</a></li>
         <li><a ng-href="/search/payments">Maksut</a></li>
     </ul>
-    <article>
+    <article class="search-article">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>
@@ -14,148 +14,152 @@
                        class="panel-button">
                         <span class="glyphicon"
                               ng-class="showCriteria
-                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                         </span>
                         Kriteerit
                     </a>
                 </h4>
             </div>
             <div class="panel-body" ng-show="showCriteria">
-                <form name="searchForm" role="form"
+                <form name="searchForm" role="form" class="form-horizontal"
                       data-ng-init="getProjectFields()"
                       data-ng-submit="update()" novalidate>
                     <div class="form-group col-md-12">
                         <div data-ng-repeat="query in searchProj"
-                             style="padding-top: 1.5em; padding-bottom: 1.5em">
-                            <label class="col-md-2">
-                                {{$index + 1}}. Kriteeri
-                            </label>
-                            <select id="fieldSelect" data-ng-model="query.field"
-                                    class="col-md-4">
-                                <option data-ng-repeat="field in projectFields"
-                                        value="{{field.name}}">
-                                    {{field.fi}}
-                                </option>
-                            </select>
-                            <label ng-show="query.field" class="col-md-2">
-                                Arvo</label>
-                            <select ng-show="query.field === 'org_fields'" id="fieldSelect"
-                                    data-ng-model="query.orgField"
-                                    class="col-md-4">
-                                <option data-ng-repeat="orgField in orgFields"
-                                        value="{{orgField.name}}">
-                                    {{orgField.fi}}
-                                </option>
-                            </select>
-                            <div ng-show="query.field === 'org_fields' && query.orgField"
-                                 class="col-md-12">
-                                <div class="col-md-6">
-                                </div>
-                                <label for="orgFieldPattern" class="col-md-2">
-                                    Hakusana
-                                </label>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control"
-                                       data-ng-model="query.orgValue"
-                                       id="orgFieldPattern"
-                                       placeholder="Säännöllinen lauseke">
+                             class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="col-md-1"><h4>{{$index + 1}}.</h4></div>
+                                <div class="col-md-11">
+                                    <label class="col-md-2 control-label">
+                                        Kriteeri
+                                    </label>
+                                    <select id="fieldSelect" data-ng-model="query.field"
+                                            class="col-md-4">
+                                        <option data-ng-repeat="field in projectFields"
+                                                value="{{field.name}}">
+                                            {{field.fi}}
+                                        </option>
+                                    </select>
+                                    <label ng-show="query.field"
+                                           class="col-md-2 control-label">
+                                        Arvo
+                                    </label>
+                                    <select ng-show="query.field === 'org_fields'" id="fieldSelect"
+                                            data-ng-model="query.orgField"
+                                            class="col-md-4">
+                                        <option data-ng-repeat="orgField in orgFields"
+                                                value="{{orgField.name}}">
+                                            {{orgField.fi}}
+                                        </option>
+                                    </select>
+                                    <div ng-show="query.field === 'org_fields' && query.orgField"
+                                         class="col-md-12" style="margin-top: 0.5em">
+                                        <div class="col-md-4 col-md-offset-8">
+                                            <input type="text" class="form-control"
+                                                   data-ng-model="query.orgValue"
+                                                   id="orgFieldPattern"
+                                                   placeholder="Säännöllinen lauseke">
+                                        </div>
+                                    </div>
+                                    <select ng-show="query.field === 'state'"
+                                            data-ng-model="query.value"
+                                            class="col-md-4">
+                                        <option data-ng-repeat="state in states"
+                                                value="{{state}}">
+                                            {{state}}
+                                        </option>
+                                    </select>
+                                    <select ng-show="query.field === 'approved.themes'"
+                                            data-ng-model="query.value"
+                                            class="col-md-4">
+                                        <option data-ng-repeat="theme in themes"
+                                                value="{{theme}}">
+                                            {{theme}}
+                                        </option>
+                                    </select>
+                                    <div ng-show="stringParams.indexOf(query.field) > -1"
+                                         class="col-md-4">
+                                        <input type="text" class="form-control"
+                                               data-ng-model="query.value"
+                                               placeholder="Säännöllinen lauseke">
+                                    </div>
+                                    <select ng-show="query.field === 'incomplete'"
+                                            data-ng-model="query.value" class="col-md-4">
+                                        <option value="true">Kyllä</option>
+                                        <option value="false">Ei</option>
+                                    </select>
+                                    <select ng-show="query.field === 'security_level'"
+                                            data-ng-model="query.value" class="col-md-4">
+                                        <option>Julkinen</option>
+                                        <option>Luottamuksellinen</option>
+                                        <option>Salainen</option>
+                                    </select>
+                                    <select ng-show="query.field === 'methods.level'"
+                                            data-ng-model="query.value"
+                                            class="col-md-4">
+                                        <option data-ng-repeat="level in levels"
+                                                value="{{level}}">
+                                            {{level}}
+                                        </option>
+                                    </select>
+                                    <select ng-show="query.field === 'dates'"
+                                            data-ng-model="query.dateField"
+                                            class="col-md-4">
+                                        <option data-ng-repeat="dateField in dateFields"
+                                                value="{{dateField.name}}">
+                                            {{dateField.fi}}
+                                        </option>
+                                    </select>
+                                    <div ng-show="query.dateField">
+                                        <br><br>
+                                        <div id="startDate" class="col-md-5 col-md-offset-1">
+                                            <div class="col-md-4">
+                                                <input type="number" class="form-control"
+                                                       data-ng-model="query.startDay"
+                                                       placeholder="p">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="number" class="form-control"
+                                                       data-ng-model="query.startMonth"
+                                                       placeholder="k">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="number" class="form-control"
+                                                       data-ng-model="query.startYear"
+                                                       placeholder="vvvv">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="control-label">–</label>
+                                        </div>
+                                        <div id="endDate" class="col-md-5">
+                                            <div class="col-md-4">
+                                                <input type="number" class="form-control"
+                                                       data-ng-model="query.endDay"
+                                                       placeholder="p">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="number" class="form-control"
+                                                       data-ng-model="query.endMonth"
+                                                       placeholder="k">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="number" class="form-control"
+                                                       data-ng-model="query.endYear"
+                                                       placeholder="vvvv">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <select id="funds" ng-show="query.field === 'funds'"
+                                            data-ng-model="query.value"
+                                            class="col-md-4">
+                                        <option data-ng-repeat="funds in funding"
+                                                value="{{funds.name}}">
+                                            {{funds.fi}}
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
-                            <select ng-show="query.field === 'state'"
-                                    data-ng-model="query.value"
-                                    class="col-md-4">
-                                <option data-ng-repeat="state in states"
-                                        value="{{state}}">
-                                    {{state}}
-                                </option>
-                            </select>
-                            <select ng-show="query.field === 'approved.themes'"
-                                    data-ng-model="query.value"
-                                    class="col-md-4">
-                                <option data-ng-repeat="theme in themes"
-                                        value="{{theme}}">
-                                    {{theme}}
-                                </option>
-                            </select>
-                            <div ng-show="stringParams.indexOf(query.field) > -1"
-                                 class="col-md-4">
-                                <input type="text" class="form-control"
-                                       data-ng-model="query.value"
-                                       placeholder="Säännöllinen lauseke">
-                            </div>
-                            <select ng-show="query.field === 'incomplete'"
-                                    data-ng-model="query.value" class="col-md-4">
-                                <option value="true">Kyllä</option>
-                                <option value="false">Ei</option>
-                            </select>
-                            <select ng-show="query.field === 'security_level'"
-                                    data-ng-model="query.value" class="col-md-4">
-                                <option>Julkinen</option>
-                                <option>Luottamuksellinen</option>
-                                <option>Salainen</option>
-                            </select>
-                            <select ng-show="query.field === 'methods.level'"
-                                    data-ng-model="query.value"
-                                    class="col-md-4">
-                                <option data-ng-repeat="level in levels"
-                                        value="{{level}}">
-                                    {{level}}
-                                </option>
-                            </select>
-                            <select ng-show="query.field === 'dates'"
-                                    data-ng-model="query.dateField"
-                                    class="col-md-4">
-                                <option data-ng-repeat="dateField in dateFields"
-                                        value="{{dateField.name}}">
-                                    {{dateField.fi}}
-                                </option>
-                            </select>
-                            <div ng-show="query.dateField">
-                                <div id="startDate" class="col-md-6">
-                                    <label class="col-md-3">Alkupäivä</label>
-                                    <div class="col-md-3">
-                                        <input type="number" class="form-control"
-                                               data-ng-model="query.startDay"
-                                               placeholder="p">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="number" class="form-control"
-                                               data-ng-model="query.startMonth"
-                                               placeholder="k">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="number" class="form-control"
-                                               data-ng-model="query.startYear"
-                                               placeholder="vvvv">
-                                    </div>
-                                </div>
-                                <div id="endDate" class="col-md-6">
-                                    <label class="col-md-3">Loppupäivä</label>
-                                    <div class="col-md-3">
-                                        <input type="number" class="form-control"
-                                               data-ng-model="query.endDay"
-                                               placeholder="p">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="number" class="form-control"
-                                               data-ng-model="query.endMonth"
-                                               placeholder="k">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="number" class="form-control"
-                                               data-ng-model="query.endYear"
-                                               placeholder="vvvv">
-                                    </div>
-                                </div>
-                            </div>
-                            <select id="funds" ng-show="query.field === 'funds'"
-                                    data-ng-model="query.value"
-                                    class="col-md-4">
-                                <option data-ng-repeat="funds in funding"
-                                        value="{{funds.name}}">
-                                    {{funds.fi}}
-                                </option>
-                            </select>
                         </div>
                         <div class="col-md-12">
                             <input type="button" value="Lisää"
@@ -173,7 +177,7 @@
             </div>
         </div>
     </article>
-    <article class="search" data-ng-init="search()">
+    <article class="search-article" data-ng-init="search()">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>
@@ -181,7 +185,7 @@
                        class="panel-button">
                         <span class="glyphicon"
                               ng-class="showResults
-                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                         </span>
                         Tulokset
                     </a>
@@ -268,7 +272,7 @@
                        class="panel-button">
                         <span class="glyphicon"
                               ng-class="showResults
-                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                         </span>
                         Vienti
                     </a>
@@ -276,7 +280,7 @@
             </div>
             <div class="panel-body" ng-show="showExport">
                 <div class="col-md-12">
-                    <form data-ng-submit="getResultsForCsv()">
+                    <form data-ng-submit="getResultsForCsv()" class="form-horizontal">
                         <h5>Kentät</h5>
                         <span class="col-md-3">
                             <input id="basics" type="checkbox"

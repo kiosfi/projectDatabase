@@ -1,12 +1,12 @@
 <section data-ng-controller="SearchController">
     <h1>Haku</h1>
     <hr>
-    <ul class="nav nav-pills" style="margin-bottom: 1em">
+    <ul class="nav nav-pills nav-stacked search-nav">
         <li><a ng-href="/search">Hankkeet</a></li>
         <li class="active"><a ng-href="/search/orgs">Järjestöt</a></li>
         <li><a ng-href="/search/payments">Maksut</a></li>
     </ul>
-    <article>
+    <article class="search-article">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>
@@ -14,38 +14,44 @@
                        class="panel-button">
                         <span class="glyphicon"
                               ng-class="showCriteria
-                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                         </span>
                         Kriteerit
                     </a>
                 </h4>
             </div>
             <div class="panel-body" ng-show="showCriteria">
-                <form name="orgForm" class="form-horizontal col-md-12"
-                      role="form" data-ng-init="getProjectFields()"
+                <form name="orgForm" role="form" class="form-horizontal"
+                      data-ng-init="getProjectFields()"
                       data-ng-submit="updateOrgSearch()" novalidate>
                     <div class="form-group col-md-12">
-                        <div class="col-md-12"
-                             data-ng-repeat="query in searchOrg"
-                             style="padding-top: 0.5em; padding-bottom: 0.5em">
-                            <label class="col-md-2">
-                                {{$index + 1}}. Kriteeri
-                            </label>
-                            <div id="search" class="col-md-4">
-                                <select data-ng-model="query.field">
-                                    <option ng-repeat="orgField in orgFields"
-                                            value="{{orgField.name}}">
-                                        {{orgField.fi}}
-                                    </option>
-                                </select>
-                            </div>
-                            <label class="col-md-2">
-                                Arvo
-                            </label>
-                            <div ng-show="query.field" class="col-md-4">
-                                <input type="text" class="form-control"
-                                       data-ng-model="query.value"
-                                       placeholder="Säännöllinen lauseke">
+                        <div class="col-md-12 panel panel-default"
+                             data-ng-repeat="query in searchOrg">
+                            <div class="panel-body">
+                                <div class="col-md-1"><h4>{{$index + 1}}.</h4></div>
+                                <div class="col-md-11">
+                                    <label class="col-md-2 control-label">
+                                        Kriteeri
+                                    </label>
+                                    <div id="search" class="col-md-4">
+                                        <select data-ng-model="query.field">
+                                            <option ng-repeat="orgField in orgFields"
+                                                    value="{{orgField.name}}">
+                                                {{orgField.fi}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div ng-show="query.field">
+                                        <label class="col-md-2 control-label">
+                                            Arvo
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control"
+                                                   data-ng-model="query.value"
+                                                   placeholder="Säännöllinen lauseke">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -65,7 +71,7 @@
             </div>
         </div>
     </article>
-    <article data-ng-init="searchOrgs()">
+    <article data-ng-init="searchOrgs()" class="search-article">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>
@@ -73,7 +79,7 @@
                        class="panel-button">
                         <span class="glyphicon"
                               ng-class="showResults
-                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                         </span>
                         Tulokset
                     </a>
@@ -109,7 +115,7 @@
                        class="panel-button">
                         <span class="glyphicon"
                               ng-class="showExport
-                                          ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                         </span>
                         Vienti
                     </a>

@@ -6,91 +6,12 @@ h5 {
     font-weight: bold;
 }
 
-.proj-left {
-    padding: 1em;
-}
-
-.proj-right {
-    padding: 1em;
-}
-
-.proj-box-left {
-    float: left;
-    width: 50%;
-}
-
-.proj-box-right {
-    /*    padding-top: 5%;*/
-    float: left;
-    width: 50%;
-}
-
-.proj-div {
-    padding-right: 10%;
-    padding: 1em;
-    float: left;
-    width: 50%;
-}
-
-.projects-example h1 {
-    background-color: purple;
-}
-
 ul li {
     list-style-type: none;
 }
 
 span ul li {
     list-style-type: disc;
-}
-
-.tila {
-    float: right;
-}
-
-.states {
-    font-size: 17px;
-    font-weight: normal;
-}
-
-.proj-header {
-    font-weight: bold;
-}
-
-.proj-sub-title {
-    font-weight: bold;
-}
-
-.proj-body {
-    line-height: 1.2;
-    font-size: 14px;
-    font-style: normal;
-}
-
-.er-body {
-    line-height: 1.2;
-    font-size: 14px;
-    font-style: normal;
-    padding: 1em;
-}
-
-.border-body {
-    border-style: solid;
-    padding: 1em;
-}
-
-.change-box {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 3%;
-}
-
-.strong-title {
-    font-weight: bold;
-}
-
-.comment-form-div {
-    margin-top: 2%;
 }
 
 .btn {
@@ -145,4 +66,52 @@ span ul li {
     font-size: 12px;
     padding: 5px 5px 15px 5px;
     text-decoration: none;
+}
+
+.search-nav {
+    position: fixed;
+    font-size: 18px;
+}
+
+@media only screen and (min-width: 1800px) {
+    .search-nav {
+        left:           10%;
+    }
+    .search-article {
+        margin-left:    0;
+    }
+}
+
+@media only screen and (min-width: 1620px) and (max-width: 1799px) {
+    .search-nav {
+        left:           5%;
+    }
+    .search-article {
+        margin-left:    0;
+    }
+}
+
+@media only screen and (min-width: 1440px) and (max-width: 1619px) {
+    .search-nav {
+        left:           1em;
+    }
+    .search-article {
+        margin-left:    5em;
+    }
+}
+
+@media only screen and (max-width: 1439px) {
+    .search-nav {
+        left:           1em;
+    }
+    .search-article {
+        margin-left:    10em;
+    }
+}
+
+@media only screen and (max-height: 768px) {
+    .search-nav {
+        overflow-y:     scroll;
+        height:         67%;
+    }
 }
