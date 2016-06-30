@@ -3,13 +3,19 @@
     <hr>
     <form name="projectForm" class="form-horizontal" role="form"
           data-ng-submit="create(projectForm.$valid)" novalidate>
-        <fieldset>
-            <legend>
-                <a ng-click="showInfo = !showInfo">
-                    Nimi, koordinaattori ja järjestö
-                </a>
-            </legend>
-            <div ng-show="showInfo">
+        <fieldset class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a ng-click="showInfo = !showInfo">
+                        <span class="glyphicon"
+                              ng-class="showInfo
+                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Nimi, koordinaattori ja järjestö
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showInfo" class="panel-body">
                 <div class="form-group col-md-6"
                      ng-class="{'has-error': projectForm.title.$invalid }">
                     <label class="col-md-3 control-label">
@@ -132,11 +138,19 @@
                            value="Lisää järjestö listalta"/>
                 </div>
                 <article class="well-lg" data-ng-show="newOrg">
-                    <fieldset>
-                        <legend>
-                            <a ng-click="showOrgInfo = !showOrgInfo">Järjestö</a>
-                        </legend>
-                        <div ng-show="showOrgInfo">
+                    <fieldset class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5>
+                                <a ng-click="showOrgInfo = !showOrgInfo">
+                                    <span class="glyphicon"
+                                          ng-class="showOrgInfo
+                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                    </span>
+                                    Järjestö
+                                </a>
+                            </h5>
+                        </div>
+                        <div ng-show="showOrgInfo" class="panel-body">
                             <div class="form-group col-md-6"
                                  ng-class="{'has-error': projectForm.orgname.$invalid}">
                                 <label class="col-md-3 control-label">Nimi</label>
@@ -170,7 +184,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-md-9" style="float:right;"
+                                <div class="col-md-9" style="float: right"
                                      ng-class="{'has-error': projectForm.orgrepEmail.$invalid}">
                                     <input data-ng-if="newOrg" name="orgrepEmail"
                                            type="text" class="form-control"
@@ -185,7 +199,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-md-9" style="float:right;"
+                                <div class="col-md-9" style="float: right"
                                      ng-class="{'has-error': projectForm.orgrepPhone.$invalid}">
                                     <input data-ng-if="newOrg" name="orgrepPhone"
                                            type="text" class="form-control"
@@ -250,7 +264,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group"
-                                     ng-class="{'has-error':projectForm.orgaddrcntry.$invalid}">
+                                     ng-class="{'has-error': projectForm.orgaddrcntry.$invalid}">
                                     <label  class="col-md-3 control-label">Maa</label>
                                     <div class="col-md-9">
                                         <input data-ng-if="newOrg" name="orgaddrcntry"
@@ -321,13 +335,18 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset>
-                        <legend>
-                            <a ng-click="showOrgDetails = !showOrgDetails">
-                                Hakijajärjestön lisätiedot
-                            </a>
-                        </legend>
-                        <div ng-show="showOrgDetails">
+                    <fieldset class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5>
+                                <a ng-click="showOrgDetails = !showOrgDetails">
+                                    <span class="glyphicon"
+                                          ng-class="showOrgDetails ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                    </span>
+                                    Hakijajärjestön lisätiedot
+                                </a>
+                            </h5>
+                        </div>
+                        <div ng-show="showOrgDetails" class="panel-body">
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
                                     <label class="col-md-3 control-label">
@@ -461,13 +480,19 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset>
-                        <legend>
-                            <a ng-click="showBankInfo = !showBankInfo">
-                                Pankkitili
-                            </a>
-                        </legend>
-                        <div ng-show="showBankInfo">
+                    <fieldset class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5>
+                                <a ng-click="showBankInfo = !showBankInfo">
+                                    <span class="glyphicon"
+                                          ng-class="showBankInfo
+                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                    </span>
+                                    Pankkitili
+                                </a>
+                            </h5>
+                        </div>
+                        <div ng-show="showBankInfo" class="panel-body">
                             <div class="form-group">
                                 <div class="form-group col-md-6">
                                     <label class="col-md-3 control-label">
@@ -522,13 +547,18 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset>
-                        <legend>
-                            <a ng-click="showSpecialNotes = !showSpecialNotes">
-                                Erityishuomioita
-                            </a>
-                        </legend>
-                        <div ng-show="showSpecialNotes">
+                    <fieldset class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5><a ng-click="showSpecialNotes = !showSpecialNotes">
+                                    <span class="glyphicon"
+                                          ng-class="showSpecialNotes
+                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                    </span>
+                                    Erityishuomioita
+                                </a>
+                            </h5>
+                        </div>
+                        <div ng-show="showSpecialNotes" class="panel-body">
                             <div class="form-group col-md-6">
                                 <label for="org_special_notes"
                                        class="col-md-3 control-label">
@@ -548,11 +578,18 @@
                 </article>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>
-                <a ng-click="showProjInfo = !showProjInfo">Perustiedot</a>
-            </legend>
-            <div ng-show="showProjInfo">
+        <fieldset class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a ng-click="showProjInfo = !showProjInfo">
+                        <span class="glyphicon"
+                              ng-class="showProjInfo ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Perustiedot
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showProjInfo" class="panel-body">
                 <div class="form-group col-md-6">
                     <label for="description"
                            class="col-md-3 control-label">
@@ -624,11 +661,18 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>
-                <a ng-click="showProjDetails = !showProjDetails">Lisätiedot</a>
-            </legend>
-            <div ng-show="showProjDetails">
+        <fieldset class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a ng-click="showProjDetails = !showProjDetails">
+                        <span class="glyphicon"
+                              ng-class="showProjDetails ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Lisätiedot
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showProjDetails" class="panel-body">
                 <div class="form-group col-md-12">
                     <label mean-token="'create-methods'" class="col-md-2">
                         {{fieldNames["methods"]}}
@@ -885,11 +929,19 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>
-                <a ng-click="showAssessment = !showAssessment">KIOSin arvio</a>
-            </legend>
-            <div ng-show="showAssessment">
+        <fieldset class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a ng-click="showAssessment = !showAssessment">
+                        <span class="glyphicon"
+                              ng-class="showAssessment
+                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        KIOSin arvio
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showAssessment" class="panel-body">
                 <div class="col-md-12">
                     <div class="form-group col-md-6">
                         <label for="fitness"
@@ -958,9 +1010,9 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>Vahvistus</legend>
-            <div class="form-group col-md-6">
+        <fieldset class="panel panel-default">
+            <div class="panel-heading"><h4>Vahvistus</h4></div>
+            <div class="form-group col-md-6 panel-body">
                 <label for="special_notes"
                        class="col-md-3 control-label">
                     {{fieldNames["special_notes"]}}
@@ -975,8 +1027,9 @@
             </div>
             <div class="form-group col-md-6">
                 <div class="col-md-offset-3 col-md-9">
+                    <br>
                     <button mean-token="'create-submit'" type="submit"
-                            class="btn btn-info" >Lähetä
+                            class="btn btn-info">Lähetä
                     </button>
                 </div>
             </div>
