@@ -9,8 +9,16 @@
     <article>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4><a ng-click="showCriteria = !showCriteria"
-                       class="panel-button">Kriteerit</a></h4>
+                <h4>
+                    <a ng-click="showCriteria = !showCriteria"
+                       class="panel-button">
+                        <span class="glyphicon"
+                              ng-class="showCriteria
+                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Kriteerit
+                    </a>
+                </h4>
             </div>
             <div class="panel-body" ng-show="showCriteria">
                 <form name="orgForm" class="form-horizontal col-md-12"
@@ -60,9 +68,17 @@
     <article data-ng-init="searchOrgs()">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4><a ng-click="showResults = !showResults"
-                       class="panel-button">Tulokset</a>
-                    ({{organisations.length}} kpl)</h4>
+                <h4>
+                    <a ng-click="showResults = !showResults"
+                       class="panel-button">
+                        <span class="glyphicon"
+                              ng-class="showResults
+                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Tulokset
+                    </a>
+                    ({{organisations.length}} kpl)
+                </h4>
             </div>
             <div class="panel-body" ng-show="showResults">
                 <table class="col-md-12 table table-striped">
@@ -88,8 +104,16 @@
         </div>
         <div class="panel panel-default" ng-show="organisations.length > 0">
             <div class="panel-heading">
-                <h4><a ng-click="showExport = !showExport"
-                       class="panel-button">Vienti</a></h4>
+                <h4>
+                    <a ng-click="showExport = !showExport"
+                       class="panel-button">
+                        <span class="glyphicon"
+                              ng-class="showExport
+                                          ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Vienti
+                    </a>
+                </h4>
             </div>
             <div class="panel-body" ng-show="showExport">
                 <button type="button" ng-csv="organisations" lazy-load="true"

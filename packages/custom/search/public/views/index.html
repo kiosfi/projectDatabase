@@ -9,8 +9,16 @@
     <article>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4><a ng-click="showCriteria = !showCriteria"
-                       class="panel-button">Kriteerit</a></h4>
+                <h4>
+                    <a ng-click="showCriteria = !showCriteria"
+                       class="panel-button">
+                        <span class="glyphicon"
+                              ng-class="showCriteria
+                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Kriteerit
+                    </a>
+                </h4>
             </div>
             <div class="panel-body" ng-show="showCriteria">
                 <form name="searchForm" role="form"
@@ -165,13 +173,20 @@
             </div>
         </div>
     </article>
-
     <article class="search" data-ng-init="search()">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4><a ng-click="showResults = !showResults"
-                       class="panel-button">Tulokset</a>
-                    ({{numberOfResults}} kpl)</h4>
+                <h4>
+                    <a ng-click="showResults = !showResults"
+                       class="panel-button">
+                        <span class="glyphicon"
+                              ng-class="showResults
+                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Tulokset
+                    </a>
+                    ({{numberOfResults}} kpl)
+                </h4>
             </div>
             <div class="panel-body" ng-show="showResults">
                 <style type="text/css">
@@ -245,13 +260,19 @@
                         </li>
                     </ul>
                 </div>
-
             </div>
         </div>
         <div class="panel panel-default" ng-show="numberOfResults > 0">
             <div class="panel-heading">
                 <h4><a ng-click="showExport = !showExport"
-                       class="panel-button">Vienti</a></h4>
+                       class="panel-button">
+                        <span class="glyphicon"
+                              ng-class="showResults
+                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Vienti
+                    </a>
+                </h4>
             </div>
             <div class="panel-body" ng-show="showExport">
                 <div class="col-md-12">
@@ -508,5 +529,4 @@
             </div>
         </div>
     </article>
-
 </section>

@@ -1,22 +1,3 @@
-/*h1 {
-  text-align: left;
-}
-
-.dropdown {
-  font-size: 16px;
-}
-
-.search {
-  padding: 1em;
-}
-
-.search-div {
-    padding-right: 10%;
-    padding: 1em;
-    float: left;
-    width: 50%;
-}*/
-
 body {
     padding-bottom: 50px;
 }
@@ -96,13 +77,6 @@ span ul li {
 .border-body {
     border-style: solid;
     padding: 1em;
-}
-
-hr {
-    border: 0;
-    border-bottom: 1px dashed #ccc;
-    background: #999;
-    width: 100%;
 }
 
 .change-box {
