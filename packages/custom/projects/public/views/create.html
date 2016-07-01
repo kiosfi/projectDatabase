@@ -9,7 +9,7 @@
                     <a ng-click="showInfo = !showInfo">
                         <span class="glyphicon"
                               ng-class="showInfo
-                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                         </span>
                         Nimi, koordinaattori ja järjestö
                     </a>
@@ -144,7 +144,7 @@
                                 <a ng-click="showOrgInfo = !showOrgInfo">
                                     <span class="glyphicon"
                                           ng-class="showOrgInfo
-                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                                     </span>
                                     Järjestö
                                 </a>
@@ -486,7 +486,7 @@
                                 <a ng-click="showBankInfo = !showBankInfo">
                                     <span class="glyphicon"
                                           ng-class="showBankInfo
-                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                                     </span>
                                     Pankkitili
                                 </a>
@@ -552,7 +552,7 @@
                             <h5><a ng-click="showSpecialNotes = !showSpecialNotes">
                                     <span class="glyphicon"
                                           ng-class="showSpecialNotes
-                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                                     </span>
                                     Erityishuomioita
                                 </a>
@@ -677,31 +677,52 @@
                     <label mean-token="'create-methods'" class="col-md-2">
                         {{fieldNames["methods"]}}
                     </label>
-                    <div class="col-md-12" id="methodsSelection"
+                    <div class="col-md-12 panel panel-default"
+                         id="methodsSelection"
                          data-ng-repeat="method in addedMethods">
-                        <select id="methodSelect" data-ng-model="method.name"
-                                style="margin-top: 1em">
-                            <option data-ng-repeat="methodName in methodNames"
-                                    value="{{methodName}}">
-                                {{methodName}}
-                            </option>
-                        </select>
-                        <select id="levelSelect" data-ng-model="method.level">
-                            <option data-ng-repeat="methodLevel in methodLevels"
-                                    value="{{methodLevel}}">
-                                {{methodLevel}}
-                            </option>
-                        </select>
-                        <!-- TODO: Warn the user about the fact that this is a
-                        required field too: -->
-                        <textarea name="methodComment"
-                                  data-ng-model="method.comment"
-                                  id="methodComment" class="form-control"
-                                  placeholder="Toiminnon kuvaus (pakollinen)"
-                                  required>
-                        </textarea>
+                        <div class="panel-body">
+                            <div class="col-md-7">
+                                <label class="control-label col-md-2">
+                                    Toiminto
+                                </label>
+                                <select id="methodSelect" class="col-md-10"
+                                        data-ng-model="method.name">
+                                    <option data-ng-repeat="methodName in methodNames"
+                                            value="{{methodName}}">
+                                        {{methodName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label col-md-3">
+                                    Taso
+                                </label>
+                                <select id="levelSelect" class="col-md-9"
+                                        data-ng-model="method.level">
+                                    <option data-ng-repeat="methodLevel in methodLevels"
+                                            value="{{methodLevel}}">
+                                        {{methodLevel}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- TODO: Warn the user about the fact that this is a
+                            required field too: -->
+                            <div class="col-md-12" style="margin-top: 0.5em">
+                                <label for="methodComment"
+                                       class="col-md-1 control-label">
+                                    Kuvaus
+                                </label>
+                                <div class="col-md-11">
+                                    <textarea name="methodComment"
+                                      data-ng-model="method.comment"
+                                      id="methodComment" class="form-control"
+                                      placeholder="Toiminnon kuvaus (pakollinen)"
+                                      required>
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="clear:both;">&nbsp;</div>
                     <div class="col-md-12">
                         <input type="button" value="Lisää uusi"
                                ng-click="addMethod();"/>
@@ -710,6 +731,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <hr>
                     <div class="form-group col-md-4">
                         <label class="col-md-3 control-label" for="country">
                             {{fieldNames["country"]}}
@@ -935,7 +957,7 @@
                     <a ng-click="showAssessment = !showAssessment">
                         <span class="glyphicon"
                               ng-class="showAssessment
-                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                         </span>
                         KIOSin arvio
                     </a>
