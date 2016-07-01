@@ -1,12 +1,12 @@
 <section data-ng-controller="SearchController">
     <h1>Haku</h1>
     <hr>
-    <ul class="nav nav-pills" style="margin-bottom: 1em">
+    <ul class="nav nav-pills nav-stacked search-nav">
         <li><a ng-href="/search">Hankkeet</a></li>
         <li><a ng-href="/search/orgs">Järjestöt</a></li>
         <li class="active"><a ng-href="/search/payments">Maksut</a></li>
     </ul>
-    <article>
+    <article class="search-article">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>
@@ -22,99 +22,113 @@
             </div>
             <div class="panel-body" ng-show="showCriteria">
                 <article>
-                    <form name="choiceForm" class="form-horizontal col-md-8"
+                    <form name="choiceForm" class="form-horizontal col-md-12"
                           role="form" novalidate>
-                        <div class="col-md-12">
-                            <select data-ng-model="searchChoice"
-                                    class="col-md-6" style="float:left;">
-                                <option value="payments">
-                                    Suoritetut maksut
-                                </option>
-                                <option value="approved.granted_sum_eur">
-                                    Myönnetyt avustukset
-                                </option>
-                            </select>
-                        </div>
+                        <select data-ng-model="searchChoice">
+                            <option value="payments">
+                                Suoritetut maksut
+                            </option>
+                            <option value="approved.granted_sum_eur">
+                                Myönnetyt avustukset
+                            </option>
+                        </select>
                     </form>
+                    &nbsp;
                 </article>
                 <article ng-show="searchChoice">
-                    <form name="paymentsForm" class="form-horizontal col-md-8"
+                    <form name="paymentsForm" class="form-horizontal col-md-12"
                           role="form" data-ng-init="getProjectFields()"
                           data-ng-submit="updateSearch()" novalidate>
-
                         <div class="form-group col-md-12">
-                            <label for="search">Valitse hakuparametri: </label>
-                            <div class="col-md-12"
+                            <div class="col-md-12 panel panel-default"
                                  data-ng-repeat="query in searchPay">
-                                <div id="search" style="float:left;"
-                                     class="col-md-5">
-                                    <select data-ng-model="query.field">
-                                        <option ng-repeat="paymentField in paymentFields"
-                                                value="{{paymentField.name}}">
-                                            {{paymentField.fi}}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div ng-show="query.field === 'state'"
-                                     class="col-md-5" style="float:left;">
-                                    <select data-ng-model="query.value">
-                                        <option ng-repeat="state in states"
-                                                value="{{state}}">
-                                            {{state}}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div ng-show="stringParams.indexOf(query.field) > -1"
-                                     class="col-md-6" style="float:left">
-                                    <input type="text" class="form-control"
-                                           data-ng-model="query.value"
-                                           placeholder="Kirjoita hakusana(t)">
-                                </div>
-                                <div id="date" ng-show="query.field === 'dates'"
-                                     class="col-md-6" style="float:left;">
-                                    <select data-ng-model="query.dateField" >
-                                        <option data-ng-repeat="paymentDate in paymentDates"
-                                                value="{{paymentDate.name}}">
-                                            {{paymentDate.fi}}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div ng-show="query.field === 'dates'"
-                                     class="col-md-12" style="float:left;">
-                                    <label for="startDate">Alkupäivä</label>
-                                    <div id="startDate">
-                                        <div class="col-md-2" style="float:left;">
-                                            <input type="number" class="form-control"
-                                                   data-ng-model="query.startDay"
-                                                   placeholder="p">
+                                <div class="panel-body">
+                                    <div class="col-md-1"><h4>{{$index + 1}}.</h4></div>
+                                    <div class="col-md-11">
+                                        <label class="col-md-2 control-label">
+                                            Kriteeri
+                                        </label>
+                                        <div id="search"
+                                             class="col-md-4">
+                                            <select data-ng-model="query.field">
+                                                <option ng-repeat="paymentField in paymentFields"
+                                                        value="{{paymentField.name}}">
+                                                    {{paymentField.fi}}
+                                                </option>
+                                            </select>
                                         </div>
-                                        <div class="col-md-2" style="float:left;">
-                                            <input type="number" class="form-control"
-                                                   data-ng-model="query.startMonth"
-                                                   placeholder="k">
+                                        <label class="col-md-2 control-label">
+                                            Arvo
+                                        </label>
+                                        <div ng-show="query.field === 'state'"
+                                             class="col-md-4" >
+                                            <select data-ng-model="query.value">
+                                                <option ng-repeat="state in states"
+                                                        value="{{state}}">
+                                                    {{state}}
+                                                </option>
+                                            </select>
                                         </div>
-                                        <div class="col-md-2" style="float:left;">
-                                            <input type="number" class="form-control"
-                                                   data-ng-model="query.startYear"
-                                                   placeholder="vvvv">
+                                        <div ng-show="stringParams.indexOf(query.field) > -1"
+                                             class="col-md-4">
+                                            <input type="text" class="form-control"
+                                                   data-ng-model="query.value"
+                                                   placeholder="Kirjoita hakusana(t)">
                                         </div>
-                                    </div>
-                                    <label for="endDate">Loppupäivä</label>
-                                    <div id="endDate">
-                                        <div class="col-md-2" style="float:left;">
-                                            <input type="number" class="form-control"
-                                                   data-ng-model="query.endDay"
-                                                   placeholder="p">
+                                        <div id="date" ng-show="query.field === 'dates'"
+                                             class="col-md-4" >
+                                            <select data-ng-model="query.dateField" >
+                                                <option data-ng-repeat="paymentDate in paymentDates"
+                                                        value="{{paymentDate.name}}">
+                                                    {{paymentDate.fi}}
+                                                </option>
+                                            </select>
                                         </div>
-                                        <div class="col-md-2" style="float:left;">
-                                            <input type="number" class="form-control"
-                                                   data-ng-model="query.endMonth"
-                                                   placeholder="k">
-                                        </div>
-                                        <div class="col-md-2" style="float:left;">
-                                            <input type="number" class="form-control"
-                                                   data-ng-model="query.endYear"
-                                                   placeholder="vvvv">
+                                        <div ng-show="query.dateField"
+                                             class="col-md-12" style="margin-top: 0.5em; text-align: center">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <div id="startDate">
+                                                    <div class="col-md-4" >
+                                                        <input type="number" class="form-control"
+                                                               data-ng-model="query.startDay"
+                                                               placeholder="p">
+                                                    </div>
+                                                    <div class="col-md-4" >
+                                                        <input type="number" class="form-control"
+                                                               data-ng-model="query.startMonth"
+                                                               placeholder="k">
+                                                    </div>
+                                                    <div class="col-md-4" >
+                                                        <input type="number" class="form-control"
+                                                               data-ng-model="query.startYear"
+                                                               placeholder="vvvv">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label class="control-label">
+                                                    –
+                                                </label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div id="endDate">
+                                                    <div class="col-md-4" >
+                                                        <input type="number" class="form-control"
+                                                               data-ng-model="query.endDay"
+                                                               placeholder="p">
+                                                    </div>
+                                                    <div class="col-md-4" >
+                                                        <input type="number" class="form-control"
+                                                               data-ng-model="query.endMonth"
+                                                               placeholder="k">
+                                                    </div>
+                                                    <div class="col-md-4" >
+                                                        <input type="number" class="form-control"
+                                                               data-ng-model="query.endYear"
+                                                               placeholder="vvvv">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -128,7 +142,6 @@
                                        ng-click="removePayQuery();"/>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <div class="col-md-10">
                                 <button id="appr-btn" type="submit"
@@ -141,7 +154,7 @@
             </div>
         </div>
     </article>
-    <article data-ng-init="searchPayments()">
+    <article data-ng-init="searchPayments()" class="search-article">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>
@@ -149,7 +162,7 @@
                        class="panel-button">
                         <span class="glyphicon"
                               ng-class="showResults
-                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                         </span>
                         Tulokset
                     </a>
@@ -185,7 +198,7 @@
                        class="panel-button">
                         <span class="glyphicon"
                               ng-class="showExport
-                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
                         </span>
                         Vienti
                     </a>
