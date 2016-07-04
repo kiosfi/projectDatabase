@@ -732,7 +732,7 @@
                                                         date:'d.M.yyyy, HH:mm':
                                                         '+0200'}}</div>
                             <div class="col-md-3 mini-header">
-                                Raportin esitti
+                                Raportin esitteli
                             </div>
                             <div class="col-md-9">{{intreport.approved_by}},
                                 {{intreport.date_approved|
@@ -1166,15 +1166,17 @@
         <article id="log" class="article">
             <h4>Muokkaukset</h4>
             <section class="section">
-                <ul ng-show="project.updated.length > 0">
-                    <li data-ng-repeat="update in project.updated">
+                <div ng-show="project.updated.length > 0">
+                    <div data-ng-repeat="update in project.updated"
+                         class="col-md-6">
                         {{update.time| date: 'd.M.yyyy HH:mm'}};
                         muokkaajana {{update.user}}
-                    </li>
-                </ul>
+                    </div>
+                </div>
                 <div ng-show="project.updated.length === 0">
                     Ei muokkauksia.
                 </div>
+                &nbsp;
             </section>
             &nbsp;
         </article>
