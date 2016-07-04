@@ -33,7 +33,6 @@
             </td>
         </tr>
     </table>
-    <hr>
     <article class="border-body">
         <table>
             <tr>
@@ -259,6 +258,14 @@
                 <div class="report-content"
                      style="padding-right: 0; margin-bottom: 1em"
                      ng-bind-html="handleEmphasis(project.end_report.conclusion)">
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames['end_report_approved_date']}}
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.end_report.approved_date| date : 'dd.MM.yyyy': '+0200'}}
+                    </div>
                 </div>
             </td>
         </tr>

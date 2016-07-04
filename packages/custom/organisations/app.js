@@ -18,7 +18,7 @@ Organisations.register(function(app, auth, database, circles) {
   //We enable routing. By default the Package Object is passed to the routes
   Organisations.routes(app, auth, database);
 
-  Organisations.aggregateAsset('css', 'organisations.css');
+  Organisations.aggregateAsset('css', 'organisations.css', {global: false, absolute: false});
   Organisations.aggregateAsset('js', 'view.js', {global:true,  absolute: false});
 
 
