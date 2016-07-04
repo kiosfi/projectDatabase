@@ -563,7 +563,7 @@ A form for project state change.
               novalidate>
             <div class="form-group col-md-12">
                 <label for="payments" class="col-md-2">Maksatukset</label>
-                <p class="col-md-12 comment-form-div">Maksettu:</p>
+                <p class="col-md-12">Maksettu:</p>
                 <div class="form-group col-md-12"
                      ng-repeat="payment in project.payments">
                     <div class="col-md-4">
@@ -572,9 +572,9 @@ A form for project state change.
                     </div>
                 </div>
             </div>
-            <p class="col-md-12 strong-title comment-form-div">
+            <label class="col-md-12">
                 Toimintatavat ja niiden toteutuminen
-            </p>
+            </label>
             <div class="form-group col-md-12" ng-repeat="method in project.methods">
                 <div class="col-md-6" style="text-align: justify">
                     <p><em>{{method.name}}</em> ({{method.level}})</p>
@@ -589,9 +589,9 @@ A form for project state change.
                               id="intRMethods" placeholder="Kommentteja"></textarea>
                 </div>
             </div>
-            <p class="col-md-12 strong-title comment-form-div">
+            <label class="col-md-12">
                 Tavoitteet ja niiden toteutuminen
-            </p>
+            </label>
             <div class="form-group col-md-12">
                 <div class="col-md-6" style="text-align: justify">
                     <p ng-bind-html="handleEmphasis(project.project_goal)"></p>
@@ -794,9 +794,9 @@ A form for project state change.
                     </textarea>
                 </div>
             </div>
-            <p class="col-md-12 strong-title comment-form-div">
+            <label class="col-md-12">
                 Toiminnot ja niiden toteutuminen
-            </p>
+            </label>
             <div class="form-group col-md-12"
                  ng-repeat="method in project.methods">
                 <div class="col-md-6" style="text-align: justify">
@@ -813,9 +813,9 @@ A form for project state change.
                     </textarea>
                 </div>
             </div>
-            <p class="col-md-12 strong-title comment-form-div">
+            <label class="col-md-12">
                 Kokonaistavoitteen toteutuminen
-            </p>
+            </label>
             <div class="form-group col-md-12">
                 <div class="col-md-6" style="text-align: justify">
                     <p ng-bind-html="handleEmphasis(project.project_goal)">

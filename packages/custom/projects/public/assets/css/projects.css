@@ -1,39 +1,3 @@
-
-.visibilityAppinfo, .visibilityPayments,  .visibilityAttachments,  .visibilityReviewinfo,
-.visibilityRejectedinfo,  .visibilitySignedinfo,  .visibilityApprovedinfo, .visibilityEndedinfo {
-
-    display: none;
-}
-
-body {
-    padding-bottom: 50px;
-}
-
-h5 {
-    font-weight: bold;
-}
-
-hr {
-    border-color: #E5E5E5;
-}
-
-ul li {
-    list-style-type: none;
-}
-
-span ul li {
-    list-style-type: disc;
-}
-
-.tila {
-    float: right;
-}
-
-.states {
-    font-size: 17px;
-    font-weight: normal;
-}
-
 .proj-header {
     font-weight: bold;
 }
@@ -48,84 +12,9 @@ span ul li {
     font-style: normal;
 }
 
-.er-body {
-    line-height: 1.2;
-    font-size: 14px;
-    font-style: normal;
-    padding: 1em;
-}
-
 .border-body {
     border-style: solid;
     padding: 1em;
-}
-
-.change-box {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 3%;
-}
-
-.strong-title {
-    font-weight: bold;
-}
-
-.comment-form-div {
-    margin-top: 2%;
-}
-
-.btn {
-    height: 30px;
-    width: 100px;
-    background: #b8b8b8;
-    background-image: -webkit-linear-gradient(top, #b8b8b8, #9c9a9c);
-    background-image: -moz-linear-gradient(top, #b8b8b8, #9c9a9c);
-    background-image: -ms-linear-gradient(top, #b8b8b8, #9c9a9c);
-    background-image: -o-linear-gradient(top, #b8b8b8, #9c9a9c);
-    background-image: linear-gradient(to bottom, #b8b8b8, #9c9a9c);
-    -webkit-border-radius: 4;
-    -moz-border-radius: 4;
-    border-radius: 4px;
-    font-family: Courier New;
-    color: #ffffff;
-    font-size: 12px;
-    padding: 5px 5px 15px 5px;
-    text-decoration: none;
-}
-
-.btn:hover {
-    background: #919191;
-    background-image: -webkit-linear-gradient(top, #919191, #474647);
-    background-image: -moz-linear-gradient(top, #919191, #474647);
-    background-image: -ms-linear-gradient(top, #919191, #474647);
-    background-image: -o-linear-gradient(top, #919191, #474647);
-    background-image: linear-gradient(to bottom, #919191, #474647);
-    text-decoration: none;
-}
-
-.small-btn {
-    width: 50px;
-    height: 20px;
-    padding: 1px;
-}
-
-.large-btn {
-    height: 30px;
-    width: 110px;
-    background: #b8b8b8;
-    background-image: -webkit-linear-gradient(top, #b8b8b8, #9c9a9c);
-    background-image: -moz-linear-gradient(top, #b8b8b8, #9c9a9c);
-    background-image: -ms-linear-gradient(top, #b8b8b8, #9c9a9c);
-    background-image: -o-linear-gradient(top, #b8b8b8, #9c9a9c);
-    background-image: linear-gradient(to bottom, #b8b8b8, #9c9a9c);
-    -webkit-border-radius: 4;
-    -moz-border-radius: 4;
-    border-radius: 4px;
-    font-family: Courier New;
-    color: #ffffff;
-    font-size: 12px;
-    padding: 5px 5px 15px 5px;
-    text-decoration: none;
 }
 
 .proj-content {
@@ -201,14 +90,6 @@ span ul li {
 .report-body {
     font-family:        "Times New Roman", Times, serif;
     font-size:          12pt;
-}
-
-.report-body > hr {
-    display:            block;
-    margin-top:         0.5em;
-    margin-bottom:      1.0em;
-    border-style:       solid;
-    border-width:       1px;
 }
 
 @media only screen and (min-width: 1800px) {
