@@ -14,7 +14,7 @@
         </h1>
         <hr>
     </div>
-    <ul id="menu" class="nav nav-list org-nav">
+    <ul id="menu" class="nav nav-list navtree">
         <li>
             <label><a href="#header">Järjestö</a></label>
             <ul>
@@ -33,9 +33,9 @@
             <label><a href="#log">Muokkaukset</a></label>
         </li>
     </ul>
-    <article id="summary" class="org-article">
+    <article id="summary" class="article">
         <h4>Perustiedot</h4>
-        <div class="org-content">
+        <section class="section">
             <div class="col-md-12">
                 <div class="col-md-3 mini-header">Edustaja</div>
                 <div class="col-md-9">
@@ -93,12 +93,12 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </section>
         &nbsp;
     </article>
-    <article id="bankInfo" class="org-article">
+    <article id="bankInfo" class="article">
         <h4>Tilitiedot</h4>
-        <div class="org-content">
+        <section class="section">
             <div class="col-md-12">
                 <div class="col-md-3 mini-header">Tilin haltija</div>
                 <div class="col-md-9">
@@ -127,13 +127,13 @@
                     {{organisation.bank_account.bank_contact_details}}
                 </div>
             </div>
-        </div>
+        </section>
         &nbsp;
     </article>
-    <article id="prevApp" class="org-article"
+    <article id="prevApp" class="article"
              data-ng-init="findOrgProjects()">
         <h4>KIOSilta rahoitusta hakeneet hankkeet</h4>
-        <div class="org-content">
+        <section class="section">
             <div data-ng-repeat="project in orgProjects"
                  class="col-md-12">
                 <div class="col-md-6 mini-header">
@@ -150,57 +150,57 @@
             <div data-ng-if="!orgProjects.length">
                 Ei rahoitusta hakeneita hankkeita
             </div>
-        </div>
+        </section>
         &nbsp;
     </article>
-    <article id="legalStatus" class="org-article">
+    <article id="legalStatus" class="article">
         <h4>Hallintomalli ja henkilöstö</h4>
-        <section class="org-content">
+        <section class="section">
             <p>{{organisation.legal_status}}</p>
         </section>
     </article>
-    <article id="description" class="org-article">
+    <article id="description" class="article">
         <h4>Tavoitteet ja keskeiset toimintatavat</h4>
-        <section class="org-content">
+        <section class="section">
             <p>{{organisation.description}}</p>
         </section>
     </article>
-    <article id="connections" class="org-article">
+    <article id="connections" class="article">
         <h4>Kansalliset yhteydet</h4>
-        <section class="org-content">
+        <section class="section">
             {{organisation.nat_local_links}}
         </section>
         <h4>Kansainväliset yhteydet</h4>
-        <section class="org-content">
+        <section class="section">
             {{organisation.int_links}}
         </section>
     </article>
-    <article id="otherDonors" class="org-article">
+    <article id="otherDonors" class="article">
         <h4>Muut rahoittajat ja budjetti</h4>
-        <section class="org-content">
+        <section class="section">
             <p>{{organisation.other_funding_budget}}</p>
         </section>
         <h4>Taloushallinto ja tilintarkastus</h4>
-        <section class="org-content">
+        <section class="section">
             <p>{{organisation.accounting_audit}}</p>
         </section>
     </article>
-    <article id="background" class="org-article">
+    <article id="background" class="article">
         <h4>Oleelliset taustatiedot</h4>
-        <section class="org-content">
+        <section class="section">
             <p>{{organisation.background}}</p>
         </section>
     </article>
-    <article id="special_notes" class="org-article"
+    <article id="special_notes" class="article"
              ng-show="organisation.special_notes">
         <h4>Erityishuomioita</h4>
-        <section class="org-content">
+        <section class="section">
             <p>{{organisation.special_notes}}</p>
         </section>
     </article>
-    <article id="log" class="org-article">
+    <article id="log" class="article">
         <h4>Muokkaukset</h4>
-        <section class="org-content">
+        <section class="section">
             <ul ng-show="organisation.updated.length > 0">
                 <li data-ng-repeat="update in organisation.updated">
                     {{update.time| date: 'dd.MM.yyyy HH:mm'}},
