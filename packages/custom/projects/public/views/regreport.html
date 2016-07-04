@@ -33,7 +33,6 @@
             </td>
         </tr>
     </table>
-    <hr>
     <article class="col-md-12 border-body">
         <table>
             <tr>
@@ -193,7 +192,7 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Aiemmat avustukset KIOS:lta
+                        Aiemmat avustukset KIOSilta
                     </div>
                     <div class="report-subcontent">
                         <div data-ng-repeat="proj in other_projects">
@@ -248,7 +247,7 @@
                             <tr ng-repeat="method in project.methods">
                                 <td>
                                     <em>{{method.name}}</em> ({{method.level}})
-                                    <p class="proj-subcontent">
+                                    <p class="subcontent">
                                         <span ng-bind-html="handleEmphasis(method.comment)"></span>
                                     </p>
                                 </td>
@@ -339,7 +338,7 @@
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
-            <td class="report-header">KIOS:n arvio</td>
+            <td class="report-header">KIOSin arvio</td>
             <td>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
@@ -387,6 +386,14 @@
                     </div>
                     <div class="report-subcontent">
                         <span ng-bind-html="handleEmphasis(project.approved.decision)"></span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames["approved_approved_date"]}}
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.approved.approved_date| date : 'dd.MM.yyyy': '+0200'}}
                     </div>
                 </div>
             </td>

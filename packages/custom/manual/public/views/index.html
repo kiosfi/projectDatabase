@@ -2,7 +2,7 @@
     <h1>Käyttöohje</h1>
     <hr>
     <div>
-        <ul id="menu" class="col-md-3 nav nav-list man-nav">
+        <ul id="menu" class="col-md-3 nav nav-list navtree">
             <li>
                 <label><a href="#notes">1. Yleisiä huomioita</a></label>
                 <ul>
@@ -79,9 +79,9 @@
         CSV output.  -->
 
         <!--<div style="margin-left: 220px">-->
-        <article id="notes" class="man-article">
+        <article id="notes" class="article">
             <h4>1. Yleisiä huomioita</h4>
-            <section class="man-content">
+            <section class="section">
                 <p>
                     Tämä on KIOSin hanketietojärjestelmän (myöhemmin
                     "järjestelmä", "sovellus", tms.) käyttöohje. Kyseessä on
@@ -124,7 +124,7 @@
                     resoluutiolla maksimoidulla selainikkunalla.
                 </p>
                 <h5 id="inputs">1.1. Syötekentistä</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Ennen varsinaisten lomakkeiden kuvailua on syytä käydä
                         läpi muutama yleinen huomio syötekentistä.
@@ -169,7 +169,7 @@
                     </div>
                 </div>
                 <h5 id="formatting">1.2. Tekstin muotoilusta</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Tämän kappaleen tiedot koskevat kaikkia paitsi
                         hakulomakkeita.
@@ -221,9 +221,9 @@
                 </div>
             </section>
         </article>
-        <article id="projCreation" class="man-article">
+        <article id="projCreation" class="article">
             <h4>2. Hankkeen lisäys</h4>
-            <section class="man-content">
+            <section class="section">
                 <p>
                     KIOSin hanketietojärjestelmän ensisijainen tarkoitus on
                     KIOSin rahoittamien ihmisoikeushankkeiden relevanttien
@@ -235,7 +235,7 @@
                     tämä toiminto on luontevinta käsitellä ensimmäisenä.
                 </p>
                 <h5 id="projCreationForm">2.1. Hankkeen lisäyslomake</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Järjestelmään syötetään tietoja HTML-lomakkeiden kautta.
                         Sisäänkirjautumisen jälkeen hankkeen lisäyslomakkeeseen
@@ -316,9 +316,9 @@
                 </div>
             </section>
         </article>
-        <article id="orgCreation" class="man-article">
+        <article id="orgCreation" class="article">
             <h4>3. Järjestön lisäys</h4>
-            <section class="man-content">
+            <section class="section">
                 <p>
                     Tällä hetkellä järjestöjen lisäämiselle ei ole erillistä
                     lomaketta, vaan lisäys tapahtuu hankkeen lisäyksen
@@ -332,7 +332,7 @@
                     <a href="#projCreation">2.&nbsp;Hankken&nbsp;lisäys</a>).
                 </p>
                 <h5 id="orgCreationForm">3.1. Järjestön lisäyslomake</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Uuden järjestön tietojen syöttäminen aloitetaan
                         painamalla painiketta <em>Lisää uusi järjestö</em>.
@@ -426,9 +426,9 @@
                 </div>
             </section>
         </article>
-        <article id="projView" class="man-article">
+        <article id="projView" class="article">
             <h4>4. Hankenäkymä</h4>
-            <section class="man-content">
+            <section class="section">
                 <p>
                     Selain siis ohjataan automaattisesti hankkeen näkymäsivulle,
                     kun hankkeen lisääminen on suoritettu. Hankkeen
@@ -499,9 +499,9 @@
                 </p>
             </section>
         </article>
-        <article id="projList" class="man-article">
+        <article id="projList" class="article">
             <h4>5. Hankelistaus</h4>
-            <section class="man-content">
+            <section class="section">
                 <p>
                     Hankelistaukseen pääsee navigaatiopalkin painikketta
                     <em>Hankelistaus</em> klikkaamalla. Hankelistaus näyttää
@@ -539,17 +539,17 @@
                 </p>
             </section>
         </article>
-        <article id="orgList" class="man-article">
+        <article id="orgList" class="article">
             <h4>6. Järjestölistaus</h4>
-            <section class="man-content">
+            <section class="section">
                 Järjestölistaus on oleellisesti samankaltainen kuin
                 hankelistaus.
                 (Ks. <a href="#projList">5.&nbsp;Hankelistaus</a>).
             </section>
         </article>
-        <article id="projSearch" class="man-article">
+        <article id="projSearch" class="article">
             <h4>7. Hankehaku</h4>
-            <section class="man-content">
+            <section class="section">
                 <p>
                     Hankehaku mahdollistaa monenlaisten hankedokumentteihin
                     kohdistuvien tietokantakyselyiden suorittamisen, sekä
@@ -581,7 +581,7 @@
                     </figcaption>
                 </figure>
                 <h5 id="regex">7.1. Säännölliset lausekkeet</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Tekstimuotoisissa hakukentissä käytetään säännöllisiä
                         lausekkeita. Tässä kappaleessa annetaan lyhyt selostus
@@ -704,7 +704,7 @@
                     </ul>
                 </div>
                 <h5 id="combinations">7.2. Hakukriteerien yhdistäminen</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Tällä hetkellä järjestelmä tukee hakukriteerien
                         yhdistämistä ainoastaan loogisen AND-konjunktion avulla.
@@ -789,7 +789,7 @@
                     </p>
                 </div>
                 <h5 id="export">7.3. Hakutulosten vienti</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Kun halutut hakutulokset on löydetty, voidaan ne
                         tallentaa myöhempää käyttöä varten kahdella tavalla.
@@ -826,7 +826,7 @@
                     </p>
                 </div>
                 <h5 id="criteria">7.4. Hakukriteerien tyypit</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Kuten kappaleen 7.2. esimerkeistä kävi ilmi,
                         hakukriteerejä on erityyppisiä. Vaikka eri
@@ -917,9 +917,9 @@
                 </div>
             </section>
         </article>
-        <article id="orgSearch" class="man-article">
+        <article id="orgSearch" class="article">
             <h4>8. Järjestöhaku</h4>
-            <section class="man-content">
+            <section class="section">
                 <p>
                     Järjestöhaku on oleellisesti samankaltainen kuin hankehaku
                     (ks. <a href="#projSearch">7.&nbsp;Hankehaku</a>).
@@ -948,9 +948,9 @@
                 </ol>
             </section>
         </article>
-        <article id="paymentSearch" class="man-article">
+        <article id="paymentSearch" class="article">
             <h4>9. Maksuhaku</h4>
-            <section class="man-content">
+            <section class="section">
                 <p>
                     Maksuhaku on oleellisesti samankaltainen kuin hankehaku
                     (ks. <a href="#projSearch">7.&nbsp;Hankehaku</a>).
@@ -968,9 +968,9 @@
                 </ol>
             </section>
         </article>
-        <article id="states" class="man-article">
+        <article id="states" class="article">
             <h4>10. Hankkeen tilat</h4>
-            <section class="man-content">
+            <section class="section">
                 <p>
                     Järjestelmään tallennetulla hankkeella on aina
                     yksikäsitteinen tila. Tila määrää mm. mitä tietoja hanke
@@ -979,7 +979,7 @@
                     siirtää.
                 </p>
                 <h5 id="stateModel">10.1. Tilamalli</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Järjestelmän tilamallissa hankkeen alkutila on
                         <tt>Rekisteröity</tt>. Jokainen lisätty uusi hanke
@@ -1065,7 +1065,7 @@
                     </p>
                 </div>
                 <h5 id="stateProperties">10.2. Tilojen erityispiirteitä</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         <a href="#fig11">Kuvassa&nbsp;11</a> keltasella
                         väritetyt tilat ovat sellaisia, että hankkeen katsotaan
@@ -1125,7 +1125,7 @@
                     </p>
                 </div>
                 <h5 id="incompleteness">10.3. Hanketietojen keskeneräisyys</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Järjestelmän tilamallin heikkokutena on, että se joutuu
                         olettamaan tilasiirtymässä annetut tiedot oikeiksi ja
@@ -1154,9 +1154,9 @@
                 </div>
             </section>
         </article>
-        <article id="projEdit" class="man-article">
+        <article id="projEdit" class="article">
             <h4>11. Hankkeen muokkaus</h4>
-            <section class="man-content">
+            <section class="section">
                 <p>
                     Tämä kappale käsittelee hankkeen muokkausta muuten kuin
                     tilasiirtymien yhteydessä. Tilasiirtymiä käsitellään luvussa
@@ -1170,7 +1170,7 @@
                     hankkeen näkymäsivulla.
                 </p>
                 <h5 id="projEditForm">11.1. Hankkeen muokkauslomake</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Seuraavassa kuvassa näkyy hankkeen muokkauslomake, joka
                         on jaettu hankkeen tiloja vastaaviin osioihin. Hankkeen
@@ -1189,7 +1189,7 @@
                     </figure>
                 </div>
                 <h5 id="addPayment">11.2. Maksun lisäyslomake</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Seuraavassa kuvassa näkyvä maksun lisäyslomake:
                     </p>
@@ -1226,7 +1226,7 @@
                     </div>
                 </div>
                 <h5 id="addAppendix">11.3. Liitteen lisäyslomake</h5>
-                <div class="man-subcontent">
+                <div class="subcontent">
                     <p>
                         Seuraavassa kuvassa näkyy <em>Liitteen lisäys</em>
                         -lomake, jonka kautta talousraportin ja muidenkin
@@ -1254,9 +1254,9 @@
                 </div>
             </section>
         </article>
-        <article id="orgEdit" class="man-article">
+        <article id="orgEdit" class="article">
             <h4>12. Järjestön muokkaus</h4>
-            <section class="man-content">
+            <section class="section">
                 <p>
                     Hankkeen tavoin myös järjestöllä on näkymäsivu. Myös
                     järjestön nimen vieressä on poisto- ja muokkauspainikkeet,

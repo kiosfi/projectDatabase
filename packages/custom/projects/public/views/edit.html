@@ -3,700 +3,696 @@
     <hr>
     <form name="projectEditForm" class="form-horizontal" role="form"
           data-ng-submit="update(projectEditForm.$valid)" novalidate>
-        <fieldset>
-            <legend>
-                <a href="" ng-click="showRegDetails = !showRegDetails">
-                    Rekisteröity-tilan tiedot
-                </a>
-            </legend>
-            <div class="fs1" ng-show="showRegDetails">
-                <article class="well-lg">
-                    <fieldset>
-                        <legend>
+        <fieldset class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a href="" ng-click="showRegDetails = !showRegDetails">
+                        <span class="glyphicon"
+                              ng-class="showRegDetails
+                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Rekisteröity-tila
+                    </a>
+                </h4>
+            </div>
+            <div class="panel-body" ng-show="showRegDetails">
+                <fieldset class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5>
                             <a ng-click="showProjInfo = !showProjInfo">
+                                <span class="glyphicon"
+                                      ng-class="showProjInfo
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                </span>
                                 Perustiedot
                             </a>
-                        </legend>
-                        <div ng-show="showProjInfo">
-                            <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">
-                                    {{fieldNames["security_level"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <select data-ng-model="project.security_level">
-                                        <option data-ng-repeat="sec_level in securityLevels">{{sec_level}}</option>
-                                    </select>
-                                </div>
+                        </h5>
+                    </div>
+                    <div ng-show="showProjInfo" class="panel-body">
+                        <div class="form-group col-md-6">
+                            <label class="col-md-3 control-label">
+                                {{fieldNames["security_level"]}}
+                            </label>
+                            <div class="col-md-9">
+                                <select data-ng-model="project.security_level">
+                                    <option data-ng-repeat="sec_level in securityLevels">{{sec_level}}</option>
+                                </select>
                             </div>
-                            <div class="form-group col-md-6"
-                                 ng-class="{'has-error': projectEditForm.title.$invalid }">
-                                <label class="col-md-3 control-label">
-                                    {{fieldNames["title"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <input name="title" type="text"
-                                           class="form-control"
-                                           data-ng-model="project.title"
-                                           id="title" required>
-                                    <div ng-show="projectEditForm.title.$invalid"
-                                         class="help-block">
-                                        <p ng-show="projectEditForm.title.$error.required">
-                                            Nimi on pakollinen
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6"
-                                 ng-class="{'has-error': projectEditForm.coordinator.$invalid }">
-                                <label  class="col-md-3 control-label">
-                                    {{fieldNames["coordinator"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <input name="coordinator" type="text"
-                                           class="form-control"
-                                           data-ng-model="project.coordinator"
-                                           id="coordinator" required>
-                                    <div ng-show="projectEditForm.coordinator.$invalid"
-                                         class="help-block">
-                                        <p ng-show="projectEditForm.coordinator.$error.required">
-                                            Koordinaattori on pakollinen
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6" >
-                                <label for="description"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["description"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="description"
-                                              data-ng-model="project.description"
-                                              id="description"
-                                              class="form-control" >
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6" >
-                                <label for="description_en"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["description_en"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="description_en"
-                                              data-ng-model="project.description_en"
-                                              id="description_en"
-                                              class="form-control">
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">
-                                    {{fieldNames["funding_applied_curr_local"]}}
-                                </label>
-                                <div class="col-md-5">
-                                    <input name="appliedlocal" type="number"
-                                           class="form-control"
-                                           data-ng-model="project.funding.applied_curr_local"
-                                           id="appliedlocal">
-                                </div>
-                                <div class="col-md-2">
-                                    <select id="curr_local_unit"
-                                            data-ng-model="project.funding.curr_local_unit">
-                                        <option data-ng-repeat="unit in currencyUnits">{{unit}}</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="text"
-                                           data-ng-model="project.funding.curr_local_unit"
-                                           class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label  class="col-md-3 control-label">
-                                    Haettu avustus
-                                    <!--{{fieldNames["funding_applied_curr_eur"]}}-->
-                                </label>
-                                <div class="col-md-8">
-                                    <input name="appliedeur" type="number"
-                                           class="form-control"
-                                           data-ng-model="project.funding.applied_curr_eur"
-                                           id="appliedeur"
-                                           placeholder="Haettu avustus (EUR)">
-                                </div>
-                                <label  class="col-md-1 control-label">
-                                    EUR
-                                </label>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">
-                                    {{fieldNames["duration_months"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <input name="duration" type="number"
-                                           class="form-control"
-                                           data-ng-model="project.duration_months"
-                                           id="duration">
+                        </div>
+                        <div class="form-group col-md-6"
+                             ng-class="{
+                                     'has-error'
+                                     : projectEditForm.title.$invalid }">
+                            <label class="col-md-3 control-label">
+                                {{fieldNames["title"]}}
+                            </label>
+                            <div class="col-md-9">
+                                <input name="title" type="text"
+                                       class="form-control"
+                                       data-ng-model="project.title"
+                                       id="title" required>
+                                <div ng-show="projectEditForm.title.$invalid"
+                                     class="help-block">
+                                    <p ng-show="projectEditForm.title.$error.required">
+                                        Nimi on pakollinen
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                    </fieldset>
-                </article>
-                <article class="well-lg">
-                    <fieldset>
-                        <legend>
+                        <div class="form-group col-md-6"
+                             ng-class="{
+                                     'has-error'
+                                     : projectEditForm.coordinator.$invalid }">
+                            <label  class="col-md-3 control-label">
+                                {{fieldNames["coordinator"]}}
+                            </label>
+                            <div class="col-md-9">
+                                <input name="coordinator" type="text"
+                                       class="form-control"
+                                       data-ng-model="project.coordinator"
+                                       id="coordinator" required>
+                                <div ng-show="projectEditForm.coordinator.$invalid"
+                                     class="help-block">
+                                    <p ng-show="projectEditForm.coordinator.$error.required">
+                                        Koordinaattori on pakollinen
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6" >
+                            <label for="description"
+                                   class="col-md-3 control-label">
+                                {{fieldNames["description"]}}
+                            </label>
+                            <div class="col-md-9">
+                                <textarea name="description"
+                                          data-ng-model="project.description"
+                                          id="description"
+                                          class="form-control" >
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6" >
+                            <label for="description_en"
+                                   class="col-md-3 control-label">
+                                {{fieldNames["description_en"]}}
+                            </label>
+                            <div class="col-md-9">
+                                <textarea name="description_en"
+                                          data-ng-model="project.description_en"
+                                          id="description_en"
+                                          class="form-control">
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-3 control-label">
+                                {{fieldNames["funding_applied_curr_local"]}}
+                            </label>
+                            <div class="col-md-5">
+                                <input name="appliedlocal" type="number"
+                                       class="form-control"
+                                       data-ng-model="project.funding.applied_curr_local"
+                                       id="appliedlocal">
+                            </div>
+                            <div class="col-md-2">
+                                <select id="curr_local_unit"
+                                        data-ng-model="project.funding.curr_local_unit">
+                                    <option data-ng-repeat="unit in currencyUnits">{{unit}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text"
+                                       data-ng-model="project.funding.curr_local_unit"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label  class="col-md-3 control-label">
+                                Haettu avustus
+                                <!--{{fieldNames["funding_applied_curr_eur"]}}-->
+                            </label>
+                            <div class="col-md-8">
+                                <input name="appliedeur" type="number"
+                                       class="form-control"
+                                       data-ng-model="project.funding.applied_curr_eur"
+                                       id="appliedeur"
+                                       placeholder="Haettu avustus (EUR)">
+                            </div>
+                            <label  class="col-md-1 control-label">
+                                EUR
+                            </label>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-3 control-label">
+                                {{fieldNames["duration_months"]}}
+                            </label>
+                            <div class="col-md-9">
+                                <input name="duration" type="number"
+                                       class="form-control"
+                                       data-ng-model="project.duration_months"
+                                       id="duration">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5>
                             <a ng-click="showProjDetails = !showProjDetails">
+                                <span class="glyphicon"
+                                      ng-class="showProjDetails
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                </span>
                                 Lisätiedot
                             </a>
-                        </legend>
-                        <div ng-show="showProjDetails">
-                            <div class="form-group col-md-12">
-                                <label mean-token="'create-methods'"
-                                       class="col-md-2">
-                                    {{fieldNames["methods"]}}
+                        </h5>
+                    </div>
+                    <div ng-show="showProjDetails" class="panel-body">
+                        <div class="form-group col-md-12">
+                            <label mean-token="'create-methods'"
+                                   class="col-md-2">
+                                {{fieldNames["methods"]}}
+                            </label>
+                            <div class="col-md-12 panel panel-default"
+                                 id="methodsSelection"
+                                 data-ng-repeat="method in addedMethods">
+                                <div class="panel-body">
+                                    <div class="col-md-7">
+                                        <label class="control-label col-md-2">
+                                            Toiminto
+                                        </label>
+                                        <select id="methodSelect" class="col-md-10"
+                                                data-ng-model="method.name">
+                                            <option data-ng-repeat="methodName in methodNames"
+                                                    value="{{methodName}}">
+                                                {{methodName}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="control-label col-md-3">
+                                            Taso
+                                        </label>
+                                        <select id="levelSelect" class="col-md-9"
+                                                data-ng-model="method.level">
+                                            <option data-ng-repeat="methodLevel in methodLevels"
+                                                    value="{{methodLevel}}">
+                                                {{methodLevel}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <!-- TODO: Warn the user about the fact that this is a
+                                    required field too: -->
+                                    <div class="col-md-12" style="margin-top: 0.5em">
+                                        <label for="methodComment"
+                                               class="col-md-1 control-label">
+                                            Kuvaus
+                                        </label>
+                                        <div class="col-md-11">
+                                            <textarea name="methodComment"
+                                                      data-ng-model="method.comment"
+                                                      id="methodComment" class="form-control"
+                                                      placeholder="Toiminnon kuvaus (pakollinen)"
+                                                      required>
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="button" value="Lisää uusi"
+                                       ng-click="addMethod();"/>
+                                <input type="button" value="Poista viimeinen"
+                                       ng-click="removeMethod();"/>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <hr>
+                            <div class="form-group col-md-4">
+                                <label class="col-md-3 control-label" for="country">
+                                    {{fieldNames["country"]}}
                                 </label>
-                                <div class="col-md-12" id="methodsSelection"
-                                     data-ng-repeat="method in addedMethods">
-                                    <select id="methodSelect"
-                                            data-ng-model="method.name">
-                                        <option data-ng-repeat="methodName in methodNames"
-                                                value="{{methodName}}">
-                                            {{methodName}}
-                                        </option>
-                                    </select>
-                                    <select id="levelSelect"
-                                            data-ng-model="method.level">
-                                        <option data-ng-repeat="methodLevel in methodLevels"
-                                                value="{{methodLevel}}">
-                                            {{methodLevel}}
-                                        </option>
-                                    </select>
-                                    <div style="clear:both;">&nbsp;</div>
-                                    <textarea name="methodComment"
-                                              data-ng-model="method.comment"
-                                              id="methodComment"
-                                              placeholder="Toiminnon kuvaus (pakollinen)"
+                                <div class="col-md-9">
+                                    <input name="country" type="text"
+                                           class="form-control"
+                                           data-ng-model="project.country" id="country">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="col-md-3 control-label" for="region">
+                                    {{fieldNames["region"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <input name="region" type="text"
+                                           class="form-control"
+                                           data-ng-model="project.region" id="region">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="col-md-3 control-label" for="dac">
+                                    {{fieldNames["dac"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <input name="dac" type="text" class="form-control"
+                                           data-ng-model="project.dac" id="dac">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="project_goal"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["project_goal"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="project_goal"
+                                              data-ng-model="project.project_goal"
+                                              id="project_goal" class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="context"
+                                       class="col-md-3 control-label">
+                                    Konteksti
+                                    <!--{{fieldNames["context"]}}-->
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="context"
+                                              data-ng-model="project.context"
+                                              id="context" class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="target_group" class="col-md-3 control-label">
+                                    {{fieldNames["target_group"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="target_group"
+                                              data-ng-model="project.target_group"
+                                              id="target_group" class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="gender_aspect"
+                                       class="col-md-3 control-label">
+                                    T-A. ja muut teemat
+                                    <!--{{fieldNames["gender_aspect"]}}-->
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="gender_aspect"
+                                              data-ng-model="project.gender_aspect"
+                                              id="gender_aspect" class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="vulnerable_groups"
+                                       class="col-md-3 control-label">
+                                    Haavoitt. ryhmien huomiointi
+                                    <!--{{fieldNames["vulnerable_groups"]}}-->
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="vulnerable_groups"
+                                              data-ng-model="project.vulnerable_groups"
+                                              id="vulnerable_groups"
                                               class="form-control">
                                     </textarea>
                                 </div>
-                                <div style="clear:both;">&nbsp;</div>
-                                <div class="col-md-12">
-                                    <input type="button" value="Lisää uusi"
-                                           ng-click="addMethod();"/>
-                                    <input type="button"
-                                           value="Poista viimeinen"
-                                           ng-click="removeMethod();"/>
-                                </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group col-md-4">
-                                    <label class="col-md-3 control-label" for="country">
-                                        {{fieldNames["country"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input name="country" type="text"
-                                               class="form-control"
-                                               data-ng-model="project.country" id="country">
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label class="col-md-3 control-label" for="region">
-                                        {{fieldNames["region"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input name="region" type="text"
-                                               class="form-control"
-                                               data-ng-model="project.region" id="region">
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label class="col-md-3 control-label" for="dac">
-                                        {{fieldNames["dac"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input name="dac" type="text" class="form-control"
-                                               data-ng-model="project.dac" id="dac">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label for="project_goal"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["project_goal"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="project_goal"
-                                                  data-ng-model="project.project_goal"
-                                                  id="project_goal" class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="context"
-                                           class="col-md-3 control-label">
-                                        Konteksti
-                                        <!--{{fieldNames["context"]}}-->
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="context"
-                                                  data-ng-model="project.context"
-                                                  id="context" class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label for="target_group" class="col-md-3 control-label">
-                                        {{fieldNames["target_group"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="target_group"
-                                                  data-ng-model="project.target_group"
-                                                  id="target_group" class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="gender_aspect"
-                                           class="col-md-3 control-label">
-                                        T-A. ja muut teemat
-                                        <!--{{fieldNames["gender_aspect"]}}-->
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="gender_aspect"
-                                                  data-ng-model="project.gender_aspect"
-                                                  id="gender_aspect" class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label for="vulnerable_groups"
-                                           class="col-md-3 control-label">
-                                        Haavoitt. ryhmien huomiointi
-                                        <!--{{fieldNames["vulnerable_groups"]}}-->
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="vulnerable_groups"
-                                                  data-ng-model="project.vulnerable_groups"
-                                                  id="vulnerable_groups"
-                                                  class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="planned_results"
-                                           class="col-md-3 control-label">
-                                        Odotetut keskeiset tulokset
-                                        <!--{{fieldNames["planned_results"]}}-->
-                                    </label>
+                            <div class="form-group col-md-6">
+                                <label for="planned_results"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["planned_results"]}}
+                                </label>
 
-                                    <div class="col-md-9">
-                                        <textarea name="planned_results"
-                                                  data-ng-model="project.planned_results"
-                                                  id="planned_results" class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label for="indicators"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["indicators"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="indicators"
-                                                  data-ng-model="project.indicators"
-                                                  id="indicators" class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="risk_control"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["risk_control"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="risk_control"
-                                                  data-ng-model="project.risk_control"
-                                                  id="risk_control" class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label for="reporting_evaluation"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["reporting_evaluation"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="reporting_evaluation"
-                                                  data-ng-model="project.reporting_evaluation"
-                                                  id="reporting_evaluation"
-                                                  class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="human_resources"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["human_resources"]}}
-                                    </label>
-
-                                    <div class="col-md-9">
-                                        <textarea name="human_resources"
-                                                  data-ng-model="project.human_resources"
-                                                  id="human_resources" class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label for="budget"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["budget"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="budget"
-                                                  data-ng-model="project.budget"
-                                                  id="budget"
-                                                  class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="other_donors_proposed"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["other_donors_proposed"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="other_donors_proposed"
-                                                  data-ng-model="project.other_donors_proposed"
-                                                  id="other_donors_proposed"
-                                                  class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label for="referees"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["referees"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="referees"
-                                                  data-ng-model="project.referees"
-                                                  id="referees"
-                                                  class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="background_check"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["background_check"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="background_check"
-                                                  data-ng-model="project.background_check"
-                                                  id="background_check"
-                                                  class="form-control">
-                                        </textarea>
-                                    </div>
+                                <div class="col-md-9">
+                                    <textarea name="planned_results"
+                                              data-ng-model="project.planned_results"
+                                              id="planned_results" class="form-control">
+                                    </textarea>
                                 </div>
                             </div>
                         </div>
-                    </fieldset>
-                </article>
-                <article class="well-lg">
-                    <fieldset>
-                        <legend>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="indicators"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["indicators"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="indicators"
+                                              data-ng-model="project.indicators"
+                                              id="indicators" class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="risk_control"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["risk_control"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="risk_control"
+                                              data-ng-model="project.risk_control"
+                                              id="risk_control" class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="reporting_evaluation"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["reporting_evaluation"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="reporting_evaluation"
+                                              data-ng-model="project.reporting_evaluation"
+                                              id="reporting_evaluation"
+                                              class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="human_resources"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["human_resources"]}}
+                                </label>
+
+                                <div class="col-md-9">
+                                    <textarea name="human_resources"
+                                              data-ng-model="project.human_resources"
+                                              id="human_resources" class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="budget"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["budget"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="budget"
+                                              data-ng-model="project.budget"
+                                              id="budget"
+                                              class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="other_donors_proposed"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["other_donors_proposed"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="other_donors_proposed"
+                                              data-ng-model="project.other_donors_proposed"
+                                              id="other_donors_proposed"
+                                              class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="referees"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["referees"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="referees"
+                                              data-ng-model="project.referees"
+                                              id="referees"
+                                              class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="background_check"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["background_check"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="background_check"
+                                              data-ng-model="project.background_check"
+                                              id="background_check"
+                                              class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5>
                             <a ng-click="showAssessment = !showAssessment">
-                                KIOS:n arvio
+                                <span class="glyphicon"
+                                      ng-class="showAssessment
+                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                </span>
+                                KIOSin arvio
                             </a>
-                        </legend>
-                        <div ng-show="showAssessment">
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label for="fitness"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["fitness"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="fitness"
-                                                  data-ng-model="project.fitness"
-                                                  id="fitness"
-                                                  class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="capacity"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["capacity"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="capacity"
-                                                  data-ng-model="project.capacity"
-                                                  id="capacity"
-                                                  class="form-control">
-                                        </textarea>
-                                    </div>
+                        </h5>
+                    </div>
+                    <div ng-show="showAssessment" class="panel-body">
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="fitness"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["fitness"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="fitness"
+                                              data-ng-model="project.fitness"
+                                              id="fitness"
+                                              class="form-control">
+                                    </textarea>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label for="feasibility"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["feasibility"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="feasibility"
-                                                  data-ng-model="project.feasibility"
-                                                  id="feasibility"
-                                                  class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="effectiveness"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["effectiveness"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="effectiveness"
-                                                  data-ng-model="project.effectiveness"
-                                                  id="effectiveness"
-                                                  class="form-control">
-                                        </textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label for="proposed_funding"
-                                           class="col-md-3 control-label">
-                                        {{fieldNames["proposed_funding"]}}
-                                    </label>
-                                    <div class="col-md-9">
-                                        <textarea name="proposed_funding"
-                                                  data-ng-model="project.proposed_funding"
-                                                  id="proposed_funding"
-                                                  class="form-control">
-                                        </textarea>
-                                    </div>
+                            <div class="form-group col-md-6">
+                                <label for="capacity"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["capacity"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="capacity"
+                                              data-ng-model="project.capacity"
+                                              id="capacity"
+                                              class="form-control">
+                                    </textarea>
                                 </div>
                             </div>
                         </div>
-                    </fieldset>
-                </article>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="feasibility"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["feasibility"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="feasibility"
+                                              data-ng-model="project.feasibility"
+                                              id="feasibility"
+                                              class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="effectiveness"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["effectiveness"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="effectiveness"
+                                              data-ng-model="project.effectiveness"
+                                              id="effectiveness"
+                                              class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="proposed_funding"
+                                       class="col-md-3 control-label">
+                                    {{fieldNames["proposed_funding"]}}
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea name="proposed_funding"
+                                              data-ng-model="project.proposed_funding"
+                                              id="proposed_funding"
+                                              class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
         </fieldset>
-        <fieldset ng-show="project.in_review.date">
-            <legend>
-                <a href="" ng-click="showInRevDetails = !showInRevDetails">
-                    Käsittelyssä-tilan tiedot
-                </a>
-            </legend>
-            <div class="form-group col-md-12" ng-show="showInRevDetails">
-                <div class="col-md-2">
-                    <label>{{fieldNames["required_appendices"]}}</label>
+        <fieldset ng-show="project.in_review.date" class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a href="" ng-click="showInRevDetails = !showInRevDetails">
+                        <span class="glyphicon"
+                              ng-class="showInRevDetails
+                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Käsittelyssä-tila
+                    </a>
+                </h4>
+            </div>
+            <div class="form-group col-md-12 panel-body"
+                 ng-show="showInRevDetails">
+                <div class="col-md-6">
+                    <label class="col-md-4 control-label">
+                        Toimitetut liitteet
+                        <!--{{fieldNames["required_appendices"]}}-->
+                    </label>
+                    <div class="col-md-8">
+                        <div class="col-md-12">
+                            <span class="col-md-6">
+                                <label for="proj_budget"
+                                       style="font-weight: normal">
+                                    {{fieldNames["required_appendices_proj_budget"]}}
+                                </label>
+                            </span>
+                            <span class="col-md-6">
+                                <input type="checkbox" id="proj_budget"
+                                       name="proj_budget"
+                                       ng-model="project.required_appendices.proj_budget">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="col-md-6">
+                                <label for="references" style="font-weight: normal">
+                                    {{fieldNames["required_appendices_references"]}}
+                                </label>
+                            </span>
+                            <span class="col-md-6">
+                                <input type="checkbox" id="references" name="references"
+                                       ng-model="project.required_appendices.references">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="col-md-6">
+                                <label for="annual_budget"
+                                       style="font-weight: normal">
+                                    {{fieldNames["required_appendices_annual_budget"]}}
+                                </label>
+                            </span>
+                            <span class="col-md-6">
+                                <input type="checkbox" id="annual_budget"
+                                       name="annual_budget"
+                                       ng-model="project.required_appendices.annual_budget">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="col-md-6">
+                                <label for="rules" style="font-weight: normal">
+                                    {{fieldNames["required_appendices_rules"]}}
+                                </label>
+                            </span>
+                            <span class="col-md-6">
+                                <input type="checkbox" id="rules" name="rules"
+                                       ng-model="project.required_appendices.rules">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="col-md-6">
+                                <label for="reg_cert" style="font-weight: normal">
+                                    {{fieldNames["required_appendices_reg_cert"]}}
+                                </label>
+                            </span>
+                            <span class="col-md-6">
+                                <input type="checkbox" id="reg_cert" name="reg_cert"
+                                       ng-model="project.required_appendices.reg_cert">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="col-md-6">
+                                <label for="annual_report"
+                                       style="font-weight: normal">
+                                    {{fieldNames["required_appendices_annual_report"]}}
+                                </label>
+                            </span>
+                            <span class="col-md-6">
+                                <input type="checkbox" id="annual_report"
+                                       name="annual_report"
+                                       ng-model="project.required_appendices.annual_report">
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="col-md-6">
+                                <label for="audit_reports"
+                                       style="font-weight: normal">
+                                    {{fieldNames["required_appendices_audit_reports"]}}
+                                </label>
+                            </span>
+                            <span class="col-md-6">
+                                <input type="checkbox" id="audit_reports"
+                                       name="audit_reports"
+                                       ng-model="project.required_appendices.audit_reports">
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-6">
+                    <label for="comments" class="col-md-2 control-label">
+                        {{fieldNames["in_review_comments"]}}
+                    </label>
                     <div class="col-md-10">
-                        <span class="col-md-3">
-                            <label for="proj_budget">
-                                {{fieldNames["required_appendices_proj_budget"]}}
-                            </label>
-                        </span>
-                        <span class="col-md-7">
-                            <input type="checkbox" id="proj_budget"
-                                   name="proj_budget"
-                                   ng-model="project.required_appendices.proj_budget">
-                        </span>
+                        <textarea name="comments" type="text" class="form-control"
+                                  data-ng-model="project.in_review.comments"
+                                  id="comments">
+                        </textarea>
                     </div>
-                    <div class="col-md-10">
-                        <span class="col-md-3">
-                            <label for="references">
-                                {{fieldNames["required_appendices_references"]}}
-                            </label>
-                        </span>
-                        <span class="col-md-7">
-                            <input type="checkbox" id="references" name="references"
-                                   ng-model="project.required_appendices.references">
-                        </span>
-                    </div>
-                    <div class="col-md-10">
-                        <span class="col-md-3">
-                            <label for="annual_budget">
-                                {{fieldNames["required_appendices_annual_budget"]}}
-                            </label>
-                        </span>
-                        <span class="col-md-7">
-                            <input type="checkbox" id="annual_budget"
-                                   name="annual_budget"
-                                   ng-model="project.required_appendices.annual_budget">
-                        </span>
-                    </div>
-                    <div class="col-md-10">
-                        <span class="col-md-3">
-                            <label for="rules">
-                                {{fieldNames["required_appendices_rules"]}}
-                            </label>
-                        </span>
-                        <span class="col-md-7">
-                            <input type="checkbox" id="rules" name="rules"
-                                   ng-model="project.required_appendices.rules">
-                        </span>
-                    </div>
-                    <div class="col-md-10">
-                        <span class="col-md-3">
-                            <label for="reg_cert">
-                                {{fieldNames["required_appendices_reg_cert"]}}
-                            </label>
-                        </span>
-                        <span class="col-md-7">
-                            <input type="checkbox" id="reg_cert" name="reg_cert"
-                                   ng-model="project.required_appendices.reg_cert">
-                        </span>
-                    </div>
-                    <div class="col-md-10">
-                        <span class="col-md-3">
-                            <label for="annual_report">
-                                {{fieldNames["required_appendices_annual_report"]}}
-                            </label>
-                        </span>
-                        <span class="col-md-7">
-                            <input type="checkbox" id="annual_report"
-                                   name="annual_report"
-                                   ng-model="project.required_appendices.annual_report">
-                        </span>
-                    </div>
-                    <div class="col-md-10">
-                        <span class="col-md-3">
-                            <label for="audit_reports">
-                                {{fieldNames["required_appendices_audit_reports"]}}
-                            </label>
-                        </span>
-                        <span class="col-md-7">
-                            <input type="checkbox" id="audit_reports"
-                                   name="audit_reports"
-                                   ng-model="project.required_appendices.audit_reports">
-                        </span>
-                    </div>
-                </div>
-                <label for="comments" class="col-md-2 control-label">
-                    {{fieldNames["in_review_comments"]}}
-                </label>
-                <div class="col-md-10">
-                    <textarea name="comments" type="text" class="form-control"
-                              data-ng-model="project.in_review.comments"
-                              id="comments">
-                    </textarea>
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.approved.date">
-            <legend>
-                <a href="" ng-click="showApprDetails = !showApprDetails">
-                    Hyväksytty-tilan tiedot
-                </a>
-            </legend>
-            <div ng-show="showApprDetails">
-                <div class="form-group col-md-12">
-                    <label class="col-md-2" for="board_meeting">
+        <fieldset ng-show="project.approved.date" class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a href="" ng-click="showApprDetails = !showApprDetails">
+                        <span class="glyphicon"
+                              ng-class="showApprDetails
+                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Hyväksytty-tila
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showApprDetails" class="panel-body">
+                <div class="form-group col-md-6">
+                    <label class="col-md-4 control-label" for="board_meeting">
                         {{fieldNames["approved_board_meeting"]}}
                     </label>
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <input id="board_meeting" name="board_meeting"
                                data-ng-model="project.approved.board_meeting"
                                class="form-control">
                     </div>
                 </div>
-                <div class="form-group col-md-12">
-                    <label class="col-md-2" for="decision">
-                        {{fieldNames["approved_decision"]}}
-                    </label>
-                    <div class="col-md-10">
-                        <textarea id="decision" name="decision"
-                                  data-ng-model="project.approved.decision"
-                                  class="form-control">
-                        </textarea>
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="approved_day" class="col-md-2">
-                        {{fieldNames["approved_approved_date"]}}
-                    </label>
-                    <div class="col-md-2"
-                         ng-class="{'has-error': projectEditForm.approved_day.$invalid}">
-                        <input name="approved_day" type="number"
-                               class="form-control" data-ng-model="approved_day"
-                               id="approved_day" placeholder="p" min="1">
-                        <div ng-show="projectEditForm.approved_day.$invalid"
-                             class="help-block">
-                            <p ng-show="projectEditForm.approved_day.$error.number">
-                                Päivän täytyy olla numero
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-2" style="float:left;"
-                         ng-class="{'has-error': projectEditForm.approved_month.$invalid}">
-                        <input name="approved_month" type="number"
-                               class="form-control"
-                               data-ng-model="approved_month"
-                               id="approved_month" placeholder="kk" min="1">
-                        <div ng-show="projectEditForm.approved_month.$invalid"
-                             class="help-block">
-                            <p ng-show="projectEditForm.approved_month.$error.number">
-                                Kuukauden täytyy olla numero
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-2" style="float:left;"
-                         ng-class="{'has-error': projectEditForm.approved_year.$invalid }">
-                        <input name="approved_year" type="number"
-                               class="form-control"
-                               data-ng-model="approved_year" id="approved_year"
-                               placeholder="vvvv" min="1">
-                        <div ng-show="projectEditForm.approved_year.$invalid"
-                             class="help-block">
-                            <p ng-show="projectEditForm.approved_year.$error.number">
-                                Vuoden täytyy olla numero
-                            </p>
-                        </div>
-                    </div>
-                    <div style="clear:both;">&nbsp;</div>
-                </div>
-                <div class="form-group col-md-12"
-                     ng-class="{'has-error': projectEditForm.approved_by.$invalid}">
-                    <label for="approved_by" class="col-md-2">
-                        {{fieldNames["approved_approved_by"]}}
-                    </label>
-                    <div class="col-md-10">
-                        <select id="approved_by"
-                                data-ng-model="project.approved.approved_by"
-                                class='form-control'
-                                selected="project.approved.approved_by">
-                            <option>Toiminnanjohtaja</option>
-                            <option>Hallituksen kokous</option>
-                            <option>UM</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="board_notified_day" class="col-md-2">
+                <div class="form-group col-md-6">
+                    <label for="board_notified_day"
+                           class="col-md-3 control-label">
                         {{fieldNames["approved_board_notified"]}}
                     </label>
-                    <div class="col-md-2" style="float:left;"
-                         ng-class="{'has-error': projectEditForm.board_notified_day.$invalid}">
+                    <div class="col-md-3"
+                         ng-class="{
+                                 'has-error'
+                                 : projectEditForm.board_notified_day.$invalid}">
                         <input name="board_notified_day" type="number"
                                class="form-control" data-ng-model="notified_day"
                                id="board_notified_day" placeholder="p" min="1">
@@ -707,8 +703,9 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-2" style="float:left;"
-                         ng-class="{'has-error': projectEditForm.board_notified_month.$invalid}">
+                    <div class="col-md-3"
+                         ng-class="{
+                                 'has-error': projectEditForm.board_notified_month.$invalid}">
                         <input name="board_notified_month" type="number"
                                class="form-control"
                                data-ng-model="notified_month"
@@ -721,8 +718,9 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-2" style="float:left;"
-                         ng-class="{'has-error': projectEditForm.board_notified_year.$invalid}">
+                    <div class="col-md-3"
+                         ng-class="{
+                                 'has-error': projectEditForm.board_notified_year.$invalid}">
                         <input name="board_notified_year" type="number"
                                class="form-control"
                                data-ng-model="notified_year"
@@ -735,31 +733,13 @@
                             </p>
                         </div>
                     </div>
-                    <div style="clear:both;">&nbsp;</div>
                 </div>
-                <div class="form-group col-md-12">
-                    <label for="granted_sum_eur" class="col-md-2">
-                        {{fieldNames["approved_granted_sum_eur"]}}
-                    </label>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': projectEditForm.granted_sum_eur.$invalid }">
-                        <input name="granted_sum_eur" type="number"
-                               class="form-control"
-                               data-ng-model="project.approved.granted_sum_eur"
-                               id="granted_sum_eur" placeholder="0">
-                        <div ng-show="projectEditForm.granted_sum_eur.$invalid"
-                             class="help-block">
-                            <p ng-show="projectEditForm.granted_sum_eur.$error.number">
-                                Summan täytyy olla numero
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label mean-token="'create-themes'" class="col-md-2">
+                <div class="form-group col-md-7">
+                    <label mean-token="'create-themes'"
+                           class="col-md-3 control-label">
                         {{fieldNames["approved_themes"]}}
                     </label>
-                    <div class="col-md-12">
+                    <div class="col-md-9">
                         <table>
                             <tr ng-repeat="theme in themes">
                                 <td><input
@@ -774,15 +754,119 @@
                         </table>
                     </div>
                 </div>
+                <div class="form-group col-md-5">
+                    <label for="granted_sum_eur" class="col-md-6 control-label">
+                        {{fieldNames["approved_granted_sum_eur"]}}
+                    </label>
+                    <div class="col-md-6"
+                         ng-class="{
+                                 'has-error'
+                                 : projectEditForm.granted_sum_eur.$invalid }">
+                        <input name="granted_sum_eur" type="number"
+                               class="form-control"
+                               data-ng-model="project.approved.granted_sum_eur"
+                               id="granted_sum_eur" placeholder="0">
+                        <div ng-show="projectEditForm.granted_sum_eur.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.granted_sum_eur.$error.number">
+                                Summan täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label class="col-md-1 control-label" for="decision">
+                        {{fieldNames["approved_decision"]}}
+                    </label>
+                    <div class="col-md-11">
+                        <textarea id="decision" name="decision"
+                                  data-ng-model="project.approved.decision"
+                                  class="form-control">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="approved_day" class="col-md-3 control-label">
+                        Hyväksymispvm
+                        <!--{{fieldNames["approved_approved_date"]}}-->
+                    </label>
+                    <div class="col-md-3"
+                         ng-class="{
+                                 'has-error'
+                                 : projectEditForm.approved_day.$invalid}">
+                        <input name="approved_day" type="number"
+                               class="form-control" data-ng-model="approved_day"
+                               id="approved_day" placeholder="p" min="1">
+                        <div ng-show="projectEditForm.approved_day.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.approved_day.$error.number">
+                                Päivän täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{
+                                 'has-error'
+                                 : projectEditForm.approved_month.$invalid}">
+                        <input name="approved_month" type="number"
+                               class="form-control"
+                               data-ng-model="approved_month"
+                               id="approved_month" placeholder="kk" min="1">
+                        <div ng-show="projectEditForm.approved_month.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.approved_month.$error.number">
+                                Kuukauden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{
+                                 'has-error'
+                                 : projectEditForm.approved_year.$invalid }">
+                        <input name="approved_year" type="number"
+                               class="form-control"
+                               data-ng-model="approved_year" id="approved_year"
+                               placeholder="vvvv" min="1">
+                        <div ng-show="projectEditForm.approved_year.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.approved_year.$error.number">
+                                Vuoden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6"
+                     ng-class="{
+                             'has-error': projectEditForm.approved_by.$invalid}">
+                    <label for="approved_by" class="col-md-3 control-label">
+                        {{fieldNames["approved_approved_by"]}}
+                    </label>
+                    <div class="col-md-9">
+                        <select id="approved_by"
+                                data-ng-model="project.approved.approved_by"
+                                class='form-control'
+                                selected="project.approved.approved_by">
+                            <option>Toiminnanjohtaja</option>
+                            <option>Hallituksen kokous</option>
+                            <option>Ulkoministeriö</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.rejected.date">
-            <legend>
-                <a href="" ng-click="showRejDetails = !showRejDetails">
-                    Hylätty-tilan tiedot
-                </a>
-            </legend>
-            <div ng-show="showRejDetails">
+        <fieldset ng-show="project.rejected.date" class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a href="" ng-click="showRejDetails = !showRejDetails">
+                        <span class="glyphicon"
+                              ng-class="showRejDetails
+                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Hylätty-tila
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showRejDetails" class="panel-body">
                 <div class="form-group col-md-12">
                     <label mean-token="'create-rejcategories'" class="col-md-3">
                         {{fieldNames["rejected_rejection_categories"]}}
@@ -791,7 +875,7 @@
                          data-ng-repeat="rej in addedRejections">
                         <select name="rejSelect" id="rejSelect"
                                 data-ng-model="rej.rejection">
-                            <option data-ng-repeat="rejCat in rejcategories"
+                            <option data-ng-repeat="rejCat in rejCategories"
                                     value="{{rejCat}}">{{rejCat}}</option>
                         </select>
                     </div>
@@ -817,13 +901,19 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.signed.date">
-            <legend>
-                <a href="" ng-click="showSignDetails = !showSignDetails">
-                    Allekirjoitettu-tilan tiedot
-                </a>
-            </legend>
-            <div ng-show="showSignDetails">
+        <fieldset ng-show="project.signed.date" class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a href="" ng-click="showSignDetails = !showSignDetails">
+                        <span class="glyphicon"
+                              ng-class="showSignDetails
+                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Allekirjoitettu-tila
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showSignDetails" class="panel-body">
                 <div class="form-group col-md-6">
                     <label for="signed_by" class="col-md-4">
                         {{fieldNames["signed_signed_by"]}}
@@ -841,7 +931,9 @@
                         <!--{{fieldNames["signed_signed_date"]}}-->
                     </label>
                     <div class="col-md-3"
-                         ng-class="{'has-error': projectEditForm.signed_date_day.$invalid }">
+                         ng-class="{
+                                 'has-error'
+                                         : projectEditForm.signed_date_day.$invalid }">
                         <input name="signed_date_day" type="number"
                                class="form-control" data-ng-model="signed_day"
                                id="signed_date_day" placeholder="p"
@@ -853,7 +945,8 @@
                         </div>
                     </div>
                     <div class="col-md-3"
-                         ng-class="{'has-error': projectEditForm.signed_date_month.$invalid}">
+                         ng-class="{
+                                 'has-error': projectEditForm.signed_date_month.$invalid}">
                         <input name="signed_date_month" type="number"
                                class="form-control" data-ng-model="signed_month"
                                id="signed_date_month" placeholder="k"
@@ -866,7 +959,9 @@
                         </div>
                     </div>
                     <div class="col-md-3"
-                         ng-class="{'has-error': projectEditForm.signed_date_year.$invalid}">
+                         ng-class="{
+                                 'has-error'
+                                 : projectEditForm.signed_date_year.$invalid}">
                         <input name="signed_date_year" type="number"
                                class="form-control" data-ng-model="signed_year"
                                id="signed_date_year" placeholder="vvvv"
@@ -915,18 +1010,16 @@
                                        min="1">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="plannedSumEUR"
-                                   class="col-md-4 control-label">
-                                Maksu (EUR)
-                            </label>
-                            <div class="col-md-8">
-                                <input name="plannedSumEUR" type="number"
-                                       class="form-control"
-                                       data-ng-model="plannedPayments[$index].sum_eur"
-                                       id="plannedSumEUR"
-                                       placeholder="Summa (EUR)" min="0">
-                            </div>
+                        <label for="plannedSumEUR"
+                               class="col-md-2 control-label">
+                            Maksu (EUR)
+                        </label>
+                        <div class="col-md-2">
+                            <input name="plannedSumEUR" type="number"
+                                   class="form-control"
+                                   data-ng-model="plannedPayments[$index].sum_eur"
+                                   id="plannedSumEUR"
+                                   placeholder="Summa (EUR)" min="0">
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -987,18 +1080,25 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.intermediary_reports.length > 0">
-            <legend>
-                <a href="" ng-click="showIntRepDetails = !showIntRepDetails">
-                    Väliraportti-tilan tiedot
-                </a>
-            </legend>
-            <div ng-show="showIntRepDetails">
+        <fieldset ng-show="project.intermediary_reports.length > 0"
+                  class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a href="" ng-click="showIntRepDetails = !showIntRepDetails">
+                        <span class="glyphicon"
+                              ng-class="showIntRepDetails
+                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Väliraportti-tila
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showIntRepDetails" class="panel-body">
                 <div data-ng-repeat="intreport in int_reports">
                     <h4>{{intreport.reportNumber}}.&nbsp;väliraportti</h4>
-                    <p class="col-md-12 strong-title comment-form-div">
+                    <label class="col-md-12">
                         Toimintatavat ja niiden toteutuminen
-                    </p>
+                    </label>
                     <div class="form-group col-md-12"
                          ng-repeat="method in project.methods">
                         <div class="col-md-6" style="text-align: justify">
@@ -1016,9 +1116,9 @@
                             </textarea>
                         </div>
                     </div>
-                    <p class="col-md-12 strong-title comment-form-div">
+                    <label class="col-md-12">
                         Tavoitteet ja niiden toteutuminen
-                    </p>
+                    </label>
                     <div class="form-group col-md-12">
                         <div class="col-md-6" style="text-align: justify">
                             <span ng-bind-html="handleEmphasis(project.project_goal)"></span>
@@ -1089,11 +1189,11 @@
                             </textarea>
                         </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <label for="intRDateAppr" class="col-md-2">
+                    <div class="form-group col-md-6">
+                        <label for="intRDateAppr" class="col-md-3">
                             Hyväksymispvm
                         </label>
-                        <div class="col-md-2" style="float:left;"
+                        <div class="col-md-3"
                              ng-class="{'has-error': projectEditForm.intRDateAppr_day.$invalid}">
                             <input name="intRDateAppr_day" type="number"
                                    class="form-control"
@@ -1107,7 +1207,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-md-2" style="float:left;"
+                        <div class="col-md-3"
                              ng-class="{'has-error': projectEditForm.intRDateAppr_month.$invalid}">
                             <input name="intRDateAppr_month" type="number"
                                    class="form-control"
@@ -1121,7 +1221,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-md-2" style="float:left;"
+                        <div class="col-md-3"
                              ng-class="{'has-error': projectEditForm.intRDateAppr_year.$invalid}">
                             <input name="intRDateAppr_year" type="number"
                                    class="form-control"
@@ -1139,31 +1239,89 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.end_report.date">
-            <legend>
-                <a href="" ng-click="showEndRepDetails = !showEndRepDetails">
-                    Loppuraportti-tilan tiedot
-                </a>
-            </legend>
-            <div ng-show="showEndRepDetails">
-                <div class="form-group col-md-12">
-                    <div class="form-group col-md-12">
-                        <label for="end_budget" class="col-md-4">
-                            {{fieldNames["end_report_budget"]}}
-                        </label>
-                        <div class="col-md-8">
-                            <textarea name="end_budget" type="text"
-                                      class="form-control"
-                                      data-ng-model="project.end_report.budget"
-                                      id="end_budget">
-                            </textarea>
-                        </div>
+        <fieldset ng-show="project.end_report.date" class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a href="" ng-click="showEndRepDetails = !showEndRepDetails">
+                        <span class="glyphicon"
+                              ng-class="showEndRepDetails
+                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Loppuraportti-tila
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showEndRepDetails" class="panel-body">
+                <div class="form-group col-md-6">
+                    <label class="col-md-4" for="end_board_meeting">
+                        {{fieldNames["end_report_board_meeting"]}}
+                    </label>
+                    <div class="col-md-8">
+                        <input id="end_board_meeting" name="end_board_meeting"
+                               data-ng-model="project.end_report.board_meeting"
+                               class="form-control">
                     </div>
-                    <label for="audit_date" class="col-md-2">
+                </div>
+                <!--                <div class="form-group col-md-6">
+                                    <label for="board_notified_date" class="col-md-3">
+                                        Hallitukselle tiedoksi
+                                    </label>
+                                    <div class="col-md-3"
+                                         ng-class="{'has-error': projectEditForm.board_notified_day.$invalid}">
+                                        <input name="board_notified_day" type="number"
+                                               class="form-control" data-ng-model="board_notified_day"
+                                               id="board_notified_day" placeholder="p" min="1">
+                                        <div ng-show="projectEditForm.board_notified_day.$invalid"
+                                             class="help-block">
+                                            <p ng-show="projectEditForm.board_notified_day.$error.number">
+                                                Päivän täytyy olla numero
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"
+                                         ng-class="{'has-error': projectEditForm.board_notified_month.$invalid}">
+                                        <input name="board_notified_month" type="number"
+                                               class="form-control" data-ng-model="board_notified_month"
+                                               id="board_notified_month" placeholder="k" min="1">
+                                        <div ng-show="projectEditForm.board_notified_month.$invalid"
+                                             class="help-block">
+                                            <p ng-show="projectEditForm.board_notified_month.$error.number">
+                                                Kuukauden täytyy olla numero
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"
+                                         ng-class="{'has-error': projectEditForm.board_notified_year.$invalid}">
+                                        <input name="board_notified_year" type="number"
+                                               class="form-control" data-ng-model="board_notified_year"
+                                               id="board_notified_year" placeholder="vvvv" min="1">
+                                        <div ng-show="projectEditForm.board_notified_year.$invalid"
+                                             class="help-block">
+                                            <p ng-show="projectEditForm.board_notified_year.$error.number">
+                                                Vuoden täytyy olla numero
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>-->
+                <div class="form-group col-md-12">
+                    <label for="end_budget" class="col-md-4">
+                        {{fieldNames["end_report_budget"]}}
+                    </label>
+                    <div class="col-md-8">
+                        <textarea name="end_budget" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.end_report.budget"
+                                  id="end_budget">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="audit_date" class="col-md-3">
                         Tilintarkastuspvm
                     </label>
-                    <div class="col-md-2" style="float:left;"
-                         ng-class="{'has-error': projectEditForm.audit_day.$invalid}">
+                    <div class="col-md-3"
+                         ng-class="{
+                                 'has-error':projectEditForm.audit_day.$invalid}">
                         <input name="audit_day" type="number"
                                class="form-control" data-ng-model="audit_day"
                                id="audit_day" placeholder="p" min="1">
@@ -1174,8 +1332,9 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-2" style="float:left;"
-                         ng-class="{'has-error': projectEditForm.audit_month.$invalid}">
+                    <div class="col-md-3"
+                         ng-class="{
+                                 'has-error': projectEditForm.audit_month.$invalid}">
                         <input name="audit_month" type="number"
                                class="form-control" data-ng-model="audit_month"
                                id="audit_month" placeholder="k" min="1">
@@ -1186,8 +1345,10 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-2" style="float:left;"
-                         ng-class="{'has-error': projectEditForm.audit_year.$invalid}">
+                    <div class="col-md-3"
+                         ng-class="{
+                                 'has-error'
+                                 : projectEditForm.audit_year.$invalid}">
                         <input name="audit_year" type="number"
                                class="form-control" data-ng-model="audit_year"
                                id="audit_year" placeholder="vvvv" min="1">
@@ -1199,7 +1360,6 @@
                         </div>
                     </div>
                 </div>
-                <div style="clear:both;">&nbsp;</div>
                 <div class="form-group col-md-12">
                     <label for="audit_review" class="col-md-2">
                         Tilintarkastuksen Arvio
@@ -1212,9 +1372,9 @@
                         </textarea>
                     </div>
                 </div>
-                <p class="col-md-12 strong-title comment-form-div">
+                <label class="col-md-12">
                     Toiminnot ja niiden toteutuminen
-                </p>
+                </label>
                 <div class="form-group col-md-12"
                      ng-repeat="method in project.methods">
                     <div class="col-md-6" style="text-align: justify">
@@ -1231,9 +1391,9 @@
                         </textarea>
                     </div>
                 </div>
-                <p class="col-md-12 strong-title comment-form-div">
+                <label class="col-md-12">
                     Kokonaistavoitteen toteutuminen
-                </p>
+                </label>
                 <div class="form-group col-md-12">
                     <div class="col-md-6" style="text-align: justify">
                         <p ng-bind-html="handleEmphasis(project.project_goal)">
@@ -1248,56 +1408,60 @@
                     </div>
                 </div>
                 <div class="form-group col-md-12">
-                    <div class="col-md-4">
-                        <label for="direct_beneficiaries">
-                            {{fieldNames["end_report_direct_beneficiaries"]}}
-                            (arvio)
+                    <div class="col-md-3">
+                        <div class="col-md-6">
+                            <label for="direct_beneficiaries">
+                                {{fieldNames["end_report_direct_beneficiaries"]}}
+                                (arvio)
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="direct_beneficiaries" name="direct_beneficiaries"
+                                   class="form-control"
+                                   data-ng-model="project.end_report.direct_beneficiaries">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="col-md-6">
+                            <label for="direct_beneficiaries">
+                                {{fieldNames["end_report_indirect_beneficiaries"]}}
+                                (arvio)
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="indirect_beneficiaries"
+                                   name="indirect_beneficiaries" class="form-control"
+                                   data-ng-model="project.end_report.indirect_beneficiaries">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="grade" class="col-md-4">
+                            {{fieldNames["end_report_grade"]}}
                         </label>
-                    </div>
-                    <div class="col-md-2">
-                        <input id="direct_beneficiaries" name="direct_beneficiaries"
-                               class="form-control"
-                               data-ng-model="project.end_report.direct_beneficiaries">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="direct_beneficiaries">
-                            {{fieldNames["end_report_indirect_beneficiaries"]}}
-                            (arvio)
-                        </label>
-                    </div>
-                    <div class="col-md-2">
-                        <input id="indirect_beneficiaries"
-                               name="indirect_beneficiaries" class="form-control"
-                               data-ng-model="project.end_report.indirect_beneficiaries">
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="grade" class="col-md-4">
-                        {{fieldNames["end_report_grade"]}}
-                    </label>
-                    <div class="col-md-4">
-                        <select name="grade" id="grade"
-                                data-ng-model="project.end_report.grade"
-                                class="form-control">
-                            <option value="" selected></option>
-                            <option value="4">
-                                4 (Onnistui yli odotusten)
-                            </option>
-                            <option value="4">
-                                3 (Onnistui suunnitellusti)
-                            </option>
-                            <option value="4">
-                                2 (Onnistui alle odotusten, ulkoinen syy)
-                            </option>
-                            <option value="4">
-                                1 (Onnistui alle odotusten, järjestön syy)
-                            </option>
-                        </select>
+                        <div class="col-md-8">
+                            <select name="grade" id="grade"
+                                    data-ng-model="project.end_report.grade"
+                                    class="form-control">
+                                <option value="" selected></option>
+                                <option value="4">
+                                    4 (Onnistui yli odotusten)
+                                </option>
+                                <option value="4">
+                                    3 (Onnistui suunnitellusti)
+                                </option>
+                                <option value="4">
+                                    2 (Onnistui alle odotusten, ulkoinen syy)
+                                </option>
+                                <option value="4">
+                                    1 (Onnistui alle odotusten, järjestön syy)
+                                </option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="gen_review" class="col-md-2">
-                        KIOS:in kokonaisarvio
+                        KIOSiin kokonaisarvio
                     </label>
                     <div class="col-md-10">
                         <textarea name="gen_review" type="text"
@@ -1330,22 +1494,15 @@
                         </textarea>
                     </div>
                 </div>
-                <div class="form-group col-md-12">
-                    <label class="col-md-2" for="end_board_meeting">
-                        {{fieldNames["end_report_board_meeting"]}}
-                    </label>
-                    <div class="col-md-4">
-                        <input id="end_board_meeting" name="end_board_meeting"
-                               data-ng-model="project.end_report.board_meeting"
-                               class="form-control">
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="audit_day" class="col-md-2">
+                <div class="form-group col-md-6">
+                    <label for="audit_day" class="col-md-3">
                         Hyväksymispvm
+                        <!--{{fieldNames["end_report_approved_date"]}}-->
                     </label>
-                    <div class="col-md-2" style="float:left;"
-                         ng-class="{'has-error': projectEditForm.er_approved_day.$invalid}">
+                    <div class="col-md-3"
+                         ng-class="{
+                                 'has-error'
+                                 : projectEditForm.er_approved_day.$invalid}">
                         <input name="er_approved_day" type="number"
                                class="form-control"
                                data-ng-model="er_approved_day"
@@ -1357,8 +1514,9 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-2" style="float:left;"
-                         ng-class="{'has-error': projectEditForm.er_approved_month.$invalid}">
+                    <div class="col-md-3"
+                         ng-class="{
+                                 'has-error': projectEditForm.er_approved_month.$invalid}">
                         <input name="er_approved_month" type="number"
                                class="form-control"
                                data-ng-model="er_approved_month"
@@ -1370,8 +1528,10 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-2" style="float:left;"
-                         ng-class="{'has-error': projectEditForm.er_approved_year.$invalid}">
+                    <div class="col-md-3"
+                         ng-class="{
+                                 'has-error'
+                                 : projectEditForm.er_approved_year.$invalid}">
                         <input name="er_approved_year" type="number"
                                class="form-control"
                                data-ng-model="er_approved_year"
@@ -1383,73 +1543,40 @@
                             </p>
                         </div>
                     </div>
-                    <div style="clear:both;">&nbsp;</div>
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.ended.date">
-            <legend>
-                <a href="" ng-click="showEndedDetails = !showEndedDetails">
-                    Päättynyt-tilan tiedot
-                </a>
-            </legend>
-            <div ng-show="showEndedDetails">
-                <div class="form-group col-md-12">
+        <fieldset ng-show="project.ended.date" class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a ng-click="showEndedDetails = !showEndedDetails">
+                        <span class="glyphicon"
+                              ng-class="showEndedDetails
+                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Päättynyt-tila
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showEndedDetails" class="panel-body">
+                <div class="form-group col-md-6">
                     <div>
-                        <label for="endDay" class="col-md-2 control-label">
-                            {{fieldNames["ended_end_date"]}}
-                        </label>
-                        <div class="col-md-2" style="float:left;">
-                            <input name="endDay" type="number"
-                                   class="form-control" data-ng-model="end_day"
-                                   id="endDay" placeholder="p">
-                        </div>
-                        <div class="col-md-2" style="float:left;">
-                            <input name="endMonth" type="number"
-                                   class="form-control"
-                                   data-ng-model="end_month" id="endMonth"
-                                   placeholder="k">
-                        </div>
-                        <div class="col-md-2" style="float:left;">
-                            <input name="endYear" type="number"
-                                   class="form-control" data-ng-model="end_year"
-                                   id="endYear" placeholder="vvvv">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="approved_by" class="col-md-2">
-                        {{fieldNames["ended_approved_by"]}}
-                    </label>
-                    <div class="col-md-10">
-                        <select id="approved_by"
-                                data-ng-model="project.ended.approved_by"
-                                class='form-control'>
-                            <option value="toiminnanjohtaja">
-                                Toiminnanjohtaja
-                            </option>
-                            <option value="hallitus">Hallitus</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <div>
-                        <label for="notifiedDay" class="col-md-2">
+                        <label for="notifiedDay" class="col-md-3">
                             {{fieldNames["ended_board_notified"]}}
                         </label>
-                        <div class="col-md-2" style="float:left;">
+                        <div class="col-md-3">
                             <input name="endNotifiedDay" type="number"
                                    class="form-control"
                                    data-ng-model="end_notified_day"
                                    id="notifiedDay" placeholder="p">
                         </div>
-                        <div class="col-md-2" style="float:left;">
+                        <div class="col-md-3">
                             <input name="endNotifiedMonth" type="number"
                                    class="form-control"
                                    data-ng-model="end_notified_month"
                                    id="notifiedMonth" placeholder="k">
                         </div>
-                        <div class="col-md-2" style="float:left;">
+                        <div class="col-md-3">
                             <input name="endNotifiedYear" type="number"
                                    class="form-control"
                                    data-ng-model="end_notified_year"
@@ -1457,7 +1584,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     <label for="comments" class="col-md-2">
                         {{fieldNames["ended_other_comments"]}}
                     </label>
@@ -1469,17 +1596,56 @@
                         </textarea>
                     </div>
                 </div>
+                <div class="form-group col-md-6">
+                    <div>
+                        <label for="endDay" class="col-md-3 control-label">
+                            Päättymispvm
+                            <!--{{fieldNames["ended_end_date"]}}-->
+                        </label>
+                        <div class="col-md-3">
+                            <input name="endDay" type="number"
+                                   class="form-control" data-ng-model="end_day"
+                                   id="endDay" placeholder="p">
+                        </div>
+                        <div class="col-md-3">
+                            <input name="endMonth" type="number"
+                                   class="form-control"
+                                   data-ng-model="end_month" id="endMonth"
+                                   placeholder="k">
+                        </div>
+                        <div class="col-md-3">
+                            <input name="endYear" type="number"
+                                   class="form-control" data-ng-model="end_year"
+                                   id="endYear" placeholder="vvvv">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="approved_by" class="col-md-4">
+                        {{fieldNames["ended_approved_by"]}}
+                    </label>
+                    <div class="col-md-8">
+                        <select id="approved_by"
+                                data-ng-model="project.ended.approved_by"
+                                class='form-control'>
+                            <option value="toiminnanjohtaja">
+                                Toiminnanjohtaja
+                            </option>
+                            <option value="hallitus">Hallitus</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>Vahvistus</legend>
-            <div class="form-group">
+        <fieldset class="panel panel-default">
+            <div class="panel-heading"><h4>Vahvistus</h4></div>
+            <div class="form-group panel-body">
                 <div class="col-md-12" style="margin-bottom: 1em">
                     <div class="col-md-6">
-                        <label for="special_notes" class="col-md-2">
+                        <label for="special_notes" class="col-md-4">
                             {{fieldNames["special_notes"]}}
                         </label>
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             <textarea name="special_notes" type="text"
                                       class="form-control"
                                       data-ng-model="project.special_notes"
