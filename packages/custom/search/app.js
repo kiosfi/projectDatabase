@@ -33,7 +33,7 @@ Search.register(function (app, auth, database, organisations, projects) {
         menu: 'main'
     });
 
-    Search.aggregateAsset('css', 'search.css');
+    Search.aggregateAsset('css', 'search.css', {global: false, absolute: false});
 
     Search.events.defaultData({
         type: 'post',
