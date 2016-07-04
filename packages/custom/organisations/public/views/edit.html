@@ -3,358 +3,340 @@
     <hr>
     <form name="orgEditForm" class="form-horizontal" role="form"
           data-ng-submit="update(orgEditForm.$valid)" novalidate>
-        <fieldset>
-            <legend>Perustiedot</legend>
-            <div class="form-group col-md-6"
-                 ng-class="{'has-error': orgEditForm.orgname.$invalid}">
-                <label class="col-md-3 control-label">Nimi</label>
-                <div class="col-md-9">
-                    <input name="orgname" type="text" class="form-control"
-                           data-ng-model="organisation.name"
-                           id="orgname" required>
+        <fieldset class="panel panel-default">
+            <div class="panel-heading"><h4>Perustiedot</h4></div>
+            <div class="panel-body">
+                <div class="form-group col-md-6"
+                     ng-class="{'has-error': orgEditForm.orgname.$invalid}">
+                    <label class="col-md-3 control-label">Nimi</label>
+                    <div class="col-md-9">
+                        <input name="orgname" type="text" class="form-control"
+                               data-ng-model="organisation.name"
+                               id="orgname" required>
 
-                    <div ng-show="orgEditForm.orgname.$invalid"
-                         class="help-block">
-                        <p ng-show="orgEditForm.orgname.$error.required">
-                            Kenttä on pakollinen
-                        </p>
+                        <div ng-show="orgEditForm.orgname.$invalid"
+                             class="help-block">
+                            <p ng-show="orgEditForm.orgname.$error.required">
+                                Kenttä on pakollinen
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group col-md-6"
-                 ng-class="{'has-error': orgEditForm.orgrepName.$invalid}">
-                <label class="col-md-3 control-label">Edustaja</label>
-                <div class="col-md-9">
-                    <input name="orgrepName" type="text" class="form-control"
-                           data-ng-model="organisation.representative.name"
-                           id="orgrepName" placeholder="Nimi" required>
+                <div class="form-group col-md-6"
+                     ng-class="{'has-error': orgEditForm.orgrepName.$invalid}">
+                    <label class="col-md-3 control-label">Edustaja</label>
+                    <div class="col-md-9">
+                        <input name="orgrepName" type="text" class="form-control"
+                               data-ng-model="organisation.representative.name"
+                               id="orgrepName" placeholder="Nimi" required>
 
-                    <div ng-show="orgEditForm.orgrepName.$invalid"
-                         class="help-block">
-                        <p ng-show="orgEditForm.orgrepName.$error.required">
-                            Kenttä on pakollinen
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-9" style="float:right;"
-                     ng-class="{'has-error': orgEditForm.orgrepEmail.$invalid}">
-                    <input name="orgrepEmail" type="text" class="form-control"
-                           data-ng-model="organisation.representative.email"
-                           id="orgrep" placeholder="Sähköpostiosoite" required>
-                    <div ng-show="orgEditForm.orgrepEmail.$invalid"
-                         class="help-block">
-                        <p ng-show="orgEditForm.orgrepEmail.$error.required">
-                            Kenttä on pakollinen
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-9" style="float:right;"
-                     ng-class="{'has-error': orgEditForm.orgrepPhone.$invalid}">
-                    <input name="orgrepPhone" type="text" class="form-control"
-                           data-ng-model="organisation.representative.phone"
-                           id="orgrepPhone" placeholder="Puhelinnumero"
-                           required>
-                    <div ng-show="orgEditForm.orgrepPhone.$invalid"
-                         class="help-block">
-                        <p ng-show="orgEditForm.orgrepPhone.$error.required">
-                            Kenttä on pakollinen
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <div class="form-group"
-                     ng-class="{'has-error': orgEditForm.orgaddr.$invalid}">
-                    <label class="col-md-3 control-label">Osoite</label>
-                    <div class="col-md-9">
-                        <input name="orgaddr" type="text" class="form-control"
-                               data-ng-model="organisation.address.street"
-                               id="orgaddr" required>
-                        <div ng-show=" orgEditForm.orgaddr.$invalid"
+                        <div ng-show="orgEditForm.orgrepName.$invalid"
                              class="help-block">
-                            <p ng-show="orgEditForm.orgaddr.$error.required">
+                            <p ng-show="orgEditForm.orgrepName.$error.required">
+                                Kenttä on pakollinen
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-9" style="float:right;"
+                         ng-class="{'has-error': orgEditForm.orgrepEmail.$invalid}">
+                        <input name="orgrepEmail" type="text" class="form-control"
+                               data-ng-model="organisation.representative.email"
+                               id="orgrep" placeholder="Sähköpostiosoite" required>
+                        <div ng-show="orgEditForm.orgrepEmail.$invalid"
+                             class="help-block">
+                            <p ng-show="orgEditForm.orgrepEmail.$error.required">
+                                Kenttä on pakollinen
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-9" style="float:right;"
+                         ng-class="{'has-error': orgEditForm.orgrepPhone.$invalid}">
+                        <input name="orgrepPhone" type="text" class="form-control"
+                               data-ng-model="organisation.representative.phone"
+                               id="orgrepPhone" placeholder="Puhelinnumero"
+                               required>
+                        <div ng-show="orgEditForm.orgrepPhone.$invalid"
+                             class="help-block">
+                            <p ng-show="orgEditForm.orgrepPhone.$error.required">
                                 Kenttä on pakollinen
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="form-group"
-                     ng-class="{'has-error': orgEditForm.orgaddrcode.$invalid}">
-                    <label class="col-md-3 control-label">Postinumero</label>
-                    <div class="col-md-9">
-                        <input name="orgaddrcode" type="text"
-                               class="form-control"
-                               data-ng-model="organisation.address.postal_code"
-                               id="orgaddrcode" required>
-                        <div ng-show=" orgEditForm.orgaddrcode.$invalid"
-                             class="help-block">
-                            <p ng-show="orgEditForm.orgaddrcode.$error.required">
-                                Kenttä on pakollinen
-                            </p>
+                <div class="form-group col-md-6">
+                    <div class="form-group"
+                         ng-class="{'has-error': orgEditForm.orgaddr.$invalid}">
+                        <label class="col-md-3 control-label">Osoite</label>
+                        <div class="col-md-9">
+                            <input name="orgaddr" type="text" class="form-control"
+                                   data-ng-model="organisation.address.street"
+                                   id="orgaddr" required>
+                            <div ng-show=" orgEditForm.orgaddr.$invalid"
+                                 class="help-block">
+                                <p ng-show="orgEditForm.orgaddr.$error.required">
+                                    Kenttä on pakollinen
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{'has-error': orgEditForm.orgaddrcode.$invalid}">
+                        <label class="col-md-3 control-label">Postinumero</label>
+                        <div class="col-md-9">
+                            <input name="orgaddrcode" type="text"
+                                   class="form-control"
+                                   data-ng-model="organisation.address.postal_code"
+                                   id="orgaddrcode" required>
+                            <div ng-show=" orgEditForm.orgaddrcode.$invalid"
+                                 class="help-block">
+                                <p ng-show="orgEditForm.orgaddrcode.$error.required">
+                                    Kenttä on pakollinen
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{'has-error': orgEditForm.orgaddrcity.$invalid}">
+                        <label  class="col-md-3 control-label">Kaupunki</label>
+                        <div class="col-md-9">
+                            <input name="orgaddrcity" type="text"
+                                   class="form-control"
+                                   data-ng-model="organisation.address.city"
+                                   id="orgaddrcity" required>
+                            <div ng-show=" orgEditForm.orgaddrcity.$invalid"
+                                 class="help-block">
+                                <p ng-show="orgEditForm.orgaddrcity.$error.required">
+                                    Kenttä on pakollinen
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{'has-error': orgEditForm.orgaddrcntry.$invalid}">
+                        <label  class="col-md-3 control-label">Maa</label>
+                        <div class="col-md-9">
+                            <input name="orgaddrcntry" type="text"
+                                   class="form-control"
+                                   data-ng-model="organisation.address.country"
+                                   id="orgaddrcntry" required>
+                            <div ng-show=" orgEditForm.orgaddrcntry.$invalid"
+                                 class="help-block">
+                                <p ng-show="orgEditForm.orgaddrcntry.$error.required">
+                                    Kenttä on pakollinen
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group"
-                     ng-class="{'has-error': orgEditForm.orgaddrcity.$invalid}">
-                    <label  class="col-md-3 control-label">Kaupunki</label>
-                    <div class="col-md-9">
-                        <input name="orgaddrcity" type="text"
-                               class="form-control"
-                               data-ng-model="organisation.address.city"
-                               id="orgaddrcity" required>
-                        <div ng-show=" orgEditForm.orgaddrcity.$invalid"
-                             class="help-block">
-                            <p ng-show="orgEditForm.orgaddrcity.$error.required">
-                                Kenttä on pakollinen
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group"
-                     ng-class="{'has-error': orgEditForm.orgaddrcntry.$invalid}">
-                    <label  class="col-md-3 control-label">Maa</label>
-                    <div class="col-md-9">
-                        <input name="orgaddrcntry" type="text"
-                               class="form-control"
-                               data-ng-model="organisation.address.country"
-                               id="orgaddrcntry" required>
-                        <div ng-show=" orgEditForm.orgaddrcntry.$invalid"
-                             class="help-block">
-                            <p ng-show="orgEditForm.orgaddrcntry.$error.required">
-                                Kenttä on pakollinen
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-md-6"
-                 ng-class="{'has-error': orgEditForm.orgtel.$invalid}">
-                <label class="col-md-3 control-label">Puhelinnumero</label>
-                <div class="col-md-9">
-                    <input name="orgtel" type="text" class="form-control"
-                           data-ng-model="organisation.tel" id="orgtel"
-                           required>
-                    <div ng-show=" orgEditForm.orgtel.$invalid"
-                         class="help-block">
-                        <p ng-show="orgEditForm.orgtel.$error.required">
-                            Kenttä on pakollinen
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-md-6"
-                 ng-class="{'has-error': orgEditForm.orgemail.$invalid}">
-                <label  class="col-md-3 control-label">Sähköpostiosoite</label>
-                <div class="col-md-9">
-                    <input name="orgemail" type="email" class="form-control"
-                           data-ng-model="organisation.email" id="orgemail"
-                           required>
-                    <div ng-show=" orgEditForm.orgemail.$invalid"
-                         class="help-block">
-                        <p ng-show="orgEditForm.orgemail.$error.email">
-                            Syötä oikea sähköpostiosoite
-                        </p>
-                    </div>
-                    <div ng-show=" orgEditForm.orgemail.$invalid"
-                         class="help-block">
-                        <p ng-show="orgEditForm.orgemail.$error.required">
-                            Kenttä on pakollinen
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label  class="col-md-3 control-label">Websivut</label>
-                <div class="col-md-9">
-                    <input name="orgwww" type="text" class="form-control"
-                           data-ng-model="organisation.website" id="orgwww">
-                </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Lisätiedot</legend>
-            <div class="col-md-12">
                 <div class="form-group col-md-6"
-                     ng-class="{'has-error': orgEditForm.orgExecMan.$invalid}">
-                    <label class="col-md-3 control-label">
-                        Vastuullinen johtaja
-                    </label>
+                     ng-class="{'has-error': orgEditForm.orgtel.$invalid}">
+                    <label class="col-md-3 control-label">Puhelinnumero</label>
                     <div class="col-md-9">
-                        <input name="orgExecMan" type="text"
-                               class="form-control"
-                               data-ng-model="organisation.exec_manager"
-                               id="orgExecMan" required>
-                        <div ng-show="orgEditForm.orgExecMan.$invalid"
+                        <input name="orgtel" type="text" class="form-control"
+                               data-ng-model="organisation.tel" id="orgtel"
+                               required>
+                        <div ng-show=" orgEditForm.orgtel.$invalid"
                              class="help-block">
-                            <p ng-show="orgEditForm.orgExecMan.$error.required"
-                               class="help-block">
+                            <p ng-show="orgEditForm.orgtel.$error.required">
                                 Kenttä on pakollinen
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-md-6"
-                     ng-class="{'has-error': orgEditForm.orgCommRep.$invalid}">
-                    <label class="col-md-3 control-label">
-                        Viestintävastaava
-                    </label>
+                     ng-class="{'has-error': orgEditForm.orgemail.$invalid}">
+                    <label  class="col-md-3 control-label">Sähköpostiosoite</label>
                     <div class="col-md-9">
-                        <input name="orgCommRep" type="text"
-                               class="form-control"
-                               data-ng-model="organisation.communications_rep"
-                               id="orgCommRep" required>
-                        <div ng-show="orgEditForm.orgCommRep.$invalid"
+                        <input name="orgemail" type="email" class="form-control"
+                               data-ng-model="organisation.email" id="orgemail"
+                               required>
+                        <div ng-show=" orgEditForm.orgemail.$invalid"
                              class="help-block">
-                            <p ng-show="orgEditForm.orgCommRep.$error.required"
-                               class="help-block">
+                            <p ng-show="orgEditForm.orgemail.$error.email">
+                                Syötä oikea sähköpostiosoite
+                            </p>
+                        </div>
+                        <div ng-show=" orgEditForm.orgemail.$invalid"
+                             class="help-block">
+                            <p ng-show="orgEditForm.orgemail.$error.required">
                                 Kenttä on pakollinen
                             </p>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
                 <div class="form-group col-md-6">
-                    <label for="orgLegal" class="col-md-3 control-label">
-                        Hallintomalli ja henkilöstö
-                    </label>
+                    <label  class="col-md-3 control-label">Websivut</label>
                     <div class="col-md-9">
-                        <textarea name="orgLegal"
-                                  data-ng-model="organisation.legal_status"
-                                  id="orgLegal" class="form-control">
-                        </textarea>
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="orgDescription" class="col-md-3 control-label">
-                        Tavoitteet ja keskeiset toimintatavat
-                    </label>
-                    <div class="col-md-9">
-                        <textarea name="orgDescription"
-                                  data-ng-model="organisation.description"
-                                  id="orgDescription" class="form-control">
-                        </textarea>
+                        <input name="orgwww" type="text" class="form-control"
+                               data-ng-model="organisation.website" id="orgwww">
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="form-group col-md-6">
-                    <label for="orgLinks" class="col-md-3 control-label">
-                        Kansainväliset yhteydet
-                    </label>
-                    <div class="col-md-9">
-                        <textarea name="orgLinks"
-                                  data-ng-model="organisation.int_links"
-                                  id="orgLinks" class="form-control">
-                        </textarea>
+        </fieldset>
+        <fieldset class="panel panel-default">
+            <div class="panel-heading"><h4>Lisätiedot</h4></div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-3 control-label">
+                            Vastuullinen johtaja
+                        </label>
+                        <div class="col-md-9">
+                            <input name="orgExecMan" type="text"
+                                   class="form-control"
+                                   data-ng-model="organisation.exec_manager"
+                                   id="orgExecMan">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-md-3 control-label">
+                            Viestintävastaava
+                        </label>
+                        <div class="col-md-9">
+                            <input name="orgCommRep" type="text"
+                                   class="form-control"
+                                   data-ng-model="organisation.communications_rep"
+                                   id="orgCommRep">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="orgNatLocLinks" class="col-md-3 control-label">
-                        Kansalliset ja paikalliset yhteydet
-                    </label>
-                    <div class="col-md-9">
-                        <textarea name="orgNatLocLinks"
-                                  data-ng-model="organisation.nat_local_links"
-                                  id="orgNatLocLinks" class="form-control">
-                        </textarea>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="orgLegal" class="col-md-3 control-label">
+                            Hallintomalli ja henkilöstö
+                        </label>
+                        <div class="col-md-9">
+                            <textarea name="orgLegal"
+                                      data-ng-model="organisation.legal_status"
+                                      id="orgLegal" class="form-control">
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="orgDescription" class="col-md-3 control-label">
+                            Tavoitteet ja keskeiset toimintatavat
+                        </label>
+                        <div class="col-md-9">
+                            <textarea name="orgDescription"
+                                      data-ng-model="organisation.description"
+                                      id="orgDescription" class="form-control">
+                            </textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <div class="form-group col-md-6">
-                    <label for="orgOthFund" class="col-md-3 control-label">
-                        Muut rahoittajat ja budjetti
-                    </label>
-                    <div class="col-md-9">
-                        <textarea name="orgOthFund"
-                                  data-ng-model="organisation.other_funding_budget"
-                                  id="orgOthFund" class="form-control">
-                        </textarea>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="orgLinks" class="col-md-3 control-label">
+                            Kansainväliset yhteydet
+                        </label>
+                        <div class="col-md-9">
+                            <textarea name="orgLinks"
+                                      data-ng-model="organisation.int_links"
+                                      id="orgLinks" class="form-control">
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="orgNatLocLinks" class="col-md-3 control-label">
+                            Kansalliset ja paikalliset yhteydet
+                        </label>
+                        <div class="col-md-9">
+                            <textarea name="orgNatLocLinks"
+                                      data-ng-model="organisation.nat_local_links"
+                                      id="orgNatLocLinks" class="form-control">
+                            </textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group col-md-6"
-                     ng-class="{'has-error': orgEditForm.orgAcct.$invalid}">
-                    <label for="orgAcct" class="col-md-3 control-label">
-                        Taloushallinto ja Tilintarkastus
-                    </label>
-                    <div class="col-md-9">
-                        <textarea name="orgAcct"
-                                  data-ng-model="organisation.accounting_audit"
-                            id="orgAcct" class="form-control" required>
-                        </textarea>
-                        <div ng-show="orgEditForm.orgAcct.$invalid"
-                             class="help-block">
-                            <p ng-show="orgEditForm.orgAcct.$error.required"
-                               class="help-block">
-                                Kenttä on pakollinen
-                            </p>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="orgOthFund" class="col-md-3 control-label">
+                            Muut rahoittajat ja budjetti
+                        </label>
+                        <div class="col-md-9">
+                            <textarea name="orgOthFund"
+                                      data-ng-model="organisation.other_funding_budget"
+                                      id="orgOthFund" class="form-control">
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="orgAcct" class="col-md-3 control-label">
+                            Taloushallinto ja Tilintarkastus
+                        </label>
+                        <div class="col-md-9">
+                            <textarea name="orgAcct"
+                                      data-ng-model="organisation.accounting_audit"
+                                      id="orgAcct" class="form-control">
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="org_background"
+                               class="col-md-3 control-label">
+                            Oleelliset taustatiedot
+                        </label>
+                        <div class="col-md-9">
+                            <textarea name="org_background"
+                                      data-ng-model="organisation.background"
+                                      id="org_background" class="form-control">
+                            </textarea>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="form-group col-md-6">
-                    <label for="org_background"
-                           class="col-md-3 control-label">
-                        Oleelliset taustatiedot
-                    </label>
-                    <div class="col-md-9">
-                        <textarea name="org_background"
-                                  data-ng-model="organisation.background"
-                                  id="org_background" class="form-control">
-                        </textarea>
+        </fieldset>
+        <fieldset class="panel panel-default">
+            <div class="panel-heading"><h4>Pankkitili</h4></div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-3 control-label">
+                            Tilinumero (IBAN)
+                        </label>
+                        <div class="col-md-9">
+                            <input name="bankIban" type="text" class="form-control"
+                                   data-ng-model="organisation.bank_account.iban"
+                                   id="bankIban">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-md-3 control-label">Pankin SWIFT</label>
+                        <div class="col-md-9">
+                            <input name="bankSwift" type="text" class="form-control"
+                                   data-ng-model="organisation.bank_account.swift"
+                                   id="bankSwift">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-3 control-label">Tilin haltija</label>
+                        <div class="col-md-9">
+                            <input name="bankHolder" type="text"
+                                   class="form-control"
+                                   data-ng-model="organisation.bank_account.holder_name"
+                                   id="bankHolder">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-md-3 control-label">
+                            Pankin yhteystiedot
+                        </label>
+                        <div class="col-md-9">
+                            <input name="bankCont" type="text" class="form-control"
+                                   data-ng-model="organisation.bank_account.bank_contact_details"
+                                   id="bankCont">
+                        </div>
                     </div>
                 </div>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>Pankkitili</legend>
-            <div class="form-group">
-                <div class="form-group col-md-6">
-                    <label class="col-md-3 control-label">
-                        Tilinumero (IBAN)
-                    </label>
-                    <div class="col-md-9">
-                        <input name="bankIban" type="text" class="form-control"
-                               data-ng-model="organisation.bank_account.iban"
-                               id="bankIban">
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="col-md-3 control-label">Pankin SWIFT</label>
-                    <div class="col-md-9">
-                        <input name="bankSwift" type="text" class="form-control"
-                               data-ng-model="organisation.bank_account.swift"
-                               id="bankSwift">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-group col-md-6">
-                    <label class="col-md-3 control-label">Tilin haltija</label>
-                    <div class="col-md-9">
-                        <input name="bankHolder" type="text"
-                               class="form-control"
-                               data-ng-model="organisation.bank_account.holder_name"
-                               id="bankHolder">
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="col-md-3 control-label">
-                        Pankin yhteystiedot
-                    </label>
-                    <div class="col-md-9">
-                        <input name="bankCont" type="text" class="form-control"
-                               data-ng-model="organisation.bank_account.bank_contact_details"
-                               id="bankCont">
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Erityishuomioiota</legend>
-            <div class="col-md-12">
+        <fieldset class="panel panel-default">
+            <div class="panel-heading"><h4>Erityishuomioiota</h4></div>
+            <div class="col-md-12 panel-body">
                 <div class="form-group col-md-6">
                     <label for="org_special_notes"
                            class="col-md-3 control-label">

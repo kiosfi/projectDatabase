@@ -23,7 +23,7 @@ Manual.register(function(app, auth) {
     roles:  ['authenticated']
   });
 
-  Manual.aggregateAsset('css', 'manual.css');
+  Manual.aggregateAsset('css', 'manual.css', {global: false, absolute: false});
 
   return Manual;
 });

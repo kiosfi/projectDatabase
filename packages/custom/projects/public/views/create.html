@@ -3,13 +3,19 @@
     <hr>
     <form name="projectForm" class="form-horizontal" role="form"
           data-ng-submit="create(projectForm.$valid)" novalidate>
-        <fieldset>
-            <legend>
-                <a ng-click="showInfo = !showInfo">
-                    Nimi, koordinaattori ja järjestö
-                </a>
-            </legend>
-            <div ng-show="showInfo">
+        <fieldset class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a ng-click="showInfo = !showInfo">
+                        <span class="glyphicon"
+                              ng-class="showInfo
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Nimi, koordinaattori ja järjestö
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showInfo" class="panel-body">
                 <div class="form-group col-md-6"
                      ng-class="{'has-error': projectForm.title.$invalid }">
                     <label class="col-md-3 control-label">
@@ -132,11 +138,19 @@
                            value="Lisää järjestö listalta"/>
                 </div>
                 <article class="well-lg" data-ng-show="newOrg">
-                    <fieldset>
-                        <legend>
-                            <a ng-click="showOrgInfo = !showOrgInfo">Järjestö</a>
-                        </legend>
-                        <div ng-show="showOrgInfo">
+                    <fieldset class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5>
+                                <a ng-click="showOrgInfo = !showOrgInfo">
+                                    <span class="glyphicon"
+                                          ng-class="showOrgInfo
+                                                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                    </span>
+                                    Järjestö
+                                </a>
+                            </h5>
+                        </div>
+                        <div ng-show="showOrgInfo" class="panel-body">
                             <div class="form-group col-md-6"
                                  ng-class="{'has-error': projectForm.orgname.$invalid}">
                                 <label class="col-md-3 control-label">Nimi</label>
@@ -154,7 +168,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-6"
-                                 ng-class="{'has-error': projectForm.orgrepName.$invalid }">
+                                 ng-class="{'has-error': projectForm.orgrepName.$invalid}">
                                 <label class="col-md-3 control-label">Edustaja</label>
                                 <div class="col-md-9">
                                     <input data-ng-if="newOrg" name="orgrepName"
@@ -170,8 +184,8 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-md-9" style="float:right;"
-                                     ng-class="{'has-error': projectForm.orgrepEmail.$invalid }">
+                                <div class="col-md-9" style="float: right"
+                                     ng-class="{'has-error': projectForm.orgrepEmail.$invalid}">
                                     <input data-ng-if="newOrg" name="orgrepEmail"
                                            type="text" class="form-control"
                                            data-ng-model="project.organisation.representative.email"
@@ -185,15 +199,13 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-md-9" style="float:right;"
-                                     ng-class="{'has-error': projectForm.orgrepPhone.$invalid }">
+                                <div class="col-md-9" style="float: right"
+                                     ng-class="{'has-error': projectForm.orgrepPhone.$invalid}">
                                     <input data-ng-if="newOrg" name="orgrepPhone"
                                            type="text" class="form-control"
                                            data-ng-model="project.organisation.representative.phone"
                                            placeholder="Puhelinnumero"
-                                           id="orgrepPhone"
-                                           required>
-
+                                           id="orgrepPhone" required>
                                     <div ng-show="projectForm.orgrepPhone.$invalid"
                                          class="help-block">
                                         <p ng-show="projectForm.orgrepPhone.$error.required">
@@ -204,9 +216,8 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <div class="form-group"
-                                     ng-class="{'has-error': projectForm.orgaddr.$invalid }">
+                                     ng-class="{'has-error': projectForm.orgaddr.$invalid}">
                                     <label class="col-md-3 control-label">Osoite</label>
-
                                     <div class="col-md-9">
                                         <input data-ng-if="newOrg" name="orgaddr"
                                                type="text" class="form-control"
@@ -221,15 +232,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group"
-                                     ng-class="{'has-error': projectForm.orgaddrcode.$invalid }">
+                                     ng-class="{'has-error': projectForm.orgaddrcode.$invalid}">
                                     <label class="col-md-3 control-label">Postinumero</label>
-
                                     <div class="col-md-9">
                                         <input data-ng-if="newOrg" name="orgaddrcode"
                                                type="text" class="form-control"
                                                data-ng-model="project.organisation.address.postal_code"
                                                id="orgaddrcode" required>
-
                                         <div ng-show="projectForm.orgaddrcode.$invalid"
                                              class="help-block">
                                             <p ng-show="projectForm.orgaddrcode.$error.required">
@@ -239,15 +248,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group"
-                                     ng-class="{'has-error': projectForm.orgaddrcity.$invalid }">
+                                     ng-class="{'has-error': projectForm.orgaddrcity.$invalid}">
                                     <label  class="col-md-3 control-label">Kaupunki</label>
-
                                     <div class="col-md-9">
                                         <input data-ng-if="newOrg" name="orgaddrcity"
                                                type="text" class="form-control"
                                                data-ng-model="project.organisation.address.city"
                                                id="orgaddrcity" required>
-
                                         <div ng-show="projectForm.orgaddrcity.$invalid"
                                              class="help-block">
                                             <p ng-show="projectForm.orgaddrcity.$error.required">
@@ -257,15 +264,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group"
-                                     ng-class="{'has-error':projectForm.orgaddrcntry.$invalid }">
+                                     ng-class="{'has-error': projectForm.orgaddrcntry.$invalid}">
                                     <label  class="col-md-3 control-label">Maa</label>
-
                                     <div class="col-md-9">
                                         <input data-ng-if="newOrg" name="orgaddrcntry"
                                                type="text" class="form-control"
                                                data-ng-model="project.organisation.address.country"
                                                id="orgaddrcntry" required>
-
                                         <div ng-show=" projectForm.orgaddrcntry.$invalid"
                                              class="help-block">
                                             <p ng-show="projectForm.orgaddrcntry.$error.required">
@@ -276,7 +281,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-6"
-                                 ng-class="{'has-error': projectForm.orgtel.$invalid }">
+                                 ng-class="{'has-error': projectForm.orgtel.$invalid}">
                                 <label class="col-md-3 control-label">
                                     Puhelinnumero
                                 </label>
@@ -285,7 +290,6 @@
                                            class="form-control"
                                            data-ng-model="project.organisation.tel"
                                            id="orgtel" required>
-
                                     <div ng-show="projectForm.orgtel.$invalid"
                                          class="help-block">
                                         <p ng-show="projectForm.orgtel.$error.required">
@@ -295,7 +299,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-6"
-                                 ng-class="{'has-error': projectForm.orgemail.$invalid }">
+                                 ng-class="{'has-error': projectForm.orgemail.$invalid}">
                                 <label  class="col-md-3 control-label">
                                     Sähköpostiosoite
                                 </label>
@@ -331,16 +335,20 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset>
-                        <legend>
-                            <a ng-click="showOrgDetails = !showOrgDetails">
-                                Hakijajärjestön lisätiedot
-                            </a>
-                        </legend>
-                        <div ng-show="showOrgDetails">
+                    <fieldset class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5>
+                                <a ng-click="showOrgDetails = !showOrgDetails">
+                                    <span class="glyphicon"
+                                          ng-class="showOrgDetails ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                    </span>
+                                    Hakijajärjestön lisätiedot
+                                </a>
+                            </h5>
+                        </div>
+                        <div ng-show="showOrgDetails" class="panel-body">
                             <div class="col-md-12">
-                                <div class="form-group col-md-6"
-                                     ng-class="{'has-error': projectForm.orgExecMan.$invalid}">
+                                <div class="form-group col-md-6">
                                     <label class="col-md-3 control-label">
                                         Vastuullinen johtaja
                                     </label>
@@ -349,17 +357,10 @@
                                                name="orgExecMan"
                                                type="text" class="form-control"
                                                data-ng-model="project.organisation.exec_manager"
-                                               id="orgExecMan" required>
-                                        <div ng-show="projectForm.orgExecMan.$invalid"
-                                             class="help-block">
-                                            <p ng-show="projectForm.orgExecMan.$error.required" class="help-block">
-                                                Kenttä on pakollinen
-                                            </p>
-                                        </div>
+                                               id="orgExecMan">
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6"
-                                     ng-class="{'has-error': projectForm.orgCommRep.$invalid}">
+                                <div class="form-group col-md-6">
                                     <label class="col-md-3 control-label">
                                         Viestintävastaava
                                     </label>
@@ -368,13 +369,7 @@
                                                name="orgCommRep"
                                                type="text" class="form-control"
                                                data-ng-model="project.organisation.communications_rep"
-                                               id="orgCommRep" required>
-                                        <div ng-show="projectForm.orgCommRep.$invalid"
-                                             class="help-block">
-                                            <p ng-show="projectForm.orgCommRep.$error.required" class="help-block">
-                                                Kenttä on pakollinen
-                                            </p>
-                                        </div>
+                                               id="orgCommRep">
                                     </div>
                                 </div>
                             </div>
@@ -453,8 +448,7 @@
                                         </textarea>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6"
-                                     ng-class="{'has-error': projectForm.orgAcct.$invalid}">
+                                <div class="form-group col-md-6">
                                     <label for="orgAcct"
                                            class="col-md-3 control-label">
                                         Taloushallinto ja Tilintarkastus
@@ -463,15 +457,8 @@
                                         <textarea data-ng-if="newOrg" name="orgAcct"
                                                   data-ng-model="project.organisation.accounting_audit"
                                                   id="orgAcct"
-                                                  class="form-control" required>
+                                                  class="form-control">
                                         </textarea>
-                                        <div ng-show="projectForm.orgAcct.$invalid"
-                                                 class="help-block">
-                                                <p ng-show="projectForm.orgAcct.$error.required"
-                                                   class="help-block">
-                                                    Kenttä on pakollinen
-                                                </p>
-                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -493,13 +480,19 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset>
-                        <legend>
-                            <a ng-click="showBankInfo = !showBankInfo">
-                                Pankkitili
-                            </a>
-                        </legend>
-                        <div ng-show="showBankInfo">
+                    <fieldset class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5>
+                                <a ng-click="showBankInfo = !showBankInfo">
+                                    <span class="glyphicon"
+                                          ng-class="showBankInfo
+                                                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                    </span>
+                                    Pankkitili
+                                </a>
+                            </h5>
+                        </div>
+                        <div ng-show="showBankInfo" class="panel-body">
                             <div class="form-group">
                                 <div class="form-group col-md-6">
                                     <label class="col-md-3 control-label">
@@ -554,13 +547,18 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset>
-                        <legend>
-                            <a ng-click="showSpecialNotes = !showSpecialNotes">
-                                Erityishuomioita
-                            </a>
-                        </legend>
-                        <div ng-show="showSpecialNotes">
+                    <fieldset class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5><a ng-click="showSpecialNotes = !showSpecialNotes">
+                                    <span class="glyphicon"
+                                          ng-class="showSpecialNotes
+                                                                  ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                    </span>
+                                    Erityishuomioita
+                                </a>
+                            </h5>
+                        </div>
+                        <div ng-show="showSpecialNotes" class="panel-body">
                             <div class="form-group col-md-6">
                                 <label for="org_special_notes"
                                        class="col-md-3 control-label">
@@ -580,11 +578,18 @@
                 </article>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>
-                <a ng-click="showProjInfo = !showProjInfo">Perustiedot</a>
-            </legend>
-            <div ng-show="showProjInfo">
+        <fieldset class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a ng-click="showProjInfo = !showProjInfo">
+                        <span class="glyphicon"
+                              ng-class="showProjInfo ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Perustiedot
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showProjInfo" class="panel-body">
                 <div class="form-group col-md-6">
                     <label for="description"
                            class="col-md-3 control-label">
@@ -656,40 +661,68 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>
-                <a ng-click="showProjDetails = !showProjDetails">Lisätiedot</a>
-            </legend>
-            <div ng-show="showProjDetails">
+        <fieldset class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a ng-click="showProjDetails = !showProjDetails">
+                        <span class="glyphicon"
+                              ng-class="showProjDetails ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        Lisätiedot
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showProjDetails" class="panel-body">
                 <div class="form-group col-md-12">
                     <label mean-token="'create-methods'" class="col-md-2">
                         {{fieldNames["methods"]}}
                     </label>
-                    <div class="col-md-12" id="methodsSelection"
+                    <div class="col-md-12 panel panel-default"
+                         id="methodsSelection"
                          data-ng-repeat="method in addedMethods">
-                        <select id="methodSelect" data-ng-model="method.name">
-                            <option data-ng-repeat="methodName in methodNames"
-                                    value="{{methodName}}">
-                                {{methodName}}
-                            </option>
-                        </select>
-                        <select id="levelSelect" data-ng-model="method.level">
-                            <option data-ng-repeat="methodLevel in methodLevels"
-                                    value="{{methodLevel}}">
-                                {{methodLevel}}
-                            </option>
-                        </select>
-                        <div style="clear:both;">&nbsp;</div>
-                        <!-- TODO: Warn the user about the fact that this is a
-                        required field too: -->
-                        <textarea name="methodComment"
-                                  data-ng-model="method.comment"
-                                  id="methodComment" class="form-control"
-                                  placeholder="Toiminnon kuvaus (pakollinen)"
-                                  required>
-                        </textarea>
+                        <div class="panel-body">
+                            <div class="col-md-7">
+                                <label class="control-label col-md-2">
+                                    Toiminto
+                                </label>
+                                <select id="methodSelect" class="col-md-10"
+                                        data-ng-model="method.name">
+                                    <option data-ng-repeat="methodName in methodNames"
+                                            value="{{methodName}}">
+                                        {{methodName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label col-md-3">
+                                    Taso
+                                </label>
+                                <select id="levelSelect" class="col-md-9"
+                                        data-ng-model="method.level">
+                                    <option data-ng-repeat="methodLevel in methodLevels"
+                                            value="{{methodLevel}}">
+                                        {{methodLevel}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- TODO: Warn the user about the fact that this is a
+                            required field too: -->
+                            <div class="col-md-12" style="margin-top: 0.5em">
+                                <label for="methodComment"
+                                       class="col-md-1 control-label">
+                                    Kuvaus
+                                </label>
+                                <div class="col-md-11">
+                                    <textarea name="methodComment"
+                                      data-ng-model="method.comment"
+                                      id="methodComment" class="form-control"
+                                      placeholder="Toiminnon kuvaus (pakollinen)"
+                                      required>
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="clear:both;">&nbsp;</div>
                     <div class="col-md-12">
                         <input type="button" value="Lisää uusi"
                                ng-click="addMethod();"/>
@@ -698,6 +731,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <hr>
                     <div class="form-group col-md-4">
                         <label class="col-md-3 control-label" for="country">
                             {{fieldNames["country"]}}
@@ -799,8 +833,7 @@
                     <div class="form-group col-md-6">
                         <label for="planned_results"
                                class="col-md-3 control-label">
-                            Odotetut keskeiset tulokset
-                            <!--{{fieldNames["planned_results"]}}-->
+                            {{fieldNames["planned_results"]}}
                         </label>
 
                         <div class="col-md-9">
@@ -918,11 +951,19 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>
-                <a ng-click="showAssessment = !showAssessment">KIOS:n arvio</a>
-            </legend>
-            <div ng-show="showAssessment">
+        <fieldset class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <a ng-click="showAssessment = !showAssessment">
+                        <span class="glyphicon"
+                              ng-class="showAssessment
+                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                        </span>
+                        KIOSin arvio
+                    </a>
+                </h4>
+            </div>
+            <div ng-show="showAssessment" class="panel-body">
                 <div class="col-md-12">
                     <div class="form-group col-md-6">
                         <label for="fitness"
@@ -991,9 +1032,9 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>Vahvistus</legend>
-            <div class="form-group col-md-6">
+        <fieldset class="panel panel-default">
+            <div class="panel-heading"><h4>Vahvistus</h4></div>
+            <div class="form-group col-md-6 panel-body">
                 <label for="special_notes"
                        class="col-md-3 control-label">
                     {{fieldNames["special_notes"]}}
@@ -1008,8 +1049,9 @@
             </div>
             <div class="form-group col-md-6">
                 <div class="col-md-offset-3 col-md-9">
+                    <br>
                     <button mean-token="'create-submit'" type="submit"
-                            class="btn btn-info" >Lähetä
+                            class="btn btn-info">Lähetä
                     </button>
                 </div>
             </div>
