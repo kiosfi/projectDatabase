@@ -12,7 +12,6 @@ var expect = require('expect.js'),
 var async = require('async');
 
 describe('<Unit Test>', function () {
-
     var organisation1;
     var organisation2;
     var organisation3;
@@ -176,6 +175,7 @@ describe('<Unit Test>', function () {
                     expect(err).to.be(null);
                     expect(data.name).to.equal("Disabled people's rights org");
                     expect(data.bank_account.swift).to.equal('NDEAFIHH');
+                    done();
                 });
             });
 
@@ -185,6 +185,7 @@ describe('<Unit Test>', function () {
                 organisation4.name = undefined;
                 return organisation4.save(function (err) {
                     expect(err).to.not.be(null);
+                    done();
                 });
             });
 
