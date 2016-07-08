@@ -3,6 +3,7 @@
     margin: 0 !important;
     border-bottom: 0 !important;
 }
+
 .page-header .navbar-nav {
     float: right;
 }
@@ -10,7 +11,7 @@
     display: inline-block;
 }
 .text-edit {
-    float: right; 
+    float: right;
     margin-top: 12px;
 }
 .account {
