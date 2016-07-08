@@ -6,531 +6,537 @@
         <li><a ng-href="/search/orgs">Järjestöt</a></li>
         <li><a ng-href="/search/payments">Maksut</a></li>
     </ul>
-    <article class="search-article">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>
-                    <a ng-click="showCriteria = !showCriteria"
-                       class="panel-button">
-                        <span class="glyphicon"
-                              ng-class="showCriteria
-                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
-                        </span>
-                        Kriteerit
-                    </a>
-                </h4>
-            </div>
-            <div class="panel-body" ng-show="showCriteria">
-                <form name="searchForm" role="form" class="form-horizontal"
-                      data-ng-init="getProjectFields()"
-                      data-ng-submit="update()" novalidate>
-                    <div class="form-group col-md-12">
-                        <div data-ng-repeat="query in searchProj"
-                             class="panel panel-default">
-                            <div class="panel-body">
-                                <div class="col-md-1"><h4>{{$index + 1}}.</h4></div>
-                                <div class="col-md-11">
-                                    <label class="col-md-2 control-label">
-                                        Kriteeri
-                                    </label>
-                                    <select id="fieldSelect" data-ng-model="query.field"
-                                            class="col-md-4">
-                                        <option data-ng-repeat="field in projectFields"
-                                                value="{{field.name}}">
-                                            {{field.fi}}
-                                        </option>
-                                    </select>
-                                    <label ng-show="query.field"
-                                           class="col-md-2 control-label">
-                                        Arvo
-                                    </label>
-                                    <select ng-show="query.field === 'org_fields'" id="fieldSelect"
-                                            data-ng-model="query.orgField"
-                                            class="col-md-4">
-                                        <option data-ng-repeat="orgField in orgFields"
-                                                value="{{orgField.name}}">
-                                            {{orgField.fi}}
-                                        </option>
-                                    </select>
-                                    <div ng-show="query.field === 'org_fields' && query.orgField"
-                                         class="col-md-12" style="margin-top: 0.5em">
-                                        <div class="col-md-4 col-md-offset-8">
-                                            <input type="text" class="form-control"
-                                                   data-ng-model="query.orgValue"
-                                                   id="orgFieldPattern"
-                                                   placeholder="Säännöllinen lauseke">
-                                        </div>
-                                    </div>
-                                    <select ng-show="query.field === 'state'"
-                                            data-ng-model="query.value"
-                                            class="col-md-4">
-                                        <option data-ng-repeat="state in states"
-                                                value="{{state}}">
-                                            {{state}}
-                                        </option>
-                                    </select>
-                                    <select ng-show="query.field === 'approved.themes'"
-                                            data-ng-model="query.value"
-                                            class="col-md-4">
-                                        <option data-ng-repeat="theme in themes"
-                                                value="{{theme}}">
-                                            {{theme}}
-                                        </option>
-                                    </select>
-                                    <div ng-show="stringParams.indexOf(query.field) > -1"
-                                         class="col-md-4">
+    <article class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="showCriteria = !showCriteria"
+                      class="panel-button">
+                    <span class="glyphicon"
+                          ng-class="showCriteria ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                    </span>
+                    Kriteerit
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-show="showCriteria">
+            <form name="searchForm" role="form" class="form-horizontal"
+                  data-ng-init="getProjectFields()"
+                  data-ng-submit="update()" novalidate>
+                <div class="form-group col-md-12">
+                    <div data-ng-repeat="query in searchProj"
+                         class="panel panel-default"
+                         style="background-color: #F9F9F9">
+                        <div class="panel-body">
+                            <div class="col-md-1"><h4>{{$index + 1}}.</h4></div>
+                            <div class="col-md-11">
+                                <label class="col-md-2 control-label">
+                                    Kriteeri
+                                </label>
+                                <select id="fieldSelect" data-ng-model="query.field"
+                                        class="col-md-4">
+                                    <option data-ng-repeat="field in projectFields"
+                                            value="{{field.name}}">
+                                        {{field.fi}}
+                                    </option>
+                                </select>
+                                <label ng-show="query.field"
+                                       class="col-md-2 control-label">
+                                    Arvo
+                                </label>
+                                <select ng-show="query.field === 'org_fields'" id="fieldSelect"
+                                        data-ng-model="query.orgField"
+                                        class="col-md-4">
+                                    <option data-ng-repeat="orgField in orgFields"
+                                            value="{{orgField.name}}">
+                                        {{orgField.fi}}
+                                    </option>
+                                </select>
+                                <div ng-show="query.field === 'org_fields' && query.orgField"
+                                     class="col-md-12" style="margin-top: 0.5em">
+                                    <div class="col-md-4 col-md-offset-8">
                                         <input type="text" class="form-control"
-                                               data-ng-model="query.value"
+                                               data-ng-model="query.orgValue"
+                                               id="orgFieldPattern"
                                                placeholder="Säännöllinen lauseke">
                                     </div>
-                                    <select ng-show="query.field === 'incomplete'"
-                                            data-ng-model="query.value" class="col-md-4">
-                                        <option value="true">Kyllä</option>
-                                        <option value="false">Ei</option>
-                                    </select>
-                                    <select ng-show="query.field === 'security_level'"
-                                            data-ng-model="query.value" class="col-md-4">
-                                        <option>Julkinen</option>
-                                        <option>Luottamuksellinen</option>
-                                        <option>Salainen</option>
-                                    </select>
-                                    <select ng-show="query.field === 'methods.level'"
-                                            data-ng-model="query.value"
-                                            class="col-md-4">
-                                        <option data-ng-repeat="level in levels"
-                                                value="{{level}}">
-                                            {{level}}
-                                        </option>
-                                    </select>
-                                    <select ng-show="query.field === 'dates'"
-                                            data-ng-model="query.dateField"
-                                            class="col-md-4">
-                                        <option data-ng-repeat="dateField in dateFields"
-                                                value="{{dateField.name}}">
-                                            {{dateField.fi}}
-                                        </option>
-                                    </select>
-                                    <div ng-show="query.dateField"
-                                         style="margin-top: 0.5em; text-align: center">
-                                        <div id="startDate" class="col-md-5 col-md-offset-1">
-                                            <div class="col-md-4">
-                                                <input type="number" class="form-control"
-                                                       data-ng-model="query.startDay"
-                                                       placeholder="p">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="number" class="form-control"
-                                                       data-ng-model="query.startMonth"
-                                                       placeholder="k">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="number" class="form-control"
-                                                       data-ng-model="query.startYear"
-                                                       placeholder="vvvv">
-                                            </div>
+                                </div>
+                                <select ng-show="query.field === 'state'"
+                                        data-ng-model="query.value"
+                                        class="col-md-4">
+                                    <option data-ng-repeat="state in states"
+                                            value="{{state}}">
+                                        {{state}}
+                                    </option>
+                                </select>
+                                <select ng-show="query.field === 'approved.themes'"
+                                        data-ng-model="query.value"
+                                        class="col-md-4">
+                                    <option data-ng-repeat="theme in themes"
+                                            value="{{theme}}">
+                                        {{theme}}
+                                    </option>
+                                </select>
+                                <div ng-show="stringParams.indexOf(query.field) > -1"
+                                     class="col-md-4">
+                                    <input type="text" class="form-control"
+                                           data-ng-model="query.value"
+                                           placeholder="Säännöllinen lauseke">
+                                </div>
+                                <select ng-show="query.field === 'incomplete'"
+                                        data-ng-model="query.value" class="col-md-4">
+                                    <option value="true">Kyllä</option>
+                                    <option value="false">Ei</option>
+                                </select>
+                                <select ng-show="query.field === 'security_level'"
+                                        data-ng-model="query.value" class="col-md-4">
+                                    <option>Julkinen</option>
+                                    <option>Luottamuksellinen</option>
+                                    <option>Salainen</option>
+                                </select>
+                                <select ng-show="query.field === 'methods.level'"
+                                        data-ng-model="query.value"
+                                        class="col-md-4">
+                                    <option data-ng-repeat="level in levels"
+                                            value="{{level}}">
+                                        {{level}}
+                                    </option>
+                                </select>
+                                <select ng-show="query.field === 'dates'"
+                                        data-ng-model="query.dateField"
+                                        class="col-md-4">
+                                    <option data-ng-repeat="dateField in dateFields"
+                                            value="{{dateField.name}}">
+                                        {{dateField.fi}}
+                                    </option>
+                                </select>
+                                <div ng-show="query.dateField"
+                                     style="margin-top: 0.5em; text-align: center">
+                                    <div id="startDate" class="col-md-5 col-md-offset-1">
+                                        <div class="col-md-4">
+                                            <input type="number" class="form-control"
+                                                   data-ng-model="query.startDay"
+                                                   placeholder="p">
                                         </div>
-                                        <div class="col-md-1">
-                                            <label class="control-label">–</label>
+                                        <div class="col-md-4">
+                                            <input type="number" class="form-control"
+                                                   data-ng-model="query.startMonth"
+                                                   placeholder="k">
                                         </div>
-                                        <div id="endDate" class="col-md-5">
-                                            <div class="col-md-4">
-                                                <input type="number" class="form-control"
-                                                       data-ng-model="query.endDay"
-                                                       placeholder="p">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="number" class="form-control"
-                                                       data-ng-model="query.endMonth"
-                                                       placeholder="k">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="number" class="form-control"
-                                                       data-ng-model="query.endYear"
-                                                       placeholder="vvvv">
-                                            </div>
+                                        <div class="col-md-4">
+                                            <input type="number" class="form-control"
+                                                   data-ng-model="query.startYear"
+                                                   placeholder="vvvv">
                                         </div>
                                     </div>
-                                    <select id="funds" ng-show="query.field === 'funds'"
-                                            data-ng-model="query.value"
-                                            class="col-md-4">
-                                        <option data-ng-repeat="funds in funding"
-                                                value="{{funds.name}}">
-                                            {{funds.fi}}
-                                        </option>
-                                    </select>
+                                    <div class="col-md-1">
+                                        <label class="control-label">–</label>
+                                    </div>
+                                    <div id="endDate" class="col-md-5">
+                                        <div class="col-md-4">
+                                            <input type="number" class="form-control"
+                                                   data-ng-model="query.endDay"
+                                                   placeholder="p">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="number" class="form-control"
+                                                   data-ng-model="query.endMonth"
+                                                   placeholder="k">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="number" class="form-control"
+                                                   data-ng-model="query.endYear"
+                                                   placeholder="vvvv">
+                                        </div>
+                                    </div>
                                 </div>
+                                <select id="funds" ng-show="query.field === 'funds'"
+                                        data-ng-model="query.value"
+                                        class="col-md-4">
+                                    <option data-ng-repeat="funds in funding"
+                                            value="{{funds.name}}">
+                                        {{funds.fi}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <input type="button" value="Lisää"
-                                   ng-click="addQuery();"/>
-                            <input type="button" ng-show="searchProj.length > 0"
-                                   value="Poista viimeinen" ng-click="removeQuery();"/>
-                        </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <button id="appr-btn" type="submit"
-                                class="btn btn-default">
-                            Hae</button>
+                    <div class="col-md-12">
+                        <a class="btn btn-danger"
+                           ng-show="searchProj.length > 0"
+                           ng-click="removeQuery();">
+                            <span class="glyphicon glyphicon-minus">
+                            </span>&nbsp;Poista viimeinen
+                        </a>
+                        <span class="btn btn-danger disabled"
+                              ng-show="!(searchProj.length > 0)">
+                            <span class="glyphicon glyphicon-minus">
+                            </span>&nbsp;Poista viimeinen
+                        </span>
+                        <a class="btn btn-success" ng-click="addQuery();">
+                            <span class="glyphicon glyphicon-plus">
+                            </span>&nbsp;Lisää
+                        </a>
+                        <span ng-show="searchProj.length > 0"
+                              style="float: right">
+                            <button id="appr-btn" type="submit"
+                                    class="btn btn-primary">
+                                <span class="glyphicon glyphicon-search">
+                                </span>&nbsp;Hae
+                            </button>
+                        </span>
+                        <span ng-show="!(searchProj.length > 0)"
+                              style="float: right">
+                            <span class="btn btn-primary disabled">
+                                <span class="glyphicon glyphicon-search">
+                                </span>&nbsp;Hae
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </article>
+    <article class="panel panel-primary" data-ng-init="search()">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="showResults = !showResults"
+                      class="panel-button">
+                    <span class="glyphicon"
+                          ng-class="showResults ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                    </span>
+                    Tulokset ({{numberOfResults}} kpl)
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-show="showResults">
+            <table class="col-md-12 table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-md-1">
+                            <a id="byRef"
+                               ng-click="updateOrdering('projects', 'project_ref')">
+                                Tunnus
+                                <span class="glyphicon"
+                                      ng-show="ordering === 'project_ref'"
+                                      ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                                </span>
+                            </a>
+                        </th>
+                        <th class="col-md-4">
+                            <a id="byTitle"
+                               ng-click="updateOrdering('projects', 'title')">
+                                Hanke
+                                <span class="glyphicon"
+                                      ng-show="ordering === 'title'"
+                                      ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                                </span>
+                            </a>
+                        </th>
+                        <th class="col-md-3">
+                            Järjestö
+                        </th>
+                        <th class="col-md-4">
+                            <a id="byDesc"
+                               ng-click="updateOrdering('projects', 'description')">
+                                Hankkeen kuvaus
+                                <span class="glyphicon"
+                                      ng-show="ordering === 'description'"
+                                      ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                                </span>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="result in results">
+                        <td id="resultRef">{{result.project_ref}}</td>
+                        <td><a ng-href="/projects/{{result._id}}"
+                               target="_blank">
+                                {{result.title}}</a></td>
+                        <td><a ng-href="/organisations/{{result.organisation._id}}"
+                               target="_blank">{{result.organisation.name}}</a>
+                        </td>
+                        <td>{{result.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <ul id="pagination" class="pagination pagination-sm">
+                    <li ng-repeat="pg in pages"
+                        ng-class="pg.number == page ? 'active' : ''">
+                        <a id="page-{{pg.number}}" href=""
+                           ng-click="updatePage(pg.number)">{{pg.number}}</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </article>
+    <article class="panel panel-primary" ng-show="numberOfResults > 0">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="showExport = !showExport"
+                      class="panel-button">
+                    <span class="glyphicon"
+                          ng-class="showResults ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                    </span>
+                    Vienti
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-show="showExport">
+            <div class="col-md-12" style="padding-left: 0">
+                <form data-ng-submit="getResultsForCsv()" class="form-horizontal">
+                    <h4>Kentät</h4>
+                    <span class="col-md-3">
+                        <input id="basics" type="checkbox"
+                               data-ng-model="basicFieldsToggle"
+                               ng-click="setStates(basicFieldsArray, basicFieldsToggle);">
+                        <label for="basics">Perustiedot</label>
+                    </span>
+                    <div class="col-md-12">
+                        <span class="col-md-3">
+                            <input type="checkbox" id="ref"
+                                   data-ng-model="exportFields.ref">
+                            <label for="ref">Hankenro</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="title"
+                                   data-ng-model="exportFields.title">
+                            <label for="title">Nimi</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="state"
+                                   data-ng-model="exportFields.state">
+                            <label for="state">Tila</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="security_level"
+                                   data-ng-model="exportFields.security_level">
+                            <label for="security_level">
+                                Turvaluokitus
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="coordinator"
+                                   data-ng-model="exportFields.coordinator">
+                            <label for="coordinator">Koordinaattori</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="country"
+                                   data-ng-model="exportFields.country">
+                            <label for="country">Maa</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="region"
+                                   data-ng-model="exportFields.region">
+                            <label for="region">Alue</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="dac"
+                                   data-ng-model="exportFields.dac">
+                            <label for="dac">DAC</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="reg_date"
+                                   data-ng-model="exportFields.reg_date">
+                            <label for="reg_date">Rekisteröimispvm</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="applied_local"
+                                   data-ng-model="exportFields.applied_local">
+                            <label for="applied_local">
+                                Haettu paik. val.
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="applied_eur"
+                                   data-ng-model="exportFields.applied_eur">
+                            <label for="applied_eur">Haettu EUR</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="granted_eur"
+                                   data-ng-model="exportFields.granted_eur">
+                            <label for="granted_eur">Myönnetty EUR</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="duration"
+                                   data-ng-model="exportFields.duration">
+                            <label for="duration">Kesto</label>
+                        </span>
+                    </div>
+                    <span class="col-md-3">
+                        <input id="organisation" type="checkbox"
+                               data-ng-model="orgFieldsToggle"
+                               ng-click="setStates(orgFieldsArray, orgFieldsToggle);">
+                        <label for="organisation">Järjestön tiedot</label>
+                    </span>
+                    <div class="col-md-12">
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_name"
+                                   data-ng-model="exportFields.org_name">
+                            <label for="org_name">
+                                Järjestön nimi
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_rep"
+                                   data-ng-model="exportFields.org_rep">
+                            <label for="org_rep">
+                                Järjestön edustaja
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_addr"
+                                   data-ng-model="exportFields.org_addr">
+                            <label for="org_addr">
+                                Järjestön osoite
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_tel"
+                                   data-ng-model="exportFields.org_tel">
+                            <label for="org_tel">
+                                Järjestön puh. nro.
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_email"
+                                   data-ng-model="exportFields.org_email">
+                            <label for="org_email">
+                                Järjestön sähköpostios.
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_www"
+                                   data-ng-model="exportFields.org_www">
+                            <label for="org_www">
+                                Järjestön websivut
+                            </label>
+                        </span>
+                    </div>
+                    <span class="col-md-3">
+                        <input id="extra_info" type="checkbox"
+                               data-ng-model="extraFieldsToggle"
+                               ng-click="setStates(extraFieldsArray, extraFieldsToggle);">
+                        <label for="extra_info">Lisätiedot</label>
+                    </span>
+                    <div class="col-md-12">
+                        <span class="col-md-3">
+                            <input type="checkbox" id="themes"
+                                   data-ng-model="exportFields.themes">
+                            <label for="themes">Oikeudellinen fokus</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="description"
+                                   data-ng-model="exportFields.description">
+                            <label for="description">Kuvaus</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="activities"
+                                   data-ng-model="exportFields.activities">
+                            <label for="activities">Toimintatavat</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="context"
+                                   data-ng-model="exportFields.context">
+                            <label for="context">
+                                Ihmisoikeuskonteksti
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="goal"
+                                   data-ng-model="exportFields.goal">
+                            <label for="goal">Päätavoitteet</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="target_group"
+                                   data-ng-model="exportFields.target_group">
+                            <label for="target_group">Hyödynsaajat</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="equality"
+                                   data-ng-model="exportFields.equality">
+                            <label for="equality">
+                                T-A. ja muut teemat
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="vulnerable_groups"
+                                   data-ng-model="exportFields.vulnerable_groups">
+                            <label for="vulnerable_groups">
+                                Haavoitt. ryhmien huomiointi
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="planned_results"
+                                   data-ng-model="exportFields.planned_results">
+                            <label for="planned_results">
+                                Tulostavoitteet
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox"
+                                   id="risk_control"
+                                   data-ng-model="exportFields.risk_control">
+                            <label for="risk_control">
+                                Riskinhallinnan kuvaus
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="indicators"
+                                   data-ng-model="exportFields.indicators">
+                            <label for="indicators">
+                                Tulosten saavutt. todent.
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="reporting_evaluation"
+                                   data-ng-model="exportFields.reporting_evaluation">
+                            <label for="reporting_evaluation">
+                                Eval. ja vaikutt. arviointi
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="human_resources"
+                                   data-ng-model="exportFields.human_resources">
+                            <label for="human_resources">
+                                Henkilöresurssit
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="budget"
+                                   data-ng-model="exportFields.budget">
+                            <label for="budget">Budjetti</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="other_funding"
+                                   data-ng-model="exportFields.other_funding">
+                            <label for="other_funding">
+                                Muualta haettu rahoitus
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="referees"
+                                   data-ng-model="exportFields.referees">
+                            <label for="referees">Suosittelijat</label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="background_check"
+                                   data-ng-model="exportFields.background_check">
+                            <label for="background_check">
+                                Taustaselvitys
+                            </label>
+                        </span>
+                    </div>
+                    <div class="col-md-12" style="text-align: center">
+                        <hr>
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-list">
+                            </span>&nbsp;CSV
+                        </button>
                     </div>
                 </form>
             </div>
-        </div>
-    </article>
-    <article class="search-article" data-ng-init="search()">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>
-                    <a ng-click="showResults = !showResults"
-                       class="panel-button">
-                        <span class="glyphicon"
-                              ng-class="showResults
-                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
-                        </span>
-                        Tulokset
-                    </a>
-                    ({{numberOfResults}} kpl)
-                </h4>
-            </div>
-            <div class="panel-body" ng-show="showResults">
-                <style type="text/css">
-                    .sortorder:after {
-                        content: '\25b2';
-                    }
-                    .sortorder.reverse:after {
-                        content: '\25bc';
-                    }
-                </style>
-                <table class="col-md-12 table table-striped">
-                    <thead>
-                        <tr>
-                            <th class="col-md-1">
-                                <a id="byRef"
-                                   ng-click="updateOrdering('project_ref')">
-                                    Tunnus
-                                </a>
-                                <span class="sortorder"
-                                      ng-show="ordering === 'project_ref'"
-                                      ng-class="{reverse:!ascending}"></span>
-                            </th>
-                            <th class="col-md-4">
-                                <a id="byTitle"
-                                   ng-click="updateOrdering('title')">
-                                    Hanke
-                                </a>
-                                <span class="sortorder"
-                                      ng-show="ordering === 'title'"
-                                      ng-class="{reverse:!ascending}"></span>
-                            </th>
-                            <th class="col-md-3">
-                                <a id="byOrg"
-                                   ng-click="updateOrdering('organisation.name')">
-                                    Järjestö
-                                </a>
-                                <span class="sortorder"
-                                      ng-show="ordering === 'organisation.name'"
-                                      ng-class="{reverse:!ascending}"></span>
-                            </th>
-                            <th class="col-md-4">
-                                <a id="byDesc"
-                                   ng-click="updateOrdering('description')">
-                                    Hankkeen kuvaus
-                                </a>
-                                <span class="sortorder"
-                                      ng-show="ordering === 'description'"
-                                      ng-class="{reverse:!ascending}"></span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="result in results">
-                            <td id="resultRef">{{result.project_ref}}</td>
-                            <td><a ng-href="/projects/{{result._id}}"
-                                   target="_blank">
-                                    {{result.title}}</a></td>
-                            <td><a ng-href="/organisations/{{result.organisation._id}}"
-                                   target="_blank">{{result.organisation.name}}</a>
-                            </td>
-                            <td>{{result.description}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div>
-                    <ul id="pagination" class="pagination pagination-sm">
-                        <li ng-repeat="pg in pages"
-                            ng-class="pg.number == page ? 'active' : ''">
-                            <a id="page-{{pg.number}}" href=""
-                               ng-click="updatePage(pg.number)">{{pg.number}}</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default" ng-show="numberOfResults > 0">
-            <div class="panel-heading">
-                <h4><a ng-click="showExport = !showExport"
-                       class="panel-button">
-                        <span class="glyphicon"
-                              ng-class="showResults
-                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
-                        </span>
-                        Vienti
-                    </a>
-                </h4>
-            </div>
-            <div class="panel-body" ng-show="showExport">
-                <div class="col-md-12">
-                    <form data-ng-submit="getResultsForCsv()" class="form-horizontal">
-                        <h5>Kentät</h5>
-                        <span class="col-md-3">
-                            <input id="basics" type="checkbox"
-                                   data-ng-model="basicFieldsToggle"
-                                   ng-click="setStates(basicFieldsArray, basicFieldsToggle);">
-                            <label for="basics">Perustiedot</label>
-                        </span>
-                        <div class="col-md-12">
-                            <span class="col-md-3">
-                                <input type="checkbox" id="ref"
-                                       data-ng-model="exportFields.ref">
-                                <label for="ref">Hankenro</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="title"
-                                       data-ng-model="exportFields.title">
-                                <label for="title">Nimi</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="state"
-                                       data-ng-model="exportFields.state">
-                                <label for="state">Tila</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="security_level"
-                                       data-ng-model="exportFields.security_level">
-                                <label for="security_level">
-                                    Turvaluokitus
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="coordinator"
-                                       data-ng-model="exportFields.coordinator">
-                                <label for="coordinator">Koordinaattori</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="country"
-                                       data-ng-model="exportFields.country">
-                                <label for="country">Maa</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="region"
-                                       data-ng-model="exportFields.region">
-                                <label for="region">Alue</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="dac"
-                                       data-ng-model="exportFields.dac">
-                                <label for="dac">DAC</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="reg_date"
-                                       data-ng-model="exportFields.reg_date">
-                                <label for="reg_date">Rekisteröimispvm</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="applied_local"
-                                       data-ng-model="exportFields.applied_local">
-                                <label for="applied_local">
-                                    Haettu paik. val.
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="applied_eur"
-                                       data-ng-model="exportFields.applied_eur">
-                                <label for="applied_eur">Haettu EUR</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="granted_eur"
-                                       data-ng-model="exportFields.granted_eur">
-                                <label for="granted_eur">Myönnetty EUR</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="duration"
-                                       data-ng-model="exportFields.duration">
-                                <label for="duration">Kesto</label>
-                            </span>
-                        </div>
-                        <span class="col-md-3">
-                            <input id="organisation" type="checkbox"
-                                   data-ng-model="orgFieldsToggle"
-                                   ng-click="setStates(orgFieldsArray, orgFieldsToggle);">
-                            <label for="organisation">Järjestön tiedot</label>
-                        </span>
-                        <div class="col-md-12">
-                            <span class="col-md-3">
-                                <input type="checkbox" id="org_name"
-                                       data-ng-model="exportFields.org_name">
-                                <label for="org_name">
-                                    Järjestön nimi
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="org_rep"
-                                       data-ng-model="exportFields.org_rep">
-                                <label for="org_rep">
-                                    Järjestön edustaja
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="org_addr"
-                                       data-ng-model="exportFields.org_addr">
-                                <label for="org_addr">
-                                    Järjestön osoite
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="org_tel"
-                                       data-ng-model="exportFields.org_tel">
-                                <label for="org_tel">
-                                    Järjestön puh. nro.
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="org_email"
-                                       data-ng-model="exportFields.org_email">
-                                <label for="org_email">
-                                    Järjestön sähköpostios.
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="org_www"
-                                       data-ng-model="exportFields.org_www">
-                                <label for="org_www">
-                                    Järjestön websivut
-                                </label>
-                            </span>
-                        </div>
-                        <span class="col-md-3">
-                            <input id="extra_info" type="checkbox"
-                                   data-ng-model="extraFieldsToggle"
-                                   ng-click="setStates(extraFieldsArray, extraFieldsToggle);">
-                            <label for="extra_info">Lisätiedot</label>
-                        </span>
-                        <div class="col-md-12">
-                            <span class="col-md-3">
-                                <input type="checkbox" id="themes"
-                                       data-ng-model="exportFields.themes">
-                                <label for="themes">Oikeudellinen fokus</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="description"
-                                       data-ng-model="exportFields.description">
-                                <label for="description">Kuvaus</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="activities"
-                                       data-ng-model="exportFields.activities">
-                                <label for="activities">Toimintatavat</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="context"
-                                       data-ng-model="exportFields.context">
-                                <label for="context">
-                                    Ihmisoikeuskonteksti
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="goal"
-                                       data-ng-model="exportFields.goal">
-                                <label for="goal">Päätavoitteet</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="target_group"
-                                       data-ng-model="exportFields.target_group">
-                                <label for="target_group">Hyödynsaajat</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="equality"
-                                       data-ng-model="exportFields.equality">
-                                <label for="equality">
-                                    T-A. ja muut teemat
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="vulnerable_groups"
-                                       data-ng-model="exportFields.vulnerable_groups">
-                                <label for="vulnerable_groups">
-                                    Haavoitt. ryhmien huomiointi
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="planned_results"
-                                       data-ng-model="exportFields.planned_results">
-                                <label for="planned_results">
-                                    Tulostavoitteet
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox"
-                                       id="risk_control"
-                                       data-ng-model="exportFields.risk_control">
-                                <label for="risk_control">
-                                    Riskinhallinnan kuvaus
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="indicators"
-                                       data-ng-model="exportFields.indicators">
-                                <label for="indicators">
-                                    Tulosten saavutt. todent.
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="reporting_evaluation"
-                                       data-ng-model="exportFields.reporting_evaluation">
-                                <label for="reporting_evaluation">
-                                    Eval. ja vaikutt. arviointi
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="human_resources"
-                                       data-ng-model="exportFields.human_resources">
-                                <label for="human_resources">
-                                    Henkilöresurssit
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="budget"
-                                       data-ng-model="exportFields.budget">
-                                <label for="budget">Budjetti</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="other_funding"
-                                       data-ng-model="exportFields.other_funding">
-                                <label for="other_funding">
-                                    Muualta haettu rahoitus
-                                </label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="referees"
-                                       data-ng-model="exportFields.referees">
-                                <label for="referees">Suosittelijat</label>
-                            </span>
-                            <span class="col-md-3">
-                                <input type="checkbox" id="background_check"
-                                       data-ng-model="exportFields.background_check">
-                                <label for="background_check">
-                                    Taustaselvitys
-                                </label>
-                            </span>
-                        </div>
-                        <span class="col-md-12">
-                            <button type="submit" class="btn">
-                                CSV
-                            </button>
-                        </span>
-                    </form>
-                </div>
-            </div>
-        </div>
+        </section>
     </article>
 </section>

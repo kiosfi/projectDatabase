@@ -6,127 +6,174 @@
         <li class="active"><a ng-href="/search/orgs">Järjestöt</a></li>
         <li><a ng-href="/search/payments">Maksut</a></li>
     </ul>
-    <article class="search-article">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>
-                    <a ng-click="showCriteria = !showCriteria"
-                       class="panel-button">
-                        <span class="glyphicon"
-                              ng-class="showCriteria
-                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
-                        </span>
-                        Kriteerit
-                    </a>
-                </h4>
-            </div>
-            <div class="panel-body" ng-show="showCriteria">
-                <form name="orgForm" role="form" class="form-horizontal"
-                      data-ng-init="getProjectFields()"
-                      data-ng-submit="updateOrgSearch()" novalidate>
-                    <div class="form-group col-md-12">
-                        <div class="col-md-12 panel panel-default"
-                             data-ng-repeat="query in searchOrg">
-                            <div class="panel-body">
-                                <div class="col-md-1"><h4>{{$index + 1}}.</h4></div>
-                                <div class="col-md-11">
+    <article class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="showCriteria = !showCriteria"
+                      class="panel-button">
+                    <span class="glyphicon"
+                          ng-class="showCriteria ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                    </span>
+                    Kriteerit
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-show="showCriteria">
+            <form name="orgForm" role="form" class="form-horizontal"
+                  data-ng-init="getProjectFields()"
+                  data-ng-submit="updateOrgSearch()" novalidate>
+                <div class="form-group col-md-12">
+                    <div class="col-md-12 panel panel-default"
+                         data-ng-repeat="query in searchOrg">
+                        <div class="panel-body">
+                            <div class="col-md-1"><h4>{{$index + 1}}.</h4></div>
+                            <div class="col-md-11">
+                                <label class="col-md-2 control-label">
+                                    Kriteeri
+                                </label>
+                                <div id="search" class="col-md-4">
+                                    <select data-ng-model="query.field">
+                                        <option ng-repeat="orgField in orgFields"
+                                                value="{{orgField.name}}">
+                                            {{orgField.fi}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div ng-show="query.field">
                                     <label class="col-md-2 control-label">
-                                        Kriteeri
+                                        Arvo
                                     </label>
-                                    <div id="search" class="col-md-4">
-                                        <select data-ng-model="query.field">
-                                            <option ng-repeat="orgField in orgFields"
-                                                    value="{{orgField.name}}">
-                                                {{orgField.fi}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div ng-show="query.field">
-                                        <label class="col-md-2 control-label">
-                                            Arvo
-                                        </label>
-                                        <div class="col-md-4">
-                                            <input type="text" class="form-control"
-                                                   data-ng-model="query.value"
-                                                   placeholder="Säännöllinen lauseke">
-                                        </div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control"
+                                               data-ng-model="query.value"
+                                               placeholder="Säännöllinen lauseke">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <input type="button" value="Lisää"
-                                   ng-click="addOrgQuery();"/>
-                            <input type="button" ng-show="searchOrg.length > 0"
-                                   value="Poista viimeinen"
-                                   ng-click="removeOrgQuery();"/>
-                        </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <button id="appr-btn" type="submit"
-                                class="btn btn-default">
-                            Hae</button>
+                    <div class="col-md-12">
+                        <a class="btn btn-danger"
+                           ng-show="searchOrg.length > 0"
+                           ng-click="removeOrgQuery();">
+                            <span class="glyphicon glyphicon-minus">
+                            </span>&nbsp;Poista viimeinen
+                        </a>
+                        <span class="btn btn-danger disabled"
+                              ng-show="!(searchOrg.length > 0)">
+                            <span class="glyphicon glyphicon-minus">
+                            </span>&nbsp;Poista viimeinen
+                        </span>
+                        <a class="btn btn-success" ng-click="addOrgQuery();">
+                            <span class="glyphicon glyphicon-plus">
+                            </span>&nbsp;Lisää
+                        </a>
+                        <span ng-show="searchOrg.length > 0"
+                              style="float: right">
+                            <button id="appr-btn" type="submit"
+                                    class="btn btn-primary">
+                                <span class="glyphicon glyphicon-search">
+                                </span>&nbsp;Hae
+                            </button>
+                        </span>
+                        <span ng-show="!(searchOrg.length > 0)"
+                              style="float: right">
+                            <span class="btn btn-primary disabled">
+                                <span class="glyphicon glyphicon-search">
+                                </span>&nbsp;Hae
+                            </span>
+                        </span>
                     </div>
-                </form>
-            </div>
-        </div>
+                </div>
+            </form>
+        </section>
     </article>
-    <article data-ng-init="searchOrgs()" class="search-article">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>
-                    <a ng-click="showResults = !showResults"
-                       class="panel-button">
-                        <span class="glyphicon"
-                              ng-class="showResults
-                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
-                        </span>
-                        Tulokset
-                    </a>
-                    ({{organisations.length}} kpl)
-                </h4>
-            </div>
-            <div class="panel-body" ng-show="showResults">
-                <table class="col-md-12 table table-striped">
-                    <thead>
-                        <tr>
-                            <th class="col-md-3">Nimi</th>
-                            <th class="col-md-3">Edustaja</th>
-                            <th class="col-md-3">Osoite</th>
-                            <th class="col-md-3">Sähköposti</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="org in organisations">
-                            <td><a ng-href="/organisations/{{org._id}}"
-                                   target="_blank">{{org.name}}</a></td>
-                            <td>{{org.representative}}</td>
-                            <td>{{org.address}}</td>
-                            <td>{{org.email}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <article data-ng-init="searchOrgs()" class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="showResults = !showResults"
+                      class="panel-button">
+                    <span class="glyphicon"
+                          ng-class="showResults ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                    </span>
+                    Tulokset ({{organisations.length}} kpl)
+                </span>
+            </h4>
         </div>
-        <div class="panel panel-default" ng-show="organisations.length > 0">
-            <div class="panel-heading">
-                <h4>
-                    <a ng-click="showExport = !showExport"
-                       class="panel-button">
-                        <span class="glyphicon"
-                              ng-class="showExport
-                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
-                        </span>
-                        Vienti
-                    </a>
-                </h4>
-            </div>
-            <div class="panel-body" ng-show="showExport">
-                <button type="button" ng-csv="organisations" lazy-load="true"
-                        csv-header="orgHeaders" csv-column-order="csvColOrder"
-                        filename="järjestöt.csv" field-separator=";"
-                        add-bom="true" class="btn">CSV</button>
-            </div>
+        <section class="panel-body" ng-show="showResults">
+            <table class="col-md-12 table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-md-3">
+                            <a ng-click="updateOrdering('organisations', 'name')">
+                                Nimi
+                                <span class="sortorder"
+                                      ng-show="ordering === 'name'"
+                                      ng-class="{reverse:!ascending}">
+                                </span>
+                            </a>
+                        </th>
+                        <th class="col-md-3">
+                            <a ng-click="updateOrdering('organisations', 'representative.name')">
+                                Edustaja
+                                <span class="sortorder"
+                                      ng-show="ordering === 'representative.name'"
+                                      ng-class="{reverse:!ascending}">
+                                </span>
+                            </a>
+                        </th>
+                        <th class="col-md-3">
+                            <a ng-click="updateOrdering('organisations', 'address.street')">
+                                Osoite
+                                <span class="sortorder"
+                                      ng-show="ordering === 'address.street'"
+                                      ng-class="{reverse:!ascending}">
+                                </span>
+                            </a>
+                        </th>
+                        <th class="col-md-3">
+                            <a ng-click="updateOrdering('organisations', 'email')">
+                                Sähköposti
+                                <span class="sortorder"
+                                      ng-show="ordering === 'email'"
+                                      ng-class="{reverse:!ascending}">
+                                </span>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="org in organisations">
+                        <td><a ng-href="/organisations/{{org._id}}"
+                               target="_blank">{{org.name}}</a></td>
+                        <td>{{org.representative}}</td>
+                        <td>{{org.address}}</td>
+                        <td>{{org.email}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </article>
+    <article class="panel panel-primary" ng-show="organisations.length > 0">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="showExport = !showExport"
+                      class="panel-button">
+                    <span class="glyphicon"
+                          ng-class="showExport ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                    </span>
+                    Vienti
+                </span>
+            </h4>
         </div>
+        <section class="panel-body" ng-show="showExport">
+            <button type="button" ng-csv="organisations" lazy-load="true"
+                    csv-header="orgHeaders" csv-column-order="csvColOrder"
+                    filename="järjestöt.csv" field-separator=";"
+                    add-bom="true" class="btn btn-primary">
+                <span class="glyphicon glyphicon-download">
+                </span>&nbsp;Lataa CSV
+            </button>
+        </section>
     </article>
 </section>

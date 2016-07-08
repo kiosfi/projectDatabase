@@ -19,10 +19,7 @@ module.exports = function (Search) {
     /**
      * Formulates received search query depending on the type of
      * data searched
-     * @param {JSON}
-     * @returns {JSON}
      */
-
     function prepareQueries(searchBy) {
 
         /**
@@ -118,7 +115,7 @@ module.exports = function (Search) {
                     search[query.orgField] = new RegExp(query.orgValue, 'i');
                 }
                 return search;
-            })
+            });
 
             Organisation.find({$and: params}, function (err, orgs) {
 
@@ -135,7 +132,7 @@ module.exports = function (Search) {
                  */
                 queries = _.filter(queries, function (query) {
                     return typeof query.org_fields === 'undefined';
-                })
+                });
 
                 queries.push({organisation: {$in: orgs}});
 
@@ -287,7 +284,7 @@ module.exports = function (Search) {
                                 "date": project.approved.approved_date,
                                 "ref": project.project_ref,
                                 "title": project.title,
-                                "id": project._id}
+                                "id": project._id};
                         });
                         res.json(projects);
                     }
@@ -305,8 +302,8 @@ module.exports = function (Search) {
          */
         searchOrgs: function (req, res) {
             var queries = prepareQueries(req.query.searchBy);
-
-            Organisation.find({$and: queries}, function (err, orgs) {
+            Organisation.find({$and: queries}).sort({"name" : 1})
+                    .exec(function (err, orgs) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Virhe järjestöjen hakutoiminnossa'
@@ -334,12 +331,14 @@ module.exports = function (Search) {
                             "nat_local_links": org.nat_local_links,
                             "other_funding_budget": org.other_funding_budget,
                             "accounting_audit": org.accounting_audit
-                        }
-                    })
+                        };
+                    });
                     res.json(orgs);
                 }
-
             });
+
+        },
+        searchAllOrgs: function (req, res) {
 
         },
         /**
@@ -359,7 +358,7 @@ module.exports = function (Search) {
                     search[query.orgField] = new RegExp(query.orgValue, 'i');
                 }
                 return search;
-            })
+            });
 
             Organisation.find({$and: params}, function (err, orgs) {
 
@@ -369,7 +368,7 @@ module.exports = function (Search) {
 
                 queries = _.filter(queries, function (query) {
                     return typeof query.orgField === 'undefined';
-                })
+                });
 
                 queries.push({organisation: {$in: orgs}});
 

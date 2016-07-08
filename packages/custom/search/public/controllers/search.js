@@ -384,11 +384,11 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                     Search.searchAllProjects({"searchBy": searchBy, "projFields":
                                 $scope.projFieldSel(), "orgFields": $scope.orgFieldSel()
                     },
-                    function (results) {
-                        $scope.global.exportResults = results;
-                        $scope.global.exportFields = $scope.exportFields;
-                        $location.path('search/export');
-                    });
+                            function (results) {
+                                $scope.global.exportResults = results;
+                                $scope.global.exportFields = $scope.exportFields;
+                                $location.path('search/export');
+                            });
         };
 
 
@@ -476,15 +476,29 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         /**
          * Updates the ordering and reloads the view.
          *
-         * @param {String} ordering The ordering predicate.
+         * @pstsm {String} collection   The collection whose search results will
+         * be sorted ("projects" or "organisations").
+         * @param {String} ordering     The ordering predicate.
          */
-        $scope.updateOrdering = function (ordering) {
-            $window.location = '/search?searchBy='
-                    + JSON.stringify($scope.searchProj)
-                    + '&ordering=' + ordering
-                    + '&ascending=' + (ordering === $scope.ordering
-                            ? !$scope.ascending : true)
-                    + '&page=' + $scope.page;
+        $scope.updateOrdering = function (collection, ordering) {
+            switch (collection) {
+                case "projects":
+                    $window.location = '/search?searchBy='
+                            + JSON.stringify($scope.searchProj)
+                            + '&ordering=' + ordering
+                            + '&ascending=' + (ordering === $scope.ordering
+                                    ? !$scope.ascending : true)
+                            + '&page=' + $scope.page;
+                    break;
+                case "organisations":
+                    $window.location = '/search/orgs?searchBy='
+                            + JSON.stringify($scope.searchOrg)
+                            + '&ordering=' + ordering
+                            + '&ascending=' + (ordering === $scope.ordering
+                                    ? !$scope.ascending : true)
+                            + '&page=' + $scope.page;
+                    break;
+            }
         };
 
         /**
