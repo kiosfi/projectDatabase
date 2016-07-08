@@ -243,7 +243,7 @@
                                 </td>
                             </tr>
                             <tr ng-show="nonEmpty(project.organisation.
-                                                representative.name)">
+                                                    representative.name)">
                                 <th>
                                     {{fieldNames["organisation_representative"]}}
                                 </th>
@@ -925,7 +925,7 @@
             <form name="stateForm" class="form-horizontal"
                   data-ng-init="findState()"
                   data-ng-submit="changeState(project.changeTo);">
-                <span class="col-md-11">
+                <span>
                     <label class="control-label">
                         {{project.state}}
                         <span ng-if="project.incomplete"> (keskeneräinen)</span>
@@ -938,11 +938,13 @@
                                 value="{{next_state}}">{{next_state}}</option>
                     </select>
                 </span>
-                <button type="submit" class="col-md-1 btn btn-default" id="st"
-                        ng-disalbed="stateform.$invalid">
-                    <span class="glyphicon glyphicon-share-alt"></span>&nbsp;
-                    Lomake
-                </button>
+                <span style="float: right">
+                    <button type="submit" class="btn btn-default" id="st"
+                            ng-disalbed="stateform.$invalid">
+                        <span class="glyphicon glyphicon-share-alt"></span>&nbsp;
+                        Lomake
+                    </button>
+                </span>
             </form>
         </section>
     </article>
