@@ -1,11 +1,12 @@
 <article data-ng-controller="ProjectsController" data-ng-init="findOne()">
+    <link rel="stylesheet" type="text/css" href="/theme/assets/css/twoPart.css">
     <div id="header">
         <h1 id="projtitle">
             {{project.project_ref}}: {{project.title}}
         </h1>
         <hr>
     </div>
-    <ul id="menu" class="nav nav-list navtree">
+    <ul id="menu" class="nav nav-list left-part">
         <li>
             <label><a href="#functions">Toiminnot</a></label>
             <ul>
@@ -42,9 +43,9 @@
                 </li>
             </ul>
         </li>
-<!--        <li>
-            <label><a href="#organisation">Järjestö</a></label>
-        </li>-->
+        <!--        <li>
+                    <label><a href="#organisation">Järjestö</a></label>
+                </li>-->
         <li>
             <label><a href="#assessment">KIOSin arvio</a></label>
         </li>
@@ -150,141 +151,142 @@
                 <section class="col-md-6">
                     <h4>Perustiedot</h4>
                     <section class="section">
-                        <div class="col-md-12">
-                            <div class="col-md-6 mini-header">
-                                {{fieldNames["security_level"]}}
-                            </div>
-                            <div class="col-md-6">{{project.security_level}}</div>
-                        </div>
-                        <div ng-show="nonEmpty(project.country)"
-                             class="col-md-12">
-                            <div class="col-md-6 mini-header">
-                                {{fieldNames["country"]}}
-                            </div>
-                            <div class="col-md-6">{{project.country}}</div>
-                        </div>
-                        <div ng-show="nonEmpty(project.region)"
-                             class="col-md-12">
-                            <div class="col-md-6 mini-header">
-                                {{fieldNames["region"]}}
-                            </div>
-                            <div class="col-md-6">{{project.region}}</div>
-                        </div>
-                        <div ng-show="nonEmpty(project.dac)"
-                             class="col-md-12">
-                            <div class="col-md-6 mini-header">
-                                {{fieldNames["dac"]}}
-                            </div>
-                            <div class="col-md-6">{{project.dac}}</div>
-                        </div>
-                        <div ng-show="nonEmpty(project.state)"
-                             class="col-md-12">
-                            <div class="col-md-6 mini-header">
-                                {{fieldNames["state"]}}
-                            </div>
-                            <div class="col-md-6">{{project.state}}</div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-6 mini-header">
-                                {{fieldNames["reg_date"]}}
-                            </div>
-                            <div class="col-md-6">{{project.reg_date| date:'d.M.yyyy': '+0200'}}</div>
-                        </div>
-                        <div ng-show="project.approved.granted_sum_eur"
-                             class="ng-hide col-md-12">
-                            <div class="col-md-6 mini-header">
-                                {{fieldNames["approved_granted_sum_eur"]}}
-                            </div>
-                            <div class="col-md-6">
-                                {{numberToString(project.approved.granted_sum_eur)}}
-                            </div>
-                        </div>
-                        <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
-                                                project.funding.applied_curr_eur >= 0"
-                             class="ng-hide col-md-12">
-                            <div class="col-md-6 mini-header">
-                                {{fieldNames["funding_applied_curr_eur"]}}
-                            </div>
-                            <div class="col-md-6">
-                                {{numberToString(project.funding.applied_curr_eur)}}
-                            </div>
-                        </div>
-                        <div ng-show="!project.approved.granted_sum.granted_curr_eur &&
-                                                project.funding.applied_curr_local"
-                             class="ng-hide col-md-12">
-                            <div class="col-md-6 mini-header">
-                                {{fieldNames["funding_applied_curr_local"]}}
-                                ({{project.funding.curr_local_unit ?
+                        <table class="summary-table">
+                            <tr>
+                                <th>
+                                    {{fieldNames["security_level"]}}
+                                </th>
+                                <td class="summary-td">
+                                    {{project.security_level}}
+                                </td>
+                            </tr>
+                            <tr ng-show="nonEmpty(project.country)">
+                                <th>
+                                    {{fieldNames["country"]}}
+                                </th>
+                                <td class="summary-td">{{project.country}}</td>
+                            </tr>
+                            <tr ng-show="nonEmpty(project.region)">
+                                <th>
+                                    {{fieldNames["region"]}}
+                                </th>
+                                <td class="summary-td">{{project.region}}</td>
+                            </tr>
+                            <tr ng-show="nonEmpty(project.dac)">
+                                <th>
+                                    {{fieldNames["dac"]}}
+                                </th>
+                                <td class="summary-td">{{project.dac}}</td>
+                            </tr>
+                            <tr ng-show="nonEmpty(project.state)">
+                                <th>
+                                    {{fieldNames["state"]}}
+                                </th>
+                                <td class="summary-td">{{project.state}}</td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {{fieldNames["reg_date"]}}
+                                </th>
+                                <td class="summary-td">
+                                    {{project.reg_date| date:'d.M.yyyy': '+0200'}}
+                                </td>
+                            </tr>
+                            <tr ng-show="project.approved.granted_sum_eur">
+                                <th>
+                                    {{fieldNames["approved_granted_sum_eur"]}}
+                                </th>
+                                <td class="summary-td">
+                                    {{numberToString(project.approved.granted_sum_eur)}}
+                                </td>
+                            </tr>
+                            <tr ng-show="!project.approved.granted_sum.granted_curr_eur &&
+                                                    project.funding.applied_curr_eur >= 0">
+                                <th>
+                                    {{fieldNames["funding_applied_curr_eur"]}}
+                                </th>
+                                <td class="summary-td">
+                                    {{numberToString(project.funding.applied_curr_eur)}}
+                                </td>
+                            </tr>
+                            <tr ng-show="!project.approved.granted_sum.granted_curr_eur &&
+                                                    project.funding.applied_curr_local">
+                                <th>
+                                    {{fieldNames["funding_applied_curr_local"]}}
+                                    ({{project.funding.curr_local_unit ?
                             project.funding.curr_local_unit : "paik. val."}})
-                            </div>
-                            <div class="col-md-6">
-                                {{numberToString(project.funding.applied_curr_local)}}
-                            </div>
-                        </div>
-                        <div ng-show="project.duration_months >= 0"
-                             class="col-md-12">
-                            <div class="col-md-6 mini-header">
-                                {{fieldNames["duration_months"]}}
-                            </div>
-                            <div class="col-md-6">{{project.duration_months}}</div>
-                        </div>
+                                </th>
+                                <td class="summary-td">
+                                    {{numberToString(project.funding.applied_curr_local)}}
+                                </td>
+                            </tr>
+                            <tr ng-show="project.duration_months >= 0">
+                                <th>
+                                    {{fieldNames["duration_months"]}}
+                                </th>
+                                <td class="summary-td">{{project.duration_months}}</td>
+                            </tr>
+                        </table>
                     </section>
                 </section>
                 <section id="organisation" class="col-md-6">
                     <h4>{{fieldNames["organisation"]}}</h4>
                     <section class="section">
-                        <div ng-show="nonEmpty(project.organisation.name)"
-                             class="col-md-12">
-                            <div class="col-md-4 mini-header">
-                                {{fieldNames["organisation_name"]}}
-                            </div>
-                            <div class="col-md-8">
-                                <a data-ng-href="/organisations/{{project.organisation._id}}">
-                                    {{project.organisation.name}}</a>
-                            </div>
-                        </div>
-                        <div ng-show="nonEmpty(project.organisation.
-                                                representative.name)"
-                             class="col-md-12">
-                            <div class="col-md-4 mini-header">
-                                {{fieldNames["organisation_representative"]}}
-                            </div>
-                            <div class="col-md-8">
-                                {{project.organisation.representative.name}}
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-4 mini-header">
-                                {{fieldNames["organisation_address"]}}
-                            </div>
-                            <div class="col-md-8">
-                                {{project.organisation.address.street}}<br>
-                                {{project.organisation.address.postal_code}}
-                                {{project.organisation.address.city}}<br>
-                                {{project.organisation.address.country}}
-                            </div>
-                        </div>
-                        <div ng-show="nonEmpty(project.organisation.tel)"
-                             class="col-md-12">
-                            <div class="col-md-4 mini-header">
-                                {{fieldNames["organisation_tel"]}}
-                            </div>
-                            <div class="col-md-8">{{project.organisation.tel}}</div>
-                        </div>
-                        <div ng-show="nonEmpty(project.organisation.email)"
-                             class="col-md-12">
-                            <div class="col-md-4 mini-header">
-                                {{fieldNames["organisation_email"]}}
-                            </div>
-                            <div class="col-md-8">{{project.organisation.email}}</div>
-                        </div>
-                        <div ng-show="nonEmpty(project.organisation.website)"
-                             class="col-md-12">
-                            <div class="col-md-4 mini-header">
-                                {{fieldNames["organisation_www"]}}
-                            </div>
-                            <div class="col-md-8">{{project.organisation.website}}</div>
-                        </div>
+                        <table class="summary-table">
+                            <tr ng-show="nonEmpty(project.organisation.name)">
+                                <th>
+                                    {{fieldNames["organisation_name"]}}
+                                </th>
+                                <td class="summary-td">
+                                    <a data-ng-href="/organisations/{{project.organisation._id}}">
+                                        {{project.organisation.name}}</a>
+                                </td>
+                            </tr>
+                            <tr ng-show="nonEmpty(project.organisation.
+                                                representative.name)">
+                                <th>
+                                    {{fieldNames["organisation_representative"]}}
+                                </th>
+                                <td class="summary-td">
+                                    {{project.organisation.representative.name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {{fieldNames["organisation_address"]}}
+                                </th>
+                                <td class="summary-td">
+                                    {{project.organisation.address.street}}<br>
+                                    {{project.organisation.address.postal_code}}
+                                    {{project.organisation.address.city}}<br>
+                                    {{project.organisation.address.country}}
+                                </td>
+                            </tr>
+                            <tr ng-show="nonEmpty(project.organisation.tel)">
+                                <th>
+                                    {{fieldNames["organisation_tel"]}}
+                                </th>
+                                <td class="summary-td">
+                                    {{project.organisation.tel}}
+                                </td>
+                            </tr>
+                            <tr ng-show="nonEmpty(project.organisation.email)">
+                                <th>
+                                    {{fieldNames["organisation_email"]}}
+                                </th>
+                                <td class="summary-td">
+                                    {{project.organisation.email}}
+                                </td>
+                            </tr>
+                            <tr ng-show="nonEmpty(project.organisation.website)">
+                                <th>
+                                    {{fieldNames["organisation_www"]}}
+                                </th>
+                                <td class="summary-td">
+                                    {{project.organisation.website}}
+                                </td>
+                            </tr>
+                        </table>
                     </section>
                 </section>
                 &nbsp;
@@ -298,7 +300,7 @@
                           data-ng-repeat="theme in project.approved.themes"
                           style="margin-right: 2em">
                         <span class="glyphicon glyphicon-tag">
-                        </span> {{theme}}
+                        </span>&nbsp;{{theme}}
                     </span>
                 </section>
             </section>
@@ -358,7 +360,7 @@
                 <div class="col-md-8">
                     <div ng-repeat="method in project.methods">
                         <em>{{method.name}}</em> ({{method.level}})
-                        <p class="subcontent">
+                        <p class="subsection">
                             <span ng-bind-html="handleEmphasis(method.comment)"></span>
                         </p>
                     </div>
@@ -528,7 +530,7 @@
         <div class="panel-heading"><h4>Suunniteltu aikataulu</h4></div>
         <section class="panel-body">
             <h5>{{fieldNames["signed_intreport_deadlines"]}}</h5>
-            <div ng-repeat="deadline in project.signed.intreport_deadlines" class="subcontent col-md-12">
+            <div ng-repeat="deadline in project.signed.intreport_deadlines" class="subsection col-md-12">
                 <div class="col-md-3 mini-header">
                     {{deadline.report}}
                 </div>
@@ -949,7 +951,7 @@
         <div class="panel-heading"><h4>Maksatus</h4></div>
         <section class="panel-body">
             <section class="section" style="margin-left: 1em">
-                <section>
+                <section class="col-md-12">
                     <div class="col-md-2 mini-header">
                         <div ng-show="project.approved.granted_sum_eur">
                             Myönnetty avustus
@@ -963,22 +965,20 @@
                         {{project.approved.approved_date| date:'d.M.yyyy': '+0200'}}
                     </div>
                 </section>
-                <section>
+                <section class="col-md-12">
                     <div class="col-md-2 mini-header">Maksettu yhteensä</div>
                     <div class="col-md-10">
                         {{numberToString(project.funding.paid_eur)}} EUR
                     </div>
                 </section>
-                <section ng-show="project.signed.date">
+                <section ng-show="project.signed.date" class="col-md-12">
                     <div class="col-md-2 mini-header">Jäljellä</div>
                     <div class="col-md-10">
                         {{numberToString(project.funding.left_eur)}} EUR
                     </div>
-                    &nbsp;
                 </section>
                 &nbsp;
             </section>
-            &nbsp;
             <hr>
             <section class="col-md-12" style="margin-left: -2em">
                 <section class="col-md-6" ng-show="project.signed.planned_payments.length > 0">

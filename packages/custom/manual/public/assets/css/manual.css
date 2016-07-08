@@ -1,5 +1,6 @@
 .man-body table {
     margin-bottom:      1em;
+    background-color:   #F5F5F5;
 }
 
 .man-body th {
@@ -14,7 +15,7 @@
 .man-body img {
     border-style:       solid;
     border-width:       1px;
-    border-color:       #808080;
+    border-color:       #DE4610;
 }
 
 .man-body figure {

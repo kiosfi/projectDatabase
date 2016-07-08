@@ -1,13 +1,10 @@
 <section data-ng-controller="OrganisationsController" data-ng-init="findOne()">
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-jquery/dist/angular-jquery.min.js"></script>
-    <script src="bower_components/angular-bootstrap-affix/dist/angular-bootstrap-affix.min.js"></script>
-    <script src="scripts/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="/theme/assets/css/twoPart.css">
     <div id="header">
         <h1>{{organisation.name}}</h1>
         <hr>
     </div>
-    <ul id="menu" class="nav nav-list navtree">
+    <ul id="menu" class="nav nav-list left-part">
         <li>
             <label><a href="#functions">Toiminnot</a></label>
             <ul>
@@ -56,97 +53,100 @@
         <section class="panel-body">
             <section class="col-md-6">
                 <h4>Järjestö</h4>
-                <section class="panel-body">
-                    <div class="col-md-12">
-                        <div class="col-md-5 mini-header">Edustaja</div>
-                        <div class="col-md-7">
-                            {{organisation.representative.name}}<br>
-                            {{organisation.representative.email}}<br>
-                            {{organisation.representative.phone}}
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-5 mini-header">
-                            Vastuullinen johtaja
-                        </div>
-                        <div class="col-md-7">
-                            {{organisation.exec_manager}}
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-5 mini-header">
-                            Viestintävastaava
-                        </div>
-                        <div class="col-md-7">
-                            {{organisation.communications_rep}}
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-5 mini-header">Osoite</div>
-                        <div class="col-md-7">
-                            {{organisation.address.street}}<br>
-                            {{organisation.address.postal_code}}
-                            {{organisation.address.city}}<br>
-                            {{organisation.address.country}}
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-5 mini-header">Puhelinnumero</div>
-                        <div class="col-md-7">{{organisation.tel}}</div>
-
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-5 mini-header">Sähköposti</div>
-                        <div class="col-md-7">
-                            <a href="mailto:{{organisation.email}}">
-                                {{organisation.email}}
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-5 mini-header">Websivut</div>
-                        <div class="col-md-7">
-                            <a href="{{
+                <section class="section">
+                    <table class="summary-table">
+                        <tr>
+                            <th>Edustaja</th>
+                            <td class="summary-td">
+                                {{organisation.representative.name}}<br>
+                                {{organisation.representative.email}}<br>
+                                {{organisation.representative.phone}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Vastuullinen johtaja
+                            </th>
+                            <td class="summary-td">
+                                {{organisation.exec_manager}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Viestintävastaava
+                            </th>
+                            <td class="summary-td">
+                                {{organisation.communications_rep}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Osoite</th>
+                            <td class="summary-td">
+                                {{organisation.address.street}}<br>
+                                {{organisation.address.postal_code}}
+                                {{organisation.address.city}}<br>
+                                {{organisation.address.country}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Puhelinnumero</th>
+                            <td class="summary-td">{{organisation.tel}}</td>
+                        </tr>
+                        <tr>
+                            <th>Sähköposti</th>
+                            <td class="summary-td">
+                                <a href="mailto:{{organisation.email}}">
+                                    {{organisation.email}}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Websivut</th>
+                            <td class="summary-td">
+                                <a href="{{
                                         organisation.website.startsWith('http://') ?
                                                 organisation.websiet :
                                                 'http://' + organisation.website}}">
-                                {{organisation.website}}
-                            </a>
-                        </div>
-                    </div>
+                                    {{organisation.website}}
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
                 </section>
             </section>
             <section class="col-md-6">
                 <h4>Tilitiedot</h4>
-                <section class="panel-body">
-                    <div class="col-md-12">
-                        <div class="col-md-4 mini-header">Tilin haltija</div>
-                        <div class="col-md-8">
-                            {{organisation.bank_account.holder_name}}
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-4 mini-header">
-                            Tilinumero (IBAN)
-                        </div>
-                        <div class="col-md-8">
-                            {{organisation.bank_account.iban}}
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-4 mini-header">SWIFT</div>
-                        <div class="col-md-8">
-                            {{organisation.bank_account.swift}}
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-4 mini-header">
-                            Pankin yhteystiedot
-                        </div>
-                        <div class="col-md-8">
-                            {{organisation.bank_account.bank_contact_details}}
-                        </div>
-                    </div>
+                <section class="section">
+                    <table class="summary-table">
+                        <tr>
+                            <th>Tilin haltija</th>
+                            <td class="summary-td">
+                                {{organisation.bank_account.holder_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Tilinumero (IBAN)
+                            </th>
+                            <td class="summary-td">
+                                {{organisation.bank_account.iban}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>SWIFT</th>
+                            <td class="summary-td">
+                                {{organisation.bank_account.swift}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Pankin yhteystiedot
+                            </th>
+                            <td class="summary-td">
+                                {{organisation.bank_account.bank_contact_details}}
+                            </td>
+                        </tr>
+                    </table>
                 </section>
             </section>
         </section>

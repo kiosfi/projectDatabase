@@ -1,11 +1,15 @@
 <section data-ng-controller="SearchController">
     <h1>Haku</h1>
     <hr>
-    <ul class="nav nav-pills nav-stacked navtree">
-        <li><a ng-href="/search">Hankkeet</a></li>
-        <li class="active"><a ng-href="/search/orgs">Järjestöt</a></li>
-        <li><a ng-href="/search/payments">Maksut</a></li>
-    </ul>
+    <article class="panel panel-primary">
+        <section class="panel-body">
+            <ul class="nav nav-pills">
+                <li><a ng-href="/search">Hankkeet</a></li>
+                <li class="active"><a ng-href="/search/orgs">Järjestöt</a></li>
+                <li><a ng-href="/search/payments">Maksut</a></li>
+            </ul>
+        </section>
+    </article>
     <article class="panel panel-primary">
         <div class="panel-heading">
             <h4>
@@ -24,7 +28,8 @@
                   data-ng-submit="updateOrgSearch()" novalidate>
                 <div class="form-group col-md-12">
                     <div class="col-md-12 panel panel-default"
-                         data-ng-repeat="query in searchOrg">
+                         data-ng-repeat="query in searchOrg"
+                         style="background-color: #F9F9F9">
                         <div class="panel-body">
                             <div class="col-md-1"><h4>{{$index + 1}}.</h4></div>
                             <div class="col-md-11">

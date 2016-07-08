@@ -39,16 +39,8 @@ table {
     padding-bottom:     0.25em;
 }
 
-.navtree {
+.left-part {
     position:           fixed;
-}
-
-.article {
-    border-style:       none;
-    border-radius:      0.5em;
-    background-color:   #F9F9F9;
-    margin:             1em;
-    padding:            1em;
 }
 
 .panel {
@@ -60,7 +52,7 @@ table {
     margin-right:       3em;
 }
 
-.subcontent {
+.subsection {
     margin-left:        2em;
     margin-right:       2em;
 }
@@ -70,53 +62,10 @@ table {
     margin-left:        -2em;
 }
 
-.sortorder:after {
-    content: '\25b2';
+.summary-table {
+    background-color:   #F5F5F5;
 }
 
-.sortorder.reverse:after {
-    content: '\25bc';
-}
-
-@media only screen and (min-width: 1800px) {
-    .navtree {
-        left:           3%;
-    }
-    .article {
-        margin-left:    1em;
-    }
-}
-
-@media only screen and (min-width: 1620px) and (max-width: 1799px) {
-    .navtree {
-        left:           2%;
-    }
-    .article {
-        margin-left:    5em;
-    }
-}
-
-@media only screen and (min-width: 1440px) and (max-width: 1619px) {
-    .navtree {
-        left:           1em;
-    }
-    .article {
-        margin-left:    10em;
-    }
-}
-
-@media only screen and (max-width: 1439px) {
-    .navtree {
-        left:           1em;
-    }
-    .article {
-        margin-left:    15em;
-    }
-}
-
-@media only screen and (max-height: 768px) {
-    .navtree {
-        overflow-y:     scroll;
-        height:         67%;
-    }
+.summary-td {
+    padding-left:       2em;
 }

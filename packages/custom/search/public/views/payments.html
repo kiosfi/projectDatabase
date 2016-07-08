@@ -1,19 +1,22 @@
 <section data-ng-controller="SearchController">
     <h1>Haku</h1>
     <hr>
-    <ul class="nav nav-pills nav-stacked navtree">
-        <li><a ng-href="/search">Hankkeet</a></li>
-        <li><a ng-href="/search/orgs">Järjestöt</a></li>
-        <li class="active"><a ng-href="/search/payments">Maksut</a></li>
-    </ul>
+    <article class="panel panel-primary">
+        <section class="panel-body">
+            <ul class="nav nav-pills">
+                <li><a ng-href="/search">Hankkeet</a></li>
+                <li><a ng-href="/search/orgs">Järjestöt</a></li>
+                <li class="active"><a ng-href="/search/payments">Maksut</a></li>
+            </ul>
+        </section>
+    </article>
     <article class="panel panel-primary">
         <div class="panel-heading">
             <h4>
                 <span ng-click="showCriteria = !showCriteria"
                       class="panel-button">
                     <span class="glyphicon"
-                          ng-class="showCriteria
-                                                      ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                          ng-class="showCriteria ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                     </span>
                     Kriteerit
                 </span>
@@ -40,7 +43,8 @@
                       data-ng-submit="updateSearch()" novalidate>
                     <div class="form-group col-md-12">
                         <div class="col-md-12 panel panel-default"
-                             data-ng-repeat="query in searchPay">
+                             data-ng-repeat="query in searchPay"
+                             style="background-color: #F9F9F9">
                             <div class="panel-body">
                                 <div class="col-md-1"><h4>{{$index + 1}}.</h4></div>
                                 <div class="col-md-11">
@@ -132,22 +136,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--                            <div class="col-md-12">
-                                                        <input type="button" value="Lisää hakukenttä"
-                                                               ng-click="addPayQuery();"/>
-                                                        <input type="button"
-                                                               ng-show="searchPay.length > 0"
-                                                               value="Poista viimeinen"
-                                                               ng-click="removePayQuery();"/>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <button id="appr-btn" type="submit"
-                                                                class="btn btn-default">
-                                                            Hae</button>
-                                                    </div>
-                                                </div>                        -->
                         <div class="col-md-12">
                             <a class="btn btn-danger"
                                ng-show="searchPay.length > 0"
@@ -180,6 +168,7 @@
                                 </span>
                             </span>
                         </div>
+                    </div>
                 </form>
             </article>
         </section>
@@ -191,7 +180,7 @@
                       class="panel-button">
                     <span class="glyphicon"
                           ng-class="showResults
-                                                      ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                                                  ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                     </span>
                     Tulokset ({{payments.length}} kpl)
                 </span>
@@ -225,8 +214,7 @@
                 <span ng-click="showExport = !showExport"
                       class="panel-button">
                     <span class="glyphicon"
-                          ng-class="showExport
-                                                      ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                          ng-class="showExport ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                     </span>
                     Vienti
                 </span>
