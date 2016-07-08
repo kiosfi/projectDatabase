@@ -3,29 +3,27 @@
     <hr>
     <form name="projectEditForm" class="form-horizontal" role="form"
           data-ng-submit="update(projectEditForm.$valid)" novalidate>
-        <fieldset class="panel panel-default">
+        <fieldset class="panel panel-primary">
             <div class="panel-heading">
                 <h4>
-                    <a href="" ng-click="showRegDetails = !showRegDetails">
+                    <span href="" ng-click="showRegDetails = !showRegDetails">
                         <span class="glyphicon"
-                              ng-class="showRegDetails
-                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                              ng-class="showRegDetails ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
                         Rekisteröity-tila
-                    </a>
+                    </span>
                 </h4>
             </div>
             <div class="panel-body" ng-show="showRegDetails">
-                <fieldset class="panel panel-default">
+                <fieldset class="panel panel-primary">
                     <div class="panel-heading">
                         <h5>
-                            <a ng-click="showProjInfo = !showProjInfo">
+                            <span ng-click="showProjInfo = !showProjInfo">
                                 <span class="glyphicon"
-                                      ng-class="showProjInfo
-                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                      ng-class="showProjInfo ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                                 </span>
                                 Perustiedot
-                            </a>
+                            </span>
                         </h5>
                     </div>
                     <div ng-show="showProjInfo" class="panel-body">
@@ -40,9 +38,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6"
-                             ng-class="{
-                                     'has-error'
-                                     : projectEditForm.title.$invalid }">
+                             ng-class="{'has-error' : projectEditForm.title.$invalid}">
                             <label class="col-md-3 control-label">
                                 {{fieldNames["title"]}}
                             </label>
@@ -60,9 +56,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6"
-                             ng-class="{
-                                     'has-error'
-                                     : projectEditForm.coordinator.$invalid }">
+                             ng-class="{'has-error' : projectEditForm.coordinator.$invalid}">
                             <label  class="col-md-3 control-label">
                                 {{fieldNames["coordinator"]}}
                             </label>
@@ -156,75 +150,108 @@
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="panel panel-default">
+                <fieldset class="panel panel-primary">
                     <div class="panel-heading">
                         <h5>
-                            <a ng-click="showProjDetails = !showProjDetails">
+                            <span ng-click="showProjDetails = !showProjDetails">
                                 <span class="glyphicon"
-                                      ng-class="showProjDetails
-                                                      ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                      ng-class="showProjDetails ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                                 </span>
                                 Lisätiedot
-                            </a>
+                            </span>
                         </h5>
                     </div>
                     <div ng-show="showProjDetails" class="panel-body">
+                        <label mean-token="'create-methods'"
+                               class="control-label">
+                            {{fieldNames["methods"]}}
+                        </label>
                         <div class="form-group col-md-12">
-                            <label mean-token="'create-methods'"
-                                   class="col-md-2">
-                                {{fieldNames["methods"]}}
-                            </label>
-                            <div class="col-md-12 panel panel-default"
+                            <div class="panel panel-default"
                                  id="methodsSelection"
                                  data-ng-repeat="method in addedMethods">
-                                <div class="panel-body">
-                                    <div class="col-md-7">
+                                <div class="panel-body"
+                                     style="background-color: #F9F9F9">
+                                    <div class="col-md-7"
+                                         ng-class="projectEditForm['methodSelect' + $index].$invalid ? 'has-error' : ''">
                                         <label class="control-label col-md-2">
                                             Toiminto
                                         </label>
-                                        <select id="methodSelect" class="col-md-10"
-                                                data-ng-model="method.name">
-                                            <option data-ng-repeat="methodName in methodNames"
-                                                    value="{{methodName}}">
-                                                {{methodName}}
-                                            </option>
-                                        </select>
+                                        <div class="col-md-10">
+                                            <select id="{{'methodSelect' + $index}}"
+                                                    name="{{'methodSelect' + $index}}"
+                                                    data-ng-model="method.name"
+                                                    required>
+                                                <option data-ng-repeat="methodName in methodNames"
+                                                        value="{{methodName}}">
+                                                    {{methodName}}
+                                                </option>
+                                            </select>
+                                            <div ng-show="projectEditForm['methodSelect' + $index].$invalid"
+                                                 class="help-block">
+                                                <p ng-show="projectEditForm['methodSelect' + $index].$error.required">
+                                                    Toiminto on pakollinen
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3"
+                                         ng-class="projectEditForm['levelSelect' + $index].$invalid ? 'has-error' : ''">
                                         <label class="control-label col-md-3">
                                             Taso
                                         </label>
-                                        <select id="levelSelect" class="col-md-9"
-                                                data-ng-model="method.level">
-                                            <option data-ng-repeat="methodLevel in methodLevels"
-                                                    value="{{methodLevel}}">
-                                                {{methodLevel}}
-                                            </option>
-                                        </select>
+                                        <div class="col-md-9">
+                                            <select id="{{'levelSelect' + $index}}"
+                                                    name="{{'levelSelect' + $index}}"
+                                                    data-ng-model="method.level"
+                                                    required>
+                                                <option data-ng-repeat="methodLevel in methodLevels"
+                                                        value="{{methodLevel}}">
+                                                    {{methodLevel}}
+                                                </option>
+                                            </select>
+                                            <div ng-show="projectEditForm['levelSelect' + $index].$invalid"
+                                                 class="help-block">
+                                                <p ng-show="projectEditForm['levelSelect' + $index].$error.required">
+                                                    Taso on pakollinen
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!-- TODO: Warn the user about the fact that this is a
-                                    required field too: -->
-                                    <div class="col-md-12" style="margin-top: 0.5em">
-                                        <label for="methodComment"
-                                               class="col-md-1 control-label">
+                                    <div class="col-md-12"
+                                         ng-class="projectEditForm['methodComment' + $index].$invalid ? 'has-error' : ''"
+                                         style="margin-top: 0.5em">
+                                        <label class="col-md-1 control-label">
                                             Kuvaus
                                         </label>
                                         <div class="col-md-11">
-                                            <textarea name="methodComment"
+                                            <textarea id="{{'methodComment' + $index}}"
+                                                      name="{{'methodComment' + $index}}"
                                                       data-ng-model="method.comment"
-                                                      id="methodComment" class="form-control"
-                                                      placeholder="Toiminnon kuvaus (pakollinen)"
+                                                      class="form-control"
                                                       required>
                                             </textarea>
+                                            <div ng-show="projectEditForm['methodComment' + $index].$invalid"
+                                                 class="help-block">
+                                                <p ng-show="projectEditForm['methodComment' + $index].$error.required">
+                                                    Kuvaus on pakollinen
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <input type="button" value="Lisää uusi"
-                                       ng-click="addMethod();"/>
-                                <input type="button" value="Poista viimeinen"
-                                       ng-click="removeMethod();"/>
+                            <div class="col-md-12" style="text-align: center">
+                                <button class="btn btn-danger"
+                                        ng-click="removeMethod();">
+                                    <span class="glyphicon glyphicon-minus">
+                                    </span>&nbsp;Poista viimeinen
+                                </button>
+                                <button class="btn btn-success"
+                                        ng-click="addMethod();">
+                                    <span class="glyphicon glyphicon-plus">
+                                    </span>&nbsp;Lisää uusi
+                                </button>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -453,16 +480,15 @@
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="panel panel-default">
+                <fieldset class="panel panel-primary">
                     <div class="panel-heading">
                         <h5>
-                            <a ng-click="showAssessment = !showAssessment">
+                            <span ng-click="showAssessment = !showAssessment">
                                 <span class="glyphicon"
-                                      ng-class="showAssessment
-                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                      ng-class="showAssessment ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                                 </span>
                                 KIOSin arvio
-                            </a>
+                            </span>
                         </h5>
                     </div>
                     <div ng-show="showAssessment" class="panel-body">
@@ -541,16 +567,15 @@
                 </fieldset>
             </div>
         </fieldset>
-        <fieldset ng-show="project.in_review.date" class="panel panel-default">
+        <fieldset ng-show="project.in_review.date" class="panel panel-primary">
             <div class="panel-heading">
                 <h4>
-                    <a href="" ng-click="showInRevDetails = !showInRevDetails">
+                    <span href="" ng-click="showInRevDetails = !showInRevDetails">
                         <span class="glyphicon"
-                              ng-class="showInRevDetails
-                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                              ng-class="showInRevDetails ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
                         Käsittelyssä-tila
-                    </a>
+                    </span>
                 </h4>
             </div>
             <div class="form-group col-md-12 panel-body"
@@ -661,16 +686,15 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.approved.date" class="panel panel-default">
+        <fieldset ng-show="project.approved.date" class="panel panel-primary">
             <div class="panel-heading">
                 <h4>
-                    <a href="" ng-click="showApprDetails = !showApprDetails">
+                    <span href="" ng-click="showApprDetails = !showApprDetails">
                         <span class="glyphicon"
-                              ng-class="showApprDetails
-                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                              ng-class="showApprDetails ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
                         Hyväksytty-tila
-                    </a>
+                    </span>
                 </h4>
             </div>
             <div ng-show="showApprDetails" class="panel-body">
@@ -690,9 +714,7 @@
                         {{fieldNames["approved_board_notified"]}}
                     </label>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error'
-                                 : projectEditForm.board_notified_day.$invalid}">
+                         ng-class="{'has-error': projectEditForm.board_notified_day.$invalid}">
                         <input name="board_notified_day" type="number"
                                class="form-control" data-ng-model="notified_day"
                                id="board_notified_day" placeholder="p" min="1">
@@ -704,8 +726,7 @@
                         </div>
                     </div>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error': projectEditForm.board_notified_month.$invalid}">
+                         ng-class="{'has-error': projectEditForm.board_notified_month.$invalid}">
                         <input name="board_notified_month" type="number"
                                class="form-control"
                                data-ng-model="notified_month"
@@ -719,8 +740,7 @@
                         </div>
                     </div>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error': projectEditForm.board_notified_year.$invalid}">
+                         ng-class="{'has-error': projectEditForm.board_notified_year.$invalid}">
                         <input name="board_notified_year" type="number"
                                class="form-control"
                                data-ng-model="notified_year"
@@ -759,9 +779,7 @@
                         {{fieldNames["approved_granted_sum_eur"]}}
                     </label>
                     <div class="col-md-6"
-                         ng-class="{
-                                 'has-error'
-                                 : projectEditForm.granted_sum_eur.$invalid }">
+                         ng-class="{'has-error': projectEditForm.granted_sum_eur.$invalid }">
                         <input name="granted_sum_eur" type="number"
                                class="form-control"
                                data-ng-model="project.approved.granted_sum_eur"
@@ -791,9 +809,7 @@
                         <!--{{fieldNames["approved_approved_date"]}}-->
                     </label>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error'
-                                 : projectEditForm.approved_day.$invalid}">
+                         ng-class="{'has-error': projectEditForm.approved_day.$invalid}">
                         <input name="approved_day" type="number"
                                class="form-control" data-ng-model="approved_day"
                                id="approved_day" placeholder="p" min="1">
@@ -805,9 +821,7 @@
                         </div>
                     </div>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error'
-                                 : projectEditForm.approved_month.$invalid}">
+                         ng-class="{'has-error': projectEditForm.approved_month.$invalid}">
                         <input name="approved_month" type="number"
                                class="form-control"
                                data-ng-model="approved_month"
@@ -820,9 +834,7 @@
                         </div>
                     </div>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error'
-                                 : projectEditForm.approved_year.$invalid }">
+                         ng-class="{'has-error': projectEditForm.approved_year.$invalid }">
                         <input name="approved_year" type="number"
                                class="form-control"
                                data-ng-model="approved_year" id="approved_year"
@@ -854,16 +866,15 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.rejected.date" class="panel panel-default">
+        <fieldset ng-show="project.rejected.date" class="panel panel-primary">
             <div class="panel-heading">
                 <h4>
-                    <a href="" ng-click="showRejDetails = !showRejDetails">
+                    <span href="" ng-click="showRejDetails = !showRejDetails">
                         <span class="glyphicon"
-                              ng-class="showRejDetails
-                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                              ng-class="showRejDetails ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
                         Hylätty-tila
-                    </a>
+                    </span>
                 </h4>
             </div>
             <div ng-show="showRejDetails" class="panel-body">
@@ -901,16 +912,16 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.signed.date" class="panel panel-default">
+        <fieldset ng-show="project.signed.date" class="panel panel-primary">
             <div class="panel-heading">
                 <h4>
-                    <a href="" ng-click="showSignDetails = !showSignDetails">
+                    <span href="" ng-click="showSignDetails = !showSignDetails">
                         <span class="glyphicon"
                               ng-class="showSignDetails
-                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                  ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
                         Allekirjoitettu-tila
-                    </a>
+                    </span>
                 </h4>
             </div>
             <div ng-show="showSignDetails" class="panel-body">
@@ -1081,174 +1092,187 @@
             </div>
         </fieldset>
         <fieldset ng-show="project.intermediary_reports.length > 0"
-                  class="panel panel-default">
+                  class="panel panel-primary">
             <div class="panel-heading">
                 <h4>
-                    <a href="" ng-click="showIntRepDetails = !showIntRepDetails">
+                    <span href="" ng-click="showIntRepDetails = !showIntRepDetails">
                         <span class="glyphicon"
-                              ng-class="showIntRepDetails
-                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                              ng-class="showIntRepDetails ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
                         Väliraportti-tila
-                    </a>
+                    </span>
                 </h4>
             </div>
             <div ng-show="showIntRepDetails" class="panel-body">
-                <div data-ng-repeat="intreport in int_reports">
-                    <h4>{{intreport.reportNumber}}.&nbsp;väliraportti</h4>
-                    <label class="col-md-12">
-                        Toimintatavat ja niiden toteutuminen
-                    </label>
-                    <div class="form-group col-md-12"
-                         ng-repeat="method in project.methods">
-                        <div class="col-md-6" style="text-align: justify">
-                            <p><em>{{method.name}} ({{method.level}})</em></p>
-                            <span ng-bind-html="handleEmphasis(method.comment)"></span>
-                        </div>
-                        <div class="col-md-6">
-                            <p>&nbsp;</p>
-                            <textarea name="intRMethods" type="text"
-                                      class="form-control"
-                                      data-ng-model="intreport.methods[project.methods.indexOf(method)]"
-                                      rows="10" cols="50"
-                                      id="intRMethods"
-                                      placeholder="Toiminnon toteutuminen">
-                            </textarea>
-                        </div>
+                <div data-ng-repeat="intreport in int_reports"
+                     class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h5>
+                            <span ng-click="showInt[intreport.reportNumber] = !showInt[intreport.reportNumber]">
+
+                                <span class="glyphicon"
+                                      ng-class="showInt[intreport.reportNumber] ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                                </span>
+                                {{intreport.reportNumber}}.&nbsp;väliraportti
+                            </span>
+                        </h5>
                     </div>
-                    <label class="col-md-12">
-                        Tavoitteet ja niiden toteutuminen
-                    </label>
-                    <div class="form-group col-md-12">
-                        <div class="col-md-6" style="text-align: justify">
-                            <span ng-bind-html="handleEmphasis(project.project_goal)"></span>
-                        </div>
-                        <div class="col-md-6">
-                            <textarea name="objComments" type="text"
-                                      class="form-control"
-                                      data-ng-model="intreport.objectives"
-                                      id="objComments" rows="10" cols="50">
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="communication" class="col-md-2">
-                            {{fieldNames["intreport_communication"]}}
+                    <div class="panel-body"
+                         ng-show="showInt[intreport.reportNumber]">
+                        <label class="col-md-12">
+                            Toimintatavat ja niiden toteutuminen
                         </label>
-                        <div class="col-md-10">
-                            <textarea name="communication" type="text"
-                                      class="form-control"
-                                      data-ng-model="intreport.communication"
-                                      id="communication">
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="evaluation" class="col-md-2">
-                            {{fieldNames["intreport_evaluation"]}}
-                        </label>
-                        <div class="col-md-10">
-                            <textarea name="evaluation" type="text"
-                                      class="form-control"
-                                      data-ng-model="intreport.evaluation"
-                                      id="evaluation">
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="budget" class="col-md-2">
-                            {{fieldNames["intreport_budget"]}}
-                        </label>
-                        <div class="col-md-10">
-                            <textarea name="budget" type="text"
-                                      class="form-control"
-                                      data-ng-model="intreport.budget"
-                                      id="budget">
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="overallKios" class="col-md-2">
-                            {{fieldNames["intreport_overall_rating_kios"]}}
-                        </label>
-                        <div class="col-md-10">
-                            <textarea name="overallKios" type="text"
-                                      class="form-control"
-                                      data-ng-model="intreport.overall_rating_kios"
-                                      id="overallKios">
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="comments" class="col-md-2">Päätös</label>
-                        <div class="col-md-10">
-                            <textarea name="intRComments" type="text"
-                                      class="form-control"
-                                      data-ng-model="intreport.comments"
-                                      id="intRcomments">
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="intRDateAppr" class="col-md-3">
-                            Hyväksymispvm
-                        </label>
-                        <div class="col-md-3"
-                             ng-class="{'has-error': projectEditForm.intRDateAppr_day.$invalid}">
-                            <input name="intRDateAppr_day" type="number"
-                                   class="form-control"
-                                   data-ng-model="intreport.date_day"
-                                   id="intRDateAppr_day" placeholder="p"
-                                   min="1">
-                            <div ng-show="projectEditForm.intRDateAppr_day.$invalid"
-                                 class="help-block">
-                                <p ng-show="projectEditForm.intRDateAppr_day.$error.number">
-                                    Päivän täytyy olla numero
-                                </p>
+                        <div class="form-group col-md-12"
+                             ng-repeat="method in project.methods">
+                            <div class="col-md-6" style="text-align: justify">
+                                <p><em>{{method.name}} ({{method.level}})</em></p>
+                                <span ng-bind-html="handleEmphasis(method.comment)"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <p>&nbsp;</p>
+                                <textarea name="intRMethods" type="text"
+                                          class="form-control"
+                                          data-ng-model="intreport.methods[project.methods.indexOf(method)]"
+                                          rows="10" cols="50"
+                                          id="intRMethods"
+                                          placeholder="Toiminnon toteutuminen">
+                                </textarea>
                             </div>
                         </div>
-                        <div class="col-md-3"
-                             ng-class="{'has-error': projectEditForm.intRDateAppr_month.$invalid}">
-                            <input name="intRDateAppr_month" type="number"
-                                   class="form-control"
-                                   data-ng-model="intreport.date_month"
-                                   id="intRDateAppr_month" placeholder="k"
-                                   min="1">
-                            <div ng-show="projectEditForm.intRDateAppr_month.$invalid"
-                                 class="help-block">
-                                <p ng-show="projectEditForm.intRDateAppr_month.$error.number">
-                                    Kuukauden täytyy olla numero
-                                </p>
+                        <label class="col-md-12">
+                            Tavoitteet ja niiden toteutuminen
+                        </label>
+                        <div class="form-group col-md-12">
+                            <div class="col-md-6" style="text-align: justify">
+                                <span ng-bind-html="handleEmphasis(project.project_goal)"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <textarea name="objComments" type="text"
+                                          class="form-control"
+                                          data-ng-model="intreport.objectives"
+                                          id="objComments" rows="10" cols="50">
+                                </textarea>
                             </div>
                         </div>
-                        <div class="col-md-3"
-                             ng-class="{'has-error': projectEditForm.intRDateAppr_year.$invalid}">
-                            <input name="intRDateAppr_year" type="number"
-                                   class="form-control"
-                                   data-ng-model="intreport.date_year"
-                                   id="intRDateAppr_year" placeholder="vvvv"
-                                   min="1">
-                            <div ng-show="projectEditForm.intRDateAppr_year.$invalid"
-                                 class="help-block">
-                                <p ng-show="projectEditForm.intRDateAppr_year.$error.number">
-                                    Vuoden täytyy olla numero
-                                </p>
+                        <div class="form-group col-md-12">
+                            <label for="communication" class="col-md-2">
+                                {{fieldNames["intreport_communication"]}}
+                            </label>
+                            <div class="col-md-10">
+                                <textarea name="communication" type="text"
+                                          class="form-control"
+                                          data-ng-model="intreport.communication"
+                                          id="communication">
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="evaluation" class="col-md-2">
+                                {{fieldNames["intreport_evaluation"]}}
+                            </label>
+                            <div class="col-md-10">
+                                <textarea name="evaluation" type="text"
+                                          class="form-control"
+                                          data-ng-model="intreport.evaluation"
+                                          id="evaluation">
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="budget" class="col-md-2">
+                                {{fieldNames["intreport_budget"]}}
+                            </label>
+                            <div class="col-md-10">
+                                <textarea name="budget" type="text"
+                                          class="form-control"
+                                          data-ng-model="intreport.budget"
+                                          id="budget">
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="overallKios" class="col-md-2">
+                                {{fieldNames["intreport_overall_rating_kios"]}}
+                            </label>
+                            <div class="col-md-10">
+                                <textarea name="overallKios" type="text"
+                                          class="form-control"
+                                          data-ng-model="intreport.overall_rating_kios"
+                                          id="overallKios">
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="comments" class="col-md-2">Päätös</label>
+                            <div class="col-md-10">
+                                <textarea name="intRComments" type="text"
+                                          class="form-control"
+                                          data-ng-model="intreport.comments"
+                                          id="intRcomments">
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="intRDateAppr" class="col-md-3">
+                                Hyväksymispvm
+                            </label>
+                            <div class="col-md-3"
+                                 ng-class="{'has-error': projectEditForm.intRDateAppr_day.$invalid}">
+                                <input name="intRDateAppr_day" type="number"
+                                       class="form-control"
+                                       data-ng-model="intreport.date_day"
+                                       id="intRDateAppr_day" placeholder="p"
+                                       min="1">
+                                <div ng-show="projectEditForm.intRDateAppr_day.$invalid"
+                                     class="help-block">
+                                    <p ng-show="projectEditForm.intRDateAppr_day.$error.number">
+                                        Päivän täytyy olla numero
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3"
+                                 ng-class="{'has-error': projectEditForm.intRDateAppr_month.$invalid}">
+                                <input name="intRDateAppr_month" type="number"
+                                       class="form-control"
+                                       data-ng-model="intreport.date_month"
+                                       id="intRDateAppr_month" placeholder="k"
+                                       min="1">
+                                <div ng-show="projectEditForm.intRDateAppr_month.$invalid"
+                                     class="help-block">
+                                    <p ng-show="projectEditForm.intRDateAppr_month.$error.number">
+                                        Kuukauden täytyy olla numero
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3"
+                                 ng-class="{'has-error': projectEditForm.intRDateAppr_year.$invalid}">
+                                <input name="intRDateAppr_year" type="number"
+                                       class="form-control"
+                                       data-ng-model="intreport.date_year"
+                                       id="intRDateAppr_year" placeholder="vvvv"
+                                       min="1">
+                                <div ng-show="projectEditForm.intRDateAppr_year.$invalid"
+                                     class="help-block">
+                                    <p ng-show="projectEditForm.intRDateAppr_year.$error.number">
+                                        Vuoden täytyy olla numero
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.end_report.date" class="panel panel-default">
+        <fieldset ng-show="project.end_report.date" class="panel panel-primary">
             <div class="panel-heading">
                 <h4>
-                    <a href="" ng-click="showEndRepDetails = !showEndRepDetails">
+                    <span href="" ng-click="showEndRepDetails = !showEndRepDetails">
                         <span class="glyphicon"
                               ng-class="showEndRepDetails
-                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                  ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
                         Loppuraportti-tila
-                    </a>
+                    </span>
                 </h4>
             </div>
             <div ng-show="showEndRepDetails" class="panel-body">
@@ -1320,8 +1344,7 @@
                         Tilintarkastuspvm
                     </label>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error':projectEditForm.audit_day.$invalid}">
+                         ng-class="{'has-error': projectEditForm.audit_day.$invalid}">
                         <input name="audit_day" type="number"
                                class="form-control" data-ng-model="audit_day"
                                id="audit_day" placeholder="p" min="1">
@@ -1333,8 +1356,7 @@
                         </div>
                     </div>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error': projectEditForm.audit_month.$invalid}">
+                         ng-class="{'has-error': projectEditForm.audit_month.$invalid}">
                         <input name="audit_month" type="number"
                                class="form-control" data-ng-model="audit_month"
                                id="audit_month" placeholder="k" min="1">
@@ -1346,9 +1368,7 @@
                         </div>
                     </div>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error'
-                                 : projectEditForm.audit_year.$invalid}">
+                         ng-class="{'has-error': projectEditForm.audit_year.$invalid}">
                         <input name="audit_year" type="number"
                                class="form-control" data-ng-model="audit_year"
                                id="audit_year" placeholder="vvvv" min="1">
@@ -1546,16 +1566,16 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.ended.date" class="panel panel-default">
+        <fieldset ng-show="project.ended.date" class="panel panel-primary">
             <div class="panel-heading">
                 <h4>
-                    <a ng-click="showEndedDetails = !showEndedDetails">
+                    <span ng-click="showEndedDetails = !showEndedDetails">
                         <span class="glyphicon"
                               ng-class="showEndedDetails
-                                              ? 'glyphicon-minus-sign' : 'glyphicon-plus-sign'">
+                                                  ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
                         Päättynyt-tila
-                    </a>
+                    </span>
                 </h4>
             </div>
             <div ng-show="showEndedDetails" class="panel-body">
@@ -1637,12 +1657,21 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset class="panel panel-default">
-            <div class="panel-heading"><h4>Vahvistus</h4></div>
-            <div class="form-group panel-body">
+        <fieldset class="panel panel-primary">
+            <div class="panel-heading">
+                <h4>
+                    <span ng-click="showConfirmation = !showConfirmation">
+                        <span class="glyphicon" ng-class="showConfirmation ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                        </span>
+                        Vahvistus
+                    </span>
+                </h4>
+            </div>
+            <div ng-show="showConfirmation" class="form-group panel-body">
                 <div class="col-md-12" style="margin-bottom: 1em">
-                    <div class="col-md-6">
-                        <label for="special_notes" class="col-md-4">
+                    <div class="col-md-9">
+                        <label for="special_notes"
+                               class="control-label col-md-4">
                             {{fieldNames["special_notes"]}}
                         </label>
                         <div class="col-md-8">
@@ -1653,19 +1682,22 @@
                             </textarea>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="incomplete">Kesken</label>
+                    <div class="col-md-3">
+                        <label for="incomplete" class="control-label">
+                            Kesken
+                        </label>
                         <input type="checkbox" id="incomplete"
                                data-ng-model="project.incomplete">
                     </div>
                 </div>
                 <div class="col-md-12" style="text-align: center">
+                    <hr>
                     <a ng-href="/projects/{{project._id}}"
-                       class="btn btn-danger">
+                       class="btn btn-danger" style="margin-right: 1em">
                         Peruuta
                     </a>
                     <button mean-token="'edit-submit'" type="submit"
-                            class="btn btn-default"
+                            class="btn btn-success"
                             ng-disabled="projectEditForm.$invalid">Tallenna</button>
                 </div>
             </div>

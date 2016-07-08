@@ -59,7 +59,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             var pieces = text.split("**");
             var transformed = "";
             for (var i = 1, max = pieces.length; i < max; i += 2) {
-                pieces[i] = '<span class="bg-danger">' + pieces[i] + '</span>';
+                pieces[i] = '<mark>' + pieces[i] + '</mark>';
             }
             pieces.forEach(function (x) {
                 transformed += x;
@@ -1117,6 +1117,28 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     $scope.pages.push({number: i});
                 }
             });
+        };
+
+        /**
+         * The property used for sorting the appendices in their table.
+         */
+        $scope.property = "category";
+
+        /**
+         * <tt>true</tt> iff the order of appendices should be reversed.
+         */
+        $scope.reverse = false;
+
+        /**
+         * Sorts the appendices by the given property. If they were previously
+         * sorted by the same property, the order will be reversed.
+         *
+         * @param {String} property The property used for sorting
+         * @returns {undefined}
+         */
+        $scope.sortBy = function (property) {
+            $scope.reverse = ($scope.property === property) ? !$scope.reverse : false;
+            $scope.property = property;
         };
     }
 ]);

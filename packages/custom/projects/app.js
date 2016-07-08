@@ -38,6 +38,6 @@ Projects.register(function(app, auth, database, circles, organisations) {
         type: 'post',
         subtype: 'project'
     });
-
+    
     return Projects;
 });

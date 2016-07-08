@@ -1,13 +1,5 @@
 <section data-ng-controller="ProjectsController" data-ng-init="find()">
     <article ng-if="projects && projects.length > 0">
-        <style type="text/css">
-            .sortorder:after {
-                content: '\25b2';
-            }
-            .sortorder.reverse:after {
-                content: '\25bc';
-            }
-        </style>
         <h1>Hankkeet</h1>
         <hr>
         <table class="col-md-12 table table-striped">
@@ -16,28 +8,31 @@
                     <th class="col-md-1">
                         <a id="byRef" ng-click="updateOrdering('project_ref')">
                             {{fieldNames["project_ref"]}}
+                            <span class="glyphicon"
+                                  ng-show="ordering === 'project_ref'"
+                                  ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                            </span>
                         </a>
-                        <span class="sortorder"
-                              ng-show="ordering === 'project_ref'"
-                              ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-4">
                         <a id="byTitle"
                            href="" ng-click="updateOrdering('title')">
                             {{fieldNames["title"]}}
+                            <span class="glyphicon"
+                                  ng-show="ordering === 'title'"
+                                  ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                            </span>
                         </a>
-                        <span class="sortorder"
-                              ng-show="ordering === 'title'"
-                              ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-1">
                         <a id="byState"
                            href="" ng-click="updateOrdering('state')">
                             {{fieldNames["state"]}}
+                            <span class="glyphicon"
+                                  ng-show="ordering === 'state'"
+                                  ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                            </span>
                         </a>
-                        <span class="sortorder"
-                              ng-show="ordering === 'state'"
-                              ng-class="{reverse:!ascending}"></span>
                     </th>
                     <th class="col-md-3">Huomioita</th>
                     <th class="col-md-3">

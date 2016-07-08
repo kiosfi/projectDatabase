@@ -3,1060 +3,1102 @@
 A form for project state change.
 -->
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
-    <article class="col-md-12">
+    <article>
         <h1><span>{{project.project_ref}}: {{project.title}}</span></h1>
         <hr>
-        <h2>
-            Siirto tilasta "{{project.state}}" tilaan "{{global.newState}}"
-        </h2>
-        <h3>{{fieldNames["coordinator"]}}:
-            {{project.coordinator}}
-        </h3>
     </article>
-    <article class="col-md-12 article">
-        <div class="col-md-6">
-            <h4>Hanke</h4>
-            <div class="col-md-12">
-                <div class="col-md-6 mini-header">{{fieldNames["dac"]}}</div>
-                <div class="col-md-6">{{project.dac}}&nbsp;</div>
-                <div class="col-md-6 mini-header">
-                    {{fieldNames["reg_date"]}}
+    <article class="panel panel-primary">
+        <div class="panel-heading"><h4>Yhteenveto</h4></div>
+        <section class="panel-body">
+            <section class="col-md-12">
+                <h4>{{fieldNames["coordinator"]}}: {{project.coordinator}}</h4>
+            </section>
+            &nbsp;
+            <hr>
+            <section class="col-md-12">
+                <div class="col-md-6">
+                    <h4>Hanke</h4>
+                    <section class="section">
+                        <div class="col-md-6 mini-header">{{fieldNames["dac"]}}</div>
+                        <div class="col-md-6">{{project.dac}}&nbsp;</div>
+                        <div class="col-md-6 mini-header">
+                            {{fieldNames["reg_date"]}}
+                        </div>
+                        <div class="col-md-6">
+                            {{project.reg_date| date:'dd.MM.yyyy'}}
+                        </div>
+                        <div ng-show="project.approved.granted_sum_eur" class="ng-hide">
+                            <div
+                                class="col-md-6 mini-header">
+                                Myönnetty avustus
+                                <!--{{fieldNames["approved_granted_sum_eur"]}}-->
+                            </div>
+                            <div class="col-md-6">
+                                {{project.approved.granted_sum_eur| currency : ""}} EUR
+                            </div>
+                        </div>
+                        <div ng-show="!project.approved.granted_sum_eur" class="ng-hide">
+                            <div class="col-md-6 mini-header">
+                                Haettu avustus
+                            </div>
+                            <div class="col-md-6">
+                                {{project.funding.applied_curr_eur| currency : ""}} EUR
+                                ({{project.funding.applied_curr_local| currency : ""}}
+                                paikallinen)
+                            </div>
+                        </div>
+                        <div class="col-md-6 mini-header">Kesto</div>
+                        <div class="col-md-6">{{project.duration_months}} kk</div>
+                    </section>
                 </div>
                 <div class="col-md-6">
-                    {{project.reg_date| date:'dd.MM.yyyy'}}
+                    <h4>Järjestö</h4>
+                    <section class="section">
+                        <div class="col-md-3 mini-header">Nimi</div>
+                        <div class="col-md-9">{{project.organisation.name}}</div>
+                        <div class="col-md-3 mini-header">Edustaja</div>
+                        <div class="col-md-9">
+                            {{project.organisation.representative.name}}<br>
+                            {{project.organisation.representative.email}}<br>
+                            {{project.organisation.representative.phone}}
+                        </div>
+                    </section>
                 </div>
-                <div ng-show="project.approved.granted_sum_eur" class="ng-hide">
-                    <div
-                        class="col-md-6 mini-header">
-                        Myönnetty avustus
-                        <!--{{fieldNames["approved_granted_sum_eur"]}}-->
-                    </div>
-                    <div class="col-md-6">
-                        {{project.approved.granted_sum_eur| currency : ""}} EUR
-                    </div>
-                </div>
-                <div ng-show="!project.approved.granted_sum_eur" class="ng-hide">
-                    <div class="col-md-6 mini-header">
-                        Haettu avustus
-                    </div>
-                    <div class="col-md-6">
-                        {{project.funding.applied_curr_eur| currency : ""}} EUR
-                        ({{project.funding.applied_curr_local| currency : ""}}
-                        paikallinen)
-                    </div>
-                </div>
-                <div class="col-md-6 mini-header">Kesto</div>
-                <div class="col-md-6">{{project.duration_months}} kk</div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <h4>Järjestö</h4>
-            <div class="col-md-12">
-                <div class="col-md-3 mini-header">Nimi</div>
-                <div class="col-md-9">{{project.organisation.name}}</div>
-                <div class="col-md-3 mini-header">Edustaja</div>
-                <div class="col-md-9">
-                    {{project.organisation.representative.name}}<br>
-                    {{project.organisation.representative.email}}<br>
-                    {{project.organisation.representative.phone}}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12" style="margin: 0.5em">
-            <h4>Kuvaus</h4>
-            <div>
-                {{project.description}}
-            </div>
-        </div>
+            </section>
+            &nbsp;
+            <hr>
+            <section class="col-md-12" style="margin: 0.5em">
+                <h4>Kuvaus</h4>
+                <section class="section">
+                    {{project.description}}
+                </section>
+            </section>
+        </section>
     </article>
-    <article class="col-md-12 article">
-        <!--    Käsittelyssä -->
-        <form name="inReviewForm" class="form-horizontal col-md-12"
-              ng-show="global.newState === 'käsittelyssä'" role="form"
-              data-ng-submit="addReviewState(inReviewForm.$valid)" novalidate>
-            <div class="form-group col-md-12">
-                <div class="col-md-6">
-                    <label class="col-md-4 control-label">
-                        Toimitetut liitteet
-                        <!--{{fieldNames["required_appendices"]}}-->
+    <article class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>
+                <tt>{{project.state}}</tt>
+                <span class="glyphicon glyphicon-arrow-right"></span>
+                <tt>{{global.newState}}</tt>
+            </h4>
+        </div>
+        <div class="panel-body">
+            <!--    Käsittelyssä -->
+            <form name="inReviewForm" class="form-horizontal col-md-12"
+                  ng-show="global.newState === 'käsittelyssä'" role="form"
+                  data-ng-submit="addReviewState(inReviewForm.$valid)" novalidate>
+                <div class="form-group col-md-12">
+                    <div class="col-md-6">
+                        <label class="col-md-4 control-label">
+                            Toimitetut liitteet
+                            <!--{{fieldNames["required_appendices"]}}-->
+                        </label>
+                        <div class="col-md-8">
+                            <div class="col-md-12">
+                                <span class="col-md-6">
+                                    <label for="proj_budget"
+                                           style="font-weight: normal">
+                                        {{fieldNames["required_appendices_proj_budget"]}}
+                                    </label>
+                                </span>
+                                <span class="col-md-6">
+                                    <input type="checkbox" id="proj_budget"
+                                           name="proj_budget"
+                                           ng-model="project.required_appendices.proj_budget">
+                                </span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="col-md-6">
+                                    <label for="references" style="font-weight: normal">
+                                        {{fieldNames["required_appendices_references"]}}
+                                    </label>
+                                </span>
+                                <span class="col-md-6">
+                                    <input type="checkbox" id="references" name="references"
+                                           ng-model="project.required_appendices.references">
+                                </span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="col-md-6">
+                                    <label for="annual_budget"
+                                           style="font-weight: normal">
+                                        {{fieldNames["required_appendices_annual_budget"]}}
+                                    </label>
+                                </span>
+                                <span class="col-md-6">
+                                    <input type="checkbox" id="annual_budget"
+                                           name="annual_budget"
+                                           ng-model="project.required_appendices.annual_budget">
+                                </span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="col-md-6">
+                                    <label for="rules" style="font-weight: normal">
+                                        {{fieldNames["required_appendices_rules"]}}
+                                    </label>
+                                </span>
+                                <span class="col-md-6">
+                                    <input type="checkbox" id="rules" name="rules"
+                                           ng-model="project.required_appendices.rules">
+                                </span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="col-md-6">
+                                    <label for="reg_cert" style="font-weight: normal">
+                                        {{fieldNames["required_appendices_reg_cert"]}}
+                                    </label>
+                                </span>
+                                <span class="col-md-6">
+                                    <input type="checkbox" id="reg_cert" name="reg_cert"
+                                           ng-model="project.required_appendices.reg_cert">
+                                </span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="col-md-6">
+                                    <label for="annual_report"
+                                           style="font-weight: normal">
+                                        {{fieldNames["required_appendices_annual_report"]}}
+                                    </label>
+                                </span>
+                                <span class="col-md-6">
+                                    <input type="checkbox" id="annual_report"
+                                           name="annual_report"
+                                           ng-model="project.required_appendices.annual_report">
+                                </span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="col-md-6">
+                                    <label for="audit_reports"
+                                           style="font-weight: normal">
+                                        {{fieldNames["required_appendices_audit_reports"]}}
+                                    </label>
+                                </span>
+                                <span class="col-md-6">
+                                    <input type="checkbox" id="audit_reports"
+                                           name="audit_reports"
+                                           ng-model="project.required_appendices.audit_reports">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="comments" class="col-md-2 control-label">
+                            {{fieldNames["in_review_comments"]}}
+                        </label>
+                        <div class="col-md-10">
+                            <textarea name="comments" type="text" class="form-control"
+                                      data-ng-model="project.in_review.comments"
+                                      id="comments">
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12" style="text-align: center">
+                    <hr>
+                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;
+                        Peru
+                    </a>
+                    <button id="end-btn" type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp;
+                        Tallenna
+                    </button>
+                </div>
+            </form>
+            <!--        Hyväksytty-->
+            <form name="approvedForm" class="form-horizontal col-md-12"
+                  ng-show="global.newState === 'hyväksytty'" role="form"
+                  data-ng-submit="addApprovedState(approvedForm.$valid)" novalidate>
+                <div class="form-group col-md-6">
+                    <label class="col-md-4 control-label" for="board_meeting">
+                        {{fieldNames["approved_board_meeting"]}}
                     </label>
                     <div class="col-md-8">
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="proj_budget"
-                                       style="font-weight: normal">
-                                    {{fieldNames["required_appendices_proj_budget"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="proj_budget"
-                                       name="proj_budget"
-                                       ng-model="project.required_appendices.proj_budget">
-                            </span>
+                        <input id="board_meeting" name="board_meeting"
+                               data-ng-model="project.approved.board_meeting"
+                               class="form-control"
+                               placeholder="Hallituksen kokous">
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="board_notified" class="col-md-3 control-label">
+                        {{fieldNames["approved_board_notified"]}}
+                    </label>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': approvedForm.board_notified_day.$invalid}">
+                        <input name="board_notified_day" type="number"
+                               class="form-control" data-ng-model="notified_day"
+                               id="board_notified_day" placeholder="p">
+                        <div ng-show="approvedForm.board_notified_day.$invalid"
+                             class="help-block">
+                            <p ng-show="approvedForm.board_notified_day.$error.number">
+                                Päivän täytyy olla numero
+                            </p>
                         </div>
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="references" style="font-weight: normal">
-                                    {{fieldNames["required_appendices_references"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="references" name="references"
-                                       ng-model="project.required_appendices.references">
-                            </span>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': approvedForm.board_notified_month.$invalid}">
+                        <input name="board_notified_month" type="number"
+                               class="form-control" data-ng-model="notified_month"
+                               id="board_notified_month" placeholder="k">
+                        <div ng-show="approvedForm.board_notified_month.$invalid"
+                             class="help-block">
+                            <p ng-show="approvedForm.board_notified_month.$error.number">
+                                Kuukauden täytyy olla numero
+                            </p>
                         </div>
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="annual_budget"
-                                       style="font-weight: normal">
-                                    {{fieldNames["required_appendices_annual_budget"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="annual_budget"
-                                       name="annual_budget"
-                                       ng-model="project.required_appendices.annual_budget">
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="rules" style="font-weight: normal">
-                                    {{fieldNames["required_appendices_rules"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="rules" name="rules"
-                                       ng-model="project.required_appendices.rules">
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="reg_cert" style="font-weight: normal">
-                                    {{fieldNames["required_appendices_reg_cert"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="reg_cert" name="reg_cert"
-                                       ng-model="project.required_appendices.reg_cert">
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="annual_report"
-                                       style="font-weight: normal">
-                                    {{fieldNames["required_appendices_annual_report"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="annual_report"
-                                       name="annual_report"
-                                       ng-model="project.required_appendices.annual_report">
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="audit_reports"
-                                       style="font-weight: normal">
-                                    {{fieldNames["required_appendices_audit_reports"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="audit_reports"
-                                       name="audit_reports"
-                                       ng-model="project.required_appendices.audit_reports">
-                            </span>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': approvedForm.board_notified_year.$invalid}">
+                        <input name="board_notified_year" type="number"
+                               class="form-control" data-ng-model="notified_year"
+                               id="board_notified_year" placeholder="vvvv">
+                        <div ng-show="approvedForm.board_notified_year.$invalid"
+                             class="help-block">
+                            <p ng-show="approvedForm.board_notified_year.$error.number">
+                                Vuoden täytyy olla numero
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <label for="comments" class="col-md-2 control-label">
-                        {{fieldNames["in_review_comments"]}}
+                <div class="form-group col-md-7">
+                    <label mean-token="'create-themes'"
+                           class="col-md-4 control-label">
+                        {{fieldNames["approved_themes"]}}
                     </label>
+                    <div class="col-md-8">
+                        <table>
+                            <tr ng-repeat="theme in themes">
+                                <td><input
+                                        type="checkbox"
+                                        name="selectedThemes[]"
+                                        value="{{theme}}"
+                                        ng-checked="themeSelection.indexOf(theme) > -1"
+                                        ng-click="toggleThemeSelection(theme)">
+                                    {{theme}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="granted_sum_eur" class="col-md-6 control-label">
+                        {{fieldNames["approved_granted_sum_eur"]}}
+                    </label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': approvedForm.granted_sum_eur.$invalid}">
+                        <input name="granted_sum_eur" type="number"
+                               class="form-control"
+                               data-ng-model="project.approved.granted_sum_eur"
+                               id="granted_sum_eur" placeholder="0">
+                        <div ng-show="approvedForm.granted_sum_eur.$invalid"
+                             class="help-block">
+                            <p ng-show="approvedForm.granted_sum_eur.$error.number">
+                                Summan täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label class="col-md-1 control-label" for="decision">
+                        {{fieldNames["approved_decision"]}}
+                    </label>
+                    <div class="col-md-11">
+                        <textarea id="decision" name="decision"
+                                  data-ng-model="project.approved.decision"
+                                  class="form-control" placeholder="Päätös">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="approved_date" class="col-md-3 control-label">
+                        Hyväksymispvm
+                        <!--{{fieldNames["approved_approved_date"]}}-->
+                    </label>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': approvedForm.approved_day.$invalid}">
+                        <input name="approved_day" type="number" class="form-control"
+                               data-ng-model="approved_day" id="approved_day"
+                               placeholder="p">
+                        <div ng-show="approvedForm.approved_day.$invalid"
+                             class="help-block">
+                            <p ng-show="approvedForm.approved_day.$error.number">
+                                Päivän täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': approvedForm.approved_month.$invalid}">
+                        <input name="approved_month" type="number" class="form-control"
+                               data-ng-model="approved_month" id="approved_month"
+                               placeholder="k">
+                        <div ng-show="approvedForm.approved_month.$invalid"
+                             class="help-block">
+                            <p ng-show="approvedForm.approved_month.$error.number">
+                                Kuukauden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': approvedForm.approved_year.$invalid }">
+                        <input name="approved_year" type="number" class="form-control"
+                               data-ng-model="approved_year" id="approved_year"
+                               placeholder="vvvv">
+                        <div ng-show="approvedForm.approved_year.$invalid"
+                             class="help-block">
+                            <p ng-show="approvedForm.approved_year.$error.number">
+                                Vuoden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6"
+                     ng-class="{'has-error': approvedForm.approved_by.$invalid}">
+                    <label for="approved_by" class="col-md-3 control-label">
+                        Hyväksyjä
+                    </label>
+                    <div class="col-md-9">
+                        <select id="approved_by"
+                                data-ng-model="project.approved.approved_by"
+                                class='form-control'>
+                            <option>Toiminnanjohtaja</option>
+                            <option>Hallituksen kokous</option>
+                            <option>Ulkoministeriö</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-12" style="text-align: center">
+                    <hr>
+                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;
+                        Peru
+                    </a>
+                    <button id="end-btn" type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp;
+                        Tallenna
+                    </button>
+                </div>
+            </form>
+            <!--    Hylätty-->
+            <form name="rejectedForm" class="form-horizontal col-md-12"
+                  ng-show="global.newState === 'hylätty'"  role="form"
+                  data-ng-submit="addRejectedState(rejectedForm.$valid)" novalidate>
+                <div class="form-group col-md-12">
+                    <label mean-token="'create-rejcategories'" class="col-md-3">
+                        Syyt
+                    </label>
+                    <div class="col-md-12" id="rejSelection"
+                         data-ng-repeat="rej in addedRejections">
+                        <select name="rejSelect" id="rejSelect"
+                                data-ng-model="rej.rejection">
+                            <option data-ng-repeat="rejCat in rejCategories"
+                                    value="{{rejCat}}">{{rejCat}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <input id="addRej" type="button" value="Lisää uusi"
+                               ng-click="addRejection();"/>
+                        <input id="remRej" type="button" value="Poista viimeinen"
+                               ng-click="removeRejection();"/>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="comments" class="col-md-2">Kommentit</label>
                     <div class="col-md-10">
                         <textarea name="comments" type="text" class="form-control"
-                                  data-ng-model="project.in_review.comments"
+                                  data-ng-model="project.rejected.rejection_comments"
+                                  id="comments"
+                                  placeholder="Kommentit hylkäysperusteille">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-12" style="text-align: center">
+                    <hr>
+                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;
+                        Peru
+                    </a>
+                    <button id="end-btn" type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp;
+                        Tallenna
+                    </button>
+                </div>
+            </form>
+            <!--Allekirjoitettu-->
+            <form name="signedForm" class="form-horizontal col-md-12"
+                  ng-show="global.newState === 'allekirjoitettu'"  role="form"
+                  data-ng-submit="addSignedState(signedForm.$valid)" novalidate>
+                <div class="form-group col-md-6">
+                    <label for="signed_by" class="col-md-4">Allekirjoittaja</label>
+                    <div class="col-md-8">
+                        <input name="signed_by" type="text" class="form-control"
+                               data-ng-model="project.signed.signed_by"
+                               id="signed_by"
+                               placeholder="Sopimuksen allekirjoittajan nimi"
+                               required>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="signed_date_day" class="col-md-3">Päivämäärä</label>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': signedForm.signed_date_day.$invalid}">
+                        <input name="signed_date_day" type="number"
+                               class="form-control" data-ng-model="signed_day"
+                               id="signed_date_day" placeholder="p">
+                        <div ng-show="signedForm.signed_date_day.$invalid"
+                             class="help-block">
+                            <p ng-show="signedForm.signed_date_day.$error.number">
+                                Päivän täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': signedForm.signed_date_month.$invalid}">
+                        <input name="signed_date_month" type="number"
+                               class="form-control" data-ng-model="signed_month"
+                               id="signed_date_month" placeholder="k">
+                        <div ng-show="signedForm.signed_date_month.$invalid"
+                             class="help-block">
+                            <p ng-show="signedForm.signed_date_month.$error.number">
+                                Kuukauden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': signedForm.signed_date_year.$invalid}">
+                        <input name="signed_date_year" type="number"
+                               class="form-control" data-ng-model="signed_year"
+                               id="signed_date_year" placeholder="vvvv">
+                        <div ng-show="signedForm.signed_date_year.$invalid"
+                             class="help-block">
+                            <p ng-show="signedForm.signed_date_year.$error.number">
+                                Vuoden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="plannedPaymentSelection">
+                        Maksusuunnitelma
+                    </label>
+                    myönnetylle avustukselle
+                    {{project.approved.granted_sum_eur| currency : ""}} €
+                </div>
+                <div class="form-group col-md-12" id="plPayments">
+                    <div class="col-md-12" name="plannedPaymentSelection"
+                         id="plannedPaymentSelection"
+                         data-ng-repeat="plannedPayment in plannedPayments">
+                        <div class="col-md-6">
+                            <label for="plannedDay" class="col-md-3 control-label">
+                                Päivämäärä
+                            </label>
+                            <div class="col-md-3">
+                                <input name="plannedDay" type="number"
+                                       class="form-control"
+                                       data-ng-model="plannedPayment.day"
+                                       id="plannedDay" placeholder="p">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="plannedMonth" type="number"
+                                       class="form-control"
+                                       data-ng-model="plannedPayment.month"
+                                       id="plannedMonth" placeholder="k">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="plannedYear" type="number"
+                                       class="form-control"
+                                       data-ng-model="plannedPayment.year"
+                                       id="plannedYear" placeholder="vvvv">
+                            </div>
+                        </div>
+                        <label for="plannedSumEUR" class="col-md-2 control-label">
+                            Maksu (EUR)
+                        </label>
+                        <div class="col-md-2">
+                            <input name="plannedSumEUR" type="number"
+                                   class="form-control"
+                                   data-ng-model="plannedPayment.sum_eur"
+                                   id="plannedSumEUR" placeholder="Summa (EUR)">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="button" id="add-btn" value="Lisää uusi"
+                               ng-click="addPlannedPayment();"/>
+                        <input type="button" value="Poista viimeinen"
+                               ng-click="removePlannedPayment();"/>
+                    </div>
+                </div>
+                <label for="reportDeadlines" class="col-md-12">
+                    Raporttien eräpäivät
+                </label>
+                <div class="form-group col-md-12">
+                    <div class="col-md-12" name="reportDeadlines"
+                         id="reportDeadlines" data-ng-repeat="deadline in deadlines">
+                        <label for="dlRep" class="col-md-2 control-label">
+                            Raportti
+                        </label>
+                        <div class="col-md-4">
+                            <input name="dlRep" type="text" class="form-control"
+                                   data-ng-model="deadline.report" id="dlRep"
+                                   placeholder="Raportti">
+                        </div>
+                        <div id="dlDate" class="col-md-6">
+                            <label for="dlDay" class="col-md-3 control-label">
+                                Eräpäivä
+                            </label>
+                            <div class="col-md-3">
+                                <input name="dlDay" type="number"
+                                       class="form-control"
+                                       data-ng-model="deadline.day" id="dlDay"
+                                       placeholder="p">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="dlMonth" type="number"
+                                       class="form-control"
+                                       data-ng-model="deadline.month" id="dlMonth"
+                                       placeholder="k">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="dlYear" type="number"
+                                       class="form-control"
+                                       data-ng-model="deadline.year" id="dlYear"
+                                       placeholder="vvvv">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="button" id="add-btn2" value="Lisää uusi"
+                               ng-click="addDeadline();"/>
+                        <input type="button" value="Poista viimeinen"
+                               ng-click="removeDeadline();"/>
+                    </div>
+                </div>
+                <div class="form-group col-md-12" style="text-align: center">
+                    <hr>
+                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;
+                        Peru
+                    </a>
+                    <button id="end-btn" type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp;
+                        Tallenna
+                    </button>
+                </div>
+            </form>
+            <!--    Väliraportti-->
+            <form name="intReportForm" class="form-horizontal col-md-12"
+                  ng-show="global.newState === 'väliraportti'"  role="form"
+                  data-ng-submit="addIntReportState(intReportForm.$valid)"
+                  novalidate>
+                <div class="form-group col-md-12">
+                    <label for="payments" class="col-md-2">Maksatukset</label>
+                    <p class="col-md-12">Maksettu:</p>
+                    <div class="form-group col-md-12"
+                         ng-repeat="payment in project.payments">
+                        <div class="col-md-4">
+                            {{payment.sum_eur| currency : ""}} EUR /
+                            {{payment.payment_date| date : 'dd.MM.yyyy'}}
+                        </div>
+                    </div>
+                </div>
+                <label class="col-md-12">
+                    Toimintatavat ja niiden toteutuminen
+                </label>
+                <div class="form-group col-md-12" ng-repeat="method in project.methods">
+                    <div class="col-md-6" style="text-align: justify">
+                        <p><em>{{method.name}}</em> ({{method.level}})</p>
+                        <p ng-bind-html="handleEmphasis(method.comment)"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>&nbsp;</p>
+                        <textarea name="intRMethods" type="text"
+                                  class="form-control"
+                                  data-ng-model="addedMethods[(project.methods).indexOf(method)]"
+                                  rows="10" cols="50"
+                                  id="intRMethods" placeholder="Kommentteja"></textarea>
+                    </div>
+                </div>
+                <label class="col-md-12">
+                    Tavoitteet ja niiden toteutuminen
+                </label>
+                <div class="form-group col-md-12">
+                    <div class="col-md-6" style="text-align: justify">
+                        <p ng-bind-html="handleEmphasis(project.project_goal)"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <textarea name="objComments" type="text"
+                                  class="form-control"
+                                  data-ng-model="objectiveComments[0]"
+                                  id="objComments"
+                                  rows="10" cols="50"
+                                  placeholder="Kommentteja tavoitteiden toteutumisesta">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="communication" class="col-md-4">
+                        Raportointi ja yhteydenpito
+                    </label>
+                    <div class="col-md-8">
+                        <textarea name="communication" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.intermediary_report.communication"
+                                  id="communication"
+                                  placeholder="Raportointi ja yhteydenpito">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="evaluation" class="col-md-4">
+                        Evaluointi ja vaikuttavuuden arviointi
+                    </label>
+                    <div class="col-md-8">
+                        <textarea name="evaluation" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.intermediary_report.evaluation"
+                                  id="evaluation"
+                                  placeholder="Evaluointi ja vaikuttavuuden arviointi">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="budget" class="col-md-4">
+                        Budjetin toteutuminen ja raportoitu summa
+                    </label>
+                    <div class="col-md-8">
+                        <textarea name="budget" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.intermediary_report.budget"
+                                  id="budget"
+                                  placeholder="Budjetin toteutuminen ja raportoitu summa">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="overallKios" class="col-md-2">
+                        KIOSiin kokonaisarvio
+                    </label>
+                    <div class="col-md-10">
+                        <textarea name="overallKios" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.intermediary_report.overall_rating_kios"
+                                  id="overallKios" placeholder="KIOSiin arvio">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="comments" class="col-md-2">Päätös</label>
+                    <div class="col-md-10">
+                        <textarea name="intRComments" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.intermediary_report.comments"
+                                  id="intRcomments"
+                                  placeholder="Päätös"></textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="intRDateAppr" class="col-md-3">Hyväksymispvm</label>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': intReportForm.intRDateAppr_day.$invalid}">
+                        <input name="intRDateAppr_day" type="number"
+                               class="form-control" data-ng-model="intRDateAppr_day"
+                               id="intRDateAppr_day" placeholder="p">
+                        <div ng-show="intReportForm.intRDateAppr_day.$invalid"
+                             class="help-block">
+                            <p ng-show="intReportForm.intRDateAppr_day.$error.number">
+                                Päivän täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': intReportForm.intRDateAppr_month.$invalid}">
+                        <input name="intRDateAppr_month" type="number"
+                               class="form-control" data-ng-model="intRDateAppr_month"
+                               id="intRDateAppr_month" placeholder="k">
+                        <div ng-show="intReportForm.intRDateAppr_month.$invalid"
+                             class="help-block">
+                            <p ng-show="intReportForm.intRDateAppr_month.$error.number">
+                                Kuukauden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': intReportForm.intRDateAppr_year.$invalid}">
+                        <input name="intRDateAppr_year" type="number"
+                               class="form-control"
+                               data-ng-model="intRDateAppr_year"
+                               id="intRDateAppr_year" placeholder="vvvv">
+                        <div ng-show="intReportForm.intRDateAppr_year.$invalid"
+                             class="help-block">
+                            <p ng-show="intReportForm.intRDateAppr_year.$error.number">
+                                Vuoden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12" style="text-align: center">
+                    <hr>
+                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;
+                        Peru
+                    </a>
+                    <button id="end-btn" type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp;
+                        Tallenna
+                    </button>
+                </div>
+            </form>
+            <!--   Loppuraportti-->
+            <form name="endReportForm" class="form-horizontal col-md-12"
+                  ng-show="global.newState === 'loppuraportti'" role="form"
+                  data-ng-submit="addEndReportState(endReportForm)" novalidate>
+                <div class="form-group col-md-6">
+                    <label class="col-md-4" for="end_board_meeting">
+                        {{fieldNames["end_report_board_meeting"]}}
+                    </label>
+                    <div class="col-md-8">
+                        <input id="end_board_meeting" name="end_board_meeting"
+                               data-ng-model="project.end_report.board_meeting"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="end_budget" class="col-md-4">
+                        {{fieldNames["end_report_budget"]}}
+                    </label>
+                    <div class="col-md-8">
+                        <textarea name="end_budget" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.end_report.budget"
+                                  id="end_budget">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="audit_date" class="col-md-3">
+                        Tilintarkastuspvm
+                    </label>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': projectEditForm.audit_day.$invalid}">
+                        <input name="audit_day" type="number"
+                               class="form-control" data-ng-model="audit_day"
+                               id="audit_day" placeholder="p" min="1">
+                        <div ng-show="projectEditForm.audit_day.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.audit_day.$error.number">
+                                Päivän täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': projectEditForm.audit_month.$invalid}">
+                        <input name="audit_month" type="number"
+                               class="form-control" data-ng-model="audit_month"
+                               id="audit_month" placeholder="k" min="1">
+                        <div ng-show="projectEditForm.audit_month.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.audit_month.$error.number">
+                                Kuukauden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': projectEditForm.audit_year.$invalid}">
+                        <input name="audit_year" type="number"
+                               class="form-control" data-ng-model="audit_year"
+                               id="audit_year" placeholder="vvvv" min="1">
+                        <div ng-show="projectEditForm.audit_year.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.audit_year.$error.number">
+                                Vuoden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="audit_review" class="col-md-2">
+                        Tilintarkastuksen Arvio
+                    </label>
+                    <div class="col-md-8">
+                        <textarea name="audit_review" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.end_report.audit.review"
+                                  id="audit_review">
+                        </textarea>
+                    </div>
+                </div>
+                <label class="col-md-12">
+                    Toiminnot ja niiden toteutuminen
+                </label>
+                <div class="form-group col-md-12"
+                     ng-repeat="method in project.methods">
+                    <div class="col-md-6" style="text-align: justify">
+                        <p><em>{{method.name}}</em> ({{method.level}})</p>
+                        <p ng-bind-html="handleEmphasis(method.comment)"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>&nbsp;</p>
+                        <textarea name="er_methods" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.end_report.methods[project.methods.indexOf(method)]"
+                                  rows="10" cols="50"
+                                  id="er_methods" placeholder="Toiminnon toteutuminen">
+                        </textarea>
+                    </div>
+                </div>
+                <label class="col-md-12">
+                    Kokonaistavoitteen toteutuminen
+                </label>
+                <div class="form-group col-md-12">
+                    <div class="col-md-6" style="text-align: justify">
+                        <p ng-bind-html="handleEmphasis(project.project_goal)">
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <textarea name="objectivesComments" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.end_report.objective"
+                                  id="objectivesComments" rows="10" cols="50">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <div class="col-md-3">
+                        <div class="col-md-6">
+                            <label for="direct_beneficiaries">
+                                {{fieldNames["end_report_direct_beneficiaries"]}}
+                                (arvio)
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="direct_beneficiaries" name="direct_beneficiaries"
+                                   class="form-control"
+                                   data-ng-model="project.end_report.direct_beneficiaries">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="col-md-6">
+                            <label for="direct_beneficiaries">
+                                {{fieldNames["end_report_indirect_beneficiaries"]}}
+                                (arvio)
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="indirect_beneficiaries"
+                                   name="indirect_beneficiaries" class="form-control"
+                                   data-ng-model="project.end_report.indirect_beneficiaries">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="grade" class="col-md-4">
+                            {{fieldNames["end_report_grade"]}}
+                        </label>
+                        <div class="col-md-8">
+                            <select name="grade" id="grade"
+                                    data-ng-model="project.end_report.grade"
+                                    class="form-control">
+                                <option value="" selected></option>
+                                <option value="4">
+                                    4 (Onnistui yli odotusten)
+                                </option>
+                                <option value="4">
+                                    3 (Onnistui suunnitellusti)
+                                </option>
+                                <option value="4">
+                                    2 (Onnistui alle odotusten, ulkoinen syy)
+                                </option>
+                                <option value="4">
+                                    1 (Onnistui alle odotusten, järjestön syy)
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="gen_review" class="col-md-2">
+                        KIOSiin kokonaisarvio
+                    </label>
+                    <div class="col-md-10">
+                        <textarea name="gen_review" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.end_report.general_review"
+                                  id="gen_review">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="proposition" class="col-md-2">
+                        {{fieldNames["end_report_proposition"]}}
+                    </label>
+                    <div class="col-md-10">
+                        <textarea name="proposition" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.end_report.proposition"
+                                  id="proposition">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="conclusion" class="col-md-2">
+                        {{fieldNames["end_report_conclusion"]}}
+                    </label>
+                    <div class="col-md-10">
+                        <textarea name="conclusion" type="text" class="form-control"
+                                  data-ng-model="project.end_report.conclusion"
+                                  id="conclusion">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="audit_day" class="col-md-3">
+                        Hyväksymispvm
+                        <!--{{fieldNames["end_report_approved_date"]}}-->
+                    </label>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': projectEditForm.er_approved_day.$invalid}">
+                        <input name="er_approved_day" type="number"
+                               class="form-control"
+                               data-ng-model="er_approved_day"
+                               id="er_approved_day" placeholder="p" min="1">
+                        <div ng-show="projectEditForm.er_approved_day.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.er_approved_day.$error.number">
+                                Päivän täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': projectEditForm.er_approved_month.$invalid}">
+                        <input name="er_approved_month" type="number"
+                               class="form-control"
+                               data-ng-model="er_approved_month"
+                               id="er_approved_month" placeholder="k" min="1">
+                        <div ng-show="projectEditForm.er_approved_month.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.er_approved_month.$error.number">
+                                Kuukauden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3"
+                         ng-class="{'has-error': projectEditForm.er_approved_year.$invalid}">
+                        <input name="er_approved_year" type="number"
+                               class="form-control"
+                               data-ng-model="er_approved_year"
+                               id="er_approved_year" placeholder="vvvv" min="1">
+                        <div ng-show="projectEditForm.er_approved_year.$invalid"
+                             class="help-block">
+                            <p ng-show="projectEditForm.er_approved_year.$error.number">
+                                Vuoden täytyy olla numero
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12" style="text-align: center">
+                    <hr>
+                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;
+                        Peru
+                    </a>
+                    <button id="end-btn" type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp;
+                        Tallenna
+                    </button>
+                </div>
+            </form>
+            <!--Päättynyt-->
+            <form name="endedForm" class="form-horizontal col-md-12"
+                  ng-show="global.newState === 'päättynyt'" role="form"
+                  data-ng-submit="addEndedState(endedForm.$valid)" novalidate>
+                <div class="form-group col-md-6">
+                    <div>
+                        <label for="notifiedDay" class="col-md-3">
+                            {{fieldNames["ended_board_notified"]}}
+                        </label>
+                        <div class="col-md-3">
+                            <input name="endNotifiedDay" type="number"
+                                   class="form-control"
+                                   data-ng-model="end_notified_day"
+                                   id="notifiedDay" placeholder="p">
+                        </div>
+                        <div class="col-md-3">
+                            <input name="endNotifiedMonth" type="number"
+                                   class="form-control"
+                                   data-ng-model="end_notified_month"
+                                   id="notifiedMonth" placeholder="k">
+                        </div>
+                        <div class="col-md-3">
+                            <input name="endNotifiedYear" type="number"
+                                   class="form-control"
+                                   data-ng-model="end_notified_year"
+                                   id="notifiedYear" placeholder="vvvv">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="comments" class="col-md-2">
+                        {{fieldNames["ended_other_comments"]}}
+                    </label>
+                    <div class="col-md-10">
+                        <textarea name="endComments" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.ended.other_comments"
                                   id="comments">
                         </textarea>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" id="review-btn" class="btn btn-default">
-                        Tallenna
-                    </button>
-                </div>
-            </div>
-        </form>
-        <!--        Hyväksytty-->
-        <form name="approvedForm" class="form-horizontal col-md-12"
-              ng-show="global.newState === 'hyväksytty'" role="form"
-              data-ng-submit="addApprovedState(approvedForm.$valid)" novalidate>
-            <div class="form-group col-md-6">
-                <label class="col-md-4 control-label" for="board_meeting">
-                    {{fieldNames["approved_board_meeting"]}}
-                </label>
-                <div class="col-md-8">
-                    <input id="board_meeting" name="board_meeting"
-                           data-ng-model="project.approved.board_meeting"
-                           class="form-control"
-                           placeholder="Hallituksen kokous">
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="board_notified" class="col-md-3 control-label">
-                    {{fieldNames["approved_board_notified"]}}
-                </label>
-                <div class="col-md-3"
-                     ng-class="{'has-error': approvedForm.board_notified_day.$invalid}">
-                    <input name="board_notified_day" type="number"
-                           class="form-control" data-ng-model="notified_day"
-                           id="board_notified_day" placeholder="p">
-                    <div ng-show="approvedForm.board_notified_day.$invalid"
-                         class="help-block">
-                        <p ng-show="approvedForm.board_notified_day.$error.number">
-                            Päivän täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3"
-                     ng-class="{'has-error': approvedForm.board_notified_month.$invalid}">
-                    <input name="board_notified_month" type="number"
-                           class="form-control" data-ng-model="notified_month"
-                           id="board_notified_month" placeholder="k">
-                    <div ng-show="approvedForm.board_notified_month.$invalid"
-                         class="help-block">
-                        <p ng-show="approvedForm.board_notified_month.$error.number">
-                            Kuukauden täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3"
-                     ng-class="{'has-error': approvedForm.board_notified_year.$invalid}">
-                    <input name="board_notified_year" type="number"
-                           class="form-control" data-ng-model="notified_year"
-                           id="board_notified_year" placeholder="vvvv">
-                    <div ng-show="approvedForm.board_notified_year.$invalid"
-                         class="help-block">
-                        <p ng-show="approvedForm.board_notified_year.$error.number">
-                            Vuoden täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-md-7">
-                <label mean-token="'create-themes'"
-                       class="col-md-4 control-label">
-                    {{fieldNames["approved_themes"]}}
-                </label>
-                <div class="col-md-8">
-                    <table>
-                        <tr ng-repeat="theme in themes">
-                            <td><input
-                                    type="checkbox"
-                                    name="selectedThemes[]"
-                                    value="{{theme}}"
-                                    ng-checked="themeSelection.indexOf(theme) > -1"
-                                    ng-click="toggleThemeSelection(theme)">
-                                {{theme}}
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="form-group col-md-5">
-                <label for="granted_sum_eur" class="col-md-6 control-label">
-                    {{fieldNames["approved_granted_sum_eur"]}}
-                </label>
-                <div class="col-md-6"
-                     ng-class="{'has-error': approvedForm.granted_sum_eur.$invalid}">
-                    <input name="granted_sum_eur" type="number"
-                           class="form-control"
-                           data-ng-model="project.approved.granted_sum_eur"
-                           id="granted_sum_eur" placeholder="0">
-                    <div ng-show="approvedForm.granted_sum_eur.$invalid"
-                         class="help-block">
-                        <p ng-show="approvedForm.granted_sum_eur.$error.number">
-                            Summan täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <label class="col-md-1 control-label" for="decision">
-                    {{fieldNames["approved_decision"]}}
-                </label>
-                <div class="col-md-11">
-                    <textarea id="decision" name="decision"
-                              data-ng-model="project.approved.decision"
-                              class="form-control" placeholder="Päätös">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="approved_date" class="col-md-3 control-label">
-                    Hyväksymispvm
-                    <!--{{fieldNames["approved_approved_date"]}}-->
-                </label>
-                <div class="col-md-3"
-                     ng-class="{'has-error': approvedForm.approved_day.$invalid}">
-                    <input name="approved_day" type="number" class="form-control"
-                           data-ng-model="approved_day" id="approved_day"
-                           placeholder="p">
-                    <div ng-show="approvedForm.approved_day.$invalid"
-                         class="help-block">
-                        <p ng-show="approvedForm.approved_day.$error.number">
-                            Päivän täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3"
-                     ng-class="{'has-error': approvedForm.approved_month.$invalid}">
-                    <input name="approved_month" type="number" class="form-control"
-                           data-ng-model="approved_month" id="approved_month"
-                           placeholder="k">
-                    <div ng-show="approvedForm.approved_month.$invalid"
-                         class="help-block">
-                        <p ng-show="approvedForm.approved_month.$error.number">
-                            Kuukauden täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3"
-                     ng-class="{'has-error': approvedForm.approved_year.$invalid }">
-                    <input name="approved_year" type="number" class="form-control"
-                           data-ng-model="approved_year" id="approved_year"
-                           placeholder="vvvv">
-                    <div ng-show="approvedForm.approved_year.$invalid"
-                         class="help-block">
-                        <p ng-show="approvedForm.approved_year.$error.number">
-                            Vuoden täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-md-6"
-                 ng-class="{'has-error': approvedForm.approved_by.$invalid}">
-                <label for="approved_by" class="col-md-3 control-label">
-                    Hyväksyjä
-                </label>
-                <div class="col-md-9">
-                    <select id="approved_by"
-                            data-ng-model="project.approved.approved_by"
-                            class='form-control'>
-                        <option>Toiminnanjohtaja</option>
-                        <option>Hallituksen kokous</option>
-                        <option>Ulkoministeriö</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button id="appr-btn" type="submit" class="btn btn-default">
-                        Tallenna
-                    </button>
-                </div>
-            </div>
-        </form>
-        <!--    Hylätty-->
-        <form name="rejectedForm" class="form-horizontal col-md-12"
-              ng-show="global.newState === 'hylätty'"  role="form"
-              data-ng-submit="addRejectedState(rejectedForm.$valid)" novalidate>
-            <div class="form-group col-md-12">
-                <label mean-token="'create-rejcategories'" class="col-md-3">
-                    Syyt
-                </label>
-                <div class="col-md-12" id="rejSelection"
-                     data-ng-repeat="rej in addedRejections">
-                    <select name="rejSelect" id="rejSelect"
-                            data-ng-model="rej.rejection">
-                        <option data-ng-repeat="rejCat in rejCategories"
-                                value="{{rejCat}}">{{rejCat}}</option>
-                    </select>
-                </div>
-                <div class="col-md-12">
-                    <input id="addRej" type="button" value="Lisää uusi"
-                           ng-click="addRejection();"/>
-                    <input id="remRej" type="button" value="Poista viimeinen"
-                           ng-click="removeRejection();"/>
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <label for="comments" class="col-md-2">Kommentit</label>
-                <div class="col-md-10">
-                    <textarea name="comments" type="text" class="form-control"
-                              data-ng-model="project.rejected.rejection_comments"
-                              id="comments"
-                              placeholder="Kommentit hylkäysperusteille">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button id="rej-btn" type="submit" class="btn btn-default">
-                        Tallenna
-                    </button>
-                </div>
-            </div>
-        </form>
-        <!--Allekirjoitettu-->
-        <form name="signedForm" class="form-horizontal col-md-12"
-              ng-show="global.newState === 'allekirjoitettu'"  role="form"
-              data-ng-submit="addSignedState(signedForm.$valid)" novalidate>
-            <div class="form-group col-md-6">
-                <label for="signed_by" class="col-md-4">Allekirjoittaja</label>
-                <div class="col-md-8">
-                    <input name="signed_by" type="text" class="form-control"
-                           data-ng-model="project.signed.signed_by"
-                           id="signed_by"
-                           placeholder="Sopimuksen allekirjoittajan nimi"
-                           required>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="signed_date_day" class="col-md-3">Päivämäärä</label>
-                <div class="col-md-3"
-                     ng-class="{'has-error': signedForm.signed_date_day.$invalid}">
-                    <input name="signed_date_day" type="number"
-                           class="form-control" data-ng-model="signed_day"
-                           id="signed_date_day" placeholder="p">
-                    <div ng-show="signedForm.signed_date_day.$invalid"
-                         class="help-block">
-                        <p ng-show="signedForm.signed_date_day.$error.number">
-                            Päivän täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3"
-                     ng-class="{'has-error': signedForm.signed_date_month.$invalid}">
-                    <input name="signed_date_month" type="number"
-                           class="form-control" data-ng-model="signed_month"
-                           id="signed_date_month" placeholder="k">
-                    <div ng-show="signedForm.signed_date_month.$invalid"
-                         class="help-block">
-                        <p ng-show="signedForm.signed_date_month.$error.number">
-                            Kuukauden täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3"
-                     ng-class="{'has-error': signedForm.signed_date_year.$invalid}">
-                    <input name="signed_date_year" type="number"
-                           class="form-control" data-ng-model="signed_year"
-                           id="signed_date_year" placeholder="vvvv">
-                    <div ng-show="signedForm.signed_date_year.$invalid"
-                         class="help-block">
-                        <p ng-show="signedForm.signed_date_year.$error.number">
-                            Vuoden täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <label for="plannedPaymentSelection">
-                    Maksusuunnitelma
-                </label>
-                myönnetylle avustukselle
-                {{project.approved.granted_sum_eur| currency : ""}} €
-            </div>
-            <div class="form-group col-md-12" id="plPayments">
-                <div class="col-md-12" name="plannedPaymentSelection"
-                     id="plannedPaymentSelection"
-                     data-ng-repeat="plannedPayment in plannedPayments">
-                    <div class="col-md-6">
-                        <label for="plannedDay" class="col-md-3 control-label">
-                            Päivämäärä
+                <div class="form-group col-md-6">
+                    <div>
+                        <label for="endDay" class="col-md-3 control-label">
+                            Päättymispvm
+                            <!--{{fieldNames["ended_end_date"]}}-->
                         </label>
                         <div class="col-md-3">
-                            <input name="plannedDay" type="number"
-                                   class="form-control"
-                                   data-ng-model="plannedPayment.day"
-                                   id="plannedDay" placeholder="p">
+                            <input name="endDay" type="number"
+                                   class="form-control" data-ng-model="end_day"
+                                   id="endDay" placeholder="p">
                         </div>
                         <div class="col-md-3">
-                            <input name="plannedMonth" type="number"
+                            <input name="endMonth" type="number"
                                    class="form-control"
-                                   data-ng-model="plannedPayment.month"
-                                   id="plannedMonth" placeholder="k">
-                        </div>
-                        <div class="col-md-3">
-                            <input name="plannedYear" type="number"
-                                   class="form-control"
-                                   data-ng-model="plannedPayment.year"
-                                   id="plannedYear" placeholder="vvvv">
-                        </div>
-                    </div>
-                    <label for="plannedSumEUR" class="col-md-2 control-label">
-                        Maksu (EUR)
-                    </label>
-                    <div class="col-md-2">
-                        <input name="plannedSumEUR" type="number"
-                               class="form-control"
-                               data-ng-model="plannedPayment.sum_eur"
-                               id="plannedSumEUR" placeholder="Summa (EUR)">
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <input type="button" id="add-btn" value="Lisää uusi"
-                           ng-click="addPlannedPayment();"/>
-                    <input type="button" value="Poista viimeinen"
-                           ng-click="removePlannedPayment();"/>
-                </div>
-            </div>
-            <label for="reportDeadlines" class="col-md-12">
-                Raporttien eräpäivät
-            </label>
-            <div class="form-group col-md-12">
-                <div class="col-md-12" name="reportDeadlines"
-                     id="reportDeadlines" data-ng-repeat="deadline in deadlines">
-                    <label for="dlRep" class="col-md-2 control-label">
-                        Raportti
-                    </label>
-                    <div class="col-md-4">
-                        <input name="dlRep" type="text" class="form-control"
-                               data-ng-model="deadline.report" id="dlRep"
-                               placeholder="Raportti">
-                    </div>
-                    <div id="dlDate" class="col-md-6">
-                        <label for="dlDay" class="col-md-3 control-label">
-                            Eräpäivä
-                        </label>
-                        <div class="col-md-3">
-                            <input name="dlDay" type="number"
-                                   class="form-control"
-                                   data-ng-model="deadline.day" id="dlDay"
-                                   placeholder="p">
-                        </div>
-                        <div class="col-md-3">
-                            <input name="dlMonth" type="number"
-                                   class="form-control"
-                                   data-ng-model="deadline.month" id="dlMonth"
+                                   data-ng-model="end_month" id="endMonth"
                                    placeholder="k">
                         </div>
                         <div class="col-md-3">
-                            <input name="dlYear" type="number"
-                                   class="form-control"
-                                   data-ng-model="deadline.year" id="dlYear"
-                                   placeholder="vvvv">
+                            <input name="endYear" type="number"
+                                   class="form-control" data-ng-model="end_year"
+                                   id="endYear" placeholder="vvvv">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <input type="button" id="add-btn2" value="Lisää uusi"
-                           ng-click="addDeadline();"/>
-                    <input type="button" value="Poista viimeinen"
-                           ng-click="removeDeadline();"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn btn-default" id="sign-btn">
-                        Tallenna
-                    </button>
-                </div>
-            </div>
-        </form>
-        <!--    Väliraportti-->
-        <form name="intReportForm" class="form-horizontal col-md-12"
-              ng-show="global.newState === 'väliraportti'"  role="form"
-              data-ng-submit="addIntReportState(intReportForm.$valid)"
-              novalidate>
-            <div class="form-group col-md-12">
-                <label for="payments" class="col-md-2">Maksatukset</label>
-                <p class="col-md-12">Maksettu:</p>
-                <div class="form-group col-md-12"
-                     ng-repeat="payment in project.payments">
-                    <div class="col-md-4">
-                        {{payment.sum_eur| currency : ""}} EUR /
-                        {{payment.payment_date| date : 'dd.MM.yyyy'}}
-                    </div>
-                </div>
-            </div>
-            <label class="col-md-12">
-                Toimintatavat ja niiden toteutuminen
-            </label>
-            <div class="form-group col-md-12" ng-repeat="method in project.methods">
-                <div class="col-md-6" style="text-align: justify">
-                    <p><em>{{method.name}}</em> ({{method.level}})</p>
-                    <p ng-bind-html="handleEmphasis(method.comment)"></p>
-                </div>
-                <div class="col-md-6">
-                    <p>&nbsp;</p>
-                    <textarea name="intRMethods" type="text"
-                              class="form-control"
-                              data-ng-model="addedMethods[(project.methods).indexOf(method)]"
-                              rows="10" cols="50"
-                              id="intRMethods" placeholder="Kommentteja"></textarea>
-                </div>
-            </div>
-            <label class="col-md-12">
-                Tavoitteet ja niiden toteutuminen
-            </label>
-            <div class="form-group col-md-12">
-                <div class="col-md-6" style="text-align: justify">
-                    <p ng-bind-html="handleEmphasis(project.project_goal)"></p>
-                </div>
-                <div class="col-md-6">
-                    <textarea name="objComments" type="text"
-                              class="form-control"
-                              data-ng-model="objectiveComments[0]"
-                              id="objComments"
-                              rows="10" cols="50"
-                              placeholder="Kommentteja tavoitteiden toteutumisesta">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <label for="communication" class="col-md-4">
-                    Raportointi ja yhteydenpito
-                </label>
-                <div class="col-md-8">
-                    <textarea name="communication" type="text"
-                              class="form-control"
-                              data-ng-model="project.intermediary_report.communication"
-                              id="communication"
-                              placeholder="Raportointi ja yhteydenpito">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <label for="evaluation" class="col-md-4">
-                    Evaluointi ja vaikuttavuuden arviointi
-                </label>
-                <div class="col-md-8">
-                    <textarea name="evaluation" type="text"
-                              class="form-control"
-                              data-ng-model="project.intermediary_report.evaluation"
-                              id="evaluation"
-                              placeholder="Evaluointi ja vaikuttavuuden arviointi">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <label for="budget" class="col-md-4">
-                    Budjetin toteutuminen ja raportoitu summa
-                </label>
-                <div class="col-md-8">
-                    <textarea name="budget" type="text"
-                              class="form-control"
-                              data-ng-model="project.intermediary_report.budget"
-                              id="budget"
-                              placeholder="Budjetin toteutuminen ja raportoitu summa">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <label for="overallKios" class="col-md-2">
-                    KIOSiin kokonaisarvio
-                </label>
-                <div class="col-md-10">
-                    <textarea name="overallKios" type="text"
-                              class="form-control"
-                              data-ng-model="project.intermediary_report.overall_rating_kios"
-                              id="overallKios" placeholder="KIOSiin arvio">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <label for="comments" class="col-md-2">Päätös</label>
-                <div class="col-md-10">
-                    <textarea name="intRComments" type="text"
-                              class="form-control"
-                              data-ng-model="project.intermediary_report.comments"
-                              id="intRcomments"
-                              placeholder="Päätös"></textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="intRDateAppr" class="col-md-3">Hyväksymispvm</label>
-                <div class="col-md-3"
-                     ng-class="{'has-error': intReportForm.intRDateAppr_day.$invalid}">
-                    <input name="intRDateAppr_day" type="number"
-                           class="form-control" data-ng-model="intRDateAppr_day"
-                           id="intRDateAppr_day" placeholder="p">
-                    <div ng-show="intReportForm.intRDateAppr_day.$invalid"
-                         class="help-block">
-                        <p ng-show="intReportForm.intRDateAppr_day.$error.number">
-                            Päivän täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3"
-                     ng-class="{'has-error': intReportForm.intRDateAppr_month.$invalid}">
-                    <input name="intRDateAppr_month" type="number"
-                           class="form-control" data-ng-model="intRDateAppr_month"
-                           id="intRDateAppr_month" placeholder="k">
-                    <div ng-show="intReportForm.intRDateAppr_month.$invalid"
-                         class="help-block">
-                        <p ng-show="intReportForm.intRDateAppr_month.$error.number">
-                            Kuukauden täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3"
-                     ng-class="{'has-error': intReportForm.intRDateAppr_year.$invalid}">
-                    <input name="intRDateAppr_year" type="number"
-                           class="form-control"
-                           data-ng-model="intRDateAppr_year"
-                           id="intRDateAppr_year" placeholder="vvvv">
-                    <div ng-show="intReportForm.intRDateAppr_year.$invalid"
-                         class="help-block">
-                        <p ng-show="intReportForm.intRDateAppr_year.$error.number">
-                            Vuoden täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button id="intrep-btn" type="submit" class="btn btn-default">
-                        Tallenna
-                    </button>
-                </div>
-            </div>
-        </form>
-        <!--   Loppuraportti-->
-        <form name="endReportForm" class="form-horizontal col-md-12"
-              ng-show="global.newState === 'loppuraportti'" role="form"
-              data-ng-submit="addEndReportState(endReportForm)" novalidate>
-            <div class="form-group col-md-6">
-                <label class="col-md-4" for="end_board_meeting">
-                    {{fieldNames["end_report_board_meeting"]}}
-                </label>
-                <div class="col-md-8">
-                    <input id="end_board_meeting" name="end_board_meeting"
-                           data-ng-model="project.end_report.board_meeting"
-                           class="form-control">
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <label for="end_budget" class="col-md-4">
-                    {{fieldNames["end_report_budget"]}}
-                </label>
-                <div class="col-md-8">
-                    <textarea name="end_budget" type="text"
-                              class="form-control"
-                              data-ng-model="project.end_report.budget"
-                              id="end_budget">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="audit_date" class="col-md-3">
-                    Tilintarkastuspvm
-                </label>
-                <div class="col-md-3"
-                     ng-class="{'has-error': projectEditForm.audit_day.$invalid}">
-                    <input name="audit_day" type="number"
-                           class="form-control" data-ng-model="audit_day"
-                           id="audit_day" placeholder="p" min="1">
-                    <div ng-show="projectEditForm.audit_day.$invalid"
-                         class="help-block">
-                        <p ng-show="projectEditForm.audit_day.$error.number">
-                            Päivän täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3"
-                     ng-class="{'has-error': projectEditForm.audit_month.$invalid}">
-                    <input name="audit_month" type="number"
-                           class="form-control" data-ng-model="audit_month"
-                           id="audit_month" placeholder="k" min="1">
-                    <div ng-show="projectEditForm.audit_month.$invalid"
-                         class="help-block">
-                        <p ng-show="projectEditForm.audit_month.$error.number">
-                            Kuukauden täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3"
-                     ng-class="{'has-error': projectEditForm.audit_year.$invalid}">
-                    <input name="audit_year" type="number"
-                           class="form-control" data-ng-model="audit_year"
-                           id="audit_year" placeholder="vvvv" min="1">
-                    <div ng-show="projectEditForm.audit_year.$invalid"
-                         class="help-block">
-                        <p ng-show="projectEditForm.audit_year.$error.number">
-                            Vuoden täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <label for="audit_review" class="col-md-2">
-                    Tilintarkastuksen Arvio
-                </label>
-                <div class="col-md-8">
-                    <textarea name="audit_review" type="text"
-                              class="form-control"
-                              data-ng-model="project.end_report.audit.review"
-                              id="audit_review">
-                    </textarea>
-                </div>
-            </div>
-            <label class="col-md-12">
-                Toiminnot ja niiden toteutuminen
-            </label>
-            <div class="form-group col-md-12"
-                 ng-repeat="method in project.methods">
-                <div class="col-md-6" style="text-align: justify">
-                    <p><em>{{method.name}}</em> ({{method.level}})</p>
-                    <p ng-bind-html="handleEmphasis(method.comment)"></p>
-                </div>
-                <div class="col-md-6">
-                    <p>&nbsp;</p>
-                    <textarea name="er_methods" type="text"
-                              class="form-control"
-                              data-ng-model="project.end_report.methods[project.methods.indexOf(method)]"
-                              rows="10" cols="50"
-                              id="er_methods" placeholder="Toiminnon toteutuminen">
-                    </textarea>
-                </div>
-            </div>
-            <label class="col-md-12">
-                Kokonaistavoitteen toteutuminen
-            </label>
-            <div class="form-group col-md-12">
-                <div class="col-md-6" style="text-align: justify">
-                    <p ng-bind-html="handleEmphasis(project.project_goal)">
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <textarea name="objectivesComments" type="text"
-                              class="form-control"
-                              data-ng-model="project.end_report.objective"
-                              id="objectivesComments" rows="10" cols="50">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <div class="col-md-3">
-                    <div class="col-md-6">
-                        <label for="direct_beneficiaries">
-                            {{fieldNames["end_report_direct_beneficiaries"]}}
-                            (arvio)
-                        </label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="direct_beneficiaries" name="direct_beneficiaries"
-                               class="form-control"
-                               data-ng-model="project.end_report.direct_beneficiaries">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="col-md-6">
-                        <label for="direct_beneficiaries">
-                            {{fieldNames["end_report_indirect_beneficiaries"]}}
-                            (arvio)
-                        </label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="indirect_beneficiaries"
-                               name="indirect_beneficiaries" class="form-control"
-                               data-ng-model="project.end_report.indirect_beneficiaries">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="grade" class="col-md-4">
-                        {{fieldNames["end_report_grade"]}}
+                <div class="form-group col-md-6">
+                    <label for="approved_by" class="col-md-4">
+                        {{fieldNames["ended_approved_by"]}}
                     </label>
                     <div class="col-md-8">
-                        <select name="grade" id="grade"
-                                data-ng-model="project.end_report.grade"
-                                class="form-control">
-                            <option value="" selected></option>
-                            <option value="4">
-                                4 (Onnistui yli odotusten)
+                        <select id="approved_by"
+                                data-ng-model="project.ended.approved_by"
+                                class='form-control'>
+                            <option value="toiminnanjohtaja">
+                                Toiminnanjohtaja
                             </option>
-                            <option value="4">
-                                3 (Onnistui suunnitellusti)
-                            </option>
-                            <option value="4">
-                                2 (Onnistui alle odotusten, ulkoinen syy)
-                            </option>
-                            <option value="4">
-                                1 (Onnistui alle odotusten, järjestön syy)
-                            </option>
+                            <option value="hallitus">Hallitus</option>
                         </select>
                     </div>
                 </div>
-            </div>
-            <div class="form-group col-md-12">
-                <label for="gen_review" class="col-md-2">
-                    KIOSiin kokonaisarvio
-                </label>
-                <div class="col-md-10">
-                    <textarea name="gen_review" type="text"
-                              class="form-control"
-                              data-ng-model="project.end_report.general_review"
-                              id="gen_review">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <label for="proposition" class="col-md-2">
-                    {{fieldNames["end_report_proposition"]}}
-                </label>
-                <div class="col-md-10">
-                    <textarea name="proposition" type="text"
-                              class="form-control"
-                              data-ng-model="project.end_report.proposition"
-                              id="proposition">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <label for="conclusion" class="col-md-2">
-                    {{fieldNames["end_report_conclusion"]}}
-                </label>
-                <div class="col-md-10">
-                    <textarea name="conclusion" type="text" class="form-control"
-                              data-ng-model="project.end_report.conclusion"
-                              id="conclusion">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="audit_day" class="col-md-3">
-                    Hyväksymispvm
-                    <!--{{fieldNames["end_report_approved_date"]}}-->
-                </label>
-                <div class="col-md-3"
-                     ng-class="{'has-error': projectEditForm.er_approved_day.$invalid}">
-                    <input name="er_approved_day" type="number"
-                           class="form-control"
-                           data-ng-model="er_approved_day"
-                           id="er_approved_day" placeholder="p" min="1">
-                    <div ng-show="projectEditForm.er_approved_day.$invalid"
-                         class="help-block">
-                        <p ng-show="projectEditForm.er_approved_day.$error.number">
-                            Päivän täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3"
-                     ng-class="{'has-error': projectEditForm.er_approved_month.$invalid}">
-                    <input name="er_approved_month" type="number"
-                           class="form-control"
-                           data-ng-model="er_approved_month"
-                           id="er_approved_month" placeholder="k" min="1">
-                    <div ng-show="projectEditForm.er_approved_month.$invalid"
-                         class="help-block">
-                        <p ng-show="projectEditForm.er_approved_month.$error.number">
-                            Kuukauden täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3"
-                     ng-class="{'has-error': projectEditForm.er_approved_year.$invalid}">
-                    <input name="er_approved_year" type="number"
-                           class="form-control"
-                           data-ng-model="er_approved_year"
-                           id="er_approved_year" placeholder="vvvv" min="1">
-                    <div ng-show="projectEditForm.er_approved_year.$invalid"
-                         class="help-block">
-                        <p ng-show="projectEditForm.er_approved_year.$error.number">
-                            Vuoden täytyy olla numero
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-10 col-md-12">
-                    <button type="submit" id="er-btn" class="btn btn-default">
+                <div class="form-group col-md-12" style="text-align: center">
+                    <hr>
+                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;
+                        Peru
+                    </a>
+                    <button id="end-btn" type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
                 </div>
-            </div>
-        </form>
-        <!--Päättynyt-->
-        <form name="endedForm" class="form-horizontal col-md-12"
-              ng-show="global.newState === 'päättynyt'" role="form"
-              data-ng-submit="addEndedState(endedForm.$valid)" novalidate>
-            <div class="form-group col-md-6">
-                <div>
-                    <label for="notifiedDay" class="col-md-3">
-                        {{fieldNames["ended_board_notified"]}}
-                    </label>
-                    <div class="col-md-3">
-                        <input name="endNotifiedDay" type="number"
-                               class="form-control"
-                               data-ng-model="end_notified_day"
-                               id="notifiedDay" placeholder="p">
-                    </div>
-                    <div class="col-md-3">
-                        <input name="endNotifiedMonth" type="number"
-                               class="form-control"
-                               data-ng-model="end_notified_month"
-                               id="notifiedMonth" placeholder="k">
-                    </div>
-                    <div class="col-md-3">
-                        <input name="endNotifiedYear" type="number"
-                               class="form-control"
-                               data-ng-model="end_notified_year"
-                               id="notifiedYear" placeholder="vvvv">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="comments" class="col-md-2">
-                    {{fieldNames["ended_other_comments"]}}
-                </label>
-                <div class="col-md-10">
-                    <textarea name="endComments" type="text"
-                              class="form-control"
-                              data-ng-model="project.ended.other_comments"
-                              id="comments">
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <div>
-                    <label for="endDay" class="col-md-3 control-label">
-                        Päättymispvm
-                        <!--{{fieldNames["ended_end_date"]}}-->
-                    </label>
-                    <div class="col-md-3">
-                        <input name="endDay" type="number"
-                               class="form-control" data-ng-model="end_day"
-                               id="endDay" placeholder="p">
-                    </div>
-                    <div class="col-md-3">
-                        <input name="endMonth" type="number"
-                               class="form-control"
-                               data-ng-model="end_month" id="endMonth"
-                               placeholder="k">
-                    </div>
-                    <div class="col-md-3">
-                        <input name="endYear" type="number"
-                               class="form-control" data-ng-model="end_year"
-                               id="endYear" placeholder="vvvv">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="approved_by" class="col-md-4">
-                    {{fieldNames["ended_approved_by"]}}
-                </label>
-                <div class="col-md-8">
-                    <select id="approved_by"
-                            data-ng-model="project.ended.approved_by"
-                            class='form-control'>
-                        <option value="toiminnanjohtaja">
-                            Toiminnanjohtaja
-                        </option>
-                        <option value="hallitus">Hallitus</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <div class="col-md-offset-2 col-md-10">
-                    <button id="end-btn" type="submit" class="btn btn-default">
-                        Tallenna
-                    </button>
-                </div>
-            </div>
-        </form>
-        &nbsp;
+            </form>
+        </div>
     </article>
 </section>
