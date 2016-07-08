@@ -3,7 +3,7 @@
     <hr>
     <form name="orgEditForm" class="form-horizontal" role="form"
           data-ng-submit="update(orgEditForm.$valid)" novalidate>
-        <fieldset class="panel panel-default">
+        <fieldset class="panel panel-primary">
             <div class="panel-heading"><h4>Perustiedot</h4></div>
             <div class="panel-body">
                 <div class="form-group col-md-6"
@@ -173,7 +173,7 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset class="panel panel-default">
+        <fieldset class="panel panel-primary">
             <div class="panel-heading"><h4>Lisätiedot</h4></div>
             <div class="panel-body">
                 <div class="col-md-12">
@@ -288,7 +288,7 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset class="panel panel-default">
+        <fieldset class="panel panel-primary">
             <div class="panel-heading"><h4>Pankkitili</h4></div>
             <div class="panel-body">
                 <div class="form-group">
@@ -334,10 +334,10 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset class="panel panel-default">
-            <div class="panel-heading"><h4>Erityishuomioiota</h4></div>
+        <fieldset class="panel panel-primary">
+            <div class="panel-heading"><h4>Vahvistus</h4></div>
             <div class="col-md-12 panel-body">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                     <label for="org_special_notes"
                            class="col-md-3 control-label">
                         Erityishuomioita
@@ -350,14 +350,17 @@
                         </textarea>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <button mean-token="'edit-submit'" type="submit"
-                                class="btn btn-default"
-                                ng-disabled="orgEditForm.$invalid">
-                            Tallenna
-                        </button>
-                    </div>
+                <div class="form-group col-md-12" style="text-align: center">
+                    <hr>
+                    <a href="/organisations/{{organisation._id}}"
+                       class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;
+                        Peru
+                    </a>
+                    <button id="end-btn" type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp;
+                        Tallenna
+                    </button>
                 </div>
             </div>
         </fieldset>

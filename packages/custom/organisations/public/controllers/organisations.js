@@ -14,6 +14,29 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
         $scope.organisations = [];
 
         /**
+         * The property used for sorting the ortanisation's projects in their
+         * table.
+         */
+        $scope.property = "title";
+
+        /**
+         * <tt>true</tt> iff the order of projects should be reversed.
+         */
+        $scope.reverse = false;
+
+        /**
+         * Sorts the projects by the given property. If they were previously
+         * sorted by the same property, the order will be reversed.
+         *
+         * @param {String} property The property used for sorting
+         * @returns {undefined}
+         */
+        $scope.sortBy = function (property) {
+            $scope.reverse = ($scope.property === property) ? !$scope.reverse : false;
+            $scope.property = property;
+        };
+
+        /**
          * This function converts a number to a Finnish string representation
          * (i.e. ',' for decimal separator and '.' for grouping. If the number
          * is undefined, the string "-" will be returned. Note that this piece
@@ -59,9 +82,9 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
                 ascending: ascending,
                 page: page
             },
-            function (results) {
-                $scope.organisations = results;
-            }
+                    function (results) {
+                        $scope.organisations = results;
+                    }
             );
         };
 
@@ -72,23 +95,6 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
                 $scope.organisation = organisation;
             });
         };
-        /*$scope.findOne = function () {
-         // For some unknown reason,
-         // $http.get(...).then(success(...), error(...)) doesn't seem to be
-         // working here, so we need to use the deprecated
-         // $http.get(...).success(...).error(...) instead.
-         $http.get('/api/organisations/' + $stateParams.organisationId).success(
-         function (organisation) {
-         $scope.statusCode = 200;
-         $scope.organisation = organisation;
-         }
-         ).error(
-         function (error) {
-         $scope.statusCode = error.status;
-         $scope.errorMessage = error.message;
-         }
-         );
-         };*/
 
         /**
          * Updates organisation's details as per edit-form and goes to org-view

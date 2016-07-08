@@ -1,20 +1,24 @@
 <section data-ng-controller="OrganisationsController" data-ng-init="findOne()">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-jquery/dist/angular-jquery.min.js"></script>
+    <script src="bower_components/angular-bootstrap-affix/dist/angular-bootstrap-affix.min.js"></script>
+    <script src="scripts/app.js"></script>
     <div id="header">
-        <h1><span class="name">{{organisation.name}}</span>
-            <span>
-                <a class="btn-lg" id="delete"
-                   data-ng-click="confirm(organisation);">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </a>
-                <a ng-href="/organisations/{{organisation._id}}/edit"
-                   class="btn-lg" id="edit">
-                    <span class="glyphicon glyphicon-edit"></span>
-                </a>
-            </span>
-        </h1>
+        <h1>{{organisation.name}}</h1>
         <hr>
     </div>
     <ul id="menu" class="nav nav-list navtree">
+        <li>
+            <label><a href="#functions">Toiminnot</a></label>
+            <ul>
+                <li>
+                    <a ng-href="/organisations/{{organisation._id}}/edit">
+                        Muokkaus
+                    </a>
+                </li>
+                <li><a data-ng-click="confirm(organisation);">Poisto</a></li>
+            </ul>
+        </li>
         <li>
             <label><a href="#header">Järjestö</a></label>
             <ul>
@@ -23,7 +27,7 @@
                 <li><a href="#description">Tavoitteet ja toimintatavat</a></li>
                 <li><a href="#connections">Yhteydet</a></li>
                 <li><a href="#bankInfo">Tilitiedot</a></li>
-                <li><a href="#prevApp">Aiemmat hakemukset</a></li>
+                <li><a href="#prevApp">Muut hankkeet</a></li>
                 <li><a href="#otherDonors">Taloustilanne</a></li>
                 <li><a href="#background">Taustatiedot</a></li>
                 <li ng-show="organisation.special_notes">
@@ -33,11 +37,26 @@
             <label><a href="#log">Muokkaukset</a></label>
         </li>
     </ul>
-    <article id="summary" class="article">
-        <div class="col-md-12">
+    <article id="functions" class="panel panel-primary">
+        <section class="panel-body" style="text-align: center">
+            <big>
+                <a id="edit" ng-href="/organisations/{{organisation._id}}/edit"
+                   class="btn btn-default" style="margin-right: 1em">
+                    <span class="glyphicon glyphicon-edit"></span>&nbsp;Muokkaus
+                </a>
+                <a id="delete" data-ng-click="confirm(organisation);"
+                   class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash"></span>&nbsp;Poisto
+                </a>
+            </big>
+        </section>
+    </article>
+    <article id="summary" class="panel panel-primary">
+        <div class="panel-heading"><h4>Perustiedot</h4></div>
+        <section class="panel-body">
             <section class="col-md-6">
-                <h4>Perustiedot</h4>
-                <section class="section">
+                <h4>Järjestö</h4>
+                <section class="panel-body">
                     <div class="col-md-12">
                         <div class="col-md-5 mini-header">Edustaja</div>
                         <div class="col-md-7">
@@ -99,7 +118,7 @@
             </section>
             <section class="col-md-6">
                 <h4>Tilitiedot</h4>
-                <section class="section">
+                <section class="panel-body">
                     <div class="col-md-12">
                         <div class="col-md-4 mini-header">Tilin haltija</div>
                         <div class="col-md-8">
@@ -130,98 +149,125 @@
                     </div>
                 </section>
             </section>
-        </div>
-        &nbsp;
+        </section>
     </article>
-    <article id="prevApp" class="article"
+    <article id="prevApp" class="panel panel-primary"
              data-ng-init="findOrgProjects()">
-        <h4>KIOSilta rahoitusta hakeneet hankkeet</h4>
-        <section class="section">
-            <div data-ng-repeat="project in orgProjects"
-                 class="col-md-12">
-                <div class="col-md-6 mini-header">
-                    <a data-ng-href="/projects/{{project._id}}">
-                        {{project.title}}
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    {{project.approved.granted_sum_eur
-                                            ? numberToString(project.approved.granted_sum_eur)
-                                            + " EUR" : "-"}}
-                </div>
-            </div>
+        <div class="panel-heading">
+            <h4>
+                KIOSilta rahoitusta hakeneet hankkeet
+                ({{orgProjects.length}} kpl)
+            </h4>
+        </div>
+        <section class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <a ng-click="sortBy('title')">
+                                <span ng-show="property === 'title'"
+                                      class="glyphicon"
+                                      ng-class="reverse ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-top'">
+                                </span>
+                                Hanke
+                            </a>
+                        </th>
+                        <th>
+                            <a ng-click="sortBy('approved.granted_sum_eur')">
+                                <span ng-show="property === 'approved.granted_sum_eur'"
+                                      class="glyphicon"
+                                      ng-class="reverse ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-top'">
+                                </span>
+                                Myönnetty avustus
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="project in orgProjects| orderBy:property:reverse">
+                        <td>
+                            <a data-ng-href="/projects/{{project._id}}">
+                                {{project.title}}
+                            </a>
+                        </td>
+                        <td>
+                            {{project.approved.granted_sum_eur ? numberToString(project.approved.granted_sum_eur) + " EUR" : "-"}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div data-ng-if="!orgProjects.length">
                 Ei rahoitusta hakeneita hankkeita
             </div>
-            &nbsp;
         </section>
     </article>
-    <article id="legalStatus" class="article">
-        <h4>Hallintomalli ja henkilöstö</h4>
-        <section class="section">
-            <p>{{organisation.legal_status}}</p>
-            &nbsp;
+    <article id="legalStatus" class="panel panel-primary">
+        <div class="panel-heading"><h4>Hallintomalli ja henkilöstö</h4></div>
+        <section class="panel-body">
+            {{organisation.legal_status}}
         </section>
     </article>
-    <article id="description" class="article">
-        <h4>Tavoitteet ja keskeiset toimintatavat</h4>
-        <section class="section">
-            <p>{{organisation.description}}</p>
-            &nbsp;
+    <article id="description" class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Tavoitteet ja keskeiset toimintatavat</h4>
+        </div>
+        <section class="panel-body">
+            {{organisation.description}}
         </section>
     </article>
-    <article id="connections" class="article">
-        <h4>Kansalliset yhteydet</h4>
-        <section class="section">
-            <p>{{organisation.nat_local_links}}</p>
-            &nbsp;
-        </section>
-        <h4>Kansainväliset yhteydet</h4>
-        <section class="section">
-            <p>{{organisation.int_links}}</p>
-            &nbsp;
+    <article id="connections" class="panel panel-primary">
+        <div class="panel-heading"><h4>Kansalliset yhteydet</h4></div>
+        <section class="panel-body">
+            {{organisation.nat_local_links}}
         </section>
     </article>
-    <article id="otherDonors" class="article">
-        <h4>Muut rahoittajat ja budjetti</h4>
-        <section class="section">
-            <p>{{organisation.other_funding_budget}}</p>
-            &nbsp;
-        </section>
-        <h4>Taloushallinto ja tilintarkastus</h4>
-        <section class="section">
-            <p>{{organisation.accounting_audit}}</p>
-            &nbsp;
+    <article class="panel panel-primary">
+        <div class="panel-heading"><h4>Kansainväliset yhteydet</h4></div>
+        <section class="panel-body">
+            {{organisation.int_links}}
         </section>
     </article>
-    <article id="background" class="article">
-        <h4>Oleelliset taustatiedot</h4>
-        <section class="section">
-            <p>{{organisation.background}}</p>
-            &nbsp;
+    <article id="otherDonors" class="panel panel-primary">
+        <div class="panel-heading"><h4>Muut rahoittajat ja budjetti</h4></div>
+        <section class="panel-body">
+            {{organisation.other_funding_budget}}
         </section>
     </article>
-    <article id="special_notes" class="article"
+    <article class="panel panel-primary">
+        <div class="panel-heading"><h4>Taloushallinto ja tilintarkastus</h4></div>
+        <section class="panel-body">
+            {{organisation.accounting_audit}}
+        </section>
+    </article>
+    <article id="background" class="panel panel-primary">
+        <div class="panel-heading"><h4>Oleelliset taustatiedot</h4></div>
+        <section class="panel-body">
+            {{organisation.background}}
+        </section>
+    </article>
+    <article id="special_notes" class="panel panel-primary"
              ng-show="organisation.special_notes">
-        <h4>Erityishuomioita</h4>
-        <section class="section">
-            <p>{{organisation.special_notes}}</p>
-            &nbsp;
+        <div class="panel-heading"><h4>Erityishuomioita</h4></div>
+        <section class="panel-body">
+            {{organisation.special_notes}}
         </section>
     </article>
-    <article id="log" class="article">
-        <h4>Muokkaukset</h4>
-        <section class="section">
-            <ul ng-show="organisation.updated.length > 0">
-                <li data-ng-repeat="update in organisation.updated">
-                    {{update.time| date: 'dd.MM.yyyy HH:mm'}},
-                    muokkaaja: {{update.user}}
-                </li>
-            </ul>
+    <article id="log" class="panel panel-primary">
+        <div class="panel-heading"><h4>Muokkaukset</h4></div>
+        <section class="panel-body">
+            <div ng-show="organisation.updated.length > 0">
+                <div data-ng-repeat="update in organisation.updated"
+                     class="col-md-6">
+                    <div class="mini-header col-md-1">{{$index + 1}}.</div>
+                    <div class="col-md-11">
+                        {{update.time| date: 'dd.MM.yyyy HH:mm'}};
+                        <em>{{update.user}}</em>
+                    </div>
+                </div>
+            </div>
             <div ng-show="organisation.updated.length === 0">
                 Ei muokkauksia.
             </div>
-            &nbsp;
         </section>
     </article>
 </section>
