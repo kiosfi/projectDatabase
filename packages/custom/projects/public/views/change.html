@@ -196,11 +196,11 @@ A form for project state change.
                 </div>
                 <div class="form-group col-md-12" style="text-align: center">
                     <hr>
-                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                    <a href="/projects/{{project._id}}" class="btn btn-default">
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-success">
+                    <button id="end-btn" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -268,15 +268,13 @@ A form for project state change.
                         {{fieldNames["approved_themes"]}}
                     </label>
                     <div class="col-md-8">
-                        <ul>
-                            <li ng-repeat="theme in themes">
-                                <input type="checkbox" name="selectedThemes[]"
-                                       value="{{theme}}"
-                                       ng-checked="themeSelection.indexOf(theme) > -1"
-                                       ng-click="toggleThemeSelection(theme)">
-                                {{theme}}
-                            </li>
-                        </ul>
+                        <div ng-repeat="theme in themes" class="col-md-12">
+                            <input type="checkbox" name="selectedThemes[]"
+                                   value="{{theme}}"
+                                   ng-checked="themeSelection.indexOf(theme) > -1"
+                                   ng-click="toggleThemeSelection(theme)">
+                            {{theme}}
+                        </div>
                     </div>
                 </div>
                 <div class="form-group col-md-4">
@@ -367,11 +365,11 @@ A form for project state change.
                 </div>
                 <div class="form-group col-md-12" style="text-align: center">
                     <hr>
-                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                    <a href="/projects/{{project._id}}" class="btn btn-default">
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-success">
+                    <button id="end-btn" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -396,12 +394,12 @@ A form for project state change.
                         </div>
                     </div>
                     <div class="col-md-12" style="margin-top: 1em">
-                        <a id="remRej" class="btn btn-sm btn-danger"
+                        <a id="remRej" class="btn btn-sm btn-default"
                            ng-click="removeRejection();">
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </a>
-                        <a id="addRej" class="btn btn-sm btn-success"
+                        <a id="addRej" class="btn btn-sm btn-default"
                            ng-click="addRejection();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
@@ -421,11 +419,11 @@ A form for project state change.
                 </div>
                 <div class="form-group col-md-12" style="text-align: center">
                     <hr>
-                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                    <a href="/projects/{{project._id}}" class="btn btn-default">
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-success">
+                    <button id="end-btn" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -535,11 +533,11 @@ A form for project state change.
                     </div>
                     <div class="col-md-12" style="margin-top: 1em">
                         <a ng-click="removePlannedPayment();"
-                           class="btn btn-sm btn-danger">
+                           class="btn btn-sm btn-default">
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </a>
-                        <a id="add-btn" class="btn btn-sm btn-success"
+                        <a id="add-btn" class="btn btn-sm btn-default"
                            ng-click="addPlannedPayment();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
@@ -591,12 +589,12 @@ A form for project state change.
                         </div>
                     </div>
                     <div class="col-md-12" style="margin-top: 1em">
-                        <a class="btn btn-sm btn-danger"
+                        <a class="btn btn-sm btn-default"
                            ng-click="removeDeadline();">
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </a>
-                        <a id="add-btn2" class="btn btn-sm btn-success"
+                        <a id="add-btn2" class="btn btn-sm btn-default"
                            ng-click="addDeadline();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
@@ -605,11 +603,11 @@ A form for project state change.
                 </div>
                 <div class="form-group col-md-12" style="text-align: center">
                     <hr>
-                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                    <a href="/projects/{{project._id}}" class="btn btn-default">
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-success">
+                    <button id="end-btn" type="submit" class="btn btn-default">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -768,11 +766,11 @@ A form for project state change.
                 </div>
                 <div class="form-group col-md-12" style="text-align: center">
                     <hr>
-                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                    <a href="/projects/{{project._id}}" class="btn btn-default">
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-success">
+                    <button id="end-btn" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -1026,11 +1024,11 @@ A form for project state change.
                 </div>
                 <div class="form-group col-md-12" style="text-align: center">
                     <hr>
-                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                    <a href="/projects/{{project._id}}" class="btn btn-default">
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-success">
+                    <button id="end-btn" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -1118,11 +1116,11 @@ A form for project state change.
                 </div>
                 <div class="form-group col-md-12" style="text-align: center">
                     <hr>
-                    <a href="/projects/{{project._id}}" class="btn btn-danger">
+                    <a href="/projects/{{project._id}}" class="btn btn-default">
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-success">
+                    <button id="end-btn" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>

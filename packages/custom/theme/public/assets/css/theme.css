@@ -13,7 +13,7 @@
 }
 
 mark {
-    background-color:   #F2A2CD;
+    background-color:   #F2CEC2;
 }
 
 h5 {
@@ -24,9 +24,9 @@ hr {
     border-color:       #E5E5E5;
 }
 
-ul li {
+/*ul li {
     list-style-type:    none;
-}
+}*/
 
 span ul li {
     list-style-type:    disc;
