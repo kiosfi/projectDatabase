@@ -4,9 +4,24 @@
     <article class="panel panel-primary">
         <section class="panel-body">
             <ul class="nav nav-pills">
-                <li class="active"><a ng-href="/search">Hankkeet</a></li>
-                <li><a ng-href="/search/orgs">Järjestöt</a></li>
-                <li><a ng-href="/search/payments">Maksut</a></li>
+                <li class="active">
+                    <a ng-href="/search">
+                        <span class="glyphicon glyphicon-folder-open">
+                        </span>&nbsp;Hankkeet
+                    </a>
+                </li>
+                <li>
+                    <a ng-href="/search/orgs">
+                        <span class="glyphicon glyphicon-user">
+                        </span>&nbsp;Järjestöt
+                    </a>
+                </li>
+                <li>
+                    <a ng-href="/search/payments">
+                        <span class="glyphicon glyphicon-euro">
+                        </span>&nbsp;Maksut
+                    </a>
+                </li>
             </ul>
         </section>
     </article>
@@ -222,7 +237,7 @@
                                 Tunnus
                                 <span class="glyphicon"
                                       ng-show="ordering === 'project_ref'"
-                                      ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                                      ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
                                 </span>
                             </a>
                         </th>
@@ -232,7 +247,7 @@
                                 Hanke
                                 <span class="glyphicon"
                                       ng-show="ordering === 'title'"
-                                      ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                                      ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
                                 </span>
                             </a>
                         </th>
@@ -245,7 +260,7 @@
                                 Hankkeen kuvaus
                                 <span class="glyphicon"
                                       ng-show="ordering === 'description'"
-                                      ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                                      ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
                                 </span>
                             </a>
                         </th>
@@ -264,12 +279,14 @@
                     </tr>
                 </tbody>
             </table>
-            <div>
-                <ul id="pagination" class="pagination pagination-sm">
+            <div style="text-align: center">
+                <ul id="pagination" class="pagination pagination-md">
                     <li ng-repeat="pg in pages"
                         ng-class="pg.number == page ? 'active' : ''">
                         <a id="page-{{pg.number}}" href=""
-                           ng-click="updatePage(pg.number)">{{pg.number}}</a>
+                           ng-click="updatePage('projects', pg.number)">
+                            {{pg.number}}
+                        </a>
                     </li>
                 </ul>
             </div>

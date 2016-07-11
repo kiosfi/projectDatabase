@@ -23,9 +23,14 @@ angular.module('mean.search').factory('Search', ['$resource',
                         url: 'api/search/export',
                         isArray: true
                     },
-                    countSearchResults: {
+                    countProjects: {
                         method: 'POST',
-                        url: 'api/search/count',
+                        url: 'api/search/countProjects',
+                        isarray: false
+                    },
+                    countOrganisations: {
+                        method: 'POST',
+                        url: 'api/search/countOrganisations',
                         isarray: false
                     }
                 });

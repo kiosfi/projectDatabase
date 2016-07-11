@@ -23,7 +23,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 $scope.paymentFields = response.payment_search;
                 $scope.paymentDates = response.payment_search_dates;
             });
-        }
+        };
 
         /**
          * Whether to show the search criteria in the HTML view or not. The
@@ -70,12 +70,12 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * The sorting predicate used in project listing. Initial value is
          * "project_ref".
          */
-        $scope.ordering = 'project_ref';
+        $scope.ordering;
 
         /**
          * <tt>true</tt> iff the projects will be listed in ascending order.
          */
-        $scope.ascending = 'true';
+        $scope.ascending;
 
         /**
          * Current page number.
@@ -101,25 +101,25 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             var ordering = $location.search().ordering;
             var ascending = $location.search().ascending;
             var page = $location.search().page;
-            if (typeof searchBy === 'undefined') {
+            if ((typeof searchBy) === 'undefined') {
                 $scope.results = [];
                 return;
             }
-            if (typeof ordering === 'undefined') {
+            if ((typeof ordering) === 'undefined') {
                 ordering = 'project_ref';
             }
-            if (typeof ascending === 'undefined') {
+            if ((typeof ascending) === 'undefined') {
                 ascending = 'true';
             }
-            if (typeof page === 'undefined') {
+            if ((typeof page) === 'undefined') {
                 page = 1;
             }
             $scope.searchProj = JSON.parse(searchBy);
             $scope.ordering = ordering;
-            $scope.ascending = ascending;
+            $scope.ascending = ascending === 'true';
             $scope.page = page;
 
-            Search.countSearchResults({"searchBy": searchBy}, function (result) {
+            Search.countProjects({"searchBy": searchBy}, function (result) {
                 $scope.numberOfResults = result.projectCount;
                 $scope.paginate();
             });
@@ -140,9 +140,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.searchPayments = function () {
             var search = $location.search();
-
-            if (typeof search.searchBy === 'undefined' ||
-                    typeof search.choice === 'undefined') {
+            if (((typeof search.searchBy) === 'undefined') ||
+                    ((typeof search.choice) === 'undefined')) {
                 $scope.payments = [];
                 return;
             }
@@ -163,18 +162,39 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * from the URL.
          */
         $scope.searchOrgs = function () {
-
             var searchBy = $location.search().searchBy;
-
-            if (typeof searchBy === 'undefined') {
+            var ordering = $location.search().ordering;
+            var ascending = $location.search().ascending;
+            var page = $location.search().page;
+            if ((typeof searchBy) === 'undefined') {
                 $scope.organisations = [];
                 return;
             }
+            if ((typeof ordering) === 'undefined') {
+                ordering = 'name';
+            }
+            if ((typeof ascending) === 'undefined') {
+                ascending = 'true';
+            }
+            if ((typeof page) === 'undefined') {
+                page = 1;
+            }
 
             $scope.searchOrg = JSON.parse(searchBy);
+            $scope.ordering = ordering;
+            $scope.ascending = ascending === 'true';
+            $scope.page = page;
+
+            Search.countOrganisations({"searchBy": searchBy}, function (result) {
+                $scope.numberOfResults = result.organisationCount;
+                $scope.paginate();
+            });
 
             Search.searchOrgs({
-                "searchBy": searchBy
+                "searchBy": searchBy,
+                "ordering": ordering,
+                "ascending": ascending,
+                "page": page
             }, function (results) {
                 $scope.organisations = results;
 
@@ -374,7 +394,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.getResultsForCsv = function () {
             var searchBy = $location.search().searchBy;
-            if (typeof searchBy === 'undefined') {
+            if ((typeof searchBy) === 'undefined') {
                 $scope.global.exportResults = [];
                 return;
             }
@@ -444,7 +464,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          * Reloads payment search view.
          *
          */
-        $scope.updateSearch = function () {
+        $scope.updatePaymentSearch = function () {
             var search = {"choice": $scope.searchChoice};
             $window.location = '/search/payments?searchBy='
                     + JSON.stringify($scope.searchPay)
@@ -457,7 +477,10 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.updateOrgSearch = function () {
             $window.location = '/search/orgs?searchBy='
-                    + JSON.stringify($scope.searchOrg);
+                    + JSON.stringify($scope.searchOrg)
+                    + '&ordering=' + $scope.ordering
+                    + '&ascending=' + $scope.ascending
+                    + '&page=' + $scope.page;
         };
 
         /**
@@ -465,12 +488,23 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          *
          * @param {String} page New page number.
          */
-        $scope.updatePage = function (page) {
-            $window.location = '/search?searchBy='
-                    + JSON.stringify($scope.searchProj)
-                    + '&ordering=' + $scope.ordering
-                    + '&ascending=' + $scope.ascending
-                    + '&page=' + page;
+        $scope.updatePage = function (collection, page) {
+            switch (collection) {
+                case "projects":
+                    $window.location = '/search?searchBy='
+                            + JSON.stringify($scope.searchProj)
+                            + '&ordering=' + $scope.ordering
+                            + '&ascending=' + $scope.ascending
+                            + '&page=' + page;
+                    break;
+                case "organisations":
+                    $window.location = '/search/orgs?searchBy='
+                            + JSON.stringify($scope.searchOrg)
+                            + '&ordering=' + $scope.ordering
+                            + '&ascending=' + $scope.ascending
+                            + '&page=' + page;
+                    break;
+            }
         };
 
         /**
@@ -544,14 +578,14 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
          */
         $scope.flattenObject = function (project) {
             // Some pre-flattening for certain fields is needed:
-            if (typeof project.organisation !== "undefined") {
-                if (typeof project.organisation.representative !== "undefined") {
+            if ((typeof project.organisation) !== "undefined") {
+                if ((typeof project.organisation.representative) !== "undefined") {
                     project.organisation.representative =
                             project.organisation.representative.name + ", " +
                             project.organisation.representative.email + ", " +
                             project.organisation.representative.phone;
                 }
-                if (typeof project.organisation.address !== "undefined") {
+                if ((typeof project.organisation.address) !== "undefined") {
                     project.organisation.address =
                             project.organisation.address.street + ", " +
                             project.organisation.address.postal_code + ", " +
@@ -559,8 +593,8 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                             project.organisation.address.country;
                 }
             }
-            if (typeof project.approved !== "undefined") {
-                if (typeof project.approved.themes !== "undefined" &&
+            if ((typeof project.approved) !== "undefined") {
+                if ((typeof project.approved.themes) !== "undefined" &&
                         project.approved.themes.length > 0) {
                     var str = "";
                     project.approved.themes.forEach(function (theme) {
@@ -600,7 +634,7 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
             results.forEach(function (result) {
                 var flat = $scope.flattenObject(result);
                 Object.keys(flat).forEach(function (field) {
-                    if (typeof flat[field] === "undefined") {
+                    if ((typeof flat[field]) === "undefined") {
                         flat[field] = " ";
                     }
                 });

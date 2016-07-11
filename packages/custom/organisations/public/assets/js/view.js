@@ -41,7 +41,7 @@ function toggleCollapse2(elementID, indicatorID) {
         element.style.display = 'none';
         indicator.src = '/projects/assets/img/indicator-closing.gif';
     }
-    if (typeof previousIndicator !== 'undefined') {
+    if ((typeof previousIndicator) !== 'undefined') {
         if (indicator !== previousIndicator) {
             if (previousIndicator.src === '/projects/assets/img/indicator-opening.gif') {
                 previousIndicator.src = '/projects/assets/img/indicator-open.gif';

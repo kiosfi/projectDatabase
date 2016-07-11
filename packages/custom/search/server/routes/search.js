@@ -33,12 +33,14 @@ module.exports = function (Search, app, auth) {
 
     app.route('/api/search')
             .get(search.searchProjects);
-    app.route('/api/search/count')
-            .post(search.countSearchResults);
+    app.route('/api/search/countProjects')
+            .post(search.countProjects);
     app.route('/api/search/export')
             .get(search.searchAllProjects);
     app.route('/api/search/payments')
             .get(search.searchPayments);
     app.route('/api/search/orgs')
             .get(search.searchOrgs);
+    app.route('/api/search/countOrganisations')
+            .post(search.countOrganisations);
 };

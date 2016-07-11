@@ -118,13 +118,13 @@ module.exports = function (Organisations) {
             var ordering = req.query.ordering;
             var ascending = req.query.ascending;
             var page = req.query.page;
-            if (typeof ordering === 'undefined') {
+            if ((typeof ordering) === 'undefined') {
                 ordering = 'name';
             }
-            if (typeof ascending === 'undefined') {
+            if ((typeof ascending) === 'undefined') {
                 ascending = 'true';
             }
-            if (typeof page === 'undefined') {
+            if ((typeof page) === 'undefined') {
                 page = 1;
             }
 

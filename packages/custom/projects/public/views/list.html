@@ -10,7 +10,7 @@
                             {{fieldNames["project_ref"]}}
                             <span class="glyphicon"
                                   ng-show="ordering === 'project_ref'"
-                                  ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                                  ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
                             </span>
                         </a>
                     </th>
@@ -20,7 +20,7 @@
                             {{fieldNames["title"]}}
                             <span class="glyphicon"
                                   ng-show="ordering === 'title'"
-                                  ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                                  ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
                             </span>
                         </a>
                     </th>
@@ -30,7 +30,7 @@
                             {{fieldNames["state"]}}
                             <span class="glyphicon"
                                   ng-show="ordering === 'state'"
-                                  ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                                  ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
                             </span>
                         </a>
                     </th>
@@ -55,7 +55,7 @@
                         <span ng-repeat="deadline in project.signed.intreport_deadlines"
                               style="color:red;"
                               ng-if="deadline.date < now &&
-                                          project.intermediary_reports[project.signed.intreport_deadlines.indexOf(deadline)] === undefined">
+                                                              project.intermediary_reports[project.signed.intreport_deadlines.indexOf(deadline)] === undefined">
                             {{deadline.report}} myöhässä!
                         </span>
                     </td>
@@ -64,14 +64,16 @@
                 </tr>
             </tbody>
         </table>
-        <ul id="pagination" class="pagination pagination-sm"
-            data-ng-init="paginate()">
-            <li ng-repeat="pg in pages"
-                ng-class="pg.number == page ? 'active' : ''">
-                <a id="page-{{pg.number}}" href=""
-                   ng-click="updatePage(pg.number)">{{pg.number}}</a>
-            </li>
-        </ul>
+        <div style="text-align: center">
+            <ul id="pagination" class="pagination pagination-md"
+                data-ng-init="paginate()">
+                <li ng-repeat="pg in pages"
+                    ng-class="pg.number == page ? 'active' : ''">
+                    <a id="page-{{pg.number}}" href=""
+                       ng-click="updatePage(pg.number)">{{pg.number}}</a>
+                </li>
+            </ul>
+        </div>
     </article>
     <article data-ng-hide="!projects || projects.length">
         <h1>Hankkeita ei ole.</h1>

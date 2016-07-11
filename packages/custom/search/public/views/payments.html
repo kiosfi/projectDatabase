@@ -4,9 +4,24 @@
     <article class="panel panel-primary">
         <section class="panel-body">
             <ul class="nav nav-pills">
-                <li><a ng-href="/search">Hankkeet</a></li>
-                <li><a ng-href="/search/orgs">Järjestöt</a></li>
-                <li class="active"><a ng-href="/search/payments">Maksut</a></li>
+                <li>
+                    <a ng-href="/search">
+                        <span class="glyphicon glyphicon-folder-close">
+                        </span>&nbsp;Hankkeet
+                    </a>
+                </li>
+                <li>
+                    <a ng-href="/search/orgs">
+                        <span class="glyphicon glyphicon-user">
+                        </span>&nbsp;Järjestöt
+                    </a>
+                </li>
+                <li class="active">
+                    <a ng-href="/search/payments">
+                        <span class="glyphicon glyphicon-euro">
+                        </span>&nbsp;Maksut
+                    </a>
+                </li>
             </ul>
         </section>
     </article>
@@ -24,7 +39,7 @@
         </div>
         <section class="panel-body" ng-show="showCriteria">
             <article>
-                <form name="choiceForm" class="form-horizontal"
+                <form name="choiceForm" class="form-inline"
                       role="form" novalidate>
                     <label for="searhcChoice" class="control-label col-md-2">
                         Hakukohde
@@ -39,16 +54,16 @@
                             </option>
                         </select>
                     </div>
-                </form>
                 &nbsp;
+                </form>
             </article>
             <article ng-show="searchChoice">
                 <hr>
                 <form name="paymentsForm" class="form-horizontal col-md-12"
                       role="form" data-ng-init="getProjectFields()"
-                      data-ng-submit="updateSearch()" novalidate>
+                      data-ng-submit="updatePaymentSearch()" novalidate>
                     <div class="form-group col-md-12">
-                        <div class="col-md-12 panel panel-default"
+                        <div class="panel panel-default"
                              data-ng-repeat="query in searchPay"
                              style="background-color: #F9F9F9">
                             <div class="panel-body">
@@ -57,8 +72,7 @@
                                     <label class="col-md-2 control-label">
                                         Kriteeri
                                     </label>
-                                    <div id="search"
-                                         class="col-md-4">
+                                    <div id="search" class="col-md-2">
                                         <select data-ng-model="query.field">
                                             <option ng-repeat="paymentField in paymentFields"
                                                     value="{{paymentField.name}}">
@@ -70,7 +84,7 @@
                                         Arvo
                                     </label>
                                     <div ng-show="query.field === 'state'"
-                                         class="col-md-4" >
+                                         class="col-md-6">
                                         <select data-ng-model="query.value">
                                             <option ng-repeat="state in states"
                                                     value="{{state}}">
@@ -79,13 +93,13 @@
                                         </select>
                                     </div>
                                     <div ng-show="stringParams.indexOf(query.field) > -1"
-                                         class="col-md-4">
+                                         class="col-md-6">
                                         <input type="text" class="form-control"
                                                data-ng-model="query.value"
                                                placeholder="Kirjoita hakusana(t)">
                                     </div>
                                     <div id="date" ng-show="query.field === 'dates'"
-                                         class="col-md-4" >
+                                         class="col-md-6">
                                         <select data-ng-model="query.dateField" >
                                             <option data-ng-repeat="paymentDate in paymentDates"
                                                     value="{{paymentDate.name}}">

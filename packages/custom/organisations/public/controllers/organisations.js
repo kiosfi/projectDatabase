@@ -26,7 +26,8 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
 
         /**
          * Sorts the projects by the given property. If they were previously
-         * sorted by the same property, the order will be reversed.
+         * sorted by the same property, the order will be reversed. This
+         * function doesn't alter GET parameters or cause page reload.
          *
          * @param {String} property The property used for sorting
          * @returns {undefined}
@@ -46,7 +47,7 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
          * @returns {String}        The string representation of that number.
          */
         $scope.numberToString = function (number) {
-            if (typeof number === "undefined") {
+            if ((typeof number) === "undefined") {
                 return "-";
             }
             var string = $filter('currency')(number, '', 2);
@@ -65,13 +66,13 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
             var ordering = $location.search().ordering;
             var ascending = $location.search().ascending;
             var page = $location.search().page;
-            if (typeof ordering === 'undefined') {
+            if ((typeof ordering) === 'undefined') {
                 ordering = 'name';
             }
-            if (typeof ascending === 'undefined') {
+            if ((typeof ascending) === 'undefined') {
                 ascending = 'true';
             }
-            if (typeof page === 'undefined') {
+            if ((typeof page) === 'undefined') {
                 page = 1;
             }
             $scope.ordering = ordering;

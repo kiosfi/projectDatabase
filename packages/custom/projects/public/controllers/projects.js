@@ -34,7 +34,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          * @returns {String}        The string representation of that number.
          */
         $scope.numberToString = function (number) {
-            if (typeof number === "undefined") {
+            if ((typeof number) === "undefined") {
                 return "-";
             }
             var string = $filter('currency')(number, '', 2);
@@ -214,7 +214,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     });
                 });
 
-                if (typeof project.approved !== 'undefined') {
+                if ((typeof project.approved) !== 'undefined') {
                     if ($scope.projectEditForm.approved_day.$dirty
                             || $scope.projectEditForm.approved_month.$dirty
                             || $scope.projectEditForm.approved_year.$dirty) {
@@ -234,7 +234,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     project.approved.themes = $scope.themeSelection;
                 }
 
-                if (typeof project.signed !== 'undefined') {
+                if ((typeof project.signed) !== 'undefined') {
                     if ($scope.projectEditForm.signed_date_day.$dirty
                             || $scope.projectEditForm.signed_date_day.$dirty
                             || $scope.projectEditForm.signed_date_day.$dirty) {
@@ -284,7 +284,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     });
                 }
 
-                if (typeof project.end_report.date !== 'undefined') {
+                if ((typeof project.end_report.date) !== 'undefined') {
                     if ($scope.projectEditForm.audit_day.$dirty
                             || $scope.projectEditForm.audit_month.$dirty
                             || $scope.projectEditForm.audit_year.$dirty) {
@@ -304,7 +304,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     }
                 }
 
-                if (typeof project.ended !== 'undefined') {
+                if ((typeof project.ended) !== 'undefined') {
                     if ($scope.projectEditForm.endNotifiedDay.$dirty
                             || $scope.projectEditForm.endNotifiedMonth.$dirty ||
                             $scope.projectEditForm.endNotifiedYear.$dirty) {
@@ -356,7 +356,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                         comment: obj.comment});
                 });
 
-                if (typeof project.approved !== 'undefined') {
+                if ((typeof project.approved) !== 'undefined') {
                     var date = new Date(project.approved.approved_date);
                     $scope.approved_day = date.getDate();
                     $scope.approved_month = date.getMonth() + 1;
@@ -372,7 +372,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     });
                 }
 
-                if (typeof project.signed !== 'undefined') {
+                if ((typeof project.signed) !== 'undefined') {
                     var date = new Date(project.signed.signed_date);
                     $scope.signed_day = date.getDate();
                     $scope.signed_month = date.getMonth() + 1;
@@ -401,7 +401,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     });
                 }
 
-                if (typeof project.end_report.date !== 'undefined') {
+                if ((typeof project.end_report.date) !== 'undefined') {
                     var date = new Date(project.end_report.approved_date);
                     $scope.er_approved_year = date.getFullYear();
                     $scope.er_approved_month = date.getMonth() + 1;
@@ -413,7 +413,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                     $scope.audit_year = audit_date.getFullYear();
                 }
 
-                if (typeof project.ended !== 'undefined') {
+                if ((typeof project.ended) !== 'undefined') {
                     var date = new Date(project.ended.end_date);
                     $scope.end_day = date.getDate();
                     $scope.end_month = date.getMonth() + 1;
@@ -436,13 +436,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             var ordering = $location.search().ordering;
             var ascending = $location.search().ascending;
             var page = $location.search().page;
-            if (typeof ordering === 'undefined') {
+            if ((typeof ordering) === 'undefined') {
                 ordering = 'project_ref';
             }
-            if (typeof ascending === 'undefined') {
+            if ((typeof ascending) === 'undefined') {
                 ascending = 'true';
             }
-            if (typeof page === 'undefined') {
+            if ((typeof page) === 'undefined') {
                 page = 1;
             }
             $scope.ordering = ordering;
@@ -568,7 +568,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          * @returns {undefined}
          */
         $scope.ensureCompatibility = function (project) {
-            if (typeof project.schema_version === "undefined") {
+            if ((typeof project.schema_version) === "undefined") {
                 project.security_level = "Julkinen";
             }
             if (project.schema_version < 4) {
@@ -725,17 +725,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (isValid) {
                 var project = $scope.project;
                 project.approved.date = Date.now();
-                if (typeof $scope.approved_day !== 'undefined' &&
-                        typeof $scope.approved_month !== 'undefined' &&
-                        typeof $scope.approved_year !== 'undefined') {
+                if (((typeof $scope.approved_day) !== 'undefined') &&
+                        ((typeof $scope.approved_month) !== 'undefined') &&
+                        ((typeof $scope.approved_year) !== 'undefined')) {
                     project.approved.approved_date = $scope.convertDate(
                             $scope.approved_day, $scope.approved_month,
                             $scope.approved_year);
                 }
 
-                if (typeof $scope.notified_day !== 'undefined' &&
-                        typeof $scope.notified_month !== 'undefined' &&
-                        typeof $scope.notified_year !== 'undefined') {
+                if (((typeof $scope.notified_day) !== 'undefined') &&
+                        ((typeof $scope.notified_month) !== 'undefined') &&
+                        ((typeof $scope.notified_year) !== 'undefined')) {
                     project.approved.board_notified = $scope.convertDate(
                             $scope.notified_day, $scope.notified_month,
                             $scope.notified_year);
@@ -778,8 +778,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
             if (isValid) {
                 var project = $scope.project;
 
-                if (typeof $scope.signed_day !== 'undefined' && typeof $scope.signed_month !== 'undefined' &&
-                        typeof $scope.signed_year !== 'undefined') {
+                if (((typeof $scope.signed_day) !== 'undefined') &&
+                        ((typeof $scope.signed_month) !== 'undefined') &&
+                        ((typeof $scope.signed_year) !== 'undefined')) {
                     project.signed.signed_date = $scope.convertDate($scope.signed_day, $scope.signed_month, $scope.signed_year);
                 }
 
@@ -855,9 +856,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 var project = $scope.project;
                 project.intermediary_report.date = Date.now();
 
-                if (typeof $scope.intRDateAppr_day !== 'undefined' &&
-                        typeof $scope.intRDateAppr_month !== 'undefined' &&
-                        typeof $scope.intRDateAppr_year !== 'undefined') {
+                if (((typeof $scope.intRDateAppr_day) !== 'undefined') &&
+                        ((typeof $scope.intRDateAppr_month) !== 'undefined') &&
+                        ((typeof $scope.intRDateAppr_year) !== 'undefined')) {
                     project.intermediary_report.date_approved =
                             $scope.convertDate($scope.intRDateAppr_day,
                                     $scope.intRDateAppr_month, $scope.intRDateAppr_year);
@@ -894,14 +895,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 project.end_report.methods = $scope.addedMethods;
                 project.state = $scope.global.newState;
 
-                if (typeof $scope.er_approved_day !== 'undefined' && typeof $scope.er_approved_month !== 'undefined' &&
-                        typeof $scope.er_approved_year !== 'undefined') {
+                if (((typeof $scope.er_approved_day) !== 'undefined') &&
+                        ((typeof $scope.er_approved_month) !== 'undefined') &&
+                        ((typeof $scope.er_approved_year) !== 'undefined')) {
                     project.end_report.approved_date = $scope.convertDate($scope.er_approved_day,
                             $scope.er_approved_month, $scope.er_approved_year);
                 }
 
-                if (typeof $scope.audit_day !== 'undefined' && typeof $scope.audit_month !== 'undefined' &&
-                        typeof $scope.audit_year !== 'undefined') {
+                if (((typeof $scope.audit_day) !== 'undefined') &&
+                        ((typeof $scope.audit_month) !== 'undefined') &&
+                        ((typeof $scope.audit_year) !== 'undefined')) {
                     project.end_report.audit.date = $scope.convertDate($scope.audit_day, $scope.audit_month, $scope.audit_year);
                 }
 
@@ -923,13 +926,15 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
                 var project = $scope.project;
                 project.ended.date = Date.now();
 
-                if (typeof $scope.end_day !== 'undefined' && typeof $scope.end_month !== 'undefined' &&
-                        typeof $scope.end_year !== 'undefined') {
+                if (((typeof $scope.end_day) !== 'undefined') &&
+                        ((typeof $scope.end_month) !== 'undefined') &&
+                        ((typeof $scope.end_year) !== 'undefined')) {
                     project.ended.end_date = $scope.convertDate($scope.end_day, $scope.end_month, $scope.end_year);
                 }
 
-                if (typeof $scope.notified_day !== 'undefined' && typeof $scope.notified_month !== 'undefined' &&
-                        typeof $scope.notified_year !== 'undefined') {
+                if (((typeof $scope.notified_day) !== 'undefined') &&
+                        ((typeof $scope.notified_month) !== 'undefined') &&
+                        ((typeof $scope.notified_year) !== 'undefined')) {
                     project.ended.board_notified = $scope.convertDate($scope.end_notified_day, $scope.end_notified_month, $scope.end_notified_year);
                 }
 
@@ -992,7 +997,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
          * @returns {Boolean}
          */
         $scope.nonEmpty = function (string) {
-            return typeof string !== "undefined" && string !== "";
+            return ((typeof string) !== "undefined") && (string !== "");
         };
 
         /**
@@ -1131,7 +1136,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$st
 
         /**
          * Sorts the appendices by the given property. If they were previously
-         * sorted by the same property, the order will be reversed.
+         * sorted by the same property, the order will be reversed. Unlike
+         * <tt>updateOrdering</tt>, this function does not cause a page reload.
+         * Also, the GET parameters won't be changed.
          *
          * @param {String} property The property used for sorting
          * @returns {undefined}

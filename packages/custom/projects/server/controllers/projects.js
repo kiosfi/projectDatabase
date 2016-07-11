@@ -105,7 +105,7 @@ module.exports = function (Projects) {
         pieces.forEach(function (x) {
             transformed += x;
         });
-        return typeof object === "string"
+        return (typeof object) === "string"
                 ? transformed.substring(1, transformed.length - 1)
                 : transformed;
     }
@@ -309,17 +309,17 @@ module.exports = function (Projects) {
             var ordering = req.query.ordering;
             var ascending = req.query.ascending;
             var page = req.query.page;
-            if (typeof ordering === 'undefined') {
+            if ((typeof ordering) === 'undefined') {
                 return res.status(500).json({
                     error: 'Kyselystä puuttuu kenttä "ordering"!'
                 });
             }
-            if (typeof ascending === 'undefined') {
+            if ((typeof ascending) === 'undefined') {
                 return res.status(500).json({
                     error: 'Kyselystä puuttuu kenttä "ascending"!'
                 });
             }
-            if (typeof page === 'undefined') {
+            if ((typeof page) === 'undefined') {
                 return res.status(500).json({
                     error: 'Kyselystä puuttuu kenttä "page"!'
                 });

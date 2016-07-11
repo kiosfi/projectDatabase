@@ -11,7 +11,7 @@
                             Nimi
                             <span class="glyphicon"
                                   ng-show="ordering === 'name'"
-                                  ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                                  ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
                             </span>
                         </a>
                     </th>
@@ -21,7 +21,7 @@
                             Edustaja
                             <span class="glyphicon"
                                   ng-show="ordering === 'representative'"
-                                  ng-class="{'glyphicon-triangle-top': ascending, 'glyphicon-triangle-bottom': !ascending}">
+                                  ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
                             </span>
                         </a>
                     </th>
@@ -34,14 +34,16 @@
                 </tr>
             </tbody>
         </table>
-        <ul id="pagination" class="pagination pagination-sm"
-            data-ng-init="paginate()">
-            <li ng-repeat="pg in pages"
-                ng-class="pg.number == page ? 'active' : ''">
-                <a id="page-{{pg.number}}" href=""
-                   ng-click="updatePage(pg.number)">{{pg.number}}</a>
-            </li>
-        </ul>
+        <div style="text-align: center">
+            <ul id="pagination" class="pagination pagination-md"
+                data-ng-init="paginate()">
+                <li ng-repeat="pg in pages"
+                    ng-class="pg.number == page ? 'active' : ''">
+                    <a id="page-{{pg.number}}" href=""
+                       ng-click="updatePage(pg.number)">{{pg.number}}</a>
+                </li>
+            </ul>
+        </div>
     </article>
     <article ng-hide="!organisations || organisations.length">
         <h1>Järjestöjä ei ole.</h1>

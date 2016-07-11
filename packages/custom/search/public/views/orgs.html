@@ -4,9 +4,24 @@
     <article class="panel panel-primary">
         <section class="panel-body">
             <ul class="nav nav-pills">
-                <li><a ng-href="/search">Hankkeet</a></li>
-                <li class="active"><a ng-href="/search/orgs">Järjestöt</a></li>
-                <li><a ng-href="/search/payments">Maksut</a></li>
+                <li>
+                    <a ng-href="/search">
+                        <span class="glyphicon glyphicon-folder-close">
+                        </span>&nbsp;Hankkeet
+                    </a>
+                </li>
+                <li class="active">
+                    <a ng-href="/search/orgs">
+                        <span class="glyphicon glyphicon-user">
+                        </span>&nbsp;Järjestöt
+                    </a>
+                </li>
+                <li>
+                    <a ng-href="/search/payments">
+                        <span class="glyphicon glyphicon-euro">
+                        </span>&nbsp;Maksut
+                    </a>
+                </li>
             </ul>
         </section>
     </article>
@@ -27,7 +42,7 @@
                   data-ng-init="getProjectFields()"
                   data-ng-submit="updateOrgSearch()" novalidate>
                 <div class="form-group col-md-12">
-                    <div class="col-md-12 panel panel-default"
+                    <div class="panel panel-default"
                          data-ng-repeat="query in searchOrg"
                          style="background-color: #F9F9F9">
                         <div class="panel-body">
@@ -112,36 +127,36 @@
                         <th class="col-md-3">
                             <a ng-click="updateOrdering('organisations', 'name')">
                                 Nimi
-                                <span class="sortorder"
+                                <span class="glyphicon"
                                       ng-show="ordering === 'name'"
-                                      ng-class="{reverse:!ascending}">
+                                      ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
                                 </span>
                             </a>
                         </th>
                         <th class="col-md-3">
                             <a ng-click="updateOrdering('organisations', 'representative.name')">
                                 Edustaja
-                                <span class="sortorder"
+                                <span class="glyphicon"
                                       ng-show="ordering === 'representative.name'"
-                                      ng-class="{reverse:!ascending}">
+                                      ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
                                 </span>
                             </a>
                         </th>
                         <th class="col-md-3">
                             <a ng-click="updateOrdering('organisations', 'address.street')">
                                 Osoite
-                                <span class="sortorder"
+                                <span class="glyphicon"
                                       ng-show="ordering === 'address.street'"
-                                      ng-class="{reverse:!ascending}">
+                                      ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
                                 </span>
                             </a>
                         </th>
                         <th class="col-md-3">
                             <a ng-click="updateOrdering('organisations', 'email')">
                                 Sähköposti
-                                <span class="sortorder"
+                                <span class="glyphicon"
                                       ng-show="ordering === 'email'"
-                                      ng-class="{reverse:!ascending}">
+                                      ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
                                 </span>
                             </a>
                         </th>
@@ -157,6 +172,17 @@
                     </tr>
                 </tbody>
             </table>
+            <div style="text-align: center">
+                <ul id="pagination" class="pagination pagination-md">
+                    <li ng-repeat="pg in pages"
+                        ng-class="pg.number == page ? 'active' : ''">
+                        <a id="page-{{pg.number}}" href=""
+                           ng-click="updatePage('organisations', pg.number)">
+                            {{pg.number}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </section>
     </article>
     <article class="panel panel-primary" ng-show="organisations.length > 0">

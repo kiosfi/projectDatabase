@@ -14,7 +14,7 @@ module.exports = function (Search) {
      * Maximum number of search results to be displayed when using paginated
      * search function.
      */
-    var pageSize = 10;
+    var PAGE_SIZE = 10;
 
     /**
      * Formulates received search query depending on the type of
@@ -64,7 +64,7 @@ module.exports = function (Search) {
             if (query.value === 'Käynnissä olevat hankkeet') {
                 query.value = {$in: ["allekirjoitettu", "väliraportti", "loppuraportti"]};
             }
-            if (typeof query.value === 'string') {
+            if ((typeof query.value) === 'string') {
                 query.value = new RegExp(query.value, 'i');
             }
             search[query.field] = query.value;
@@ -76,6 +76,7 @@ module.exports = function (Search) {
         /**
          * Searches for projects. The results are ordered and paginated
          * according to the given HTTP GET parameters in the request object.
+         * This query is used for listing project search results.
          *
          * @param {type} req    The request object.
          * @returns {JSON}
@@ -84,17 +85,17 @@ module.exports = function (Search) {
             var ordering = req.query.ordering;
             var ascending = req.query.ascending;
             var page = req.query.page;
-            if (typeof ordering === 'undefined') {
+            if ((typeof ordering) === 'undefined') {
                 return res.status(500).json({
                     error: 'Kyselystä puuttuu kenttä "ordering"!'
                 });
             }
-            if (typeof ascending === 'undefined') {
+            if ((typeof ascending) === 'undefined') {
                 return res.status(500).json({
                     error: 'Kyselystä puuttuu kenttä "ascending"!'
                 });
             }
-            if (typeof page === 'undefined') {
+            if ((typeof page) === 'undefined') {
                 return res.status(500).json({
                     error: 'Kyselystä puuttuu kenttä "page"!'
                 });
@@ -111,7 +112,7 @@ module.exports = function (Search) {
 
             var params = _.map(JSON.parse(req.query.searchBy), function (query) {
                 var search = {};
-                if (typeof query.orgField !== 'undefined') {
+                if ((typeof query.orgField) !== 'undefined') {
                     search[query.orgField] = new RegExp(query.orgValue, 'i');
                 }
                 return search;
@@ -131,7 +132,7 @@ module.exports = function (Search) {
                  * and query the projects collection
                  */
                 queries = _.filter(queries, function (query) {
-                    return typeof query.org_fields === 'undefined';
+                    return (typeof query.org_fields) === 'undefined';
                 });
 
                 queries.push({organisation: {$in: orgs}});
@@ -140,8 +141,8 @@ module.exports = function (Search) {
                     organisation: 1, description: 1})
                         .populate('organisation', {_id: 1, name: 1})
                         .sort(orderingJSON)
-                        .skip((page - 1) * pageSize)
-                        .limit(pageSize)
+                        .skip((page - 1) * PAGE_SIZE)
+                        .limit(PAGE_SIZE)
                         .exec(function (err, results) {
                             if (err) {
                                 return res.status(500).json({
@@ -153,12 +154,14 @@ module.exports = function (Search) {
                         });
             });
         },
+
         /**
          * Returns all projects matching the given search query in the HTTP POST
          * parameter <tt>searchBy</tt>. The fields in the documents will be
          * restricted to only the ones specified in parameters
          * <tt>projFields</tt> and <tt>orgFields</tt>, which are strings of
-         * field names separated with spaces.
+         * field names separated with spaces. This query is used for exporting
+         * project search results.
          *
          * @param {type} req Request object.
          * @param {type} res Response object.
@@ -168,7 +171,7 @@ module.exports = function (Search) {
 
             var params = _.map(JSON.parse(req.query.searchBy), function (query) {
                 var search = {};
-                if (typeof query.orgField !== 'undefined') {
+                if ((typeof query.orgField) !== 'undefined') {
                     search[query.orgField] = new RegExp(query.orgValue, 'i');
                 }
                 return search;
@@ -183,7 +186,7 @@ module.exports = function (Search) {
                 });
 
                 queries = _.filter(queries, function (query) {
-                    return typeof query.orgField === 'undefined';
+                    return (typeof query.orgField) === 'undefined';
                 });
 
                 queries.push({organisation: {$in: orgs}});
@@ -198,20 +201,20 @@ module.exports = function (Search) {
                                 });
                             } else {
                                 results.forEach(function (result) {
-                                    result._id                  = undefined;
-                                    result.in_review            = undefined;
+                                    result._id = undefined;
+                                    result.in_review = undefined;
                                     if (Object.keys(result.approved).length === 0) {
                                         result.approved = undefined;
                                     }
-                                    result.rejected             = undefined;
-                                    result.required_appendices  = undefined;
-                                    result.signed               = undefined;
+                                    result.rejected = undefined;
+                                    result.required_appendices = undefined;
+                                    result.signed = undefined;
                                     result.intermediary_reports = undefined;
-                                    result.payments             = undefined;
-                                    result.end_report           = undefined;
-                                    result.ended                = undefined;
-                                    result.updated              = undefined;
-                                    result.appendices           = undefined;
+                                    result.payments = undefined;
+                                    result.end_report = undefined;
+                                    result.ended = undefined;
+                                    result.updated = undefined;
+                                    result.appendices = undefined;
                                     if (Object.keys(result.funding).length === 0) {
                                         result.funding = undefined;
                                     }
@@ -226,6 +229,52 @@ module.exports = function (Search) {
                         });
             });
         },
+
+        /**
+         * Counts the number of all projects matching the search query given by
+         * the HTTP POST parameter <tt>searchBy</tt>.
+         *
+         * @param {type} req
+         * @param {type} res
+         * @returns {undefined}
+         */
+        countProjects: function (req, res) {
+            var queries = prepareQueries(req.body.searchBy);
+
+            var params = _.map(JSON.parse(req.body.searchBy), function (query) {
+                var search = {};
+                if ((typeof query.orgField) !== 'undefined') {
+                    search[query.orgField] = new RegExp(query.orgValue, 'i');
+                }
+                return search;
+            });
+
+            Organisation.find({$and: params}, function (err, orgs) {
+
+                orgs = orgs.map(function (org) {
+                    return org._id;
+                });
+
+                queries = _.filter(queries, function (query) {
+                    return (typeof query.orgField) === 'undefined';
+                });
+
+                queries.push({organisation: {$in: orgs}});
+
+                Project.count({$and: queries})
+                        .populate('organisation', {name: 1})
+                        .exec(function (err, result) {
+                            if (err) {
+                                return res.status(500).json({
+                                    error: 'Virhe hankkeiden hakutoiminnossa'
+                                });
+                            } else {
+                                res.json({projectCount: result});
+                            }
+                        });
+            });
+        },
+
         /**
          * Returns all payments matching the given search query in the HTTP POST
          * parameter <tt>searchPay</tt>.
@@ -234,9 +283,7 @@ module.exports = function (Search) {
          * @param {type} res Response object.
          */
         searchPayments: function (req, res) {
-
             var choice = _.values(JSON.parse(req.query.choice));
-
             var queries = prepareQueries(req.query.searchBy);
 
             /**
@@ -293,96 +340,90 @@ module.exports = function (Search) {
             }
 
         },
+
         /**
          * Returns all organisations matching the given search query in the HTTP
-         * POST parameter <tt>searchOrg</tt>.
+         * POST parameter <tt>searchOrg</tt>. This query is used for listing
+         * organisation search results.
          *
          * @param {type} req Request object.
          * @param {type} res Response object.
          */
         searchOrgs: function (req, res) {
             var queries = prepareQueries(req.query.searchBy);
-            Organisation.find({$and: queries}).sort({"name" : 1})
+            var ordering = req.query.ordering;
+            var ascending = req.query.ascending;
+            var page = req.query.page;
+            var orderingJSON = {};
+            orderingJSON[ordering] = ascending === 'true' ? 1 : -1;
+            Organisation.find({$and: queries})
+                    .sort(orderingJSON)
+                    .skip((page - 1) * PAGE_SIZE)
+                    .limit(PAGE_SIZE)
                     .exec(function (err, orgs) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Virhe järjestöjen hakutoiminnossa'
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Virhe järjestöjen hakutoiminnossa'
+                            });
+                        } else {
+                            orgs = _.map(orgs, function (org) {
+                                return {
+                                    "_id": org._id,
+                                    "name": org.name,
+                                    "representative": org.representative.name +
+                                            ", " + org.representative.email + ", " +
+                                            org.representative.phone,
+                                    "exec_manager": org.exec_manager,
+                                    "communications_rep": org.communications_rep,
+                                    "address": org.address.street + ", " +
+                                            org.address.postal_code + " " +
+                                            org.address.city + ", " +
+                                            org.address.country,
+                                    "tel": org.tel,
+                                    "email": org.email,
+                                    "website": org.website,
+                                    "legal_status": org.legal_status,
+                                    "description": org.description,
+                                    "int_links": org.int_links,
+                                    "nat_local_links": org.nat_local_links,
+                                    "other_funding_budget": org.other_funding_budget,
+                                    "accounting_audit": org.accounting_audit
+                                };
+                            });
+                            res.json(orgs);
+                        }
                     });
-                } else {
-                    orgs = _.map(orgs, function (org) {
-                        return {
-                            "_id": org._id,
-                            "name": org.name,
-                            "representative": org.representative.name +
-                                    ", " + org.representative.email + ", " +
-                                    org.representative.phone,
-                            "exec_manager": org.exec_manager,
-                            "communications_rep": org.communications_rep,
-                            "address": org.address.street + ", " +
-                                    org.address.postal_code + " " +
-                                    org.address.city + ", " +
-                                    org.address.country,
-                            "tel": org.tel,
-                            "email": org.email,
-                            "website": org.website,
-                            "legal_status": org.legal_status,
-                            "description": org.description,
-                            "int_links": org.int_links,
-                            "nat_local_links": org.nat_local_links,
-                            "other_funding_budget": org.other_funding_budget,
-                            "accounting_audit": org.accounting_audit
-                        };
-                    });
-                    res.json(orgs);
-                }
-            });
 
         },
+
+        /**
+         * @param {type} req
+         * @param {type} res
+         * @returns {undefined}
+         */
         searchAllOrgs: function (req, res) {
 
         },
+
         /**
-         * Returns the number of all projects matching the search query given by
-         * the HTTP POST parameter <tt>searchBy</tt>.
+         * Counts the number of all organisations matching the search query
+         * given by the HTTP POST parameter <tt>searchBy</tt>.
          *
          * @param {type} req
          * @param {type} res
          * @returns {undefined}
          */
-        countSearchResults: function (req, res) {
+        countOrganisations: function (req, res) {
             var queries = prepareQueries(req.body.searchBy);
 
-            var params = _.map(JSON.parse(req.body.searchBy), function (query) {
-                var search = {};
-                if (typeof query.orgField !== 'undefined') {
-                    search[query.orgField] = new RegExp(query.orgValue, 'i');
+            Organisation.count({$and: queries}).exec(function (err, result) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Virhe hankkeiden hakutoiminnossa'
+                    });
+                } else {
+                    res.json({organisationCount: result});
                 }
-                return search;
-            });
-
-            Organisation.find({$and: params}, function (err, orgs) {
-
-                orgs = orgs.map(function (org) {
-                    return org._id;
-                });
-
-                queries = _.filter(queries, function (query) {
-                    return typeof query.orgField === 'undefined';
-                });
-
-                queries.push({organisation: {$in: orgs}});
-
-                Project.count({$and: queries})
-                        .populate('organisation', {name: 1})
-                        .exec(function (err, result) {
-                            if (err) {
-                                return res.status(500).json({
-                                    error: 'Virhe hankkeiden hakutoiminnossa'
-                                });
-                            } else {
-                                res.json({projectCount: result});
-                            }
-                        });
             });
         }
     };
