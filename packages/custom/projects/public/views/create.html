@@ -750,12 +750,12 @@
                             </div>
                         </div>
                         <div class="col-md-12" style="text-align: center">
-                            <button class="btn btn-danger"
+                            <button class="btn btn-sm btn-danger"
                                     ng-click="removeMethod();">
                                 <span class="glyphicon glyphicon-minus">
                                 </span>&nbsp;Poista viimeinen
                             </button>
-                            <button class="btn btn-success"
+                            <button class="btn btn-sm btn-success"
                                     ng-click="addMethod();">
                                 <span class="glyphicon glyphicon-plus">
                                 </span>&nbsp;Lisää uusi
@@ -1093,7 +1093,8 @@
                     <hr>
                     <button mean-token="'create-submit'" type="submit"
                             class="btn btn-success"
-                            ng-disabled="projectForm.$invalid">Lähetä
+                            ng-disabled="projectForm.$invalid">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp;Lähetä
                     </button>
                 </div>
             </div>

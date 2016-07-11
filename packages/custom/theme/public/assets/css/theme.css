@@ -1,7 +1,7 @@
 @font-face {
-  font-family: 'Ubuntu';
-  font-weight: 400;
-  font-style: normal;
+  font-family:          'Ubuntu';
+  font-weight:          400;
+  font-style:           normal;
   src: url('/theme/assets/fonts/Ubuntu-regular/Ubuntu-regular.eot');
   src: url('/theme/assets/fonts/Ubuntu-regular/Ubuntu-regular.eot?#iefix') format('embedded-opentype'),
        local('Ubuntu'),
@@ -12,24 +12,28 @@
        url('/theme/assets/fonts/Ubuntu-regular/Ubuntu-regular.svg#Ubuntu') format('svg');
 }
 
+mark {
+    background-color:   #F2A2CD;
+}
+
 h5 {
-    font-weight: bold;
+    font-weight:        bold;
 }
 
 hr {
-    border-color: #E5E5E5;
+    border-color:       #E5E5E5;
 }
 
 ul li {
-    list-style-type: none;
+    list-style-type:    none;
 }
 
 span ul li {
-    list-style-type: disc;
+    list-style-type:    disc;
 }
 
 table {
-    background-color: #FFFFFF;
+    background-color:   #FFFFFF;
 }
 
 .panel-heading {

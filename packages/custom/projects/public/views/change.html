@@ -262,27 +262,24 @@ A form for project state change.
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-7">
+                <div class="form-group col-md-8">
                     <label mean-token="'create-themes'"
                            class="col-md-4 control-label">
                         {{fieldNames["approved_themes"]}}
                     </label>
                     <div class="col-md-8">
-                        <table>
-                            <tr ng-repeat="theme in themes">
-                                <td><input
-                                        type="checkbox"
-                                        name="selectedThemes[]"
-                                        value="{{theme}}"
-                                        ng-checked="themeSelection.indexOf(theme) > -1"
-                                        ng-click="toggleThemeSelection(theme)">
-                                    {{theme}}
-                                </td>
-                            </tr>
-                        </table>
+                        <ul>
+                            <li ng-repeat="theme in themes">
+                                <input type="checkbox" name="selectedThemes[]"
+                                       value="{{theme}}"
+                                       ng-checked="themeSelection.indexOf(theme) > -1"
+                                       ng-click="toggleThemeSelection(theme)">
+                                {{theme}}
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-4">
                     <label for="granted_sum_eur" class="col-md-6 control-label">
                         {{fieldNames["approved_granted_sum_eur"]}}
                     </label>
@@ -385,25 +382,34 @@ A form for project state change.
                   ng-show="global.newState === 'hylätty'"  role="form"
                   data-ng-submit="addRejectedState(rejectedForm.$valid)" novalidate>
                 <div class="form-group col-md-12">
-                    <label mean-token="'create-rejcategories'" class="col-md-3">
-                        Syyt
+                    <label mean-token="'create-rejcategories'" class="col-md-2">
+                        {{fieldNames["rejected_rejection_categories"]}}
                     </label>
-                    <div class="col-md-12" id="rejSelection"
-                         data-ng-repeat="rej in addedRejections">
-                        <select name="rejSelect" id="rejSelect"
-                                data-ng-model="rej.rejection">
-                            <option data-ng-repeat="rejCat in rejCategories"
-                                    value="{{rejCat}}">{{rejCat}}</option>
-                        </select>
+                    <div class="col-md-10">
+                        <div id="rejSelection"
+                             data-ng-repeat="rej in addedRejections">
+                            <select name="rejSelect" id="rejSelect"
+                                    data-ng-model="rej.rejection">
+                                <option data-ng-repeat="rejCat in rejCategories"
+                                        value="{{rejCat}}">{{rejCat}}</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-12">
-                        <input id="addRej" type="button" value="Lisää uusi"
-                               ng-click="addRejection();"/>
-                        <input id="remRej" type="button" value="Poista viimeinen"
-                               ng-click="removeRejection();"/>
+                    <div class="col-md-12" style="margin-top: 1em">
+                        <a id="remRej" class="btn btn-sm btn-danger"
+                           ng-click="removeRejection();">
+                            <span class="glyphicon glyphicon-minus">
+                            </span>&nbsp;Poista viimeinen
+                        </a>
+                        <a id="addRej" class="btn btn-sm btn-success"
+                           ng-click="addRejection();">
+                            <span class="glyphicon glyphicon-plus">
+                            </span>&nbsp;Lisää
+                        </a>
                     </div>
                 </div>
                 <div class="form-group col-md-12">
+                    <hr>
                     <label for="comments" class="col-md-2">Kommentit</label>
                     <div class="col-md-10">
                         <textarea name="comments" type="text" class="form-control"
@@ -479,8 +485,9 @@ A form for project state change.
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <hr>
                     <label for="plannedPaymentSelection">
-                        Maksusuunnitelma
+                        Suunnitellut maksut
                     </label>
                     myönnetylle avustukselle
                     {{project.approved.granted_sum_eur| currency : ""}} €
@@ -496,82 +503,104 @@ A form for project state change.
                             <div class="col-md-3">
                                 <input name="plannedDay" type="number"
                                        class="form-control"
-                                       data-ng-model="plannedPayment.day"
-                                       id="plannedDay" placeholder="p">
+                                       data-ng-model="plannedPayments[$index].planned_day"
+                                       id="plannedDay" placeholder="p" min="1">
                             </div>
                             <div class="col-md-3">
                                 <input name="plannedMonth" type="number"
                                        class="form-control"
-                                       data-ng-model="plannedPayment.month"
-                                       id="plannedMonth" placeholder="k">
+                                       data-ng-model="plannedPayments[$index].planned_month"
+                                       id="plannedMonth" placeholder="k"
+                                       min="1">
                             </div>
                             <div class="col-md-3">
                                 <input name="plannedYear" type="number"
                                        class="form-control"
-                                       data-ng-model="plannedPayment.year"
-                                       id="plannedYear" placeholder="vvvv">
+                                       data-ng-model="plannedPayments[$index].planned_year"
+                                       id="plannedYear" placeholder="vvvv"
+                                       min="1">
                             </div>
                         </div>
-                        <label for="plannedSumEUR" class="col-md-2 control-label">
+                        <label for="plannedSumEUR"
+                               class="col-md-2 control-label">
                             Maksu (EUR)
                         </label>
                         <div class="col-md-2">
                             <input name="plannedSumEUR" type="number"
                                    class="form-control"
-                                   data-ng-model="plannedPayment.sum_eur"
-                                   id="plannedSumEUR" placeholder="Summa (EUR)">
+                                   data-ng-model="plannedPayments[$index].sum_eur"
+                                   id="plannedSumEUR"
+                                   placeholder="Summa (EUR)" min="0">
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <input type="button" id="add-btn" value="Lisää uusi"
-                               ng-click="addPlannedPayment();"/>
-                        <input type="button" value="Poista viimeinen"
-                               ng-click="removePlannedPayment();"/>
+                    <div class="col-md-12" style="margin-top: 1em">
+                        <a ng-click="removePlannedPayment();"
+                           class="btn btn-sm btn-danger">
+                            <span class="glyphicon glyphicon-minus">
+                            </span>&nbsp;Poista viimeinen
+                        </a>
+                        <a id="add-btn" class="btn btn-sm btn-success"
+                           ng-click="addPlannedPayment();">
+                            <span class="glyphicon glyphicon-plus">
+                            </span>&nbsp;Lisää
+                        </a>
                     </div>
                 </div>
-                <label for="reportDeadlines" class="col-md-12">
-                    Raporttien eräpäivät
-                </label>
+                <div class="col-md-12">
+                    <hr>
+                    <label for="reportDeadlines" class="col-md-12">
+                        Raporttien eräpäivät
+                    </label>
+                </div>
                 <div class="form-group col-md-12">
-                    <div class="col-md-12" name="reportDeadlines"
-                         id="reportDeadlines" data-ng-repeat="deadline in deadlines">
-                        <label for="dlRep" class="col-md-2 control-label">
-                            Raportti
-                        </label>
-                        <div class="col-md-4">
-                            <input name="dlRep" type="text" class="form-control"
-                                   data-ng-model="deadline.report" id="dlRep"
-                                   placeholder="Raportti">
+                    <div name="reportDeadlines" id="reportDeadlines"
+                         data-ng-repeat="deadline in deadlines">
+                        <div class="col-md-6">
+                            <label for="dlRep" class="col-md-3 control-label">
+                                Raportti
+                            </label>
+                            <div class="col-md-9">
+                                <input name="dlRep" type="text"
+                                       class="form-control"
+                                       data-ng-model="deadlines[$index].report"
+                                       id="dlRep" placeholder="Raportti">
+                            </div>
                         </div>
-                        <div id="dlDate" class="col-md-6">
+                        <div class="col-md-6">
                             <label for="dlDay" class="col-md-3 control-label">
                                 Eräpäivä
                             </label>
                             <div class="col-md-3">
                                 <input name="dlDay" type="number"
                                        class="form-control"
-                                       data-ng-model="deadline.day" id="dlDay"
-                                       placeholder="p">
+                                       data-ng-model="deadlines[$index].deadline_day"
+                                       id="dlDay" placeholder="p" min="1">
                             </div>
                             <div class="col-md-3">
                                 <input name="dlMonth" type="number"
                                        class="form-control"
-                                       data-ng-model="deadline.month" id="dlMonth"
-                                       placeholder="k">
+                                       data-ng-model="deadlines[$index].deadline_month"
+                                       id="dlMonth" placeholder="k" min="1">
                             </div>
                             <div class="col-md-3">
                                 <input name="dlYear" type="number"
                                        class="form-control"
-                                       data-ng-model="deadline.year" id="dlYear"
-                                       placeholder="vvvv">
+                                       data-ng-model="deadlines[$index].deadline_year"
+                                       id="dlYear" placeholder="vvvv" min="1">
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <input type="button" id="add-btn2" value="Lisää uusi"
-                               ng-click="addDeadline();"/>
-                        <input type="button" value="Poista viimeinen"
-                               ng-click="removeDeadline();"/>
+                    <div class="col-md-12" style="margin-top: 1em">
+                        <a class="btn btn-sm btn-danger"
+                           ng-click="removeDeadline();">
+                            <span class="glyphicon glyphicon-minus">
+                            </span>&nbsp;Poista viimeinen
+                        </a>
+                        <a id="add-btn2" class="btn btn-sm btn-success"
+                           ng-click="addDeadline();">
+                            <span class="glyphicon glyphicon-plus">
+                            </span>&nbsp;Lisää
+                        </a>
                     </div>
                 </div>
                 <div class="form-group col-md-12" style="text-align: center">

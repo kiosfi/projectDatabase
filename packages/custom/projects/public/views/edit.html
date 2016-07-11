@@ -241,16 +241,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12" style="text-align: center">
-                                <button class="btn btn-danger"
+                            <div class="col-md-12">
+                                <button class="btn btn-sm btn-danger"
                                         ng-click="removeMethod();">
                                     <span class="glyphicon glyphicon-minus">
                                     </span>&nbsp;Poista viimeinen
                                 </button>
-                                <button class="btn btn-success"
+                                <button class="btn btn-sm btn-success"
                                         ng-click="addMethod();">
                                     <span class="glyphicon glyphicon-plus">
-                                    </span>&nbsp;Lisää uusi
+                                    </span>&nbsp;Lisää
                                 </button>
                             </div>
                         </div>
@@ -754,27 +754,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-7">
+                <div class="form-group col-md-8">
                     <label mean-token="'create-themes'"
                            class="col-md-3 control-label">
                         {{fieldNames["approved_themes"]}}
                     </label>
                     <div class="col-md-9">
-                        <table>
-                            <tr ng-repeat="theme in themes">
-                                <td><input
-                                        type="checkbox"
-                                        name="selectedThemes[]"
-                                        value="{{theme}}"
-                                        ng-checked="themeSelection.indexOf(theme) > -1"
-                                        ng-click="toggleThemeSelection(theme)">
-                                    {{theme}}
-                                </td>
-                            </tr>
-                        </table>
+                        <ul>
+                            <li ng-repeat="theme in themes">
+                                <input type="checkbox" name="selectedThemes[]"
+                                       value="{{theme}}"
+                                       ng-checked="themeSelection.indexOf(theme) > -1"
+                                       ng-click="toggleThemeSelection(theme)">
+                                {{theme}}
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-4">
                     <label for="granted_sum_eur" class="col-md-6 control-label">
                         {{fieldNames["approved_granted_sum_eur"]}}
                     </label>
@@ -869,7 +866,7 @@
         <fieldset ng-show="project.rejected.date" class="panel panel-primary">
             <div class="panel-heading">
                 <h4>
-                    <span href="" ng-click="showRejDetails = !showRejDetails">
+                    <span ng-click="showRejDetails = !showRejDetails">
                         <span class="glyphicon"
                               ng-class="showRejDetails ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
@@ -879,26 +876,34 @@
             </div>
             <div ng-show="showRejDetails" class="panel-body">
                 <div class="form-group col-md-12">
-                    <label mean-token="'create-rejcategories'" class="col-md-3">
+                    <label mean-token="'create-rejcategories'" class="col-md-2">
                         {{fieldNames["rejected_rejection_categories"]}}
                     </label>
-                    <div class="col-md-12" id="rejSelection"
-                         data-ng-repeat="rej in addedRejections">
-                        <select name="rejSelect" id="rejSelect"
-                                data-ng-model="rej.rejection">
-                            <option data-ng-repeat="rejCat in rejCategories"
-                                    value="{{rejCat}}">{{rejCat}}</option>
-                        </select>
+                    <div class="col-md-10">
+                        <div id="rejSelection"
+                             data-ng-repeat="rej in addedRejections">
+                            <select name="rejSelect" id="rejSelect"
+                                    data-ng-model="rej.rejection">
+                                <option data-ng-repeat="rejCat in rejCategories"
+                                        value="{{rejCat}}">{{rejCat}}</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-12">
-                        <input id="addRej" type="button" value="Lisää uusi"
-                               ng-click="addRejection();"/>
-                        <input id="remRej" type="button"
-                               value="Poista viimeinen"
-                               ng-click="removeRejection();"/>
+                    <div class="col-md-12" style="margin-top: 1em">
+                        <a id="remRej" class="btn btn-sm btn-danger"
+                           ng-click="removeRejection();">
+                            <span class="glyphicon glyphicon-minus">
+                            </span>&nbsp;Poista viimeinen
+                        </a>
+                        <a id="addRej" class="btn btn-sm btn-success"
+                           ng-click="addRejection();">
+                            <span class="glyphicon glyphicon-plus">
+                            </span>&nbsp;Lisää
+                        </a>
                     </div>
                 </div>
                 <div class="form-group col-md-12">
+                    <hr>
                     <label for="comments" class="col-md-2">
                         {{fieldNames["rejected_rejection_comments"]}}
                     </label>
@@ -918,7 +923,7 @@
                     <span href="" ng-click="showSignDetails = !showSignDetails">
                         <span class="glyphicon"
                               ng-class="showSignDetails
-                                                  ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                                                      ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
                         Allekirjoitettu-tila
                     </span>
@@ -942,9 +947,7 @@
                         <!--{{fieldNames["signed_signed_date"]}}-->
                     </label>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error'
-                                         : projectEditForm.signed_date_day.$invalid }">
+                         ng-class="{'has-error': projectEditForm.signed_date_day.$invalid }">
                         <input name="signed_date_day" type="number"
                                class="form-control" data-ng-model="signed_day"
                                id="signed_date_day" placeholder="p"
@@ -956,8 +959,7 @@
                         </div>
                     </div>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error': projectEditForm.signed_date_month.$invalid}">
+                         ng-class="{'has-error': projectEditForm.signed_date_month.$invalid}">
                         <input name="signed_date_month" type="number"
                                class="form-control" data-ng-model="signed_month"
                                id="signed_date_month" placeholder="k"
@@ -970,9 +972,7 @@
                         </div>
                     </div>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error'
-                                 : projectEditForm.signed_date_year.$invalid}">
+                         ng-class="{'has-error': projectEditForm.signed_date_year.$invalid}">
                         <input name="signed_date_year" type="number"
                                class="form-control" data-ng-model="signed_year"
                                id="signed_date_year" placeholder="vvvv"
@@ -986,11 +986,12 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <hr>
                     <label for="plannedPaymentSelection">
                         {{fieldNames["signed_planned_payments"]}}
                     </label>
                     myönnetylle avustukselle
-                    {{project.approved.granted_sum_eur| currency : ""}} €
+                    {{project.approved.granted_sum_eur| currency : "0"}} €
                 </div>
                 <div class="form-group col-md-12" id="plPayments">
                     <div class="col-md-12" name="plannedPaymentSelection"
@@ -1033,25 +1034,33 @@
                                    placeholder="Summa (EUR)" min="0">
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <input type="button" id="add-btn" value="Lisää uusi"
-                               ng-click="addPlannedPayment();"/>
-                        <input type="button" value="Poista viimeinen"
-                               ng-click="removePlannedPayment();"/>
+                    <div class="col-md-12" style="margin-top: 1em">
+                        <a ng-click="removePlannedPayment();"
+                           class="btn btn-sm btn-danger">
+                            <span class="glyphicon glyphicon-minus">
+                            </span>&nbsp;Poista viimeinen
+                        </a>
+                        <a id="add-btn" class="btn btn-sm btn-success"
+                           ng-click="addPlannedPayment();">
+                            <span class="glyphicon glyphicon-plus">
+                            </span>&nbsp;Lisää
+                        </a>
                     </div>
                 </div>
-                <label for="reportDeadlines" class="col-md-12">
-                    Raporttien eräpäivät
-                </label>
+                <div class="col-md-12">
+                    <hr>
+                    <label for="reportDeadlines" class="col-md-12">
+                        Raporttien eräpäivät
+                    </label>
+                </div>
                 <div class="form-group col-md-12">
-                    <div class="col-md-12" name="reportDeadlines"
-                         id="reportDeadlines"
+                    <div name="reportDeadlines" id="reportDeadlines"
                          data-ng-repeat="deadline in deadlines">
                         <div class="col-md-6">
-                            <label for="dlRep" class="col-md-4 control-label">
+                            <label for="dlRep" class="col-md-3 control-label">
                                 Raportti
                             </label>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <input name="dlRep" type="text"
                                        class="form-control"
                                        data-ng-model="deadlines[$index].report"
@@ -1082,11 +1091,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <input type="button" id="add-btn2" value="Lisää uusi"
-                               ng-click="addDeadline();"/>
-                        <input type="button" value="Poista viimeinen"
-                               ng-click="removeDeadline();"/>
+                    <div class="col-md-12" style="margin-top: 1em">
+                        <a class="btn btn-sm btn-danger"
+                           ng-click="removeDeadline();">
+                            <span class="glyphicon glyphicon-minus">
+                            </span>&nbsp;Poista viimeinen
+                        </a>
+                        <a id="add-btn2" class="btn btn-sm btn-success"
+                           ng-click="addDeadline();">
+                            <span class="glyphicon glyphicon-plus">
+                            </span>&nbsp;Lisää
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1095,7 +1110,7 @@
                   class="panel panel-primary">
             <div class="panel-heading">
                 <h4>
-                    <span href="" ng-click="showIntRepDetails = !showIntRepDetails">
+                    <span ng-click="showIntRepDetails = !showIntRepDetails">
                         <span class="glyphicon"
                               ng-class="showIntRepDetails ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
@@ -1268,8 +1283,7 @@
                 <h4>
                     <span href="" ng-click="showEndRepDetails = !showEndRepDetails">
                         <span class="glyphicon"
-                              ng-class="showEndRepDetails
-                                                  ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                              ng-class="showEndRepDetails ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
                         Loppuraportti-tila
                     </span>
@@ -1520,9 +1534,7 @@
                         <!--{{fieldNames["end_report_approved_date"]}}-->
                     </label>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error'
-                                 : projectEditForm.er_approved_day.$invalid}">
+                         ng-class="{'has-error': projectEditForm.er_approved_day.$invalid}">
                         <input name="er_approved_day" type="number"
                                class="form-control"
                                data-ng-model="er_approved_day"
@@ -1535,8 +1547,7 @@
                         </div>
                     </div>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error': projectEditForm.er_approved_month.$invalid}">
+                         ng-class="{'has-error': projectEditForm.er_approved_month.$invalid}">
                         <input name="er_approved_month" type="number"
                                class="form-control"
                                data-ng-model="er_approved_month"
@@ -1549,9 +1560,7 @@
                         </div>
                     </div>
                     <div class="col-md-3"
-                         ng-class="{
-                                 'has-error'
-                                 : projectEditForm.er_approved_year.$invalid}">
+                         ng-class="{'has-error': projectEditForm.er_approved_year.$invalid}">
                         <input name="er_approved_year" type="number"
                                class="form-control"
                                data-ng-model="er_approved_year"
@@ -1572,7 +1581,7 @@
                     <span ng-click="showEndedDetails = !showEndedDetails">
                         <span class="glyphicon"
                               ng-class="showEndedDetails
-                                                  ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                                                      ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                         </span>
                         Päättynyt-tila
                     </span>
@@ -1694,11 +1703,15 @@
                     <hr>
                     <a ng-href="/projects/{{project._id}}"
                        class="btn btn-danger" style="margin-right: 1em">
-                        Peruuta
+                        <span class="glyphicon glyphicon-remove">
+                        </span>&nbsp;Peru
                     </a>
                     <button mean-token="'edit-submit'" type="submit"
                             class="btn btn-success"
-                            ng-disabled="projectEditForm.$invalid">Tallenna</button>
+                            ng-disabled="projectEditForm.$invalid">
+                        <span class="glyphicon glyphicon-ok">
+                        </span>&nbsp;Tallenna
+                    </button>
                 </div>
             </div>
         </fieldset>

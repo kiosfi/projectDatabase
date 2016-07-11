@@ -928,7 +928,7 @@
                 <span>
                     <label class="control-label">
                         {{project.state}}
-                        <span ng-if="project.incomplete"> (keskeneräinen)</span>
+                        <!--<span ng-if="project.incomplete"> (keskeneräinen)</span>-->
                     </label>
                     <span class="glyphicon glyphicon-arrow-right"></span>
                     <select id="stateSelect" data-ng-model="project.changeTo"
@@ -1001,7 +1001,7 @@
                     </section>
                 </section>
                 <section class="col-md-6" ng-show="!(project.signed.planned_payments.length > 0)">
-                    [Ei maksuaikataulua.]
+                    [Ei suunniteltuja maksuja.]
                 </section>
                 <section ng-show="project.payments.length > 0" class="col-md-6">
                     <h5>Maksetut erät</h5>
@@ -1025,7 +1025,7 @@
                     </section>
                 </section>
                 <section class="col-md-6" ng-show="!(project.payments.length > 0)">
-                    [Ei maksuja.]
+                    [Ei toteutuneita maksuja.]
                 </section>
                 &nbsp;
             </section>
