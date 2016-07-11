@@ -24,20 +24,26 @@
         </div>
         <section class="panel-body" ng-show="showCriteria">
             <article>
-                <form name="choiceForm" class="form-horizontal col-md-12"
+                <form name="choiceForm" class="form-horizontal"
                       role="form" novalidate>
-                    <select data-ng-model="searchChoice">
-                        <option value="payments">
-                            Suoritetut maksut
-                        </option>
-                        <option value="approved.granted_sum_eur">
-                            Myönnetyt avustukset
-                        </option>
-                    </select>
+                    <label for="searhcChoice" class="control-label col-md-2">
+                        Hakukohde
+                    </label>
+                    <div class="col-md-10">
+                        <select data-ng-model="searchChoice">
+                            <option value="payments">
+                                Suoritetut maksut
+                            </option>
+                            <option value="approved.granted_sum_eur">
+                                Myönnetyt avustukset
+                            </option>
+                        </select>
+                    </div>
                 </form>
                 &nbsp;
             </article>
             <article ng-show="searchChoice">
+                <hr>
                 <form name="paymentsForm" class="form-horizontal col-md-12"
                       role="form" data-ng-init="getProjectFields()"
                       data-ng-submit="updateSearch()" novalidate>

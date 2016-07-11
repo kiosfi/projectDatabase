@@ -15,42 +15,44 @@
                 </h4>
             </div>
             <div ng-show="showInfo" class="panel-body">
-                <div class="form-group col-md-6"
-                     ng-class="{'has-error': projectForm.title.$invalid }">
-                    <label class="col-md-3 control-label">
-                        {{fieldNames["title"]}}
-                    </label>
-                    <div class="col-md-9">
-                        <input name="title" type="text" class="form-control"
-                               data-ng-model="project.title" id="title"
-                               required>
-                        <div ng-show="projectForm.title.$invalid"
-                             class="help-block">
-                            <p ng-show="projectForm.title.$error.required">
-                                Kenttä on pakollinen
-                            </p>
+                <div class="col-md-12">
+                    <div class="form-group col-md-6"
+                         ng-class="{'has-error': projectForm.title.$invalid }">
+                        <label class="col-md-3 control-label">
+                            {{fieldNames["title"]}}
+                        </label>
+                        <div class="col-md-9">
+                            <input name="title" type="text" class="form-control"
+                                   data-ng-model="project.title" id="title"
+                                   required>
+                            <div ng-show="projectForm.title.$invalid"
+                                 class="help-block">
+                                <p ng-show="projectForm.title.$error.required">
+                                    Kenttä on pakollinen
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6"
+                         ng-class="{'has-error': projectForm.coordinator.$invalid }">
+                        <label  class="col-md-3 control-label">
+                            {{fieldNames["coordinator"]}}
+                        </label>
+                        <div class="col-md-9">
+                            <input name="coordinator" type="text"
+                                   class="form-control"
+                                   data-ng-model="project.coordinator"
+                                   id="coordinator" required>
+                            <div ng-show="projectForm.coordinator.$invalid"
+                                 class="help-block">
+                                <p ng-show="projectForm.coordinator.$error.required">
+                                    Koordinaattori on pakollinen
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-6"
-                     ng-class="{'has-error': projectForm.coordinator.$invalid }">
-                    <label  class="col-md-3 control-label">
-                        {{fieldNames["coordinator"]}}
-                    </label>
-                    <div class="col-md-9">
-                        <input name="coordinator" type="text"
-                               class="form-control"
-                               data-ng-model="project.coordinator"
-                               id="coordinator" required>
-                        <div ng-show="projectForm.coordinator.$invalid"
-                             class="help-block">
-                            <p ng-show="projectForm.coordinator.$error.required">
-                                Koordinaattori on pakollinen
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
+                <div class="col-md-12">
                     <div class="form-group col-md-6">
                         <label class="col-md-3 control-label">
                             Rekisteröimispvm
@@ -110,13 +112,32 @@
                             </select>
                         </div>
                     </div>
+                    &nbsp;
                 </div>
-                <div class="form-group col-md-6" data-ng-show="!newOrg">
-                    <label class="col-md-3 control-label">
-                        {{fieldNames["organisation"]}}
+                &nbsp;
+                <hr>
+                <div class="form-group col-md-12" ng-disabled="!newOrg">
+                    <label class="col-md-2 control-label">
+                        <big>{{fieldNames["organisation"]}}</big>
                     </label>
-                    <div data-ng-if="!newOrg" class="col-md-9" id="orgSelection"
-                         data-ng-init="addOrgFromDb()">
+                    <div class="col-md-3">
+                        <ul class="nav nav-pills">
+                            <li ng-class="{active: !newOrg}">
+                                <a id="addOrgFromList" data-ng-click="addOrgFromDb()">
+                                    <span class="glyphicon glyphicon-list">
+                                    </span>&nbsp;Listalta
+                                </a>
+                            </li>
+                            <li ng-class="{active: newOrg}">
+                                <a id="addOrg" data-ng-click="addNewOrg()">
+                                    <span class="glyphicon glyphicon-plus">
+                                    </span>&nbsp;Uusi
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-ng-if="!newOrg" class="col-md-7"
+                         id="orgSelection" data-ng-init="addOrgFromDb()">
                         <select data-ng-if="!newOrg"
                                 data-ng-model="project.listOrganisation">
                             <option data-ng-if="!newOrg"
@@ -127,15 +148,6 @@
                         </select>
                     </div>
                 </div>
-                <div data-ng-show="!newOrg" class="form-group col-md-6">
-                    <input type="button" id="addOrg" data-ng-click="addNewOrg()"
-                           value="Lisää uusi järjestö"/>
-                </div>
-                <div data-ng-show="newOrg" class="form-group col-md-12">
-                    <input type="button" id="addOrgFromList"
-                           data-ng-click="addOrgFromDb()"
-                           value="Lisää järjestö listalta"/>
-                </div>
                 <article class="well-lg" data-ng-show="newOrg">
                     <fieldset class="panel panel-primary">
                         <div class="panel-heading">
@@ -144,7 +156,7 @@
                                     <span class="glyphicon"
                                           ng-class="showOrgInfo ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                                     </span>
-                                    Järjestö
+                                    Järjestön perustiedot
                                 </span>
                             </h5>
                         </div>
@@ -340,7 +352,7 @@
                                     <span class="glyphicon"
                                           ng-class="showOrgDetails ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                                     </span>
-                                    Hakijajärjestön lisätiedot
+                                    Järjestön lisätiedot
                                 </span>
                             </h5>
                         </div>
