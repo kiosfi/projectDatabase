@@ -127,7 +127,8 @@ var OrganisationSchema = new Schema({
      * This field was added in schema version 3.
      */
     special_notes: {
-
+        type: String,
+        trim: true
     },
     updated: {
         type: Array

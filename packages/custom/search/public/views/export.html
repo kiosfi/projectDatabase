@@ -1,11 +1,11 @@
-<section data-ng-controller="SearchController" data-ng-init="getCsvData()">
-    <h1>Haettujen hankkeiden vienti</h1>
+<section data-ng-controller="SearchController" data-ng-init="getCSVData()">
+    <h1>Haettujen {{global.collection == "proj" ? "hankkeiden" : "järjestöjen"}} vienti</h1>
     <hr>
     <div style="text-align: center">
         <button type="button" ng-csv="global.exportResults" lazy-load="true"
                 csv-header="csvHeader" csv-column-order="csvColOrder"
-                filename="hankkeet.csv" field-separator=";" add-bom="true"
-                class="btn btn-primary">
+                filename="{{global.collection == 'proj' ? 'hankkeet' : 'järjestöt'}}.csv"
+                field-separator=";" add-bom="true" class="btn btn-primary">
             <span class="glyphicon glyphicon-download"></span>&nbsp;Lataa CSV
         </button>
     </div>

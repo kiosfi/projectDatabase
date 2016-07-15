@@ -116,7 +116,7 @@
                     <span class="glyphicon"
                           ng-class="showResults ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                     </span>
-                    Tulokset ({{organisations.length}} kpl)
+                    Tulokset ({{numberOfResults}} kpl)
                 </span>
             </h4>
         </div>
@@ -125,39 +125,31 @@
                 <thead>
                     <tr>
                         <th class="col-md-3">
-                            <a ng-click="updateOrdering('organisations', 'name')">
-                                Nimi
+                            <a ng-click="updateOrdering('org', 'name')">
                                 <span class="glyphicon"
-                                      ng-show="ordering === 'name'"
-                                      ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
-                                </span>
+                                      ng-class="ordering === 'name' ? (ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom') : 'glyphicon-none'">
+                                </span>&nbsp;Nimi
                             </a>
                         </th>
                         <th class="col-md-3">
-                            <a ng-click="updateOrdering('organisations', 'representative.name')">
-                                Edustaja
+                            <a ng-click="updateOrdering('org', 'representative.name')">
                                 <span class="glyphicon"
-                                      ng-show="ordering === 'representative.name'"
-                                      ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
-                                </span>
+                                      ng-class="ordering === 'representative.name' ? (ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom') : 'glyphicon-none'">
+                                </span>&nbsp;Edustaja
                             </a>
                         </th>
                         <th class="col-md-3">
-                            <a ng-click="updateOrdering('organisations', 'address.street')">
-                                Osoite
+                            <a ng-click="updateOrdering('org', 'address.street')">
                                 <span class="glyphicon"
-                                      ng-show="ordering === 'address.street'"
-                                      ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
-                                </span>
+                                      ng-class="ordering === 'address.street' ? (ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom') : 'glyphicon-none'">
+                                </span>&nbsp;Osoite
                             </a>
                         </th>
                         <th class="col-md-3">
-                            <a ng-click="updateOrdering('organisations', 'email')">
-                                Sähköposti
+                            <a ng-click="updateOrdering('org', 'email')">
                                 <span class="glyphicon"
-                                      ng-show="ordering === 'email'"
-                                      ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
-                                </span>
+                                      ng-class="ordering === 'email' ? (ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom') : 'glyphicon-none'">
+                                </span>&nbsp;Sähköposti
                             </a>
                         </th>
                     </tr>
@@ -177,7 +169,7 @@
                     <li ng-repeat="pg in pages"
                         ng-class="pg.number == page ? 'active' : ''">
                         <a id="page-{{pg.number}}" href=""
-                           ng-click="updatePage('organisations', pg.number)">
+                           ng-click="updatePage('org', pg.number)">
                             {{pg.number}}
                         </a>
                     </li>
@@ -198,13 +190,153 @@
             </h4>
         </div>
         <section class="panel-body" ng-show="showExport">
-            <button type="button" ng-csv="organisations" lazy-load="true"
-                    csv-header="orgHeaders" csv-column-order="csvColOrder"
-                    filename="järjestöt.csv" field-separator=";"
-                    add-bom="true" class="btn btn-primary">
-                <span class="glyphicon glyphicon-download">
-                </span>&nbsp;Lataa CSV
-            </button>
+            <div class="col-md-12" style="padding-left: 0">
+                <form data-ng-submit="getDataForCSV('org')" class="form-horizontal">
+                    <h4>Kentät</h4>
+                    <div class="col-md-3">
+                        <input id="orgBasicFields" type="checkbox"
+                               data-ng-model="orgBasicCBToggle"
+                               ng-click="setStates('org', orgBasicCBArray, orgBasicCBToggle);">
+                        <label for="orgBasicCB">Perustiedot</label>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_name"
+                                   data-ng-model="orgExportFields.org_name">
+                            <label for="org_name">
+                                Nimi
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_rep"
+                                   data-ng-model="orgExportFields.org_rep">
+                            <label for="org_rep">
+                                Edustaja
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_exec_man"
+                                   data-ng-model="orgExportFields.org_exec_man">
+                            <label for="org_exec_man">
+                                Vastaava johtaja
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_comm_rep"
+                                   data-ng-model="orgExportFields.org_comm_rep">
+                            <label for="org_comm_rep">
+                                Viestintävastaava
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_addr"
+                                   data-ng-model="orgExportFields.org_addr">
+                            <label for="org_addr">
+                                Osoite
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_tel"
+                                   data-ng-model="orgExportFields.org_tel">
+                            <label for="org_tel">
+                                Puhelinnumero
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_email"
+                                   data-ng-model="orgExportFields.org_email">
+                            <label for="org_email">
+                                Sähköpostiosoite
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_www"
+                                   data-ng-model="orgExportFields.org_www">
+                            <label for="org_www">
+                                Verkkosivut
+                            </label>
+                        </span>
+<!--                        <span class="col-md-3">
+                            <input type="checkbox" id="org_bank_account"
+                                   data-ng-model="orgExportFields.org_bank_account">
+                            <label for="org_bank_account">
+                                Pankkitili
+                            </label>
+                        </span>-->
+                    </div>
+                    <div class="col-md-3">
+                        <input id="orgExtraFields" type="checkbox"
+                               data-ng-model="orgExtraCBToggle"
+                               ng-click="setStates('org', orgExtraCBArray, orgExtraCBToggle);">
+                        <label for="orgExtraFields">Lisätiedot</label>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_legal_status"
+                                   data-ng-model="orgExportFields.org_legal_status">
+                            <label for="org_legal_status">
+                                Hallintomalli ja henkilöstö
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_description"
+                                   data-ng-model="orgExportFields.org_description">
+                            <label for="org_description">
+                                Tavoitt. ja kesk. toimintatavat
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_int_links"
+                                   data-ng-model="orgExportFields.org_int_links">
+                            <label for="org_int_links">
+                                Kansainväliset yhteydet
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_nat_local_links"
+                                   data-ng-model="orgExportFields.org_nat_local_links">
+                            <label for="org_nat_local_links">
+                                Kansalliset ja paik. yht.
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_other_funding_budget"
+                                   data-ng-model="orgExportFields.org_other_funding_budget">
+                            <label for="org_other_funding_budget">
+                                Muut rahoittajat ja budj.
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_accounting_audit"
+                                   data-ng-model="orgExportFields.org_accounting_audit">
+                            <label for="org_accounting_audit">
+                                Taloushallinto ja tt.
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_background"
+                                   data-ng-model="orgExportFields.org_background">
+                            <label for="org_background">
+                                Oleelliset taustatiedot
+                            </label>
+                        </span>
+                        <span class="col-md-3">
+                            <input type="checkbox" id="org_special_notes"
+                                   data-ng-model="orgExportFields.org_special_notes">
+                            <label for="org_special_notes">
+                                Erityishuomiot
+                            </label>
+                        </span>
+                    </div>
+                    <div class="col-md-12" style="text-align: center">
+                        <hr>
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-share-alt">
+                            </span>&nbsp;CSV
+                        </button>
+                    </div>
+                </form>
+            </div>
         </section>
     </article>
 </section>

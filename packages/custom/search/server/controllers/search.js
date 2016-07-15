@@ -291,7 +291,6 @@ module.exports = function (Search) {
              */
             if (choice.indexOf('payments') > -1) {
                 queries.push({"payments": {$exists: true, $gt: {$size: 0}}});
-
                 Project.find({$and: queries}, function (err, projects) {
                     if (err) {
                         return res.status(500).json({
@@ -312,7 +311,6 @@ module.exports = function (Search) {
                         res.json(projects);
                     }
                 });
-
             }
 
             if (choice.indexOf('approved.granted_sum_eur') > -1) {
@@ -336,9 +334,7 @@ module.exports = function (Search) {
                         res.json(projects);
                     }
                 });
-
             }
-
         },
 
         /**
@@ -349,7 +345,7 @@ module.exports = function (Search) {
          * @param {type} req Request object.
          * @param {type} res Response object.
          */
-        searchOrgs: function (req, res) {
+        searchOrganisations: function (req, res) {
             var queries = prepareQueries(req.query.searchBy);
             var ordering = req.query.ordering;
             var ascending = req.query.ascending;
@@ -373,27 +369,16 @@ module.exports = function (Search) {
                                     "representative": org.representative.name +
                                             ", " + org.representative.email + ", " +
                                             org.representative.phone,
-                                    "exec_manager": org.exec_manager,
-                                    "communications_rep": org.communications_rep,
                                     "address": org.address.street + ", " +
                                             org.address.postal_code + " " +
                                             org.address.city + ", " +
                                             org.address.country,
-                                    "tel": org.tel,
-                                    "email": org.email,
-                                    "website": org.website,
-                                    "legal_status": org.legal_status,
-                                    "description": org.description,
-                                    "int_links": org.int_links,
-                                    "nat_local_links": org.nat_local_links,
-                                    "other_funding_budget": org.other_funding_budget,
-                                    "accounting_audit": org.accounting_audit
+                                    "email": org.email
                                 };
                             });
                             res.json(orgs);
                         }
                     });
-
         },
 
         /**
@@ -401,8 +386,18 @@ module.exports = function (Search) {
          * @param {type} res
          * @returns {undefined}
          */
-        searchAllOrgs: function (req, res) {
-
+        searchAllOrganisations: function (req, res) {
+            var queries = prepareQueries(req.query.searchBy);
+            Organisation.find({$and: queries}).select(req.query.fields)
+                    .exec(function (err, orgs) {
+                    if (err) {
+                        return res.status(500).json({
+                            error: 'Virhe järjestöjen hakutoiminnossa'
+                        });
+                    } else {
+                        res.json(orgs);
+                    }
+                });
         },
 
         /**

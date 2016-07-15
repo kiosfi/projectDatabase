@@ -42,8 +42,8 @@ module.exports = function (Projects) {
             var datePieces = string.replace(/"/g, "").split("T");
             if (datePieces.length === 2) {
                 datePieces = datePieces[0].split("-");
-                return datePieces[2].replace(/$0/, "") + "."
-                        + datePieces[1].replace(/$0/, "") + "." + datePieces[0];
+                return datePieces[2].replace(/^0/, "") + "."
+                        + datePieces[1].replace(/^0/, "") + "." + datePieces[0];
             }
         }
 
@@ -888,7 +888,7 @@ module.exports = function (Projects) {
                                         "Oikeudellinen fokus")
                                 .replace("<approved.themes>", themes)
                                 .replace("<titles.organisation.www>",
-                                        "Websivut")
+                                        "Verkkosivut")
                                 .replace("<organisation.www>",
                                         filter(project.organisation.website))
                                 .replace("<titles.organisation.description>",

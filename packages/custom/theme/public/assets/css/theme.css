@@ -36,6 +36,11 @@ table {
     background-color:   #FFFFFF;
 }
 
+.glyphicon-none:before {
+    content:            "\e094";
+    color:              transparent !important;
+}
+
 .panel-heading {
     padding-top:        0.25em;
     padding-bottom:     0.25em;

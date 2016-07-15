@@ -8,6 +8,16 @@ angular.module('mean.search').factory('Search', ['$resource',
                         method: 'GET',
                         isArray: true
                     },
+                    searchAllProjects: {
+                        method: 'GET',
+                        url: 'api/search/allProjects',
+                        isArray: true
+                    },
+                    countProjects: {
+                        method: 'POST',
+                        url: 'api/search/countProjects',
+                        isarray: false
+                    },
                     searchPayments: {
                         method: 'GET',
                         url: 'api/search/payments',
@@ -18,15 +28,10 @@ angular.module('mean.search').factory('Search', ['$resource',
                         url: 'api/search/orgs',
                         isArray: true
                     },
-                    searchAllProjects: {
+                    searchAllOrganisations: {
                         method: 'GET',
-                        url: 'api/search/export',
+                        url: 'api/search/allOrganisations',
                         isArray: true
-                    },
-                    countProjects: {
-                        method: 'POST',
-                        url: 'api/search/countProjects',
-                        isarray: false
                     },
                     countOrganisations: {
                         method: 'POST',

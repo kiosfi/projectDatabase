@@ -65,7 +65,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Vastuullinen johtaja
+                                Vastaava johtaja
                             </th>
                             <td class="summary-td">
                                 {{organisation.exec_manager}}
@@ -101,12 +101,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>Websivut</th>
+                            <th>Verkkosivut</th>
                             <td class="summary-td">
                                 <a href="{{
-                                        organisation.website.startsWith('http://') ?
-                                                organisation.websiet :
-                                                'http://' + organisation.website}}">
+                                            organisation.website.startsWith('http://') ?
+                                                    organisation.websiet :
+                                                    'http://' + organisation.website}}">
                                     {{organisation.website}}
                                 </a>
                             </td>
@@ -165,20 +165,16 @@
                     <tr>
                         <th>
                             <a ng-click="sortBy('title')">
-                                <span ng-show="property === 'title'"
-                                      class="glyphicon"
-                                      ng-class="reverse ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-top'">
-                                </span>
-                                Hanke
+                                <span class="glyphicon"
+                                      ng-class="property === 'title' ? (reverse ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-top') : 'glyphicon-none'">
+                                </span>&nbsp;Hanke
                             </a>
                         </th>
                         <th>
                             <a ng-click="sortBy('approved.granted_sum_eur')">
-                                <span ng-show="property === 'approved.granted_sum_eur'"
-                                      class="glyphicon"
-                                      ng-class="reverse ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-top'">
-                                </span>
-                                Myönnetty avustus
+                                <span class="glyphicon"
+                                      ng-class="property === 'approved.granted_sum_eur' ? (reverse ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-top') : 'glyphicon-none'">
+                                </span>&nbsp;Myönnetty avustus
                             </a>
                         </th>
                     </tr>

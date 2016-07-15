@@ -125,7 +125,7 @@
                     Maksun lisäys
                 </span>
                 <a id="delete" data-ng-click="confirmProjectDeletion(project);"
-                   class="btn btn-default" style="margin-right: 1em">
+                   class="btn btn-danger" style="margin-right: 1em">
                     <span class="glyphicon glyphicon-trash"></span>
                     Poisto
                 </a>
@@ -1218,32 +1218,31 @@
                     <tr>
                         <th>
                             <a ng-click="sortBy('category')">
-                                <span ng-show="property === 'category'"
-                                      class="glyphicon"
-                                      ng-class="reverse ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-top'">
-                                </span>
-                                Liite
+                                <span class="glyphicon"
+                                      ng-class="property === 'category' ? (reverse ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-top') : 'glyphicon-none'">
+                                </span>&nbsp;Liite
                             </a>
                         </th>
                         <th>
                             <a ng-click="sortBy('original_name')">
-                                <span ng-show="property === 'original_name'"
-                                      class="glyphicon"
-                                      ng-class="reverse ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-top'">
-                                </span>
+                                <span class="glyphicon"
+                                      ng-class="property === 'original_name' ? (reverse ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-top') : 'glyphicon-none'">
+                                </span>&nbsp;
                                 Alkup. tiedostonimi
                             </a>
                         </th>
                         <th>
                             <a ng-click="sortBy('date')">
-                                <span ng-show="property === 'date'"
-                                      class="glyphicon"
-                                      ng-class="reverse ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-top'">
-                                </span>
+                                <span class="glyphicon"
+                                      ng-class="property === 'date' ? (reverse ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-top') : 'glyphicon-none'">
+                                </span>&nbsp;
                                 Päivämäärä
                             </a>
                         </th>
-                        <th>Toiminnot</th>
+                        <th>
+                            <span class="glyphicon glyphicon-none">
+                            </span>&nbsp;Toiminnot
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

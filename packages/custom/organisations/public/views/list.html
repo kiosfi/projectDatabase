@@ -8,21 +8,17 @@
                     <th class="col-md-5">
                         <a id="byName"
                            href="" ng-click="updateOrdering('name')">
-                            Nimi
                             <span class="glyphicon"
-                                  ng-show="ordering === 'name'"
-                                  ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
-                            </span>
+                                  ng-class="ordering === 'name' ? (ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom') : 'glyphicon-none'">
+                            </span>&nbsp;Nimi
                         </a>
                     </th>
                     <th class="col-md-4">
                         <a id="byRep"
                            href="" ng-click="updateOrdering('representative')">
-                            Edustaja
                             <span class="glyphicon"
-                                  ng-show="ordering === 'representative'"
-                                  ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
-                            </span>
+                                  ng-class="ordering === 'representative' ? (ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom') : 'glyphicon-none'">
+                            </span>&nbsp;Edustaja
                         </a>
                     </th>
                 </tr>

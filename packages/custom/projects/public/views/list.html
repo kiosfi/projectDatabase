@@ -7,38 +7,36 @@
                 <tr>
                     <th class="col-md-1">
                         <a id="byRef" ng-click="updateOrdering('project_ref')">
-                            {{fieldNames["project_ref"]}}
                             <span class="glyphicon"
-                                  ng-show="ordering === 'project_ref'"
-                                  ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
-                            </span>
+                                  ng-class="ordering === 'project_ref' ? (ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom') : 'glyphicon-none'">
+                            </span>&nbsp;{{fieldNames["project_ref"]}}
                         </a>
                     </th>
                     <th class="col-md-4">
                         <a id="byTitle"
                            href="" ng-click="updateOrdering('title')">
-                            {{fieldNames["title"]}}
                             <span class="glyphicon"
-                                  ng-show="ordering === 'title'"
-                                  ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
-                            </span>
+                                  ng-class="ordering === 'title' ? (ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom') : 'glyphicon-none'">
+                            </span>&nbsp;{{fieldNames["title"]}}
                         </a>
                     </th>
                     <th class="col-md-1">
                         <a id="byState"
                            href="" ng-click="updateOrdering('state')">
-                            {{fieldNames["state"]}}
                             <span class="glyphicon"
-                                  ng-show="ordering === 'state'"
-                                  ng-class="ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom'">
-                            </span>
+                                  ng-class="ordering === 'state' ? (ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom') : 'glyphicon-none'">
+                            </span>&nbsp; {{fieldNames["state"]}}
                         </a>
                     </th>
-                    <th class="col-md-3">Huomioita</th>
+                    <th class="col-md-3">
+                        <span class="glyphicon glyphicon-none">
+                        </span>&nbsp;Huomioita
+                    </th>
                     <th class="col-md-3">
                         <!-- Sorting by organisation seems to be broken, so it's
                         disabled here: -->
-                        {{fieldNames["organisation"]}}
+                        <span class="glyphicon glyphicon-none">
+                        </span>&nbsp;{{fieldNames["organisation"]}}
                     </th>
                 </tr>
             </thead>
