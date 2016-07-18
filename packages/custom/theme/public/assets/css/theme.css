@@ -36,6 +36,12 @@ table {
     background-color:   #FFFFFF;
 }
 
+.alert-warning {
+    background-color:   #FFD9CC;
+    color:              #802E11;
+    border-color:       #802E11;
+}
+
 .glyphicon-none:before {
     content:            "\e094";
     color:              transparent !important;

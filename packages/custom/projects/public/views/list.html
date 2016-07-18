@@ -8,7 +8,7 @@
                     <th class="col-md-1">
                         <a id="byRef" ng-click="updateOrdering('project_ref')">
                             <span class="glyphicon"
-                                  ng-class="ordering === 'project_ref' ? (ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom') : 'glyphicon-none'">
+                                  ng-class="ordering === 'project_ref' ? (ascending ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : 'glyphicon-none'">
                             </span>&nbsp;{{fieldNames["project_ref"]}}
                         </a>
                     </th>
@@ -16,7 +16,7 @@
                         <a id="byTitle"
                            href="" ng-click="updateOrdering('title')">
                             <span class="glyphicon"
-                                  ng-class="ordering === 'title' ? (ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom') : 'glyphicon-none'">
+                                  ng-class="ordering === 'title' ? (ascending ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : 'glyphicon-none'">
                             </span>&nbsp;{{fieldNames["title"]}}
                         </a>
                     </th>
@@ -24,7 +24,7 @@
                         <a id="byState"
                            href="" ng-click="updateOrdering('state')">
                             <span class="glyphicon"
-                                  ng-class="ordering === 'state' ? (ascending ? 'glyphicon-triangle-top' : 'glyphicon-triangle-bottom') : 'glyphicon-none'">
+                                  ng-class="ordering === 'state' ? (ascending ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : 'glyphicon-none'">
                             </span>&nbsp; {{fieldNames["state"]}}
                         </a>
                     </th>
