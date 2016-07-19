@@ -70,7 +70,8 @@ A form for project state change.
             <section class="col-md-12" style="margin: 0.5em">
                 <h4>Kuvaus</h4>
                 <section class="section">
-                    {{project.description}}
+                    <span ng-bind-html="handleEmphasis(project.description)">
+                    </span>
                 </section>
             </section>
         </section>
