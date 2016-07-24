@@ -6,7 +6,8 @@
             <thead>
                 <tr>
                     <th class="col-md-1">
-                        <a id="byRef" ng-click="updateOrdering('project_ref')">
+                        <a href="" id="byRef"
+                           ng-click="updateOrdering('project_ref')">
                             <span class="glyphicon"
                                   ng-class="ordering === 'project_ref' ? (ascending ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : 'glyphicon-none'">
                             </span>&nbsp;{{fieldNames["project_ref"]}}
@@ -41,7 +42,9 @@
                 </tr>
             </thead>
             <tbody id="projtable">
-                <tr id="proj-{{project.project_ref}}" ng-repeat="project in projects" ng-class="project.incomplete ? 'text-muted' : ''">
+                <tr id="proj-{{project.project_ref}}"
+                    ng-repeat="project in projects"
+                    ng-class="project.incomplete ? 'text-muted' : ''">
                     <td>{{project.project_ref}}</td>
                     <td><a ng-href="/projects/{{project._id}}">
                             {{project.title}}</a></td>
@@ -52,8 +55,7 @@
                         <span ng-if="project.incomplete">Keskeneräinen</span>
                         <span ng-repeat="deadline in project.signed.intreport_deadlines"
                               style="color:red;"
-                              ng-if="deadline.date < now &&
-                                                              project.intermediary_reports[project.signed.intreport_deadlines.indexOf(deadline)] === undefined">
+                              ng-if="deadline.date < now && project.intermediary_reports[project.signed.intreport_deadlines.indexOf(deadline)] === undefined">
                             {{deadline.report}} myöhässä!
                         </span>
                     </td>

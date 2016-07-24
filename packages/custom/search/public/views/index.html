@@ -180,7 +180,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <a class="btn btn-sm btn-default"
+                        <a class="btn btn-sm btn-default" href=""
                            ng-show="searchProj.length > 0"
                            ng-click="removeQuery();">
                             <span class="glyphicon glyphicon-minus">
@@ -191,7 +191,8 @@
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </span>
-                        <a class="btn btn-sm btn-default" ng-click="addQuery();">
+                        <a class="btn btn-sm btn-default" href=""
+                           ng-click="addQuery();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
                         </a>
@@ -232,17 +233,17 @@
                 <thead>
                     <tr>
                         <th class="col-md-1">
-                            <a id="byRef"
+                            <a href="" id="byRef"
                                ng-click="updateOrdering('proj', 'project_ref')">
-                                <span class="glyphicon"
+                                <span class="glyphicon" href=""
                                       ng-class="ordering === 'project_ref' ? (ascending ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : 'glyphicon-none'">
                                 </span>&nbsp;Tunnus
                             </a>
                         </th>
                         <th class="col-md-4">
-                            <a id="byTitle"
+                            <a href="" id="byTitle"
                                ng-click="updateOrdering('proj', 'title')">
-                                <span class="glyphicon"
+                                <span class="glyphicon" href=""
                                       ng-class="ordering === 'title' ? (ascending ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : 'glyphicon-none'">
                                 </span>&nbsp;Hanke
                             </a>
@@ -252,7 +253,7 @@
                             </span>&nbsp;Järjestö
                         </th>
                         <th class="col-md-4">
-                            <a id="byDesc"
+                            <a href="" id="byDesc" href=""
                                ng-click="updateOrdering('proj', 'description')">
                                 <span class="glyphicon"
                                       ng-class="ordering === 'description' ? (ascending ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : 'glyphicon-none'">
@@ -278,7 +279,7 @@
                 <ul id="pagination" class="pagination pagination-md">
                     <li ng-repeat="pg in pages"
                         ng-class="pg.number == page ? 'active' : ''">
-                        <a id="page-{{pg.number}}" href=""
+                        <a href="" id="page-{{pg.number}}"
                            ng-click="updatePage('proj', pg.number)">
                             {{pg.number}}
                         </a>

@@ -13,7 +13,11 @@
                         Muokkaus
                     </a>
                 </li>
-                <li><a data-ng-click="confirm(organisation);">Poisto</a></li>
+                <li>
+                    <a data-ng-click="confirm(organisation);" href="">
+                        Poisto
+                    </a>
+                </li>
             </ul>
         </li>
         <li>
@@ -41,7 +45,7 @@
                    class="btn btn-default" style="margin-right: 1em">
                     <span class="glyphicon glyphicon-edit"></span>&nbsp;Muokkaus
                 </a>
-                <a id="delete" data-ng-click="confirm(organisation);"
+                <a id="delete" data-ng-click="confirm(organisation);" href=""
                    class="btn btn-danger">
                     <span class="glyphicon glyphicon-trash"></span>&nbsp;Poisto
                 </a>
@@ -164,14 +168,14 @@
                 <thead>
                     <tr>
                         <th>
-                            <a ng-click="sortBy('title')">
+                            <a href="" ng-click="sortBy('title')">
                                 <span class="glyphicon"
                                       ng-class="property === 'title' ? (reverse ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up') : 'glyphicon-none'">
                                 </span>&nbsp;Hanke
                             </a>
                         </th>
                         <th>
-                            <a ng-click="sortBy('approved.granted_sum_eur')">
+                            <a href="" ng-click="sortBy('approved.granted_sum_eur')">
                                 <span class="glyphicon"
                                       ng-class="property === 'approved.granted_sum_eur' ? (reverse ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up') : 'glyphicon-none'">
                                 </span>&nbsp;Myönnetty avustus

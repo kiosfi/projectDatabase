@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li>
-                    <a data-ng-click="confirmProjectDeletion(project);">
+                    <a data-ng-click="confirmProjectDeletion(project);" href="">
                         Poisto
                     </a>
                 </li>
@@ -125,7 +125,7 @@
                     Maksun lisäys
                 </span>
                 <a id="delete" data-ng-click="confirmProjectDeletion(project);"
-                   class="btn btn-danger" style="margin-right: 1em">
+                   href="" class="btn btn-danger" style="margin-right: 1em">
                     <span class="glyphicon glyphicon-trash"></span>
                     Poisto
                 </a>
@@ -607,7 +607,7 @@
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a ng-click="createPDF('reg')"
+                        <a ng-click="createPDF('reg')" href=""
                            ng-disabled="regRepExists"
                            class="btn btn-default btn-xs"
                            style="margin-top: -4px">
@@ -771,9 +771,8 @@
                             </a>
                         </div>
                         <div class="col-md-6">
-                            <a ng-click="createPDF('int')"
-                               ng-disabled="true"
-                               class="btn btn-default btn-xs"
+                            <a ng-click="createPDF('int')" href=""
+                               ng-disabled="true" class="btn btn-default btn-xs"
                                style="margin-top: -4px">
                                 <span class="glyphicon glyphicon-file"></span>&nbsp;
                                 PDF
@@ -827,7 +826,7 @@
                         </a>
                     </div>
                     <div class="col-md-1">
-                        <a ng-click="createPDF('end')"
+                        <a ng-click="createPDF('end')" href=""
                            ng-disabled="endRepExists || nonPDFfinancialRep"
                            class="btn btn-default btn-xs"
                            style="margin-top: -4px">
@@ -1017,7 +1016,8 @@
                                 {{payment.payment_date| date:'d.M.yyyy': '+0200'}}
                             </div>
                             <div class="col-md-2">
-                                <a data-ng-click="confirmPaymentDeletion(payment.payment_number, $index + 1)">
+                                <a href=""
+                                   data-ng-click="confirmPaymentDeletion(payment.payment_number, $index + 1)">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </div>
@@ -1217,14 +1217,14 @@
                 <thead>
                     <tr>
                         <th>
-                            <a ng-click="sortBy('category')">
+                            <a href="" ng-click="sortBy('category')">
                                 <span class="glyphicon"
                                       ng-class="property === 'category' ? (reverse ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up') : 'glyphicon-none'">
                                 </span>&nbsp;Liite
                             </a>
                         </th>
                         <th>
-                            <a ng-click="sortBy('original_name')">
+                            <a href="" ng-click="sortBy('original_name')">
                                 <span class="glyphicon"
                                       ng-class="property === 'original_name' ? (reverse ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up') : 'glyphicon-none'">
                                 </span>&nbsp;
@@ -1232,7 +1232,7 @@
                             </a>
                         </th>
                         <th>
-                            <a ng-click="sortBy('date')">
+                            <a href="" ng-click="sortBy('date')">
                                 <span class="glyphicon"
                                       ng-class="property === 'date' ? (reverse ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up') : 'glyphicon-none'">
                                 </span>&nbsp;

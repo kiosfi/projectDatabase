@@ -394,12 +394,12 @@ A form for project state change.
                         </div>
                     </div>
                     <div class="col-md-12" style="margin-top: 1em">
-                        <a id="remRej" class="btn btn-sm btn-default"
+                        <a id="remRej" class="btn btn-sm btn-default" href=""
                            ng-click="removeRejection();">
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </a>
-                        <a id="addRej" class="btn btn-sm btn-default"
+                        <a id="addRej" class="btn btn-sm btn-default" href=""
                            ng-click="addRejection();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
@@ -438,9 +438,7 @@ A form for project state change.
                     <div class="col-md-8">
                         <input name="signed_by" type="text" class="form-control"
                                data-ng-model="project.signed.signed_by"
-                               id="signed_by"
-                               placeholder="Sopimuksen allekirjoittajan nimi"
-                               required>
+                               id="signed_by" required>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -501,20 +499,21 @@ A form for project state change.
                             <div class="col-md-3">
                                 <input name="plannedDay" type="number"
                                        class="form-control"
-                                       data-ng-model="plannedPayments[$index].planned_day"
-                                       id="plannedDay" placeholder="p" min="1">
+                                       data-ng-model="plannedPayments[$index].day"
+                                       id="plannedDay" placeholder="p" min="1"
+                                       max="31">
                             </div>
                             <div class="col-md-3">
                                 <input name="plannedMonth" type="number"
                                        class="form-control"
-                                       data-ng-model="plannedPayments[$index].planned_month"
+                                       data-ng-model="plannedPayments[$index].month"
                                        id="plannedMonth" placeholder="k"
-                                       min="1">
+                                       min="1" max="12">
                             </div>
                             <div class="col-md-3">
                                 <input name="plannedYear" type="number"
                                        class="form-control"
-                                       data-ng-model="plannedPayments[$index].planned_year"
+                                       data-ng-model="plannedPayments[$index].year"
                                        id="plannedYear" placeholder="vvvv"
                                        min="1">
                             </div>
@@ -532,12 +531,12 @@ A form for project state change.
                         </div>
                     </div>
                     <div class="col-md-12" style="margin-top: 1em">
-                        <a ng-click="removePlannedPayment();"
+                        <a ng-click="removePlannedPayment();" href=""
                            class="btn btn-sm btn-default">
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </a>
-                        <a id="add-btn" class="btn btn-sm btn-default"
+                        <a id="add-btn" class="btn btn-sm btn-default" href=""
                            ng-click="addPlannedPayment();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
@@ -571,30 +570,30 @@ A form for project state change.
                             <div class="col-md-3">
                                 <input name="dlDay" type="number"
                                        class="form-control"
-                                       data-ng-model="deadlines[$index].deadline_day"
+                                       data-ng-model="deadlines[$index].day"
                                        id="dlDay" placeholder="p" min="1">
                             </div>
                             <div class="col-md-3">
                                 <input name="dlMonth" type="number"
                                        class="form-control"
-                                       data-ng-model="deadlines[$index].deadline_month"
+                                       data-ng-model="deadlines[$index].month"
                                        id="dlMonth" placeholder="k" min="1">
                             </div>
                             <div class="col-md-3">
                                 <input name="dlYear" type="number"
                                        class="form-control"
-                                       data-ng-model="deadlines[$index].deadline_year"
+                                       data-ng-model="deadlines[$index].year"
                                        id="dlYear" placeholder="vvvv" min="1">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12" style="margin-top: 1em">
-                        <a class="btn btn-sm btn-default"
+                        <a class="btn btn-sm btn-default" href=""
                            ng-click="removeDeadline();">
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </a>
-                        <a id="add-btn2" class="btn btn-sm btn-default"
+                        <a id="add-btn2" class="btn btn-sm btn-default" href=""
                            ng-click="addDeadline();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
@@ -607,7 +606,7 @@ A form for project state change.
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-default">
+                    <button id="end-btn" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -658,8 +657,7 @@ A form for project state change.
                                   class="form-control"
                                   data-ng-model="objectiveComments[0]"
                                   id="objComments"
-                                  rows="10" cols="50"
-                                  placeholder="Kommentteja tavoitteiden toteutumisesta">
+                                  rows="10" cols="50">
                         </textarea>
                     </div>
                 </div>
@@ -671,8 +669,7 @@ A form for project state change.
                         <textarea name="communication" type="text"
                                   class="form-control"
                                   data-ng-model="project.intermediary_report.communication"
-                                  id="communication"
-                                  placeholder="Raportointi ja yhteydenpito">
+                                  id="communication">
                         </textarea>
                     </div>
                 </div>
@@ -684,8 +681,7 @@ A form for project state change.
                         <textarea name="evaluation" type="text"
                                   class="form-control"
                                   data-ng-model="project.intermediary_report.evaluation"
-                                  id="evaluation"
-                                  placeholder="Evaluointi ja vaikuttavuuden arviointi">
+                                  id="evaluation">
                         </textarea>
                     </div>
                 </div>
@@ -697,8 +693,7 @@ A form for project state change.
                         <textarea name="budget" type="text"
                                   class="form-control"
                                   data-ng-model="project.intermediary_report.budget"
-                                  id="budget"
-                                  placeholder="Budjetin toteutuminen ja raportoitu summa">
+                                  id="budget">
                         </textarea>
                     </div>
                 </div>
@@ -709,8 +704,7 @@ A form for project state change.
                     <div class="col-md-10">
                         <textarea name="overallKios" type="text"
                                   class="form-control"
-                                  data-ng-model="project.intermediary_report.overall_rating_kios"
-                                  id="overallKios" placeholder="KIOSiin arvio">
+                                  data-ng-model="project.intermediary_report.overall_rating_kios">
                         </textarea>
                     </div>
                 </div>
@@ -720,8 +714,7 @@ A form for project state change.
                         <textarea name="intRComments" type="text"
                                   class="form-control"
                                   data-ng-model="project.intermediary_report.comments"
-                                  id="intRcomments"
-                                  placeholder="Päätös"></textarea>
+                                  id="intRcomments"></textarea>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -730,7 +723,8 @@ A form for project state change.
                          ng-class="{'has-error': intReportForm.intRDateAppr_day.$invalid}">
                         <input name="intRDateAppr_day" type="number"
                                class="form-control" data-ng-model="intRDateAppr_day"
-                               id="intRDateAppr_day" placeholder="p">
+                               id="intRDateAppr_day" placeholder="p" min="1"
+                               max="31">
                         <div ng-show="intReportForm.intRDateAppr_day.$invalid"
                              class="help-block">
                             <p ng-show="intReportForm.intRDateAppr_day.$error.number">
@@ -742,7 +736,8 @@ A form for project state change.
                          ng-class="{'has-error': intReportForm.intRDateAppr_month.$invalid}">
                         <input name="intRDateAppr_month" type="number"
                                class="form-control" data-ng-model="intRDateAppr_month"
-                               id="intRDateAppr_month" placeholder="k">
+                               id="intRDateAppr_month" placeholder="k" min="1"
+                               max="12">
                         <div ng-show="intReportForm.intRDateAppr_month.$invalid"
                              class="help-block">
                             <p ng-show="intReportForm.intRDateAppr_month.$error.number">
@@ -755,7 +750,7 @@ A form for project state change.
                         <input name="intRDateAppr_year" type="number"
                                class="form-control"
                                data-ng-model="intRDateAppr_year"
-                               id="intRDateAppr_year" placeholder="vvvv">
+                               id="intRDateAppr_year" placeholder="vvvv" min="0">
                         <div ng-show="intReportForm.intRDateAppr_year.$invalid"
                              class="help-block">
                             <p ng-show="intReportForm.intRDateAppr_year.$error.number">

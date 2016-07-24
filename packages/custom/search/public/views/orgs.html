@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <a class="btn btn-sm btn-default"
+                        <a class="btn btn-sm btn-default" href=""
                            ng-show="searchOrg.length > 0"
                            ng-click="removeOrgQuery();">
                             <span class="glyphicon glyphicon-minus">
@@ -84,7 +84,8 @@
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </span>
-                        <a class="btn btn-sm btn-default" ng-click="addOrgQuery();">
+                        <a class="btn btn-sm btn-default" href=""
+                           ng-click="addOrgQuery();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
                         </a>
@@ -125,28 +126,31 @@
                 <thead>
                     <tr>
                         <th class="col-md-3">
-                            <a ng-click="updateOrdering('org', 'name')">
+                            <a href="" ng-click="updateOrdering('org', 'name')">
                                 <span class="glyphicon"
                                       ng-class="ordering === 'name' ? (ascending ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : 'glyphicon-none'">
                                 </span>&nbsp;Nimi
                             </a>
                         </th>
                         <th class="col-md-3">
-                            <a ng-click="updateOrdering('org', 'representative.name')">
+                            <a href=""
+                               ng-click="updateOrdering('org', 'representative.name')">
                                 <span class="glyphicon"
                                       ng-class="ordering === 'representative.name' ? (ascending ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : 'glyphicon-none'">
                                 </span>&nbsp;Edustaja
                             </a>
                         </th>
                         <th class="col-md-3">
-                            <a ng-click="updateOrdering('org', 'address.street')">
+                            <a href=""
+                               ng-click="updateOrdering('org', 'address.street')">
                                 <span class="glyphicon"
                                       ng-class="ordering === 'address.street' ? (ascending ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : 'glyphicon-none'">
                                 </span>&nbsp;Osoite
                             </a>
                         </th>
                         <th class="col-md-3">
-                            <a ng-click="updateOrdering('org', 'email')">
+                            <a href=""
+                               ng-click="updateOrdering('org', 'email')">
                                 <span class="glyphicon"
                                       ng-class="ordering === 'email' ? (ascending ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : 'glyphicon-none'">
                                 </span>&nbsp;Sähköposti

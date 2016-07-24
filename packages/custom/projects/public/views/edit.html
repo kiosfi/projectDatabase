@@ -716,7 +716,8 @@
                          ng-class="{'has-error': projectEditForm.board_notified_day.$invalid}">
                         <input name="board_notified_day" type="number"
                                class="form-control" data-ng-model="notified_day"
-                               id="board_notified_day" placeholder="p" min="1">
+                               id="board_notified_day" placeholder="p" min="1"
+                               max="31">
                         <div ng-show="projectEditForm.board_notified_day.$invalid"
                              class="help-block">
                             <p ng-show="projectEditForm.board_notified_day.$error.number">
@@ -730,7 +731,7 @@
                                class="form-control"
                                data-ng-model="notified_month"
                                id="board_notified_month" placeholder="k"
-                               min="1">
+                               min="1" max="12">
                         <div ng-show="projectEditForm.board_notified_month.$invalid"
                              class="help-block">
                             <p ng-show="projectEditForm.board_notified_month.$error.number">
@@ -744,7 +745,7 @@
                                class="form-control"
                                data-ng-model="notified_year"
                                id="board_notified_year"
-                               placeholder="vvvv" min="1">
+                               placeholder="vvvv" min="0">
                         <div ng-show="projectEditForm.board_notified_year.$invalid"
                              class="help-block">
                             <p ng-show="projectEditForm.board_notified_year.$error.number">
@@ -885,12 +886,12 @@
                         </div>
                     </div>
                     <div class="col-md-12" style="margin-top: 1em">
-                        <a id="remRej" class="btn btn-sm btn-default"
+                        <a id="remRej" class="btn btn-sm btn-default" href=""
                            ng-click="removeRejection();">
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </a>
-                        <a id="addRej" class="btn btn-sm btn-default"
+                        <a id="addRej" class="btn btn-sm btn-default" href=""
                            ng-click="addRejection();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
@@ -1030,12 +1031,12 @@
                         </div>
                     </div>
                     <div class="col-md-12" style="margin-top: 1em">
-                        <a ng-click="removePlannedPayment();"
+                        <a ng-click="removePlannedPayment();" href=""
                            class="btn btn-sm btn-default">
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </a>
-                        <a id="add-btn" class="btn btn-sm btn-default"
+                        <a id="add-btn" class="btn btn-sm btn-default" href=""
                            ng-click="addPlannedPayment();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
@@ -1087,12 +1088,12 @@
                         </div>
                     </div>
                     <div class="col-md-12" style="margin-top: 1em">
-                        <a class="btn btn-sm btn-default"
+                        <a class="btn btn-sm btn-default" href=""
                            ng-click="removeDeadline();">
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </a>
-                        <a id="add-btn2" class="btn btn-sm btn-default"
+                        <a id="add-btn2" class="btn btn-sm btn-default" href=""
                            ng-click="addDeadline();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
@@ -1129,7 +1130,7 @@
                     </div>
                     <div class="panel-body"
                          ng-show="showInt[intreport.reportNumber]">
-                        <label class="col-md-12">
+                        <label class="col-md-12" ng-show="project.methods.length > 0">
                             Toimintatavat ja niiden toteutuminen
                         </label>
                         <div class="form-group col-md-12"
@@ -1232,7 +1233,7 @@
                                        class="form-control"
                                        data-ng-model="intreport.date_day"
                                        id="intRDateAppr_day" placeholder="p"
-                                       min="1">
+                                       min="1" max="31">
                                 <div ng-show="projectEditForm.intRDateAppr_day.$invalid"
                                      class="help-block">
                                     <p ng-show="projectEditForm.intRDateAppr_day.$error.number">
@@ -1246,7 +1247,7 @@
                                        class="form-control"
                                        data-ng-model="intreport.date_month"
                                        id="intRDateAppr_month" placeholder="k"
-                                       min="1">
+                                       min="1" max="12">
                                 <div ng-show="projectEditForm.intRDateAppr_month.$invalid"
                                      class="help-block">
                                     <p ng-show="projectEditForm.intRDateAppr_month.$error.number">
