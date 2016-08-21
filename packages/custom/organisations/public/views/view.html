@@ -175,6 +175,20 @@
                             </a>
                         </th>
                         <th>
+                            <a href="" ng-click="sortBy('state')">
+                                <span class="glyphicon"
+                                      ng-class="property === 'state' ? (reverse ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up') : 'glyphicon-none'">
+                                </span>&nbsp;Tila
+                            </a>
+                        </th>
+                        <th>
+                            <a href="" ng-click="sortBy('latestStateDate')">
+                                <span class="glyphicon"
+                                      ng-class="property === 'latestStateDate' ? (reverse ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up') : 'glyphicon-none'">
+                                </span>&nbsp;Tilan pvm
+                            </a>
+                        </th>
+                        <th>
                             <a href="" ng-click="sortBy('approved.granted_sum_eur')">
                                 <span class="glyphicon"
                                       ng-class="property === 'approved.granted_sum_eur' ? (reverse ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up') : 'glyphicon-none'">
@@ -189,6 +203,12 @@
                             <a data-ng-href="/projects/{{project._id}}">
                                 {{project.title}}
                             </a>
+                        </td>
+                        <td>
+                            {{project.state}}
+                        </td>
+                        <td>
+                            {{project.latestStateDate | date:'d.M.yyyy': '+0200'}}
                         </td>
                         <td>
                             {{project.approved.granted_sum_eur ? numberToString(project.approved.granted_sum_eur) + " EUR" : "Ei myönnettyä avustusta"}}

@@ -157,6 +157,35 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
         $scope.findOrgProjects = function () {
             OrgProjects.findProjects($stateParams.organisationId).success(function (projects) {
                 $scope.orgProjects = projects;
+                $scope.orgProjects.forEach(function (project) {
+                    switch (project.state) {
+                        case "päättynyt":
+                            project.latestStateDate = project.ended.date;
+                            break;
+                        case "loppuraportti":
+                            project.latestStateDate = project.end_report.date;
+                            break;
+                        case "väliraportti":
+                            project.latestStateDate = project.intermediary_reports[
+                                    project.intermediary_reports.length - 1].date;
+                            break;
+                        case "allekirjoitettu":
+                            project.latestStateDate = project.signed.date;
+                            break;
+                        case "hylätty":
+                            project.latestStateDate = project.rejected.date;
+                            break;
+                        case "hyväksytty":
+                            project.latestStateDate = project.approved.date;
+                            break;
+                        case "käsittelyssä":
+                            project.latestStateDate = project.in_review.date;
+                            break;
+                        case "rekisteröity":
+                        default:
+//                            project.latestStateDate = ObjectId(project._id).getTimestamp();
+                    }
+                });
             });
         };
 
