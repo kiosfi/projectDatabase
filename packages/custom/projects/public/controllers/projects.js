@@ -4,19 +4,19 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
     '$stateParams', '$location', '$window', '$q', '$http', '$filter', 'Global',
     'Projects', 'OrgProjects', 'MeanUser', 'Circles', 'Organisations',
     function ($scope, $stateParams, $location, $window, $q, $http, $filter,
-    Global, Projects, OrgProjects, MeanUser, Circles, Organisations) {
+            Global, Projects, OrgProjects, MeanUser, Circles, Organisations) {
         $scope.global = Global;
 
         $http.get("projects/assets/json/projectConstants.json").success(
                 function (response) {
-                    $scope.securityLevels       = response.security_levels;
-                    $scope.currencyUnits        = response.currency_units;
-                    $scope.themes               = response.themes;
-                    $scope.methodNames          = response.method_names;
-                    $scope.methodLevels         = response.method_levels;
-                    $scope.rejCategories        = response.rej_categories;
-                    $scope.fieldNames           = response.field_names;
-                    $scope.appendixCategories   = response.appendix_categories;
+                    $scope.securityLevels = response.security_levels;
+                    $scope.currencyUnits = response.currency_units;
+                    $scope.themes = response.themes;
+                    $scope.methodNames = response.method_names;
+                    $scope.methodLevels = response.method_levels;
+                    $scope.rejCategories = response.rej_categories;
+                    $scope.fieldNames = response.field_names;
+                    $scope.appendixCategories = response.appendix_categories;
                 });
 
         $scope.addedMethods = [];
@@ -175,7 +175,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                         $scope.register_day,
                         $scope.register_month,
                         $scope.register_year
-                );
+                        );
                 project.reg_date = reg_date;
 
                 if ($scope.newOrg) {
@@ -227,7 +227,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                                 $scope.approved_day,
                                 $scope.approved_month,
                                 $scope.approved_year
-                        );
+                                );
                     }
 
                     if ($scope.projectEditForm.board_notified_day.$dirty
@@ -237,7 +237,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                                 $scope.notified_day,
                                 $scope.notified_month,
                                 $scope.notified_year
-                        );
+                                );
                     }
 
                     project.approved.themes = $scope.themeSelection;
@@ -251,7 +251,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                                 $scope.signed_day,
                                 $scope.signed_month,
                                 $scope.signed_year
-                        );
+                                );
                     }
 
                     project.signed.intreport_deadlines = [];
@@ -262,7 +262,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                                     obj.deadline_day,
                                     obj.deadline_month,
                                     obj.deadline_year
-                            )
+                                    )
                         });
                     });
 
@@ -273,13 +273,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                                     obj.planned_day,
                                     obj.planned_month,
                                     obj.planned_year
-                            ),
+                                    ),
                             sum_eur: obj.sum_eur
                         });
                     });
                 }
 
-                if (project.intermediary_reports.length > 0) {
+                if (project.intermediary_reports && project.intermediary_reports.length > 0) {
                     project.intermediary_reports = [];
 
                     angular.forEach($scope.int_reports, function (report) {
@@ -296,14 +296,14 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                                     report.date_day,
                                     report.date_month,
                                     report.date_year
-                            ),
+                                    ),
                             reportNumber: report.reportNumber,
                             user: report.user,
                             date: report.date});
                     });
                 }
 
-                if ((typeof project.end_report.date) !== 'undefined') {
+                if (project.end_report && (typeof project.end_report.date) !== 'undefined') {
                     if ($scope.projectEditForm.audit_day.$dirty
                             || $scope.projectEditForm.audit_month.$dirty
                             || $scope.projectEditForm.audit_year.$dirty) {
@@ -353,10 +353,40 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     $location.path('projects/' + project._id);
                 });
             } else {
-                console.log("The following fields have invalid values:");
                 $scope.printInvalidFields($scope.projectEditForm);
                 $scope.submitted = true;
             }
+        };
+        
+        /**
+         * Removes the fields related to states whose information can't be
+         * present when modifying the project in its current state. This is a
+         * bugfix for the problem where registered projects couldn't be modified
+         * because they had the field for approved state with invalid data, so
+         * Angular wouldn't accept the modification and the user couldn't access
+         * the appropriate form fields due to state restrictions.
+         * 
+         * @param {type} project    The project to be edited.
+         * @returns {undefined}
+         */
+        $scope.removeFutureStates = function (project) {
+            switch (project.state) {
+                    case "rekisteröity":
+                        project.in_review = undefined;
+                    case "käsittelyssä":
+                        project.approved = undefined;
+                    case "hyväksytty":
+                        project.rejected = undefined;
+//                    case "hylätty":
+                        project.signed = undefined;
+                        project.payments = undefined;
+                    case "allekirjoitettu":
+                        project.intermediary_reports = undefined;
+                    case "väliraportti":
+                        project.end_report = undefined;
+                    case "loppuraportti":
+                        project.ended = undefined;
+                }
         };
 
         /**
@@ -380,6 +410,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     $scope.addedMethods.push({name: obj.name, level: obj.level,
                         comment: obj.comment});
                 });
+
+                // Classic "quick 'n dirty" approach:
+                $scope.removeFutureStates($scope.project);
 
                 if ((typeof project.approved) !== 'undefined') {
                     var date = new Date(project.approved.approved_date);
@@ -423,7 +456,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     });
                 }
 
-                if (project.intermediary_reports.length > 0) {
+                if (project.intermediary_reports && project.intermediary_reports.length > 0) {
                     angular.forEach(project.intermediary_reports, function (obj) {
                         var date = new Date(obj.date_approved);
                         $scope.int_reports.push({
@@ -445,7 +478,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     });
                 }
 
-                if ((typeof project.end_report.date) !== 'undefined') {
+                if (project.end_report && (typeof project.end_report.date) !== 'undefined') {
                     var date = new Date(project.end_report.approved_date);
                     $scope.er_approved_day = date.getDate() - 1;
                     $scope.er_approved_month = date.getMonth() + 1;
@@ -497,10 +530,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                 ascending: ascending,
                 page: page
             },
-            function (results) {
-                $scope.now = new Date().toISOString();
-                $scope.projects = results;
-            }
+                    function (results) {
+                        $scope.now = new Date().toISOString();
+                        $scope.projects = results;
+                    }
             );
         };
 
@@ -776,7 +809,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                             $scope.approved_day,
                             $scope.approved_month,
                             $scope.approved_year
-                    );
+                            );
                 }
 
                 if (((typeof $scope.notified_day) !== 'undefined') &&
@@ -786,7 +819,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                             $scope.notified_day,
                             $scope.notified_month,
                             $scope.notified_year
-                    );
+                            );
                 }
                 project.approved.themes = $scope.themeSelection;
                 project.state = $scope.global.newState;
@@ -833,7 +866,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                             $scope.signed_day,
                             $scope.signed_month,
                             $scope.signed_year
-                    );
+                            );
                 }
 
                 project.signed.date = Date.now();
@@ -843,7 +876,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                 for (var i = 0; i < plpms.length; i++) {
                     var pp = $scope.convertDate(
                             plpms[i].day, plpms[i].month, plpms[i].year
-                    );
+                            );
                     $scope.parsedPlannedPayments.push({
                         date: pp, sum_eur: plpms[i].sum_eur,
                         sum_local: plpms[i].sum_local
@@ -854,7 +887,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                 for (var i = 0; i < dls.length; i++) {
                     var dl = $scope.convertDate(
                             dls[i].day, dls[i].month, dls[i].year
-                    );
+                            );
                     $scope.parsedDeadlines.push({report: dls[i].report, date: dl});
                 }
                 project.signed.intreport_deadlines = $scope.parsedDeadlines;
@@ -880,7 +913,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                         $scope.payment_day,
                         $scope.payment_month,
                         $scope.payment_year
-                );
+                        );
                 project.payment.payment_date = payment_date;
                 var index = project.payments.length;
                 if (index === undefined) {
@@ -925,7 +958,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                             $scope.intRDateAppr_day,
                             $scope.intRDateAppr_month,
                             $scope.intRDateAppr_year
-                    );
+                            );
                 }
 
                 project.state = $scope.global.newState;
@@ -966,7 +999,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                             $scope.er_approved_day,
                             $scope.er_approved_month,
                             $scope.er_approved_year
-                    );
+                            );
                 }
 
                 if (((typeof $scope.audit_day) !== 'undefined') &&
@@ -976,7 +1009,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                             $scope.audit_day,
                             $scope.audit_month,
                             $scope.audit_year
-                    );
+                            );
                 }
 
                 project.$addEndReport(function (response) {
@@ -1004,7 +1037,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                             $scope.end_day,
                             $scope.end_month,
                             $scope.end_year
-                    );
+                            );
                 }
 
                 if (((typeof $scope.notified_day) !== 'undefined') &&
@@ -1014,7 +1047,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                             $scope.end_notified_day,
                             $scope.end_notified_month,
                             $scope.end_notified_year
-                    );
+                            );
                 }
 
                 project.state = $scope.global.newState;
@@ -1235,7 +1268,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
             $scope.reverse = ($scope.property === property) ? !$scope.reverse : false;
             $scope.property = property;
         };
-                
+
         /**
          * Prints the names of the invalid fields of an input form to the
          * console.
@@ -1245,7 +1278,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
          */
         $scope.printInvalidFields = function (form) {
             var invalids = "";
-            Object.keys(form).forEach(function(fieldName) {
+            Object.keys(form).forEach(function (fieldName) {
                 if (!fieldName.startsWith("$") && !fieldName.startsWith("$$") &&
                         !fieldName.startsWith("_") && form[fieldName].$invalid) {
                     invalids += fieldName + ", ";
@@ -1259,5 +1292,5 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
             }
         }
     }
-    
+
 ]);
