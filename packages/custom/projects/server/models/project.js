@@ -14,7 +14,7 @@ var ProjectSchema = new Schema({
      * This piece of metadata tells the version number of the scheme. It is used
      * for updating old entries to the newest version during runtime.
      */
-    schema_version: {           // Current version is 9.
+    schema_version: {           // Current version is 10.
         type: Number,
         required: true,
         default: 1
@@ -614,6 +614,24 @@ var ProjectSchema = new Schema({
          */
         grade: {                // "Numeerinen arvio"
             type: Number,
+            trim: true
+        },
+        /**
+         * Comments on the project's planned results. Planned results can be
+         * added to a project in the Project Creation Form. This field was added
+         * in the schema version 10.
+         */
+        planned_results: {      // "Tulostavoitteet"
+            type: String,
+            trim: true
+        },
+        /**
+         * Comments on the project's indicators. Indicators can be added to a
+         * project in the Project Creation Form. This field was added in the
+         * schema version 10.
+         */
+        indicators: {           // "Tulosten saavuttamisen todentaminen"
+            type: String,
             trim: true
         },
         processed: {            // "Käsitelty"

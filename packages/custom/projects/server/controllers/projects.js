@@ -1021,10 +1021,20 @@ module.exports = function (Projects) {
                         + " \\end{itemize}\n";
             });
             methods += "\\end{itemize}";
+            
+            var planned_results = "\\subsubsection*{Suunnitelma}\n"
+                    + filter(project.planned_results)
+                    + "\n \\subsubsection*{Toteutuminen}"
+                    + filter(project.end_report.planned_results);
+            
+            var indicators = "\\subsubsection*{Suunnitelma}\n"
+                    + filter(project.indicators)
+                    + "\n \\subsubsection*{Toteutuminen}"
+                    + filter(project.end_report.indicators);
 
-            var objective = "\\subsubsection*{Päätavoitteet}\n"
+            var objective = "\\subsubsection*{Suunnitelma}\n"
                     + filter(project.project_goal)
-                    + "\n \\subsubsection*{Päätavoitteiden toteutuminen}"
+                    + "\n \\subsubsection*{Toteutuminen}"
                     + filter(project.end_report.objective);
 
             var plannedPayments = "\\begin{tabular}{l l l}";
@@ -1121,8 +1131,14 @@ module.exports = function (Projects) {
                             filter(project.end_report.audit.review))
                     .replace("<titles.end-report.methods>", "Toiminnot")
                     .replace("<end-report.methods>", methods)
+                    .replace("<titles.end-report.planned-results>",
+                            "Tulostavoitteet")
+                    .replace("<end-report.planned-results>", planned_results)
+                    .replace("<titles.end-report.indicators>",
+                            "Tulosten saavuttamisen todentaminen")
+                    .replace("<end-report.indicators>", indicators)
                     .replace("<titles.end-report.objective>",
-                            "Tärkeimmät tulokset")
+                            "Päätavoitteet")
                     .replace("<end-report.objective>", objective)
                     .replace("<titles.end-report.direct-beneficiaries>",
                             "Suoria hyödynsaajia")

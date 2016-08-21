@@ -850,8 +850,9 @@ A form for project state change.
                         </textarea>
                     </div>
                 </div>
-                <label class="col-md-12">
-                    Toiminnot ja niiden toteutuminen
+                <label class="col-md-12" 
+                       data-ng-show="project.methods && project.methods.length > 0">
+                    Toiminnot
                 </label>
                 <div class="form-group col-md-12"
                      ng-repeat="method in project.methods">
@@ -870,7 +871,37 @@ A form for project state change.
                     </div>
                 </div>
                 <label class="col-md-12">
-                    Kokonaistavoitteen toteutuminen
+                    Tulostavoitteet
+                </label>
+                <div class="form-group col-md-12">
+                    <div class="col-md-6" style="text-align: justify">
+                        <p ng-bind-html="handleEmphasis(project.planned_results)"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <textarea name="plannedResultsComments" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.end_report.planned_results"
+                                  id="plannedResultsComments" rows="10" cols="50">
+                        </textarea>
+                    </div>
+                </div>
+                <label class="col-md-12">
+                    Tulosten saavuttamisen todentaminen
+                </label>
+                <div class="form-group col-md-12">
+                    <div class="col-md-6" style="text-align: justify">
+                        <p ng-bind-html="handleEmphasis(project.indicators)"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <textarea name="indicatorsComments" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.end_report.indicators"
+                                  id="indicatorsComments" rows="10" cols="50">
+                        </textarea>
+                    </div>
+                </div>
+                <label class="col-md-12">
+                    Kokonaistavoite
                 </label>
                 <div class="form-group col-md-12">
                     <div class="col-md-6" style="text-align: justify">

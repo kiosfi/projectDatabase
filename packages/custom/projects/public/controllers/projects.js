@@ -279,7 +279,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     });
                 }
 
-                if (project.intermediary_reports && project.intermediary_reports.length > 0) {
+                if (project.intermediary_reports &&
+                        project.intermediary_reports.length > 0) {
                     project.intermediary_reports = [];
 
                     angular.forEach($scope.int_reports, function (report) {
@@ -303,7 +304,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     });
                 }
 
-                if (project.end_report && (typeof project.end_report.date) !== 'undefined') {
+                if (project.end_report &&
+                        (typeof project.end_report.date) !== 'undefined') {
                     if ($scope.projectEditForm.audit_day.$dirty
                             || $scope.projectEditForm.audit_month.$dirty
                             || $scope.projectEditForm.audit_year.$dirty) {
@@ -357,7 +359,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                 $scope.submitted = true;
             }
         };
-        
+
         /**
          * Removes the fields related to states whose information can't be
          * present when modifying the project in its current state. This is a
@@ -371,22 +373,22 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
          */
         $scope.removeFutureStates = function (project) {
             switch (project.state) {
-                    case "rekisteröity":
-                        project.in_review = undefined;
-                    case "käsittelyssä":
-                        project.approved = undefined;
-                    case "hyväksytty":
-                        project.rejected = undefined;
+                case "rekisteröity":
+                    project.in_review = undefined;
+                case "käsittelyssä":
+                    project.approved = undefined;
+                case "hyväksytty":
+                    project.rejected = undefined;
 //                    case "hylätty":
-                        project.signed = undefined;
-                        project.payments = undefined;
-                    case "allekirjoitettu":
-                        project.intermediary_reports = undefined;
-                    case "väliraportti":
-                        project.end_report = undefined;
-                    case "loppuraportti":
-                        project.ended = undefined;
-                }
+                    project.signed = undefined;
+                    project.payments = undefined;
+                case "allekirjoitettu":
+                    project.intermediary_reports = undefined;
+                case "väliraportti":
+                    project.end_report = undefined;
+                case "loppuraportti":
+                    project.ended = undefined;
+            }
         };
 
         /**
@@ -681,6 +683,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                 project.sustainability_risks = undefined;
                 project.country = project.region;
                 project.region = "";
+            }
+            if (project.schema_version < 10) {
+                if (project.state === "loppuraportti") {
+                    project.end_report.planned_results =
+                            project.end_report.planned_results
+                            ? project.end_report.planned_results : "";
+                    project.end_report.indicators =
+                            project.end_report.indicators
+                            ? project.end_report.indicators : "";
+                }
                 project.$update(function () {
                 });
             }
@@ -1052,7 +1064,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
 
                 project.state = $scope.global.newState;
                 project.$addEnded(function (response) {
-                    $location.path('projects/' + response._id)
+                    $location.path('projects/' + response._id);
                 });
             }
 
