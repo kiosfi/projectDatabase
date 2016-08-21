@@ -353,6 +353,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     $location.path('projects/' + project._id);
                 });
             } else {
+                console.log("The following fields have invalid values:");
+                $scope.printInvalidFields($scope.projectEditForm);
                 $scope.submitted = true;
             }
         };
@@ -362,7 +364,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
          *
          */
         $scope.initEditing = function () {
-            // TODO: Figure out, why the hell we need to move the data from
+            // TODO: Figure out, why we need to move the data from
             // $scope.project.<var> to $scope.<var>. Looks like this bit of
             // code, and the edit form as well, could use some refactoring...
             Projects.get({
@@ -1233,5 +1235,29 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
             $scope.reverse = ($scope.property === property) ? !$scope.reverse : false;
             $scope.property = property;
         };
+                
+        /**
+         * Prints the names of the invalid fields of an input form to the
+         * console.
+         *
+         * @param {type} form
+         * @returns {undefined}
+         */
+        $scope.printInvalidFields = function (form) {
+            var invalids = "";
+            Object.keys(form).forEach(function(fieldName) {
+                if (!fieldName.startsWith("$") && !fieldName.startsWith("$$") &&
+                        !fieldName.startsWith("_") && form[fieldName].$invalid) {
+                    invalids += fieldName + ", ";
+                }
+            });
+            if (invalids !== "") {
+                console.log("The following fields have invalid values:\n\n"
+                        + invalids);
+            } else {
+                console.log("All fields have valid values.");
+            }
+        }
     }
+    
 ]);
