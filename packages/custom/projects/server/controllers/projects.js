@@ -64,12 +64,12 @@ module.exports = function (Projects) {
                 .replace(/\\/g, "")
                 .replace(/\{/g, "\\{")
                 .replace(/\}/g, "\\}")
-                .replace(/Å/g, "\\AA")  // This workaround is needed
-                .replace(/å/g, "\\aa")  // because the production server
-                .replace(/Ä/g, "\\\"\{A\}") // has insufficient/obsolete
-                .replace(/ä/g, "\\\"\{a\}") // latex packages installed
-                .replace(/Ö/g, "\\\"\{O\}") // (in this case the inputenc
-                .replace(/ö/g, "\\\"\{o\}") // package, but also
+//                .replace(/Å/g, "\\AA")  // This workaround is needed
+//                .replace(/å/g, "\\aa")  // because the production server
+//                .replace(/Ä/g, "\\\"\{A\}") // has insufficient/obsolete
+//                .replace(/ä/g, "\\\"\{a\}") // latex packages installed
+//                .replace(/Ö/g, "\\\"\{O\}") // (in this case the inputenc
+//                .replace(/ö/g, "\\\"\{o\}") // package, but also
                 // the babel package, which
                 // means that currently Finnish
                 .replace(/\&/g, "\\&")  // hyphenation is
