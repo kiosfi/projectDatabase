@@ -52,11 +52,15 @@ module.exports = function (Search) {
                     };
                 }
                 if (query.startYear && query.endYear) {
-                    query.field = query.dateField;
-                    query.value = {
-                        $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1)
-                                .toISOString(),
-                        $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1)
+                    query.field = "$and";
+                    var fieldName = query.dateField;
+                    query.value = [{}, {}];
+                    query.value[0][fieldName] = {
+                        "$gte": new Date(query.startYear, query.startMonth - 1, query.startDay + 1)
+                                .toISOString()
+                    };
+                    query.value[1][fieldName] = {
+                        "$lte": new Date(query.endYear, query.endMonth - 1, query.endDay + 1)
                                 .toISOString()
                     };
                 }
@@ -285,10 +289,7 @@ module.exports = function (Search) {
         searchPayments: function (req, res) {
             var choice = _.values(JSON.parse(req.query.choice));
             var queries = prepareQueries(req.query.searchBy);
-
-            /**
-             * Query paid sums
-             */
+            
             if (choice.indexOf('payments') > -1) {
                 queries.push({"payments": {$exists: true, $gt: {$size: 0}}});
                 Project.find({$and: queries}, function (err, projects) {
