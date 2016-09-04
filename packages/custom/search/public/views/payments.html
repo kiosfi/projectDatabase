@@ -200,8 +200,7 @@
                 <span ng-click="showResults = !showResults"
                       class="panel-button">
                     <span class="glyphicon"
-                          ng-class="showResults
-                                                  ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
+                          ng-class="showResults ? 'glyphicon-collapse-down' : 'glyphicon-collapse-up'">
                     </span>
                     Tulokset ({{payments.length}} kpl)
                 </span>
@@ -222,7 +221,7 @@
                         <td>{{payment.sum| currency: ""}}</td>
                         <td>{{payment.date| date: 'dd.MM.yyyy': '+0200'}}</td>
                         <td>{{payment.ref}}</td>
-                        <td><a ng-href="/projects/{{payment.id}}"
+                        <td><a ng-href="/projects/{{payment.project_id}}"
                                target="_blank">{{payment.title}}</a></td>
                     </tr>
                 </tbody>

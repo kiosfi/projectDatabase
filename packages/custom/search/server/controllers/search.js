@@ -15,6 +15,22 @@ module.exports = function (Search) {
      * search function.
      */
     var PAGE_SIZE = 10;
+    
+//    function startDates(searchBy) {
+//        return _.map(JSON.parse(searchBy), function (query) {
+//            return query.dateField && query.startYear ? 
+//                    new Date(query.startYear, query.startMonth - 1, query.startDay + 1)
+//                            .toISOString() : "";
+//        });
+//    };
+//    
+//    function endDates(seachBy) {
+//        return _.map(JSON.parse(searchBy), function (query) {
+//            return query.dateField && query.startYear ? 
+//                    new Date(query.startYear, query.startMonth - 1, query.startDay + 1)
+//                            .toISOString() : "";
+//        });
+//    };
 
     /**
      * Formulates received search query depending on the type of
@@ -40,14 +56,14 @@ module.exports = function (Search) {
                 if (query.startYear && !query.endYear) {
                     query.field = query.dateField;
                     query.value = {
-                        $gte: new Date(query.startYear, query.startMonth - 1, query.startDay + 1)
+                        "$gte": new Date(query.startYear, query.startMonth - 1, query.startDay + 1)
                                 .toISOString()
                     };
                 }
                 if (query.endYear && !query.startYear) {
                     query.field = query.dateField;
                     query.value = {
-                        $lte: new Date(query.endYear, query.endMonth - 1, query.endDay + 1)
+                        "$lte": new Date(query.endYear, query.endMonth - 1, query.endDay + 1)
                                 .toISOString()
                     };
                 }
@@ -288,10 +304,11 @@ module.exports = function (Search) {
          */
         searchPayments: function (req, res) {
             var choice = _.values(JSON.parse(req.query.choice));
-            var queries = prepareQueries(req.query.searchBy);
+            var queries = [{"payments": {$exists: true, $gt: {$size: 0}}}]
+                    .concat(prepareQueries(req.query.searchBy));
             
+//            console.log(JSON.stringify(queries));
             if (choice.indexOf('payments') > -1) {
-                queries.push({"payments": {$exists: true, $gt: {$size: 0}}});
                 Project.find({$and: queries}, function (err, projects) {
                     if (err) {
                         return res.status(500).json({
@@ -305,7 +322,8 @@ module.exports = function (Search) {
                                     "ref": project.project_ref,
                                     "title": project.title,
                                     "coordinator": project.coordinator,
-                                    "region": project.region};
+                                    "region": project.region,
+                                    "project_id": project._id};
                             });
                             return payments;
                         }));
@@ -330,7 +348,7 @@ module.exports = function (Search) {
                                 "date": project.approved.approved_date,
                                 "ref": project.project_ref,
                                 "title": project.title,
-                                "id": project._id};
+                                "project_id": project._id};
                         });
                         res.json(projects);
                     }
