@@ -15,22 +15,6 @@ module.exports = function (Search) {
      * search function.
      */
     var PAGE_SIZE = 10;
-    
-//    function startDates(searchBy) {
-//        return _.map(JSON.parse(searchBy), function (query) {
-//            return query.dateField && query.startYear ? 
-//                    new Date(query.startYear, query.startMonth - 1, query.startDay + 1)
-//                            .toISOString() : "";
-//        });
-//    };
-//    
-//    function endDates(seachBy) {
-//        return _.map(JSON.parse(searchBy), function (query) {
-//            return query.dateField && query.startYear ? 
-//                    new Date(query.startYear, query.startMonth - 1, query.startDay + 1)
-//                            .toISOString() : "";
-//        });
-//    };
 
     /**
      * Formulates received search query depending on the type of
@@ -90,7 +74,8 @@ module.exports = function (Search) {
             search[query.field] = query.value;
             return search;
         });
-    };
+    }
+    ;
 
     return {
         /**
@@ -174,7 +159,6 @@ module.exports = function (Search) {
                         });
             });
         },
-
         /**
          * Returns all projects matching the given search query in the HTTP POST
          * parameter <tt>searchBy</tt>. The fields in the documents will be
@@ -249,7 +233,6 @@ module.exports = function (Search) {
                         });
             });
         },
-
         /**
          * Counts the number of all projects matching the search query given by
          * the HTTP POST parameter <tt>searchBy</tt>.
@@ -294,7 +277,6 @@ module.exports = function (Search) {
                         });
             });
         },
-
         /**
          * Returns all payments matching the given search query in the HTTP POST
          * parameter <tt>searchPay</tt>.
@@ -303,59 +285,68 @@ module.exports = function (Search) {
          * @param {type} res Response object.
          */
         searchPayments: function (req, res) {
-            var choice = _.values(JSON.parse(req.query.choice));
-            var queries = [{"payments": {$exists: true, $gt: {$size: 0}}}]
-                    .concat(prepareQueries(req.query.searchBy));
-            
-//            console.log(JSON.stringify(queries));
-            if (choice.indexOf('payments') > -1) {
-                Project.find({$and: queries}, function (err, projects) {
-                    if (err) {
-                        return res.status(500).json({
-                            error: 'Virhe maksujen hakutoiminnossa'
-                        });
-                    } else {
-                        projects = _.flattenDeep(_.map(projects, function (project) {
-                            var payments = _.map(project.payments, function (payment) {
-                                return {"sum": payment.sum_eur,
-                                    "date": payment.payment_date,
-                                    "ref": project.project_ref,
-                                    "title": project.title,
-                                    "coordinator": project.coordinator,
-                                    "region": project.region,
-                                    "project_id": project._id};
-                            });
-                            return payments;
-                        }));
-                        res.json(projects);
-                    }
-                });
-            }
-
-            if (choice.indexOf('approved.granted_sum_eur') > -1) {
-                queries.push({"approved.granted_sum_eur": {$exists: true}});
-
-                Project.find({$and: queries}, function (err, projects) {
-                    if (err) {
-                        return res.status(500).json({
-                            error: 'Virhe maksujen hakutoiminnossa'
-                        });
-                    } else {
-                        projects = _.map(projects, function (project) {
-
-
-                            return {"sum": project.approved.granted_sum_eur,
-                                "date": project.approved.approved_date,
-                                "ref": project.project_ref,
-                                "title": project.title,
-                                "project_id": project._id};
-                        });
-                        res.json(projects);
-                    }
-                });
+            var choice = JSON.parse(req.query.choice).choice;
+            var queries = prepareQueries(req.query.searchBy);
+            var startDate, endDate;
+            queries.forEach(function (query) {
+                var andQueries = query.$and;
+                if (andQueries) {
+                    andQueries.forEach(function (andQuery) {
+                        var dateQuery = andQuery["payments.payment_date"];
+                        if (dateQuery) {
+                            startDate = dateQuery.$gte;
+                            endDate = dateQuery.$lte;
+                        }
+                    });
+                }
+            });
+            if (choice === "payments") {
+                Project.find({$and: [{"payments": {$exists: true, $gt: {$size: 0}}}].concat(queries)},
+                        function (err, projects) {
+                            if (err) {
+                                return res.status(500).json({
+                                    error: "Virhe maksujen hakutoiminnossa"
+                                });
+                            } else {
+                                res.json((_.flattenDeep(_.map(projects, function (project) {
+                                    var payments = _.map(project.payments, function (payment) {
+                                        return {"sum": payment.sum_eur,
+                                            "date": payment.payment_date,
+                                            "ref": project.project_ref,
+                                            "title": project.title,
+                                            "coordinator": project.coordinator,
+                                            "region": project.region,
+                                            "project_id": project._id};
+                                    });
+                                    return payments;
+                                }))).filter(function (payment) {
+                                    return (startDate ? payment.date >= startDate : true) &&
+                                            (endDate ? payment.date <= endDate : true);
+                                }));
+                            }
+                        }
+                );
+            } else {
+                Project.find({$and: [{"approved.granted_sum_eur": {$exists: true}}].concat(queries)},
+                        function (err, projects) {
+                            if (err) {
+                                return res.status(500).json({
+                                    error: "Virhe maksujen hakutoiminnossa"
+                                });
+                            } else {
+                                projects = _.map(projects, function (project) {
+                                    return {"sum": project.approved.granted_sum_eur,
+                                        "date": project.approved.approved_date,
+                                        "ref": project.project_ref,
+                                        "title": project.title,
+                                        "project_id": project._id};
+                                });
+                                res.json(projects);
+                            }
+                        }
+                );
             }
         },
-
         /**
          * Returns all organisations matching the given search query in the HTTP
          * POST parameter <tt>searchOrg</tt>. This query is used for listing
@@ -399,7 +390,6 @@ module.exports = function (Search) {
                         }
                     });
         },
-
         /**
          * @param {type} req
          * @param {type} res
@@ -409,16 +399,15 @@ module.exports = function (Search) {
             var queries = prepareQueries(req.query.searchBy);
             Organisation.find({$and: queries}).select(req.query.fields)
                     .exec(function (err, orgs) {
-                    if (err) {
-                        return res.status(500).json({
-                            error: 'Virhe järjestöjen hakutoiminnossa'
-                        });
-                    } else {
-                        res.json(orgs);
-                    }
-                });
+                        if (err) {
+                            return res.status(500).json({
+                                error: 'Virhe järjestöjen hakutoiminnossa'
+                            });
+                        } else {
+                            res.json(orgs);
+                        }
+                    });
         },
-
         /**
          * Counts the number of all organisations matching the search query
          * given by the HTTP POST parameter <tt>searchBy</tt>.

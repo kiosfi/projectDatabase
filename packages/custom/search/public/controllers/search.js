@@ -197,22 +197,6 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
                 "page": page
             }, function (results) {
                 $scope.organisations = results;
-
-//                $scope.csvColOrder = ['name', 'representative',
-//                    'exec_manager', 'communications_rep', 'address', 'tel',
-//                    'email', 'website', 'legal_status', 'description',
-//                    'int_links', 'nat_local_links', 'other_funding_budget',
-//                    'accounting_audit', 'background', 'special_notes'];
-//
-//                $scope.orgHeaders = ['Nimi', 'Edustaja', 'Vastaava johtaja',
-//                    'Viestintävastaava', 'Osoite', 'Puhelinnumero',
-//                    'Sähköpostiosoite', 'Verkkosivut',
-//                    'Hallintomalli ja henkilöstö',
-//                    'Tavoitteet ja keskeiset toimintatavat',
-//                    'Kansainväliset yhteydet', 'Kansalliset yhteydet',
-//                    'Muut rahoittajat ja budjetti',
-//                    'Taloushallinto ja tilintarkastus',
-//                    'Oleelliset taustatiedot', 'Erityishuomiot'];
             });
         };
 
