@@ -6,7 +6,6 @@
 var mongoose = require('mongoose'),
         Project = mongoose.model('Project'),
         Organisation = mongoose.model('Organisation'),
-        BankAccount = mongoose.model('BankAccount'),
         States = mongoose.model('States'),
         config = require('meanio').loadConfig(),
         multiparty = require('multiparty'),
@@ -17,9 +16,9 @@ var mongoose = require('mongoose'),
         mkdirp = require('mkdirp'),
         crypto = require('crypto'),
         mime = require('mime'),
-        numeral = require('numeral').language('fi', {
-    delimiters: {thousands: '\\,', decimal: ','}
-}),
+        numeral = require('numeral').language('fi', 
+                {delimiters: {thousands: '\\,', decimal: ','}}
+        ),
         _ = require('lodash');
 
 numeral.language('fi');
@@ -135,7 +134,7 @@ module.exports = function (Projects) {
      *
      * @param {type} project
      * @param {String} template
-     * @param {String} ouTDir
+     * @param {String} outDir
      * @param {String} fileName
      * @param {String} customCategory
      * @param {type} res
@@ -178,8 +177,7 @@ module.exports = function (Projects) {
                     Projects.events.publish({
                         action: 'updated',
                         name: project.title,
-                        url: config.hostname + '/projects/'
-                                + project._id
+                        url: config.hostname + '/projects/' + project._id
                     });
                     res.status(201).json({});
                 });
@@ -221,11 +219,11 @@ module.exports = function (Projects) {
                     .count(function (err, count) {
                         function pad(n) {
                             if (n < 10) {
-                                return "00" + n
-                            } else if (n >= 10 && n < 100) {
-                                return "0" + n
+                                return "00" + n;
+                            } else if (n < 100) {
+                                return "0" + n;
                             } else {
-                                return n
+                                return n;
                             }
                         }
 

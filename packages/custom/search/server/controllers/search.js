@@ -310,8 +310,9 @@ module.exports = function (Search) {
                             } else {
                                 res.json((_.flattenDeep(_.map(projects, function (project) {
                                     var payments = _.map(project.payments, function (payment) {
+                                        var d = payment.payment_date.split("T")[0].split("-");
                                         return {"sum": payment.sum_eur,
-                                            "date": payment.payment_date,
+                                            "date": d[2] + "." + d[1] + "." + d[0],
                                             "ref": project.project_ref,
                                             "title": project.title,
                                             "coordinator": project.coordinator,
@@ -335,8 +336,9 @@ module.exports = function (Search) {
                                 });
                             } else {
                                 projects = _.map(projects, function (project) {
+                                    var d = project.approved_date.split("T")[0].split("-");
                                     return {"sum": project.approved.granted_sum_eur,
-                                        "date": project.approved.approved_date,
+                                        "date": d[2] + "." + d[1] + "." + d[0],
                                         "ref": project.project_ref,
                                         "title": project.title,
                                         "project_id": project._id};
