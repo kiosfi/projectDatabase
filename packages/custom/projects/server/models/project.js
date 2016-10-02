@@ -48,6 +48,15 @@ var ProjectSchema = new Schema({
         required: true,
         trim: true
     },
+    
+    /**
+     * The date of creation of the Project document. This field was added in the 
+     * schema version 11.
+     */
+    date: {
+        type: Date
+    },
+    
     /**
      * Name of the coordinator of the project.
      */

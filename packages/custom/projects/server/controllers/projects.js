@@ -227,7 +227,8 @@ module.exports = function (Projects) {
                             }
                         }
 
-                        project.schema_version = 2;
+                        project.schema_version = 11;
+                        project.date = new Date();
                         project.project_ref = prefix + pad(count + 1);
                         project.organisation = req.body.organisation;
                         project.save(function (err) {

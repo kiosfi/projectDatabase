@@ -160,28 +160,39 @@ angular.module('mean.organisations').controller('OrganisationsController', ['$sc
                 $scope.orgProjects.forEach(function (project) {
                     switch (project.state) {
                         case "päättynyt":
-                            project.latestStateDate = project.ended.date;
+                            project.latestStateDate = project.ended.ended_date
+                                    ? project.ended.ended_date
+                                    : project.ended.date;
                             break;
                         case "loppuraportti":
-                            project.latestStateDate = project.end_report.date;
+                            project.latestStateDate = project.end_report.approved_date 
+                                    ? project.end_report.approved_date 
+                                    : project.end_report.date;
                             break;
                         case "väliraportti":
                             project.latestStateDate = project.intermediary_reports[
                                     project.intermediary_reports.length - 1].date;
                             break;
                         case "allekirjoitettu":
-                            project.latestStateDate = project.signed.date;
+                            project.latestStateDate = project.signed.signed_date 
+                                    ? project.signed.signed_date 
+                                    : project.signed.date;
                             break;
                         case "hylätty":
                             project.latestStateDate = project.rejected.date;
                             break;
                         case "hyväksytty":
-                            project.latestStateDate = project.approved.date;
+                            project.latestStateDate = project.approved.approved_date
+                                    ? project.approved.approved_date
+                                    : project.approved.date;
                             break;
                         case "käsittelyssä":
                             project.latestStateDate = project.in_review.date;
                             break;
                         case "rekisteröity":
+                            if (project.date) {
+                                project.latestStateDate = project.date;
+                            }
                         default:
 //                            project.latestStateDate = ObjectId(project._id).getTimestamp();
                     }
