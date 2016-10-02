@@ -761,9 +761,12 @@ module.exports = function (Projects) {
             var checkbox = function (checked) {
                 return checked ? " \\makebox[0pt][l]{$\\square$}\\raisebox{.15ex}{\\hspace{0.1em}$\\checkmark$}" : " \\makebox[0pt][l]{$\\square$}\\hspace{0.3cm}";
             };
-            var description = filter(project.description.substring(0, 1000));
+            var description = (project.description ? 
+                    filter(project.description.substring(0, 1000)) : "")
             description += project.description.length > 1000 ? "..." : "";
-            var plannedResultsSummary = filter(project.planned_results.substring(0, 1000));
+            var plannedResultsSummary = (project.planned_results ? 
+                    filter(project.planned_results.substring(0, 1000))
+                    : "");
             plannedResultsSummary += project.planned_results.length > 1000 ? "..." : "";
             var themes = "";
             project.approved.themes.forEach(function (theme) {
@@ -993,9 +996,11 @@ module.exports = function (Projects) {
             var outDir = rootDir + "data/" + project._id;
             var fileName = uniqueFilename(outDir);
             var date = new Date();
-            var description = filter(project.description.substring(0, 1000));
+            var description = (project.description ? 
+                    filter(project.description.substring(0, 1000)) : "");
             description += project.description.length > 1000 ? "..." : "";
-            var plannedResultsSummary = filter(project.planned_results.substring(0, 1000));
+            var plannedResultsSummary = (project.planned_results ? 
+                    filter(project.planned_results.substring(0, 1000)) : "");
             plannedResultsSummary += project.planned_results.length > 1000 ? "..." : "";
             var themes = "";
             project.approved.themes.forEach(function (theme) {

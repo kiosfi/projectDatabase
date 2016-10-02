@@ -69,9 +69,7 @@
                     </div>
                     <div class="report-subcontent">
                         <em>Toteutuminen: </em>
-                        <!-- For some reason, the value of this field is an
-                        array. -->
-                        <span ng-bind-html="handleEmphasis(report.objectives[0])"></span>
+                        <span ng-bind-html="handleEmphasis(report.objectiveComments)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">

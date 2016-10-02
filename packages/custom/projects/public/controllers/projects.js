@@ -698,7 +698,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                             project.end_report.indicators
                             ? project.end_report.indicators : "";
                 }
-                project.schema_version = 10;
+            }
+            if (project.schema_version < 11) {
+                if (project.intermediary_reports) {
+                    project.intermediary_reports.forEach(function (intreport) {
+                        intreport.objectiveComments = intreport.objectives ? 
+                                intreport.objectives[0] : "";
+                        intreport.objectives = undefined;
+                    });
+                }
+                project.schema_version = 11;
                 project.$update(function () {
                 });
             }

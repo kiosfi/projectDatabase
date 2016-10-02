@@ -14,7 +14,7 @@ var ProjectSchema = new Schema({
      * This piece of metadata tells the version number of the scheme. It is used
      * for updating old entries to the newest version during runtime.
      */
-    schema_version: {           // Current version is 10.
+    schema_version: {           // Current version is 11.
         type: Number,
         required: true,
         default: 1
@@ -247,10 +247,10 @@ var ProjectSchema = new Schema({
         trim: true
     },
     /**
-     * The current Finnish name for this field is "Evaluointi ja vaikuttavuuden
-     * arviointi".
+     * The current Finnish name for this field is "Muita huomioita" (since 
+     * schema version 11). 
      */
-    reporting_evaluation: {     // "Evaluointi ja vaikuttavuuden arviointi"
+    reporting_evaluation: {     // "Muita huomioita"
         type: String,
         trim: true
     },
@@ -515,7 +515,7 @@ var ProjectSchema = new Schema({
     /**
      * An array of objects containing the following fields:<tt>reportNumber</tt>,
      * <tt>date</tt>, <tt>user</tt>, <tt>budget</tt>, <tt>communication</tt>,
-     * <tt>evaluation</tt>, <tt>methods</tt>, <tt>objectives</tt>,
+     * <tt>evaluation</tt>, <tt>methods</tt>, <tt>objectiveComments</tt>,
      * <tt>planned_payments</tt>, <tt>overal_rating_kios</tt>, and
      * <tt>comments</tt>.
      */
