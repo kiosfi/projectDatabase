@@ -714,6 +714,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
             // This is a bugfix for adding payments:
             if (project.approved.granted_sum_eur && !(project.funding.left_eur)) {
                 project.funding.left_eur = project.approved.granted_sum_eur;
+                project.$update(function () {
+                });
             }
         };
 
