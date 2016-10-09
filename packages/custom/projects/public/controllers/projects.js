@@ -955,7 +955,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                 } else {
                     project.payment.payment_number = project.payments.length + 1;
                 }
-                $console.log(project.funding.left_eur);
                 project.$addPayment(function (response) {
                 });
             }
