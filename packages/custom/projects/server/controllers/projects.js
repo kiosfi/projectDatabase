@@ -63,6 +63,12 @@ module.exports = function (Projects) {
                 .replace(/\\/g, "")
                 .replace(/\{/g, "\\{")
                 .replace(/\}/g, "\\}")
+                .replace(/Å/g, "\\AA")      // This workaround is needed
+                .replace(/å/g, "\\aa")      // because there seems to be some
+                .replace(/Ä/g, "\\\"\{A\}") // issues with character encoding
+                .replace(/ä/g, "\\\"\{a\}") // even though the production server
+                .replace(/Ö/g, "\\\"\{O\}") // should support unicode.
+                .replace(/ö/g, "\\\"\{o\}")
                 // the babel package, which
                 // means that currently Finnish
                 .replace(/\&/g, "\\&")  // hyphenation is
@@ -501,6 +507,7 @@ module.exports = function (Projects) {
             project.funding.left_eur = project.funding.left_eur -
                     payment.sum_eur;
             project.save(function (err) {
+                console.log(err);
                 if (err) {
                     return res.status(500).json({
                         error: 'Maksatuksen lisääminen epäonnistui.'
