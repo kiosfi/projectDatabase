@@ -711,6 +711,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                 project.$update(function () {
                 });
             }
+            // This is a bugfix for adding payments:
+            if (project.approved.granted_sum_eur && !(project.funding.left_eur)) {
+                project.funding.left_eur = project.approved.granted_sum_eur;
+            }
         };
 
         /**
@@ -849,6 +853,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     );
                 }
                 project.approved.themes = $scope.themeSelection;
+                project.funding.left_eur = project.approved.granted_sum_eur;
                 project.state = $scope.global.newState;
                 project.$addApproved(function (response) {
                     $location.path('projects/' + response._id)

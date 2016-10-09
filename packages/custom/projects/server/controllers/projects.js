@@ -507,7 +507,6 @@ module.exports = function (Projects) {
             project.funding.left_eur = project.funding.left_eur -
                     payment.sum_eur;
             project.save(function (err) {
-                console.log(err);
                 if (err) {
                     return res.status(500).json({
                         error: 'Maksatuksen lisääminen epäonnistui.'
