@@ -884,7 +884,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         };
 
         /**
-         * Updates project with "signed" state data
+         * Updates project with data related to the state "signed".
          *
          * @param {type} isValid checks if project creation form is valid
          * @returns {undefined}
@@ -1023,7 +1023,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
             if (isValid) {
                 var project = $scope.project;
                 project.end_report.date = Date.now();
-                project.end_report.methods = $scope.addedMethods;
                 project.state = $scope.global.newState;
 
                 if (((typeof $scope.er_approved_day) !== 'undefined') &&
@@ -1116,7 +1115,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
             $scope.plannedPayments.push({
                 day: $scope.currentDate.getDate(),
                 month: $scope.currentDate.getMonth() + 1,
-                year: $scope.currentDate.getFullYear(), sum_eur: 0
+                year: $scope.currentDate.getFullYear(),
+                sum_eur: 0
             });
         };
         $scope.removePlannedPayment = function () {
