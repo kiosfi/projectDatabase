@@ -165,7 +165,7 @@
                         <div ng-show="showOrgInfo" class="panel-body">
                             <div class="form-group col-md-6"
                                  ng-class="{'has-error': projectForm.orgname.$invalid}">
-                                <label class="col-md-3 control-label">Nimi</label>
+                                <label class="col-md-3 control-label">{{fieldNames["organisation_name"]}}</label>
                                 <div class="col-md-9">
                                     <input data-ng-if="newOrg" name="orgname"
                                            type="text" class="form-control"
@@ -181,7 +181,7 @@
                             </div>
                             <div class="form-group col-md-6"
                                  ng-class="{'has-error': projectForm.orgrepName.$invalid}">
-                                <label class="col-md-3 control-label">Edustaja</label>
+                                <label class="col-md-3 control-label">{{fieldNames["organisation_representative"]}}</label>
                                 <div class="col-md-9">
                                     <input data-ng-if="newOrg" name="orgrepName"
                                            type="text" class="form-control"
@@ -229,7 +229,7 @@
                             <div class="form-group col-md-6">
                                 <div class="form-group"
                                      ng-class="{'has-error': projectForm.orgaddr.$invalid}">
-                                    <label class="col-md-3 control-label">Osoite</label>
+                                    <label class="col-md-3 control-label">{{fieldNames["organisation_address"]}}</label>
                                     <div class="col-md-9">
                                         <input data-ng-if="newOrg" name="orgaddr"
                                                type="text" class="form-control"
@@ -313,7 +313,7 @@
                             <div class="form-group col-md-6"
                                  ng-class="{'has-error': projectForm.orgemail.$invalid}">
                                 <label  class="col-md-3 control-label">
-                                    Sähköpostiosoite
+                                    {{fieldNames["organisation_email"]}}
                                 </label>
                                 <div class="col-md-9">
                                     <input data-ng-if="newOrg" name="orgemail"
@@ -336,7 +336,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label  class="col-md-3 control-label">
-                                    Verkkosivut
+                                    {{fieldNames["organisation_www"]}}
                                 </label>
                                 <div class="col-md-9">
                                     <input data-ng-if="newOrg" name="orgwww"
@@ -419,7 +419,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="orgLinks"
                                            class="col-md-3 control-label">
-                                        Kansainväliset yhteydet
+                                        Yhteistyökumppanit ja verkostoituminen
                                     </label>
                                     <div class="col-md-9">
                                         <textarea data-ng-if="newOrg"
@@ -449,7 +449,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="orgOthFund"
                                            class="col-md-3 control-label">
-                                        Muut rahoittajat, budjetti
+                                        Vuosibudjetit ja rahoittajat
                                     </label>
                                     <div class="col-md-9">
                                         <textarea data-ng-if="newOrg"

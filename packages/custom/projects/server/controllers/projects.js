@@ -893,7 +893,7 @@ module.exports = function (Projects) {
                                         "Oikeudellinen fokus")
                                 .replace("<approved.themes>", themes)
                                 .replace("<titles.organisation.www>",
-                                        "Verkkosivut")
+                                        "Kotisivut")
                                 .replace("<organisation.www>",
                                         filter(project.organisation.website))
                                 .replace("<titles.organisation.description>",
@@ -909,11 +909,11 @@ module.exports = function (Projects) {
                                 .replace("<organisation.nat-local-links>",
                                         filter(project.organisation.nat_local_links))
                                 .replace("<titles.organisation.int-links>",
-                                        "Kansainväliset yhteydet")
+                                        "Yhteistyökumppanit ja verkostoituminen")
                                 .replace("<organisation.int-links>",
                                         filter(project.organisation.int_links))
                                 .replace("<titles.organisation.other-funding-budget>",
-                                        "Muut rahoittajat ja budjetti")
+                                        "Vuosibudjetit ja rahoittajat")
                                 .replace("<organisation.other-funding-budget>",
                                         filter(project.organisation.other_funding_budget))
                                 .replace("<titles.organisation.accounting-audit>",
@@ -926,22 +926,22 @@ module.exports = function (Projects) {
                                 .replace("<titles.context>", "Ihmisoikeuskonteksti")
                                 .replace("<context>", filter(project.context))
                                 .replace("<titles.project-goal>",
-                                        "Päätavoitteet")
+                                        "Keskeinen tavoite ja oikeudellinen fokus")
                                 .replace("<project-goal>",
                                         filter(project.project_goal))
                                 .replace("<titles.target-group>",
-                                        "Kohderyhmä")
+                                        "Hyödynsaajat ja sidosryhmät")
                                 .replace("<target-group>",
                                         filter(project.target_group))
                                 .replace("<titles.methods>",
-                                        "Suunnitellut toiminnot")
+                                        "Suunnitellut aktiviteetit")
                                 .replace("<methods>", methods)
                                 .replace("<titles.human-resources>",
                                         "Henkilöresurssit")
                                 .replace("<human-resources>",
                                         filter(project.human_resources))
                                 .replace("<titles.gender-aspect>",
-                                        "Tasa-arvonäkökulma ja muut läpileikkaavat teemat")
+                                        "Tasa-arvonäkökulma")
                                 .replace("<gender-aspect>",
                                         filter(project.gender_aspect))
                                 .replace("<titles.vulnerable-groups>",
@@ -953,11 +953,11 @@ module.exports = function (Projects) {
                                 .replace("<planned-results>",
                                         filter(project.planned_results))
                                 .replace("<titles.risk-control>",
-                                        "Riskinhallinnan kuvaus")
+                                        "Ilmastokestävyyden huomioon ottaminen")
                                 .replace("<risk-control>",
                                         filter(project.risk_control))
                                 .replace("<titles.indicators>",
-                                        "Tulosten saavuttamisen todentaminen")
+                                        "Hankkeen strategiset kumppanit")
                                 .replace("<indicators>",
                                         filter(project.indicators))
                                 .replace("<titles.reporting-evaluation>",
@@ -1140,7 +1140,7 @@ module.exports = function (Projects) {
                             "Tilintarkastus")
                     .replace("<end-report.audit.review>",
                             filter(project.end_report.audit.review))
-                    .replace("<titles.end-report.methods>", "Toiminnot")
+                    .replace("<titles.end-report.methods>", "Aktiviteetit")
                     .replace("<end-report.methods>", methods)
                     .replace("<titles.end-report.planned-results>",
                             "Tulostavoitteet")
@@ -1149,7 +1149,7 @@ module.exports = function (Projects) {
                             "Tulosten saavuttamisen todentaminen")
                     .replace("<end-report.indicators>", indicators)
                     .replace("<titles.end-report.objective>",
-                            "Päätavoitteet")
+                            "Keskeinen tavoite ja oikeudellinen fokus")
                     .replace("<end-report.objective>", objective)
                     .replace("<titles.end-report.direct-beneficiaries>",
                             "Suoria hyödynsaajia")

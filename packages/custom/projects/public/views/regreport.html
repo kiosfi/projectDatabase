@@ -168,7 +168,7 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Kansainväliset yhteydet
+                        Yhteistyökumppanit ja verkostoituminen
                     </div>
                     <div class="report-subcontent">
                         <p>{{project.organisation.int_links}}</p>
@@ -176,7 +176,7 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        Muut rahoittajat ja budjetti
+                        Vuosibudjetit ja rahoittajat
                     </div>
                     <div class="report-subcontent">
                         {{project.organisation.otder_funding_budget}}
@@ -240,6 +240,14 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
+                        {{fieldNames["planned_results"]}}
+                    </div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.planned_results)"></span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
                         Suunnitellut {{fieldNames["methods"].toLowerCase()}}
                     </div>
                     <div class="report-subcontent">
@@ -257,6 +265,14 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
+                        {{fieldNames["human_resources"]}}
+                    </div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.human_resources)"></span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
                         {{fieldNames["gender_aspect"]}}
                     </div>
                     <div class="report-subcontent">
@@ -269,14 +285,6 @@
                     </div>
                     <div class="report-subcontent">
                         <span ng-bind-html="handleEmphasis(project.vulnerable_groups)"></span>
-                    </div>
-                </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
-                        {{fieldNames["planned_results"]}}
-                    </div>
-                    <div class="report-subcontent">
-                        <span ng-bind-html="handleEmphasis(project.planned_results)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -301,14 +309,6 @@
                     </div>
                     <div class="report-subcontent">
                         <span ng-bind-html="handleEmphasis(project.reporting_evaluation)"></span>
-                    </div>
-                </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
-                        {{fieldNames["human_resources"]}}
-                    </div>
-                    <div class="report-subcontent">
-                        <span ng-bind-html="handleEmphasis(project.human_resources)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">

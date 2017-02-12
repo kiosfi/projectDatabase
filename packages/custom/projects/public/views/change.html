@@ -52,11 +52,11 @@ A form for project state change.
                     </section>
                 </div>
                 <div class="col-md-6">
-                    <h4>Järjestö</h4>
+                    <h4>{{fieldNames["organisation"]}}</h4>
                     <section class="section">
-                        <div class="col-md-3 mini-header">Nimi</div>
+                        <div class="col-md-3 mini-header">{{fieldNames["organisation_name"]}}</div>
                         <div class="col-md-9">{{project.organisation.name}}</div>
-                        <div class="col-md-3 mini-header">Edustaja</div>
+                        <div class="col-md-3 mini-header">{{fieldNames["organisation_representative"]}}</div>
                         <div class="col-md-9">
                             {{project.organisation.representative.name}}<br>
                             {{project.organisation.representative.email}}<br>
