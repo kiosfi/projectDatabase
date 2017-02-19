@@ -182,6 +182,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                 if ($scope.newOrg) {
                     var org = new Organisations($scope.project.organisation);
                     org.schema_version = 3;
+                    org.nat_local_links = "-";
                     org.$save(function (response) {
                         var orgId = response._id;
                         project.organisation = orgId;

@@ -101,6 +101,10 @@ var OrganisationSchema = new Schema({
         type: String,
         trim: true
     },
+    /**
+     * This field was hidden from the views in version 1.0.10 of the Project
+     * Database.
+     */
     nat_local_links: {
         type: String,
         trim: true

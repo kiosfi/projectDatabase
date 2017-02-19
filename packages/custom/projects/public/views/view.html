@@ -47,7 +47,7 @@
                     <label><a href="#organisation">Järjestö</a></label>
                 </li>-->
         <li>
-            <label><a href="#assessment">KIOSin arvio</a></label>
+            <label><a href="#assessment">Arvio</a></label>
         </li>
         <li>
             <label><a href="#schedule">Aikataulu</a></label>
@@ -312,7 +312,7 @@
             </span>
         </section>
     </article>
-    <article class="panel panel-primary">
+    <article class="panel panel-primary" ng-show="nonEmpty(project.description_en)">
         <div class="panel-heading">
             <h4>{{fieldNames["description_en"]}}</h4>
         </div>
@@ -351,6 +351,24 @@
                     <span ng-bind-html="handleEmphasis(project.target_group)"></span>
                 </div>
             </div>
+            <div ng-show="nonEmpty(project.planned_results)"
+                 class="col-md-12" style="margin-bottom: 1em">
+                <div class="col-md-4 mini-header">
+                    {{fieldNames["planned_results"]}}
+                </div>
+                <div class="col-md-8">
+                    <span ng-bind-html="handleEmphasis(project.planned_results)"></span>
+                </div>
+            </div>            
+            <div ng-show="nonEmpty(project.indicators)"
+                 class="col-md-12" style="margin-bottom: 1em">
+                <div class="col-md-4 mini-header">
+                    {{fieldNames["indicators"]}}
+                </div>
+                <div class="col-md-8">
+                    <span ng-bind-html="handleEmphasis(project.indicators)"></span>
+                </div>
+            </div>
             <div class="col-md-12" style="margin-bottom: 1em"
                  ng-show="project.methods.length > 0">
                 <div class="col-md-4 mini-header">
@@ -365,22 +383,13 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="nonEmpty(project.planned_results)"
+            <div ng-show="nonEmpty(project.human_resources)"
                  class="col-md-12" style="margin-bottom: 1em">
                 <div class="col-md-4 mini-header">
-                    {{fieldNames["planned_results"]}}
+                    {{fieldNames["human_resources"]}}
                 </div>
                 <div class="col-md-8">
-                    <span ng-bind-html="handleEmphasis(project.planned_results)"></span>
-                </div>
-            </div>
-            <div ng-show="nonEmpty(project.risk_control)"
-                 class="col-md-12" style="margin-bottom: 1em">
-                <div class="col-md-4 mini-header">
-                    {{fieldNames["risk_control"]}}
-                </div>
-                <div class="col-md-8">
-                    <span ng-bind-html="handleEmphasis(project.risk_control)"></span>
+                    <span ng-bind-html="handleEmphasis(project.human_resources)"></span>
                 </div>
             </div>
             <div ng-show="nonEmpty(project.gender_aspect)"
@@ -401,13 +410,13 @@
                     <span ng-bind-html="handleEmphasis(project.vulnerable_groups)"></span>
                 </div>
             </div>
-            <div ng-show="nonEmpty(project.indicators)"
+            <div ng-show="nonEmpty(project.risk_control)"
                  class="col-md-12" style="margin-bottom: 1em">
                 <div class="col-md-4 mini-header">
-                    {{fieldNames["indicators"]}}
+                    {{fieldNames["risk_control"]}}
                 </div>
                 <div class="col-md-8">
-                    <span ng-bind-html="handleEmphasis(project.indicators)"></span>
+                    <span ng-bind-html="handleEmphasis(project.risk_control)"></span>
                 </div>
             </div>
             <div ng-show="nonEmpty(project.reporting_evaluation)"
@@ -437,15 +446,6 @@
                     <span ng-bind-html="handleEmphasis(project.other_donors_proposed)"></span>
                 </div>
             </div>
-            <div ng-show="nonEmpty(project.human_resources)"
-                 class="col-md-12" style="margin-bottom: 1em">
-                <div class="col-md-4 mini-header">
-                    {{fieldNames["human_resources"]}}
-                </div>
-                <div class="col-md-8">
-                    <span ng-bind-html="handleEmphasis(project.human_resources)"></span>
-                </div>
-            </div>
             <div ng-show="nonEmpty(project.referees)"
                  class="col-md-12" style="margin-bottom: 1em">
                 <div class="col-md-4 mini-header">
@@ -467,7 +467,7 @@
         </section>
     </article>
     <article id="assessment" class="panel panel-primary">
-        <div class="panel-heading"><h4>KIOSin arvio</h4></div>
+        <div class="panel-heading"><h4>Arvio</h4></div>
         <section class="panel-body">
             <div ng-show="nonEmpty(project.fitness)"
                  class="col-md-12" style="margin-bottom: 1em">
@@ -505,7 +505,7 @@
                     <span ng-bind-html="handleEmphasis(project.effectiveness)"></span>
                 </div>
             </div>
-            <div ng-show="nonEmpty(project.proposed_funding)"
+<!--            <div ng-show="nonEmpty(project.proposed_funding)"
                  class="col-md-12">
                 <div class="col-md-4 mini-header">
                     {{fieldNames["proposed_funding"]}}
@@ -513,7 +513,7 @@
                 <div class="col-md-8">
                     <span ng-bind-html="handleEmphasis(project.proposed_funding)"></span>
                 </div>
-            </div>
+            </div>-->
         </section>
     </article>
     <article id="special_notes" class="panel panel-primary"

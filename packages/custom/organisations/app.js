@@ -25,7 +25,7 @@ Organisations.register(function(app, auth, database, circles) {
   //We are adding a link to the main menu for all authenticated users
   Organisations.menus.add({
     'roles': ['authenticated'],
-    'title': 'Järjestölistaus',
+    'title': 'Järjestöt',
     'link': 'all organisations'
   });
 

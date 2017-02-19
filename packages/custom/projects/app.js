@@ -24,7 +24,7 @@ Projects.register(function(app, auth, database, circles, organisations) {
     //We are adding a link to the main menu for all authenticated users
     Projects.menus.add({
         'roles': ['authenticated'],
-        'title': 'Hankelistaus',
+        'title': 'Hankkeet',
         'link': 'all projects'
     });
 

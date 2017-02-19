@@ -132,7 +132,7 @@
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
             <!-- TODO: Translate organisation fields into a json also. -->
-            <td class="report-header">Järjestö</td>
+            <td class="report-header">1.&nbsp;JÄRJESTÖ</td>
             <td>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
@@ -158,14 +158,14 @@
                         {{project.organisation.legal_status}}
                     </div>
                 </div>
-                <div style="margin-bottom: 1em">
+<!--                <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         Kansalliset yhteydet
                     </div>
                     <div class="report-subcontent">
                         <p>{{project.organisation.nat_local_links}}</p>
                     </div>
-                </div>
+                </div>-->
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         Yhteistyökumppanit ja verkostoituminen
@@ -212,7 +212,7 @@
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
-            <td class="report-header">Hanke</td>
+            <td class="report-header">2.&nbsp;HANKE</td>
             <td>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
@@ -244,6 +244,14 @@
                     </div>
                     <div class="report-subcontent">
                         <span ng-bind-html="handleEmphasis(project.planned_results)"></span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames["indicators"]}}
+                    </div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.indicators)"></span>
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -297,14 +305,6 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        {{fieldNames["indicators"]}}
-                    </div>
-                    <div class="report-subcontent">
-                        <span ng-bind-html="handleEmphasis(project.indicators)"></span>
-                    </div>
-                </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
                         {{fieldNames["reporting_evaluation"]}}
                     </div>
                     <div class="report-subcontent">
@@ -338,7 +338,7 @@
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
-            <td class="report-header">KIOSin arvio</td>
+            <td class="report-header">3.&nbsp;ARVIO</td>
             <td>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
@@ -390,7 +390,7 @@
                 </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
-                        {{fieldNames["approved_approved_date"]}}
+                        {{fieldNames['approved_approved_date']}}
                     </div>
                     <div class="report-subcontent">
                         {{project.approved.approved_date| date : 'dd.MM.yyyy': '+0200'}}
@@ -398,5 +398,33 @@
                 </div>
             </td>
         </tr>
+<!--        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td class="report-header">{{fieldNames["proposed_funding"]}}</td>
+            <td>
+                <div class="report-content"
+                     style="padding-right: 0; margin-bottom: 1em"
+                     ng-bind-html="handleEmphasis(project.proposed_funding)">
+                </div>
+            </td>
+        </tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td class="report-header">{{fieldNames["approved_decision"]}}</td>
+            <td>
+                <div class="report-content"
+                     style="padding-right: 0; margin-bottom: 1em"
+                     ng-bind-html="handleEmphasis(project.approved.decision)">
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames['approved_approved_date']}}
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.approved.approved_date| date : 'dd.MM.yyyy': '+0200'}}
+                    </div>
+                </div>
+            </td>
+        </tr>-->
     </table>
 </section>

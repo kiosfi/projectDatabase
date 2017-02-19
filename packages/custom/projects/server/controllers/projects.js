@@ -904,10 +904,10 @@ module.exports = function (Projects) {
                                         "Hallintomalli ja henkilöstö")
                                 .replace("<organisation.legal-status>",
                                         filter(project.organisation.legal_status))
-                                .replace("<titles.organisation.nat-local-links>",
-                                        "Kansalliset yhteydet")
-                                .replace("<organisation.nat-local-links>",
-                                        filter(project.organisation.nat_local_links))
+//                                .replace("<titles.organisation.nat-local-links>",
+//                                        "Kansalliset yhteydet")
+//                                .replace("<organisation.nat-local-links>",
+//                                        filter(project.organisation.nat_local_links))
                                 .replace("<titles.organisation.int-links>",
                                         "Yhteistyökumppanit ja verkostoituminen")
                                 .replace("<organisation.int-links>",
@@ -949,7 +949,7 @@ module.exports = function (Projects) {
                                 .replace("<vulnerable-groups>",
                                         filter(project.vulnerable_groups))
                                 .replace("<titles.planned-results>",
-                                        "Tulostavoitteet")
+                                        "Hankkeen strategiset kumppanit")
                                 .replace("<planned-results>",
                                         filter(project.planned_results))
                                 .replace("<titles.risk-control>",
@@ -957,7 +957,7 @@ module.exports = function (Projects) {
                                 .replace("<risk-control>",
                                         filter(project.risk_control))
                                 .replace("<titles.indicators>",
-                                        "Hankkeen strategiset kumppanit")
+                                        "Hankkeen tulostavoitteet ja indikaattorit")
                                 .replace("<indicators>",
                                         filter(project.indicators))
                                 .replace("<titles.reporting-evaluation>",
