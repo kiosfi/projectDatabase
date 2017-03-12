@@ -7,6 +7,39 @@ angular.module('mean.search').controller('SearchController', ['$scope', '$stateP
         $scope.global = Global;
 
         /**
+         * Returns a string where certain special character sequences are 
+         * replaced with html tags, and the length is truncated to 200 
+         * characters. This function was copied and modified from the Projects 
+         * package.
+         *
+         * @param {String} text The text to be transformed.
+         * @returns {String}    The transformed text.
+         */
+        $scope.handleDescription = function (text) {
+            if (!text) {
+                return "";
+            }
+            var pieces = text.split("**");
+            var transformed = "";
+            for (var i = 1, max = pieces.length; i < max; i += 2) {
+                pieces[i] = '<mark>' + pieces[i] + '</mark>';
+            }
+            pieces.forEach(function (x) {
+                transformed += x;
+            });
+            pieces = transformed.split("!!");
+            transformed = "";
+            for (var i = 1, max = pieces.length; i < max; i += 2) {
+                pieces[i] = '<h5>' + pieces[i] + '</h5>';
+            }
+            pieces.forEach(function (x) {
+                transformed += x;
+            });
+            transformed = transformed.replace(/\_\_/g, "<br/>&nbsp;&nbsp;&nbsp;&nbsp;");
+            return transformed.length > 200 ? transformed.substring(0, 197) + "..." : transformed;
+        };
+
+        /**
          * Fetches project schema attributes to populate search view
          * fields dropdown.
          */

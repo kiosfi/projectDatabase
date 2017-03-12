@@ -51,7 +51,8 @@
                     {{fieldNames["project_ref"]}}
                 </td>
                 <td class="report-content">{{project.project_ref}}&nbsp;</td>
-                <td class="report-mini-header">{{fieldNames["region"]}}</td>
+                <!--<td class="report-mini-header">{{fieldNames["region"]}}</td>-->
+                <td class="report-mini-header">Alue / Maa</td>
                 <td class="report-content">{{project.region}}&nbsp;</td>
             </tr>
             <tr>
@@ -100,7 +101,7 @@
     <table>
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
-            <td class="report-header">Järjestö</td>
+            <td class="report-header">1.&nbsp;JÄRJESTÖ</td>
             <td>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
@@ -110,11 +111,26 @@
                         {{project.organisation.description}}
                     </div>
                 </div>
+                <div style="margin-bottom: 1em">                    
+                    <div class="report-mini-header">
+                        {{fieldNames["end_report_indicators"]}}
+                    </div>
+                    <div class="report-subcontent">
+                        <p>
+                            <em>Suunnitelma:</em>
+                            <span ng-bind-html="handleEmphasis(project.indicators)"></span>
+                        </p>
+                        <p>
+                            <em>Toteutuminen:</em>
+                            <span ng-bind-html="handleEmphasis(project.end_report.indicators)"></span>
+                        </p>
+                    </div>
+                </div>
             </td>
         </tr>
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
-            <td class="report-header">Rahoitus</td>
+            <td class="report-header">2.&nbsp;RAHOITUS</td>
             <!--<td class="report-header">{{fieldNames["title"]}}</td>-->
             <td>
                 <div style="margin-bottom: 1em">
@@ -189,8 +205,23 @@
         </tr>
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
-            <td class="report-header">Tulokset</td>
+            <td class="report-header">3.&nbsp;HANKE</td>
             <td>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames['project_goal']}}
+                    </div>
+                    <div class="report-subcontent">
+                        <p>
+                            <em>Suunnitelma:</em>
+                            <span ng-bind-html="handleEmphasis(project.project_goal)"></span>
+                        </p>
+                        <p>
+                            <em>Toteutuminen:</em>
+                            <span ng-bind-html="handleEmphasis(project.end_report.objective)"></span>
+                        </p>
+                    </div>
+                </div>
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         {{fieldNames["end_report_methods"]}}
@@ -213,6 +244,7 @@
                 <div style="margin-bottom: 1em">                    
                     <div class="report-mini-header">
                         {{fieldNames["end_report_planned_results"]}}
+                        <!--Tärkeimmät tulokset-->
                     </div>
                     <div class="report-subcontent">
                         <p>
@@ -222,36 +254,6 @@
                         <p>
                             <em>Toteutuminen:</em>
                             <span ng-bind-html="handleEmphasis(project.end_report.planned_results)"></span>
-                        </p>
-                    </div>
-                </div>
-                <div style="margin-bottom: 1em">                    
-                    <div class="report-mini-header">
-                        {{fieldNames["end_report_indicators"]}}
-                    </div>
-                    <div class="report-subcontent">
-                        <p>
-                            <em>Suunnitelma:</em>
-                            <span ng-bind-html="handleEmphasis(project.indicators)"></span>
-                        </p>
-                        <p>
-                            <em>Toteutuminen:</em>
-                            <span ng-bind-html="handleEmphasis(project.end_report.indicators)"></span>
-                        </p>
-                    </div>
-                </div>
-                <div style="margin-bottom: 1em">
-                    <div class="report-mini-header">
-                        {{fieldNames["end_report_objective"]}}
-                    </div>
-                    <div class="report-subcontent">
-                        <p>
-                            <em>Suunnitelma:</em>
-                            <span ng-bind-html="handleEmphasis(project.project_goal)"></span>
-                        </p>
-                        <p>
-                            <em>Toteutuminen:</em>
-                            <span ng-bind-html="handleEmphasis(project.end_report.objective)"></span>
                         </p>
                     </div>
                 </div>
@@ -279,9 +281,33 @@
                         <span ng-bind-html="handleEmphasis(project.end_report.general_review)"></span>
                     </div>
                 </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames["end_report_proposition"]}}
+                    </div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.end_report.proposition)"></span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames["end_report_conclusion"]}}
+                    </div>
+                    <div class="report-subcontent">
+                        <span ng-bind-html="handleEmphasis(project.end_report.conclusion)"></span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em">
+                    <div class="report-mini-header">
+                        {{fieldNames['end_report_approved_date']}}
+                    </div>
+                    <div class="report-subcontent">
+                        {{project.end_report.approved_date| date : 'dd.MM.yyyy': '+0200'}}
+                    </div>
+                </div>
             </td>
         </tr>
-        <tr><td colspan="2">&nbsp;</td></tr>
+<!--        <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
             <td class="report-header">{{fieldNames["end_report_proposition"]}}</td>
             <td>
@@ -308,6 +334,6 @@
                     </div>
                 </div>
             </td>
-        </tr>
+        </tr>-->
     </table>
 </section>

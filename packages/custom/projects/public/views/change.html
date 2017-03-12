@@ -629,24 +629,7 @@ A form for project state change.
                     </div>
                 </div>
                 <label class="col-md-12">
-                    Toimintatavat ja niiden toteutuminen
-                </label>
-                <div class="form-group col-md-12" ng-repeat="method in project.methods">
-                    <div class="col-md-6" style="text-align: justify">
-                        <p><em>{{method.name}}</em> ({{method.level}})</p>
-                        <p ng-bind-html="handleEmphasis(method.comment)"></p>
-                    </div>
-                    <div class="col-md-6">
-                        <p>&nbsp;</p>
-                        <textarea name="intRMethods" type="text"
-                                  class="form-control"
-                                  data-ng-model="addedMethods[(project.methods).indexOf(method)]"
-                                  rows="10" cols="50"
-                                  id="intRMethods" placeholder="Kommentteja"></textarea>
-                    </div>
-                </div>
-                <label class="col-md-12">
-                    Päätavoitteet ja niiden toteutuminen
+                    {{fieldNames["project_goal"]}}
                 </label>
                 <div class="form-group col-md-12">
                     <div class="col-md-6" style="text-align: justify">
@@ -661,9 +644,27 @@ A form for project state change.
                         </textarea>
                     </div>
                 </div>
+                <label class="col-md-12">
+                    {{fieldNames["methods"]}}
+                </label>
+                <div class="form-group col-md-12" ng-repeat="method in project.methods">
+                    <div class="col-md-6" style="text-align: justify">
+                        <p><em>{{method.name}}</em> ({{method.level}})</p>
+                        <p ng-bind-html="handleEmphasis(method.comment)"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>&nbsp;</p>
+                        <textarea name="intRMethods" type="text"
+                                  class="form-control"
+                                  data-ng-model="addedMethods[(project.methods).indexOf(method)]"
+                                  rows="10" cols="50"
+                                  id="intRMethods">
+                        </textarea>
+                    </div>
+                </div>
                 <div class="form-group col-md-12">
                     <label for="communication" class="col-md-4">
-                        Raportointi ja yhteydenpito
+                        {{fieldNames["intreport_communication"]}}
                     </label>
                     <div class="col-md-8">
                         <textarea name="communication" type="text"
@@ -674,20 +675,8 @@ A form for project state change.
                     </div>
                 </div>
                 <div class="form-group col-md-12">
-                    <label for="evaluation" class="col-md-4">
-                        Muita huomioita
-                    </label>
-                    <div class="col-md-8">
-                        <textarea name="evaluation" type="text"
-                                  class="form-control"
-                                  data-ng-model="project.intermediary_report.evaluation"
-                                  id="evaluation">
-                        </textarea>
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
                     <label for="budget" class="col-md-4">
-                        Budjetin toteutuminen ja raportoitu summa
+                        {{fieldNames["intreport_budget"]}}
                     </label>
                     <div class="col-md-8">
                         <textarea name="budget" type="text"
@@ -698,8 +687,20 @@ A form for project state change.
                     </div>
                 </div>
                 <div class="form-group col-md-12">
+                    <label for="evaluation" class="col-md-4">
+                        {{fieldNames["intreport_evaluation"]}}
+                    </label>
+                    <div class="col-md-8">
+                        <textarea name="evaluation" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.intermediary_report.evaluation"
+                                  id="evaluation">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
                     <label for="overallKios" class="col-md-2">
-                        KIOSiin kokonaisarvio
+                        {{fieldNames["intreport_overall_rating_kios"]}}
                     </label>
                     <div class="col-md-10">
                         <textarea name="overallKios" type="text"
@@ -852,7 +853,7 @@ A form for project state change.
                 </div>
                 <label class="col-md-12" 
                        data-ng-show="project.methods && project.methods.length > 0">
-                    Toiminnot
+                    {{fieldNames["methods"]}}
                 </label>
                 <div class="form-group col-md-12"
                      ng-repeat="method in project.methods">
@@ -871,7 +872,7 @@ A form for project state change.
                     </div>
                 </div>
                 <label class="col-md-12">
-                    Tulostavoitteet
+                    {{fieldNames["end_report_planned_results"]}}
                 </label>
                 <div class="form-group col-md-12">
                     <div class="col-md-6" style="text-align: justify">
@@ -886,7 +887,7 @@ A form for project state change.
                     </div>
                 </div>
                 <label class="col-md-12">
-                    Tulosten saavuttamisen todentaminen
+                    {{fieldNames["end_report_indicators"]}}
                 </label>
                 <div class="form-group col-md-12">
                     <div class="col-md-6" style="text-align: justify">
@@ -901,7 +902,7 @@ A form for project state change.
                     </div>
                 </div>
                 <label class="col-md-12">
-                    Kokonaistavoite
+                    {{fieldNames["project_goal"]}}
                 </label>
                 <div class="form-group col-md-12">
                     <div class="col-md-6" style="text-align: justify">
@@ -970,7 +971,7 @@ A form for project state change.
                 </div>
                 <div class="form-group col-md-12">
                     <label for="gen_review" class="col-md-2">
-                        KIOSiin kokonaisarvio
+                        {{fieldNames["end_report_general_review"]}}
                     </label>
                     <div class="col-md-10">
                         <textarea name="gen_review" type="text"

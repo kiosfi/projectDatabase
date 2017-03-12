@@ -953,7 +953,7 @@ module.exports = function (Projects) {
                                 .replace("<planned-results>",
                                         filter(project.planned_results))
                                 .replace("<titles.risk-control>",
-                                        "Ilmastokestävyyden huomioon ottaminen")
+                                        "Ilmasto- ja ympäristökestävyyden huomioon ottaminen")
                                 .replace("<risk-control>",
                                         filter(project.risk_control))
                                 .replace("<titles.indicators>",
@@ -1108,9 +1108,6 @@ module.exports = function (Projects) {
                             filter(project.signed.signed_date) + "~--~"
                             + filter(project.end_report.approved_date)
                             + "~(" + Math.floor((project.end_report.approved_date - project.signed.signed_date) / 3456000000) + "~kk)")
-                    .replace("<titles.planned-results-summary>",
-                            "Tulostavoitteet")
-                    .replace("<planned-results-summary>", plannedResultsSummary)
                     .replace("<titles.description>", "Kuvaus")
                     .replace("<description>", description)
                     .replace("<titles.approved.themes>", "Oikeudellinen fokus")
@@ -1143,10 +1140,10 @@ module.exports = function (Projects) {
                     .replace("<titles.end-report.methods>", "Aktiviteetit")
                     .replace("<end-report.methods>", methods)
                     .replace("<titles.end-report.planned-results>",
-                            "Tulostavoitteet")
+                            "Tulostavoitteet ja indikaattorit")
                     .replace("<end-report.planned-results>", planned_results)
                     .replace("<titles.end-report.indicators>",
-                            "Tulosten saavuttamisen todentaminen")
+                            "Raportointi ja yhteydenpito")
                     .replace("<end-report.indicators>", indicators)
                     .replace("<titles.end-report.objective>",
                             "Keskeinen tavoite ja oikeudellinen fokus")
@@ -1166,7 +1163,7 @@ module.exports = function (Projects) {
                     .replace("<titles.end-report.grade>", "Numeerinen arvio")
                     .replace("<end-report.grade>", project.end_report.grade)
                     .replace("<titles.end-report.general-review>",
-                            "Yleisarvio")
+                            "Arvio")
                     .replace("<end-report.general-review>",
                             filter(project.end_report.general_review))
                     .replace("<titles.end-report.proposition>", "Esitys")

@@ -639,7 +639,7 @@ var ProjectSchema = new Schema({
          * project in the Project Creation Form. This field was added in the
          * schema version 10.
          */
-        indicators: {           // "Tulosten saavuttamisen todentaminen"
+        indicators: {           // "Raportointi ja yhteydenpito"
             type: String,
             trim: true
         },

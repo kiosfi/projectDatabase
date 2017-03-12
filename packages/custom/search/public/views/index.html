@@ -271,7 +271,7 @@
                         <td><a ng-href="/organisations/{{result.organisation._id}}"
                                target="_blank">{{result.organisation.name}}</a>
                         </td>
-                        <td>{{result.description}}</td>
+                        <td><span ng-bind-html="handleDescription(result.description)"></span></td>
                     </tr>
                 </tbody>
             </table>

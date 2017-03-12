@@ -54,7 +54,7 @@
         },
         {
             "name": "methods.level",
-            "fi": "Tasot"
+            "fi": "Aktiviteettien tasot"
         },
         {
             "name": "signed.signed_by",
@@ -82,7 +82,7 @@
         },
         {
             "name": "project_goal",
-            "fi": "Päätavoitteet"
+            "fi": "Keskeinen tavoite ja oik. fokus"
         },
         {
             "name": "target_group",
@@ -90,7 +90,7 @@
         },
         {
             "name": "gender_aspect",
-            "fi": "T-A. ja muut läpileikkaavat teemat"
+            "fi": "Tasa-arvonäkökulma"
         },
         {
             "name": "vulnerable_groups",
@@ -98,7 +98,7 @@
         },
         {
             "name": "planned_results",
-            "fi": "Tulostavoitteet"
+            "fi": "Tulostavoitteet ja indikaattorit"
         },
         {
             "name": "risk_control",
@@ -150,7 +150,7 @@
         },
         {
             "name": "methods.comment",
-            "fi": "Toteutuneet toiminnot"
+            "fi": "Toteutuneet aktiviteetit"
         },
         {
             "name": "in_review.comments",

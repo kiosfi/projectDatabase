@@ -571,6 +571,24 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                         }
                     });
                 }
+                if (project.intermediary_reports.length > 0)
+                {
+                    var previousIntReport = project.intermediary_reports[
+                        project.intermediary_reports.length - 1];
+                    $scope.addedMethods = previousIntReport.methods;
+                    if (typeof $scope.project.intermediary_report == "undefined")
+                    {
+                        $scope.project.intermediary_report = {};
+                    }
+                    $scope.project.intermediary_report.objectiveComments = 
+                            previousIntReport.objectiveComments;
+                    $scope.project.intermediary_report.communication =
+                            previousIntReport.communication;
+                    $scope.project.intermediary_report.budget =
+                            previousIntReport.budget;
+                    $scope.project.intermediary_report.evaluation =
+                            previousIntReport.evaluation;
+                }
             });
         };
 
@@ -1011,7 +1029,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     $location.path('projects/' + response._id);
                 });
             }
-
         };
 
         /**
