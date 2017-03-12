@@ -851,6 +851,22 @@ A form for project state change.
                         </textarea>
                     </div>
                 </div>
+                <label class="col-md-12">
+                    {{fieldNames["project_goal"]}}
+                </label>
+                <div class="form-group col-md-12">
+                    <div class="col-md-6" style="text-align: justify">
+                        <p ng-bind-html="handleEmphasis(project.project_goal)">
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <textarea name="objectivesComments" type="text"
+                                  class="form-control"
+                                  data-ng-model="project.end_report.objective"
+                                  id="objectivesComments" rows="10" cols="50">
+                        </textarea>
+                    </div>
+                </div>
                 <label class="col-md-12" 
                        data-ng-show="project.methods && project.methods.length > 0">
                     {{fieldNames["methods"]}}
@@ -867,7 +883,7 @@ A form for project state change.
                                   class="form-control"
                                   data-ng-model="project.end_report.methods[project.methods.indexOf(method)]"
                                   rows="10" cols="50"
-                                  id="er_methods" placeholder="Toiminnon toteutuminen">
+                                  id="er_methods">
                         </textarea>
                     </div>
                 </div>
@@ -898,22 +914,6 @@ A form for project state change.
                                   class="form-control"
                                   data-ng-model="project.end_report.indicators"
                                   id="indicatorsComments" rows="10" cols="50">
-                        </textarea>
-                    </div>
-                </div>
-                <label class="col-md-12">
-                    {{fieldNames["project_goal"]}}
-                </label>
-                <div class="form-group col-md-12">
-                    <div class="col-md-6" style="text-align: justify">
-                        <p ng-bind-html="handleEmphasis(project.project_goal)">
-                        </p>
-                    </div>
-                    <div class="col-md-6">
-                        <textarea name="objectivesComments" type="text"
-                                  class="form-control"
-                                  data-ng-model="project.end_report.objective"
-                                  id="objectivesComments" rows="10" cols="50">
                         </textarea>
                     </div>
                 </div>
