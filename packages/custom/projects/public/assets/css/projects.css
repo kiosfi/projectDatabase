@@ -31,6 +31,9 @@
     padding-left:       2em;
     text-align:         justify;
     line-height:        1em;
+    -webkit-hyphens:    auto;
+    -moz-hyphens:       auto;
+    hyphens:            auto;
 }
 
 .report-body {

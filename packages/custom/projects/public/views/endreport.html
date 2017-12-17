@@ -111,19 +111,12 @@
                         {{project.organisation.description}}
                     </div>
                 </div>
-                <div style="margin-bottom: 1em">                    
+                <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         {{fieldNames["end_report_indicators"]}}
                     </div>
                     <div class="report-subcontent">
-                        <p>
-                            <em>Suunnitelma:</em>
-                            <span ng-bind-html="handleEmphasis(project.indicators)"></span>
-                        </p>
-                        <p>
-                            <em>Toteutuminen:</em>
-                            <span ng-bind-html="handleEmphasis(project.end_report.indicators)"></span>
-                        </p>
+                        <span ng-bind-html="handleEmphasis(project.end_report.indicators)"></span>
                     </div>
                 </div>
             </td>
@@ -241,7 +234,7 @@
                         </li>
                     </ul>
                 </div>
-                <div style="margin-bottom: 1em">                    
+                <div style="margin-bottom: 1em">
                     <div class="report-mini-header">
                         {{fieldNames["end_report_planned_results"]}}
                         <!--Tärkeimmät tulokset-->

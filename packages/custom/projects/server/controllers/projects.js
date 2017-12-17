@@ -16,7 +16,7 @@ var mongoose = require('mongoose'),
         mkdirp = require('mkdirp'),
         crypto = require('crypto'),
         mime = require('mime'),
-        numeral = require('numeral').language('fi', 
+        numeral = require('numeral').language('fi',
                 {delimiters: {thousands: '\\,', decimal: ','}}
         ),
         _ = require('lodash');
@@ -1032,16 +1032,13 @@ module.exports = function (Projects) {
                         + " \\end{itemize}\n";
             });
             methods += "\\end{itemize}";
-            
+
             var planned_results = "\\subsubsection*{Suunnitelma}\n"
                     + filter(project.planned_results)
                     + "\n \\subsubsection*{Toteutuminen}"
                     + filter(project.end_report.planned_results);
-            
-            var indicators = "\\subsubsection*{Suunnitelma}\n"
-                    + filter(project.indicators)
-                    + "\n \\subsubsection*{Toteutuminen}"
-                    + filter(project.end_report.indicators);
+
+            var indicators = filter(project.end_report.indicators);
 
             var objective = "\\subsubsection*{Suunnitelma}\n"
                     + filter(project.project_goal)

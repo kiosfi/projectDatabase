@@ -327,8 +327,7 @@
                             <div class="form-group col-md-6">
                                 <label for="gender_aspect"
                                        class="col-md-3 control-label">
-                                    T-A. ja muut teemat
-                                    <!--{{fieldNames["gender_aspect"]}}-->
+                                    {{fieldNames["gender_aspect"]}}
                                 </label>
                                 <div class="col-md-9">
                                     <textarea name="gender_aspect"
@@ -1151,7 +1150,7 @@
                             </div>
                         </div>
                         <label class="col-md-12">
-                            Päätavoitteet ja niiden toteutuminen
+                            {{fieldNames["project_goal"]}}
                         </label>
                         <div class="form-group col-md-12">
                             <div class="col-md-6" style="text-align: justify">
@@ -1402,7 +1401,7 @@
                         </textarea>
                     </div>
                 </div>
-                <label class="col-md-12" 
+                <label class="col-md-12"
                        data-ng-show="project.methods && project.methods.length > 0">
                     {{fieldNames["end_report_methods"]}}
                 </label>
@@ -1507,13 +1506,13 @@
                                 <option value="4">
                                     4 (Onnistui yli odotusten)
                                 </option>
-                                <option value="4">
+                                <option value="3">
                                     3 (Onnistui suunnitellusti)
                                 </option>
-                                <option value="4">
+                                <option value="2">
                                     2 (Onnistui alle odotusten, ulkoinen syy)
                                 </option>
-                                <option value="4">
+                                <option value="1">
                                     1 (Onnistui alle odotusten, järjestön syy)
                                 </option>
                             </select>
