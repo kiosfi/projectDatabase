@@ -834,7 +834,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.addReviewState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
-                project.in_review = {};
                 project.in_review.date = Date.now();
                 project.state = $scope.global.newState;
                 project.$addReview(function (response) {

@@ -392,6 +392,8 @@ module.exports = function (Projects) {
             project.in_review = in_review;
             project.state = req.body.state;
             project.required_appendices = req.body.required_appendices;
+//            project.in_review.comments = req.body.in_review.comments;
+            console.log(project.in_review);
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -883,10 +885,6 @@ module.exports = function (Projects) {
                                         "tilintarkastukset")
                                 .replace("<required-appendices.audit-reports>",
                                         checkbox(project.required_appendices.audit_reports))
-                                .replace("<titles.planned-results-summary>",
-                                        "Tulostavoitteet")
-                                .replace("<planned-results-summary>",
-                                        plannedResultsSummary)
                                 .replace("<titles.description>", "Kuvaus")
                                 .replace("<description>", description)
                                 .replace("<titles.approved.themes>",
