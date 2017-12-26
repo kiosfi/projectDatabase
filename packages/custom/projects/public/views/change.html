@@ -638,7 +638,7 @@ A form for project state change.
                     <div class="col-md-6">
                         <textarea name="objComments" type="text"
                                   class="form-control"
-                                  data-ng-model="project.intermediary_report.objectiveComments"
+                                  data-ng-model="project.intermediary_report.objectives"
                                   id="objComments"
                                   rows="10" cols="50">
                         </textarea>
@@ -798,7 +798,7 @@ A form for project state change.
                         </textarea>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-8">
                     <label for="audit_date" class="col-md-3">
                         Tilintarkastuspvm
                     </label>
@@ -840,10 +840,10 @@ A form for project state change.
                     </div>
                 </div>
                 <div class="form-group col-md-12">
-                    <label for="audit_review" class="col-md-2">
+                    <label for="audit_review" class="col-md-6">
                         Tilintarkastuksen Arvio
                     </label>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <textarea name="audit_review" type="text"
                                   class="form-control"
                                   data-ng-model="project.end_report.audit.review"
@@ -892,7 +892,7 @@ A form for project state change.
                 </label>
                 <div class="form-group col-md-12">
                     <div class="col-md-6" style="text-align: justify">
-                        <p ng-bind-html="handleEmphasis(project.planned_results)"></p>
+                        <p ng-bind-html="handleEmphasis(project.indicators)"></p>
                     </div>
                     <div class="col-md-6">
                         <textarea name="plannedResultsComments" type="text"
@@ -902,18 +902,15 @@ A form for project state change.
                         </textarea>
                     </div>
                 </div>
-                <label class="col-md-12">
-                    {{fieldNames["end_report_indicators"]}}
-                </label>
                 <div class="form-group col-md-12">
-                    <div class="col-md-6" style="text-align: justify">
-                        <p ng-bind-html="handleEmphasis(project.indicators)"></p>
-                    </div>
-                    <div class="col-md-6">
+                    <label for="indicatorsComments" class="col-md-4">
+                        {{fieldNames["end_report_indicators"]}}
+                    </label>
+                    <div class="col-md-8">
                         <textarea name="indicatorsComments" type="text"
                                   class="form-control"
                                   data-ng-model="project.end_report.indicators"
-                                  id="indicatorsComments" rows="10" cols="50">
+                                  id="indicatorsComments">
                         </textarea>
                     </div>
                 </div>

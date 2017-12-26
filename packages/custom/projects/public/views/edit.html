@@ -1159,7 +1159,7 @@
                             <div class="col-md-6">
                                 <textarea name="objComments" type="text"
                                           class="form-control"
-                                          data-ng-model="intreport.objectiveComments"
+                                          data-ng-model="intreport.objectives"
                                           id="objComments" rows="10" cols="50">
                                 </textarea>
                             </div>
@@ -1426,7 +1426,7 @@
                 </label>
                 <div class="form-group col-md-12">
                     <div class="col-md-6" style="text-align: justify">
-                        <p ng-bind-html="handleEmphasis(project.planned_results)"></p>
+                        <p ng-bind-html="handleEmphasis(project.indicators)"></p>
                     </div>
                     <div class="col-md-6">
                         <textarea name="plannedResultsComments" type="text"
@@ -1441,7 +1441,7 @@
                 </label>
                 <div class="form-group col-md-12">
                     <div class="col-md-6" style="text-align: justify">
-                        <p ng-bind-html="handleEmphasis(project.indicators)"></p>
+                        <p ng-bind-html="handleEmphasis(latest_intreport.communication)"></p>
                     </div>
                     <div class="col-md-6">
                         <textarea name="indicatorsComments" type="text"

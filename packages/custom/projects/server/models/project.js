@@ -48,15 +48,15 @@ var ProjectSchema = new Schema({
         required: true,
         trim: true
     },
-    
+
     /**
-     * The date of creation of the Project document. This field was added in the 
+     * The date of creation of the Project document. This field was added in the
      * schema version 11.
      */
     date: {
         type: Date
     },
-    
+
     /**
      * Name of the coordinator of the project.
      */
@@ -256,8 +256,8 @@ var ProjectSchema = new Schema({
         trim: true
     },
     /**
-     * The current Finnish name for this field is "Muita huomioita" (since 
-     * schema version 11). 
+     * The current Finnish name for this field is "Muita huomioita" (since
+     * schema version 11).
      */
     reporting_evaluation: {     // "Muita huomioita"
         type: String,
@@ -524,9 +524,12 @@ var ProjectSchema = new Schema({
     /**
      * An array of objects containing the following fields:<tt>reportNumber</tt>,
      * <tt>date</tt>, <tt>user</tt>, <tt>budget</tt>, <tt>communication</tt>,
-     * <tt>evaluation</tt>, <tt>methods</tt>, <tt>objectiveComments</tt>,
+     * <tt>evaluation</tt>, <tt>methods</tt>, <tt>objectives</tt>,
      * <tt>planned_payments</tt>, <tt>overal_rating_kios</tt>, and
      * <tt>comments</tt>.
+     *
+     * Due to renaming of fields, <tt>evaluation</tt> refers to
+     * "muita huomioita".
      */
     intermediary_reports: {
         type: Array
@@ -635,9 +638,9 @@ var ProjectSchema = new Schema({
             trim: true
         },
         /**
-         * Comments on the project's indicators. Indicators can be added to a
-         * project in the Project Creation Form. This field was added in the
-         * schema version 10.
+         * This field was added in the schema version 10. Due to field
+         * renamings, this field now contains data for "raportointi ja
+         * yhteydenpito".
          */
         indicators: {           // "Raportointi ja yhteydenpito"
             type: String,

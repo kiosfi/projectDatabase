@@ -373,7 +373,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
          * because they had the field for approved state with invalid data, so
          * Angular wouldn't accept the modification and the user couldn't access
          * the appropriate form fields due to state restrictions.
-         * 
+         *
          * @param {type} project    The project to be edited.
          * @returns {undefined}
          */
@@ -424,14 +424,14 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
 
                 if ((typeof project.approved) !== 'undefined') {
                     var date = new Date(project.approved.approved_date);
-                    $scope.approved_day = date.getDate();
-                    $scope.approved_month = date.getMonth() + 1;
-                    $scope.approved_year = date.getFullYear();
+                    $scope.approved_day     = date.getDate();
+                    $scope.approved_month   = date.getMonth() + 1;
+                    $scope.approved_year    = date.getFullYear();
 
                     var notified_date = new Date(project.approved.board_notified);
-                    $scope.notified_day = notified_date.getDate();
-                    $scope.notified_month = notified_date.getMonth() + 1;
-                    $scope.notified_year = notified_date.getFullYear();
+                    $scope.notified_day     = notified_date.getDate();
+                    $scope.notified_month   = notified_date.getMonth() + 1;
+                    $scope.notified_year    = notified_date.getFullYear();
 
                     angular.forEach(project.approved.themes, function (obj) {
                         $scope.themeSelection.push(obj);
@@ -440,26 +440,26 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
 
                 if ((typeof project.signed) !== 'undefined') {
                     var date = new Date(project.signed.signed_date);
-                    $scope.signed_day = date.getDate();
-                    $scope.signed_month = date.getMonth() + 1;
-                    $scope.signed_year = date.getFullYear();
+                    $scope.signed_day       = date.getDate();
+                    $scope.signed_month     = date.getMonth() + 1;
+                    $scope.signed_year      = date.getFullYear();
 
                     angular.forEach(project.signed.planned_payments, function (obj) {
                         var date = new Date(obj.date);
                         $scope.plannedPayments.push({
-                            planned_day: date.getDate(),
-                            planned_month: date.getMonth() + 1,
-                            planned_year: date.getFullYear(),
-                            sum_eur: obj.sum_eur
+                            planned_day:    date.getDate(),
+                            planned_month:  date.getMonth() + 1,
+                            planned_year:   date.getFullYear(),
+                            sum_eur:        obj.sum_eur
                         });
                     });
                     angular.forEach(project.signed.intreport_deadlines, function (obj) {
                         var date = new Date(obj.date);
                         $scope.deadlines.push({
-                            report: obj.report,
-                            deadline_day: date.getDate(),
+                            report:         obj.report,
+                            deadline_day:   date.getDate(),
                             deadline_month: date.getMonth() + 1,
-                            deadline_year: date.getFullYear()
+                            deadline_year:  date.getFullYear()
                         });
                     });
                 }
@@ -468,46 +468,57 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     angular.forEach(project.intermediary_reports, function (obj) {
                         var date = new Date(obj.date_approved);
                         $scope.int_reports.push({
-                            methods: obj.methods,
-                            objectives: obj.objectives,
-                            communication: obj.communication,
-                            evaluation: obj.evaluation,
-                            budget: obj.budget,
-                            overall_rating_kios: obj.overall_rating_kios,
-                            comments: obj.comments,
-                            approved_by: obj.approved_by,
-                            date_day: date.getDate(),
-                            date_month: date.getMonth() + 1,
-                            date_year: date.getFullYear(),
-                            reportNumber: obj.reportNumber,
-                            date: obj.date,
-                            user: obj.user
+                            methods:                obj.methods,
+                            objectives:             obj.objectives,
+                            communication:          obj.communication,
+                            evaluation:             obj.evaluation,
+                            budget:                 obj.budget,
+                            overall_rating_kios:    obj.overall_rating_kios,
+                            comments:               obj.comments,
+                            approved_by:            obj.approved_by,
+                            date_day:               date.getDate(),
+                            date_month:             date.getMonth() + 1,
+                            date_year:              date.getFullYear(),
+                            reportNumber:           obj.reportNumber,
+                            date:                   obj.date,
+                            user:                   obj.user
                         });
                     });
+                    $scope.latest_intreport = project.intermediary_reports[project.intermediary_reports.length - 1];
+                } else {
+                    $scope.latest_intreport = {
+                        methods:                "[Väliraportin tiedot puuttuvat.]",
+                        objectives:             "[Väliraportin tiedot puuttuvat.]",
+                        communication:          "[Väliraportin tiedot puuttuvat.]",
+                        evaluation:             "[Väliraportin tiedot puuttuvat.]",
+                        budget:                 "[Väliraportin tiedot puuttuvat.]",
+                        overall_rating_kios:    "[Väliraportin tiedot puuttuvat.]",
+                        comments:               "[Väliraportin tiedot puuttuvat.]"
+                    };
                 }
 
                 if (project.end_report && (typeof project.end_report.date) !== 'undefined') {
                     var date = new Date(project.end_report.approved_date);
-                    $scope.er_approved_day = date.getDate();
-                    $scope.er_approved_month = date.getMonth() + 1;
-                    $scope.er_approved_year = date.getFullYear();
+                    $scope.er_approved_day      = date.getDate();
+                    $scope.er_approved_month    = date.getMonth() + 1;
+                    $scope.er_approved_year     = date.getFullYear();
 
                     var audit_date = new Date(project.end_report.audit.date);
-                    $scope.audit_day = audit_date.getDate();
-                    $scope.audit_month = audit_date.getMonth() + 1;
-                    $scope.audit_year = audit_date.getFullYear();
+                    $scope.audit_day            = audit_date.getDate();
+                    $scope.audit_month          = audit_date.getMonth() + 1;
+                    $scope.audit_year           = audit_date.getFullYear();
                 }
 
                 if ((typeof project.ended) !== 'undefined') {
                     var date = new Date(project.ended.end_date);
-                    $scope.end_day = date.getDate();
-                    $scope.end_month = date.getMonth() + 1;
-                    $scope.end_year = date.getFullYear();
+                    $scope.end_day              = date.getDate();
+                    $scope.end_month            = date.getMonth() + 1;
+                    $scope.end_year             = date.getFullYear();
 
                     var notified_date = new Date(project.ended.board_notified);
-                    $scope.end_notified_day = notified_date.getDate();
-                    $scope.end_notified_month = notified_date.getMonth() + 1;
-                    $scope.end_notified_year = notified_date.getFullYear();
+                    $scope.end_notified_day     = notified_date.getDate();
+                    $scope.end_notified_month   = notified_date.getMonth() + 1;
+                    $scope.end_notified_year    = notified_date.getFullYear();
                 }
             });
         };
@@ -571,24 +582,28 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                         }
                     });
                 }
+                $scope.previousIntReport = undefined;
                 if (project.intermediary_reports.length > 0)
                 {
-                    var previousIntReport = project.intermediary_reports[
+                    $scope.previousIntReport = project.intermediary_reports[
                         project.intermediary_reports.length - 1];
-                    $scope.addedMethods = previousIntReport.methods;
-                    if (typeof $scope.project.intermediary_report == "undefined")
-                    {
-                        $scope.project.intermediary_report = {};
-                    }
-                    $scope.project.intermediary_report.objectiveComments = 
-                            previousIntReport.objectiveComments;
-                    $scope.project.intermediary_report.communication =
-                            previousIntReport.communication;
-                    $scope.project.intermediary_report.budget =
-                            previousIntReport.budget;
-                    $scope.project.intermediary_report.evaluation =
-                            previousIntReport.evaluation;
+                    $scope.addedMethods = $scope.previousIntReport.methods;
                 }
+                if (typeof $scope.previousIntReport == "undefined")
+                {
+                    $scope.previousIntReport = {
+                        objectives:             "[Väliraportin tiedot puuttuvat.]",
+                        communication:          "[Väliraportin tiedot puuttuvat.]",
+                        evaluation:             "[Väliraportin tiedot puuttuvat.]",
+                        budget:                 "[Väliraportin tiedot puuttuvat.]",
+                        overall_rating_kios:    "[Väliraportin tiedot puuttuvat.]",
+                        comments:               "[Väliraportin tiedot puuttuvat.]"
+                    };
+                }
+                $scope.project.intermediary_report = $scope.previousIntReport;
+                project.end_report.objective            = $scope.previousIntReport.objectives;
+                project.end_report.methods              = $scope.previousIntReport.methods;
+                project.end_report.indicators           = $scope.previousIntReport.communication;
             });
         };
 
@@ -657,6 +672,16 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                             Math.floor(interval / 31536000000) + " v " +
                             Math.round(interval / 2592000000) + " kk)";
                 }
+                if (project.intermediary_reports.length > 0)
+                {
+                    var previousIntReport = project.intermediary_reports[
+                        project.intermediary_reports.length - 1];
+                    $scope.addedMethods = previousIntReport.methods;
+                    if (typeof $scope.project.intermediary_report == "undefined")
+                    {
+                        $scope.project.intermediary_report = {};
+                    }
+                }
             });
         };
 
@@ -721,7 +746,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
             if (project.schema_version < 11) {
                 if (project.intermediary_reports) {
                     project.intermediary_reports.forEach(function (intreport) {
-                        intreport.objectiveComments = intreport.objectives ? 
+                        intreport.objectiveComments = intreport.objectives ?
                                 intreport.objectives[0] : "";
                         intreport.objectives = undefined;
                     });
@@ -1015,7 +1040,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
 
                 project.state = $scope.global.newState;
                 project.intermediary_report.methods = $scope.addedMethods;
-                project.intermediary_report.objectives = $scope.objectiveComments;
                 var index = project.intermediary_reports.length;
                 if (index === undefined || index === 0) {
                     project.intermediary_report.reportNumber = 1;

@@ -392,8 +392,6 @@ module.exports = function (Projects) {
             project.in_review = in_review;
             project.state = req.body.state;
             project.required_appendices = req.body.required_appendices;
-//            project.in_review.comments = req.body.in_review.comments;
-            console.log(project.in_review);
             project.save(function (err) {
                 if (err) {
                     return res.status(500).json({
@@ -587,6 +585,12 @@ module.exports = function (Projects) {
                             res.end(util.inspect({fields: fields, files: files}));
                         });
             });
+
+            Projects.events.publish({
+                action: 'added appendix',
+                name: project.title,
+                url: config.hostname + '/projects/' + project._id
+            });
         },
         /**
          * Accesses the requested appendix. The request URL should be in the
@@ -639,6 +643,12 @@ module.exports = function (Projects) {
                                 error: 'Liitteen poisto epäonnistui.'
                             });
                         }
+                    });
+
+                    Projects.events.publish({
+                        action: 'removed appendix',
+                        name: project.title,
+                        url: config.hostname + '/projects/' + project._id
                     });
                     fs.unlinkSync(path);
                     res.writeHead(302, {'Location': '/projects/' + projectID});
@@ -1032,7 +1042,7 @@ module.exports = function (Projects) {
             methods += "\\end{itemize}";
 
             var planned_results = "\\subsubsection*{Suunnitelma}\n"
-                    + filter(project.planned_results)
+                    + filter(project.indicators)
                     + "\n \\subsubsection*{Toteutuminen}"
                     + filter(project.end_report.planned_results);
 
