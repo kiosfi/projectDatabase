@@ -39,7 +39,19 @@
         </li>
     </ul>
     <article id="functions" class="panel panel-primary">
-        <section class="panel-body" style="text-align: center">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideActions = !hideActions">
+                    <span class="glyphicon"
+                          ng-class="hideActions
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Toiminnot
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" style="text-align: center" ng-hide="hideActions">
             <big>
                 <a id="edit" ng-href="/organisations/{{organisation._id}}/edit"
                    class="btn btn-default" style="margin-right: 1em">
@@ -53,8 +65,19 @@
         </section>
     </article>
     <article id="summary" class="panel panel-primary">
-        <div class="panel-heading"><h4>Perustiedot</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideSummary = !hideSummary">
+                    <span class="glyphicon"
+                          ng-class="hideSummary
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Perustiedot
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideSummary">
             <section class="col-md-6">
                 <h4>Järjestö</h4>
                 <section class="section">
@@ -159,11 +182,18 @@
              data-ng-init="findOrgProjects()">
         <div class="panel-heading">
             <h4>
-                KIOSilta rahoitusta hakeneet hankkeet
-                ({{orgProjects.length}} kpl)
+                <span ng-click="hidePrevApp = !hidePrevApp">
+                    <span class="glyphicon"
+                          ng-class="hidePrevApp
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    KIOSilta rahoitusta hakeneet hankkeet
+                    ({{orgProjects.length}} kpl)
+                </span>
             </h4>
         </div>
-        <section class="panel-body">
+        <section class="panel-body" ng-hide="hidePrevApp">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -222,16 +252,36 @@
         </section>
     </article>
     <article id="legalStatus" class="panel panel-primary">
-        <div class="panel-heading"><h4>Hallintomalli ja henkilöstö</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideLegalStatus = !hideLegalStatus">
+                    <span class="glyphicon"
+                          ng-class="hideLegalStatus
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Hallintomalli ja henkilöstö
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideLegalStatus">
             {{organisation.legal_status}}
         </section>
     </article>
     <article id="description" class="panel panel-primary">
         <div class="panel-heading">
-            <h4>Tavoitteet ja keskeiset toimintatavat</h4>
+            <h4>
+                <span ng-click="hideDescription = !hideDescription">
+                    <span class="glyphicon"
+                          ng-class="hideDescription
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Tavoitteet ja keskeiset toimintatavat
+                </span>
+            </h4>
         </div>
-        <section class="panel-body">
+        <section class="panel-body" ng-hide="hideDescription">
             {{organisation.description}}
         </section>
     </article>
@@ -242,39 +292,105 @@
         </section>
     </article>-->
     <article class="panel panel-primary">
-        <div class="panel-heading"><h4>Yhteistyökumppanit ja verkostoituminen</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideIntNatLinks = !hideIntNatLinks">
+                    <span class="glyphicon"
+                          ng-class="hideIntNatLinks
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Yhteistyökumppanit ja verkostoituminen
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideIntNatLinks">
             {{organisation.int_links}}
         </section>
     </article>
     <article id="otherDonors" class="panel panel-primary">
-        <div class="panel-heading"><h4>Vuosibudjetit ja rahoittajat</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideOtherDonors = !hideOtherDonors">
+                    <span class="glyphicon"
+                          ng-class="hideOtherDonors
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Vuosibudjetit ja rahoittajat
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideOtherDonors">
             {{organisation.other_funding_budget}}
         </section>
     </article>
     <article class="panel panel-primary">
-        <div class="panel-heading"><h4>Taloushallinto ja tilintarkastus</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideAccountingAudit = !hideAccountingAudit">
+                    <span class="glyphicon"
+                          ng-class="hideAccountingAudit
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Taloushallinto ja tilintarkastus
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideAccountingAudit">
             {{organisation.accounting_audit}}
         </section>
     </article>
     <article id="background" class="panel panel-primary">
-        <div class="panel-heading"><h4>Oleelliset taustatiedot</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideBackground = !hideBackground">
+                    <span class="glyphicon"
+                          ng-class="hideBackground
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Oleelliset taustatiedot
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideBackground">
             {{organisation.background}}
         </section>
     </article>
     <article id="special_notes" class="panel panel-primary"
              ng-show="organisation.special_notes">
-        <div class="panel-heading"><h4>Erityishuomioita</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideSpecialNotes = !hideSpecialNotes">
+                    <span class="glyphicon"
+                          ng-class="hideSpecialNotes
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Erityishuomioita
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideSpecialNotes">
             {{organisation.special_notes}}
         </section>
     </article>
     <article id="log" class="panel panel-primary">
-        <div class="panel-heading"><h4>Muokkaukset</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideLog = !hideLog">
+                    <span class="glyphicon"
+                          ng-class="hideLog
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Toiminnot
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideLog">
             <div ng-show="organisation.updated.length > 0">
                 <div data-ng-repeat="update in organisation.updated"
                      class="col-md-6">

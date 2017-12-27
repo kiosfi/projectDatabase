@@ -89,7 +89,19 @@
         </li>
     </ul>
     <article id="functions" class="panel panel-primary">
-        <section class="panel-body" style="text-align: center">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideFunctions = !hideFunctions">
+                    <span class="glyphicon"
+                          ng-class="hideFunctions
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Toiminnot
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" style="text-align: center" ng-hide="hideFunctions">
             <big>
                 <a ng-href="#stateTransition"
                    ng-show="state.next.length !== 0 && project.state !== 'hylätty' && project.state !== 'päättynyt'"
@@ -132,8 +144,19 @@
         </section>
     </article>
     <article class="panel panel-primary" id="summary">
-        <div class="panel-heading"><h4>Yhteenveto</h4></div>
-        <div class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideSummary = !hideSummary">
+                    <span class="glyphicon"
+                          ng-class="hideSummary
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Yhteenveto
+                </span>
+            </h4>
+        </div>
+        <div class="panel-body" ng-hide="hideSummary">
             <section style="padding-bottom: 1em">
                 <h4>
                     <span class="col-md-1">{{fieldNames["state"]}}</span>
@@ -315,24 +338,55 @@
         </div>
     </article>
     <article id="description" class="panel panel-primary">
-        <div class="panel-heading"><h4>{{fieldNames["description"]}}</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideDescription = !hideDescription">
+                    <span class="glyphicon"
+                          ng-class="hideDescription
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    {{fieldNames["description"]}}
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideDescription">
             <span ng-bind-html="handleEmphasis(project.description)">
             </span>
         </section>
     </article>
     <article class="panel panel-primary" ng-show="nonEmpty(project.description_en)">
         <div class="panel-heading">
-            <h4>{{fieldNames["description_en"]}}</h4>
+            <h4>
+                <span ng-click="hideDescriptionEn = !hideDescriptionEn">
+                    <span class="glyphicon"
+                          ng-class="hideDescriptionEn
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    {{fieldNames["description_en"]}}
+                </span>
+            </h4>
         </div>
-        <section class="panel-body">
+        <section class="panel-body" ng-hide="hideDescriptionEn">
             <span ng-bind-html="handleEmphasis(project.description_en)">
             </span>
         </section>
     </article>
     <article id="details" class="panel panel-primary">
-        <div class="panel-heading"><h4>Lisätiedot</h4></div>
-        <section id="appinfo" class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideDetails = !hideDetails">
+                    <span class="glyphicon"
+                          ng-class="hideDetails
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Lisätiedot
+                </span>
+            </h4>
+        </div>
+        <section id="appinfo" class="panel-body" ng-hide="hideDetails">
             <div ng-show="nonEmpty(project.context)"
                  class="col-md-12" style="margin-bottom: 1em">
                 <div class="col-md-4 mini-header">
@@ -476,8 +530,19 @@
         </section>
     </article>
     <article id="assessment" class="panel panel-primary">
-        <div class="panel-heading"><h4>Arvio</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideAssessment = !hideAssessment">
+                    <span class="glyphicon"
+                          ng-class="hideAssessment
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Arvio
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideAssessment">
             <div ng-show="nonEmpty(project.fitness)"
                  class="col-md-12" style="margin-bottom: 1em">
                 <div class="col-md-4 mini-header">
@@ -527,16 +592,38 @@
     </article>
     <article id="special_notes" class="panel panel-primary"
              ng-show="project.special_notes">
-        <div class="panel-heading"><h4>{{fieldNames["special_notes"]}}</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideSpecialNotes = !hideSpecialNotes">
+                    <span class="glyphicon"
+                          ng-class="hideSpecialNotes
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    {{fieldNames["special_notes"]}}
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideSpecialNotes">
             <span ng-bind-html="handleEmphasis(project.special_notes)">
             </span>
         </section>
     </article>
     <article id="schedule" class="panel panel-primary"
              ng-show="project.signed.intreport_deadlines.length > 0">
-        <div class="panel-heading"><h4>Suunniteltu aikataulu</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideSchedule = !hideSchedule">
+                    <span class="glyphicon"
+                          ng-class="hideSchedule
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Suunniteltu aikataulu
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideSchedule">
             <h5>{{fieldNames["signed_intreport_deadlines"]}}</h5>
             <div ng-repeat="deadline in project.signed.intreport_deadlines" class="subsection col-md-12">
                 <div class="col-md-3 mini-header">
@@ -549,8 +636,19 @@
         </section>
     </article>
     <article id="reports" class="panel panel-primary">
-        <div class="panel-heading"><h4>Toteutunut aikataulu</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideReports = !hideReports">
+                    <span class="glyphicon"
+                          ng-class="hideReports
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Toteutunut aikataulu
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideReports">
             <section ng-show="project.in_review.date"
                      class="panel panel-primary">
                 <div class="panel-heading">
@@ -927,8 +1025,19 @@
     </article>
     <article id="stateTransition" class="panel panel-primary"
              ng-show="state.next.length !== 0 && project.state !== 'hylätty' && project.state !== 'päättynyt'">
-        <div class="panel-heading"><h4>Tilasiirtymä</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideStateTransition = !hideStateTransition">
+                    <span class="glyphicon"
+                          ng-class="hideStateTransition
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Tilasiirtymä
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideStateTransition">
             <form name="stateForm" class="form-horizontal"
                   data-ng-init="findState()"
                   data-ng-submit="changeState(project.changeTo);">
@@ -957,8 +1066,19 @@
     </article>
     <article id="payments" class="panel panel-primary"
              ng-show="project.approved.date">
-        <div class="panel-heading"><h4>Maksatus</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hidePayments = !hidePayments">
+                    <span class="glyphicon"
+                          ng-class="hidePayments
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Maksatus
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hidePayments">
             <section class="section" style="margin-left: 1em">
                 <section class="col-md-12">
                     <div class="col-md-2 mini-header">
@@ -1042,8 +1162,19 @@
     </article>
     <article id="addPayment" ng-show="project.signed.date"
              class="panel panel-primary">
-        <div class="panel-heading"><h4>Maksun lisäys</h4></div>
-        <section class="panel-body" style="margin-bottom: -2em">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideAddPayment = !hideAddPayment">
+                    <span class="glyphicon"
+                          ng-class="hideAddPayment
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Maksun lisäys
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" style="margin-bottom: -2em" ng-hide="hideAddPayment">
             <form name="paymentForm" class="form-horizontal" role="form"
                   data-ng-submit="addPaymentInfo(paymentForm.$valid)"
                   novalidate>
@@ -1133,9 +1264,18 @@
     </article>
     <article id="checklist" class="panel panel-primary">
         <div class="panel-heading">
-            <h4>{{fieldNames["required_appendices"]}}</h4>
+            <h4>
+                <span ng-click="hideChecklist = !hideChecklist">
+                    <span class="glyphicon"
+                          ng-class="hideChecklist
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    {{fieldNames["required_appendices"]}}
+                </span>
+            </h4>
         </div>
-        <div class="panel-body" style="padding-left: 0">
+        <div class="panel-body" style="padding-left: 0" ng-hide="hideChecklist">
             <div class="col-md-12" style="padding-left: 0">
                 <span class="col-md-3">
                     <label>{{fieldNames["required_appendices_proj_budget"]}}</label>
@@ -1218,9 +1358,18 @@
     <article id="appendices" class="panel panel-primary"
              ng-show="project.appendices.length > 0">
         <div class="panel-heading">
-            <h4>Tallennetut liitteet ({{project.appendices.length}} kpl)</h4>
+            <h4>
+                <span ng-click="hideAppendices = !hideAppendices">
+                    <span class="glyphicon"
+                          ng-class="hideAppendices
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Tallennetut liitteet ({{project.appendices.length}} kpl)
+                </span>
+            </h4>
         </div>
-        <section class="panel-body">
+        <section class="panel-body" ng-hide="hideAppendices">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -1285,10 +1434,21 @@
         </section>
     </article>
     <article id="addAppendix" class="panel panel-primary">
-        <div class="panel-heading"><h4>Liitteen lisäys</h4></div>
         <!-- TODO: Figure out how to make this form work through a
         client-side service in order to enable proper acces contol: -->
-        <section class="panel-body" style="padding-left: 0">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideAddAppendix = !hideAddAppendix">
+                    <span class="glyphicon"
+                          ng-class="hideAddAppendix
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Liitteen lisäys
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" style="padding-left: 0" ng-hide="hideAddAppendix">
             <form name="appendixForm" class="form-horizonalsection"
                   action="/api/projects/upload"
                   method="post" enctype="multipart/form-data">
@@ -1330,8 +1490,19 @@
         </section>
     </article>
     <article id="log" class="panel panel-primary">
-        <div class="panel-heading"><h4>Muokkaukset</h4></div>
-        <section class="panel-body">
+        <div class="panel-heading">
+            <h4>
+                <span ng-click="hideLog = !hideLog">
+                    <span class="glyphicon"
+                          ng-class="hideLog
+                                                  ? 'glyphicon-collapse-down'
+                                                  : 'glyphicon-collapse-up'">
+                    </span>
+                    Muokkaukset
+                </span>
+            </h4>
+        </div>
+        <section class="panel-body" ng-hide="hideLog">
             <div ng-show="project.updated.length > 0">
                 <div data-ng-repeat="update in project.updated"
                      class="col-md-6">
