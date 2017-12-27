@@ -753,11 +753,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-8">
-                    <label class="col-md-3 control-label">
+                <div class="form-group col-md-12">
+                    <label class="col-md-2 control-label">
                         {{fieldNames["approved_themes"]}}
                     </label>
-                    <div class="col-md-9">
+                    <div class="col-md-10">
                         <div ng-repeat="theme in themes" class="col-md-12">
                             <input type="checkbox" name="selectedThemes[]"
                                    value="{{theme}}"
@@ -767,11 +767,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="granted_sum_eur" class="col-md-6 control-label">
+                <div class="form-group col-md-12">
+                    <label for="themes_disambiguation"
+                           class="col-md-2 control-label">
+                        Oik. fokus; Tarkennus
+                    </label>
+                    <div class="col-md-10">
+                        <input id="themes_disambiguation"
+                               name="themes_disambiguation"
+                               data-ng-model="project.approved.themes_disambiguation"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label class="col-md-2 control-label" for="decision">
+                        {{fieldNames["approved_decision"]}}
+                    </label>
+                    <div class="col-md-10">
+                        <textarea id="decision" name="decision"
+                                  data-ng-model="project.approved.decision"
+                                  class="form-control">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="granted_sum_eur" class="col-md-2 control-label">
                         {{fieldNames["approved_granted_sum_eur"]}}
                     </label>
-                    <div class="col-md-6"
+                    <div class="col-md-2"
                          ng-class="{'has-error': projectEditForm.granted_sum_eur.$invalid }">
                         <input name="granted_sum_eur" type="number"
                                class="form-control"
@@ -783,17 +806,6 @@
                                 Summan täytyy olla numero
                             </p>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label class="col-md-1 control-label" for="decision">
-                        {{fieldNames["approved_decision"]}}
-                    </label>
-                    <div class="col-md-11">
-                        <textarea id="decision" name="decision"
-                                  data-ng-model="project.approved.decision"
-                                  class="form-control">
-                        </textarea>
                     </div>
                 </div>
                 <div class="form-group col-md-6">

@@ -302,6 +302,15 @@
                         </span>&nbsp;{{theme}}
                     </span>
                 </section>
+                <section class="section"
+                         ng-show="project.approved.themes_disambiguation.length > 0">
+                    <table class="summary-table">
+                        <tr>
+                            <th>{{fieldNames["approved_themes_disambiguation"]}}</th>
+                            <td class="summary-td">{{project.approved.themes_disambiguation}}</td>
+                        </tr>
+                    </table>
+                </section>
             </section>
         </div>
     </article>

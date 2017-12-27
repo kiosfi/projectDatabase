@@ -93,8 +93,12 @@
                         <tr ng-repeat="theme in project.approved.themes">
                             <td>{{theme}}</td>
                         </tr>
-                    </table>&nbsp;
+                    </table>
                 </td>
+            </tr>
+            <tr>
+                <td class="report-mini-header">{{fieldNames["approved_themes_disambiguation"]}}</td>
+                <td class="report-content" colspan="3">{{project.approved.themes_disambiguation}}</td>
             </tr>
         </table>
     </article>

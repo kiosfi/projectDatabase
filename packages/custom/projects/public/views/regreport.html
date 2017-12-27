@@ -118,13 +118,17 @@
                 <td class="report-mini-header">Oikeudellinen&nbsp;fokus
                     <!--{{fieldNames["approved_themes"]}}-->
                 </td>
-                <td colspan="3" class="report-content">
+                <td class="report-content" colspan="3">
                     <table>
                         <tr ng-repeat="theme in project.approved.themes">
                             <td>{{theme}}</td>
                         </tr>
                     </table>
                 </td>
+            </tr>
+            <tr>
+                <td class="report-mini-header">{{fieldNames["approved_themes_disambiguation"]}}</td>
+                <td class="report-content" colspan="3">{{project.approved.themes_disambiguation}}</td>
             </tr>
         </table>
     </article>

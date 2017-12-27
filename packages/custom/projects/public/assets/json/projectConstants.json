@@ -114,6 +114,7 @@
         "approved_board_notified": "Hallitukselle tiedoksi",
         "approved_granted_sum_eur": "Myönnetty avustus (EUR)",
         "approved_themes": "Oikeudellinen fokus",
+        "approved_themes_disambiguation": "Tarkennus",
         "rejected": "Hylätty",
         "rejected_date": "Hylkäyspäivämäärä",
         "rejected_user": "Tiedot lisäsi",

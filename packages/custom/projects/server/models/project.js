@@ -14,7 +14,7 @@ var ProjectSchema = new Schema({
      * This piece of metadata tells the version number of the scheme. It is used
      * for updating old entries to the newest version during runtime.
      */
-    schema_version: {           // Current version is 11.
+    schema_version: {           // Current version is 12.
         type: Number,
         required: true,
         default: 1
@@ -457,10 +457,32 @@ var ProjectSchema = new Schema({
             type: Number
         },
         /**
-         * The Finnish name of this field is currently "Oikeudellinen fokus".
+         * The Finnish name of this field is currently "Oikeudellinen fokus". It
+         * is an array of tags for the project. As of 1.0.13, the available tags
+         * are
+         * "Oikeusvaltio ja demokratia",
+         * "TSS-oikeudet",
+         * "Oikeus koskemattomuuteen ja inhimilliseen kohteluun",
+         * "Naisten oikeudet ja sukupuolten välinen tasa-arvo",
+         * "Lapsen oikeudet",
+         * "Haavoittuvien ryhmien, dalitien ja vammaisten henkilöiden oikeudet",
+         * "Etniset vähemmistöt ja alkuperäiskansat",
+         * "LHBTIQ",
+         * "Ihmisoikeuspuolustajat", and
+         * "Muu".
          */
         themes: {               // "Oikeudellinen fokus"
             type: Array
+        },
+
+        /**
+         * This field was added in the schema version 12. The purpose of this
+         * field is to contain additional information regarding the themes of
+         * the project, if the theme "Muu" was included.
+         */
+        themes_disambiguation: {
+            type: String,
+            trim: true
         }
     },
     rejected: {                 // "Hylätty"

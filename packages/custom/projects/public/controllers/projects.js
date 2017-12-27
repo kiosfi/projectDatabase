@@ -698,62 +698,72 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.ensureCompatibility = function (project) {
             if ((typeof project.schema_version) === "undefined") {
                 project.security_level = "Julkinen";
+                project.schema_version = 0;
             }
-            if (project.schema_version < 4) {
-                // The name of this field was changed to prevent confusion with
-                // the similarly named fields in end report state:
-                project.target_group = project.beneficiaries;
-                project.beneficiaries = undefined;
+            if (project.schema_version < 0) {
+                project.schema_version = 0;
             }
-            if (project.schema_version < 5) {
-                // The name of this field was changed to prevent confusion with
-                // the field "background_check":
-                project.context = project.background;
-                project.background = undefined;
-                if (project.approved && project.approved.approved_by &&
-                        project.approved.approved_by === "Halko") {
-                    project.approved.approved_by = "Hallituksen kokous";
+            switch (project.schema_version) {
+                case 0: case 1: case 2: case 3: {
+                    // The name of this field was changed to prevent confusion
+                    // with the similarly named fields in end report state:
+                    project.target_group = project.beneficiaries;
+                    project.beneficiaries = undefined;
                 }
-            }
-            if (project.schema_version < 7) {
-                // This field was removed in schema version 7:
-                if (project.approved.presented_by) {
-                    project.approved.presented_by = undefined;
+                case 4: {
+                    // The name of this field was changed to prevent confusion with
+                    // the field "background_check":
+                    project.context = project.background;
+                    project.background = undefined;
+                    if (project.approved && project.approved.approved_by &&
+                            project.approved.approved_by === "Halko") {
+                        project.approved.approved_by = "Hallituksen kokous";
+                    }
                 }
-                // The name of this field was changed:
-                if (project.end_report.comments) {
-                    project.end_report.proposition = project.end_report.comments;
-                    project.end.report.comments = undefined;
+                case 5: case 6: {
+                    // This field was removed in schema version 7:
+                    if (project.approved.presented_by) {
+                        project.approved.presented_by = undefined;
+                    }
+                    // The name of this field was changed:
+                    if (project.end_report.comments) {
+                        project.end_report.proposition = project.end_report.comments;
+                        project.end.report.comments = undefined;
+                    }
                 }
-            }
-            if (project.schema_version < 9) {
-                project.schema_version = 9;
-                project.indicators = project.sustainability_risks;
-                project.sustainability_risks = undefined;
-                project.country = project.region;
-                project.region = "";
-            }
-            if (project.schema_version < 10) {
-                if (project.state === "loppuraportti") {
-                    project.end_report.planned_results =
-                            project.end_report.planned_results
-                            ? project.end_report.planned_results : "";
-                    project.end_report.indicators =
-                            project.end_report.indicators
-                            ? project.end_report.indicators : "";
+                case 7: case 8: {
+                    project.indicators = project.sustainability_risks;
+                    project.sustainability_risks = undefined;
+                    project.country = project.region;
+                    project.region = "";
                 }
-            }
-            if (project.schema_version < 11) {
-                if (project.intermediary_reports) {
-                    project.intermediary_reports.forEach(function (intreport) {
-                        intreport.objectiveComments = intreport.objectives ?
-                                intreport.objectives[0] : "";
-                        intreport.objectives = undefined;
+                case 9: {
+                    if (project.state === "loppuraportti") {
+                        project.end_report.planned_results =
+                                project.end_report.planned_results
+                                ? project.end_report.planned_results : "";
+                        project.end_report.indicators =
+                                project.end_report.indicators
+                                ? project.end_report.indicators : "";
+                    }
+                }
+                case 10: {
+                    if (project.intermediary_reports) {
+                        project.intermediary_reports.forEach(function (intreport) {
+                            intreport.objectiveComments = intreport.objectives ?
+                                    intreport.objectives[0] : "";
+                            intreport.objectives = undefined;
+                        });
+                    }
+                }
+                case 11: {
+                    if (project.approved) {
+                        project.approved.themes_disambiguation = "";
+                    }
+                    project.schema_version = 12;
+                    project.$update(function () {
                     });
                 }
-                project.schema_version = 11;
-                project.$update(function () {
-                });
             }
             // This is a bugfix for adding payments:
             if (project.approved.granted_sum_eur && !(project.funding.left_eur)) {

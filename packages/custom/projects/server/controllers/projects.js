@@ -897,6 +897,8 @@ module.exports = function (Projects) {
                                         checkbox(project.required_appendices.audit_reports))
                                 .replace("<titles.description>", "Kuvaus")
                                 .replace("<description>", description)
+                                .replace("<titles.approved.themes-disambiguation>", "Tarkennus")
+                                .replace("<approved.themes-disambiguation>", project.approved.themes_disambiguation)
                                 .replace("<titles.approved.themes>",
                                         "Oikeudellinen fokus")
                                 .replace("<approved.themes>", themes)
@@ -1115,6 +1117,8 @@ module.exports = function (Projects) {
                             + "~(" + Math.floor((project.end_report.approved_date - project.signed.signed_date) / 3456000000) + "~kk)")
                     .replace("<titles.description>", "Kuvaus")
                     .replace("<description>", description)
+                    .replace("<titles.approved.themes-disambiguation>", "Tarkennus")
+                    .replace("<approved.themes-disambiguation>", project.approved.themes_disambiguation)
                     .replace("<titles.approved.themes>", "Oikeudellinen fokus")
                     .replace("<approved.themes>", themes)
                     .replace("<titles.organisation.description>",
