@@ -1,9 +1,61 @@
 <section data-ng-controller="ProjectsController" data-ng-init="initEditing()">
-    <h1>{{project.title}} ({{project.organisation.name}}) – Muokkaus</h1>
+    <link rel="stylesheet" type="text/css" href="/theme/assets/css/twoPart.css">
+    <h1 id="header">{{project.title}} ({{project.organisation.name}}) – Muokkaus</h1>
     <hr>
+    <ul id="menu" class="nav nav-list left-part">
+        <li>
+            <label><a href="#header">Tilojen&nbsp;tiedot</a></label>
+            <ul>
+                <li><a href="#fieldset_registered">Rekisteröity</a></li>
+                <li ng-show="project.in_review.date">
+                    <a href="#fieldset_in_review">Käsittelyssä</a>
+                </li>
+<!--                <li ng-hide="project.in_review.date">
+                    <span class="text-muted">Käsittelyssä</span>
+                </li>-->
+                <li ng-show="project.approved.date">
+                    <a href="#fieldset_approved">Hyväksytty</a>
+                </li>
+<!--                <li ng-hide="project.approved.date">
+                    <span class="text-muted">Hyväksytty</span>
+                </li>-->
+                <li ng-show="project.rejected.date">
+                    <a href="#fieldset_rejected">Hylätty</a>
+                </li>
+<!--                <li ng-hide="project.rejected.date">
+                    <span class="text-muted">Hylätty</span>
+                </li>-->
+                <li ng-show="project.signed.date">
+                    <a href="#fieldset_signed">Allekirjoitettu</a>
+                </li>
+<!--                <li ng-hide="project.signed.date">
+                    <span class="text-muted">Allekirjoitettu</span>
+                </li>-->
+                <li ng-show="project.intermediary_reports.length > 0">
+                    <a href="#fieldset_intreport">Väliraportti</a>
+                </li>
+<!--                <li ng-hide="project.intermediary_reports.length > 0">
+                    <span class="text-muted">Väliraportti</span>
+                </li>-->
+                <li ng-show="project.end_report.date">
+                    <a href="#fieldset_endreport">Loppuraportti</a>
+                </li>
+<!--                <li ng-hide="project.end_report.date">
+                    <span class="text-muted">Loppuraportti</span>
+                </li>-->
+                <li ng-show="project.ended.date">
+                    <a href="#fieldset_ended">Päättynyt</a>
+                </li>
+<!--                <li ng-hide="project.ended.date">
+                    <span class="text-muted">Päättynyt</span>
+                </li>-->
+            </ul>
+            <label><a href="#fieldset_confirm">Vahvistus</a></label>
+        </li>
+    </ul>
     <form name="projectEditForm" class="form-horizontal" role="form"
           data-ng-submit="update(projectEditForm.$valid)" novalidate>
-        <fieldset class="panel panel-primary">
+        <fieldset class="panel panel-primary" id="fieldset_registered">
             <div class="panel-heading">
                 <h4>
                     <span href="" ng-click="showRegDetails = !showRegDetails">
@@ -565,7 +617,8 @@
                 </fieldset>
             </div>
         </fieldset>
-        <fieldset ng-show="project.in_review.date" class="panel panel-primary">
+        <fieldset ng-show="project.in_review.date" class="panel panel-primary"
+                  id="fieldset_in_review">
             <div class="panel-heading">
                 <h4>
                     <span href="" ng-click="showInRevDetails = !showInRevDetails">
@@ -684,7 +737,8 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.approved.date" class="panel panel-primary">
+        <fieldset ng-show="project.approved.date" class="panel panel-primary"
+                  id="fieldset_approved">
             <div class="panel-heading">
                 <h4>
                     <span href="" ng-click="showApprDetails = !showApprDetails">
@@ -870,7 +924,8 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.rejected.date" class="panel panel-primary">
+        <fieldset ng-show="project.rejected.date" class="panel panel-primary"
+                  id="fieldset_rejected">
             <div class="panel-heading">
                 <h4>
                     <span ng-click="showRejDetails = !showRejDetails">
@@ -924,7 +979,8 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.signed.date" class="panel panel-primary">
+        <fieldset ng-show="project.signed.date" class="panel panel-primary"
+                  id="fieldset_signed">
             <div class="panel-heading">
                 <h4>
                     <span href="" ng-click="showSignDetails = !showSignDetails">
@@ -1114,7 +1170,7 @@
             </div>
         </fieldset>
         <fieldset ng-show="project.intermediary_reports.length > 0"
-                  class="panel panel-primary">
+                  class="panel panel-primary" id="fieldset_intreport">
             <div class="panel-heading">
                 <h4>
                     <span ng-click="showIntRepDetails = !showIntRepDetails">
@@ -1285,7 +1341,8 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.end_report.date" class="panel panel-primary">
+        <fieldset ng-show="project.end_report.date" class="panel panel-primary"
+                  id="fieldset_endreport">
             <div class="panel-heading">
                 <h4>
                     <span href="" ng-click="showEndRepDetails = !showEndRepDetails">
@@ -1613,7 +1670,8 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset ng-show="project.ended.date" class="panel panel-primary">
+        <fieldset ng-show="project.ended.date" class="panel panel-primary"
+                  if="fieldset_ended">
             <div class="panel-heading">
                 <h4>
                     <span ng-click="showEndedDetails = !showEndedDetails">
@@ -1704,7 +1762,7 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset class="panel panel-primary">
+        <fieldset class="panel panel-primary" id="fieldset_confirm">
             <div class="panel-heading">
                 <h4>
                     <span ng-click="showConfirmation = !showConfirmation">
