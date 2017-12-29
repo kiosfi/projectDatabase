@@ -21,18 +21,18 @@ angular.module("mean.projects").config(["$stateProvider",
                         }
                     }
                 })
-                .state("edit project", {
-                    url: "/projects/:projectID/edit",
-                    templateUrl: "/projects/views/edit.html",
+                .state("project by id", {
+                    url: "/projects/:projectID",
+                    templateUrl: "/projects/views/view.html",
                     resolve: {
                         loggedin: function (MeanUser) {
                             return MeanUser.checkLoggedin();
                         }
                     }
                 })
-                .state("project by id", {
-                    url: "/projects/:projectID",
-                    templateUrl: "/projects/views/view.html",
+                .state("edit project", {
+                    url: "/projects/:projectID/edit",
+                    templateUrl: "/projects/views/edit.html",
                     resolve: {
                         loggedin: function (MeanUser) {
                             return MeanUser.checkLoggedin();
@@ -49,7 +49,7 @@ angular.module("mean.projects").config(["$stateProvider",
                     }
                 })
                 .state("registration report by id", {
-                    url: "/projects/:projectID/regreport/:reportId",
+                    url: "/projects/:projectID/regreport",
                     templateUrl: "/projects/views/regreport.html",
                     resolve: {
                         loggedin: function (MeanUser) {
@@ -67,7 +67,7 @@ angular.module("mean.projects").config(["$stateProvider",
                     }
                 })
                 .state("end report by project id", {
-                    url: "/projects/endReport/:projectID",
+                    url: "/projects/:projectID/endReport",
                     templateUrl: "/projects/views/endreport.html",
                     resolve: {
                         loggedin: function (MeanUser) {
