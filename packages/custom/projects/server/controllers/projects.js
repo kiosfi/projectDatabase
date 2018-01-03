@@ -575,7 +575,7 @@ module.exports = function (Projects) {
                                     });
                                 }
                                 Projects.events.publish({
-                                    action: 'updated',
+                                    action: 'added appendix',
                                     name: project.title,
                                     url: config.hostname + '/projects/' + project._id
                                 });
@@ -584,12 +584,6 @@ module.exports = function (Projects) {
                                         fields.project_id});
                             res.end(util.inspect({fields: fields, files: files}));
                         });
-            });
-
-            Projects.events.publish({
-                action: 'added appendix',
-                name: project.title,
-                url: config.hostname + '/projects/' + project._id
             });
         },
         /**

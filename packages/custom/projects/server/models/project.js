@@ -28,7 +28,8 @@ var ProjectSchema = new Schema({
     security_level: {           // "Turvaluokitus"
         type: String,
         required: true,
-        default: "Julkinen"
+        default: "Julkinen",
+        trim: true
     },
     /**
      * Reference number of the project. It's an integer whose two first (most
@@ -38,7 +39,8 @@ var ProjectSchema = new Schema({
      */
     project_ref: {              // "Tunnus"
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     /**
      * Title of the project.
@@ -62,7 +64,8 @@ var ProjectSchema = new Schema({
      */
     coordinator: {          // "Koordinaattori" (or "esittelijä" in reports)
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     /**
      * ID of the organisation in charge of this project.
@@ -70,7 +73,8 @@ var ProjectSchema = new Schema({
     organisation: {             // "Järjestö"
         type: Schema.ObjectId,
         ref: 'Organisation',
-        required: true
+        required: true,
+        trim: true
     },
     /**
      * State of the project. Must be one of the following strings:
@@ -82,7 +86,8 @@ var ProjectSchema = new Schema({
     state: {                    // "Tila"
         type: String,
         default: 'rekisteröity',
-        required: true
+        required: true,
+        trim: true
     },
     /**
      * The purpose of this flag is to indicate that the current state of the
@@ -147,8 +152,7 @@ var ProjectSchema = new Schema({
      * Duration of the project in months.
      */
     duration_months: {          // "Kesto (kk)"
-        type: Number,
-        trim: true
+        type: Number
     },
     /**
      * Additional project description in Finnish.
@@ -408,10 +412,12 @@ var ProjectSchema = new Schema({
             type: Date
         },
         user: {                 // "Tiedot lisäsi"
-            type: String
+            type: String,
+            trim: true
         },
         comments: {             // "Kommentit"
-            type: String
+            type: String,
+            trim: true
         }
     },
     /**
@@ -422,7 +428,8 @@ var ProjectSchema = new Schema({
             type: Date
         },
         user: {                 // "Tiedot lisäsi"
-            type: String
+            type: String,
+            trim: true
         },
         /**
          * The board meeting where the approval was given for the project. This
@@ -448,7 +455,8 @@ var ProjectSchema = new Schema({
          * "UM" (Ulkoministeriö), "Hallituksen kokous", or "Toiminnanjohtaja".
          */
         approved_by: {          // "Hyväksyjä"
-            type: String
+            type: String,
+            trim: true
         },
         board_notified: {       // "Hallitukselle tiedoksi"
             type: Date
@@ -490,13 +498,15 @@ var ProjectSchema = new Schema({
             type: Date
         },
         user: {                 // "Tiedot lisäsi"
-            type: String
+            type: String,
+            trim: true
         },
         rejection_categories: { // "Hylkäyssyyt"
             type: Array
         },
         rejection_comments: {   // "Kommentit"
-            type: String
+            type: String,
+            trim: true
         }
     },
     signed: {                   // "Allekirjoitettu"
@@ -504,13 +514,15 @@ var ProjectSchema = new Schema({
             type: Date
         },
         user: {                 // "Tiedot lisäsi"
-            type: String
+            type: String,
+            trim: true
         },
         /**
          * The person signing the project (from the applicant organisation).
          */
         signed_by: {            // "Allekirjoittaja"
-            type: String
+            type: String,
+            trim: true
         },
         signed_date: {          // "Allekirjoituspäivämäärä"
             type: Date
@@ -561,7 +573,8 @@ var ProjectSchema = new Schema({
             type: Date
         },
         user: {                 // "Tiedot lisäsi"
-            type: String
+            type: String,
+            trim: true
         },
         /**
          * This field was added in the schema version 7.
@@ -575,23 +588,27 @@ var ProjectSchema = new Schema({
                 type: Date
             },
             review: {           // "Arvio"
-                type: String
+                type: String,
+                trim: true
             }
         },
         approved_by: {          // "Hyväksyjä"
-            type: String
+            type: String,
+            trim: true
         },
         approved_date: {        // "Hyväksymispäivämäärä"
             type: Date
         },
         general_review: {       // "Yleisarvio"
-            type: String
+            type: String,
+            trim: true
         },
         methods: {              // "Toiminnot"
             type: Array
         },
         objective: {            // "Tärkeimmät tulokset"
-            type: String
+            type: String,
+            trim: true
         },
         /**
          * The board meeting where the end report was approved. This field was
@@ -629,16 +646,14 @@ var ProjectSchema = new Schema({
          * The estimated number of people, whom this project has directly helped.
          */
         direct_beneficiaries: { // "Suoria hyödynsaajia"
-            type: Number,
-            trim: true
+            type: Number
         },
         /**
          * The estimated number of people, who have received indirect benefits
          * from this project.
          */
         indirect_beneficiaries: {   // "Epäsuoria hyödynsaajia"
-            type: Number,
-            trim: true
+            type: Number
         },
         /**
          * A numerical grade for the success of the project. The grading system
@@ -647,8 +662,7 @@ var ProjectSchema = new Schema({
          * 1 (did not succeed as planned due to neglection by the organisation).
          */
         grade: {                // "Numeerinen arvio"
-            type: Number,
-            trim: true
+            type: Number
         },
         /**
          * Comments on the project's planned results. Planned results can be
@@ -678,7 +692,8 @@ var ProjectSchema = new Schema({
             type: Date
         },
         user: {                 // "Tiedot lisäsi"
-            type: String
+            type: String,
+            trim: true
         },
         end_date: {             // "Päättymispäivämäärä"
             type: Date
@@ -687,10 +702,12 @@ var ProjectSchema = new Schema({
             type: Date
         },
         approved_by: {          // "Hyväksyjä"
-            type: String
+            type: String,
+            trim: true
         },
         other_comments: {       // "Kommentit"
-            type: String
+            type: String,
+            trim: true
         }
     },
     updated: {                  // "Päivitetty"

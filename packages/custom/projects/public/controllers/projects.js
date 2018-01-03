@@ -140,14 +140,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         var now = new Date();
 
         /**
-         * These date fields are used in the project creation form. The default
-         * values correspond to the current date (generated during runtime).
-         */
-        $scope.register_year = now.getFullYear();
-        $scope.register_month = now.getMonth() + 1;
-        $scope.register_day = now.getDate();
-
-        /**
          * These date fields are used in the payment addition form at the
          * project view. The default values correspond to the current date
          * (generated during runtime).
@@ -155,6 +147,28 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.payment_year = now.getFullYear();
         $scope.payment_month = now.getMonth() + 1;
         $scope.payment_day = now.getDate();
+
+        $scope.initNewProject = function() {
+
+            /**
+             * These date fields are used in the project creation form. The default
+             * values correspond to the current date (generated during runtime).
+             */
+            $scope.register_year = now.getFullYear();
+            $scope.register_month = now.getMonth() + 1;
+            $scope.register_day = now.getDate();
+//            $scope.project = {
+//                schema_version:     "12",
+//                title:              "",
+//                coordinator:        "",
+////                project.reg_date:   "",
+//                date:               "",
+//                security_level:     "Julkinen",
+////                organisation
+//            }
+            $scope.project = new Projects();
+            $scope.project.security_level = "Julkinen";
+        }
 
         /**
          * Creates new project by checking if organisation already exists (i.e. organisation
@@ -837,6 +851,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
          * @returns {undefined}
          */
         $scope.confirmAppendixDeletion = function (name, url) {
+            name = name.trim();
             if (confirm("Haluatko varmasti poistaa liitteen \"" + name + "\"?")) {
                 $window.location = url + "&action=delete";
             }
@@ -860,6 +875,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
             }
         };
 
+        $scope.createIfNotExistent = function (stateObjectName) {
+            if (typeof project[stateObjectName] === "undefined") {
+                project[stateObjectName] = {};
+            }
+        }
+
         /**
          * Updates project with "in review" state data
          *
@@ -869,13 +890,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.addReviewState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                $scope.createIfNotExistent("in_review");
                 project.in_review.date = Date.now();
                 project.state = $scope.global.newState;
                 project.$addReview(function (response) {
                     $location.path('projects/' + response._id);
                 });
             }
-
+            else
+            {
+                alert("Lomakkeen tiedot ovat virheelliset.");
+            }
         };
 
         /**
@@ -887,6 +912,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.addApprovedState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                $scope.createIfNotExistent("approved");
                 project.approved.date = Date.now();
                 if (((typeof $scope.approved_day) !== 'undefined') &&
                         ((typeof $scope.approved_month) !== 'undefined') &&
@@ -914,7 +940,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     $location.path('projects/' + response._id)
                 });
             }
-
+            else
+            {
+                alert("Lomakkeen tiedot ovat virheelliset.");
+            }
         };
 
         /**
@@ -926,6 +955,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.addRejectedState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                $scope.createIfNotExistent("rejected");
                 project.rejected.date = Date.now();
                 project.rejected.rejection_categories = $scope.addedRejections;
                 project.state = $scope.global.newState;
@@ -933,7 +963,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     $location.path('projects/' + response._id);
                 });
             }
-
+            else
+            {
+                alert("Lomakkeen tiedot ovat virheelliset.");
+            }
         };
 
         /**
@@ -945,7 +978,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.addSignedState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
-
+                $scope.createIfNotExistent("signed");
                 if (((typeof $scope.signed_day) !== 'undefined') &&
                         ((typeof $scope.signed_month) !== 'undefined') &&
                         ((typeof $scope.signed_year) !== 'undefined')) {
@@ -984,7 +1017,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     $location.path('projects/' + response._id);
                 });
             }
-
+            else
+            {
+                alert("Lomakkeen tiedot ovat virheelliset.");
+            }
         };
 
         /**
@@ -1011,7 +1047,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                 project.$addPayment(function (response) {
                 });
             }
-
+            else
+            {
+                alert("Lomakkeen tiedot ovat virheelliset.");
+            }
         };
 
         // TODO: Make this stuff work instead of direct HTTP requests in order
@@ -1062,6 +1101,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     $location.path('projects/' + response._id);
                 });
             }
+            else
+            {
+                alert("Lomakkeen tiedot ovat virheelliset.");
+            }
         };
 
         /**
@@ -1073,6 +1116,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.addEndReportState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                $scope.createIfNotExistent("end_report");
                 project.end_report.date = Date.now();
                 project.state = $scope.global.newState;
 
@@ -1100,7 +1144,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     $location.path('projects/' + response._id);
                 });
             }
-
+            else
+            {
+                alert("Lomakkeen tiedot ovat virheelliset.");
+            }
         };
 
         /**
@@ -1112,6 +1159,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.addEndedState = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
+                $scope.createIfNotExistent("ended");
                 project.ended.date = Date.now();
 
                 if (((typeof $scope.end_day) !== 'undefined') &&
@@ -1139,7 +1187,10 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     $location.path('projects/' + response._id);
                 });
             }
-
+            else
+            {
+                alert("Lomakkeen tiedot ovat virheelliset.");
+            }
         };
         $scope.changeState = function (changeTo) {
             Projects.get({

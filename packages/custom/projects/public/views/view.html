@@ -10,9 +10,10 @@
         <li>
             <label><a href="#functions">Toiminnot</a></label>
             <ul>
-                <li>
-                    <a href="#stateTransition"
-                       ng-show="state.next.length !== 0 && project.state !== 'hylätty' && project.state !== 'päättynyt'">
+                <li ng-show="state.next.length !== 0 &&
+                            project.state !== 'hylätty' &&
+                            project.state !== 'päättynyt'">
+                    <a href="#stateTransition">
                         Tilasiirtymä
                     </a>
                 </li>
@@ -20,8 +21,8 @@
                     <a ng-href="/projects/{{project._id}}/edit">Muokkaus</a>
                 </li>
                 <li><a href="#addAppendix">Liitteen lisäys</a></li>
-                <li>
-                    <a href="#addPayment" ng-show="project.signed.date">
+                <li ng-show="project.signed.date">
+                    <a href="#addPayment">
                         Maksun lisäys
                     </a>
                 </li>
@@ -58,7 +59,9 @@
                 <li><a href="#reports">Toteutunut</a></li>
                 <li>
                     <a href="#stateTransition"
-                       ng-show="state.next.length !== 0 && project.state !== 'hylätty' && project.state !== 'päättynyt'">
+                       ng-show="state.next.length !== 0 &&
+                                   project.state !== 'hylätty' &&
+                                   project.state !== 'päättynyt'">
                         Tilasiirtymä
                     </a>
                 </li>
@@ -104,13 +107,18 @@
         <section class="panel-body" style="text-align: center" ng-hide="hideFunctions">
             <big>
                 <a ng-href="#stateTransition"
-                   ng-show="state.next.length !== 0 && project.state !== 'hylätty' && project.state !== 'päättynyt'"
+                   ng-show="state.next.length !== 0 &&
+                               project.state !== 'hylätty' &&
+                               project.state !== 'päättynyt'"
                    class="btn btn-default" style="margin-right: 1em">
                     <span class="glyphicon glyphicon-arrow-right"></span>
                     Tilasiirtymä
                 </a>
                 <span class="btn btn-default disabled" style="margin-right: 1em"
-                      ng-show="state.next.length === 0 || project.state === 'hylätty' || project.state === 'päättynyt'">
+                      ng-show="state.next.length === 0 ||
+                                  project.state === 'hylätty' ||
+                                  project.state === 'päättynyt'"
+                                  title="Hankkeella ei ole enää laillisia tilasiirtymiä.">
                     <span class="glyphicon glyphicon-arrow-right"></span>
                     Tilasiirtymä
                 </span>
@@ -131,7 +139,8 @@
                 </a>
                 <span ng-show="!project.signed.date"
                       class="btn btn-default disabled"
-                      style="margin-right: 1em">
+                      style="margin-right: 1em"
+                      title="Hankkeen tulee olla allekirjoitettu ennen maksujen lisäämistä.">
                     <span class="glyphicon glyphicon-eur"></span>
                     Maksun lisäys
                 </span>
@@ -716,7 +725,8 @@
                         <a ng-click="createPDF('reg')" href=""
                            ng-disabled="regRepExists"
                            class="btn btn-default btn-xs"
-                           style="margin-top: -4px">
+                           style="margin-top: -4px"
+                           title="PDF-tiedosto tallentuu liitteenä.">
                             <span class="glyphicon glyphicon-file"></span>&nbsp;
                             PDF
                         </a>
@@ -879,7 +889,8 @@
                         <div class="col-md-6">
                             <a ng-click="createPDF('int')" href=""
                                ng-disabled="true" class="btn btn-default btn-xs"
-                               style="margin-top: -4px">
+                               style="margin-top: -4px"
+                               title="PDF-tiedosto tallentuu liitteenä.">
                                 <span class="glyphicon glyphicon-file"></span>&nbsp;
                                 PDF
                             </a>
@@ -1462,7 +1473,9 @@
                             class="col-md-3"
                             ng-model="project.appendix.category" required>
                         <option value="">[Valitse yksi]</option>
-                        <option data-ng-repeat="category in appendixCategories">{{category}}</option>
+                        <option data-ng-repeat="category in appendixCategories">
+                            {{category}}
+                        </option>
                     </select>
                     <input type="text" name="appendix_custom_category"
                            value="" class="col-md-7"
@@ -1481,7 +1494,9 @@
                 <div class="form-group col-md-2" style="margin-top: -2em">
                     <button type="submit" id="btn-add-appendix"
                             value="Submit" class="btn btn-primary"
-                            ng-disabled="appendixForm.$invalid || (project.appendix.category === 'Muu...' && project.appendix.custom_category === '')">
+                            ng-disabled="appendixForm.$invalid ||
+                                        (project.appendix.category === 'Muu...' &&
+                                        project.appendix.custom_category === '')">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>

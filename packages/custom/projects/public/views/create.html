@@ -1,4 +1,5 @@
-<section data-ng-controller="ProjectsController">
+<section data-ng-controller="ProjectsController"
+         data-ng-init="initNewProject()">
     <link rel="stylesheet" type="text/css" href="/theme/assets/css/twoPart.css">
     <h1 id="header">Hankkeen lisäys</h1>
     <hr>
@@ -14,6 +15,7 @@
             <label><a href="#fieldset_confirm">Vahvistus</a></label>
         </li>
     </ul>
+    <!--<div>{{project}}</div>-->
     <form name="projectForm" class="form-horizontal" role="form"
           data-ng-submit="create(projectForm.$valid)" novalidate>
         <fieldset class="panel panel-primary" id="fieldset_basics">
@@ -120,8 +122,8 @@
                         </label>
                         <div class="col-md-9">
                             <select id="security_level"
-                                    data-ng-model="project.security_level">
-                                <option data-ng-repeat="sec_level in securityLevels">{{sec_level}}</option>
+                                    data-ng-model="project.security_level"
+                                    ng-options="sec_level for sec_level in securityLevels">
                             </select>
                         </div>
                     </div>
@@ -152,7 +154,8 @@
                         </ul>
                     </div>
                     <div data-ng-if="!newOrg" class="col-md-7"
-                         id="orgSelection" data-ng-init="addOrgFromDb()">
+                         id="orgSelection" data-ng-init="addOrgFromDb()"
+                         ng-class="{'has-error': !newOrg && !project.listOrganisation}">
                         <select data-ng-if="!newOrg"
                                 data-ng-model="project.listOrganisation">
                             <option data-ng-if="!newOrg"
@@ -161,6 +164,12 @@
                                 {{org.name}}
                             </option>
                         </select>
+                        <div ng-show="!project.listOrganisation"
+                                     class="help-block">
+                            <p>
+                                Järjestö on pakollinen
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <article class="well-lg" data-ng-show="newOrg">
@@ -1119,7 +1128,8 @@
                 <div class="form-group col-md-12" style="text-align: center">
                     <hr>
                     <button type="submit" class="btn btn-primary"
-                            ng-disabled="projectForm.$invalid">
+                            ng-disabled="projectForm.$invalid ||
+                                        (!newOrg && !project.listOrganisation)">
                         <span class="glyphicon glyphicon-ok">
                         </span>&nbsp;Tallenna
                     </button>
