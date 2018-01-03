@@ -876,8 +876,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         };
 
         $scope.createIfNotExistent = function (stateObjectName) {
-            if (typeof project[stateObjectName] === "undefined") {
-                project[stateObjectName] = {};
+            if (typeof $scope.project[stateObjectName] === "undefined") {
+                $scope.project[stateObjectName] = {};
             }
         }
 
