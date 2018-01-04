@@ -1,5 +1,6 @@
 {
     "security_levels": ["Julkinen", "Luottamuksellinen", "Salainen"],
+    "authorities": ["Toiminnanjohtaja", "Hallituksen kokous", "Ulkoministeriö"],
     "currency_units": ["AFN", "BDT", "BIF", "CDF", "ETB", "EUR", "INR", "KES",
         "LKR", "NPR", "PKR", "RWF", "UGX", "USD"],
     "themes": [
@@ -31,7 +32,12 @@
         "Toimintatuki",
         "Muu"
     ],
-    "method_levels": ["Kansainvälinen", "Kansallinen", "Paikallinen", "Yhteisö"],
+    "method_levels": [
+        "Kansainvälinen",
+        "Kansallinen",
+        "Paikallinen",
+        "Yhteisö"
+    ],
     "rej_categories": [
         "1. Hanke ei ole ihmisoikeushanke",
         "2. Järjestöllä ei ole riittävää kapasiteettia ihmisoikeustyön tekemiseen",
@@ -174,8 +180,18 @@
         "appendices": "Liitteet",
         "special_notes": "Erityishuomioita"
     },
-    "appendix_categories": ["Hankehakemus", "Hankebudjetti", "Rekisteröintitodistus",
-        "Suositus", "Järjestön vuosibudjetti", "Tilinpäätös", "Sopimus",
-        "Valokuva", "Hankkeessa tuotettu materiaali", "Välitalousraportti",
-        "Talousraportti", "Muu..."]
+    "appendix_categories": [
+        "Hankehakemus",
+        "Hankebudjetti",
+        "Rekisteröintitodistus",
+        "Suositus",
+        "Järjestön vuosibudjetti",
+        "Tilinpäätös",
+        "Sopimus",
+        "Valokuva",
+        "Hankkeessa tuotettu materiaali",
+        "Välitalousraportti",
+        "Talousraportti",
+        "Muu..."
+    ]
 }

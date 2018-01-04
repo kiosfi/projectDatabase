@@ -369,10 +369,8 @@ A form for project state change.
                     <div class="col-md-9">
                         <select id="approved_by"
                                 data-ng-model="project.approved.approved_by"
+                                ng-options="authority for authority in authorities"
                                 class='form-control'>
-                            <option>Toiminnanjohtaja</option>
-                            <option>Hallituksen kokous</option>
-                            <option>Ulkoministeriö</option>
                         </select>
                     </div>
                 </div>
@@ -400,9 +398,8 @@ A form for project state change.
                         <div id="rejSelection"
                              data-ng-repeat="rej in addedRejections">
                             <select name="rejSelect" id="rejSelect"
-                                    data-ng-model="rej.rejection">
-                                <option data-ng-repeat="rejCat in rejCategories"
-                                        value="{{rejCat}}">{{rejCat}}</option>
+                                    data-ng-model="rej.rejection"
+                                    ng-options="rejCat for rejCat in rejCategories">
                             </select>
                         </div>
                     </div>
@@ -962,7 +959,7 @@ A form for project state change.
                             <select name="grade" id="grade"
                                     data-ng-model="project.end_report.grade"
                                     class="form-control">
-                                <option value="" selected></option>
+                                <option value="" selected style="display:none"></option>
                                 <option value="4">
                                     4 (Onnistui yli odotusten)
                                 </option>

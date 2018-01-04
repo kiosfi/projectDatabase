@@ -1055,7 +1055,7 @@
                 <span>
                     <label class="control-label">
                         {{project.state}}
-                        <!--<span ng-if="project.incomplete"> (keskeneräinen)</span>-->
+                        <span ng-if="project.incomplete"> (keskeneräinen)</span>
                     </label>
                     <span class="glyphicon glyphicon-arrow-right"></span>
                     <select id="stateSelect" data-ng-model="project.changeTo"
@@ -1464,30 +1464,33 @@
                   action="/api/projects/upload"
                   method="post" enctype="multipart/form-data">
                 <input type="hidden" name="project_id" value="{{project._id}}">
-                <div class="form-group col-md-10" style="padding-left: 0">
-                    <label for="appendixTypeSelect"
+                <div class="form-group col-md-10" style="padding-left: 0"
+                     ng-class="{'has-error': appendixForm.appendix_category.$invalid}">
+                    <label for="appendix_category"
                            class="col-md-2 control-label">
                         Kategoria
                     </label>
                     <select id="appendixTypeSelect" name="appendix_category"
                             class="col-md-3"
-                            ng-model="project.appendix.category" required>
-                        <option value="">[Valitse yksi]</option>
-                        <option data-ng-repeat="category in appendixCategories">
-                            {{category}}
-                        </option>
+                            ng-model="project.appendix.category"
+                            ng-options="category for category in appendixCategories"
+                            required>
                     </select>
                     <input type="text" name="appendix_custom_category"
                            value="" class="col-md-7"
                            ng-show="project.appendix.category === 'Muu...'"
                            ng-model="project.appendix.customCategory">
+                    <div ng-show="appendixForm.appendix_category.$invalid"
+                         class="col-md-7 help-block">
+                        Liitteelle pitää valita kategoria.
+                    </div>
                 </div>
                 <div class="col-md-10" style="padding-left: 0">
-                    <label for="appendixFileInput" class="col-md-2">
+                    <label for="appendix_file" class="col-md-2">
                         Tiedosto
                     </label>
                     <input type="file" id="appendixFileInput"
-                           name="appendix_file" class="col-md-10"
+                           name="appendix_file" class="col-md-6"
                            accept="application/msword,application/pdf,application/rtf,application/vnd.oasis.opendocument.text,text/plain,text/csv,image/*"
                            ng-model="project.appendix.file">
                 </div>
@@ -1496,7 +1499,7 @@
                             value="Submit" class="btn btn-primary"
                             ng-disabled="appendixForm.$invalid ||
                                         (project.appendix.category === 'Muu...' &&
-                                        project.appendix.custom_category === '')">
+                                        !project.appendix.customCategory)">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>

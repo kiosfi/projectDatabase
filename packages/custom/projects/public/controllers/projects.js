@@ -9,24 +9,25 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
 
         $http.get("projects/assets/json/projectConstants.json").success(
                 function (response) {
-                    $scope.securityLevels = response.security_levels;
-                    $scope.currencyUnits = response.currency_units;
-                    $scope.themes = response.themes;
-                    $scope.methodNames = response.method_names;
-                    $scope.methodLevels = response.method_levels;
-                    $scope.rejCategories = response.rej_categories;
-                    $scope.fieldNames = response.field_names;
-                    $scope.appendixCategories = response.appendix_categories;
+                    $scope.securityLevels       = response.security_levels;
+                    $scope.authorities          = response.authorities;
+                    $scope.currencyUnits        = response.currency_units;
+                    $scope.themes               = response.themes;
+                    $scope.methodNames          = response.method_names;
+                    $scope.methodLevels         = response.method_levels;
+                    $scope.rejCategories        = response.rej_categories;
+                    $scope.fieldNames           = response.field_names;
+                    $scope.appendixCategories   = response.appendix_categories;
                 }
         );
 
-        $scope.addedMethods = [];
-        $scope.plannedPayments = [];
-        $scope.deadlines = [];
-        $scope.themeSelection = [];
-        $scope.objectiveComments = [];
-        $scope.addedRejections = [];
-        $scope.currentDate = new Date();
+        $scope.addedMethods         = [];
+        $scope.plannedPayments      = [];
+        $scope.deadlines            = [];
+        $scope.themeSelection       = [];
+        $scope.objectiveComments    = [];
+        $scope.addedRejections      = [];
+        $scope.currentDate          = new Date();
 
         /**
          * This function converts a number to a Finnish string representation
