@@ -56,7 +56,8 @@ var ProjectSchema = new Schema({
      * schema version 11.
      */
     date: {
-        type: Date
+        type: Date,
+        required: true
     },
 
     /**
@@ -169,7 +170,9 @@ var ProjectSchema = new Schema({
         trim: true
     },
     /**
-     * The Finnish name of this field is currently "Toiminnot".
+     * The Finnish name of this field is currently "Toiminnot". It contains
+     * objects with string-valued fields fields <tt>name</tt>, <tt>level</tt>,
+     * and <tt>comment</tt>.
      */
     methods: {                  // "Toiminnot"
         type: Array
@@ -559,8 +562,7 @@ var ProjectSchema = new Schema({
      * An array of objects containing the following fields:<tt>reportNumber</tt>,
      * <tt>date</tt>, <tt>user</tt>, <tt>budget</tt>, <tt>communication</tt>,
      * <tt>evaluation</tt>, <tt>methods</tt>, <tt>objectives</tt>,
-     * <tt>planned_payments</tt>, <tt>overal_rating_kios</tt>, and
-     * <tt>comments</tt>.
+     * <tt>overal_rating_kios</tt>, and <tt>comments</tt>.
      *
      * Due to renaming of fields, <tt>evaluation</tt> refers to
      * "muita huomioita".
@@ -710,6 +712,8 @@ var ProjectSchema = new Schema({
             trim: true
         }
     },
+    // TODO: Ota selvää, minkä muotoista dataa tästä arraysta löytyy ja
+    // dokumentoi tähän.
     updated: {                  // "Päivitetty"
         type: Array
     },

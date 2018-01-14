@@ -14,119 +14,121 @@ db.createCollection("users");
 
 var date = new Date();
 
-db.users.insert(
-        {"_id": ObjectId("5614d428013b9a2f1ca236ce"),
-            "email": "test@test.com",
-            "hashed_password": "O2cdPpHlLOkwnQBnExKqwmRF3lpQRW8NDit/UCk+WQz06+CyUJjQOrrBf5mWrhGgE5YKn5y+DY4DZ6Q4zwT/3A==",
-            "salt": "e5y3JfOstfMYQSZzpQ+acw==",
-            "username": "testia",
-            "name": "teppo testi",
-            "provider": "local",
-            "roles": ["authenticated"], "__v": 0}
-);
+db.users.insert({
+    "_id": ObjectId("5614d428013b9a2f1ca236ce"),
+    "email": "test@test.com",
+    "hashed_password": "O2cdPpHlLOkwnQBnExKqwmRF3lpQRW8NDit/UCk+WQz06+CyUJjQOrrBf5mWrhGgE5YKn5y+DY4DZ6Q4zwT/3A==",
+    "salt": "e5y3JfOstfMYQSZzpQ+acw==",
+    "username": "testia",
+    "name": "teppo testi",
+    "provider": "local",
+    "roles": ["authenticated"], "__v": 0
+});
 
-db.bankaccounts.insert(
-        {"_id": ObjectId("56150897b560c1fc0b9b3015"),
-            "bank_contact_details": "Nordea Helsinki",
-            "iban": "FI1234456789000",
-            "swift": "NDEAFIHH",
-            "holder_name": "Järjestö1"}
-);
+db.bankaccounts.insert({"_id": ObjectId("56150897b560c1fc0b9b3015"),
+    "bank_contact_details": "Nordea Helsinki",
+    "iban": "FI1234456789000",
+    "swift": "NDEAFIHH",
+    "holder_name": "Järjestö1"
+});
 
-db.organisations.insert(
-        {"_id": ObjectId("56091a0525f75ebc0c486338"),
-            "schema_version": 3,
-            "name": "Human rights org",
-            "representative": {
-                "name": "Representative",
-                "email": "email@email.com",
-                "phone": "12345"
-            },
-            "exec_manager": "Mrs Manager",
-            "communications_rep": "John Doe",
-            "address": {
-                "street": "Samppalinnantie 20 C 22",
-                "postal_code": "00780",
-                "city": "Samppalinna",
-                "country": "Suomi"
-            },
-            "tel": "123445",
-            "email": "email@org.com",
-            "website": "www.org.com",
-            "legal_status": "hyväntekeväisyysjärjestö",
-            "description": "järjestön historiaa...",
-            "int_links": "link 1, link 2",
-            "nat_local_links": "link a, link b",
-            "other_funding_budget": "some funders...",
-            "accounting_audit": "All audits are OK.",
-            "context": "Liirum laarum...",
-            "bank_account": ObjectId("56150897b560c1fc0b9b3015"),
-            "special_notes": ""}
-);
+db.organisations.insert({"_id": ObjectId("56091a0525f75ebc0c486338"),
+    "schema_version": 3,
+    "name": "Human rights org",
+    "representative": {
+        "name": "Representative",
+        "email": "email@email.com",
+        "phone": "12345"
+    },
+    "exec_manager": "Mrs Manager",
+    "communications_rep": "John Doe",
+    "address": {
+        "street": "Samppalinnantie 20 C 22",
+        "postal_code": "00780",
+        "city": "Samppalinna",
+        "country": "Suomi"
+    },
+    "tel": "123445",
+    "email": "email@org.com",
+    "website": "www.org.com",
+    "legal_status": "hyväntekeväisyysjärjestö",
+    "description": "järjestön historiaa...",
+    "int_links": "link 1, link 2",
+    "nat_local_links": "link a, link b",
+    "other_funding_budget": "some funders...",
+    "accounting_audit": "All audits are OK.",
+    "context": "Liirum laarum...",
+    "bank_account": ObjectId("56150897b560c1fc0b9b3015"),
+    "special_notes": "",
+    "updated": []
+});
 
-db.organisations.insert(
-        {"_id": ObjectId("6f25e7cf1526771eee2a0043"),
-            "schema_version": 3,
-            "name": "Womens' rights",
-            "representative": {
-                "name": "Matti Meikäläinen",
-                "email": "email@email.com",
-                "phone": "12345"
-            },
-            "exec_manager": "Matti Manageri",
-            "communications_rep": "Matti Meikäläinen",
-            "address": {
-                "street": "Ankkalinnankatu 123 A 45",
-                "postal_code": "01780",
-                "city": "Vantaa",
-                "country": "Suomi"
-            },
-            "tel": "555 1234 567",
-            "email": "email@wr.org",
-            "website": "www.wr.org",
-            "legal_status": "hyväntekeväisyysjärjestö",
-            "description": "järjestön historiaa...",
-            "int_links": "link 1, link 2",
-            "nat_local_links": "link a, link b",
-            "other_funding_budget": "some funders...",
-            "accounting_audit": "All audits are OK.",
-            "context": "Liirum laarum...",
-            "bank_account": ObjectId("56150897b560c1fc0b9b3015"),
-            "special_notes": ""}
-);
+db.organisations.insert({
+    "_id": ObjectId("6f25e7cf1526771eee2a0043"),
+    "schema_version": 3,
+    "name": "Womens' rights",
+    "representative": {
+        "name": "Matti Meikäläinen",
+        "email": "email@email.com",
+        "phone": "12345"
+    },
+    "exec_manager": "Matti Manageri",
+    "communications_rep": "Matti Meikäläinen",
+    "address": {
+        "street": "Ankkalinnankatu 123 A 45",
+        "postal_code": "01780",
+        "city": "Vantaa",
+        "country": "Suomi"
+    },
+    "tel": "555 1234 567",
+    "email": "email@wr.org",
+    "website": "www.wr.org",
+    "legal_status": "hyväntekeväisyysjärjestö",
+    "description": "järjestön historiaa...",
+    "int_links": "link 1, link 2",
+    "nat_local_links": "link a, link b",
+    "other_funding_budget": "some funders...",
+    "accounting_audit": "All audits are OK.",
+    "context": "Liirum laarum...",
+    "bank_account": ObjectId("56150897b560c1fc0b9b3015"),
+    "special_notes": "",
+    "updated": []
+});
 
-db.organisations.insert(
-        {"_id": ObjectId("8344235a153b2cf192bf74b2"),
-            "schema_version": 3,
-            "name": "Organization nr 3",
-            "representative": {
-                "name": "John Doe",
-                "email": "email@email.com",
-                "phone": "12345"
-            },
-            "exec_manager": "Piia Pomo",
-            "communications_rep": "John Doe",
-            "address": {
-                "street": "Ankkalinnankatu 123 A 46",
-                "postal_code": "01280",
-                "city": "Ankkalinna",
-                "country": "Suomi"
-            },
-            "tel": "555 9876 543",
-            "email": "test@test.com",
-            "website": "www.test.com",
-            "legal_status": "hyväntekeväisyysjärjestö",
-            "description": "järjestön historiaa...",
-            "int_links": "link 1, link 2",
-            "nat_local_links": "link a, link b",
-            "other_funding_budget": "some funders...",
-            "accounting_audit": "All audits are OK.",
-            "context": "Liirum laarum...",
-            "bank_account": ObjectId("56150897b560c1fc0b9b3015"),
-            "special_notes": ""}
-);
+db.organisations.insert({
+    "_id": ObjectId("8344235a153b2cf192bf74b2"),
+    "schema_version": 3,
+    "name": "Organization nr 3",
+    "representative": {
+        "name": "John Doe",
+        "email": "email@email.com",
+        "phone": "12345"
+    },
+    "exec_manager": "Piia Pomo",
+    "communications_rep": "John Doe",
+    "address": {
+        "street": "Ankkalinnankatu 123 A 46",
+        "postal_code": "01280",
+        "city": "Ankkalinna",
+        "country": "Suomi"
+    },
+    "tel": "555 9876 543",
+    "email": "test@test.com",
+    "website": "www.test.com",
+    "legal_status": "hyväntekeväisyysjärjestö",
+    "description": "järjestön historiaa...",
+    "int_links": "link 1, link 2",
+    "nat_local_links": "link a, link b",
+    "other_funding_budget": "some funders...",
+    "accounting_audit": "All audits are OK.",
+    "context": "Liirum laarum...",
+    "bank_account": ObjectId("56150897b560c1fc0b9b3015"),
+    "special_notes": "",
+    "updated": []
+});
 
-db.projects.insert({"_id": ObjectId("56091cbc00fccd6d66bc5cc3"),
+db.projects.insert({
+    "_id": ObjectId("56091cbc00fccd6d66bc5cc3"),
     "schema_version": 12,
     "security_level": "Julkinen",
     "project_ref": "70001",
@@ -191,11 +193,12 @@ db.projects.insert({"_id": ObjectId("56091cbc00fccd6d66bc5cc3"),
     "feasibility": "Toteutettavuus ja riskit",
     "effectiveness": "Tuloksellisuus, vaikutukset ja vaikuttavuus",
     "proposed_funding": "Esitys",
-    "special_notes": "Erityishuomioita"
-}
-);
+    "special_notes": "Erityishuomioita",
+    "updated": []
+});
 
-db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a41b"),
+db.projects.insert({
+    "_id": ObjectId("5c9ed9f94250406da7a7a41b"),
     "schema_version": 12,
     "security_level": "Julkinen",
     "project_ref": "70002",
@@ -261,10 +264,25 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a41b"),
     "effectiveness": "Tuloksellisuus, vaikutukset ja vaikuttavuus",
     "proposed_funding": "Esitys",
     "special_notes": "Erityishuomioita",
-    "in_review": {"user": "Pekka Puupää", "comments": "Jep jep"}}
-);
+    "required_appendices": {
+        "proj_budget":      false,
+        "references":       true,
+        "annual_budget":    false,
+        "rules":            true,
+        "reg_cert":         true,
+        "annual_report":    false,
+        "audit_reports":    false
+    },
+    "in_review": {
+        "date": date,
+        "user": "Pekka Puupää",
+        "comments": "Jep jep"
+    },
+    "updated": []
+});
 
-db.projects.insert({"_id": ObjectId("f2e7c9aeb017189911996768"),
+db.projects.insert({
+    "_id": ObjectId("f2e7c9aeb017189911996768"),
     "schema_version": 12,
     "security_level": "Julkinen",
     "project_ref": "70003",
@@ -330,7 +348,20 @@ db.projects.insert({"_id": ObjectId("f2e7c9aeb017189911996768"),
     "effectiveness": "Tuloksellisuus, vaikutukset ja vaikuttavuus",
     "proposed_funding": "Esitys",
     "special_notes": "Erityishuomioita",
-    "in_review": {"user": "Pekka Puupää", "comments": "Jep jep"},
+    "required_appendices": {
+        "proj_budget":      false,
+        "references":       false,
+        "annual_budget":    false,
+        "rules":            false,
+        "reg_cert":         false,
+        "annual_report":    false,
+        "audit_reports":    false
+    },
+    "in_review": {
+        "date": date,
+        "user": "Pekka Puupää",
+        "comments": "Jep jep"
+    },
     "approved": {
         "date": date,
         "user": "Maria",
@@ -343,8 +374,10 @@ db.projects.insert({"_id": ObjectId("f2e7c9aeb017189911996768"),
         "themes": [
             "Oikeusvaltio ja demokratia"
         ],
-        "themes_disambiguation": " "}}
-);
+        "themes_disambiguation": " "
+    },
+    "updated": []
+});
 
 db.projects.insert({"_id": ObjectId("f2e7c9adb017176611996768"),
     "schema_version": 12,
@@ -412,8 +445,22 @@ db.projects.insert({"_id": ObjectId("f2e7c9adb017176611996768"),
     "effectiveness": "Tuloksellisuus, vaikutukset ja vaikuttavuus",
     "proposed_funding": "Esitys",
     "special_notes": "Erityishuomioita",
-    "in_review": {"user": "Pekka Puupää", "comments": "Jep jep"}}
-);
+    "required_appendices": {
+        "proj_budget":      true,
+        "references":       true,
+        "annual_budget":    true,
+        "rules":            true,
+        "reg_cert":         true,
+        "annual_report":    true,
+        "audit_reports":    true
+    },
+    "in_review": {
+        "date": date,
+        "user": "Pekka Puupää",
+        "comments": "Jep jep"
+    },
+    "updated": []
+});
 
 db.projects.insert({"_id": ObjectId("5c9ed9f94260406da7a7a41b"),
     "schema_version": 12,
@@ -482,7 +529,20 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94260406da7a7a41b"),
     "proposed_funding": "Esitys",
     "special_notes": "Erityishuomioita",
     "planned_payments": [{"date": date, "sum_eur": 5000, "sum_local": 10000}],
-    "in_review": {"user": "Pekka Puupää", "comments": "Jep jep"},
+    "required_appendices": {
+        "proj_budget":      false,
+        "references":       false,
+        "annual_budget":    false,
+        "rules":            false,
+        "reg_cert":         false,
+        "annual_report":    false,
+        "audit_reports":    false
+    },
+    "in_review": {
+        "date": date,
+        "user": "Pekka Puupää",
+        "comments": "Jep jep"
+    },
     "approved": {
         "date": date,
         "user": "Maria",
@@ -495,7 +555,8 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94260406da7a7a41b"),
         "themes": [
             "Oikeusvaltio ja demokratia"
         ],
-        "themes_disambiguation": " "},
+        "themes_disambiguation": " "
+    },
     "signed": {"date": date,
         "user": "Maria",
         "signed_by": "Maija Meri",
@@ -522,8 +583,9 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94260406da7a7a41b"),
             "date": date,
             "sum_eur": 5000
         }
-    ]}
-);
+    ],
+    "updated": []
+});
 
 db.projects.insert({"_id": ObjectId("a2c8c9adb020176611996768"),
     "schema_version": 12,
@@ -592,7 +654,20 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176611996768"),
     "proposed_funding": "Esitys",
     "special_notes": "Erityishuomioita",
     "planned_payments": [{"date": date, "sum_eur": 5000, "sum_local": 10000}],
-    "in_review": {"user": "Pekka Puupää", "comments": "Jep jep"},
+    "required_appendices": {
+        "proj_budget":      false,
+        "references":       false,
+        "annual_budget":    false,
+        "rules":            false,
+        "reg_cert":         false,
+        "annual_report":    false,
+        "audit_reports":    false
+    },
+    "in_review": {
+        "date": date,
+        "user": "Pekka Puupää",
+        "comments": "Jep jep"
+    },
     "approved": {
         "date": date,
         "user": "Maria",
@@ -605,7 +680,8 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176611996768"),
         "themes": [
             "Oikeusvaltio ja demokratia"
         ],
-        "themes_disambiguation": " "},
+        "themes_disambiguation": " "
+    },
     "signed": {"date": date,
         "user": "Maria",
         "signed_by": "Maija Meri",
@@ -644,8 +720,9 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176611996768"),
             "objectives": ["Tavoitteiden arviointia ......."],
             "overall_rating_kios": "arvio kaf wrpwrpwrpwr",
             "comments": "Muut kommentit hankkeen onnistumisesta"
-        }]}
-);
+        }],
+    "updated": []
+});
 
 db.projects.insert({"_id": ObjectId("a2c8c9adb020176622996766"),
     "schema_version": 12,
@@ -713,7 +790,20 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176622996766"),
     "effectiveness": "Tuloksellisuus, vaikutukset ja vaikuttavuus",
     "proposed_funding": "Esitys",
     "special_notes": "Erityishuomioita",
-    "in_review": {"user": "Pekka Puupää", "comments": "Jep jep"},
+    "required_appendices": {
+        "proj_budget":      false,
+        "references":       false,
+        "annual_budget":    false,
+        "rules":            false,
+        "reg_cert":         false,
+        "annual_report":    false,
+        "audit_reports":    false
+    },
+    "in_review": {
+        "date": date,
+        "user": "Pekka Puupää",
+        "comments": "Jep jep"
+    },
     "approved": {
         "date": date,
         "user": "Maria",
@@ -726,7 +816,8 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176622996766"),
         "themes": [
             "Oikeusvaltio ja demokratia"
         ],
-        "themes_disambiguation": " "},
+        "themes_disambiguation": " "
+    },
     "signed": {"date": date,
         "user": "Maria",
         "signed_by": "Maija Meri",
@@ -753,9 +844,9 @@ db.projects.insert({"_id": ObjectId("a2c8c9adb020176622996766"),
             "date": date,
             "sum_eur": 5000
         }
-    ]
-}
-);
+    ],
+    "updated": []
+});
 
 db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a111"),
     "schema_version": 12,
@@ -823,8 +914,22 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7a111"),
     "effectiveness": "Tuloksellisuus, vaikutukset ja vaikuttavuus",
     "proposed_funding": "Esitys",
     "special_notes": "Erityishuomioita",
-    "in_review": {"user": "Pekka Puupää", "comments": "Jep jep"}}
-);
+    "required_appendices": {
+        "proj_budget":      false,
+        "references":       false,
+        "annual_budget":    false,
+        "rules":            false,
+        "reg_cert":         false,
+        "annual_report":    false,
+        "audit_reports":    false
+    },
+    "in_review": {
+        "date": date,
+        "user": "Pekka Puupää",
+        "comments": "Jep jep"
+    },
+    "updated": []
+});
 
 db.projects.insert({"_id": ObjectId("779ed9f94250406da7a7a111"),
     "schema_version": 12,
@@ -892,8 +997,22 @@ db.projects.insert({"_id": ObjectId("779ed9f94250406da7a7a111"),
     "effectiveness": "Tuloksellisuus, vaikutukset ja vaikuttavuus",
     "proposed_funding": "Esitys",
     "special_notes": "Erityishuomioita",
-    "in_review": {"user": "Pekka Puupää", "comments": "Jep jep"}}
-);
+    "required_appendices": {
+        "proj_budget":      false,
+        "references":       false,
+        "annual_budget":    false,
+        "rules":            false,
+        "reg_cert":         false,
+        "annual_report":    false,
+        "audit_reports":    false
+    },
+    "in_review": {
+        "date": date,
+        "user": "Pekka Puupää",
+        "comments": "Jep jep"
+    },
+    "updated": []
+});
 
 db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7aabc"),
     "schema_version": 12,
@@ -961,8 +1080,22 @@ db.projects.insert({"_id": ObjectId("5c9ed9f94250406da7a7aabc"),
     "effectiveness": "Tuloksellisuus, vaikutukset ja vaikuttavuus",
     "proposed_funding": "Esitys",
     "special_notes": "Erityishuomioita",
-    "in_review": {"user": "Pekka Puupää", "comments": "Jep jep"}}
-);
+    "required_appendices": {
+        "proj_budget":      false,
+        "references":       false,
+        "annual_budget":    false,
+        "rules":            false,
+        "reg_cert":         false,
+        "annual_report":    false,
+        "audit_reports":    false
+    },
+    "in_review": {
+        "date": date,
+        "user": "Pekka Puupää",
+        "comments": "Jep jep"
+    },
+    "updated": []
+});
 
 db.projects.insert({"_id": ObjectId("56091ded00fccd6d66bc5cc3"),
     "schema_version": 12,
@@ -1029,9 +1162,9 @@ db.projects.insert({"_id": ObjectId("56091ded00fccd6d66bc5cc3"),
     "feasibility": "Toteutettavuus ja riskit",
     "effectiveness": "Tuloksellisuus, vaikutukset ja vaikuttavuus",
     "proposed_funding": "Esitys",
-    "special_notes": "Erityishuomioita"
-}
-);
+    "special_notes": "Erityishuomioita",
+    "updated": []
+});
 
 db.projects.insert({"_id": ObjectId("56091ded00fdde6d66bc5cc3"),
     "schema_version": 12,
@@ -1098,9 +1231,9 @@ db.projects.insert({"_id": ObjectId("56091ded00fdde6d66bc5cc3"),
     "feasibility": "Toteutettavuus ja riskit",
     "effectiveness": "Tuloksellisuus, vaikutukset ja vaikuttavuus",
     "proposed_funding": "Esitys",
-    "special_notes": "Erityishuomioita"
-}
-);
+    "special_notes": "Erityishuomioita",
+    "updated": []
+});
 
 db.projects.insert({"_id": ObjectId("f2c7d9aeb017189911996768"),
     "schema_version": 12,
@@ -1168,7 +1301,20 @@ db.projects.insert({"_id": ObjectId("f2c7d9aeb017189911996768"),
     "effectiveness": "Tuloksellisuus, vaikutukset ja vaikuttavuus",
     "proposed_funding": "Esitys",
     "special_notes": "Erityishuomioita",
-    "in_review": {"user": "Pekka Puupää", "comments": "Jep jep"},
+    "required_appendices": {
+        "proj_budget":      false,
+        "references":       false,
+        "annual_budget":    false,
+        "rules":            false,
+        "reg_cert":         false,
+        "annual_report":    false,
+        "audit_reports":    false
+    },
+    "in_review": {
+        "date": date,
+        "user": "Pekka Puupää",
+        "comments": "Jep jep"
+    },
     "approved": {
         "date": date,
         "user": "Maria",
@@ -1181,8 +1327,10 @@ db.projects.insert({"_id": ObjectId("f2c7d9aeb017189911996768"),
         "themes": [
             "Oikeusvaltio ja demokratia"
         ],
-        "themes_disambiguation": " "}}
-);
+        "themes_disambiguation": " "
+    },
+    "updated": []
+});
 
 db.projects.insert({"_id": ObjectId("123459f94260406da7a7a41b"),
     "schema_version": 12,
@@ -1251,20 +1399,34 @@ db.projects.insert({"_id": ObjectId("123459f94260406da7a7a41b"),
     "proposed_funding": "Esitys",
     "special_notes": "Erityishuomioita",
     "planned_payments": [{"date": date, "sum_eur": 5000, "sum_local": 10000}],
-    "in_review": {"user": "Pekka Puupää", "comments": "Jep jep"},
-            "approved": {
-                "date": date,
-                "user": "Maria",
-                "board_meeting": "1/2018",
-                "decision": "Hyväksytään.",
-                "approved_date": date,
-                "approved_by": "Toiminnanjohtaja",
-                "board_notified": date,
-                "granted_sum_eur": 60000,
-                "themes": [
-                    "Oikeusvaltio ja demokratia"
-                ],
-                "themes_disambiguation": " "},
+    "required_appendices": {
+        "proj_budget":      false,
+        "references":       false,
+        "annual_budget":    false,
+        "rules":            false,
+        "reg_cert":         false,
+        "annual_report":    false,
+        "audit_reports":    false
+    },
+    "in_review": {
+        "date": date,
+        "user": "Pekka Puupää",
+        "comments": "Jep jep"
+    },
+    "approved": {
+        "date": date,
+        "user": "Maria",
+        "board_meeting": "1/2018",
+        "decision": "Hyväksytään.",
+        "approved_date": date,
+        "approved_by": "Toiminnanjohtaja",
+        "board_notified": date,
+        "granted_sum_eur": 60000,
+        "themes": [
+            "Oikeusvaltio ja demokratia"
+        ],
+        "themes_disambiguation": " "
+    },
     "signed": {"date": date,
         "user": "Maria",
         "signed_by": "Maija Meri",
@@ -1286,9 +1448,9 @@ db.projects.insert({"_id": ObjectId("123459f94260406da7a7a41b"),
             }
         ]
     },
-    "payments": []
-}
-);
+    "payments": [],
+    "updated": []
+});
 
 db.states.insert([
     {

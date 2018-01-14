@@ -158,15 +158,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
             $scope.register_year = now.getFullYear();
             $scope.register_month = now.getMonth() + 1;
             $scope.register_day = now.getDate();
-//            $scope.project = {
-//                schema_version:     "12",
-//                title:              "",
-//                coordinator:        "",
-////                project.reg_date:   "",
-//                date:               "",
-//                security_level:     "Julkinen",
-////                organisation
-//            }
             $scope.project = new Projects();
             $scope.project.security_level = "Julkinen";
         }
@@ -185,7 +176,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
-                project.schema_version = 8;
 
                 var reg_date = $scope.convertDate(
                         $scope.register_day,
@@ -737,11 +727,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                 }
                 case 5: case 6: {
                     // This field was removed in schema version 7:
-                    if (project.approved.presented_by) {
+                    if (project.approved && project.approved.presented_by) {
                         project.approved.presented_by = undefined;
                     }
                     // The name of this field was changed:
-                    if (project.end_report.comments) {
+                    if (project.end_report && project.end_report.comments) {
                         project.end_report.proposition = project.end_report.comments;
                         project.end.report.comments = undefined;
                     }
@@ -781,7 +771,8 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                 }
             }
             // This is a bugfix for adding payments:
-            if (project.approved.granted_sum_eur && !(project.funding.left_eur)) {
+            if (project.approved &&
+                    project.approved.granted_sum_eur && !(project.funding.left_eur)) {
                 project.funding.left_eur = project.approved.granted_sum_eur;
                 project.$update(function () {
                 });

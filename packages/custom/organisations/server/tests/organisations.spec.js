@@ -21,12 +21,14 @@ describe('<Unit Test>', function () {
 
     describe('Model Organisation:', function () {
         beforeEach(function (done) {
+//            db.dropDatabase();
             this.timeout(10000);
             bank_account1 = new BankAccount({
                 "bank_contact_details": "Branch, address",
                 "iban": "abcdefg1234",
                 "swift": "OKOYFI",
-                "holder_name": "John Smith"});
+                "holder_name": "John Smith"
+            });
             bank_account1.save();
             organisation1 = new Organisation({
                 "schema_version": 3,
@@ -48,14 +50,15 @@ describe('<Unit Test>', function () {
                 "email": "email@org.com",
                 "website": "www.org.com",
                 "legal_status": "legal status1",
-                "history_status": "history status1",
+                "description": "description for organisation .....",
                 "int_links": "international links1",
                 "nat_local_links": "local human rights org1",
-                "description": "description for organisation .....",
                 "other_funding_budget": "other funders1",
                 "accounting_audit": "accounting",
+                "background": "Nulla pretium feugiat dolor, quis tempor enim dignissim at.",
                 "bank_account": bank_account1,
-                "background": "Nulla pretium feugiat dolor, quis tempor enim dignissim at."});
+                "updated": []
+            });
             organisation1.save();
             organisation2 = new Organisation({
                 "schema_version": 3,
@@ -77,14 +80,15 @@ describe('<Unit Test>', function () {
                 "email": "email@cro2.com",
                 "website": "www.cro2.com",
                 "legal_status": "legal statuses2",
-                "history_status": "history statuses2",
+                "description": "description for organisation .....",
                 "int_links": "international link2",
                 "nat_local_links": "local human rights org 2",
-                "description": "description for organisation .....",
                 "other_funding_budget": "other funders2",
                 "accounting_audit": "audit",
+                "background": "Sed tempus lacus a libero finibus, id blandit odio maximus.",
                 "bank_account": bank_account1,
-                "background": "Sed tempus lacus a libero finibus, id blandit odio maximus."});
+                "updated": []
+            });
             organisation2.save();
             organisation3 = new Organisation({
                 "schema_version": 3,
@@ -106,14 +110,15 @@ describe('<Unit Test>', function () {
                 "email": "contact@wrng.org",
                 "website": "www.wrng.org",
                 "legal_status": "legal statuses3",
-                "history_status": "history statuses3",
+                "description": "description for organisation .....",
                 "int_links": "international link3",
                 "nat_local_links": "local human rights org 3",
-                "description": "description for organisation .....",
                 "other_funding_budget": "other funders3",
                 "accounting_audit": "audit2",
+                "background": "Quisque eget nisi a ex porttitor ultricies quis eget sem.",
                 "bank_account": bank_account1,
-                "background": "Quisque eget nisi a ex porttitor ultricies quis eget sem."});
+                "updated": []
+            });
             organisation3.save();
             done();
         });
@@ -139,6 +144,7 @@ describe('<Unit Test>', function () {
                     "swift": "NDEAFIHH",
                     "holder_name": "Jack Jackson"
                 });
+                bank_account2.save();
                 organisation4 = new Organisation({
                     "name": "Disabled people's rights org",
                     "representative": {
@@ -158,13 +164,14 @@ describe('<Unit Test>', function () {
                     "email": "email@disabledpeoplesorg.com",
                     "website": "www.disabledpeoplesorg.com",
                     "legal_status": "non-profit",
-                    "history_status": "history status4",
+                    "description": "blah blah",
                     "int_links": "international links4",
                     "nat_local_links": "local human rights org 4",
-                    "description": "blah blah",
                     "other_funding_budget": "other funders4",
                     "accounting_audit": "Auditing",
-                    "bank_account": bank_account2
+                    "background": "Background",
+                    "bank_account": bank_account2,
+                    "updated": []
                 });
                 done();
             });
@@ -181,7 +188,6 @@ describe('<Unit Test>', function () {
 
             it('should show an error when try to save without a name', function (done) {
                 this.timeout(10000);
-//                organisation4.name = null;
                 organisation4.name = undefined;
                 return organisation4.save(function (err) {
                     expect(err).to.not.be(null);
