@@ -1473,7 +1473,7 @@
                     <select id="appendixTypeSelect" name="appendix_category"
                             class="col-md-3"
                             ng-model="project.appendix.category"
-                            ng-options="category for category in appendixCategories"
+                            ng-options="category for category in appendixCategories track by category"
                             required>
                     </select>
                     <input type="text" name="appendix_custom_category"
