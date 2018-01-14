@@ -384,7 +384,7 @@ describe('<Unit Test>', function () {
                 var params = [{"state": new RegExp('hyväksytty', 'i')}, {"region": new RegExp('aasia', 'i')}]
                 var query = Project.find({$and: params});
 
-                return query.exec(function (err, data) {
+                query.exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
                     expect(data[0].dac).to.be("abcd123");
@@ -399,7 +399,7 @@ describe('<Unit Test>', function () {
                     {"coordinator": new RegExp('maija m', 'i')}]
                 var query = Project.find({$and: params});
 
-                return query.exec(function (err, data) {
+                query.exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.length).to.be(1);
                     expect(data[0].region).to.be("Itä-Aasia");
@@ -413,7 +413,7 @@ describe('<Unit Test>', function () {
                 var params = [{"reg_date": {$gte: new Date(2015, 11 - 1, 30 + 1).toISOString()}}]
                 var query = Project.find({$and: params});
 
-                return query.exec(function (err, data) {
+                query.exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.length).to.be(3);
                     expect(data[0].dac).to.be("abcd123");
