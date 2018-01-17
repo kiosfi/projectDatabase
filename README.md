@@ -43,6 +43,23 @@ module.exports = {
   db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || 'localhost') + '/mean-dev',
 
 ```
+Insert test user and project states using MongoDB shell:
+
+```
+> use mean-dev
+
+> db.users.insert({ "email" : "tt@testi.com", "hashed_password" : "6OMmg66ekC4EROvg55Twt3fM/W/oj7ERJhUPjpgEeJcdu5U95PZP1t7cdmZ72kaYzaW6ILUz6PcTpTLkJNZegw==", "salt" : "+X1WNogMs0lMTEmZtzUjwA==", "username" : "testi", "name" : "Tommi Testaaja", "provider" : "local", "roles" : [ "authenticated" ], "__v" : 0 })
+
+> db.states.insertMany([
+{ "current_state" : "rekisteröity", "next_states" : [ "käsittelyssä", "päättynyt" ] },
+{ "current_state" : "käsittelyssä", "next_states" : [ "hyväksytty", "hylätty", "päättynyt" ] },
+{ "current_state" : "hyväksytty", "next_states" : [ "allekirjoitettu", "hylätty", "päättynyt" ] },
+{ "current_state" : "hylätty", "next_states" : [ ] },
+{ "current_state" : "allekirjoitettu", "next_states" : [ "väliraportti", "loppuraportti", "päättynyt" ] },
+{ "current_state" : "väliraportti", "next_states" : [ "väliraportti", "loppuraportti", "päättynyt" ] },
+{ "current_state" : "loppuraportti", "next_states" : [ "päättynyt" ] }
+])
+```
 
 ## Run unit tests
 
