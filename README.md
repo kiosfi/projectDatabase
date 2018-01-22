@@ -12,6 +12,12 @@ The technology stack for the Project Database application consists of MongoDB, E
 
 By default a shared mLab (mlab.com) MongoDB instance is used. Consider installing a MongoDB client to access database directly.
 
+Install LaTeX in order to be able to create PDF reports:
+
+```
+$ sudo apt-get install texlive-full
+```
+
 Install Node.js 4.2.6.
 
 Clone repository https://github.com/kiosfi/projectDatabase.
