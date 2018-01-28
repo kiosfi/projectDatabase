@@ -44,14 +44,14 @@ describe('<Unit Test>', function () {
                 email: 'test@test.com',
                 username: 'user',
                 password: 'password'});
-            user.save();
+
             bank_account = new BankAccount({
                 "bank_contact_details": "Branch, address",
                 "iban": "abcdefg1234",
                 "swift": "OKOYFI",
                 "holder_name": "John Smith"
             });
-            bank_account.save();
+            
             organisation = new Organisation({
                 "schema_version": 3,
                 "name": "Humanrights org",
@@ -82,7 +82,7 @@ describe('<Unit Test>', function () {
                 "special_notes": "special notes",
                 "updated": []
             });
-            organisation.save();
+            
             project1 = new Project({
                 "schema_version": 12,
                 "security_level": "Julkinen",
@@ -151,7 +151,7 @@ describe('<Unit Test>', function () {
                 "special_notes": "Special notes",
                 "updated": []
             });
-            project1.save();
+
             project2 = new Project({
                 "schema_version": 12,
                 "security_level": "Julkinen",
@@ -220,8 +220,18 @@ describe('<Unit Test>', function () {
                 "special_notes": "Special notes",
                 "updated": []
             });
-            project2.save();
-            done();
+
+            user.save(function() {
+                bank_account.save(function() {
+                    organisation.save(function() {
+                        project1.save(function() {
+                            project2.save(function() {
+                                done();
+                            });
+                        });
+                    });
+                });
+            });
         });
 
         describe('Method All', function () {
