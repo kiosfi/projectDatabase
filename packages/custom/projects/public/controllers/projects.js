@@ -29,6 +29,21 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.addedRejections      = [];
         $scope.currentDate          = new Date();
 
+        $scope.registerdate = {
+            opened: false
+        };
+        $scope.registerDateOptions = {         
+            formatDayTitle: 'MMM yyyy',
+            startingDay: 1
+          };
+
+        /**
+         * Show project registration date picker.
+         */
+        $scope.openRegisterDate = function() {
+            $scope.registerdate.opened = true;
+        };
+
         /**
          * This function converts a number to a Finnish string representation
          * (i.e. ',' for decimal separator and '.' for grouping. If the number
@@ -152,12 +167,11 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.initNewProject = function() {
 
             /**
-             * These date fields are used in the project creation form. The default
-             * values correspond to the current date (generated during runtime).
-             */
-            $scope.register_year = now.getFullYear();
-            $scope.register_month = now.getMonth() + 1;
-            $scope.register_day = now.getDate();
+             * This date field is used in the project creation form. The default
+             * value corresponds to the current date (generated during runtime).
+             */           
+            $scope.register_date = now;
+
             $scope.project = new Projects();
             $scope.project.security_level = "Julkinen";
         }
@@ -176,13 +190,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.create = function (isValid) {
             if (isValid) {
                 var project = new Projects($scope.project);
-
-                var reg_date = $scope.convertDate(
-                        $scope.register_day,
-                        $scope.register_month,
-                        $scope.register_year
-                );
-                project.reg_date = reg_date;
+                // set value to midnight on picked date
+                project.reg_date = $scope.register_date;
+                project.reg_date.setHours(0, 0, 0, 0);
 
                 if ($scope.newOrg) {
                     var org = new Organisations($scope.project.organisation);

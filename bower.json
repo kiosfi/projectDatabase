@@ -4,6 +4,7 @@
     "angular": "latest",
     "angular-bootstrap": "latest",
     "angular-cookies": "latest",
+    "angular-i18n": "^1.6.9",
     "angular-mocks": "latest",
     "angular-resource": "latest",
     "angular-route": "latest",
