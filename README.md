@@ -16,10 +16,11 @@ Install Node.js 4.2.6.
 
 Clone repository https://github.com/kiosfi/projectDatabase.
 
-Install dependencies and run application:
+Install dependencies, create directory for attachment files and run application:
 
 ```
 $ cd projectDatabase
+$ mkdir packages/custom/projects/data
 $ npm install
 $ npm start
 ```
