@@ -139,26 +139,18 @@ describe('<Unit Test>', function() {
       });
 
       it('should fail to save an existing user with the same values', function(done) {
-
         var _user1 = new User(user1);
-        _user1.save();
-
-        var _user2 = new User(user1);
-
-        return _user2.save(function(err) {
-          expect(err).to.not.be(null);
-          _user1.remove(function() {
-
-            if (!err) {
-              _user2.remove(function() {
-                done();
-              });
-            }
-
-            done();
-
+        _user1.save(function(err1) {
+          expect(err1).to.be(null);
+          var _user2 = new User(user1);
+          _user2.save(function(err2) {
+            expect(err2).to.not.be(null);
+            _user1.remove(function() {
+                _user2.remove(function() {
+                  done();
+                });
+            });
           });
-
         });
       });
 
@@ -167,18 +159,18 @@ describe('<Unit Test>', function() {
         var _user = new User(user1);
         _user.name = '';
 
-        return _user.save(function(err) {
+        _user.save(function(err) {
           expect(err).to.not.be(null);
           done();
         });
       });
-
+      
       it('should show an error when try to save without username', function(done) {
 
         var _user = new User(user1);
         _user.username = '';
 
-        return _user.save(function(err) {
+        _user.save(function(err) {
           expect(err).to.not.be(null);
           done();
         });
@@ -190,7 +182,7 @@ describe('<Unit Test>', function() {
         _user.password = '';
         _user.provider = 'local';
 
-        return _user.save(function(err) {
+        _user.save(function(err) {
           expect(err).to.not.be(null);
           done();
         });
@@ -203,7 +195,7 @@ describe('<Unit Test>', function() {
         _user.password = '';
         _user.provider = 'twitter';
 
-        return _user.save(function(err) {
+        _user.save(function(err) {
           _user.remove(function() {
             expect(err).to.be(null);
             expect(_user.provider).to.equal('twitter');
@@ -212,7 +204,6 @@ describe('<Unit Test>', function() {
           });
         });
       });
-
     });
 
     // source: http://en.wikipedia.org/wiki/Email_address
@@ -398,7 +389,7 @@ describe('<Unit Test>', function() {
         var _user = new User(user1);
         _user.name = '</script><script>alert(1)</script>';
 
-        return _user.save(function(err) {
+        _user.save(function(err) {
           expect(_user.name).to.be('&lt;/script&gt;&lt;script&gt;alert(1)&lt;/script&gt;');
           done();
         });
@@ -409,7 +400,7 @@ describe('<Unit Test>', function() {
         var _user = new User(user1);
         _user.name = '<b>xss</b>';
 
-        return _user.save(function(err) {
+        _user.save(function(err) {
           expect(_user.name).to.be('&lt;b&gt;xss&lt;/b&gt;');
           done();
         });

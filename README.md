@@ -12,7 +12,7 @@ The technology stack for the Project Database application consists of MongoDB, E
 
 By default a shared mLab (mlab.com) MongoDB instance is used. Consider installing a MongoDB client to access database directly.
 
-Install Node.js 4.2.6 or later.
+Install Node.js 4.2.6.
 
 Clone repository https://github.com/kiosfi/projectDatabase.
 
@@ -43,18 +43,33 @@ module.exports = {
   db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || 'localhost') + '/mean-dev',
 
 ```
+Insert test user and project states using MongoDB shell:
 
-## Run automated tests
+```
+> use mean-dev
 
-TODO: describe
+> db.users.insert({ "email" : "tt@testi.com", "hashed_password" : "6OMmg66ekC4EROvg55Twt3fM/W/oj7ERJhUPjpgEeJcdu5U95PZP1t7cdmZ72kaYzaW6ILUz6PcTpTLkJNZegw==", "salt" : "+X1WNogMs0lMTEmZtzUjwA==", "username" : "testi", "name" : "Tommi Testaaja", "provider" : "local", "roles" : [ "authenticated" ], "__v" : 0 })
 
-### Run unit tests
+> db.states.insertMany([
+{ "current_state" : "rekisteröity", "next_states" : [ "käsittelyssä", "päättynyt" ] },
+{ "current_state" : "käsittelyssä", "next_states" : [ "hyväksytty", "hylätty", "päättynyt" ] },
+{ "current_state" : "hyväksytty", "next_states" : [ "allekirjoitettu", "hylätty", "päättynyt" ] },
+{ "current_state" : "hylätty", "next_states" : [ ] },
+{ "current_state" : "allekirjoitettu", "next_states" : [ "väliraportti", "loppuraportti", "päättynyt" ] },
+{ "current_state" : "väliraportti", "next_states" : [ "väliraportti", "loppuraportti", "päättynyt" ] },
+{ "current_state" : "loppuraportti", "next_states" : [ "päättynyt" ] }
+])
+```
+
+## Run unit tests
 
 Unit tests are run on local MongoDB database `mean-test`.
 
-TODO: describe
+```
+$ ./node_modules/gulp/bin/gulp.js test
+```
 
-### Run end-to-end tests 
+## Run end-to-end tests 
 
 End-to-end tests are run on local MongoDB database `testDB`.
 

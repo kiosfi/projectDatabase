@@ -44,14 +44,14 @@ describe('<Unit Test>', function () {
                 email: 'test@test.com',
                 username: 'user',
                 password: 'password'});
-            user.save();
+
             bank_account = new BankAccount({
                 "bank_contact_details": "Branch, address",
                 "iban": "abcdefg1234",
                 "swift": "OKOYFI",
                 "holder_name": "John Smith"
             });
-            bank_account.save();
+            
             organisation = new Organisation({
                 "schema_version": 3,
                 "name": "Humanrights org",
@@ -82,7 +82,7 @@ describe('<Unit Test>', function () {
                 "special_notes": "special notes",
                 "updated": []
             });
-            organisation.save();
+            
             project1 = new Project({
                 "schema_version": 12,
                 "security_level": "Julkinen",
@@ -151,7 +151,7 @@ describe('<Unit Test>', function () {
                 "special_notes": "Special notes",
                 "updated": []
             });
-            project1.save();
+
             project2 = new Project({
                 "schema_version": 12,
                 "security_level": "Julkinen",
@@ -220,8 +220,18 @@ describe('<Unit Test>', function () {
                 "special_notes": "Special notes",
                 "updated": []
             });
-            project2.save();
-            done();
+
+            user.save(function() {
+                bank_account.save(function() {
+                    organisation.save(function() {
+                        project1.save(function() {
+                            project2.save(function() {
+                                done();
+                            });
+                        });
+                    });
+                });
+            });
         });
 
         describe('Method All', function () {
@@ -231,7 +241,7 @@ describe('<Unit Test>', function () {
                 this.timeout(10000);
                 var query = Project.find();
 
-                return query.exec(function (err, data) {
+                query.exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
                     expect(data[0].title).to.equal("Human rights");
@@ -246,7 +256,7 @@ describe('<Unit Test>', function () {
             it('should find given project', function (done) {
                 this.timeout(10000);
                 var query = Project;
-                return query.findOne({title: 'Humans'}).exec(function (err, data) {
+                query.findOne({title: 'Humans'}).exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.title).to.be("Humans");
                     done();
@@ -258,7 +268,7 @@ describe('<Unit Test>', function () {
             it('should delete given project', function (done) {
                 this.timeout(10000);
                 var query = Project;
-                return query.remove({title: "Humans"}).exec(function (err) {
+                query.remove({title: "Humans"}).exec(function (err) {
                     expect(err).to.be(null);
                     done();
                 });
@@ -360,7 +370,7 @@ describe('<Unit Test>', function () {
 
                 this.timeout(10000);
 
-                return project3.save(function (err, data) {
+                project3.save(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.title).to.equal('Children rights');
                     expect(data.coordinator).to.equal('Maija Maa');
@@ -379,7 +389,7 @@ describe('<Unit Test>', function () {
                 this.timeout(10000);
 
                 project3.title = null;
-                return project3.save(function (err) {
+                project3.save(function (err) {
                     expect(err).to.not.be(null);
 
                     project3.remove();
@@ -393,7 +403,7 @@ describe('<Unit Test>', function () {
                 this.timeout(10000);
 
                 project3.other_donors_proposed = '';
-                return project3.save(function (err, data) {
+                project3.save(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.other_donors_proposed).to.equal('');
 
@@ -493,7 +503,7 @@ describe('<Unit Test>', function () {
                     "special_notes": "Special notes",
                     "updated": []
                 });
-                return project4.save(function (err, data) {
+                project4.save(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.organisation.name).to.equal('Humanrights org');
 
@@ -510,7 +520,7 @@ describe('<Unit Test>', function () {
 
                 project3.title = 'Ääkkönen';
                 project3.organisation.name = 'Åke Björn';
-                return project3.save(function (err, data) {
+                project3.save(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.title).to.equal('Ääkkönen');
                     expect(data.organisation.name).to.equal('Åke Björn');
@@ -527,7 +537,7 @@ describe('<Unit Test>', function () {
         describe('Method byOrg', function () {
             it('should get projects where given organisation is the organisation', function (done) {
                 this.timeout(10000);
-                return Project.find({organisation: organisation}).exec(function (err, data) {
+                Project.find({organisation: organisation}).exec(function (err, data) {
                     expect(err).to.be(null);
                     expect(data.length).to.be(2);
                     done();
@@ -540,7 +550,7 @@ describe('<Unit Test>', function () {
             it('should update given project', function (done) {
                 this.timeout(10000);
 
-                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                Project.findOne({title: 'Humans'}).exec(function (err, proj) {
 
                     proj.title = 'Children rights';
                     proj.update();
@@ -560,7 +570,7 @@ describe('<Unit Test>', function () {
                     "user": user.name,
                     "comments": "this is a comment"};
 
-                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                Project.findOne({title: 'Humans'}).exec(function (err, proj) {
 
                     proj.state = "käsittelyssä";
                     proj.in_review = in_review;
@@ -589,7 +599,7 @@ describe('<Unit Test>', function () {
                     "themes_disambiguation": " "
                 };
 
-                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                Project.findOne({title: 'Humans'}).exec(function (err, proj) {
                     proj.state = "hyväksytty";
                     proj.approved = approved;
                     proj.save();
@@ -609,7 +619,7 @@ describe('<Unit Test>', function () {
                     "rejection_categories": [{rejection: "7 Strategia"}, {rejection: "8 Muu, mikä?"}],
                     "rejection_comments": "this is a comment"};
 
-                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                Project.findOne({title: 'Humans'}).exec(function (err, proj) {
                     proj.state = "hylätty";
                     proj.rejected = rejected;
                     proj.save();
@@ -632,7 +642,7 @@ describe('<Unit Test>', function () {
                     "planned_payments": [{"date": date, "sum_eur": 50000}],
                     "intreport_deadlines": [{"report": "1. väliraportti", "date": date}]};
 
-                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                Project.findOne({title: 'Humans'}).exec(function (err, proj) {
                     proj.state = "allekirjoitettu";
                     proj.signed = signed;
                     proj.save();
@@ -651,7 +661,7 @@ describe('<Unit Test>', function () {
                     "date": date,
                     "sum_eur": 20000};
 
-                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                Project.findOne({title: 'Humans'}).exec(function (err, proj) {
                     proj.payments.push(payment);
                     proj.save();
                     expect(err).to.be(null);
@@ -675,7 +685,7 @@ describe('<Unit Test>', function () {
                     "overall_rating_kios": "Arvio",
                     "comments": "Muita kommentteja hankkeen raportilta"};
 
-                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                Project.findOne({title: 'Humans'}).exec(function (err, proj) {
                     proj.state = "väliraportti";
                     proj.intermediary_report = int_report;
                     proj.save();
@@ -711,7 +721,7 @@ describe('<Unit Test>', function () {
                     "processed": true
                 };
 
-                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                Project.findOne({title: 'Humans'}).exec(function (err, proj) {
                     proj.state = "loppuraportti";
                     proj.end_report = end_report;
                     proj.save();
@@ -735,7 +745,7 @@ describe('<Unit Test>', function () {
                     "approved_by": "toimitusjohtaja",
                     "other_comments": "kommentti"};
 
-                return Project.findOne({title: 'Humans'}).exec(function (err, proj) {
+                Project.findOne({title: 'Humans'}).exec(function (err, proj) {
                     proj.state = "päättynyt";
                     proj.ended = ended;
                     proj.save();
