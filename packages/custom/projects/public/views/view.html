@@ -220,7 +220,7 @@
                                     {{fieldNames["reg_date"]}}
                                 </th>
                                 <td class="summary-td">
-                                    {{project.reg_date| date:'d.M.yyyy': '+0200'}}
+                                    {{project.reg_date | date:'d.M.yyyy': 'Z'}}
                                 </td>
                             </tr>
                             <tr ng-show="project.approved.granted_sum_eur">
