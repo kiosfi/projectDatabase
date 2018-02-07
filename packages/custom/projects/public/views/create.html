@@ -1,11 +1,11 @@
 <section data-ng-controller="ProjectsController"
          data-ng-init="initNewProject()">
     <link rel="stylesheet" type="text/css" href="/theme/assets/css/twoPart.css">
-    <h1 id="header">Hankkeen lisäys</h1>
+    <h1 id="header">Hankkeen rekisteröinti</h1>
     <hr>
     <ul id="menu" class="nav nav-list left-part">
         <li>
-            <label><a href="#header">Hankkeen lisäys</a></label>
+            <label><a href="#header">Hankkeen rekisteröinti</a></label>
             <ul>
                 <li><a href="#fieldset_basics">Nimi,&nbsp;koordinaattori&nbsp;ja&nbsp;järjestö</a></li>
                 <li><a href="#fieldset_summary">Perustiedot</a></li>
@@ -74,9 +74,8 @@
                                     uib-datepicker-popup="d. MMMM yyyy"
                                     data-ng-model="register_date"
                                     id="register_date"
-                                    placeholder="{{fieldNames['register_date']}}"
                                     is-open="registerdate.opened"
-                                    datepicker-options="registerDateOptions"
+                                    datepicker-options="dateOptions"
                                     ng-required="true"
                                     close-text="Sulje"
                                     clear-text="Tyhjennä"
@@ -85,7 +84,7 @@
                             <span class="input-group-btn">
                                 <button type="button"
                                         class="btn btn-default"
-                                        ng-click="openRegisterDate();">
+                                        ng-click="openDatePicker(registerdate);">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </button>
                             </span>
@@ -1007,7 +1006,7 @@
             </div>
             <div ng-show="!showConfirmation" class="panel-body">
 
-                 <div class="form-group">
+                <div class="form-group">
                     <label for="special_notes" class="col-md-2 control-label">{{fieldNames["special_notes"]}}</label>
                     <div class="col-md-10">
                         <textarea   class="form-control"
@@ -1018,9 +1017,8 @@
                         </textarea>
                     </div>
                 </div>       
-
+                <hr>
                 <div class="form-group col-md-12" style="text-align: center">
-                    <hr>
                     <button type="submit" class="btn btn-primary"
                             ng-disabled="projectForm.$invalid ||
                                         (!newOrg && !project.listOrganisation)">

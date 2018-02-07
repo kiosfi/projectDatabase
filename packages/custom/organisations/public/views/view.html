@@ -238,10 +238,10 @@
                             {{project.state}}
                         </td>
                         <td>
-                            {{project.latestStateDate | date:'d.M.yyyy': '+0200'}}
+                            {{ project.latestStateDate | date : 'd.M.yyyy' : 'Z' }}
                         </td>
                         <td>
-                            {{project.approved.granted_sum_eur ? numberToString(project.approved.granted_sum_eur) + " EUR" : "Ei myönnettyä avustusta"}}
+                            {{ project.approved.granted_sum_eur ? (project.approved.granted_sum_eur | currency : " EUR" : 2)  : "Ei myönnettyä avustusta" }}
                         </td>
                     </tr>
                 </tbody>

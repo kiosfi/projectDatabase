@@ -66,7 +66,7 @@
                     </span>
                 </h4>
             </div>
-            <div class="panel-body" ng-show="showRegDetails">
+            <div class="panel-body" ng-show="!showRegDetails">
                 <fieldset class="panel panel-primary">
                     <div class="panel-heading">
                         <h5>
@@ -78,130 +78,128 @@
                             </span>
                         </h5>
                     </div>
-                    <div ng-show="showProjInfo" class="panel-body">
-                        <div class="form-group col-md-6">
-                            <label class="col-md-3 control-label">
-                                {{fieldNames["security_level"]}}
-                            </label>
-                            <div class="col-md-9">
-                                <select data-ng-model="project.security_level">
-                                    <option data-ng-repeat="sec_level in securityLevels">{{sec_level}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6"
-                             ng-class="{'has-error' : projectEditForm.title.$invalid}">
-                            <label class="col-md-3 control-label">
-                                {{fieldNames["title"]}}
-                            </label>
-                            <div class="col-md-9">
-                                <input name="title" type="text"
-                                       class="form-control"
-                                       data-ng-model="project.title"
-                                       id="title" required>
-                                <div ng-show="projectEditForm.title.$invalid"
-                                     class="help-block">
-                                    <p ng-show="projectEditForm.title.$error.required">
-                                        Nimi on pakollinen
-                                    </p>
+                    <div ng-show="!showProjInfo" class="panel-body">
+
+                        <div class="form-group">
+                            <label for="title" class="col-md-3 control-label">{{fieldNames["title"]}}</label>
+                            <div class="col-md-9" ng-class="{'has-error': projectEditForm.title.$invalid}">
+                                <input  name="title"
+                                        type="text"
+                                        class="form-control"
+                                        data-ng-model="project.title"
+                                        id="title"
+                                        required placeholder="Hankkeen nimi">
+                                <div    ng-show="projectEditForm.title.$invalid"
+                                        class="help-block">
+                                    <p ng-show="projectEditForm.title.$error.required">Kenttä on pakollinen</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col-md-6"
-                             ng-class="{'has-error' : projectEditForm.coordinator.$invalid}">
-                            <label  class="col-md-3 control-label">
-                                {{fieldNames["coordinator"]}}
-                            </label>
-                            <div class="col-md-9">
-                                <input name="coordinator" type="text"
-                                       class="form-control"
-                                       data-ng-model="project.coordinator"
-                                       id="coordinator" required>
-                                <div ng-show="projectEditForm.coordinator.$invalid"
-                                     class="help-block">
-                                    <p ng-show="projectEditForm.coordinator.$error.required">
-                                        Koordinaattori on pakollinen
-                                    </p>
+                
+                        <div class="form-group">
+                            <label for="coordinator" class="col-md-3 control-label">{{fieldNames["coordinator"]}}</label>
+                            <div class="col-md-9" ng-class="{'has-error': projectEditForm.coordinator.$invalid}">
+                                <input  name="coordinator"
+                                        type="text"
+                                        class="form-control"
+                                        data-ng-model="project.coordinator"
+                                        id="coordinator"
+                                        required
+                                        placeholder="{{fieldNames['coordinator']}}n nimi">
+                                <div    ng-show="projectEditForm.coordinator.$invalid"
+                                        class="help-block">
+                                    <p ng-show="projectEditForm.coordinator.$error.required">Kenttä on pakollinen</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col-md-6" >
-                            <label for="description"
-                                   class="col-md-3 control-label">
-                                {{fieldNames["description"]}}
-                            </label>
-                            <div class="col-md-9">
-                                <textarea name="description"
-                                          data-ng-model="project.description"
-                                          id="description"
-                                          class="form-control" >
+
+                        <div class="form-group">
+                            <label for="security_level" class="col-md-3 control-label">{{fieldNames["security_level"]}}</label>
+                            <div class="col-md-4">
+                                <select name="security_level"
+                                        class="form-control"
+                                        data-ng-model="project.security_level"
+                                        id="security_level"
+                                        ng-options="sec_level for sec_level in securityLevels"/>
+                            </div>
+                        </div>
+
+                        <label for="description" class="control-label">{{fieldNames["description"]}}</label>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <textarea   class="form-control"
+                                            name="description"
+                                            data-ng-model="project.description"
+                                            id="description"
+                                            placeholder="{{fieldNames['description']}}"
+                                            rows="6">
                                 </textarea>
                             </div>
                         </div>
-                        <div class="form-group col-md-6" >
-                            <label for="description_en"
-                                   class="col-md-3 control-label">
-                                {{fieldNames["description_en"]}}
-                            </label>
-                            <div class="col-md-9">
-                                <textarea name="description_en"
-                                          data-ng-model="project.description_en"
-                                          id="description_en"
-                                          class="form-control">
+                        <label for="description_en" class="control-label">{{fieldNames["description_en"]}}</label>                
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <textarea   class="form-control"
+                                            name="description_en"
+                                            data-ng-model="project.description_en"
+                                            id="description_en"
+                                            placeholder="{{fieldNames['description']}} englanniksi"
+                                            rows="6">
                                 </textarea>
                             </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-3 control-label">
-                                {{fieldNames["funding_applied_curr_local"]}}
-                            </label>
-                            <div class="col-md-5">
-                                <input name="appliedlocal" type="number"
-                                       class="form-control"
-                                       data-ng-model="project.funding.applied_curr_local"
-                                       id="appliedlocal">
+
+
+                        <div class="form-group">
+                            <label for="appliedlocal" class="col-md-2 control-label">{{fieldNames["funding_applied_curr_local"]}}</label>
+                            <div class="col-md-3">
+                                <input  class="form-control"
+                                        name="appliedlocal"
+                                        type="number"
+                                        data-ng-model="project.funding.applied_curr_local"
+                                        id="appliedlocal"
+                                        placeholder="00,00"
+                                        min="0">
                             </div>
                             <div class="col-md-2">
-                                <select id="curr_local_unit"
-                                        data-ng-model="project.funding.curr_local_unit">
+                                <select class="form-control"
+                                        name="curr_local_unit"
+                                        data-ng-model="project.funding.curr_local_unit"
+                                        id="curr_local_unit">
                                     <option data-ng-repeat="unit in currencyUnits">{{unit}}</option>
-                                </select>
+                                </select>                                            
                             </div>
-                            <div class="col-md-2">
-                                <input type="text"
-                                       data-ng-model="project.funding.curr_local_unit"
-                                       class="form-control">
-                            </div>
+                            <label for="appliedeur" class="col-md-2 control-label">Haettu avustus (EUR)</label>
+                            <div class="col-md-3">
+                                <input  class="form-control"
+                                        name="appliedeur"
+                                        type="number"
+                                        data-ng-model="project.funding.applied_curr_eur"
+                                        id="appliedeur"
+                                        placeholder="00,00"
+                                        min="0">
+                            </div>                    
                         </div>
-                        <div class="form-group col-md-6">
-                            <label  class="col-md-3 control-label">
-                                Haettu avustus
-                                <!--{{fieldNames["funding_applied_curr_eur"]}}-->
-                            </label>
-                            <div class="col-md-8">
-                                <input name="appliedeur" type="number"
-                                       class="form-control"
-                                       data-ng-model="project.funding.applied_curr_eur"
-                                       id="appliedeur"
-                                       placeholder="Haettu avustus (EUR)">
-                            </div>
-                            <label  class="col-md-1 control-label">
-                                EUR
-                            </label>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-3 control-label">
-                                {{fieldNames["duration_months"]}}
-                            </label>
-                            <div class="col-md-9">
-                                <input name="duration" type="number"
-                                       class="form-control"
-                                       data-ng-model="project.duration_months"
-                                       id="duration">
+                        <div class="form-group">
+                            <label for="duration" class="col-md-2 control-label">{{fieldNames["duration_months"]}}</label>
+                            <div class="col-md-3">
+                                <input  class="form-control"
+                                        name="duration"
+                                        type="number"
+                                        data-ng-model="project.duration_months"
+                                        id="duration"
+                                        placeholder="{{fieldNames['duration_months']}}"
+                                        min="0">
                             </div>
                         </div>
                     </div>
                 </fieldset>
+
+
+
+
+
+
                 <fieldset class="panel panel-primary">
                     <div class="panel-heading">
                         <h5>
@@ -213,320 +211,253 @@
                             </span>
                         </h5>
                     </div>
-                    <div ng-show="showProjDetails" class="panel-body">
-                        <label class="control-label">
-                            {{fieldNames["methods"]}}
-                        </label>
-                        <div class="form-group col-md-12">
-                            <div class="panel panel-default"
-                                 id="methodsSelection"
-                                 data-ng-repeat="method in addedMethods"
-                                 style="background-color: #F9F9F9">
-                                <div class="panel-body">
-                                    <div class="col-md-7"
-                                         ng-class="projectEditForm['methodSelect' + $index].$invalid ? 'has-error' : ''">
-                                        <label class="control-label col-md-2">
-                                            Toiminto
-                                        </label>
-                                        <div class="col-md-10">
-                                            <select id="{{'methodSelect' + $index}}"
+                    <div ng-show="!showProjDetails" class="panel-body">
+
+                        <label  class="control-label">{{fieldNames["methods"]}}</label>
+                            <div    class="panel panel-default"
+                                    style="background-color: #F9F9F9"
+                                    id="methodsSelection"
+                                    data-ng-repeat="method in addedMethods">        
+                                <div class="panel-body">                
+                    
+            
+                                    <div class="form-group">
+                                        <div class="col-md-8" ng-class="{'has-error': projectEditForm.{{'methodSelect' + $index}}.$invalid}">
+                                            <select class="form-control"
+                                                    id="{{'methodSelect' + $index}}"
                                                     name="{{'methodSelect' + $index}}"
-                                                    data-ng-model="method.name"
-                                                    required>
-                                                <option data-ng-repeat="methodName in methodNames"
-                                                        value="{{methodName}}">
-                                                    {{methodName}}
-                                                </option>
+                                                    data-ng-model="method.name" required>
+                                                <option disabled selected value> -- Valitse toiminto -- </option>
+                                                <option
+                                                    data-ng-repeat="methodName in methodNames"
+                                                    value="{{methodName}}">{{methodName}}</option>
                                             </select>
-                                            <div ng-show="projectEditForm['methodSelect' + $index].$invalid"
-                                                 class="help-block">
-                                                <p ng-show="projectEditForm['methodSelect' + $index].$error.required">
-                                                    Toiminto on pakollinen
-                                                </p>
-                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3"
-                                         ng-class="projectEditForm['levelSelect' + $index].$invalid ? 'has-error' : ''">
-                                        <label class="control-label col-md-3">
-                                            Taso
-                                        </label>
-                                        <div class="col-md-9">
-                                            <select id="{{'levelSelect' + $index}}"
+                                        <div class="col-md-3" ng-class="{'has-error': projectEditForm.{{'levelSelect' + $index}}.$invalid}">
+                                            <select class="form-control"
+                                                    id="{{'levelSelect' + $index}}"
                                                     name="{{'levelSelect' + $index}}"
-                                                    data-ng-model="method.level"
-                                                    required>
+                                                    data-ng-model="method.level" required>
+                                                <option disabled selected value> -- Valitse taso -- </option>
                                                 <option data-ng-repeat="methodLevel in methodLevels"
-                                                        value="{{methodLevel}}">
-                                                    {{methodLevel}}
-                                                </option>
+                                                        value="{{methodLevel}}">{{methodLevel}}</option>
                                             </select>
-                                            <div ng-show="projectEditForm['levelSelect' + $index].$invalid"
-                                                 class="help-block">
-                                                <p ng-show="projectEditForm['levelSelect' + $index].$error.required">
-                                                    Taso on pakollinen
-                                                </p>
-                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12"
-                                         ng-class="projectEditForm['methodComment' + $index].$invalid ? 'has-error' : ''"
-                                         style="margin-top: 0.5em">
-                                        <label class="col-md-1 control-label">
-                                            Kuvaus
-                                        </label>
+            
+                                    <label  for="{{'methodComment' + $index}}"
+                                            class="control-label">Kuvaus</label>
+                                    <div class="form-group" ng-class="{'has-error': projectEditForm.{{'methodComment' + $index}}.$invalid}">
                                         <div class="col-md-11">
-                                            <textarea id="{{'methodComment' + $index}}"
-                                                      name="{{'methodComment' + $index}}"
-                                                      data-ng-model="method.comment"
-                                                      class="form-control"
-                                                      required>
+                                            <textarea   class="form-control" 
+                                                        id="{{'methodComment' + $index}}"
+                                                        name="{{'methodComment' + $index}}"
+                                                        data-ng-model="method.comment"
+                                                        placeholder="Kuvaus on pakollinen" required>
                                             </textarea>
-                                            <div ng-show="projectEditForm['methodComment' + $index].$invalid"
-                                                 class="help-block">
-                                                <p ng-show="projectEditForm['methodComment' + $index].$error.required">
-                                                    Kuvaus on pakollinen
-                                                </p>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+            
+                            <div class="form-group" style="text-align: center">
                                 <button class="btn btn-sm btn-default"
                                         ng-click="removeMethod();">
-                                    <span class="glyphicon glyphicon-minus">
-                                    </span>&nbsp;Poista viimeinen
-                                </button>
+                                        <span class="glyphicon glyphicon-minus"></span>&nbsp;Poista viimeinen</button>
                                 <button class="btn btn-sm btn-default"
                                         ng-click="addMethod();">
-                                    <span class="glyphicon glyphicon-plus">
-                                    </span>&nbsp;Lisää
-                                </button>
+                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Lisää</button>
                             </div>
-                        </div>
-                        <div class="col-md-12">
-                            <hr>
-                            <div class="form-group col-md-4">
-                                <label class="col-md-3 control-label" for="country">
-                                    {{fieldNames["country"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <input name="country" type="text"
-                                           class="form-control"
-                                           data-ng-model="project.country" id="country">
+            
+                                <hr>
+            
+                                <div class="form-group">
+                                    <label for="country" class="col-md-1 control-label">{{fieldNames["country"]}}</label>
+                                    <div class="col-md-3">
+                                        <input  class="form-control" name="country"
+                                                type="text" data-ng-model="project.country"
+                                                id="country" placeholder="{{fieldNames['country']}}">
+                                    </div>
+                                    <label for="region" class="col-md-1 control-label">{{fieldNames["region"]}}</label>
+                                    <div class="col-md-3">
+                                        <input  class="form-control" name="region"
+                                                type="text" data-ng-model="project.region"
+                                                id="region" placeholder="{{fieldNames['region']}}">
+                                    </div>
+                                    <label for="dac" class="col-md-1 control-label">{{fieldNames["dac"]}}</label>
+                                    <div class="col-md-3">
+                                        <input  class="form-control" name="dac"
+                                                type="text" data-ng-model="project.dac"
+                                                id="dac" placeholder="{{fieldNames['dac']}}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label class="col-md-3 control-label" for="region">
-                                    {{fieldNames["region"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <input name="region" type="text"
-                                           class="form-control"
-                                           data-ng-model="project.region" id="region">
+            
+                                <div class="form-group">
+                                    <label for="project_goal" class="col-md-2 control-label">{{fieldNames["project_goal"]}}</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="project_goal"
+                                                    data-ng-model="project.project_goal"
+                                                    id="project_goal"
+                                                    placeholder="{{fieldNames['project_goal']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label class="col-md-3 control-label" for="dac">
-                                    {{fieldNames["dac"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <input name="dac" type="text" class="form-control"
-                                           data-ng-model="project.dac" id="dac">
+            
+                                <div class="form-group">
+                                    <label for="context" class="col-md-2 control-label">Konteksti</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="context"
+                                                    data-ng-model="project.context"
+                                                    id="context"
+                                                    placeholder="Konteksti">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group col-md-6">
-                                <label for="project_goal"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["project_goal"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="project_goal"
-                                              data-ng-model="project.project_goal"
-                                              id="project_goal" class="form-control">
-                                    </textarea>
+            
+                                <div class="form-group">
+                                    <label for="target_group" class="col-md-2 control-label">{{fieldNames["target_group"]}}</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="target_group"
+                                                    data-ng-model="project.target_group"
+                                                    id="target_group"
+                                                    placeholder="{{fieldNames['target_group']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="context"
-                                       class="col-md-3 control-label">
-                                    Konteksti
-                                    <!--{{fieldNames["context"]}}-->
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="context"
-                                              data-ng-model="project.context"
-                                              id="context" class="form-control">
-                                    </textarea>
+                                <div class="form-group">
+                                    <label for="gender_aspect" class="col-md-2 control-label">{{fieldNames["gender_aspect"]}}</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="gender_aspect"
+                                                    data-ng-model="project.gender_aspect"
+                                                    id="gender_aspect"
+                                                    placeholder="{{fieldNames['gender_aspect']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group col-md-6">
-                                <label for="target_group" class="col-md-3 control-label">
-                                    {{fieldNames["target_group"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="target_group"
-                                              data-ng-model="project.target_group"
-                                              id="target_group" class="form-control">
-                                    </textarea>
+            
+                                <div class="form-group">
+                                    <label for="vulnerable_groups" class="col-md-2 control-label">Haavoitt. ryhmien huomiointi</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="vulnerable_groups"
+                                                    data-ng-model="project.vulnerable_groups"
+                                                    id="vulnerable_groups"
+                                                    placeholder="{{fieldNames['vulnerable_groups']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="gender_aspect"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["gender_aspect"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="gender_aspect"
-                                              data-ng-model="project.gender_aspect"
-                                              id="gender_aspect" class="form-control">
-                                    </textarea>
+            
+                                <div class="form-group">
+                                    <label for="planned_results" class="col-md-2 control-label">{{fieldNames["planned_results"]}}</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="planned_results"
+                                                    data-ng-model="project.planned_results"
+                                                    id="planned_results"
+                                                    placeholder="{{fieldNames['planned_results']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group col-md-6">
-                                <label for="vulnerable_groups"
-                                       class="col-md-3 control-label">
-                                    Haavoitt. ryhmien huomiointi
-                                    <!--{{fieldNames["vulnerable_groups"]}}-->
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="vulnerable_groups"
-                                              data-ng-model="project.vulnerable_groups"
-                                              id="vulnerable_groups"
-                                              class="form-control">
-                                    </textarea>
+            
+                                <div class="form-group">
+                                    <label for="indicators" class="col-md-2 control-label">{{fieldNames["indicators"]}}</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="indicators"
+                                                    data-ng-model="project.indicators"
+                                                    id="indicators"
+                                                    placeholder="{{fieldNames['indicators']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="planned_results"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["planned_results"]}}
-                                </label>
-
-                                <div class="col-md-9">
-                                    <textarea name="planned_results"
-                                              data-ng-model="project.planned_results"
-                                              id="planned_results" class="form-control">
-                                    </textarea>
+            
+                                <div class="form-group">
+                                    <label for="risk_control" class="col-md-2 control-label">Ilmasto- ja ymp. kestäv. huomiointi</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="risk_control"
+                                                    data-ng-model="project.risk_control"
+                                                    id="risk_control"
+                                                    placeholder="{{fieldNames['risk_control']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group col-md-6">
-                                <label for="indicators"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["indicators"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="indicators"
-                                              data-ng-model="project.indicators"
-                                              id="indicators" class="form-control">
-                                    </textarea>
+            
+                                <div class="form-group">
+                                    <label for="reporting_evaluation" class="col-md-2 control-label">{{fieldNames["reporting_evaluation"]}}</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="reporting_evaluation"
+                                                    data-ng-model="project.reporting_evaluation"
+                                                    id="reporting_evaluation"
+                                                    placeholder="{{fieldNames['reporting_evaluation']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="risk_control"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["risk_control"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="risk_control"
-                                              data-ng-model="project.risk_control"
-                                              id="risk_control" class="form-control">
-                                    </textarea>
+            
+                                <div class="form-group">
+                                    <label for="human_resources" class="col-md-2 control-label">{{fieldNames["human_resources"]}}</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="human_resources"
+                                                    data-ng-model="project.human_resources"
+                                                    id="human_resources"
+                                                    placeholder="{{fieldNames['human_resources']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group col-md-6">
-                                <label for="reporting_evaluation"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["reporting_evaluation"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="reporting_evaluation"
-                                              data-ng-model="project.reporting_evaluation"
-                                              id="reporting_evaluation"
-                                              class="form-control">
-                                    </textarea>
+            
+                                <div class="form-group">
+                                    <label for="budget" class="col-md-2 control-label">{{fieldNames["budget"]}}</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="human_resources"
+                                                    data-ng-model="project.budget"
+                                                    id="budget"
+                                                    placeholder="{{fieldNames['budget']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="human_resources"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["human_resources"]}}
-                                </label>
-
-                                <div class="col-md-9">
-                                    <textarea name="human_resources"
-                                              data-ng-model="project.human_resources"
-                                              id="human_resources" class="form-control">
-                                    </textarea>
+            
+                                <div class="form-group">
+                                    <label for="other_donors_proposed" class="col-md-2 control-label">{{fieldNames["other_donors_proposed"]}}</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="other_donors_proposed"
+                                                    data-ng-model="project.other_donors_proposed"
+                                                    id="other_donors_proposed"
+                                                    placeholder="{{fieldNames['other_donors_proposed']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group col-md-6">
-                                <label for="budget"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["budget"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="budget"
-                                              data-ng-model="project.budget"
-                                              id="budget"
-                                              class="form-control">
-                                    </textarea>
+            
+                                <div class="form-group">
+                                    <label for="referees" class="col-md-2 control-label">{{fieldNames["referees"]}}</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="referees"
+                                                    data-ng-model="project.referees"
+                                                    id="referees"
+                                                    placeholder="{{fieldNames['referees']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="other_donors_proposed"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["other_donors_proposed"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="other_donors_proposed"
-                                              data-ng-model="project.other_donors_proposed"
-                                              id="other_donors_proposed"
-                                              class="form-control">
-                                    </textarea>
+            
+                                <div class="form-group">
+                                    <label for="background_check" class="col-md-2 control-label">{{fieldNames["background_check"]}}</label>
+                                    <div class="col-md-10">
+                                        <textarea   class="form-control"
+                                                    name="background_check"
+                                                    data-ng-model="project.background_check"
+                                                    id="background_check"
+                                                    placeholder="{{fieldNames['background_check']}}">
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group col-md-6">
-                                <label for="referees"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["referees"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="referees"
-                                              data-ng-model="project.referees"
-                                              id="referees"
-                                              class="form-control">
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="background_check"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["background_check"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="background_check"
-                                              data-ng-model="project.background_check"
-                                              id="background_check"
-                                              class="form-control">
-                                    </textarea>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </fieldset>
@@ -541,76 +472,61 @@
                             </span>
                         </h5>
                     </div>
-                    <div ng-show="showAssessment" class="panel-body">
-                        <div class="col-md-12">
-                            <div class="form-group col-md-6">
-                                <label for="fitness"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["fitness"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="fitness"
-                                              data-ng-model="project.fitness"
-                                              id="fitness"
-                                              class="form-control">
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="capacity"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["capacity"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="capacity"
-                                              data-ng-model="project.capacity"
-                                              id="capacity"
-                                              class="form-control">
-                                    </textarea>
-                                </div>
+                    <div ng-show="!showAssessment" class="panel-body">
+
+                        <div class="form-group">
+                            <label for="fitness" class="col-md-2 control-label">{{fieldNames["fitness"]}}</label>
+                            <div class="col-md-10">
+                                <textarea   class="form-control"
+                                            name="fitness"
+                                            data-ng-model="project.fitness"
+                                            id="fitness"
+                                            placeholder="{{fieldNames['fitness']}}">
+                                </textarea>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group col-md-6">
-                                <label for="feasibility"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["feasibility"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="feasibility"
-                                              data-ng-model="project.feasibility"
-                                              id="feasibility"
-                                              class="form-control">
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="effectiveness"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["effectiveness"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="effectiveness"
-                                              data-ng-model="project.effectiveness"
-                                              id="effectiveness"
-                                              class="form-control">
-                                    </textarea>
-                                </div>
+                        <div class="form-group">
+                            <label for="capacity" class="col-md-2 control-label">{{fieldNames["capacity"]}}</label>
+                            <div class="col-md-10">
+                                <textarea   class="form-control"
+                                            name="capacity"
+                                            data-ng-model="project.capacity"
+                                            id="capacity"
+                                            placeholder="{{fieldNames['capacity']}}">
+                                </textarea>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group col-md-6">
-                                <label for="proposed_funding"
-                                       class="col-md-3 control-label">
-                                    {{fieldNames["proposed_funding"]}}
-                                </label>
-                                <div class="col-md-9">
-                                    <textarea name="proposed_funding"
-                                              data-ng-model="project.proposed_funding"
-                                              id="proposed_funding"
-                                              class="form-control">
-                                    </textarea>
-                                </div>
+                        <div class="form-group">
+                            <label for="feasibility" class="col-md-2 control-label">{{fieldNames["feasibility"]}}</label>
+                            <div class="col-md-10">
+                                <textarea   class="form-control"
+                                            name="feasibility"
+                                            data-ng-model="project.feasibility"
+                                            id="feasibility"
+                                            placeholder="{{fieldNames['feasibility']}}">
+                                </textarea>
+                            </div>
+                        </div>    
+                        <div class="form-group">
+                            <label for="effectiveness" class="col-md-2 control-label">{{fieldNames["effectiveness"]}}</label>
+                            <div class="col-md-10">
+                                <textarea   class="form-control"
+                                            name="effectiveness"
+                                            data-ng-model="project.effectiveness"
+                                            id="effectiveness"
+                                            placeholder="{{fieldNames['effectiveness']}}">
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="proposed_funding" class="col-md-2 control-label">{{fieldNames["proposed_funding"]}}</label>
+                            <div class="col-md-10">
+                                <textarea   class="form-control"
+                                            name="proposed_funding"
+                                            data-ng-model="project.proposed_funding"
+                                            id="proposed_funding"
+                                            placeholder="{{fieldNames['proposed_funding']}}">
+                                </textarea>
                             </div>
                         </div>
                     </div>
@@ -1772,41 +1688,40 @@
                     </span>
                 </h4>
             </div>
-            <div ng-show="showConfirmation" class="form-group panel-body">
-                <div class="col-md-12" style="margin-bottom: 1em">
+            <div ng-show="!showConfirmation" class="form-group panel-body">
+
+                <div class="form-group">
+                    <label for="special_notes" class="col-md-3 control-label">{{fieldNames["special_notes"]}}</label>
                     <div class="col-md-9">
-                        <label for="special_notes"
-                               class="control-label col-md-4">
-                            {{fieldNames["special_notes"]}}
-                        </label>
-                        <div class="col-md-8">
-                            <textarea name="special_notes" type="text"
-                                      class="form-control"
-                                      data-ng-model="project.special_notes"
-                                      id="special_notes">
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="incomplete" class="control-label">
-                            Kesken
-                        </label>
-                        <input type="checkbox" id="incomplete"
-                               data-ng-model="project.incomplete">
+                        <textarea   class="form-control"
+                                    name="special_notes"
+                                    data-ng-model="project.special_notes"
+                                    id="special_notes"
+                                    placeholder="{{fieldNames['special_notes']}}">
+                        </textarea>
                     </div>
                 </div>
-                <div class="col-md-12" style="text-align: center">
-                    <hr>
+
+                <div class="form-group">
+                    <label for="incomplete" class="col-md-3 control-label">Kesken</label>
+                    <div class="col-md-1">
+                        <input  class="form-control"
+                                type="checkbox"
+                                id="incomplete"
+                                data-ng-model="project.incomplete">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group col-md-12" style="text-align: center">
+                    
                     <a ng-href="/projects/{{project._id}}"
-                       class="btn btn-default" style="margin-right: 1em">
-                        <span class="glyphicon glyphicon-remove">
-                        </span>&nbsp;Peru
-                    </a>
+                        class="btn btn-default" style="margin-right: 1em">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;Peru</a>                    
+                    
                     <button type="submit"
                             class="btn btn-primary"
                             ng-disabled="projectEditForm.$invalid">
-                        <span class="glyphicon glyphicon-ok">
-                        </span>&nbsp;Tallenna
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp;Tallenna
                     </button>
                 </div>
             </div>
