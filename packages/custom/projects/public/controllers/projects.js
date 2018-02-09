@@ -28,6 +28,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.objectiveComments    = [];
         $scope.addedRejections      = [];
         $scope.currentDate          = new Date();
+        $scope.alerts               = [];
 
         $scope.dateOptions = {         
             formatDayTitle: 'MMM yyyy',
@@ -231,6 +232,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
          */
         $scope.update = function (isValid) {
             if (isValid) {
+
                 var project = $scope.project;
 
                 project.methods = [];
@@ -377,12 +379,22 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
 
                 project.updated.push({time: Date.now(), user: MeanUser.user.name});
                 project.$update(function () {
-                    $location.path('projects/' + project._id);
+                    $scope.projectEditForm.$setPristine();
+                    $scope.alerts.push(
+                        {
+                            type:   'alert-success',
+                            msg:    'Muutokset projektiin tallennettu'
+                        }
+                    );
                 });
             } else {
                 $scope.printInvalidFields($scope.projectEditForm);
                 $scope.submitted = true;
             }
+        };
+
+        $scope.closeAlert = function(index) {
+            $scope.alerts.splice(index, 1);
         };
 
         /**
@@ -810,6 +822,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
                     });
                 });
             });
+        };
+
+        $scope.confirmExit = function (form) {
+            if (!form.$dirty ||
+                    confirm('Olet muokannut lomaketta, haluatko varmasti poistua? Tällöin tehdyt muutokset menetetään.')) {
+                $location.path('/projects/' + $scope.project._id);
+            }
         };
 
         /**

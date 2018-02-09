@@ -1641,17 +1641,28 @@
                 </div>
                 <hr>
                 <div class="form-group col-md-12" style="text-align: center">
-                    
-                    <a ng-href="/projects/{{project._id}}"
-                        class="btn btn-default" style="margin-right: 1em">
-                        <span class="glyphicon glyphicon-remove"></span>&nbsp;Peru</a>                    
+   
+                    <button type="button"
+                            class="btn btn-primary"
+                            ng-click="confirmExit(projectEditForm)">
+                            Poistu
+                    </button>
                     
                     <button type="submit"
                             class="btn btn-primary"
-                            ng-disabled="projectEditForm.$invalid">
+                            ng-disabled="projectEditForm.$pristine ||
+                                !projectEditForm.$dirty ||
+                                projectEditForm.$invalid ||
+                                projectEditForm.$submitted">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;Tallenna
                     </button>
-                </div>
+                    <div    uib-alert
+                            ng-repeat="alert in alerts"
+                            class="alert alert-success"
+                            close="closeAlert($index)"
+                            dismiss-on-timeout="2000"
+                            type="alert.type">{{alert.msg}}</div>
+                </div>                
             </div>
         </fieldset>
     </form>
