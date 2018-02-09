@@ -55,7 +55,7 @@
         "security_level": "Turvaluokitus",
         "project_ref": "Tunnus",
         "title": "Nimi",
-        "coordinator": "Koordinaattori",
+        "coordinator": "Asiantuntija",
         "organisation": "Järjestö",
         "organisation_name": "Nimi",
         "organisation_representative": "Edustaja",

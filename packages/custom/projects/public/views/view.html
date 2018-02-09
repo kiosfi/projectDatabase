@@ -255,7 +255,7 @@
                                 <th>
                                     {{fieldNames["duration_months"]}}
                                 </th>
-                                <td class="summary-td">{{project.duration_months}}</td>
+                                <td class="summary-td">{{ project.duration_months | number: 2 }}</td>
                             </tr>
                         </table>
                     </section>
@@ -1092,7 +1092,7 @@
             </h4>
         </div>
         <section class="panel-body" ng-hide="hidePayments">
-            <section class="section" style="margin-left: 1em">
+            <section class="section">
                 <section class="col-md-12">
                     <div class="col-md-3 mini-header">
                         <div ng-show="project.approved.granted_sum_eur">
@@ -1123,7 +1123,7 @@
             </section>
             
             <hr>
-            <section class="col-md-12" style="margin-left: -2em">
+            <section class="col-md-12">
                 <section class="col-md-6" ng-show="project.signed.planned_payments.length > 0">
                     <h5>Maksuaikataulu</h5>
                     <section

@@ -545,111 +545,51 @@
                     </span>
                 </h4>
             </div>
-            <div class="form-group col-md-12 panel-body"
-                 ng-show="showInRevDetails">
-                <div class="col-md-6">
-                    <label class="col-md-4 control-label">
-                        Toimitetut liitteet
+            <div class="panel-body" ng-show="!showInRevDetails">
+                <div class="form-group">
+                    
+                    <div class="col-md-4">
                         <!--{{fieldNames["required_appendices"]}}-->
-                    </label>
+                        <label class="col-md-12" class="control-label">Toimitetut liitteet</label>
+                        <span class="col-md-8">{{fieldNames["required_appendices_proj_budget"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.proj_budget">
+                        <span class="col-md-8">{{fieldNames["required_appendices_references"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.references">
+                        <span class="col-md-8">{{fieldNames["required_appendices_annual_budget"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.annual_budget">
+                        <span class="col-md-8">{{fieldNames["required_appendices_rules"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.rules">
+                        <span class="col-md-8">{{fieldNames["required_appendices_reg_cert"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.reg_cert">
+                        <span class="col-md-8">{{fieldNames["required_appendices_annual_report"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.annual_report">
+                        <span class="col-md-8">{{fieldNames["required_appendices_audit_reports"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.audit_reports">
+                    </div>
                     <div class="col-md-8">
+                        <label for="comments" class="col-md-12" class="control-label">{{fieldNames["in_review_comments"]}}</label>
                         <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="proj_budget"
-                                       style="font-weight: normal">
-                                    {{fieldNames["required_appendices_proj_budget"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="proj_budget"
-                                       name="proj_budget"
-                                       ng-model="project.required_appendices.proj_budget">
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="references" style="font-weight: normal">
-                                    {{fieldNames["required_appendices_references"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="references" name="references"
-                                       ng-model="project.required_appendices.references">
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="annual_budget"
-                                       style="font-weight: normal">
-                                    {{fieldNames["required_appendices_annual_budget"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="annual_budget"
-                                       name="annual_budget"
-                                       ng-model="project.required_appendices.annual_budget">
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="rules" style="font-weight: normal">
-                                    {{fieldNames["required_appendices_rules"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="rules" name="rules"
-                                       ng-model="project.required_appendices.rules">
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="reg_cert" style="font-weight: normal">
-                                    {{fieldNames["required_appendices_reg_cert"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="reg_cert" name="reg_cert"
-                                       ng-model="project.required_appendices.reg_cert">
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="annual_report"
-                                       style="font-weight: normal">
-                                    {{fieldNames["required_appendices_annual_report"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="annual_report"
-                                       name="annual_report"
-                                       ng-model="project.required_appendices.annual_report">
-                            </span>
-                        </div>
-                        <div class="col-md-12">
-                            <span class="col-md-6">
-                                <label for="audit_reports"
-                                       style="font-weight: normal">
-                                    {{fieldNames["required_appendices_audit_reports"]}}
-                                </label>
-                            </span>
-                            <span class="col-md-6">
-                                <input type="checkbox" id="audit_reports"
-                                       name="audit_reports"
-                                       ng-model="project.required_appendices.audit_reports">
-                            </span>
+                            <textarea   name="comments"
+                                        type="text"
+                                        class="form-control"
+                                        data-ng-model="project.in_review.comments"
+                                        id="comments"
+                                        rows="5">
+                            </textarea>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="comments" class="col-md-2 control-label">
-                        {{fieldNames["in_review_comments"]}}
-                    </label>
-                    <div class="col-md-10">
-                        <textarea name="comments" type="text" class="form-control"
-                                  data-ng-model="project.in_review.comments"
-                                  id="comments">
-                        </textarea>
+                                    
+                
+                
+                
+                
+                <div class="form-group">
+                    
+                        
                     </div>
+                    <div class="col-md-1">
+                    </div>
+                    
                 </div>
             </div>
         </fieldset>
