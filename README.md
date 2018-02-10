@@ -32,8 +32,8 @@ The application should be available at http://localhost:3000. The following acco
 Install and run MongoDB 3.2.18. For example:
 
 ```
-# docker pull mongo:3.2.18
-# docker run -d -p 27017:27017 mongo:3.2.18
+$ docker pull mongo:3.2.18
+$ docker run -d -p 27017:27017 --name kios-mongo mongo:3.2.18
 ```
 
 Modify ```config/env/development``` and restart the application:
@@ -46,6 +46,8 @@ module.exports = {
 Insert test user and project states using MongoDB shell:
 
 ```
+$ docker run -it --link kios-mongo:mongo --rm mongo:3.2.18 sh -c 'exec mongo "$MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT/test"'
+
 > use mean-dev
 
 > db.users.insert({ "email" : "tt@testi.com", "hashed_password" : "6OMmg66ekC4EROvg55Twt3fM/W/oj7ERJhUPjpgEeJcdu5U95PZP1t7cdmZ72kaYzaW6ILUz6PcTpTLkJNZegw==", "salt" : "+X1WNogMs0lMTEmZtzUjwA==", "username" : "testi", "name" : "Tommi Testaaja", "provider" : "local", "roles" : [ "authenticated" ], "__v" : 0 })
