@@ -63,7 +63,7 @@ var ProjectSchema = new Schema({
     /**
      * Name of the coordinator of the project.
      */
-    coordinator: {          // "Koordinaattori" (or "esittelijä" in reports)
+    coordinator: {          // "Asiantuntija" (or "esittelijä" in reports)
         type: String,
         required: true,
         trim: true
@@ -739,7 +739,7 @@ ProjectSchema.path('title').validate(function (title) {
 
 ProjectSchema.path('coordinator').validate(function (coordinator) {
     return !!coordinator;
-}, 'Koordinaattorin nimi ei voi olla tyhjä');
+}, 'Asiantuntijan nimi ei voi olla tyhjä');
 
 ProjectSchema.statics.load = function (id, cb) {
     this.findOne({

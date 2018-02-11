@@ -49,7 +49,7 @@
                     {{fieldNames["signed_signed_date"]}}
                 </td>
                 <td class="report-content" colspan="3">
-                    {{project.signed.signed_date |date : 'dd.MM.yyyy': '+0200'}}
+                    {{project.signed.signed_date |date : 'dd.MM.yyyy': 'Z'}}
                 </td>
             </tr>
         </table>
@@ -121,9 +121,9 @@
                     <div class="report-mini-header">Myönnetty avustus</div>
                     <div class="report-subcontent">
                         Hankkeelle myönnettiin
-                        {{numberToString(project.approved.granted_sum_eur)}}
-                        EUR, mikä käsiteltiin hallituksen kokousessa
-                        {{project.approved.board_notified| date : 'dd.MM.yyyy': '+0200'}}.
+                        {{ project.approved.granted_sum_eur | currency : "" : 2 }}
+                        EUR, mikä käsiteltiin hallituksen kokouksessa
+                        {{project.approved.board_notified| date : 'dd.MM.yyyy': 'Z'}}.
                     </div>
                 </div>
                 <div style="margin-bottom: 1em">
@@ -136,10 +136,10 @@
                                 <em>{{$index + 1}}. erä</em>
                             </td>
                             <td style="padding-left: 2em">
-                                {{numberToString(planned_payment.sum_eur)}} EUR
+                                {{ planned_payment.sum_eur | currency : "EUR" : 2 }}
                             </td>
                             <td style="padding-left: 2em">
-                                {{planned_payment.date| date : 'dd.MM.yyyy': '+0200'}}
+                                {{planned_payment.date| date : 'dd.MM.yyyy': 'Z'}}
                             </td>
                         </tr>
                     </table>
@@ -155,10 +155,10 @@
                                 <em>{{$index + 1}}. erä</em>
                             </td>
                             <td style="padding-left: 2em">
-                                {{numberToString(payment.sum_eur)}} EUR
+                                {{ payment.sum_eur | currency : "EUR" : 2 }}
                             </td>
                             <td style="padding-left: 2em">
-                                {{payment.payment_date| date : 'dd.MM.yyyy': '+0200'}}
+                                {{payment.payment_date| date : 'dd.MM.yyyy': 'Z'}}
                             </td>
                         </tr>
                     </table>
@@ -166,7 +166,7 @@
                 <div style="margin-bottom: 1em">
                     <div class="report-mini-header">Jäljellä oleva summa</div>
                     <div class="report-subcontent">
-                        {{numberToString(project.funding.left_eur)}} EUR
+                        {{ project.funding.left_eur | currency : "EUR" : 2 }}
                     </div>
                 </div>
             </td>

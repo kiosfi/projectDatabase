@@ -29,19 +29,24 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.addedRejections      = [];
         $scope.currentDate          = new Date();
 
+        $scope.dateOptions = {         
+            formatDayTitle: 'MMM yyyy',
+            startingDay: 1
+        };
+
         $scope.registerdate = {
             opened: false
         };
-        $scope.registerDateOptions = {         
-            formatDayTitle: 'MMM yyyy',
-            startingDay: 1
-          };
+
+        $scope.paymentdate = {
+            opened: false
+        };
 
         /**
-         * Show project registration date picker.
+         * Show date picker.
          */
-        $scope.openRegisterDate = function() {
-            $scope.registerdate.opened = true;
+        $scope.openDatePicker = function(picker) {
+            picker.opened = true;
         };
 
         /**
@@ -156,13 +161,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         var now = new Date();
 
         /**
-         * These date fields are used in the payment addition form at the
-         * project view. The default values correspond to the current date
+         * This date field is used in the payment addition form at the
+         * project view. The default value correspond to the current date
          * (generated during runtime).
          */
-        $scope.payment_year = now.getFullYear();
-        $scope.payment_month = now.getMonth() + 1;
-        $scope.payment_day = now.getDate();
+        
+        $scope.payment_date = now;
 
         $scope.initNewProject = function() {
 
@@ -1034,12 +1038,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope',
         $scope.addPaymentInfo = function (isValid) {
             if (isValid) {
                 var project = $scope.project;
-                var payment_date = $scope.convertDate(
-                        $scope.payment_day,
-                        $scope.payment_month,
-                        $scope.payment_year
-                );
-                project.payment.payment_date = payment_date;
+                project.payment.payment_date = $scope.payment_date;
+                project.payment.payment_date.setHours(0, 0, 0, 0);
+
                 var index = project.payments.length;
                 if (index === undefined) {
                     project.payment.payment_number = 1;

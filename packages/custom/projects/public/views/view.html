@@ -228,7 +228,7 @@
                                     {{fieldNames["approved_granted_sum_eur"]}}
                                 </th>
                                 <td class="summary-td">
-                                    {{numberToString(project.approved.granted_sum_eur)}}
+                                    {{ project.approved.granted_sum_eur | currency : "" : 2 }}
                                 </td>
                             </tr>
                             <tr ng-show="!project.approved.granted_sum.granted_curr_eur &&
@@ -237,7 +237,7 @@
                                     {{fieldNames["funding_applied_curr_eur"]}}
                                 </th>
                                 <td class="summary-td">
-                                    {{numberToString(project.funding.applied_curr_eur)}}
+                                    {{ project.funding.applied_curr_eur | currency: "" : 2 }}
                                 </td>
                             </tr>
                             <tr ng-show="!project.approved.granted_sum.granted_curr_eur &&
@@ -248,14 +248,14 @@
                             project.funding.curr_local_unit : "paik. val."}})
                                 </th>
                                 <td class="summary-td">
-                                    {{numberToString(project.funding.applied_curr_local)}}
+                                    {{ project.funding.applied_curr_local | currency: "" : 2 }}
                                 </td>
                             </tr>
                             <tr ng-show="project.duration_months >= 0">
                                 <th>
                                     {{fieldNames["duration_months"]}}
                                 </th>
-                                <td class="summary-td">{{project.duration_months}}</td>
+                                <td class="summary-td">{{ project.duration_months | number: 2 }}</td>
                             </tr>
                         </table>
                     </section>
@@ -306,7 +306,7 @@
                                     {{fieldNames["organisation_email"]}}
                                 </th>
                                 <td class="summary-td">
-                                    {{project.organisation.email}}
+                                    <a href="mailto:{{ project.organisation.email }}">{{ project.organisation.email }}</a>
                                 </td>
                             </tr>
                             <tr ng-show="nonEmpty(project.organisation.website)">
@@ -314,7 +314,9 @@
                                     {{fieldNames["organisation_www"]}}
                                 </th>
                                 <td class="summary-td">
-                                    {{project.organisation.website}}
+                                    <a href="{{ project.organisation.website.startsWith('http://') ?
+                                                    project.organisation.website :
+                                                    'http://' + project.organisation.website }}">{{project.organisation.website}}</a>
                                 </td>
                             </tr>
                         </table>
@@ -639,7 +641,7 @@
                     {{deadline.report}}
                 </div>
                 <div class="col-md-9">
-                    {{deadline.date| date: 'd.M.yyyy': '+0200'}}
+                    {{deadline.date| date: 'd.M.yyyy': 'Z'}}
                 </div>
             </div>
         </section>
@@ -673,7 +675,7 @@
                         </span>
                     </div>
                     <div class="col-md-8">
-                        {{project.in_review.date| date:'d.M.yyyy': '+0200'}}
+                        {{ project.in_review.date | date:'d.M.yyyy': 'Z' }}
                     </div>
                     &nbsp;
                 </div>
@@ -684,7 +686,7 @@
                             {{fieldNames["in_review_user"]}}
                         </div>
                         <div class="col-md-9">{{project.in_review.user}},
-                            {{project.in_review.date| date:'d.M.yyyy, HH:mm': '+0200'}}</div>
+                            {{project.in_review.date| date:'d.M.yyyy, HH:mm': 'Z' }}</div>
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-3 mini-header">
@@ -711,7 +713,7 @@
                         </span>
                     </div>
                     <div class="col-md-1">
-                        {{project.approved.date| date:'d.M.yyyy':'+0200'}}
+                        {{project.approved.date| date:'d.M.yyyy':'Z'}}
                     </div>
                     <div class="col-md-1">
                         <a ng-href="/projects/{{project._id}}/regreport"
@@ -741,7 +743,7 @@
                         </div>
                         <div class="col-md-9">
                             {{project.approved.user}},
-                            {{project.approved.date| date:'d.M.yyyy, HH:mm': '+0200'}}
+                            {{project.approved.date| date:'d.M.yyyy, HH:mm': 'Z'}}
                         </div>
                     </div>
                     <div class="col-md-12" style="margin-bottom: 1em">
@@ -757,7 +759,7 @@
                             {{fieldNames["approved_approved_date"]}}
                         </div>
                         <div class="col-md-9">
-                            {{project.approved.approved_date| date: 'd.M.yyyy':'+0200'}}
+                            {{project.approved.approved_date| date: 'd.M.yyyy':'Z'}}
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -765,7 +767,7 @@
                             {{fieldNames["approved_board_notified"]}}
                         </div>
                         <div class="col-md-9">
-                            {{project.approved.board_notified| date:'d.M.yyyy':'+0200'}}
+                            {{project.approved.board_notified| date:'d.M.yyyy':'Z'}}
                         </div>
                     </div>
                 </div>
@@ -785,7 +787,7 @@
                         </span>
                     </div>
                     <div class="col-md-8">
-                        {{project.rejected.date| date:'d.M.yyyy': '+0200'}}
+                        {{project.rejected.date| date:'d.M.yyyy': 'Z'}}
                     </div>
                     &nbsp;
                 </div>
@@ -797,7 +799,7 @@
                         </div>
                         <div class="col-md-9">
                             {{project.rejected.user}},
-                            {{project.rejected.date|date:'d.M.yyyy, HH:mm': '+0200'}}
+                            {{project.rejected.date|date:'d.M.yyyy, HH:mm': 'Z'}}
                         </div>
                     </div>
                     <div class="col-md-12" style="margin-bottom: 1em">
@@ -835,7 +837,7 @@
                         </span>
                     </div>
                     <div class="col-md-8">
-                        {{project.signed.date| date:'d.M.yyyy': '+0200'}}
+                        {{project.signed.date| date:'d.M.yyyy': 'Z'}}
                     </div>
                     &nbsp;
                 </div>
@@ -847,7 +849,7 @@
                         </div>
                         <div class="col-md-9">
                             {{project.signed.user}},
-                            {{project.signed.date|date:'d.M.yyyy, HH:mm': '+0200'}}
+                            {{project.signed.date|date:'d.M.yyyy, HH:mm': 'Z'}}
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -856,7 +858,7 @@
                         </div>
                         <div class="col-md-9">
                             {{project.signed.signed_by}},
-                            {{project.signed.signed_date|date:'d.M.yyyy': '+0200'}}
+                            {{project.signed.signed_date|date:'d.M.yyyy': 'Z'}}
                         </div>
                     </div>
                 </div>
@@ -876,7 +878,7 @@
                             </span>
                         </div>
                         <div class="col-md-1">
-                            {{intreport.date| date:'d.M.yyyy': '+0200'}}
+                            {{intreport.date| date:'d.M.yyyy': 'Z'}}
                         </div>
                         <div class="col-md-1">
                             <a ng-href="/projects/{{project._id}}/intreport/{{intreport.reportNumber}}"
@@ -904,7 +906,7 @@
                             </div>
                             <div class="col-md-9">
                                 {{intreport.user}},
-                                {{intreport.date|date:'d.M.yyyy, HH:mm': '+0200'}}
+                                {{intreport.date|date:'d.M.yyyy, HH:mm': 'Z'}}
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -913,7 +915,7 @@
                             </div>
                             <div class="col-md-9">
                                 {{intreport.approved_by}},
-                                {{intreport.date_approved|date : 'd.M.yyyy': '+0200'}}
+                                {{intreport.date_approved|date : 'd.M.yyyy': 'Z'}}
                             </div>
                         </div>
                     </div>
@@ -932,7 +934,7 @@
                         </span>
                     </div>
                     <div class="col-md-1">
-                        {{project.end_report.date| date:'d.M.yyyy':'+0200'}}
+                        {{project.end_report.date| date:'d.M.yyyy':'Z'}}
                     </div>
                     <div class="col-md-1">
                         <a ng-href="/projects/{{project._id}}/endReport"
@@ -965,7 +967,7 @@
                         </div>
                         <div class="col-md-9">
                             {{project.end_report.user}},
-                            {{project.end_report.date|date:'d.M.yyyy, HH:mm': '+0200'}}
+                            {{project.end_report.date|date:'d.M.yyyy, HH:mm': 'Z'}}
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -974,7 +976,7 @@
                         </div>
                         <div class="col-md-9">
                             {{project.end_report.approved_by}},
-                            {{project.end_report.approved_date|date : 'd.M.yyyy': '+0200'}}
+                            {{project.end_report.approved_date|date : 'd.M.yyyy': 'Z'}}
                         </div>
                     </div>
                 </div>
@@ -993,7 +995,7 @@
                         </span>
                     </div>
                     <div class="col-md-8">
-                        {{project.ended.end_date| date:'d.M.yyyy':'+0200'}}
+                        {{project.ended.end_date| date:'d.M.yyyy':'Z'}}
                     </div>
                     &nbsp;
                 </div>
@@ -1005,7 +1007,7 @@
                         </div>
                         <div class="col-md-9">
                             {{project.ended.user}},
-                            {{project.ended.date|date:'d.M.yyyy, HH:mm': '+0200'}}
+                            {{project.ended.date|date:'d.M.yyyy, HH:mm': 'Z'}}
                         </div>
                     </div>
                     <div class="col-md-12" style="margin-bottom: 1em">
@@ -1019,7 +1021,7 @@
                             {{fieldNames["ended_board_notified"]}}
                         </div>
                         <div class="col-md-9">
-                            {{project.ended.board_notified|date: 'd.M.yyyy': '+0200'}}
+                            {{project.ended.board_notified|date: 'd.M.yyyy': 'Z'}}
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -1090,37 +1092,38 @@
             </h4>
         </div>
         <section class="panel-body" ng-hide="hidePayments">
-            <section class="section" style="margin-left: 1em">
+            <section class="section">
                 <section class="col-md-12">
-                    <div class="col-md-2 mini-header">
+                    <div class="col-md-3 mini-header">
                         <div ng-show="project.approved.granted_sum_eur">
                             Myönnetty avustus
                             <!--{{fieldNames["approved_granted_sum_eur"]}}-->
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        {{numberToString(project.approved.granted_sum_eur)}} EUR
+                    <div class="col-md-3 money">
+                        {{ project.approved.granted_sum_eur | currency : "EUR" : 2 }}
                     </div>
-                    <div class="col-md-8">
-                        {{project.approved.approved_date| date:'d.M.yyyy': '+0200'}}
+                    <div class="col-md-1">
+                        {{ project.approved.approved_date | date : 'd.M.yyyy' : 'Z' }}
                     </div>
                 </section>
                 <section class="col-md-12">
-                    <div class="col-md-2 mini-header">Maksettu yhteensä</div>
-                    <div class="col-md-10">
-                        {{numberToString(project.funding.paid_eur)}} EUR
+                    <div class="col-md-3 mini-header">Maksettu yhteensä</div>
+                    <div class="col-md-3 money">
+                        {{ project.funding.paid_eur | currency : "EUR" : 2 }}
                     </div>
                 </section>
                 <section ng-show="project.signed.date" class="col-md-12">
-                    <div class="col-md-2 mini-header">Jäljellä</div>
-                    <div class="col-md-10">
-                        {{numberToString(project.funding.left_eur)}} EUR
+                    <div class="col-md-3 mini-header">Jäljellä</div>
+                    <div class="col-md-3 money">
+                        {{ project.funding.left_eur | currency : "EUR" : 2 }}
                     </div>
                 </section>
                 &nbsp;
             </section>
+            
             <hr>
-            <section class="col-md-12" style="margin-left: -2em">
+            <section class="col-md-12">
                 <section class="col-md-6" ng-show="project.signed.planned_payments.length > 0">
                     <h5>Maksuaikataulu</h5>
                     <section
@@ -1130,10 +1133,10 @@
                                 <em>{{project.signed.planned_payments.indexOf(planned_payment) + 1}}. erä</em>
                             </div>
                             <div class="col-md-4">
-                                {{numberToString(planned_payment.sum_eur)}} EUR
+                                {{ planned_payment.sum_eur | currency : "EUR" : 2 }}
                             </div>
                             <div class="col-md-6">
-                                {{planned_payment.date| date:'d.M.yyyy': '+0200'}}
+                                {{ planned_payment.date | date:'d.M.yyyy': 'Z' }}
                             </div>
                         </div>
                     </section>
@@ -1149,10 +1152,10 @@
                                 <em id="paid">{{$index + 1}}. erä</em>
                             </div>
                             <div class="col-md-4">
-                                {{numberToString(payment.sum_eur)}} EUR
+                                {{ payment.sum_eur | currency : "EUR" : 2 }}
                             </div>
                             <div class="col-md-4">
-                                {{payment.payment_date| date:'d.M.yyyy': '+0200'}}
+                                {{ payment.payment_date | date:'d.M.yyyy': 'Z' }}
                             </div>
                             <div class="col-md-2">
                                 <a href=""
@@ -1185,91 +1188,68 @@
                 </span>
             </h4>
         </div>
-        <section class="panel-body" style="margin-bottom: -2em" ng-hide="hideAddPayment">
+        <section class="panel-body" ng-hide="hideAddPayment">
             <form name="paymentForm" class="form-horizontal" role="form"
                   data-ng-submit="addPaymentInfo(paymentForm.$valid)"
                   novalidate>
-                <div style="margin-left: -5em">
-                    <div class="form-group col-md-6" id="PaymentDate">
-                        <label class="col-md-3 control-label">
-                            Päiväys
-                        </label>
-                        <div class="col-md-3"
-                             ng-class="{'has-error': paymentForm.paymentDay.$invalid}">
-                            <input name="paymentDay" type="number"
-                                   ng-trim="true" class="form-control"
-                                   data-ng-model="payment_day"
-                                   id="paymentDay" required />
-                            <div ng-show="paymentForm.paymentDay.$invalid"
-                                 class="help-block" >
-                                <p ng-show="paymentForm.paymentDay.$error.required">
-                                    Päivä on pakollinen
-                                </p>
+                    <div class="form-group">
+                            
+                        <label for="paymentDate" class="col-md-1 control-label">Päiväys</label>
+                        <div class="col-md-4" ng-class="{'has-error': paymentForm.paymentDate.$invalid}">
+                            <div class="input-group">
+                                <input  name="paymentDate"
+                                        type="text"
+                                        class="form-control"
+                                        uib-datepicker-popup="d. MMMM yyyy"
+                                        data-ng-model="payment_date"
+                                        id="paymentDate"
+                                        is-open="paymentdate.opened"
+                                        datepicker-options="dateOptions"
+                                        ng-required="true"
+                                        close-text="Sulje"
+                                        clear-text="Tyhjennä"
+                                        current-text="Tänään"
+                                        alt-input-formats="altInputFormats" />
+                                <span class="input-group-btn">
+                                    <button type="button"
+                                            class="btn btn-default"
+                                            ng-click="openDatePicker(paymentdate);">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div    ng-show="paymentForm.paymentDate.$invalid"
+                                    class="has-error">
+                                <p class="help-block ">Valitse päivä</p>
                             </div>
                         </div>
-                        <div class="col-md-3"
-                             ng-class="{'has-error': paymentForm.paymentMonth.$invalid}">
-                            <input name="paymentMonth" type="number"
-                                   ng-trim="true" class="form-control"
-                                   data-ng-model="payment_month"
-                                   id="paymentMonth"
-                                   required />
-                            <div ng-show="paymentForm.paymentMonth.$invalid"
-                                 class="help-block">
-                                <p ng-show="paymentForm.paymentMonth.$error.required">
-                                    Kuukausi on pakollinen
-                                </p>
-                            </div>
+
+                        <label  for="paymentSumEUR"
+                                class="col-md-2 control-label">Summa (EUR)</label>
+                        
+                        <div class="col-md-3" ng-class="{ 'has-error': paymentForm.paymentSumEUR.$invalid }">
+                            <input  class="form-control"
+                                    ng-trim="true"
+                                    name="paymentSumEUR"
+                                    type="number"
+                                    data-ng-model="project.payment.sum_eur"
+                                    id="paymentSumEUR"
+                                    placeholder="00,00"
+                                    min="0" required>
+                                    
+                                    <div    ng-show="paymentForm.paymentSumEUR.$invalid"
+                                            class="has-error">
+                                        <p class="help-block ">Syötä summa</p>
+                                    </div>                                      
                         </div>
-                        <div class="col-md-3"
-                             ng-class="{'has-error': paymentForm.paymentYear.$invalid }">
-                            <input name="paymentYear" type="number"
-                                   ng-trim="true" class="form-control"
-                                   data-ng-model="payment_year"
-                                   id="paymentYear"
-                                   required />
-                            <div ng-show="paymentForm.paymentYear.$invalid"
-                                 class="help-block">
-                                <p ng-show="paymentForm.paymentYear.$error.required">
-                                    Vuosi on pakollinen
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         ng-class="{'has-error': paymentForm.paymentSumEUR.$invalid}">
-                        <label for="paymentSumEUR" class="col-md-4 control-label">
-                            Summa (EUR)
-                        </label>
-                        <div class="col-md-3">
-                            <input name="paymentSumEUR" type="number"
-                                   ng-trim="true" class="form-control"
-                                   data-ng-model="project.payment.sum_eur"
-                                   id="paymentSumEUR" required />
-                        </div>
-                        <div class="col-md-4">
-                            <div ng-show="paymentForm.paymentSumEUR.$invalid"
-                                 class="help-block">
-                                <p ng-show="paymentForm.paymentSumEUR.$error.number">
-                                    Summan täytyy olla luku
-                                </p>
-                            </div>
-                            <div ng-show="paymentForm.paymentSumEUR.$invalid"
-                                 class="help-block">
-                                <p ng-show="paymentForm.paymentSumEUR.$error.required">
-                                    Kenttä on pakollinen
-                                </p>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-1">
-                            <button type="submit" id="btn-pay" class="btn btn-primary"
+                        <div class="col-md-1">
+                            <button type="submit"
+                                    id="btn-pay"
+                                    class="btn btn-primary"
                                     ng-disabled="paymentForm.$invalid">
-                                <span class="glyphicon glyphicon-ok"></span>&nbsp;
-                                Tallenna
-                            </button>
-                        </div>
+                                <span class="glyphicon glyphicon-ok"></span>&nbsp;Tallenna</button>
+                        </div>                        
                     </div>
-                </div>
             </form>
         </section>
     </article>
@@ -1430,7 +1410,7 @@
                             <em>{{appendix.original_name}}</em>
                         </td>
                         <td>
-                            {{appendix.date| date: 'd.M.yyyy': '+0200'}}
+                            {{appendix.date| date: 'd.M.yyyy': 'Z'}}
                         </td>
                         <td>
                             <a data-ng-click="confirmAppendixDeletion(

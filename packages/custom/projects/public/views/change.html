@@ -42,8 +42,8 @@ A form for project state change.
                                 Haettu avustus
                             </div>
                             <div class="col-md-6">
-                                {{project.funding.applied_curr_eur| currency : ""}} EUR
-                                ({{project.funding.applied_curr_local| currency : ""}}
+                                {{ project.funding.applied_curr_eur | currency : "EUR" : 2 }} 
+                                ({{ project.funding.applied_curr_local | currency : "" }}
                                 paikallinen)
                             </div>
                         </div>
