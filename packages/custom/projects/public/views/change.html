@@ -67,7 +67,7 @@ A form for project state change.
             </section>
             &nbsp;
             <hr>
-            <section class="col-md-12" style="margin: 0.5em">
+            <section class="col-md-12">
                 <h4>Kuvaus</h4>
                 <section class="section">
                     <span ng-bind-html="handleEmphasis(project.description)">
@@ -79,121 +79,49 @@ A form for project state change.
     <article class="panel panel-primary">
         <div class="panel-heading">
             <h4>
-                <tt>{{project.state}}</tt>
+                <span>Tilasiirtymä {{ project.state }}</span>
                 <span class="glyphicon glyphicon-arrow-right"></span>
-                <tt>{{global.newState}}</tt>
+                <span>{{ global.newState }}</span>
             </h4>
         </div>
         <div class="panel-body">
             <!--    Käsittelyssä -->
-            <form name="inReviewForm" class="form-horizontal col-md-12"
-                  ng-show="global.newState === 'käsittelyssä'" role="form"
-                  data-ng-submit="addReviewState(inReviewForm.$valid)" novalidate>
-                <div class="form-group col-md-12">
-                    <div class="col-md-6">
-                        <label class="col-md-4 control-label">
-                            Toimitetut liitteet
-                            <!--{{fieldNames["required_appendices"]}}-->
-                        </label>
-                        <div class="col-md-8">
-                            <div class="col-md-12">
-                                <span class="col-md-6">
-                                    <label for="proj_budget"
-                                           style="font-weight: normal">
-                                        {{fieldNames["required_appendices_proj_budget"]}}
-                                    </label>
-                                </span>
-                                <span class="col-md-6">
-                                    <input type="checkbox" id="proj_budget"
-                                           name="proj_budget"
-                                           ng-model="project.required_appendices.proj_budget">
-                                </span>
-                            </div>
-                            <div class="col-md-12">
-                                <span class="col-md-6">
-                                    <label for="references" style="font-weight: normal">
-                                        {{fieldNames["required_appendices_references"]}}
-                                    </label>
-                                </span>
-                                <span class="col-md-6">
-                                    <input type="checkbox" id="references" name="references"
-                                           ng-model="project.required_appendices.references">
-                                </span>
-                            </div>
-                            <div class="col-md-12">
-                                <span class="col-md-6">
-                                    <label for="annual_budget"
-                                           style="font-weight: normal">
-                                        {{fieldNames["required_appendices_annual_budget"]}}
-                                    </label>
-                                </span>
-                                <span class="col-md-6">
-                                    <input type="checkbox" id="annual_budget"
-                                           name="annual_budget"
-                                           ng-model="project.required_appendices.annual_budget">
-                                </span>
-                            </div>
-                            <div class="col-md-12">
-                                <span class="col-md-6">
-                                    <label for="rules" style="font-weight: normal">
-                                        {{fieldNames["required_appendices_rules"]}}
-                                    </label>
-                                </span>
-                                <span class="col-md-6">
-                                    <input type="checkbox" id="rules" name="rules"
-                                           ng-model="project.required_appendices.rules">
-                                </span>
-                            </div>
-                            <div class="col-md-12">
-                                <span class="col-md-6">
-                                    <label for="reg_cert" style="font-weight: normal">
-                                        {{fieldNames["required_appendices_reg_cert"]}}
-                                    </label>
-                                </span>
-                                <span class="col-md-6">
-                                    <input type="checkbox" id="reg_cert" name="reg_cert"
-                                           ng-model="project.required_appendices.reg_cert">
-                                </span>
-                            </div>
-                            <div class="col-md-12">
-                                <span class="col-md-6">
-                                    <label for="annual_report"
-                                           style="font-weight: normal">
-                                        {{fieldNames["required_appendices_annual_report"]}}
-                                    </label>
-                                </span>
-                                <span class="col-md-6">
-                                    <input type="checkbox" id="annual_report"
-                                           name="annual_report"
-                                           ng-model="project.required_appendices.annual_report">
-                                </span>
-                            </div>
-                            <div class="col-md-12">
-                                <span class="col-md-6">
-                                    <label for="audit_reports"
-                                           style="font-weight: normal">
-                                        {{fieldNames["required_appendices_audit_reports"]}}
-                                    </label>
-                                </span>
-                                <span class="col-md-6">
-                                    <input type="checkbox" id="audit_reports"
-                                           name="audit_reports"
-                                           ng-model="project.required_appendices.audit_reports">
-                                </span>
-                            </div>
-                        </div>
+            <form   name="inReviewForm"
+            \       class="form-horizontal"
+                    ng-show="global.newState === 'käsittelyssä'"
+                    role="form"
+                    data-ng-submit="addReviewState(inReviewForm.$valid)" novalidate>
+                <div class="form-group">              
+                    <div class="col-md-4">
+                        <!--{{fieldNames["required_appendices"]}}-->
+                        <label class="col-md-12" class="control-label">Toimitetut liitteet</label>
+                        <span class="col-md-8">{{fieldNames["required_appendices_proj_budget"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.proj_budget" id="proj_budget" name="proj_budget">
+                        <span class="col-md-8">{{fieldNames["required_appendices_references"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.references" id="references" name="references">
+                        <span class="col-md-8">{{fieldNames["required_appendices_annual_budget"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.annual_budget" id="annual_budget" name="annual_budget">
+                        <span class="col-md-8">{{fieldNames["required_appendices_rules"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.rules" id="rules" name="rules">
+                        <span class="col-md-8">{{fieldNames["required_appendices_reg_cert"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.reg_cert" id="reg_cert" name="reg_cert">
+                        <span class="col-md-8">{{fieldNames["required_appendices_annual_report"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.annual_report" id="annual_report" name="annual_report">
+                        <span class="col-md-8">{{fieldNames["required_appendices_audit_reports"]}}</span>
+                        <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.audit_reports" id="audit_reports" name="audit_reports">
                     </div>
-                    <div class="col-md-6">
-                        <label for="comments" class="col-md-2 control-label">
-                            {{fieldNames["in_review_comments"]}}
-                        </label>
-                        <div class="col-md-10">
-                            <textarea name="comments" type="text" class="form-control"
-                                      data-ng-model="project.in_review.comments"
-                                      id="comments">
+                    <div class="col-md-8">
+                        <label for="comments" class="col-md-12" class="control-label">{{fieldNames["in_review_comments"]}}</label>
+                        <div class="col-md-12">
+                            <textarea   name="comments"
+                                        type="text"
+                                        class="form-control"
+                                        data-ng-model="project.in_review.comments"
+                                        id="comments"
+                                        rows="5">
                             </textarea>
                         </div>
-                    </div>
+                    </div>    
                 </div>
                 <div class="form-group col-md-12" style="text-align: center">
                     <hr>
@@ -208,62 +136,54 @@ A form for project state change.
                     </button>
                 </div>
             </form>
-            <!--        Hyväksytty-->
-            <form name="approvedForm" class="form-horizontal col-md-12"
+            <!-- Hyväksytty -->
+            <form name="approvedForm" class="form-horizontal"
                   ng-show="global.newState === 'hyväksytty'" role="form"
                   data-ng-submit="addApprovedState(approvedForm.$valid)" novalidate>
-                <div class="form-group col-md-6">
-                    <label class="col-md-4 control-label" for="board_meeting">
+                
+                  <div class="form-group">
+                    <label class="col-md-2 control-label" for="board_meeting">
                         {{fieldNames["approved_board_meeting"]}}
                     </label>
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <input id="board_meeting" name="board_meeting"
                                data-ng-model="project.approved.board_meeting"
                                class="form-control"
                                placeholder="Hallituksen kokous">
                     </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="board_notified" class="col-md-3 control-label">
+                    <label for="board_notified_date" class="col-md-1 control-label">
                         {{fieldNames["approved_board_notified"]}}
                     </label>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': approvedForm.board_notified_day.$invalid}">
-                        <input name="board_notified_day" type="number"
-                               class="form-control" data-ng-model="notified_day"
-                               id="board_notified_day" placeholder="p">
-                        <div ng-show="approvedForm.board_notified_day.$invalid"
-                             class="help-block">
-                            <p ng-show="approvedForm.board_notified_day.$error.number">
-                                Päivän täytyy olla numero
-                            </p>
+
+                    <div class="col-md-4" ng-class="{'has-error': approvedForm.board_notified_date.$invalid}">
+                        <div class="input-group">
+                            <input  name="board_notified_date"
+                                    type="text"
+                                    class="form-control"
+                                    uib-datepicker-popup="d. MMMM yyyy"
+                                    data-ng-model="board_notified_date"
+                                    id="board_notified_date"
+                                    is-open="boardnotifieddate.opened"
+                                    datepicker-options="dateOptions"
+                                    ng-required="true"
+                                    close-text="Sulje"
+                                    clear-text="Tyhjennä"
+                                    current-text="Tänään"
+                                    alt-input-formats="altInputFormats">
+                            <span class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-default"
+                                        ng-click="openDatePicker(boardnotifieddate);">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
                         </div>
                     </div>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': approvedForm.board_notified_month.$invalid}">
-                        <input name="board_notified_month" type="number"
-                               class="form-control" data-ng-model="notified_month"
-                               id="board_notified_month" placeholder="k">
-                        <div ng-show="approvedForm.board_notified_month.$invalid"
-                             class="help-block">
-                            <p ng-show="approvedForm.board_notified_month.$error.number">
-                                Kuukauden täytyy olla numero
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': approvedForm.board_notified_year.$invalid}">
-                        <input name="board_notified_year" type="number"
-                               class="form-control" data-ng-model="notified_year"
-                               id="board_notified_year" placeholder="vvvv">
-                        <div ng-show="approvedForm.board_notified_year.$invalid"
-                             class="help-block">
-                            <p ng-show="approvedForm.board_notified_year.$error.number">
-                                Vuoden täytyy olla numero
-                            </p>
-                        </div>
+                    <div ng-show="approvedForm.board_notified_date.$invalid" class="col-md-5 has-error">
+                        <p class="help-block">Valitse päivä</p>
                     </div>
                 </div>
+
                 <div class="form-group col-md-12">
                     <label class="col-md-2 control-label">
                         {{fieldNames["approved_themes"]}}
@@ -310,7 +230,7 @@ A form for project state change.
                         <input name="granted_sum_eur" type="number"
                                class="form-control"
                                data-ng-model="project.approved.granted_sum_eur"
-                               id="granted_sum_eur" placeholder="0">
+                               id="granted_sum_eur" placeholder="0" min="0">
                         <div ng-show="approvedForm.granted_sum_eur.$invalid"
                              class="help-block">
                             <p ng-show="approvedForm.granted_sum_eur.$error.number">
@@ -319,58 +239,51 @@ A form for project state change.
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="approved_date" class="col-md-3 control-label">
+
+                <div class="form-group">
+                    <!--{{fieldNames["approved_approved_date"]}}-->
+                    <label for="approved_date" class="col-md-2 control-label">
                         Hyväksymispvm
-                        <!--{{fieldNames["approved_approved_date"]}}-->
                     </label>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': approvedForm.approved_day.$invalid}">
-                        <input name="approved_day" type="number" class="form-control"
-                               data-ng-model="approved_day" id="approved_day"
-                               placeholder="p">
-                        <div ng-show="approvedForm.approved_day.$invalid"
-                             class="help-block">
-                            <p ng-show="approvedForm.approved_day.$error.number">
-                                Päivän täytyy olla numero
-                            </p>
+
+                    <div class="col-md-4" ng-class="{'has-error': approvedForm.approved_date.$invalid}">
+                        <div class="input-group">
+                            <input  name="approved_date"
+                                    type="text"
+                                    class="form-control"
+                                    uib-datepicker-popup="d. MMMM yyyy"
+                                    data-ng-model="approved_date"
+                                    id="approved_date"
+                                    is-open="approveddate.opened"
+                                    datepicker-options="dateOptions"
+                                    ng-required="true"
+                                    close-text="Sulje"
+                                    clear-text="Tyhjennä"
+                                    current-text="Tänään"
+                                    alt-input-formats="altInputFormats"></input>
+                            <span class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-default"
+                                        ng-click="openDatePicker(approveddate);">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div ng-show="approvedForm.approved_date.$invalid" class="has-error">
+                            <p class="help-block">Valitse päivä</p>
                         </div>
                     </div>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': approvedForm.approved_month.$invalid}">
-                        <input name="approved_month" type="number" class="form-control"
-                               data-ng-model="approved_month" id="approved_month"
-                               placeholder="k">
-                        <div ng-show="approvedForm.approved_month.$invalid"
-                             class="help-block">
-                            <p ng-show="approvedForm.approved_month.$error.number">
-                                Kuukauden täytyy olla numero
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': approvedForm.approved_year.$invalid }">
-                        <input name="approved_year" type="number" class="form-control"
-                               data-ng-model="approved_year" id="approved_year"
-                               placeholder="vvvv">
-                        <div ng-show="approvedForm.approved_year.$invalid"
-                             class="help-block">
-                            <p ng-show="approvedForm.approved_year.$error.number">
-                                Vuoden täytyy olla numero
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group col-md-6"
-                     ng-class="{'has-error': approvedForm.approved_by.$invalid}">
-                    <label for="approved_by" class="col-md-3 control-label">
+
+                    <label for="approved_by" class="col-md-1 control-label">
                         Hyväksyjä
                     </label>
-                    <div class="col-md-9">
+                    <div class="col-md-4" ng-class="{'has-error': approvedForm.approved_by.$invalid}">
                         <select id="approved_by"
+                                name="approved_by"
                                 data-ng-model="project.approved.approved_by"
                                 ng-options="authority for authority in authorities"
-                                class='form-control'>
+                                class='form-control' required>
+                                <option disabled selected value> -- Valitse hyväksyjä -- </option>
                         </select>
                     </div>
                 </div>
@@ -380,44 +293,47 @@ A form for project state change.
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-primary">
+                    <button id="end-btn" type="submit" class="btn btn-primary"
+                            ng-disabled="approvedForm.$invalid">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
                 </div>
             </form>
-            <!--    Hylätty-->
-            <form name="rejectedForm" class="form-horizontal col-md-12"
-                  ng-show="global.newState === 'hylätty'"  role="form"
+            <!-- Hylätty -->
+            <form name="rejectedForm" class="form-horizontal"
+                  ng-show="global.newState === 'hylätty'" role="form"
                   data-ng-submit="addRejectedState(rejectedForm.$valid)" novalidate>
-                <div class="form-group col-md-12">
-                    <label class="col-md-2">
-                        {{fieldNames["rejected_rejection_categories"]}}
-                    </label>
-                    <div class="col-md-10">
-                        <div id="rejSelection"
-                             data-ng-repeat="rej in addedRejections">
+                
+                <div class="form-group">
+                    <label class="col-md-2">{{fieldNames["rejected_rejection_categories"]}}</label>
+                    <div class="col-md-7">
+                        <div id="rejSelection" data-ng-repeat="rej in addedRejections">
                             <select name="rejSelect" id="rejSelect"
+                                    class="form-control"
                                     data-ng-model="rej.rejection"
                                     ng-options="rejCat for rejCat in rejCategories">
+                                    <option disabled selected value> -- Valitse syy -- </option>
                             </select>
                         </div>
                     </div>
+                </div>
+                <div class="form-group">
                     <div class="col-md-12" style="margin-top: 1em">
                         <a id="remRej" class="btn btn-sm btn-default" href=""
-                           ng-click="removeRejection();">
+                            ng-click="removeRejection();">
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </a>
                         <a id="addRej" class="btn btn-sm btn-default" href=""
-                           ng-click="addRejection();">
+                            ng-click="addRejection();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
                         </a>
                     </div>
                 </div>
-                <div class="form-group col-md-12">
-                    <hr>
+                <hr>
+                <div class="form-group">
                     <label for="comments" class="col-md-2">Kommentit</label>
                     <div class="col-md-10">
                         <textarea name="comments" type="text" class="form-control"
@@ -440,201 +356,200 @@ A form for project state change.
                 </div>
             </form>
             <!--Allekirjoitettu-->
-            <form name="signedForm" class="form-horizontal col-md-12"
-                  ng-show="global.newState === 'allekirjoitettu'"  role="form"
-                  data-ng-submit="addSignedState(signedForm.$valid)" novalidate>
-                <div class="form-group col-md-6">
-                    <label for="signed_by" class="col-md-4">Allekirjoittaja</label>
-                    <div class="col-md-8">
-                        <input name="signed_by" type="text" class="form-control"
-                               data-ng-model="project.signed.signed_by"
-                               id="signed_by" required>
+            <form   name="signedForm" class="form-horizontal"
+                    ng-show="global.newState === 'allekirjoitettu'"  role="form"
+                    data-ng-submit="addSignedState(signedForm.$valid)" novalidate>
+                <div class="form-group">
+                    <label for="signed_by" class="col-md-2 control-label">Allekirjoittaja</label>
+                    <div class="col-md-3" ng-class="{'has-error': signedForm.signed_by.$invalid}">
+                        <input  name="signed_by" type="text" class="form-control"
+                                data-ng-model="project.signed.signed_by" id="signed_by"
+                                placeholder="Allekirjoittajan nimi" required>
                     </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="signed_date_day" class="col-md-3">Päivämäärä</label>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': signedForm.signed_date_day.$invalid}">
-                        <input name="signed_date_day" type="number"
-                               class="form-control" data-ng-model="signed_day"
-                               id="signed_date_day" placeholder="p">
-                        <div ng-show="signedForm.signed_date_day.$invalid"
-                             class="help-block">
-                            <p ng-show="signedForm.signed_date_day.$error.number">
-                                Päivän täytyy olla numero
-                            </p>
+                    <label for="signedDate" class="col-md-1 control-label">Päivämäärä</label>
+                    <div class="col-md-4" ng-class="{'has-error': signedForm.signedDate.$invalid}">
+                        <div class="input-group">
+                            <input  name="signedDate"
+                                    type="text"
+                                    class="form-control"
+                                    uib-datepicker-popup="d. MMMM yyyy"
+                                    data-ng-model="signed_date"
+                                    id="signedDate"
+                                    is-open="signeddate.opened"
+                                    datepicker-options="dateOptions"
+                                    ng-required="true"
+                                    close-text="Sulje"
+                                    clear-text="Tyhjennä"
+                                    current-text="Tänään"
+                                    alt-input-formats="altInputFormats">
+                            <span class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-default"
+                                        ng-click="openDatePicker(signeddate);">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
                         </div>
-                    </div>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': signedForm.signed_date_month.$invalid}">
-                        <input name="signed_date_month" type="number"
-                               class="form-control" data-ng-model="signed_month"
-                               id="signed_date_month" placeholder="k">
-                        <div ng-show="signedForm.signed_date_month.$invalid"
-                             class="help-block">
-                            <p ng-show="signedForm.signed_date_month.$error.number">
-                                Kuukauden täytyy olla numero
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': signedForm.signed_date_year.$invalid}">
-                        <input name="signed_date_year" type="number"
-                               class="form-control" data-ng-model="signed_year"
-                               id="signed_date_year" placeholder="vvvv">
-                        <div ng-show="signedForm.signed_date_year.$invalid"
-                             class="help-block">
-                            <p ng-show="signedForm.signed_date_year.$error.number">
-                                Vuoden täytyy olla numero
-                            </p>
+                        <div ng-show="signedForm.signedDate.$invalid" class="has-error">
+                            <p class="help-block">Valitse päivä</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <hr>
-                    <label for="plannedPaymentSelection">
-                        Suunnitellut maksut
-                    </label>
-                    myönnetylle avustukselle
-                    {{project.approved.granted_sum_eur| currency : ""}} €
-                </div>
-                <div class="form-group col-md-12" id="plPayments">
-                    <div class="col-md-12" name="plannedPaymentSelection"
-                         id="plannedPaymentSelection"
-                         data-ng-repeat="plannedPayment in plannedPayments">
-                        <div class="col-md-6">
-                            <label for="plannedDay" class="col-md-3 control-label">
+                <hr>
+                <p><strong>Suunnitellut maksut</strong> myönnetylle avustukselle {{ project.approved.granted_sum_eur | currency : "EUR"}}</p>
+                <div id="plPayments">
+                    <div name="plannedPaymentSelection"
+                        id="plannedPaymentSelection"
+                        data-ng-repeat="plannedPayment in plannedPayments">
+
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">
                                 Päivämäärä
                             </label>
-                            <div class="col-md-3">
-                                <input name="plannedDay" type="number"
-                                       class="form-control"
-                                       data-ng-model="plannedPayments[$index].day"
-                                       id="plannedDay" placeholder="p" min="1"
-                                       max="31">
-                            </div>
-                            <div class="col-md-3">
-                                <input name="plannedMonth" type="number"
-                                       class="form-control"
-                                       data-ng-model="plannedPayments[$index].month"
-                                       id="plannedMonth" placeholder="k"
-                                       min="1" max="12">
-                            </div>
-                            <div class="col-md-3">
-                                <input name="plannedYear" type="number"
-                                       class="form-control"
-                                       data-ng-model="plannedPayments[$index].year"
-                                       id="plannedYear" placeholder="vvvv"
-                                       min="1">
+        
+                            <div class="col-md-4" ng-class="{'has-error': signedForm.signed_date_$index.$invalid}">
+                                <div class="input-group">
+                                    <input  name="signed_date_$index"
+                                            type="text"
+                                            class="form-control"
+                                            uib-datepicker-popup="d. MMMM yyyy"
+                                            data-ng-model="plannedPayments[$index].date"
+                                            id="signed_date_$index"
+                                            is-open="plannedPayment.picker.opened"
+                                            datepicker-options="dateOptions"
+                                            ng-required="true"
+                                            close-text="Sulje"
+                                            clear-text="Tyhjennä"
+                                            current-text="Tänään"
+                                            alt-input-formats="altInputFormats">
+                                    <span class="input-group-btn">
+                                        <button type="button"
+                                                class="btn btn-default"
+                                                ng-click="openDatePicker(plannedPayment.picker);">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div ng-show="signedForm.plannedPayments[$index].date.$invalid" class="has-error">
+                                    <p class="help-block">Valitse päivä</p>
+                                </div>
+                            </div> 
+        
+                            <label for="plannedSumEUR"
+                                class="col-md-2 control-label">
+                                Maksu (EUR)
+                            </label>
+                            <div class="col-md-2">
+                                <input name="plannedSumEUR" type="number"
+                                    class="form-control"
+                                    data-ng-model="plannedPayments[$index].sum_eur"
+                                    id="plannedSumEUR"
+                                    placeholder="Summa (EUR)" min="0">
                             </div>
                         </div>
-                        <label for="plannedSumEUR"
-                               class="col-md-2 control-label">
-                            Maksu (EUR)
-                        </label>
-                        <div class="col-md-2">
-                            <input name="plannedSumEUR" type="number"
-                                   class="form-control"
-                                   data-ng-model="plannedPayments[$index].sum_eur"
-                                   id="plannedSumEUR"
-                                   placeholder="Summa (EUR)" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <a ng-click="removePlannedPayment();" href=""
+                            class="btn btn-sm btn-default">
+                                <span class="glyphicon glyphicon-minus">
+                                </span>&nbsp;Poista viimeinen
+                            </a>
+                            <a id="add-btn" class="btn btn-sm btn-default" href=""
+                            ng-click="addPlannedPayment();">
+                                <span class="glyphicon glyphicon-plus">
+                                </span>&nbsp;Lisää
+                            </a>
                         </div>
                     </div>
-                    <div class="col-md-12" style="margin-top: 1em">
-                        <a ng-click="removePlannedPayment();" href=""
-                           class="btn btn-sm btn-default">
-                            <span class="glyphicon glyphicon-minus">
-                            </span>&nbsp;Poista viimeinen
-                        </a>
-                        <a id="add-btn" class="btn btn-sm btn-default" href=""
-                           ng-click="addPlannedPayment();">
-                            <span class="glyphicon glyphicon-plus">
-                            </span>&nbsp;Lisää
-                        </a>
-                    </div>
                 </div>
-                <div class="col-md-12">
-                    <hr>
-                    <label for="reportDeadlines" class="col-md-12">
-                        Raporttien eräpäivät
-                    </label>
-                </div>
-                <div class="form-group col-md-12">
-                    <div name="reportDeadlines" id="reportDeadlines"
-                         data-ng-repeat="deadline in deadlines">
-                        <div class="col-md-6">
-                            <label for="dlRep" class="col-md-3 control-label">
+                <hr>
+                <label for="reportDeadlines">Raporttien eräpäivät</label>
+                <div    name="reportDeadlines" id="reportDeadlines"
+                        data-ng-repeat="deadline in deadlines">
+                    <div class="form-group">
+                        <label for="dlRep" class="col-md-1 control-label">
                                 Raportti
-                            </label>
-                            <div class="col-md-9">
-                                <input name="dlRep" type="text"
-                                       class="form-control"
-                                       data-ng-model="deadlines[$index].report"
-                                       id="dlRep" placeholder="Raportti">
-                            </div>
+                        </label>
+                        <div class="col-md-3">
+                            <input  name="dlRep" type="text" class="form-control"
+                                    data-ng-model="deadlines[$index].report"
+                                    id="dlRep" placeholder="Raportti">
                         </div>
-                        <div class="col-md-6">
-                            <label for="dlDay" class="col-md-3 control-label">
-                                Eräpäivä
-                            </label>
-                            <div class="col-md-3">
-                                <input name="dlDay" type="number"
-                                       class="form-control"
-                                       data-ng-model="deadlines[$index].day"
-                                       id="dlDay" placeholder="p" min="1">
+                        <label for="dlDay" class="col-md-1 control-label">
+                            Eräpäivä
+                        </label>
+
+                        <div class="col-md-4" ng-class="{'has-error': signedForm.deadline_$index.$invalid}">
+                            <div class="input-group">
+                                <input  name="deadline_$index"
+                                        type="text"
+                                        class="form-control"
+                                        uib-datepicker-popup="d. MMMM yyyy"
+                                        data-ng-model="deadlines[$index].date"
+                                        id="signed_date_$index"
+                                        is-open="deadline.picker.opened"
+                                        datepicker-options="dateOptions"
+                                        ng-required="true"
+                                        close-text="Sulje"
+                                        clear-text="Tyhjennä"
+                                        current-text="Tänään"
+                                        alt-input-formats="altInputFormats">
+                                <span class="input-group-btn">
+                                    <button type="button"
+                                            class="btn btn-default"
+                                            ng-click="openDatePicker(deadline.picker);">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
                             </div>
-                            <div class="col-md-3">
-                                <input name="dlMonth" type="number"
-                                       class="form-control"
-                                       data-ng-model="deadlines[$index].month"
-                                       id="dlMonth" placeholder="k" min="1">
-                            </div>
-                            <div class="col-md-3">
-                                <input name="dlYear" type="number"
-                                       class="form-control"
-                                       data-ng-model="deadlines[$index].year"
-                                       id="dlYear" placeholder="vvvv" min="1">
+                            <div ng-show="signedForm.deadlines[$index].date.$invalid" class="has-error">
+                                <p class="help-block">Valitse päivä</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12" style="margin-top: 1em">
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
                         <a class="btn btn-sm btn-default" href=""
-                           ng-click="removeDeadline();">
+                            ng-click="removeDeadline();">
                             <span class="glyphicon glyphicon-minus">
                             </span>&nbsp;Poista viimeinen
                         </a>
                         <a id="add-btn2" class="btn btn-sm btn-default" href=""
-                           ng-click="addDeadline();">
+                            ng-click="addDeadline();">
                             <span class="glyphicon glyphicon-plus">
                             </span>&nbsp;Lisää
                         </a>
                     </div>
-                </div>
-                <div class="form-group col-md-12" style="text-align: center">
+                </div>                
+                <div class="form-group" style="text-align: center">
                     <hr>
                     <a href="/projects/{{project._id}}" class="btn btn-default">
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-primary">
+                    <button id="end-btn" type="submit" class="btn btn-primary"
+                            ng-disabled="signedForm.$invalid">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
                 </div>
             </form>
             <!--    Väliraportti-->
-            <form name="intReportForm" class="form-horizontal col-md-12"
-                  ng-show="global.newState === 'väliraportti'"  role="form"
+            <form name="intReportForm" class="form-horizontal"
+                  ng-show="global.newState === 'väliraportti'" role="form"
                   data-ng-submit="addIntReportState(intReportForm.$valid)"
                   novalidate>
-                <div class="form-group col-md-12">
+                <div class="form-group">
                     <label for="payments" class="col-md-2">Maksatukset</label>
                     <p class="col-md-12">Maksettu:</p>
                     <div class="form-group col-md-12"
                          ng-repeat="payment in project.payments">
                         <div class="col-md-4">
-                            {{payment.sum_eur| currency : ""}} EUR /
-                            {{payment.payment_date| date : 'dd.MM.yyyy'}}
+                            {{ payment.sum_eur | currency : "EUR" }} /
+                            {{ payment.payment_date | date : 'dd.MM.yyyy' }}
                         </div>
                     </div>
                 </div>
@@ -728,46 +643,35 @@ A form for project state change.
                                   id="intRcomments"></textarea>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="intRDateAppr" class="col-md-3">Hyväksymispvm</label>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': intReportForm.intRDateAppr_day.$invalid}">
-                        <input name="intRDateAppr_day" type="number"
-                               class="form-control" data-ng-model="intRDateAppr_day"
-                               id="intRDateAppr_day" placeholder="p" min="1"
-                               max="31">
-                        <div ng-show="intReportForm.intRDateAppr_day.$invalid"
-                             class="help-block">
-                            <p ng-show="intReportForm.intRDateAppr_day.$error.number">
-                                Päivän täytyy olla numero
-                            </p>
+                <div class="form-group">
+                    <label for="intRDateAppr" class="col-md-2">Hyväksymispvm</label>
+
+                    <div class="col-md-4" ng-class="{'has-error': intReportForm.intRDateAppr.$invalid}">
+                        <div class="input-group">
+                            <input  name="intRDateAppr"
+                                    type="text"
+                                    class="form-control"
+                                    uib-datepicker-popup="d. MMMM yyyy"
+                                    data-ng-model="intr_approved_date"
+                                    id="intRDateAppr"
+                                    is-open="intrdateappr.opened"
+                                    datepicker-options="dateOptions"
+                                    ng-required="true"
+                                    close-text="Sulje"
+                                    clear-text="Tyhjennä"
+                                    current-text="Tänään"
+                                    alt-input-formats="altInputFormats">
+                            <span class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-default"
+                                        ng-click="openDatePicker(intrdateappr);">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
                         </div>
                     </div>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': intReportForm.intRDateAppr_month.$invalid}">
-                        <input name="intRDateAppr_month" type="number"
-                               class="form-control" data-ng-model="intRDateAppr_month"
-                               id="intRDateAppr_month" placeholder="k" min="1"
-                               max="12">
-                        <div ng-show="intReportForm.intRDateAppr_month.$invalid"
-                             class="help-block">
-                            <p ng-show="intReportForm.intRDateAppr_month.$error.number">
-                                Kuukauden täytyy olla numero
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': intReportForm.intRDateAppr_year.$invalid}">
-                        <input name="intRDateAppr_year" type="number"
-                               class="form-control"
-                               data-ng-model="intRDateAppr_year"
-                               id="intRDateAppr_year" placeholder="vvvv" min="0">
-                        <div ng-show="intReportForm.intRDateAppr_year.$invalid"
-                             class="help-block">
-                            <p ng-show="intReportForm.intRDateAppr_year.$error.number">
-                                Vuoden täytyy olla numero
-                            </p>
-                        </div>
+                    <div ng-show="intReportForm.intRDateAppr.$invalid" class="col-md-5 has-error">
+                        <p class="help-block">Valitse päivä</p>
                     </div>
                 </div>
                 <div class="form-group col-md-12" style="text-align: center">
@@ -776,7 +680,8 @@ A form for project state change.
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-primary">
+                    <button id="end-btn" type="submit" class="btn btn-primary"
+                            ng-disabled="intReportForm.$invalid">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -786,17 +691,17 @@ A form for project state change.
             <form name="endReportForm" class="form-horizontal col-md-12"
                   ng-show="global.newState === 'loppuraportti'" role="form"
                   data-ng-submit="addEndReportState(endReportForm)" novalidate>
-                <div class="form-group col-md-6">
+                <div class="form-group">
                     <label class="col-md-4" for="end_board_meeting">
                         {{fieldNames["end_report_board_meeting"]}}
                     </label>
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <input id="end_board_meeting" name="end_board_meeting"
                                data-ng-model="project.end_report.board_meeting"
                                class="form-control">
                     </div>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group">
                     <label for="end_budget" class="col-md-4">
                         {{fieldNames["end_report_budget"]}}
                     </label>
@@ -804,60 +709,52 @@ A form for project state change.
                         <textarea name="end_budget" type="text"
                                   class="form-control"
                                   data-ng-model="project.end_report.budget"
-                                  id="end_budget">
+                                  id="end_budget"
+                                  rows="5">
                         </textarea>
                     </div>
                 </div>
-                <div class="form-group col-md-8">
-                    <label for="audit_date" class="col-md-3">
-                        Tilintarkastuspvm
-                    </label>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': projectEditForm.audit_day.$invalid}">
-                        <input name="audit_day" type="number"
-                               class="form-control" data-ng-model="audit_day"
-                               id="audit_day" placeholder="p" min="1">
-                        <div ng-show="projectEditForm.audit_day.$invalid"
-                             class="help-block">
-                            <p ng-show="projectEditForm.audit_day.$error.number">
-                                Päivän täytyy olla numero
-                            </p>
+                <div class="form-group">
+                    <label for="audit_date" class="col-md-4">Tilintarkastuspvm</label>
+
+                    <div class="col-md-4" ng-class="{'has-error': endReportForm.audit_date.$invalid}">
+                        <div class="input-group">
+                            <input  name="audit_date"
+                                    type="text"
+                                    class="form-control"
+                                    uib-datepicker-popup="d. MMMM yyyy"
+                                    data-ng-model="audit_date"
+                                    id="audit_date"
+                                    is-open="auditdate.opened"
+                                    datepicker-options="dateOptions"
+                                    ng-required="true"
+                                    close-text="Sulje"
+                                    clear-text="Tyhjennä"
+                                    current-text="Tänään"
+                                    alt-input-formats="altInputFormats">
+                            <span class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-default"
+                                        ng-click="openDatePicker(auditdate);">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
                         </div>
                     </div>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': projectEditForm.audit_month.$invalid}">
-                        <input name="audit_month" type="number"
-                               class="form-control" data-ng-model="audit_month"
-                               id="audit_month" placeholder="k" min="1">
-                        <div ng-show="projectEditForm.audit_month.$invalid"
-                             class="help-block">
-                            <p ng-show="projectEditForm.audit_month.$error.number">
-                                Kuukauden täytyy olla numero
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': projectEditForm.audit_year.$invalid}">
-                        <input name="audit_year" type="number"
-                               class="form-control" data-ng-model="audit_year"
-                               id="audit_year" placeholder="vvvv" min="1">
-                        <div ng-show="projectEditForm.audit_year.$invalid"
-                             class="help-block">
-                            <p ng-show="projectEditForm.audit_year.$error.number">
-                                Vuoden täytyy olla numero
-                            </p>
-                        </div>
+                    <div ng-show="endReportForm.audit_date.$invalid" class="col-md-5 has-error">
+                        <p class="help-block">Valitse päivä</p>
                     </div>
                 </div>
-                <div class="form-group col-md-12">
-                    <label for="audit_review" class="col-md-6">
+                <div class="form-group">
+                    <label for="audit_review" class="col-md-4">
                         Tilintarkastuksen Arvio
                     </label>
                     <div class="col-md-6">
                         <textarea name="audit_review" type="text"
                                   class="form-control"
                                   data-ng-model="project.end_report.audit.review"
-                                  id="audit_review">
+                                  id="audit_review"
+                                  rows="5">
                         </textarea>
                     </div>
                 </div>
@@ -955,105 +852,86 @@ A form for project state change.
                         <label for="grade" class="col-md-4">
                             {{fieldNames["end_report_grade"]}}
                         </label>
-                        <div class="col-md-8">
+                        <div    class="col-md-8"
+                                ng-class="{'has-error': endReportForm.grade.$invalid}">
                             <select name="grade" id="grade"
                                     data-ng-model="project.end_report.grade"
-                                    class="form-control">
-                                <option value="" selected style="display:none"></option>
-                                <option value="4">
-                                    4 (Onnistui yli odotusten)
-                                </option>
-                                <option value="3">
-                                    3 (Onnistui suunnitellusti)
-                                </option>
-                                <option value="2">
-                                    2 (Onnistui alle odotusten, ulkoinen syy)
-                                </option>
-                                <option value="1">
-                                    1 (Onnistui alle odotusten, järjestön syy)
-                                </option>
+                                    ng-options="key as value for (key , value) in grades"
+                                    class="form-control"
+                                    required>
+                                    <option disabled selected value> -- Valitse arvio -- </option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group">
                     <label for="gen_review" class="col-md-2">
                         {{fieldNames["end_report_general_review"]}}
                     </label>
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <textarea name="gen_review" type="text"
                                   class="form-control"
                                   data-ng-model="project.end_report.general_review"
-                                  id="gen_review">
+                                  id="gen_review"
+                                  rows="5">
                         </textarea>
                     </div>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group">
                     <label for="proposition" class="col-md-2">
                         {{fieldNames["end_report_proposition"]}}
                     </label>
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <textarea name="proposition" type="text"
                                   class="form-control"
                                   data-ng-model="project.end_report.proposition"
-                                  id="proposition">
+                                  id="proposition"
+                                  rows="5">
                         </textarea>
                     </div>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group">
                     <label for="conclusion" class="col-md-2">
                         {{fieldNames["end_report_conclusion"]}}
                     </label>
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <textarea name="conclusion" type="text" class="form-control"
                                   data-ng-model="project.end_report.conclusion"
-                                  id="conclusion">
+                                  id="conclusion"
+                                  rows="5">
                         </textarea>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="audit_day" class="col-md-3">
-                        Hyväksymispvm
-                        <!--{{fieldNames["end_report_approved_date"]}}-->
-                    </label>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': projectEditForm.er_approved_day.$invalid}">
-                        <input name="er_approved_day" type="number"
-                               class="form-control"
-                               data-ng-model="er_approved_day"
-                               id="er_approved_day" placeholder="p" min="1">
-                        <div ng-show="projectEditForm.er_approved_day.$invalid"
-                             class="help-block">
-                            <p ng-show="projectEditForm.er_approved_day.$error.number">
-                                Päivän täytyy olla numero
-                            </p>
+                <div class="form-group">
+                    <!--{{fieldNames["end_report_approved_date"]}}-->
+                    <label for="er_approved_date" class="col-md-2">Hyväksymispvm</label>
+
+                    <div class="col-md-4" ng-class="{'has-error': endReportForm.er_approved_date.$invalid}">
+                        <div class="input-group">
+                            <input  name="er_approved_date"
+                                    type="text"
+                                    class="form-control"
+                                    uib-datepicker-popup="d. MMMM yyyy"
+                                    data-ng-model="er_approved_date"
+                                    id="er_approved_date"
+                                    is-open="endrdateappr.opened"
+                                    datepicker-options="dateOptions"
+                                    ng-required="true"
+                                    close-text="Sulje"
+                                    clear-text="Tyhjennä"
+                                    current-text="Tänään"
+                                    alt-input-formats="altInputFormats">
+                            <span class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-default"
+                                        ng-click="openDatePicker(endrdateappr);">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
                         </div>
                     </div>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': projectEditForm.er_approved_month.$invalid}">
-                        <input name="er_approved_month" type="number"
-                               class="form-control"
-                               data-ng-model="er_approved_month"
-                               id="er_approved_month" placeholder="k" min="1">
-                        <div ng-show="projectEditForm.er_approved_month.$invalid"
-                             class="help-block">
-                            <p ng-show="projectEditForm.er_approved_month.$error.number">
-                                Kuukauden täytyy olla numero
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-3"
-                         ng-class="{'has-error': projectEditForm.er_approved_year.$invalid}">
-                        <input name="er_approved_year" type="number"
-                               class="form-control"
-                               data-ng-model="er_approved_year"
-                               id="er_approved_year" placeholder="vvvv" min="1">
-                        <div ng-show="projectEditForm.er_approved_year.$invalid"
-                             class="help-block">
-                            <p ng-show="projectEditForm.er_approved_year.$error.number">
-                                Vuoden täytyy olla numero
-                            </p>
-                        </div>
+                    <div ng-show="endReportForm.er_approved_date.$invalid" class="col-md-5 has-error">
+                        <p class="help-block">Valitse päivä</p>
                     </div>
                 </div>
                 <div class="form-group col-md-12" style="text-align: center">
@@ -1062,82 +940,101 @@ A form for project state change.
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-primary">
+                    <button id="end-btn" type="submit" class="btn btn-primary"
+                            ng-disabled="endReportForm.$invalid">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
                 </div>
             </form>
             <!--Päättynyt-->
-            <form name="endedForm" class="form-horizontal col-md-12"
+            <form name="endedForm" class="form-horizontal"
                   ng-show="global.newState === 'päättynyt'" role="form"
                   data-ng-submit="addEndedState(endedForm.$valid)" novalidate>
-                <div class="form-group col-md-6">
+                <div class="form-group">
                     <div>
-                        <label for="notifiedDay" class="col-md-3">
+                        <label for="notifiedDay" class="col-md-2">
                             {{fieldNames["ended_board_notified"]}}
                         </label>
-                        <div class="col-md-3">
-                            <input name="endNotifiedDay" type="number"
-                                   class="form-control"
-                                   data-ng-model="end_notified_day"
-                                   id="notifiedDay" placeholder="p">
-                        </div>
-                        <div class="col-md-3">
-                            <input name="endNotifiedMonth" type="number"
-                                   class="form-control"
-                                   data-ng-model="end_notified_month"
-                                   id="notifiedMonth" placeholder="k">
-                        </div>
-                        <div class="col-md-3">
-                            <input name="endNotifiedYear" type="number"
-                                   class="form-control"
-                                   data-ng-model="end_notified_year"
-                                   id="notifiedYear" placeholder="vvvv">
+
+                        <div class="col-md-3" ng-class="{'has-error': endedForm.endNotifiedDay.$invalid}">
+                            <div class="input-group">
+                                <input  name="endNotifiedDay"
+                                        type="text"
+                                        class="form-control"
+                                        uib-datepicker-popup="d. MMMM yyyy"
+                                        data-ng-model="end_notified_date"
+                                        id="endNotifiedDay"
+                                        is-open="endnofifieddate.opened"
+                                        datepicker-options="dateOptions"
+                                        ng-required="true"
+                                        close-text="Sulje"
+                                        clear-text="Tyhjennä"
+                                        current-text="Tänään"
+                                        alt-input-formats="altInputFormats">
+                                <span class="input-group-btn">
+                                    <button type="button"
+                                            class="btn btn-default"
+                                            ng-click="openDatePicker(endnofifieddate);">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div ng-show="endedForm.endNotifiedDay.$invalid" class="has-error">
+                                <p class="help-block">Valitse päivä</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="comments" class="col-md-2">
+                    <label for="comments" class="col-md-1">
                         {{fieldNames["ended_other_comments"]}}
                     </label>
-                    <div class="col-md-10">
+                    <div class="col-md-5">
                         <textarea name="endComments" type="text"
                                   class="form-control"
                                   data-ng-model="project.ended.other_comments"
-                                  id="comments">
+                                  id="comments"
+                                  rows="5">
                         </textarea>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group">
                     <div>
-                        <label for="endDay" class="col-md-3 control-label">
+                        <label for="endDay" class="col-md-2 control-label">
                             Päättymispvm
                             <!--{{fieldNames["ended_end_date"]}}-->
                         </label>
-                        <div class="col-md-3">
-                            <input name="endDay" type="number"
-                                   class="form-control" data-ng-model="end_day"
-                                   id="endDay" placeholder="p">
-                        </div>
-                        <div class="col-md-3">
-                            <input name="endMonth" type="number"
-                                   class="form-control"
-                                   data-ng-model="end_month" id="endMonth"
-                                   placeholder="k">
-                        </div>
-                        <div class="col-md-3">
-                            <input name="endYear" type="number"
-                                   class="form-control" data-ng-model="end_year"
-                                   id="endYear" placeholder="vvvv">
+                        <div class="col-md-3" ng-class="{'has-error': endedForm.endDate.$invalid}">
+                            <div class="input-group">
+                                <input  name="endDate"
+                                        type="text"
+                                        class="form-control"
+                                        uib-datepicker-popup="d. MMMM yyyy"
+                                        data-ng-model="end_date"
+                                        id="endDate"
+                                        is-open="enddate.opened"
+                                        datepicker-options="dateOptions"
+                                        ng-required="true"
+                                        close-text="Sulje"
+                                        clear-text="Tyhjennä"
+                                        current-text="Tänään"
+                                        alt-input-formats="altInputFormats">
+                                <span class="input-group-btn">
+                                    <button type="button"
+                                            class="btn btn-default"
+                                            ng-click="openDatePicker(enddate);">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div ng-show="endedForm.endDate.$invalid" class="has-error">
+                                <p class="help-block">Valitse päivä</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="approved_by" class="col-md-4">
+                    <label for="approved_by" class="col-md-1">
                         {{fieldNames["ended_approved_by"]}}
                     </label>
-                    <div class="col-md-8">
+                    <div class="col-md-5">
                         <select id="approved_by"
                                 data-ng-model="project.ended.approved_by"
                                 class='form-control'>
