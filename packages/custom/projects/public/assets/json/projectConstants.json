@@ -192,6 +192,9 @@
         "Hankkeessa tuotettu materiaali",
         "Välitalousraportti",
         "Talousraportti",
+        "Tulostaulukko",
+        "Riskitaulukko",
+        "Kuitti maksuerästä",
         "Muu..."
     ]
 }
