@@ -82,7 +82,27 @@ $ ./node_modules/gulp/bin/gulp.js test
 
 End-to-end tests are run on local MongoDB database `testDB`.
 
-TODO: describe
+To run the End-to-end tests, open three terminal sessions. In the first 
+terminal, run
+```
+export NODE_ENV=e2e-test
+node server
+```
+After the server has started, go to the next terminal and run
+```
+./node_modules/.bin/webdriver_manager start
+```
+After that, the test can be started by running the following command in the 
+third terminal:
+```
+./node_modules/.bin/protractor tests/config/e2e/protractor.config.js
+```
+
+*NB: When running the E2E tests on a fresh install, you may need to run the
+following command before the three steps above:*
+```
+./node_modules/.bin/webdriver_manager update
+```
 
 # Operation and maintenance
 
