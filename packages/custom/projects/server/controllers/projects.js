@@ -788,14 +788,19 @@ module.exports = function (Projects) {
             project.approved.themes.forEach(function (theme) {
                 themes += "& \\multicolumn{3}{>{\\hsize=\\dimexpr3\\hsize+4\\tabcolsep+2\\arrayrulewidth\\relax}X|}{\\textbullet~ "
                         + theme.replace(/"/g, "") + "}\\\\ \n";
-            });
+            });        
             var methods = "\\begin{itemize}";
-            project.methods.forEach(function (method) {
-                methods += "\\item \\textbf{" + method.name +
-                        " (" + method.level + ")}\\\\ " + filter(method.comment)
-                        + "\n";
-            });
+            if (project.methods != null && project.methods.length > 0) {
+                project.methods.forEach(function (method) {
+                    methods += "\\item \\textbf{" + method.name +
+                            " (" + method.level + ")}\\\\ " + filter(method.comment)
+                            + "\n";
+                });
+            } else {
+                methods += "\\item " + "ei aktiviteetteja";
+            }
             methods += "\\end{itemize}";
+
             Project.find({organisation: project.organisation})
                     .populate({path: 'organisation', model: 'Organisation'})
                     .exec(function (err, projects) {
