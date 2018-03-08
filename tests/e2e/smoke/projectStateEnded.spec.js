@@ -14,7 +14,7 @@ describe('Changing project state to "ended"', function () {
     });
 
     it('should change state if valid data filled in form', function () {
-        element(by.linkText("Hankelistaus")).click();
+        element(by.linkText("Hankkeet")).click();
         element(by.linkText("Project C")).click();
 
         element(by.model('project.changeTo'))
@@ -43,7 +43,7 @@ describe('Changing project state to "ended"', function () {
     });
 
     it('should not change state if user clicks "cancel"-button in change-view', function() {
-        element(by.linkText("Hankelistaus")).click();
+        element(by.linkText("Hankkeet")).click();
         element(by.linkText("Project nr 3")).click();
 
         element(by.model('project.changeTo')).element(by.cssContainingText('option', 'päättynyt')).click();

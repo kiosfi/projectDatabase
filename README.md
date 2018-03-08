@@ -86,6 +86,7 @@ To run the End-to-end tests, open three terminal sessions. In the first
 terminal, run
 ```
 export NODE_ENV=e2e-test
+gulp testData
 node server
 ```
 After the server has started, go to the next terminal and run

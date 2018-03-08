@@ -22,7 +22,7 @@ describe('Project create page', function () {
     });
 
     it('should create project and new organisation with valid data filled in form', function () {
-        element(by.linkText("Hankkeen lisäys")).click();
+        element(by.linkText("Hankkeen rekisteröinti")).click();
         element(by.linkText("Nimi, asiantuntija ja järjestö")).click();
         element(by.linkText("Perustiedot")).click();
         browser.executeScript('window.scrollTo(0,100000)').then(function () {
@@ -108,7 +108,7 @@ describe('Project create page', function () {
     });
 
     it('should create project with valid data filled in form and organisation selected from list', function () {
-        element(by.linkText("Hankkeen lisäys")).click();
+        element(by.linkText("Hankkeen rekisteröinti")).click();
         element(by.linkText("Nimi, asiantuntija ja järjestö")).click();
         element(by.linkText("Perustiedot")).click();
         element(by.linkText("Lisätiedot")).click();
@@ -146,7 +146,7 @@ describe('Project create page', function () {
     });
 
     it('should not create project with empty form', function () {
-        element(by.linkText("Hankkeen lisäys")).click();
+        element(by.linkText("Hankkeen rekisteröinti")).click();
         element(by.linkText("Nimi, asiantuntija ja järjestö")).click();
         element(by.linkText("Perustiedot")).click();
         element(by.linkText("Lisätiedot")).click();

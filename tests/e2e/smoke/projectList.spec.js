@@ -6,7 +6,7 @@ describe('Project list page', function () {
     })
 
     beforeEach(function () {
-        element(by.linkText('Hankelistaus')).click();
+        element(by.linkText('Hankkeet')).click();
     });
 
     afterAll(function () {
@@ -20,7 +20,19 @@ describe('Project list page', function () {
         expect(element(by.id('proj-70001')).isPresent()).toBe(true);
         expect(element(by.id('proj-70002')).isPresent()).toBe(true);
         expect(element(by.id('proj-70003')).isPresent()).toBe(true);
-        expect(element(by.id('proj-79999')).isPresent()).toBe(false);
+        expect(element(by.id('proj-70004')).isPresent()).toBe(true);
+        expect(element(by.id('proj-70005')).isPresent()).toBe(false);
+        expect(element(by.id('proj-70006')).isPresent()).toBe(true);
+        expect(element(by.id('proj-70007')).isPresent()).toBe(true);
+        expect(element(by.id('proj-70008')).isPresent()).toBe(true);
+        expect(element(by.id('proj-70009')).isPresent()).toBe(true);
+        expect(element(by.id('proj-70010')).isPresent()).toBe(true);
+        expect(element(by.id('proj-70011')).isPresent()).toBe(true);
+        // The following four projects should be on the next page of the list:
+        expect(element(by.id('proj-70012')).isPresent()).toBe(false);
+        expect(element(by.id('proj-70013')).isPresent()).toBe(false);
+        expect(element(by.id('proj-70014')).isPresent()).toBe(false);
+        expect(element(by.id('proj-70015')).isPresent()).toBe(false);
     });
 
 

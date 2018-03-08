@@ -7,10 +7,9 @@ describe('Adding payment in project view', function () {
     });
 
     beforeEach(function() {
-        element(by.linkText("Hankelistaus")).click();
+        element(by.linkText("Hankkeet")).click();
         element(by.linkText("Project A")).click();
     });
-
 
     afterAll(function() {
         helpers.logout();
@@ -30,7 +29,7 @@ describe('Adding payment in project view', function () {
         expect(par.getText()).toContain(2000);
     });*/
 
-    it('should not add payment if invalid data filled in form', function () {
+    xit('should not add payment if invalid data filled in form', function () {
 
         element(by.model('payment_day')).sendKeys('12');
         element(by.model('payment_month')).sendKeys('12');

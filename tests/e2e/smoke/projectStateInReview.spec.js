@@ -13,7 +13,7 @@ describe('Changing project state to "in review"', function () {
     });
 
     it('should change state if valid data filled in form', function () {
-        element(by.linkText("Hankelistaus")).click();
+        element(by.linkText("Hankkeet")).click();
         element(by.linkText("Human rights")).click();
 
         element(by.model('project.changeTo')).element(by.cssContainingText('option', 'käsittelyssä')).click();
@@ -30,7 +30,7 @@ describe('Changing project state to "in review"', function () {
     });
 
     it('should not change state if user clicks "cancel"-button in change-view', function() {
-        element(by.linkText("Hankelistaus")).click();
+        element(by.linkText("Hankkeet")).click();
         element(by.id("page-2")).click();
         element(by.linkText("Worklife rights")).click();
 

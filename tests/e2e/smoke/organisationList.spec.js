@@ -6,7 +6,7 @@ describe('Organisation list page', function() {
     });
 
     beforeEach(function() {
-        element(by.linkText('Järjestölistaus')).click();
+        element(by.linkText('Järjestöt')).click();
     });
 
     afterAll(function() {

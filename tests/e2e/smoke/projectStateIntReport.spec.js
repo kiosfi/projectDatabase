@@ -8,7 +8,7 @@ describe('Changing project state to "intermediary report"', function () {
     it('should not change state if user clicks "cancel"-button in change-view', function() {
         helpers.login();
 
-        element(by.linkText("Hankelistaus")).click();
+        element(by.linkText("Hankkeet")).click();
         element(by.id("page-2")).click();
         element(by.linkText("Project Signed")).click();
 
@@ -29,7 +29,7 @@ describe('Changing project state to "intermediary report"', function () {
     it('should change state if valid data filled in form', function () {
         helpers.login();
 
-        element(by.linkText("Hankelistaus")).click();
+        element(by.linkText("Hankkeet")).click();
         element(by.id("page-2")).click();
         element(by.linkText("Project Signed")).click();
 

@@ -10,7 +10,7 @@ describe('Changing project state to "rejected"', function () {
     })
 
     beforeEach(function() {
-        element(by.linkText("Hankelistaus")).click();
+        element(by.linkText("Hankkeet")).click();
     })
 
     afterAll(function() {

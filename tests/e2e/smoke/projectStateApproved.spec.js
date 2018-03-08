@@ -11,7 +11,7 @@ describe('Changing project state to "approved"', function () {
     });
 
     it('should change state if valid data filled in form', function () {
-        element(by.linkText("Hankelistaus")).click();
+        element(by.linkText("Hankkeet")).click();
         element(by.linkText("Minority rights")).click();
 
         element(by.model('project.changeTo')).element(by.cssContainingText('option', 'hyväksytty')).click();
@@ -48,7 +48,7 @@ describe('Changing project state to "approved"', function () {
     });
 
     it('should not change state if user clicks "cancel"-button in change-view', function() {
-        element(by.linkText("Hankelistaus")).click();
+        element(by.linkText("Hankkeet")).click();
         element(by.linkText("Elder rights")).click();
 
         element(by.model('project.changeTo')).element(by.cssContainingText('option', 'hyväksytty')).click();

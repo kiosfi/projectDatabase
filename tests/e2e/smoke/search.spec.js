@@ -19,9 +19,8 @@ describe('Search page', function () {
 
         browser.wait().then(function () {
             var results = element.all(by.repeater('result in results'));
-            expect(results.count()).not.toEqual(0);
+            expect(results.count()).toEqual(3);
         });
-
 
         helpers.logout();
     });
