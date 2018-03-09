@@ -1,7 +1,7 @@
-var helpers = require('../helpers.e2e');
+var helpers = require("../helpers.e2e");
 
-describe('Changing project state to "end report"', function () {
-//    it('should not show change-page when not logged in', function (done) {
+describe("Changing project state to end report", function () {
+//    it("should not show change-page when not logged in", function (done) {
 //
 //    });
 
@@ -13,59 +13,59 @@ describe('Changing project state to "end report"', function () {
         helpers.logout();
     });
 
-    xit('should change state if valid data filled in form', function () {
+    xit("should change state if valid data filled in form", function () {
         element(by.linkText("Hankkeet")).click();
         element(by.linkText("Project B")).click();
 
-        element(by.model('project.changeTo')).element(by.cssContainingText('option', 'loppuraportti')).click();
-        element(by.id('st')).click();
+        element(by.model("project.changeTo")).element(by.cssContainingText("option", "loppuraportti")).click();
+        element(by.id("st")).click();
 
-        expect(browser.getCurrentUrl()).toContain('/change');
+        expect(browser.getCurrentUrl()).toContain("/change");
 
-        element(by.model('er_approved_day')).sendKeys(12);
-        element(by.model('er_approved_month')).sendKeys(12);
-        element(by.model('er_approved_year')).sendKeys(2015);
-        element(by.model('audit_day')).sendKeys(1);
-        element(by.model('audit_month')).sendKeys(6);
-        element(by.model('audit_year')).sendKeys(2016);
-        element(by.model('project.end_report.audit.review')).sendKeys('Arvio tilintarkastuksesta');
-        browser.executeScript('window.scrollTo(0,100000)').then(function () {
-          element(by.id('er_methods')).sendKeys('Ihan ok');
-          element(by.model('project.end_report.objective')).sendKeys('Hyvä');
-          element(by.model('project.end_report.general_review')).sendKeys('Hyvin meni');
+        element(by.model("er_approved_day")).sendKeys(12);
+        element(by.model("er_approved_month")).sendKeys(12);
+        element(by.model("er_approved_year")).sendKeys(2015);
+        element(by.model("audit_day")).sendKeys(1);
+        element(by.model("audit_month")).sendKeys(6);
+        element(by.model("audit_year")).sendKeys(2016);
+        element(by.model("project.end_report.audit.review")).sendKeys("Arvio tilintarkastuksesta");
+        browser.executeScript("window.scrollTo(0,100000)").then(function () {
+          element(by.id("er_methods")).sendKeys("Ihan ok");
+          element(by.model("project.end_report.objective")).sendKeys("Hyvä");
+          element(by.model("project.end_report.general_review")).sendKeys("Hyvin meni");
         });
 
-        browser.executeScript('window.scrollTo(0,100000)').then(function () {
-          element(by.model('project.end_report.comments')).sendKeys('Ei muuta');
-          element(by.id('end-report-button')).click();
+        browser.executeScript("window.scrollTo(0,100000)").then(function () {
+          element(by.model("project.end_report.comments")).sendKeys("Ei muuta");
+          element(by.id("end-report-button")).click();
         });
 
-        expect(browser.getCurrentUrl()).toContain('/a2c8c9adb020176611996768');
-        var state = element(by.className('tila')).getText();
-        expect(state).toContain('loppuraportti');
+        expect(browser.getCurrentUrl()).toContain("/a2c8c9adb020176611996768");
+        var state = element(by.className("tila")).getText();
+        expect(state).toContain("loppuraportti");
     });
 
-    it('should not change state if user clicks "cancel"-button in change-view', function() {
+    it("should not change state if user clicks cancel-button in change-view", function() {
         element(by.linkText("Hankkeet")).click();
         element(by.linkText("Project A")).click();
 
-        element(by.model('project.changeTo')).element(by.cssContainingText('option', 'loppuraportti')).click();
-        element(by.id('st')).click();
+        element(by.model("project.changeTo")).element(by.cssContainingText("option", "loppuraportti")).click();
+        element(by.id("st")).click();
 
-        expect(browser.getCurrentUrl()).toContain('/change');
+        expect(browser.getCurrentUrl()).toContain("/change");
 
         browser.navigate().back();
 
-        expect(browser.getCurrentUrl()).toContain('/5c9ed9f94260406da7a7a41b');
-        var state = element(by.id('state_field')).getText();
-        expect(state).toContain('allekirjoitettu (keskeneräinen)');
+        expect(browser.getCurrentUrl()).toContain("/5c9ed9f94260406da7a7a41b");
+        var state = element(by.id("state_field")).getText();
+        expect(state).toContain("allekirjoitettu (keskeneräinen)");
     });
 
-    it('should show login page if trying to load "/projectID/change -view', function() {
+    it("should show login page if trying to load /projectID/change -view", function() {
         helpers.logout();
-        browser.get('/projects/5c9ed9f94260406da7a7a41b/change');
+        browser.get("/projects/5c9ed9f94260406da7a7a41b/change");
 
-        expect(browser.getCurrentUrl()).toContain('/auth/login');
+        expect(browser.getCurrentUrl()).toContain("/auth/login");
         helpers.login();
     });
 });

@@ -68,9 +68,8 @@
             <h4>
                 <span ng-click="hideSummary = !hideSummary">
                     <span class="glyphicon"
-                          ng-class="hideSummary
-                                                  ? 'glyphicon-collapse-down'
-                                                  : 'glyphicon-collapse-up'">
+                          ng-class="hideSummary ? 'glyphicon-collapse-down'
+                                                : 'glyphicon-collapse-up'">
                     </span>
                     Perustiedot
                 </span>
@@ -183,9 +182,8 @@
             <h4>
                 <span ng-click="hidePrevApp = !hidePrevApp">
                     <span class="glyphicon"
-                          ng-class="hidePrevApp
-                                                  ? 'glyphicon-collapse-down'
-                                                  : 'glyphicon-collapse-up'">
+                          ng-class="hidePrevApp ? 'glyphicon-collapse-down'
+                                                : 'glyphicon-collapse-up'">
                     </span>
                     KIOSilta rahoitusta hakeneet hankkeet
                     ({{orgProjects.length}} kpl)
@@ -237,10 +235,10 @@
                             {{project.state}}
                         </td>
                         <td>
-                            {{ project.latestStateDate | date : 'd.M.yyyy' : 'Z' }}
+                            {{project.latestStateDate | date : 'd.M.yyyy' : 'Z' }}
                         </td>
                         <td>
-                            {{ project.approved.granted_sum_eur ? (project.approved.granted_sum_eur | currency : " EUR" : 2)  : "Ei myönnettyä avustusta" }}
+                            {{project.approved.granted_sum_eur ? (project.approved.granted_sum_eur | currency : " EUR" : 2)  : "Ei myönnettyä avustusta" }}
                         </td>
                     </tr>
                 </tbody>
@@ -255,9 +253,8 @@
             <h4>
                 <span ng-click="hideLegalStatus = !hideLegalStatus">
                     <span class="glyphicon"
-                          ng-class="hideLegalStatus
-                                                  ? 'glyphicon-collapse-down'
-                                                  : 'glyphicon-collapse-up'">
+                          ng-class="hideLegalStatus ? 'glyphicon-collapse-down'
+                                                    : 'glyphicon-collapse-up'">
                     </span>
                     Hallintomalli ja henkilöstö
                 </span>
@@ -272,9 +269,8 @@
             <h4>
                 <span ng-click="hideDescription = !hideDescription">
                     <span class="glyphicon"
-                          ng-class="hideDescription
-                                                  ? 'glyphicon-collapse-down'
-                                                  : 'glyphicon-collapse-up'">
+                          ng-class="hideDescription ? 'glyphicon-collapse-down'
+                                                    : 'glyphicon-collapse-up'">
                     </span>
                     Tavoitteet ja keskeiset toimintatavat
                 </span>
@@ -295,9 +291,8 @@
             <h4>
                 <span ng-click="hideIntNatLinks = !hideIntNatLinks">
                     <span class="glyphicon"
-                          ng-class="hideIntNatLinks
-                                                  ? 'glyphicon-collapse-down'
-                                                  : 'glyphicon-collapse-up'">
+                          ng-class="hideIntNatLinks ? 'glyphicon-collapse-down'
+                                                    : 'glyphicon-collapse-up'">
                     </span>
                     Yhteistyökumppanit ja verkostoituminen
                 </span>
@@ -312,9 +307,8 @@
             <h4>
                 <span ng-click="hideOtherDonors = !hideOtherDonors">
                     <span class="glyphicon"
-                          ng-class="hideOtherDonors
-                                                  ? 'glyphicon-collapse-down'
-                                                  : 'glyphicon-collapse-up'">
+                          ng-class="hideOtherDonors ? 'glyphicon-collapse-down'
+                                                    : 'glyphicon-collapse-up'">
                     </span>
                     Vuosibudjetit ja rahoittajat
                 </span>
@@ -329,9 +323,8 @@
             <h4>
                 <span ng-click="hideAccountingAudit = !hideAccountingAudit">
                     <span class="glyphicon"
-                          ng-class="hideAccountingAudit
-                                                  ? 'glyphicon-collapse-down'
-                                                  : 'glyphicon-collapse-up'">
+                          ng-class="hideAccountingAudit ? 'glyphicon-collapse-down'
+                                                        : 'glyphicon-collapse-up'">
                     </span>
                     Taloushallinto ja tilintarkastus
                 </span>
@@ -346,9 +339,8 @@
             <h4>
                 <span ng-click="hideBackground = !hideBackground">
                     <span class="glyphicon"
-                          ng-class="hideBackground
-                                                  ? 'glyphicon-collapse-down'
-                                                  : 'glyphicon-collapse-up'">
+                          ng-class="hideBackground ? 'glyphicon-collapse-down'
+                                                   : 'glyphicon-collapse-up'">
                     </span>
                     Oleelliset taustatiedot
                 </span>
@@ -364,9 +356,8 @@
             <h4>
                 <span ng-click="hideSpecialNotes = !hideSpecialNotes">
                     <span class="glyphicon"
-                          ng-class="hideSpecialNotes
-                                                  ? 'glyphicon-collapse-down'
-                                                  : 'glyphicon-collapse-up'">
+                          ng-class="hideSpecialNotes ? 'glyphicon-collapse-down'
+                                                     : 'glyphicon-collapse-up'">
                     </span>
                     Erityishuomioita
                 </span>
@@ -381,9 +372,8 @@
             <h4>
                 <span ng-click="hideLog = !hideLog">
                     <span class="glyphicon"
-                          ng-class="hideLog
-                                                  ? 'glyphicon-collapse-down'
-                                                  : 'glyphicon-collapse-up'">
+                          ng-class="hideLog ? 'glyphicon-collapse-down'
+                                            : 'glyphicon-collapse-up'">
                     </span>
                     Toiminnot
                 </span>
