@@ -23,9 +23,9 @@ describe('Changing project state to "in review"', function () {
 
         element(by.model('project.in_review.comments')).sendKeys('voidaan siirtää');
 
-        element(by.id('review-btn')).click();
+        element(by.id('review-button')).click();
         expect(browser.getCurrentUrl()).toContain('/56091cbc00fccd6d66bc5cc3');
-        var state = element(by.className('tila')).getText();
+        var state = element(by.id('state_field')).getText();
         expect(state).toContain('käsittelyssä');
     });
 
@@ -41,7 +41,7 @@ describe('Changing project state to "in review"', function () {
 
         browser.navigate().back();
         expect(browser.getCurrentUrl()).toContain('/56091ded00fdde6d66bc5cc3');
-        var state = element(by.className('tila')).getText();
+        var state = element(by.id('state_field')).getText();
         expect(state).toContain('rekisteröity');
     });
 

@@ -42,7 +42,7 @@ A form for project state change.
                                 Haettu avustus
                             </div>
                             <div class="col-md-6">
-                                {{ project.funding.applied_curr_eur | currency : "EUR" : 2 }} 
+                                {{ project.funding.applied_curr_eur | currency : "EUR" : 2 }}
                                 ({{ project.funding.applied_curr_local | currency : "" }}
                                 paikallinen)
                             </div>
@@ -201,7 +201,7 @@ A form for project state change.
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-primary"
+                    <button id="review-button" type="submit" class="btn btn-primary"
                             ng-disabled="inReviewForm.$invalid">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
@@ -380,7 +380,7 @@ A form for project state change.
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-primary">
+                    <button id="approved-button" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -433,7 +433,7 @@ A form for project state change.
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-primary">
+                    <button id="rejected-button" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -616,7 +616,7 @@ A form for project state change.
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-primary">
+                    <button id="signed-button" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -776,7 +776,7 @@ A form for project state change.
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-primary">
+                    <button id="int-report-button" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -1062,7 +1062,7 @@ A form for project state change.
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-primary">
+                    <button id="end-report-button" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>
@@ -1154,7 +1154,7 @@ A form for project state change.
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;
                         Peru
                     </a>
-                    <button id="end-btn" type="submit" class="btn btn-primary">
+                    <button id="end-button" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp;
                         Tallenna
                     </button>

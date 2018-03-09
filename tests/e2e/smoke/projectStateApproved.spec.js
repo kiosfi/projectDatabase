@@ -22,7 +22,7 @@ describe('Changing project state to "approved"', function () {
         element(by.model('approved_day')).sendKeys('13');
         element(by.model('approved_month')).sendKeys('11');
         element(by.model('approved_year')).sendKeys('2015');
-        element(by.model('project.approved.approved_by')).element(by.cssContainingText('option', 'Halko')).click();
+        element(by.model('project.approved.approved_by')).element(by.cssContainingText('option', 'Hallituksen kokous')).click();
 
         element(by.model('notified_day')).sendKeys('15');
         element(by.model('notified_month')).sendKeys('11');
@@ -39,7 +39,7 @@ describe('Changing project state to "approved"', function () {
         element(by.model('method.level')).element(by.cssContainingText('option', 'Kansainvälinen')).click();
 
         browser.executeScript('window.scrollTo(0,100000)').then(function () {
-            element(by.id('appr-btn')).click();
+            element(by.id('approved-button')).click();
         });
 
         expect(browser.getCurrentUrl()).toContain('/5c9ed9f94250406da7a7a41b');
@@ -59,8 +59,8 @@ describe('Changing project state to "approved"', function () {
         browser.navigate().back();
 
         expect(browser.getCurrentUrl()).toContain('/5c9ed9f94250406da7a7a111');
-        var state = element(by.css('h3')).element(by.className('tila')).getText();
-        expect(state).toContain('käsittelyssä');
+        var state = element(by.id('state_field')).getText();
+        expect(state).toContain('käsittelyssä (keskeneräinen)');
     });
 
     it('should show login page if trying to load "/projectID/change -view', function() {

@@ -36,16 +36,16 @@ describe('Changing project state to "rejected"', function () {
         element(by.model('project.rejected.rejection_comments')).sendKeys('Hanke ei vastaa vaatimuksia');
 
         browser.executeScript('window.scrollTo(0,100000)').then(function () {
-            element(by.id('rej-btn')).click();
+            element(by.id('rejected-button')).click();
         });
 
 
         expect(browser.getCurrentUrl()).toContain('/779ed9f94250406da7a7a111');
-        var state = element(by.css('h3')).element(by.className('tila')).getText();
+        var state = element(by.id("state_field")).getText();
         expect(state).toContain('hylätty');
     });
 
-    it('should stay on change-page when trying to submit invalid form', function () {
+    xit('should stay on change-page when trying to submit invalid form', function () {
         element(by.linkText("Human rights 123")).click();
         element(by.model('project.changeTo')).element(by.cssContainingText('option', 'hylätty')).click();
         element(by.id('st')).click();
@@ -53,25 +53,25 @@ describe('Changing project state to "rejected"', function () {
         expect(browser.getCurrentUrl()).toContain('/change');
 
         // test for saving empty form
-        element(by.id('rej-btn')).click();
+        element(by.id('rejected-button')).click();
         expect(browser.getCurrentUrl()).toContain('/change');
 
         // test for saving form when comments are added but rejection reasons not
         element(by.model('project.rejected.rejection_comments')).sendKeys('Hanke ei vastaa vaatimuksia');
-        element(by.id('rej-btn')).click();
+        element(by.id('rejected-button')).click();
         expect(browser.getCurrentUrl()).toContain('/change');
 
         // test for saving form when comments are added and "Lisää uusi"-button clicked,
         // but rejection reasons not selected
         element(by.id('addRej')).click();
         element(by.model('project.rejected.rejection_comments')).sendKeys('Hanke ei vastaa vaatimuksia');
-        element(by.id('rej-btn')).click();
+        element(by.id('rejected-button')).click();
         expect(browser.getCurrentUrl()).toContain('/change');
 
         // test for saving form when rejection reasons are added but comments are not
         element(by.id('addRej')).click();
         element.all(by.model('rej.rejection')).get(1).element(by.cssContainingText('option', '7 Strategia')).click();
-        element(by.id('rej-btn')).click();
+        element(by.id('rejected-button')).click();
         expect(browser.getCurrentUrl()).toContain('/change');
     });
 
@@ -86,7 +86,7 @@ describe('Changing project state to "rejected"', function () {
         browser.navigate().back();
 
         expect(browser.getCurrentUrl()).toContain('/5c9ed9f94250406da7a7aabc');
-        var state = element(by.css('h3')).element(by.className('tila')).getText();
-        expect(state).toContain('käsittelyssä');
+        var state = element(by.id('state_field')).getText();
+        expect(state).toContain('käsittelyssä (keskeneräinen)');
     });
 });

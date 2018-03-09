@@ -20,7 +20,7 @@ describe('Changing project state to "intermediary report"', function () {
         browser.navigate().back();
 
         expect(browser.getCurrentUrl()).toContain('/123459f94260406da7a7a41b');
-        var state = element(by.className('tila')).getText();
+        var state = element(by.id('state_field')).getText();
         expect(state).toContain('allekirjoitettu');
 
         helpers.logout();
@@ -47,10 +47,10 @@ describe('Changing project state to "intermediary report"', function () {
         element(by.model('intRDateAppr_month')).sendKeys('10');
         element(by.model('intRDateAppr_year')).sendKeys('2015');
 
-        element(by.id('intrep-btn')).click();
+        element(by.id('int-report-button')).click();
 
         expect(browser.getCurrentUrl()).toContain('/123459f94260406da7a7a41b');
-        var state = element(by.className('tila')).getText();
+        var state = element(by.id('state_field')).getText();
         expect(state).toContain('väliraportti');
 
         helpers.logout();

@@ -27,7 +27,7 @@ describe('Changing project state to "signed"', function () {
         element(by.model('signed_month')).sendKeys('12');
         element(by.model('signed_year')).sendKeys('2015');
 
-        element(by.id('add-btn')).click();
+        element(by.id('signed-button')).click();
 
         element(by.model('plannedPayment.day')).sendKeys('12');
         element(by.model('plannedPayment.month')).sendKeys('12');
@@ -36,7 +36,7 @@ describe('Changing project state to "signed"', function () {
         element(by.model('plannedPayment.sum_eur')).sendKeys('30000');
 
         browser.executeScript('window.scrollTo(0,100000)').then(function () {
-            element(by.id('add-btn2')).click();
+            element(by.id('signed-button2')).click();
         });
 
         element(by.model('deadline.report')).sendKeys('1. väliraportti');
@@ -45,11 +45,11 @@ describe('Changing project state to "signed"', function () {
         element(by.model('deadline.year')).sendKeys('2016');
 
         browser.executeScript('window.scrollTo(0,100000)').then(function () {
-            element(by.id('sign-btn')).click();
+            element(by.id('signed-button')).click();
         });
 
         expect(browser.getCurrentUrl()).toContain('/f2e7c9aeb017189911996768');
-        var state = element(by.className('tila')).getText();
+        var state = element(by.id('state_field')).getText();
         expect(state).toContain('allekirjoitettu');
     });
 
@@ -66,7 +66,7 @@ describe('Changing project state to "signed"', function () {
         browser.navigate().back();
 
         expect(browser.getCurrentUrl()).toContain('/f2c7d9aeb017189911996768');
-        var state = element(by.className('tila')).getText();
+        var state = element(by.id('state_field')).getText();
         expect(state).toContain('hyväksytty');
     });
 
