@@ -94,7 +94,7 @@ A form for project state change.
                 <div class="form-group">
                     <div class="col-md-4">
                         <!--{{fieldNames["required_appendices"]}}-->
-                        <label class="col-md-12" class="control-label">Toimitetut liitteet</label>
+                        <label class="col-md-12 control-label">Toimitetut liitteet</label>
                         <span class="col-md-8">{{fieldNames["required_appendices_proj_budget"]}}</span>
                         <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.proj_budget" id="proj_budget" name="proj_budget">
                         <span class="col-md-8">{{fieldNames["required_appendices_references"]}}</span>
@@ -111,7 +111,7 @@ A form for project state change.
                         <input class="col-md-4" type="checkbox" ng-model="project.required_appendices.audit_reports" id="audit_reports" name="audit_reports">
                     </div>
                     <div class="col-md-8">
-                        <label for="comments" class="col-md-12" class="control-label">{{fieldNames["in_review_comments"]}}</label>
+                        <label for="comments" class="col-md-12 control-label">{{fieldNames["in_review_comments"]}}</label>
                         <div class="col-md-12">
                             <textarea   name="comments"
                                         type="text"
@@ -260,7 +260,7 @@ A form for project state change.
                                     close-text="Sulje"
                                     clear-text="Tyhjennä"
                                     current-text="Tänään"
-                                    alt-input-formats="altInputFormats"></input>
+                                    alt-input-formats="altInputFormats" />
                             <span class="input-group-btn">
                                 <button type="button"
                                         class="btn btn-default"
