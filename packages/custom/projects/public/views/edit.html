@@ -855,14 +855,14 @@
                                 Päivämäärä
                             </label>
         
-                            <div class="col-md-4" ng-class="{'has-error': projectEditForm.signed_date_{{$index}}.$invalid}">
+                            <div class="col-md-4" ng-class="{'has-error': projectEditForm.signed_date{{$index}}.$invalid}">
                                 <div class="input-group">
-                                    <input  name="signed_date_{{$index}}"
+                                    <input  name="signed_date{{$index}}"
                                             type="text"
                                             class="form-control"
                                             uib-datepicker-popup="d. MMMM yyyy"
                                             data-ng-model="plannedPayments[$index].date"
-                                            id="signed_date_{{$index}}"
+                                            id="signed_date{{$index}}"
                                             is-open="plannedPayment.picker.opened"
                                             datepicker-options="dateOptions"
                                             ng-required="project.signed.date"

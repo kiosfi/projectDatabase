@@ -408,14 +408,14 @@ A form for project state change.
                                 Päivämäärä
                             </label>
 
-                            <div class="col-md-4" ng-class="{'has-error': signedForm.signed_date_$index.$invalid}">
+                            <div class="col-md-4" ng-class="{'has-error': signedForm.signed_date{{$index}}.$invalid}">
                                 <div class="input-group">
-                                    <input  name="signed_date_$index"
+                                    <input  name="signed_date{{$index}}"
                                             type="text"
                                             class="form-control"
                                             uib-datepicker-popup="d. MMMM yyyy"
                                             data-ng-model="plannedPayments[$index].date"
-                                            id="signed_date_$index"
+                                            id="signed_date{{$index}}"
                                             is-open="plannedPayment.picker.opened"
                                             datepicker-options="dateOptions"
                                             ng-required="true"
@@ -482,14 +482,14 @@ A form for project state change.
                             Eräpäivä
                         </label>
 
-                        <div class="col-md-4" ng-class="{'has-error': signedForm.deadline_$index.$invalid}">
+                        <div class="col-md-4" ng-class="{'has-error': signedForm.deadline{{$index}}.$invalid}">
                             <div class="input-group">
-                                <input  name="deadline_$index"
+                                <input  name="deadline{{$index}}"
                                         type="text"
                                         class="form-control"
                                         uib-datepicker-popup="d. MMMM yyyy"
                                         data-ng-model="deadlines[$index].date"
-                                        id="signed_date_$index"
+                                        id="signed_date{{$index}}"
                                         is-open="deadline.picker.opened"
                                         datepicker-options="dateOptions"
                                         ng-required="true"
